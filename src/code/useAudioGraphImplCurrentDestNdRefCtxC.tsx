@@ -118,6 +118,9 @@ const {
     ) ;
     return {          
         AmpSlideDownAtAbsoluteT : (() => {  
+            /**    
+             * {@link useGainElas }
+             */
             type UGE_PROPS = (          
                 Parameters<typeof useGainElas>[1 ]        
             ) ;

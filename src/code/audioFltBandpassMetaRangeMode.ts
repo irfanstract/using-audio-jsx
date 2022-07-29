@@ -8,7 +8,7 @@ import { EnumC } from "./commonEnum";
 
      
       
-const ABandpassFreqArgInputRangeMode = {
+const AMetaRenderInterpretativeMode = {
 
     /**    
      * treat it as `t -> value` graph, and
@@ -22,14 +22,28 @@ const ABandpassFreqArgInputRangeMode = {
     EFFECTIVE_INTENSITY_NORMALISED : "resulting-magn-normalised" ,        
 
 } as const ; 
-type ABandpassFreqArgInputRangeMode = (
-    EnumC<typeof ABandpassFreqArgInputRangeMode >
+type AMetaRenderInterpretativeMode = (
+    EnumC<typeof AMetaRenderInterpretativeMode >
 ) ;         
 
 
  
-
-   
+       
+        
+/**    
+ * @deprecated 
+ * the naming does not properly denote the intended value-or-behaviour.   
+ */   
+type  ABandpassFreqArgInputRangeMode = AMetaRenderInterpretativeMode ;
+/**    
+ * @deprecated 
+ * the naming does not properly denote the intended value-or-behaviour.   
+ */   
+const ABandpassFreqArgInputRangeMode = AMetaRenderInterpretativeMode ;
 export {
-    ABandpassFreqArgInputRangeMode , 
+    /**          
+     * @deprecated NAMING        
+     */
+    ABandpassFreqArgInputRangeMode as ABandpassFreqArgInputRangeMode ,
+    AMetaRenderInterpretativeMode as AMetaRenderInterpretativeMode ,      
 } ;  

@@ -123,6 +123,7 @@ const BEEPBOPVR = (
                 V2XLwPassMsk ,          
                 //   
                 AmpSlideDown ,    
+                BassDrumKick ,    
             } ;
             const onv = ((version: Vr ): React.ReactElement => {  
                 if (version === Vr.SimpleBeep ) {
@@ -138,7 +139,15 @@ const BEEPBOPVR = (
                             <CPersistingBeep value={ { } } />         
                         </CAmpSlideDown>                   
                     ) ;                      
-                }                       
+                }                                       
+                if (version === Vr.BassDrumKick ) {
+                    ;      
+                    return (         
+                        <CAmpSlideDown   > 
+                            <CPersistingBeep value={ { toneFreq: 55 } } />         
+                        </CAmpSlideDown>                   
+                    ) ;                      
+                }                           
                 if (version === Vr.V2 ) {
                     ;
                     return (

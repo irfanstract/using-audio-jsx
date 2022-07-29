@@ -93,31 +93,56 @@ const {
         }              
     ) ;  
     const GNA = (
-        function <YyNode1 extends {} >(...[dest, type1, f ] : (   
-            [dest : (Pick<AudioNode, "context"> & Record<keyof YyNode1, AudioParam > ) | null, 
+        function <YyNode1 extends {} >(...[dest, type1, f , { intrinsicValue = "default" as "default" } = {} ] : (   
+            [       
+                dest : (Pick<AudioNode, "context"> & Record<keyof YyNode1, AudioParam > ) | null, 
                 key : keyof YyNode1,    
-                maxv : number ,
-            ]  
-        ) ) {   
+                maxv : number ,                       
+                etc ?: {   
+                    /**   
+                     * this would default to `"default"` .        
+                     * if set to a `number`,  
+                     * there will be `setValue(...)` with given value as argument
+                     */
+                    intrinsicValue ?: "default" | number ;                    
+                } ,
+            ]                
+        ) ) {               
             const gnAfterMul: (    
                 null | AudioParam
             ) = (                   
                 dest?.[type1] || null                   
-            ) ;                     
-            const gnBeforeMul1 = (             
+            ) ;                
+            /**   
+             * intrinsic value
+             *  */   
+            React.useLayoutEffect(() => { 
+                if (gnAfterMul ) {
+                    ;
+                    if (typeof intrinsicValue === "number" ) {
+                        gnAfterMul.value = intrinsicValue ;
+                    }                      
+                }                               
+                ;           
+            } , [
+                gnAfterMul , 
+                // TODO 
+                // intrinsicValue ,
+            ]) ;             
+            const gnBeforeMul1 = (                      
                 useFixedGain((    
                     /**         
                      * {@link gnAfterMul } (an AudioParam) as an AudioNode  
                      */
                     useParamModulation(gnAfterMul, dest?.context || null )                  
-                ) , f )    
-            ) ;  
+                ) , f )      
+            ) ;                
             const gnBeforeMul = ( 
                 (
                     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(( 
                         gnBeforeMul1 
                     ), 0.5 )    
-                )?.offset  
+                )?.offset      
                 ||
                 null             
             ) ;              

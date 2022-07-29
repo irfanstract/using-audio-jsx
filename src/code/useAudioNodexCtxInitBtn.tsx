@@ -11,6 +11,10 @@ import {
     // useCanForceRefresh, useRefreshByInterval ,
 } from "./useNonHookValue";
 import { useUserGestureDependentResource } from "./useUserGestureDependentResource"; 
+import { 
+    useWindowActivityStatus , 
+    isWindowActive ,  
+} from "./useWindowFocusState";           
 
 
 
@@ -25,7 +29,7 @@ import {
 } from "./useAudioCtxCurrentTime" ;
 
 /**  
- *   
+ *          
 */    
 const useAudioCtxWithInitBtn = (         
     ({ aCtx: aCtxGiven = null , shallAutoStart = 1 , suspendOnWindowBlur = false } : Readonly<(
@@ -45,7 +49,7 @@ const useAudioCtxWithInitBtn = (
             }  
         )>
     )> = {} ) => {                     
-        const {                        
+        const {                         
             INIT,                
             s ,              
             // setS ,                    
@@ -60,7 +64,8 @@ const useAudioCtxWithInitBtn = (
             <button type="button" disabled={!!s } onClick={() => INIT() } >
                 INIT AUDIO CTX   
             </button>
-        ) ;          
+        ) ;         
+        // TODO      
         useEffect(() => {       
             return () => {
                 CLOSE() ;                  
@@ -78,14 +83,20 @@ const useAudioCtxWithInitBtn = (
                 }      
             }                         
         ) ;            
-        const optionallyAutostart = (
+        const optionallyAutostart = (   
             () => (     
                 shallAutoStart && RESUME()    
             )
         ) ;
         useEffect(() => {                                
-            if (s) {                      
-                optionallyAutostart() ;
+            if (s) {                   
+                if ((
+                    // TODO      
+                    isWindowActive() 
+                )) {
+                    ;       
+                    optionallyAutostart() ;   
+                }
                 const focusAndBlurListener : {
                     onFocus : () => void ;                         
                     onBlur: () => void ;                    
