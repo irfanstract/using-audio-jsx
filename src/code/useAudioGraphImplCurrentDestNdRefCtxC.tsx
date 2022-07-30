@@ -1,13 +1,13 @@
  
 // utility imports        
 import Immutable from "immutable";        
-import { IterableOps, PromiseReturnValue } from "./generalUse11";  
+import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";  
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
 import { K } from "./commonElements";      
 import { CBC } from "./useStateInCallback";  
-
+ 
 // 
 import { 
     WithGivenDest ,  
@@ -69,7 +69,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
     
                    
               
-                   
+                    
  
 /**    
  * wrapper, for {@link useGainModulatedPt }   
@@ -96,7 +96,7 @@ const {
     } = (
         audioFltAtAbsTNodes           
     ) ;                      
-    type CtxtualOutUsageProps = (   
+    type CtxtualOutUsageProps = (    
         AGCtxtualOutUsageProps
     ) ;  
     /**    
@@ -111,7 +111,7 @@ const {
         (keyof Pick<JSX.IntrinsicElements, "ol" | "ul"> ) 
         | 
         React.FC<React.PropsWithChildren<{}> >    
-        |
+        | 
         (typeof React.Fragment)
     ) = (
         "ul" as ("ol" | "ul" | React.FC<React.PropsWithChildren<{}> > )
@@ -133,16 +133,16 @@ const {
                 ) ;         
                 return (            
                     function useSpcl (...[nd0 , { scheduledT: t, swingTConstant } ] : [ 
-                        AudioNode | null ,   
-                        (      
-                            Required<(
-                                Pick<Props0,  "swingTConstant">
+                        AudioNode | null ,                
+                        (        
+                            Required<(       
+                                Pick<Props0, "swingTConstant">      
                                 &
-                                Record<keyof (
+                                Record<keyof (   
                                     Pick<Props0, "scheduledT" >  
                                 ) , number >    
-                            )> & Partial<(  
-                                Pick<Props0, keyof {} >
+                            )> & Partial<(    
+                                Pick<Props0, never >
                             ) >     
                         ) ,   
                     ]) {
@@ -164,7 +164,7 @@ const {
                                 value: value ,
                                 scheduledT : t + d ,  
                             })     
-                        ) ;                 
+                        ) ;                  
                         return nd1 ;
                     }      
                 ) ;    
@@ -188,7 +188,7 @@ const {
                                 (       
                                     CtxtualOutUsageProps                    
                                 ) ,     
-                            ] ): React.ReactElement {    
+                            ] ): React.ReactElement {         
                                 const nd1 = (                        
                                     useGainElasSpcl(nd0, {   
                                         scheduledT : t ,  

@@ -8,12 +8,23 @@
 
  
 /**    
- * `A & B`             
+ * `A & B`               
  *  */    
  type Extract1<A, B> = A & B ;                
+ /**      
+  * {@link Pick }        
+  * 
+  * @deprecated 
+  * this is just plain `Pick<A, B>`   
+  */   
+type PickM<A, B extends keyof A > = Pick<A, B> ;               
+ /**   
+  * {@link Omit }
+  */
+type OmitM<A, B extends keyof A > = Omit<A, B> ;                
  /**               
   * `[B] extends [A]`   
-  *  */           
+  *  */             
  type Generalisation<A, B extends A > = A ;            
  /**               
   * `[B] extends [A]`      
@@ -63,9 +74,10 @@ type SameParametersAndReturnType<A extends (...args: any ) => any > = (
 
 
 export type {
-    Generalisation , 
+    Generalisation ,      
     Specialisation ,  
-    Extract1 , 
+    Extract1 ,  
+    OmitM ,     
     
     ObjValue , 
 
@@ -74,4 +86,4 @@ export type {
 
     SameParametersAndReturnType , 
 } ;
-   
+             
