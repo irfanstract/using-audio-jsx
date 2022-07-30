@@ -1,11 +1,11 @@
  
-// utility imports        
+// utility imports                  
 import Immutable from "immutable";        
 import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";  
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
 import React, { useMemo } from "react";               
-import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
-import { K } from "./commonElements";      
+import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
+import { K, asVoidElement } from "./commonElements";      
 import { CBC } from "./useStateInCallback";  
  
 // 
@@ -490,22 +490,7 @@ const {
             return RETURN ;
         })() ,
     } ;   
-})() ;   
-const asVoidElement = (
-    function <C0 extends React.FC<any>  > (C : ( 
-        C0 
-    ) ) {                        
-        type P = ComponentProps<C0 > ;
-        ;                                                       
-        return (                                  
-            IterableOps.identity<(     
-                React.FC<(         
-                    Omit<P , "children">
-                )>       
-            ) >((C    ))       
-        ) ;         
-    }                             
-) ;             
+})() ;      
 /**        
  * DO NOT USE THIS AT HIGH-LEVEL LAYER ; 
  * THIS RENDERER DOES NOT HONOUR `currentScheduletT`       

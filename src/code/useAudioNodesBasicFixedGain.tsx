@@ -112,22 +112,41 @@ const useOinModulatedWaveTable = (() => {
         ) ;     
     };
     return (                 
-        function useWVT(...[nd0 , { waveTable: wvTable = "sine", detuneScale1 = (12 * 100 ) } = {} ] : [
-            dest : AudioNode | null ,  
-            etc ?: {          
+        function useWVT(...[nd0 , mainOptions11 = {} ] : [
+            dest : AudioNode | null ,               
+            etc ?: {               
                 waveTable ?: NonNullable<WaveTableNodeProps["type"] > ;     
-                // TODO   
+                /**    
+                 * specifies,   
+                 * how much implied by input `1.0` increment  
+                 *  */      
                 detuneScale1 ?: number ;          
+                      
+                /**        
+                 * specifies,   
+                 * how much for input of `1.0`     
+                 *  */      
+                freqArgumentNormalValue ?: number ;    
+                /**    
+                 * @deprecated    
+                 * you probably meant {@link freqArgumentNormalValue  }
+                 */      
+                freqArgumentInitialValue ?: number ;    
             } ,    
-        ] ) {     
-            const initialValue : number = (     
-                440          
-            );                
+        ] ) {                              
+            const { 
+                waveTable: wvTable = "sine",    
+                detuneScale1 = (12 * 100 ) ,        
+                freqArgumentNormalValue = 440 ,      
+                freqArgumentInitialValue : freqArgumentInitialValue = (
+                    freqArgumentNormalValue
+                ) ,       
+            } = mainOptions11 ;    
             const nd1 = (   
                 useOscilltorNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-            ) ;              
+            ) ;                 
             /**   
-             * `type`           
+             * `type`     
              */
             React.useLayoutEffect(() => {         
                 nd1 && ( 
@@ -138,36 +157,46 @@ const useOinModulatedWaveTable = (() => {
              * assigns initial value   
              */
             React.useLayoutEffect(() => {
-                nd1 && (nd1.frequency.value = initialValue ) ;           
-            } , [nd1 ]) ;               
-            /**   
+                nd1 && (       
+                    /**   
+                     * using `yy.value = (...)` is not an option here, as    
+                     * - {@link useWVT }    
+                     *   - does not provide `freq` parameter and instead 
+                     *   - leaves the responsibility to calling code     
+                     * - using `currentTime` as `t` (which `value = (..)` exactly does )
+                     *   would interfere with subsequent calls
+                     */ 
+                    nd1.frequency.setValueAtTime(0, 0 ) 
+                ) ;              
+            } , [nd1 ]) ;                 
+            /**    
              * present the `AudioParams` as specified    
              */
             const {
                 frqx ,                
                 detunx ,            
-            } = {                                      
-                frqx : (    
+            } = {                                       
+                frqx : (       
                     useNormalisedArgumentativeChnl1<(
                         Pick<OscillatorNode, "frequency">      
                     )>(nd1 , "frequency", (     
-                        // TODO 
+                        // TODO    
                         // ( nd1 ? ctxFrameRateOf(nd1.context ) : 48000  )      
-                        440      
-                    ) , { 
-                        // TODO      
-                        intrinsicValue: 0  ,  
+                        freqArgumentNormalValue        
+                    ) , {             
+                        // TODO        
+                        destNdIntrinsicValue: freqArgumentInitialValue  ,  
                     } )       
                 )         ,             
                 detunx : (    
-                    useNormalisedArgumentativeChnl1<(
+                    useNormalisedArgumentativeChnl1<(       
                         Pick<OscillatorNode, "detune">     
                     )>(nd1 , "detune", (  
                         // TODO   
                         detuneScale1
                     ) , {
                         // TODO
-                        intrinsicValue: "default" , 
+                        destNdIntrinsicValue: 0 , 
                     } )     
                 )       ,              
             } ;   

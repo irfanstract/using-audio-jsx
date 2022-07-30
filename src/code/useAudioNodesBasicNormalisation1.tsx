@@ -93,7 +93,7 @@ const {
         }              
     ) ;  
     const GNA = (
-        function <YyNode1 extends {} >(...[dest, type1, f , { intrinsicValue = "default" as "default" } = {} ] : (   
+        function <YyNode1 extends {} >(...[dest, type1, f , { destNdIntrinsicValue: destNdIntrinsicValue = "default" as "default" } = {} ] : (   
             [       
                 dest : (Pick<AudioNode, "context"> & Record<keyof YyNode1, AudioParam > ) | null, 
                 key : keyof YyNode1,    
@@ -104,7 +104,7 @@ const {
                      * if set to a `number`,  
                      * there will be `setValue(...)` with given value as argument
                      */
-                    intrinsicValue ?: "default" | number ;                    
+                    destNdIntrinsicValue ?: "default" | number ;                    
                 } ,
             ]                
         ) ) {               
@@ -119,8 +119,8 @@ const {
             React.useLayoutEffect(() => { 
                 if (gnAfterMul ) {
                     ;
-                    if (typeof intrinsicValue === "number" ) {
-                        gnAfterMul.value = intrinsicValue ;
+                    if (typeof destNdIntrinsicValue === "number" ) {
+                        gnAfterMul.value = destNdIntrinsicValue ;
                     }                      
                 }                               
                 ;           

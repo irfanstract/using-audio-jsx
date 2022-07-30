@@ -1,8 +1,9 @@
-import util from "util" ;    
+// import util from "util" ;      
 import { 
     BoundedIdentity, 
     BoundedIdentityFunction, 
-    Unix ,    
+    Unix ,     
+    IterableOps , 
 } from "./generalUse11";       
 import React, { 
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue ,
@@ -13,7 +14,7 @@ import { useJsonStringificativeMemo } from "./usingTimeoutOrInterval";
 // export {
 //     JsxBoolean , 
 // } ;
-import { ComponentRefValue, JsxBoolean } from "./commonElementsTypes"; 
+import { ComponentRefValue, ComponentProps, JsxBoolean } from "./commonElementsTypes"; 
 
 
 
@@ -30,11 +31,29 @@ import { ComponentRefValue, JsxBoolean } from "./commonElementsTypes";
 
 
 
-
+ 
+/**   
+ * this is wrapper, omiiting `children`.          
+ */
+const asVoidElement = (
+    function <C0 extends React.FC<any>  > (C : ( 
+        C0 
+    ) ) {                        
+        type P = ComponentProps<C0 > ;
+        ;                                                       
+        return (                                  
+            IterableOps.identity<(     
+                React.FC<(       
+                    Omit<P , "children">
+                )>       
+            ) >((C    ))       
+        ) ;         
+    }                             
+) ;                       
 export * from "./commonElementsTypes" ;  
 export * from "./commonCodeSnippetAndNumericDisplay";  
 export * from "./commonNavigativeElements" ;         
 export * from "./headingNrm" ;     
 export * from "./useLocaleSPecificTextContent" ; 
 export * from "./usePriorityLevelling1";   
-export { K };
+export { K, asVoidElement, };  

@@ -22,15 +22,15 @@ type YyyUsageDest = (
     AudioNode | null 
 ) ;                              
 type YyyUsable<P extends NonNullable<unknown> , R = { } > = (        
-    (dest: YyyUsageDest, p: P ) => R       
+    (dest: YyyUsageDest, properties: P ) => R       
 ) ;
-const usePersistingBeep: (   
-    YyyUsable<(                    
+const usePersistingBeep: (      
+    YyyUsable<(                       
         Readonly<{ 
             toneFreq ?: number | undefined;
         } >    
-    ) , (
-        // AudioNode 
+    ) , (       
+        // AudioNode    
         EventTarget 
     ) | null >               
 ) = (     
@@ -38,22 +38,22 @@ const usePersistingBeep: (
         const nd2 = (
             useOscilltorNodeWithGivenFadeoutTimeConstant1(nd1 , 0.5 )   
         ) ;                
-        React[AUDIONODES_USEEFFECT ](() => {
+        React[AUDIONODES_USEEFFECT ](() => { 
             if (nd2) {    
                 nd2.frequency.value = toneFreq ;       
-            } ;                    
-        } , [ ]) ;                     
-        React[AUDIONODES_USEEFFECT ](() => {   
-            if (nd2) {    
-                /**            
+            } ;  
+        } , [nd2 ]) ;                 
+        React[AUDIONODES_USEEFFECT ](() => {     
+            if (nd2) {     
+                /**    
                  * {@link nd2.frequency.value } , smoothly   
                  */   
                 nd2.frequency.setTargetAtTime(toneFreq, (
                     // TODO 
-                    0 
+                    nd2.context.currentTime   
                 ), 0.5 ) ;
-            } ;               
-        } , [nd2, toneFreq, 0 ]) ; 
+            } ;                     
+        } , [nd2, toneFreq, 0 ]) ;         
         ;
         return nd2 ;     
     }   
