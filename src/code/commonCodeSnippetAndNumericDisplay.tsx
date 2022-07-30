@@ -18,23 +18,31 @@ const NUMERIC = (
      *   `<input>`s already fixed-width hence does not suffer from this problem               
      * - `<input type=number readonly >`s feels more semantic and may later be replaced with the `editable` one
     */
-    ({ children: value } : { children: number ; } ) => {     
+    (...[{ children: value, maxPrecision = 7 }] : [
+        {         
+            children: number ;   
+            maxPrecision ?: false | number ;   
+        } ,     
+    ]) => {               
+        const altText = (
+            String(+value.toPrecision(5) )     
+        ) ;
         if (1) {
-            return (
+            return (   
                 <code 
                     className="numeric"                
-                    title={String(+value.toPrecision(5) ) }
+                    title={altText } 
                     style={{ textAlign: "end", }}                
                 > 
-                    { +value.toPrecision(7) }                    
+                    { maxPrecision ? +value.toPrecision(maxPrecision ) : value }                    
                 </code>              
             ) ;                               
         }       
         {      
-            return (
+            return (   
                 <input             
                     type={"number"} 
-                    title={String(+value.toPrecision(5) ) }
+                    title={ altText }
                     value={value }   
                     readOnly
                     style={{ textAlign: "end" }}

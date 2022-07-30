@@ -51,16 +51,19 @@ function useThrottledLog1 (v: Object | object | string | number , deps: React.De
  * @param freqBinRatio the ratio from `n` to {@link AnalyserNode `gner.freqBinCount` }
 */  
 const useAnalyserNodeValue1 = (                     
-    function USE_AMOD_ANALV ({                  
+    function USE_AMOD_ANALV (...[{                  
         refreshIntervalMillis ,       
         //     
-        freqBinRatio = (
+        freqBinRatio = (   
             2 ** -8    
         ) ,          
-    } : {   
-        refreshIntervalMillis : number ;   
-        freqBinRatio ?: number ;          
-    }, gner05: AnalyserNode | null ): number {                       
+    } , gner05 ] : [
+        {   
+            refreshIntervalMillis : number ;   
+            freqBinRatio ?: number ;          
+        } ,    
+        AnalyserNode | null ,        
+    ] ): number {                       
         return (
             useRealTimeQueryInterval<number>(() => {        
                 if (gner05) { 

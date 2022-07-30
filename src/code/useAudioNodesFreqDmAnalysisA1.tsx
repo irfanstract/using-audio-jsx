@@ -47,11 +47,14 @@ import {
 
 // 
 const useAuTapOutputFreqDmAnalysed11 = (
-    function (dest: AudioNode | null, programProps : (
-        Parameters<typeof useAnalyserNodeValue1 >[0 ]
-        &                        
-        ({ fftSize : number } | {} )      
-    ) ) {
+    function (...[dest, programProps] : [   
+        dest: AudioNode | null, 
+        properties : (
+            Parameters<typeof useAnalyserNodeValue1 >[0 ]
+            &                        
+            ({ fftSize : number } | {} )      
+        ) ,   
+    ] ) {
         const [nd2, nd1] = (                              
             ("fftSize" in programProps)        
             ?         
@@ -62,24 +65,40 @@ const useAuTapOutputFreqDmAnalysed11 = (
             useAuTapOutputFreqDmAnalysed(dest )
               
         ) ;   
-        return [(
+        const presentlyValue = (
             useAnalyserNodeValue1(programProps, nd2 )          
+        ) ;       
+        return [( 
+            presentlyValue         
         ) , nd1 ] as const ;
     }
 ) ;
 // TODO
 const useAuTapOutputFreqDmAnalyFlt = (
-    function (nd0: AudioNode | null, propgramProps : (
-        /**    
-         * exactly the signature of the corresponding parameter of corresponding method
-         */
-        Parameters<(typeof useAuTapOutputFreqDmAnalysed11 )>[1 ]    
-    ) = (
-        // TODO
-        { refreshIntervalMillis: (2 ** -5 ) * 1000 }
-    ) ): AudioNode | null {          
+    function (...[   
+        nd0 , 
+        propgramProps = (
+            // TODO    
+            { refreshIntervalMillis: (2 ** -5 ) * 1000 }
+        )  ,    
+    ] : [     
+        dest: AudioNode | null, 
+        properties ?: (
+            (
+                /**    
+                 * exactly the signature of the corresponding parameter of corresponding method
+                 */
+                Parameters<(typeof useAuTapOutputFreqDmAnalysed11 )>[1 ]      
+            ) & {
+                onValue ?: React.Dispatch<{ value: number ; }> ;
+            }
+        ) ,  
+    ] ): AudioNode | null {         
+        const { onValue = Object } = (
+            propgramProps
+        ) ;    
         ;             
-        /**     
+        /**         
          * {@link useAuTapOutputFreqDmAnalysed11 } requires `dest` to work, but
          * since this method is supposed to serve as fliter/filter rather than analyser,  
          * this wires needs a dummy/discarding node as the `dest` argument
@@ -90,14 +109,26 @@ const useAuTapOutputFreqDmAnalyFlt = (
         const [presentlyVal, feedNd2] = (         
             useAuTapOutputFreqDmAnalysed11(dummyNd3 , propgramProps )
         ) ;    
-        (       
+        // TODO                
+        (                      
             useConstantParamSrcElas(nd0, { value: presentlyVal } )
-        ) ;
-        // TODO                       
-        ;
+        ) ;     
+        React.useLayoutEffect(() => {
+            ;
+            onValue({ value: presentlyVal }) ;         
+        } , (  
+            /**      
+             * we deliberately leave the callback fn {@link onValue} out of `deps`, since 
+             * {@link onValue } will be called every-and-only-every right time to call it
+             */  
+            // eslint-disable-next-line  react-hooks/exhaustive-deps     
+            [presentlyVal] 
+        ) ) ;       
+        // TODO          
+        ;       
         return (
             feedNd2 as (AudioNode | null )
-        ) ;
+        ) ;  
     }
 ) ;
 

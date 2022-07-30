@@ -11,9 +11,10 @@ import {
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF , 
     CAmpSlideDown ,         
 } from "./audioLoopDemoComponents1"; 
+import { CWaveTable1 } from "./useAudioGraphImplFComponents";
 
    
-
+         
   
 
             
@@ -49,7 +50,7 @@ const BeepsInLoop = (
             <ol>                           
             <LoopingWithPeriod value={{ period: 0.4 } } renderRange={{ n: !lowNumber ? 0x0C : 0x1 }} >
                 <li>  
-                    <CurrentTDisplay />        
+                    <CurrentTDisplay />         
                     <CHalfSecndBeep1    />           
                 </li>
             </LoopingWithPeriod>          
@@ -95,7 +96,7 @@ const BEEPBOPVR = (
                  *       
                  *  <CAmpModulated  
                  *  value={ (        
-                 *      <WithDelay value={-7 } >
+                 *      <WithDelay value={-7 } > 
                  *          { beepBopGraph1 }
                  *      </WithDelay>
                  *  ) } 
@@ -132,14 +133,14 @@ const BEEPBOPVR = (
                         <CHalfSecndBeep1 />     
                     ) ;                   
                 }                       
-                if (version === Vr.AmpSlideDown ) {
+                if (version === Vr.AmpSlideDown ) {  
                     ;      
                     return (       
-                        <CAmpSlideDown   > 
-                            <CPersistingBeep value={ { } } />         
+                        <CAmpSlideDown   >    
+                            <CWaveTable1  />         
                         </CAmpSlideDown>                   
                     ) ;                      
-                }                                       
+                }                                           
                 if (version === Vr.BassDrumKick ) {
                     ;      
                     return (         
@@ -154,7 +155,7 @@ const BEEPBOPVR = (
                         <CAmpModulated value={ beepBopGraph1 } > 
                             <CPersistingBeep value={ { } } />         
                         </CAmpModulated>                 
-                    ) ;                   
+                    ) ;                    
                 }                    
                 if (version === Vr.V2P1 ) {     
                     ;    

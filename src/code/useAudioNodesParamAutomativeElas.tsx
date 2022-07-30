@@ -123,8 +123,8 @@ const {
                 } , [p, value ]);        
             }   
         ) ,  
-    } ;    
-})({ UGEPI_DEBUG: true });    
+    } ;       
+})({ UGEPI_DEBUG: false });    
 
    
 

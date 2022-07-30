@@ -33,7 +33,7 @@ import {
 } from "./useAudioNodesBasicNormalisation1";         
 import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";  
 import { 
-    useOinModulatedWaveTable1 as useOinModulatedWaveTable1 , 
+    useOinModulatedWaveTable1 as useOinModulatedWaveTable0 , 
     
 } from "./useAudioNodesBasicBeepModulatedD";        
  
@@ -226,7 +226,7 @@ const useOinModulatedWaveTable = (() => {
     //     }             
     // ) ;      
     return (
-        useOinModulatedWaveTable1   
+        useOinModulatedWaveTable0   
     ) ;
 })() ;     
 

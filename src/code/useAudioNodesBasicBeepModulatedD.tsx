@@ -55,7 +55,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
         useOscilltorNodeWithGivenFadeoutTimeConstant1    
     ) ;
     type WaveTableNodeProps1 = (
-        WaveTableNodeProps         
+        WaveTableNodeProps           
     ) ;          
     const useNormalisedArgumentativeChnl11 = (
         useNormalisedArgumentativeChnl1      
@@ -79,15 +79,19 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             (void 0 )          
         ) ;       
     };
-    return (                 
+    return (                  
         function useWVT(...[nd0 , mainOptions11 = {} ] : [
             dest : AudioNode | null ,               
-            etc ?: {               
-                waveTable ?: NonNullable<WaveTableNodeProps1["type"] > ;     
+            etc ?: {                
+                /**    
+                 * 
+                 */
+                waveTable ?: NonNullable<WaveTableNodeProps1["type"] > ;   
+
                 /**    
                  * specifies,   
                  * how much implied by input `1.0` increment  
-                 *  */         
+                 *  */                   
                 detuneScale1 ?: number ;          
                       
                 /**        
@@ -100,17 +104,21 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                  * you probably meant {@link freqArgumentNormalValue  }
                  */      
                 freqArgumentInitialValue ?: number ;    
-            } ,    
-        ] ) {                              
+            } ,         
+        ] ) {                                  
             const { 
                 waveTable: wvTable = "sine",    
-                detuneScale1 = (12 * 100 ) ,        
+
+                detuneScale1 = (12 * 100 ) ,          
+
                 freqArgumentNormalValue = 440 ,      
-                freqArgumentInitialValue : freqArgumentInitialValue = (
-                    freqArgumentNormalValue
+                freqArgumentInitialValue : freqArgumentInitialValue = ( 
+                    // TODO    
+                    3          
                 ) ,       
+
             } = mainOptions11 ;    
-            const nd1 = (   
+            const nd1 = (    
                 useOscilltorNodeF(nd0, 0.5 )   
             ) ;                  
             /**   
@@ -121,11 +129,11 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                     setPeriodicWave1(nd1, wvTable )          
                 ) ;                 
             } , [nd1 ]) ;                    
-            /**   
-             * assigns initial value   
+            /**                
+             * assigns initial value(s).      
              */
             React.useLayoutEffect(() => {
-                nd1 && (       
+                nd1 && (        
                     /**   
                      * using `yy.value = (...)` is not an option here, as    
                      * - {@link useWVT }    
@@ -134,15 +142,18 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                      * - using `currentTime` as `t` (which `value = (..)` exactly does )
                      *   would interfere with subsequent calls
                      */ 
-                    nd1.frequency.setValueAtTime(0, 0 ) 
-                ) ;              
+                    nd1.frequency.setValueAtTime(( 
+                        // TODO         
+                        freqArgumentInitialValue  
+                    ), 0 ) 
+                ) ;             
             } , [nd1 ]) ;                 
             /**    
              * present the `AudioParams` as specified    
              */
             const {
-                frqx ,                
-                detunx ,            
+                frqx ,     
+                detunex: detunx ,            
             } = {                                       
                 frqx : (       
                     useNormalisedArgumentativeChnl11<(
@@ -156,7 +167,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                         destNdIntrinsicValue: freqArgumentInitialValue  ,  
                     } )       
                 )         ,             
-                detunx : (       
+                detunex : (       
                     useNormalisedArgumentativeChnl11<(       
                         Pick<OscillatorNode, "detune">     
                     )>(nd1 , "detune", (  

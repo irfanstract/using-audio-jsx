@@ -35,6 +35,25 @@ type AFeedableAndTappableNca = {
     sideTapPt: AudioSourceNode ;           
 
 } ;  
+const ACMT_TP = (
+    function (...[P1] : [
+        dest : AudioNode ,       
+    ]): AFeedableAndTappableNca {    
+        ;                              
+        const P2Tap = (      
+            P1.context.createGain()                  
+        ) ;                              
+        const P2C : DynamicsCompressorNode = (
+            P1.context.createDynamicsCompressor()             
+        ) ;  
+        P2C.connect(P1) ;   
+        P2C.connect(P2Tap ) ;        
+        return {        
+            feedPt: P2C ,             
+            sideTapPt: P2Tap ,         
+        } ;  
+    }     
+) ;
 
 /**   
  * note : 
@@ -42,28 +61,19 @@ type AFeedableAndTappableNca = {
  * - a {@link DynamicsCompressorNode } lies in middle of the stream,         
  *   preventing clipoff 
 */
-const aCtxMt0 = (                        
+const aCtxMt0 = (                           
     IterableOps.memoize((       
         async () : Promise<(
-            AFeedableAndTappableNca
+            AFeedableAndTappableNca    
         )> => {  
             const P1: AudioNode = (          
                 await newAudioCtxAsync( )      
-            ) ;                           
-            const P2Tap = (      
-                P1.context.createGain()                  
-            ) ;                              
-            const P2C : DynamicsCompressorNode = (
-                P1.context.createDynamicsCompressor()             
-            ) ;  
-            P2C.connect(P1) ;   
-            P2C.connect(P2Tap ) ;        
-            return {
-                feedPt: P2C ,             
-                sideTapPt: P2Tap ,         
-            } ;                                              
+            ) ;                      
+            return (
+                ACMT_TP(P1 )     
+            ) ;                                                      
         }
-    ) , IterableOps.identity )                  
+    ) , IterableOps.identity )                    
 ) ;       
 const useACtxMtWithoutAnyFilter1 = (
     () => (

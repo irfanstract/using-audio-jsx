@@ -1,5 +1,5 @@
  
-// utility imports        
+// utility imports          
 import Immutable from "immutable";        
 import { IterableOps, PromiseReturnValue } from "./generalUse11";  
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
@@ -16,10 +16,13 @@ import {
 
     FreqArgsProps ,  
     DetuningProps ,  
-    GainValArgsProps ,
+    GainValArgsProps ,         
     GainValArgsProps1 ,   
     QFactualProps , 
-} from "./useAudioGraphImplBiquadFltPropsTyping";
+} from "./useAudioGraphImplBiquadFltPropsTyping";      
+import { 
+    usePersistingBeep ,      
+} from "./useAudioNodesBasicBeep1";    
 
      
      
@@ -39,7 +42,7 @@ type BiquadFltCProps = (
         }      
         &    
         FreqArgsProps  
-        & 
+        &  
         /**      
          * either
          * a) both shall be left out or *set to `undefined`*, 
@@ -47,23 +50,23 @@ type BiquadFltCProps = (
          */     
         GainValArgsProps1               
     )>
-) ;              
+) ;               
 const biquadFltCPropsParse = (            
     function (mainProps : (             
         BiquadFltCProps       
-    ) ) {          
+    ) ) {            
         const {                      
             freqArgument: freqArgGraph0,   
             freqArgumentInterpretation = (  
                 automativeInputRangeDefaultMode   
             ) ,             
-            gainValArgument: gainValueGraph0 = null ,     
+            gainValArgument: gainValueGraph0 = null ,       
             gainValArgumentInterpretation = (  
                 automativeInputRangeDefaultMode 
             ) ,        
             type: flType ,     
-
-            children ,          
+ 
+            children ,           
 
         } = mainProps ;    
         const freqArgGraph1: React.ReactElement = (
@@ -79,14 +82,14 @@ const biquadFltCPropsParse = (
             } , gainValueGraph0 || <></> )       
         ) ;       
         ;             
-        return {
+        return {  
             flType ,  
             freqArgGraph1 , 
             gainValArgument1 ,   
 
             children ,      
         } ;
-    }
+    }      
 ) ;                
 
 const WaveTableNodeProps = {} as const ; // `--isolated-modules` TS-1205 
@@ -97,53 +100,91 @@ type WaveTableNodeProps = (
                 OscillatorType | PeriodicWave   
             ), "custom">
         ) ;       
-    } 
+    }   
     &          
     Partial<FreqArgsProps > 
     &    
-    Partial<DetuningProps >             
+    Partial<DetuningProps >                           
 ) ;        
-const waveTableCPropsShallParse = (            
-    function (mainProps : (              
-        WaveTableNodeProps              
-    ) ) {             
-        const {                      
-            freqArgument: freqArgGraph0 = <></> ,       
-            freqArgumentInterpretation = (  
-                automativeInputRangeDefaultMode    
-            ) ,                  
-                        
-            detune: detuneGraph0 = <></> ,      
-            detuneInterpretation = (  
-                automativeInputRangeDefaultMode   
-            ) ,                         
-            
-            type : wvTable1 ,  
-
-        } = mainProps ;    
-        const freqArgGraph1: React.ReactElement = (
-            graphAfterNrmInterpretativeMode({ 
-                mode1 : freqArgumentInterpretation  ,
- 
-            } , freqArgGraph0 )   
-        ) ;                
-        const detuneGraph1: React.ReactElement = (
-            graphAfterNrmInterpretativeMode({ 
-                mode1 : detuneInterpretation  , 
-
-            } , detuneGraph0 )          
-        ) ;                 
-        ;                     
-        return {  
-            freqArgGraph1 ,        
-            detuneGraph1 , 
-            ...(() : { type ?: NonNullable<WaveTableNodeProps["type"] > ; } => (
-                wvTable1 ? { type : wvTable1 } : { }
-            ) )() ,
-
-        } ; 
-    }            
-) ;                     
+const waveTableCPropsShallParse = (() => {  
+    const CFC = (              
+        IterableOps.once(() => (
+            import ('./useAudioGraphImplFComponents')         
+        ))
+    );
+    const CPersistingBeepX = (        
+        // TODO                
+        React.lazy(async () => {
+            const {
+                CPersistingBeep ,     
+            } = (      
+                await CFC()       
+            ) ;
+            return {
+                default: CPersistingBeep ,    
+            } ;
+        })    
+    ) ;    
+    const CWhiteNoiseX = (    
+        // TODO                
+        React.lazy(async () => {
+            const {   
+                CWhiteNoise ,       
+            } = (  
+                await CFC()      
+            ) ;
+            return {
+                default: CWhiteNoise ,    
+            } ;
+        })
+    ) ;    
+    return (                  
+        function (...[mainProps] : [
+            (              
+                WaveTableNodeProps              
+            ) ,        
+        ] ) {                   
+            const {       
+                freqArgument: freqArgGraph0 = (     
+                    // TODO     
+                    <CWhiteNoiseX value={{ volume: 2 ** 0 }} />  
+                ) ,       
+                freqArgumentInterpretation = (  
+                    automativeInputRangeDefaultMode    
+                ) ,                  
+                            
+                detune: detuneGraph0 = <></> ,       
+                detuneInterpretation = (  
+                    automativeInputRangeDefaultMode   
+                ) ,                            
+                
+                type : wvTable1 ,  
+    
+            } = mainProps ;    
+            const freqArgGraph1: React.ReactElement = (
+                graphAfterNrmInterpretativeMode({ 
+                    mode1 : freqArgumentInterpretation  ,
+     
+                } , freqArgGraph0 )   
+            ) ;                
+            const detuneGraph1: React.ReactElement = (
+                graphAfterNrmInterpretativeMode({ 
+                    mode1 : detuneInterpretation  , 
+    
+                } , detuneGraph0 )          
+            ) ;                 
+            ;                     
+            return {  
+                freqArgGraph1 ,        
+                detuneGraph1 , 
+                ...(() : { type ?: NonNullable<WaveTableNodeProps["type"] > ; } => (
+                    wvTable1 ? { type : wvTable1 } : { }
+                ) )() ,
+    
+            } ; 
+        }            
+    ) ; 
+})() ;                     
 
 const ParamAutomativeNodeCProps = {} ; // TS-1205
 type ParamAutomativeNodeCProps = ( 
@@ -151,7 +192,7 @@ type ParamAutomativeNodeCProps = (
         XWithInterpretation<"value", React.ReactElement >  
     ) , "value">     
     &    
-    Required<(
+    Required<(  
         React.PropsWithChildren<{ }>
     )>        
     &
@@ -161,13 +202,13 @@ const evParamAutomativeNodeCPropsParse = (
     function (mainProps : ParamAutomativeNodeCProps ) { 
         const {                 
             target ,         
-            
+
             children: gainValueGraph0 = null ,     
             valueInterpretation: gainValArgumentInterpretation = (  
                 automativeInputRangeDefaultMode 
             ) ,           
                            
-        } = mainProps ;      
+        } = mainProps ;        
         ;          
         const gainValArgument1: React.ReactElement = (
             graphAfterNrmInterpretativeMode({ 

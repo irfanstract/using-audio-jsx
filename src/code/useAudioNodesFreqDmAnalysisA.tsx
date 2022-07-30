@@ -104,15 +104,20 @@ const useAuTapOutputFreqDmAnalysed = (
     }   
 ) ;         
 const useAuTapOutputFreqDmAnalysed1 = (   
-    function (nd0: Parameters<typeof useATapNode>[0 ] , { fftSize } : (
-        /**   
-         * parameter 'src' shall be omitted as 
-         * it shall be specified our own way      
-         */
-        Omit<(
-            Parameters<typeof useAuTapOutputFreqDmAnalysis1 >[0 ] 
-        ) , "src">   
-    ) ) : readonly [AnalyserNode | null, AudioNode | null] {
+    function (...[    
+        nd0 , { fftSize } ,        
+    ] : [         
+        dest: Parameters<typeof useATapNode>[0 ] , 
+        properties : (
+            /**   
+             * parameter 'src' shall be omitted as 
+             * it shall be specified our own way      
+             */
+            Omit<(
+                Parameters<typeof useAuTapOutputFreqDmAnalysis1 >[0 ] 
+            ) , "src">   
+        ),     
+    ]) : readonly [AnalyserNode | null, AudioNode | null] {
         const [nd2, nd1 ] = (            
             useATapNode(nd0 )                
         ) ;        
@@ -128,7 +133,7 @@ const useAuTapOutputFreqDmAnalysed1 = (
 
 
 
-
+ 
 
 
 

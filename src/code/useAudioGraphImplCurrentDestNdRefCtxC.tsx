@@ -154,7 +154,7 @@ const {
                             useElasUsageOnMount({ v0: 1, v1: 2 ** -40 })  
                         ) ;    
                         React.useLayoutEffect(() => {
-                            if (1) { 
+                            if (0 ) { 
                                 console.log(useGainElasSpcl.name, { value, d });
                             }       
                         }, [value, d ]) ;
