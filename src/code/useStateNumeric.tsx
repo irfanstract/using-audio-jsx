@@ -58,11 +58,11 @@ const useCounter = (() => {
         }
     ) ; 
 })() ;
-const useMonotonicallyIncrementer = (
+const useMonotonicallyIncrementation = (
     function useMI(...args : Parameters<typeof useCounter > ) {
         const [ { increment: increment0 , v: vl , }] = [(   
             useCounter(...args )            
-        )] ;                
+        )] ;                    
         return [             
             vl ,   
             () => increment0() ,          
@@ -74,5 +74,5 @@ const useMonotonicallyIncrementer = (
 
 export {
     useCounter ,  
-    useMonotonicallyIncrementer ,  
+    useMonotonicallyIncrementation ,  
 } ;  
