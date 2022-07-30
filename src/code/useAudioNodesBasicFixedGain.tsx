@@ -31,8 +31,12 @@ import {
     useNormalisedArgumentativeChnl1 , 
 
 } from "./useAudioNodesBasicNormalisation1";         
-import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";    
-
+import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";  
+import { 
+    useOinModulatedWaveTable1 as useOinModulatedWaveTable1 , 
+    
+} from "./useAudioNodesBasicBeepModulatedD";        
+ 
          
   
           
@@ -56,7 +60,7 @@ const useAmpByValue : (
  * use the new name . 
  */
 const useFixedGain: (                         
-    typeof useAmpByValue      
+    typeof useAmpByValue       
 ) = ( 
     useAmpByValue     
 ); 
@@ -69,7 +73,7 @@ const useGainModulatedPt = (
     function (...[nd0] : [
         dest: AudioNode | null ,      
     ] ) {               
-        /**    
+        /**       
          * see alse {@link AudioNode.connect }, info about {@link AudioParam}s 
          */
         const initialValue : 0 = ( 
@@ -87,129 +91,143 @@ const useGainModulatedPt = (
             ampCtrl : nd1?.gain || null ,  
         } as const ;    
     }  
-) ;              
+) ;                  
 /**              
  * CAVEAT .         
  * these are {@link AudioParam}s rather than being {@link AudioNode}s .          
- */       
+ */        
 const useOinModulatedWaveTable = (() => {
-    function setPeriodicWave1(...[nd1, wvTable] : (
-        [
-            NonNullable<(         
-                ReturnType<(
-                    typeof useOscilltorNodeWithGivenFadeoutTimeConstant1  
-                )>  
-            ) > ,       
-            NonNullable<WaveTableNodeProps["type"] > ,         
-        ]                  
-    )) {
-        return (
-            ((wvTable instanceof PeriodicWave ) && (nd1.setPeriodicWave(wvTable), true )  )   
-            ||
-            (typeof wvTable !== "object" && (nd1.type = wvTable , true ) )  
-            ||
-            (void 0 )          
-        ) ;     
-    };
-    return (                 
-        function useWVT(...[nd0 , mainOptions11 = {} ] : [
-            dest : AudioNode | null ,               
-            etc ?: {               
-                waveTable ?: NonNullable<WaveTableNodeProps["type"] > ;     
-                /**    
-                 * specifies,   
-                 * how much implied by input `1.0` increment  
-                 *  */      
-                detuneScale1 ?: number ;          
+    // // DEPENDENCIES  
+    // const useOscilltorNodeF = (
+    //     useOscilltorNodeWithGivenFadeoutTimeConstant1    
+    // ) ;
+    // type WaveTableNodeProps1 = (
+    //     WaveTableNodeProps         
+    // ) ;          
+    // const useNormalisedArgumentativeChnl11 = (
+    //     useNormalisedArgumentativeChnl1      
+    // ) ;
+    // ;       
+    // function setPeriodicWave1(...[nd1, wvTable] : (
+    //     [
+    //         NonNullable<(         
+    //             ReturnType<(
+    //                 typeof useOscilltorNodeF  
+    //             )>  
+    //         ) > ,            
+    //         NonNullable<WaveTableNodeProps1["type"] > ,         
+    //     ]                  
+    // )) {
+    //     return (
+    //         ((wvTable instanceof PeriodicWave ) && (nd1.setPeriodicWave(wvTable), true )  )   
+    //         ||
+    //         (typeof wvTable !== "object" && (nd1.type = wvTable , true ) )  
+    //         ||
+    //         (void 0 )          
+    //     ) ;       
+    // };
+    // return (                 
+    //     function useWVT(...[nd0 , mainOptions11 = {} ] : [
+    //         dest : AudioNode | null ,               
+    //         etc ?: {               
+    //             waveTable ?: NonNullable<WaveTableNodeProps1["type"] > ;     
+    //             /**    
+    //              * specifies,   
+    //              * how much implied by input `1.0` increment  
+    //              *  */         
+    //             detuneScale1 ?: number ;          
                       
-                /**        
-                 * specifies,   
-                 * how much for input of `1.0`     
-                 *  */      
-                freqArgumentNormalValue ?: number ;    
-                /**    
-                 * @deprecated    
-                 * you probably meant {@link freqArgumentNormalValue  }
-                 */      
-                freqArgumentInitialValue ?: number ;    
-            } ,    
-        ] ) {                              
-            const { 
-                waveTable: wvTable = "sine",    
-                detuneScale1 = (12 * 100 ) ,        
-                freqArgumentNormalValue = 440 ,      
-                freqArgumentInitialValue : freqArgumentInitialValue = (
-                    freqArgumentNormalValue
-                ) ,       
-            } = mainOptions11 ;    
-            const nd1 = (   
-                useOscilltorNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-            ) ;                 
-            /**   
-             * `type`     
-             */
-            React.useLayoutEffect(() => {         
-                nd1 && ( 
-                    setPeriodicWave1(nd1, wvTable )          
-                ) ;               
-            } , [nd1 ]) ;                    
-            /**   
-             * assigns initial value   
-             */
-            React.useLayoutEffect(() => {
-                nd1 && (       
-                    /**   
-                     * using `yy.value = (...)` is not an option here, as    
-                     * - {@link useWVT }    
-                     *   - does not provide `freq` parameter and instead 
-                     *   - leaves the responsibility to calling code     
-                     * - using `currentTime` as `t` (which `value = (..)` exactly does )
-                     *   would interfere with subsequent calls
-                     */ 
-                    nd1.frequency.setValueAtTime(0, 0 ) 
-                ) ;              
-            } , [nd1 ]) ;                 
-            /**    
-             * present the `AudioParams` as specified    
-             */
-            const {
-                frqx ,                
-                detunx ,            
-            } = {                                       
-                frqx : (       
-                    useNormalisedArgumentativeChnl1<(
-                        Pick<OscillatorNode, "frequency">      
-                    )>(nd1 , "frequency", (     
-                        // TODO    
-                        // ( nd1 ? ctxFrameRateOf(nd1.context ) : 48000  )      
-                        freqArgumentNormalValue        
-                    ) , {             
-                        // TODO        
-                        destNdIntrinsicValue: freqArgumentInitialValue  ,  
-                    } )       
-                )         ,             
-                detunx : (    
-                    useNormalisedArgumentativeChnl1<(       
-                        Pick<OscillatorNode, "detune">     
-                    )>(nd1 , "detune", (  
-                        // TODO   
-                        detuneScale1
-                    ) , {
-                        // TODO
-                        destNdIntrinsicValue: 0 , 
-                    } )     
-                )       ,              
-            } ;   
-            ;             
-            return {       
-                main : (nd1 as (AudioNode | null ) ) || null ,              
-                // frequency : nd1?.frequency || null ,            
-                // detune    : nd1?.detune    || null ,            
-                frequency : frqx.gnBeforeMul    ,            
-                detune    : detunx.gnBeforeMul  ,  
-            } as const ;    
-        }             
-    ) ; 
+    //             /**        
+    //              * specifies,   
+    //              * how much for input of `1.0`     
+    //              *  */      
+    //             freqArgumentNormalValue ?: number ;    
+    //             /**    
+    //              * @deprecated    
+    //              * you probably meant {@link freqArgumentNormalValue  }
+    //              */      
+    //             freqArgumentInitialValue ?: number ;    
+    //         } ,    
+    //     ] ) {                              
+    //         const { 
+    //             waveTable: wvTable = "sine",    
+    //             detuneScale1 = (12 * 100 ) ,        
+    //             freqArgumentNormalValue = 440 ,      
+    //             freqArgumentInitialValue : freqArgumentInitialValue = (
+    //                 freqArgumentNormalValue
+    //             ) ,       
+    //         } = mainOptions11 ;    
+    //         const nd1 = (   
+    //             useOscilltorNodeF(nd0, 0.5 )   
+    //         ) ;                  
+    //         /**   
+    //          * `type`     
+    //          */
+    //         React.useLayoutEffect(() => {         
+    //             nd1 && ( 
+    //                 setPeriodicWave1(nd1, wvTable )          
+    //             ) ;                 
+    //         } , [nd1 ]) ;                    
+    //         /**   
+    //          * assigns initial value   
+    //          */
+    //         React.useLayoutEffect(() => {
+    //             nd1 && (       
+    //                 /**   
+    //                  * using `yy.value = (...)` is not an option here, as    
+    //                  * - {@link useWVT }    
+    //                  *   - does not provide `freq` parameter and instead 
+    //                  *   - leaves the responsibility to calling code     
+    //                  * - using `currentTime` as `t` (which `value = (..)` exactly does )
+    //                  *   would interfere with subsequent calls
+    //                  */ 
+    //                 nd1.frequency.setValueAtTime(0, 0 ) 
+    //             ) ;              
+    //         } , [nd1 ]) ;                 
+    //         /**    
+    //          * present the `AudioParams` as specified    
+    //          */
+    //         const {
+    //             frqx ,                
+    //             detunx ,            
+    //         } = {                                       
+    //             frqx : (       
+    //                 useNormalisedArgumentativeChnl11<(
+    //                     Pick<OscillatorNode, "frequency">      
+    //                 )>(nd1 , "frequency", (     
+    //                     // TODO    
+    //                     // ( nd1 ? ctxFrameRateOf(nd1.context ) : 48000  )      
+    //                     freqArgumentNormalValue        
+    //                 ) , {             
+    //                     // TODO        
+    //                     destNdIntrinsicValue: freqArgumentInitialValue  ,  
+    //                 } )       
+    //             )         ,             
+    //             detunx : (       
+    //                 useNormalisedArgumentativeChnl11<(       
+    //                     Pick<OscillatorNode, "detune">     
+    //                 )>(nd1 , "detune", (  
+    //                     // TODO     
+    //                     detuneScale1
+    //                 ) , {
+    //                     // TODO
+    //                     destNdIntrinsicValue: 0 , 
+    //                 } )     
+    //             )       ,              
+    //         } ;   
+    //         ;              
+    //         return {       
+    //             main : (nd1 as (AudioNode | null ) ) || null ,              
+    //             // frequency : nd1?.frequency || null ,            
+    //             // detune    : nd1?.detune    || null ,            
+    //             frequency : frqx.gnBeforeMul    ,            
+    //             detune    : detunx.gnBeforeMul  ,  
+    //         } as const ;    
+    //     }             
+    // ) ;      
+    return (
+        useOinModulatedWaveTable1   
+    ) ;
 })() ;     
 
 const useWhiteNoise = (       
@@ -223,7 +241,7 @@ const useWhiteNoise = (
         useWhiteNoiseNodeWithGivenProps(gNd1, {} );
         return {} ;                                                        
     }           
-) ;    
+) ;     
 
 
 

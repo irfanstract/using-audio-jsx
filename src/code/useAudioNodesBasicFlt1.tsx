@@ -9,55 +9,33 @@ import { useEfectToMap } from "./useEffectToMap";
 
 
           
-          
 import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1"; 
 import { 
     useGainNodeWithGivenFadeoutTimeConstant1, 
     useOscilltorNodeWithGivenFadeoutTimeConstant1 , 
     useWhiteNoiseNodeWithGivenProps  ,
      
-} from "./useAudioNodesMounting11"; 
+} from "./useAudioNodesMounting11";     
+import {
+    YyyUsageDest ,      
+    YyyUsable , 
+} from "./useAudioNodesBasicFltTypes1"; 
+import { 
+    usePersistingBeep , 
+    
+} from "./useAudioNodesBasicBeep1";                
  
-type YyyUsageDest = (             
-    AudioNode | null 
-) ;                              
-type YyyUsable<P extends NonNullable<unknown> , R = { } > = (        
-    (dest: YyyUsageDest, properties: P ) => R       
-) ;
-const usePersistingBeep: (      
-    YyyUsable<(                       
-        Readonly<{ 
-            toneFreq ?: number | undefined;
-        } >    
-    ) , (       
-        // AudioNode    
-        EventTarget 
-    ) | null >               
-) = (     
-    function (nd1, { toneFreq = 440 } ) {
-        const nd2 = (
-            useOscilltorNodeWithGivenFadeoutTimeConstant1(nd1 , 0.5 )   
-        ) ;                
-        React[AUDIONODES_USEEFFECT ](() => { 
-            if (nd2) {    
-                nd2.frequency.value = toneFreq ;       
-            } ;  
-        } , [nd2 ]) ;                 
-        React[AUDIONODES_USEEFFECT ](() => {     
-            if (nd2) {     
-                /**    
-                 * {@link nd2.frequency.value } , smoothly   
-                 */   
-                nd2.frequency.setTargetAtTime(toneFreq, (
-                    // TODO 
-                    nd2.context.currentTime   
-                ), 0.5 ) ;
-            } ;                     
-        } , [nd2, toneFreq, 0 ]) ;         
-        ;
-        return nd2 ;     
-    }   
-) ;               
+
+
+
+
+
+
+
+
+
+
+ 
 const useWhiteNoise1 = ( 
     function (...a: Parameters<typeof useWhiteNoiseNodeWithGivenProps> ): void {
         //

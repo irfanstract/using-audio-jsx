@@ -18,3 +18,48 @@ import {
      
 } from "./useAudioNodesMounting11"; 
      
+
+
+
+
+
+
+
+
+
+
+
+
+type YyyUsageDest = (             
+    AudioNode | null 
+) ;                              
+type YyyUsable<P extends NonNullable<unknown> , R = { } > = (        
+    (dest: YyyUsageDest, properties: P ) => R       
+) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export type {
+    YyyUsageDest , 
+    YyyUsable , 
+} ;
