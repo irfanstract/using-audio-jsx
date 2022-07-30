@@ -520,7 +520,9 @@ const CHalfSecndBeepAtAbsoluteT = (() => {
 })() ;      
 /**    
  *       
- */  
+ * alternatives : 
+ * - (in `FComponents` )
+ */     
 const CPersistingBeep = (() => { 
     return (         
         asVoidElement ((    

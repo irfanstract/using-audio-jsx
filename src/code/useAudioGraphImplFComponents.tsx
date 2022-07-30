@@ -18,15 +18,24 @@ import {
     CAmpSlideDownAtAbsoluteT ,   
     CBiquadFilterModulated ,          
       
-    CPersistingBeep ,    
+    CPersistingBeep as CPersistingBeep0 ,    
     
     nonterminalUsageWrapC , 
     terminalUsageWrapC ,  
     modulatedWaveTableUsageWrapC , 
-
-} from "./useAudioGraphImplCurrentDestNdRefCtxC";     
+  
+} from "./useAudioGraphImplCurrentDestNdRefCtxC";        
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";      
-import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";   
+import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";    
+/**    
+ * {@link CPersistingBeep0 }. 
+ * 
+ * alternative: 
+ * - {@link CWaveTable1 }, which supports meta-rendering      
+ */    
+const CPersistingBeep : (
+    typeof CPersistingBeep0  
+) = CPersistingBeep0  ;
 const {
     WithDelay ,  
         
@@ -34,7 +43,7 @@ const {
 const {
     CHalfSecndBeep1 , 
     CAmpSlideDown , 
-
+  
 } = (function () {     
     /**   
      * {@link tCtxs.currentTInfCtx.Consumer }
@@ -107,7 +116,7 @@ const CFreqDmAnalyFSpecial = (
             ) }    
             >
                 { graph0 }     
-            </CFreqDmAnalyF>     
+            </CFreqDmAnalyF>      
         ) ;            
         ;      
         return (   
@@ -134,7 +143,7 @@ const CAmpModulated1 = (
                 <CFreqDmAnalyFSpecial>   
                     { ctrlSrc }
                 </CFreqDmAnalyFSpecial>      
-            ) ;                  
+            ) ;                   
             ;         
             return (          
                 <CAmpModulated0 value={ctrlFnl} >
@@ -154,7 +163,7 @@ const CAmpModulated: (
 ) ;   
   
 
-
+    
 
 
 
