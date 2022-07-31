@@ -30,16 +30,17 @@ const useCanForceRefresh = (
         return ( 
             useMemo(() => ({ c, forceRefresh }), [c, forceRefresh ])
         );
-    }
-) ;
-const useRefreshByInterval = (      
-    (_ignored1: true , periofMillis: number): ({} & {} ) => {
+    }       
+) ;  
+const useRefreshByInterval1 = (      
+    (_ignored1: true , periofMillis: number) => {
         ;
-        const {
-            forceRefresh ,                             
+        const {    
+            forceRefresh ,       
+            c ,                                  
         } = (                                   
             useCanForceRefresh()                 
-        ) ;             
+        ) ;               
         useEffect(() => {   
             return (
                 usingInterval(() => {         
@@ -48,12 +49,20 @@ const useRefreshByInterval = (
                 } , periofMillis ) 
             ) ;   
         }, [useDeferredValue(periofMillis) ] ) ;                       
+        return {
+            c ,   
+        } ;    
+    }            
+) ;                               
+const useRefreshByInterval = (      
+    (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
+        useRefreshByInterval1(...a ) ;                    
         return JSON ;    
-    }  
+    }    
 ) ;      
 /**     
  * utility for reliably interpret the argument
-*/
+*/   
 const REFQUER_CALL_ARG_UPGRDE = (
     (function <A> (props: {                                       
         f: () => A ;                           
@@ -63,14 +72,14 @@ const REFQUER_CALL_ARG_UPGRDE = (
             const {               
                 // defaultVl ,    
                 f ,                                                                                     
-            } = props ;
+            } = props ; 
             return { f } as const ;     
         } else {         
             const f = (
                 BoundedIdentityFunction<() => A>()(props )    
-            ) ;                
+            ) ;                 
             return { f } ;
-        }    
+        }       
     })                          
 ) ;    
 /**  
@@ -80,13 +89,15 @@ const REFQUER_CALL_ARG_UPGRDE = (
 const useRealTimeQueryInterval = (     
     function <A>(props : {        
         // deps: React.DependencyList ;                          
-        // defaultVl ?: A ;
-        f: () => A ;                           
+        // defaultVl ?: A ;             
+        f: () => A ;                                   
+
+        strictInterval ?: boolean ;          
 
     } | (() => A ) , timeoutMillis: number ): A {      
-        useRefreshByInterval(true, timeoutMillis ) ;                      
+        useRefreshByInterval(true, timeoutMillis ) ;                        
         const vl = (         
-            (function useM(): A {                                  
+            (function useM(): A {         
                 const { f } = (            
                     REFQUER_CALL_ARG_UPGRDE(props )                                                 
                 ) ;
@@ -95,11 +106,82 @@ const useRealTimeQueryInterval = (
             })()    
         ) ;       
         return vl ;   
-    }               
+    }                  
+) ; 
+/**         
+ * note that this does not provide `deps` ;   
+ * `deps` will be unnecessary for this, due to how {@link useRefreshByInterval} works
+*/  
+const useRealTimeQueryInterval1 = (     
+    function <A>(props : {        
+        // deps: React.DependencyList ;                          
+        // defaultVl ?: A ;             
+        f: () => A ;                                              
+           
+        strictInterval ?: boolean ;       
+
+    } | (() => A ) , timeoutMillis: number ): A {        
+        const { f } = (            
+            REFQUER_CALL_ARG_UPGRDE(props )  
+        ) ;               
+        const { c } = (    
+            useRefreshByInterval1(true, timeoutMillis )   
+        ) ;           
+        const vl = React.useMemo(() => f() , [c] ) ;
+        return vl ;   
+    }                  
+) ; 
+const useNumericDigest = (
+    function (...[v0, { inertialCoef: coef , timeoutMillis } , { debug1 = false } = { debug1: false, } ] : [
+        presentlySrcValue : number ,          
+        config : {     
+            /**     
+             * in range `[0 EXCLUSIVE, 1 INCLUSIVE ]`
+             */  
+            inertialCoef : number ;                
+                 
+            timeoutMillis : number ;         
+        } ,                            
+        debug ?: {
+            debug1 ?: boolean ;      
+        } ,  
+    ] ) {         
+        const timeoutSeconds = (  
+            timeoutMillis / 1000 
+        ) ;     
+        const perRefreshCoef = ( 
+            coef ** timeoutSeconds   
+        ) ;             
+        const [v1, setV1] = (    
+            React.useState<number >(v0 )   
+        ) ;                       
+        (            
+            useRealTimeQueryInterval1(()  => {
+                if (debug1 === false ) {
+                    ;
+                    setV1(function (vLocally: number) {
+                        return (  
+                            // TODO    
+                            (perRefreshCoef * vLocally )     
+                            +
+                            ((1 + -perRefreshCoef ) * v0 )  
+                        ) ;    
+                    }) ;       
+                } else { 
+                    // TODO  
+                }
+            } , timeoutMillis  ) 
+        ) ;  
+        return v1 ;        
+    }
 ) ;
 export {
-    useCanForceRefresh ,  
-    useRefreshByInterval ,       
-    useRealTimeQueryInterval ,        
-    useIntervalDeferredValue as useIntervalDeferredValue1 , 
-} ;
+    useCanForceRefresh ,        
+    useRefreshByInterval ,        
+    useRefreshByInterval1 ,   
+    useRealTimeQueryInterval ,           
+    useRealTimeQueryInterval1 ,     
+    useIntervalDeferredValue as useIntervalDeferredValue1 ,  
+
+    useNumericDigest ,  
+} ;        

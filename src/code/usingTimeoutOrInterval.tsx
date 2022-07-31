@@ -21,16 +21,19 @@ import {
  * for {@link useEffect} or {@link useLayoutEffect }
  * 
  * @returns the cleanup functor      
-*/   
+*/       
 const usingTimeout = (      
-    (NEXT: () => void, periodInMillis: number ): ReturnType<React.EffectCallback> => {
+    (...[NEXT , periodInMillis ] : [
+        NEXT: () => void,   
+        periodInMillis: number ,    
+    ] ): ReturnType<React.EffectCallback> => {
         const timeoutSchdRef = (
             setTimeout(() => NEXT() , periodInMillis )         
         ) ;        
         return () => {
             clearTimeout((    
                 timeoutSchdRef            
-            )) ;
+            )) ;      
         } ;
     }                                         
 ) ;                              
@@ -39,26 +42,30 @@ export { usingTimeout } ;
  * for {@link useEffect} or {@link useLayoutEffect }    
  *          
  * @returns the cleanup functor          
-*/   
+*/                      
 const usingInterval = (                      
-    function Interval(     
+    function Interval(   ...[  
+        callback  ,                               
+        periodMillis  ,                                 
+        {   catchupPolicy , } = {     
+            catchupPolicy: "MAINTAIN_FIXED_PACE" ,   
+        } as const ,      
+    ] : [        
         callback : (() => true ) | (() => void ), 
         periodMillis: NonNullable<Parameters<typeof setTimeout >[1] >  ,                     
-        {   catchupPolicy , } : (        
+        properties ?: (        
             {      
-                /**       
+                /**         
                  * specifies how delays shall be handled
                  * */               
                 catchupPolicy : IntervalUsageAcceptableCatchupPolicy ;           
             } &                             
             Partial<{                      
             }>                          
-        ) = {  
-            catchupPolicy: "MAINTAIN_FIXED_PACE" ,   
-        } ,      
-    ): ReturnType<React.EffectCallback> {
+        ) ,         
+     ]): ReturnType<React.EffectCallback> {
         let closed: boolean = false ;    
-
+ 
         const GET_CURRENT_T = (
             () => performance.now() // MILLISECONDS                
         ) ;
@@ -68,7 +75,7 @@ const usingInterval = (
             } : {  
                 nextSchTMillis : number ;      
             } ,          
-        ): true {                                         
+        ): true {                                          
             if (closed) {
                 return true ;        
             }       
@@ -128,9 +135,12 @@ const usingInterval = (
         } ;
     }         
 ) ;
-export { usingInterval } ;
+export { usingInterval } ;   
 const useIntervalDeferredValue = (
-    function <A>({ tMillis } : { tMillis: number } , v0 : A ): A {  
+    function <A>(...[{ tMillis }  , v0 ] : [
+        { tMillis: number } , 
+        A ,      
+    ] ): A {    
         const r1 = (
             useRef<A >(v0 )                
         ) ;                     
@@ -160,13 +170,13 @@ const useJsonStringificativeMemo = (
         return (
             useMemo<A>(() => a, useDeferredValue<NonNullable<React.DependencyList > >([JSON.stringify(a)]) )
         ) ;                           
-    }            
+    }                 
 ) ;             
 export { useIntervalDeferredValue } ;   
 export { useJsonStringificativeMemo } ;        
 
 
-  
+    
 
 
      
