@@ -9,7 +9,7 @@ import { K, asVoidElement } from "./commonElements";
 import { CBC } from "./useStateInCallback";  
  
 // 
-import { 
+import {  
     WithGivenDest ,  
     Prv1 ,        
     Consm as WithCtxtualOut , 
@@ -44,7 +44,7 @@ import {
     QFactualProps , 
 } from "./useAudioGraphImplBiquadFltPropsTyping";
 import { 
-    automativeInputRangeDefaultMode , 
+    automativeInputRangeDefaultMode ,  
 
     BiquadFltCProps , 
     biquadFltCPropsParse , 
@@ -67,7 +67,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
  
   
     
-                   
+                       
               
                     
  
@@ -75,7 +75,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
  * wrapper, for {@link useGainModulatedPt }   
  * - {@link CAmpSlideDownAtAbsoluteT }
  */
-const {
+const { 
     AmpSlideDownAtAbsoluteT: CAmpSlideDownAtAbsoluteT ,
 
     modulatedAmpUsageWrapC ,  
@@ -85,7 +85,7 @@ const {
 
     CParamAutomative ,    
     
-} = (() => {     
+} = (() => {        
     const {   
         TIMEDOMAIN_NORMALISED , 
         EFFECTIVE_INTENSITY_NORMALISED: RESULTING_MAGN_NORMALISED ,   
@@ -107,14 +107,17 @@ const {
      * @see  
      * {@link React.detailed      }
      */
-    const XList : (
-        (keyof Pick<JSX.IntrinsicElements, "ol" | "ul"> ) 
+    const XList : ( 
+        (keyof Pick<JSX.IntrinsicElements, "ol" | "ul"> )  
         | 
         React.FC<React.PropsWithChildren<{}> >    
         | 
         (typeof React.Fragment)
     ) = (
         "ul" as ("ol" | "ul" | React.FC<React.PropsWithChildren<{}> > )
+    ) ;  
+    const defkey = (
+        Math.random()    
     ) ;
     return {          
         AmpSlideDownAtAbsoluteT : (() => {  
@@ -124,7 +127,7 @@ const {
             type UGE_PROPS = (          
                 Parameters<typeof useGainElas>[1 ]        
             ) ;
-            /**      
+            /**          
              * ad-hoc specialisation of {@link useGainElas }
              */
             const useGainElasSpcl = (() => {                    
@@ -172,16 +175,16 @@ const {
             type Props = (   
                 React.PropsWithChildren<{  
                     t: number ;                 
-                    swingTConst ?: number ;           
+                    swingTConst ?: number ;               
                 }>        
             ) ;        
             ;         
             return (  
                 // TODO    
-                IterableOps.identity<(              
+                IterableOps.identity<(                
                     React.FC<Props >       
                 ) >((
-                    function ({ t, swingTConst = 2 ** -2 , children }) {               
+                    function CWithAmpSlideDown ({ t, swingTConst = 2 ** -2 , children }) {               
                         ;        
                         const useC11 = (       
                             function (...[{ feedPt: nd0 }] : [
@@ -222,7 +225,7 @@ const {
                     useC1 ,  
                     
                 } = xWithUsableYyy({ useYyy }) ;
-                type Props = {       
+                type Props = {           
                     /**         
                      * defines the control graph ; `null` for 'mute' . 
                      * as opposed to `children` which would defines the main/primary graph.  
@@ -230,11 +233,11 @@ const {
                     value: React.ReactElement | null ;  
                 } ;                 
                 return (      
-                    IterableOps.identity<(              
+                    IterableOps.identity<(                
                         React.FC<(                 
                             React.PropsWithChildren<Props >     
                         )>              
-                    ) >(function ({ value: ctrlChildren, children }) {    
+                    ) >(function CWithAmpAutom ({ value: ctrlChildren, children }) {    
                         const useC11 = (
                             function ({ feedPt: nd0 } : (   
                                 CtxtualOutUsageProps     
@@ -295,13 +298,13 @@ const {
                             
                         } = xWithUsableYyy({ useYyy }) ;            
                         return (                     
-                            IterableOps.identity<(                
-                                React.FC<(                               
+                            IterableOps.identity<(                   
+                                React.FC<(         
                                     BiquadFltCProps  
                                 )>                   
-                            ) >(function (mainProps ) {    
+                            ) >(function CBiquadFltC(mainProps ) {    
                                 const {
-                                    flType ,  
+                                    flType ,      
                                     freqArgGraph1 ,  
                                     gainValArgument1 ,  
 
@@ -312,7 +315,7 @@ const {
                                         CtxtualOutUsageProps    
                                     ) ): React.ReactElement {                               
                                         ;                 
-                                        const {                        
+                                        const {                         
                                             main: mainFeed ,                 
                                             mFrequencyValue : freqArgCtrlDest1 ,         
                                             mGainValue : gainCtrlDest1 ,                        
@@ -335,7 +338,7 @@ const {
                                                     Gain Value Ctrl Mode :      
                                                     <WithGivenDest value={ gainCtrlDest1 }>
                                                         { gainValArgument1 }
-                                                    </WithGivenDest>                    
+                                                    </WithGivenDest>                      
                                                 </li>         
                                             )           }  
                                             <li key="main">    
@@ -343,7 +346,7 @@ const {
                                                 Main :  
                                                 <WithGivenDest value={ mainFeed }>
                                                     { children }
-                                                </WithGivenDest>         
+                                                </WithGivenDest>          
                                             </li>
                                             </XList >           
                                         ) ;          
@@ -355,10 +358,10 @@ const {
                                             { c1 }  
                                             </div >      
                                         ) ;         
-                                    }         
+                                    }           
                                 );                                  
                                 return (        
-                                    <CTXTUALOUTPUTUSAGE_CBC>
+                                    <CTXTUALOUTPUTUSAGE_CBC> 
                                         { useC11 }
                                     </CTXTUALOUTPUTUSAGE_CBC>         
                                 ) ;          
@@ -372,15 +375,15 @@ const {
                     function <Props1>(useYyy: (typeof audioFltAtAbsTNodes)["useOinModulatedWaveTable"] ) {    
                         const {
                             dbgBox1 ,       
-                            useC1 ,    
-                            
+                            useC1 ,                 
+                                
                         } = xWithUsableYyy({ useYyy }) ;      
                         return (            
                             IterableOps.identity<(              
                                 React.FC<(                       
                                     WaveTableNodeProps           
                                 )>                    
-                            ) >(function (mainProps ) {         
+                            ) >(function CWaveTableModulatedX(mainProps ) {         
                                 const {  
                                     freqArgGraph1 ,         
                                     detuneGraph1 ,    
@@ -389,7 +392,7 @@ const {
                                 // TODO
                                 const useC11 = (    
                                     function ({ feedPt: nd0 } : (       
-                                        CtxtualOutUsageProps               
+                                        CtxtualOutUsageProps                
                                     ) ): React.ReactElement {                                
                                         ;                    
                                         const {                                   
@@ -398,8 +401,10 @@ const {
                                         } = (          
                                             useC1(nd0, )  
                                         ) ;          
-                                        const c1 = (                      
-                                            // TODO   
+                                        const c1 = (                         
+                                            // TODO      
+                                            <K key={defkey }>  
+                                            <p> DEFKEY: {defkey } </p>
                                             <XList>      
                                             { freqArgDest1 && (        
                                                 <li key="freq">                   
@@ -408,7 +413,7 @@ const {
                                                         { freqArgGraph1 }
                                                     </WithGivenDest>      
                                                 </li>      
-                                            )  }                      
+                                            )  }                        
                                             { detuneCtrlDest1 && (                
                                                 <li key="detune">                             
                                                     Detune :      
@@ -417,9 +422,10 @@ const {
                                                     </WithGivenDest>      
                                                 </li>      
                                             )  }            
-                                            </XList>      
+                                            </XList>  
+                                            </K>    
                                         ) ;          
-                                        // TODO 
+                                        // TODO  
                                         return (                
                                             <div style={{ display: "flex", flexDirection: "column" }} >      
                                             
@@ -438,7 +444,7 @@ const {
                         ) ;                                 
                     }             
                 ) ,      
-                
+                   
                 CParamAutomative : (           
                     IterableOps.identity<(                 
                         React.FC<(                       
@@ -446,7 +452,7 @@ const {
                         )>                     
                     ) >((
                         // TODO 
-                        function (mainProps) {  
+                        function CParamAutomatingC (mainProps) {  
                             const {
                                 valueCtrl: children ,      
                                 target : mainFeed0 ,            
@@ -460,7 +466,7 @@ const {
                                 ) ): React.ReactElement {
                                     const c = (
                                         nd0?.context      
-                                        || null  
+                                        || null     
                                     ) ; 
                                     const mainFeed = (
                                         useAParamModulativeNode(mainFeed0, c )
@@ -492,7 +498,7 @@ const {
     } ;   
 })() ;      
 /**        
- * DO NOT USE THIS AT HIGH-LEVEL LAYER ; 
+ * DO NOT USE THIS AT HIGH-LEVEL LAYER ;  
  * THIS RENDERER DOES NOT HONOUR `currentScheduletT`       
  *  
  */  

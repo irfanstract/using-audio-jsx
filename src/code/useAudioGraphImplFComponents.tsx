@@ -26,11 +26,12 @@ import {
   
 } from "./useAudioGraphImplCurrentDestNdRefCtxC";        
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";      
-import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";    
+import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";     
+import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";   
 /**    
  * {@link CPersistingBeep0 }. 
  * 
- * alternative: 
+ * alternative:    
  * - {@link CWaveTable1 }, which supports meta-rendering      
  */    
 const CPersistingBeep : (
@@ -47,7 +48,7 @@ const {
 } = (function () {     
     /**   
      * {@link tCtxs.currentTInfCtx.Consumer }
-     *  */   
+     *  */    
     const TC = (           
         tCtxs.currentTInfCtx.Consumer
     ) ;   
@@ -91,10 +92,7 @@ const {
             }
         ) ,
     } ;
-})() ;   
-const CFreqDmAnalyF = (   
-    nonterminalUsageWrapC(audioFrqAnlyAtAbsTNodes.useAuTapOutputFreqDmAnalyFlt )
-) ;
+})() ;    
 const CWhiteNoise = (
     terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
 ) ;            

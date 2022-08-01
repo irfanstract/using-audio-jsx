@@ -87,42 +87,84 @@ const CFreqDmAnalyF1X = (() => {
         IterableOps.identity<(                                             
             React.FC< MountageProps1 >      
         )>((                            
-            function C({ children: graph, value : value0, inertialCoef = 0.3,  }) {    
+            function CFreqDmAnalyC({ children: graph, value : value0, inertialCoef = 2 ** -3 ,  }) {    
                 const {   
                     props1 : value1 , 
                     scnValue : v0 ,       
                 } = (   
                     useIntercepted(value0 )
                 ) ;                     
-                const v = (                  
-                    useNumericDigest(v0, {  
-                        inertialCoef : inertialCoef , 
-                        timeoutMillis : ( 2 ** -3 ) * 1000 ,
-                    })
-                ) ;
-                const vlDeferred = (
+                const v = (
+                    function useLogScaleNumericDigest(...[v00, properties ] : (
+                        Parameters<typeof useNumericDigest>
+                    ) ) {   
+                        const v0 = (                                
+                            Math.log2(1E-5 + v00 )    
+                        ) ;        
+                        const v1 = (                     
+                            useNumericDigest(v0, properties )
+                        ) ;    
+                        const v11 = (
+                            2 ** v1 
+                        );     
+                        return v11 ;
+                    }    
+                )(v0 , {   
+                    inertialCoef : inertialCoef , 
+                    timeoutMillis : ( 2 ** -3 ) * 1000 ,
+                } ) ;
+                const vlDeferred = (  
                     React.useDeferredValue(v )        
                 ) ;   
-                // TODO                               
-                return (  
-                    <div>   
-                        <div>
-                        <CFreqDmAnalyF1 value={value1} >
-                            { graph } 
-                        </CFreqDmAnalyF1>          
-                        </div>   
-                        <table>    
-                        <tbody>
-                        <tr>
-                            <td>value </td>
-                            <td> 
-                            <NUMERIC maxPrecision={3 } >
-                            {vlDeferred }
-                            </NUMERIC>
-                            </td>
-                        </tr>        
+                const dbgBox : React.ReactElement = (() => {
+                    const LIVE = (
+                        <i> non-constant value chnging ; </i>    
+                    ) ;    
+                    return (      
+                        <table>      
+                        <tbody> 
+                            <tr  title="the presently Value " >                  
+                                <td> 
+                                <i> Value </i>     
+                                </td>                             
+                                <td>      
+                                    { LIVE }
+                                </td>                    
+                                <td> 
+                                <NUMERIC maxPrecision={3 } >
+                                {vlDeferred }        
+                                </NUMERIC>      
+                                </td>               
+                            </tr>                  
+                            <tr title="the Inertial Coefficient value" >        
+                                <td>
+                                <i> Inertial Coefficient </i>
+                                </td>                             
+                                <td>     
+                                    { LIVE }
+                                </td>        
+                                <td>   
+                                <NUMERIC maxPrecision={3 } >
+                                {  inertialCoef    }  
+                                </NUMERIC>    
+                                </td>   
+                            </tr>          
                         </tbody>
-                        </table>
+                        </table>  
+                    ) ; 
+                })() ;  
+                const el = (
+                    <CFreqDmAnalyF1 value={value1} >
+                        { graph } 
+                    </CFreqDmAnalyF1>       
+                );
+                // TODO                               
+                return (        
+                    <div>   
+                        <div>     
+                            { el }  
+                        </div>   
+                        { dbgBox }
                     </div>      
                 ) ;  
             }                    
@@ -142,7 +184,7 @@ const graphAfterNrmInterpretativeMode = (
             mode1 : ABandpassFreqArgInputRangeMode ;  
             //          
     
-        } , 
+        } ,  
         React.ReactElement ,    
     ]) {
         return (
@@ -153,12 +195,12 @@ const graphAfterNrmInterpretativeMode = (
                 ||
                 (interpretativeMde === RESULTING_MAGN_NORMALISED ? (  
                     // TODO            
-                    <CFreqDmAnalyF1X 
+                    <CFreqDmAnalyF1X   
                     value={{
                         refreshIntervalMillis: (2 ** -5 ) * 1000 ,     
                     }}     
-                    inertialCoef={0.95 } 
-                    >  
+                    inertialCoef={2 ** -3.5 } 
+                    >    
                         {graph }
                     </CFreqDmAnalyF1X >     
                 ) : null )            

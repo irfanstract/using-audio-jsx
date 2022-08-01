@@ -69,10 +69,12 @@ const {
     BeepsInLoop , 
     BEEPBOPVR ,            
 } = BBVR ;
-export const AudioLoopDemoApp = (function () {
+export const AudioLoopDemoApp = (function () {    
+    const key = String(Math.random() ) ;
+    console.log({ key } , ...[2 ] );
     return (  
         function App () {             
-            const _1 = ( 
+            const _1 = (   
                 useACtxMtWithoutAnyFilter1()          
             ) ;               
             const quantityReductiveDbgMode = (
@@ -95,7 +97,7 @@ export const AudioLoopDemoApp = (function () {
             return (
                 <div className="App" >  
                     <p>     
-                        <span>
+                        <span>   
                                 
                         <s >     
                         Gettting some App Problems ?
@@ -110,8 +112,10 @@ export const AudioLoopDemoApp = (function () {
                     </p>
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                       
-                    <p> what </p>
-                    { true && c1 }
+                    <p> what </p>          
+                    <div key={key }> 
+                    { true && c1 }   
+                    </div>
                     </TP>       
                 </div>
             ) ;         

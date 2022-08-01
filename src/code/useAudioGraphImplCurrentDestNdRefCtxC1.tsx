@@ -14,69 +14,47 @@ import {
     Prv1 ,        
     Consm as WithCtxtualOut , 
 
-} from "./useAudioGraphImplCurrentDestNdRefCtx";      
+} from "./useAudioGraphImplCurrentDestNdRefCtx";   
 import { usePersistingBeep, YyyUsable } from "./useAudioNodesBasicFlt1";   
-import { USEM } from "./useAudioNodesParamAutomativeAsRegularNodes";   
-import { graphAfterNrmInterpretativeMode } from "./useAudioGraphAsBandFreqCtrlMode";   
-import {
+import {      
     SpecialUsageExplainer, 
-    xWithUsableYyy ,    
+    xWithUsableYyy ,        
     xWithUsableYyy1 ,   
-} from "./useAudioGraphImplUsableYyyNodes1"; 
-import {
-    // XWithInterpretation ,    
-   
-    FreqArgsProps , 
-    DetuningProps ,  
-    GainValArgsProps ,
-    GainValArgsProps1 ,   
-    QFactualProps , 
-} from "./useAudioGraphImplBiquadFltPropsTyping";
-import { 
-    automativeInputRangeDefaultMode , 
- 
-    BiquadFltCProps , 
-    biquadFltCPropsParse , 
-    WaveTableNodeProps , 
-    waveTableCPropsShallParse , 
-    ParamAutomativeNodeCProps ,            
-    evParamAutomativeNodeCPropsParse , 
-     
-} from "./useAudioGraphImplBasicFltAutomableProps";     
+} from "./useAudioGraphImplUsableYyyNodes1";     
 
-         
+            
  
   
     
                    
               
-                   
+                        
            
 const {      
     terminalUsageWrapC ,   
     nonterminalUsageWrapC ,    
 
 } = (function () {             
-    return {     
+    return {              
         terminalUsageWrapC : (                 
-            function <Props1>(useYyy: YyyUsable<Props1, void > ) { 
+            function   <Props1>(useYyy: YyyUsable<Props1, void > ) { 
                 const {   
                     dbgBox1 ,    
                     
                 } = xWithUsableYyy1({ useYyy }) ;       
                 type C = (         
                     React.FC<(     
-                        { value: Props1 ; }         
+                        { value: Props1 ; }          
                     )>    
                 ) ;   
                 return (   
-                    IterableOps.identity<C >(function ({ value, }) {    
+                    IterableOps.identity<C >(function CAUsageWrapTerminal ({ value, }) {    
                         return (
                             <WithCtxtualOut> 
                                 { function ({ feedPt: nd0 }) {
                                     ;     
                                     return ( 
-                                        <CBC>{ function () { 
+                                        <CBC>{ function use1() { 
                                             ;               
                                             // return value                                       
                                             const _2: void = (                 
@@ -88,31 +66,31 @@ const {
                                         } }</CBC> 
                                     ) ; 
                                 } }
-                            </WithCtxtualOut>    
+                            </WithCtxtualOut>         
                         ) ;                     
                     })     
                 ) ;   
             }              
         ) ,         
         nonterminalUsageWrapC : (               
-            function <Props1>(useYyy: YyyUsable<Props1, AudioNode | null > ) { 
+            function  <Props1>(useYyy: YyyUsable<Props1, AudioNode | null > ) { 
                 const {   
-                    dbgBox1 ,    
+                    dbgBox1 ,          
                     
                 } = xWithUsableYyy1({ useYyy }) ;         
                 type C = (       
                     React.FC<(             
                         React.PropsWithChildren<{ value: Props1 ; } >  
                     )>    
-                ) ;                          
+                ) ;                            
                 return (   
-                    IterableOps.identity<C >(function ({ value, children }) {    
+                    IterableOps.identity<C >(function CAUsageWrapNonterminal ({ value, children }) {    
                         return ( 
                             <WithCtxtualOut>
                                 { function ({ feedPt: nd0 }) {     
                                     ;     
                                     return (    
-                                        <CBC>{ function () { 
+                                        <CBC>{ function use1() { 
                                             ;               
                                             // return value                                      
                                             const nd2: AudioNode | null = (                    

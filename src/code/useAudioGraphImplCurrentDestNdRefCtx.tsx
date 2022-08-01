@@ -39,27 +39,54 @@ import {
     })        
 ) ;    
 /**   
- * {@link React.lazy } dislikes intrinsic, non-callable components (including `ctx.Provider` )
- */
+ * for these reasons :               
+ * - {@link React.lazy } 
+ *   dislikes intrinsic, non-callable components (including `ctx.Provider` ) 
+ * - use of {@link React.lazy }  
+ *   will not play well with WebpackDevServer's HMR         
+ */  
 const PWrp = (
-    function <P extends { children ?: unknown ; }>(C : React.ExoticComponent<P> ) : React.FC<P > {
+    function <P extends {
+        children ?: unknown ;   
+    }>(C : React.ExoticComponent<P> ) : React.FC<P > {
         return (
-            function (props : P ) {   
-                return ( 
+            function InPWrp(props : P ) {     
+                return (       
+                    <K key={C.length || 3 }  > 
                     <C {...props } >    
                         {props.children }
-                    </C>
+                    </C>   
+                    </K>   
                 ) ;                     
-            }   
-        ) ;
-    }    
-) ;            
-const Prv1 = (
-    React.lazy(async () => ({ default: PWrp((await ctx0() ).Provider ) }) )
-) ;               
-const Consm = (
-    React.lazy(async () => ({ default: PWrp((await ctx0() ).Consumer ) }) )
-) ;                    
+            }      
+        ) ;         
+    }                 
+) ;                     
+const {
+    Prv1 ,    
+    Consm ,  
+
+} = (() => {             
+    const wrapped0 = (
+        function <P extends {    
+            children ?: unknown ;   
+        }>(C0 : () => Promise<React.ExoticComponent<P> > ) {
+            return (                
+                PWrp((
+                    React.lazy(async () => ({ default: PWrp(await C0() ) }) )
+                ))    
+            ) ;  
+        }
+    ) ;       
+    return {  
+        Prv1 : (   
+            wrapped0(async() => (await ctx0() ).Provider )
+        ) ,                
+        Consm : (   
+            wrapped0(async() => (await ctx0() ).Consumer )
+        ) ,   
+    } ;     
+})() ;       
 const WithGivenDest = (                      
     React.lazy(async () => {       
         const ctx1 = await ctx0() ;       

@@ -1,5 +1,6 @@
-import React, { useReducer, useState } from "react";  
-
+import React, { useReducer, useState } from "react";   
+import { K } from "./commonElements";    
+  
 
 
 // domain-imports           
@@ -32,11 +33,11 @@ const {
   
     CurrentTDisplay , 
     WithDelay ,     
-    LoopingWithPeriod , 
+    LoopingWithPeriod ,   
 } = tCtxs ;
    
 const BeepsInLoop = (
-    function ({ lowNumber = false } : (
+    function CBeepsInLoop ({ lowNumber = false } : (
         { lowNumber ?: boolean ;      }     
     )) {     
         return (         
@@ -64,7 +65,13 @@ const BeepsInLoop = (
             </div>
         ) ;  
     }
-) ;     
+) ;         
+console.log("") ;
+const BEEPBOPVRKEY = (
+    String((
+        Math.random()
+    ))
+) ;       
 const BEEPBOPVR = (
     function ({ 
         quantityReductiveDbgMode ,      
@@ -76,13 +83,13 @@ const BEEPBOPVR = (
         const beepBopGraph1 = ( 
             <BeepsInLoop lowNumber={quantityReductiveDbgMode} />
         ) ;    
-        const c1 = (() => {
+        const c10 = (() => {   
             enum Vr {
                 SimpleBeep ,   
                 /**   
                  * Beep-Bops   
                  */
-                V1 ,     
+                V1 ,            
                 /**           
                  * @example 
                  * 
@@ -99,9 +106,9 @@ const BEEPBOPVR = (
                  *      <WithDelay value={-7 } > 
                  *          { beepBopGraph1 }
                  *      </WithDelay>
-                 *  ) } 
+                 *  ) }  
                  *  > 
-                 *      <CWhiteNoise value={ { volume: 2 ** -3  } } />         
+                 *      <CWhiteNoise value={ { volume: 2 ** -3  } } />          
                  *  </CAmpModulated>          
                  */         
                 V2P1 ,     
@@ -119,13 +126,13 @@ const BEEPBOPVR = (
                  *  freqArgumentInterpretation="timedomain-normalised"  
                  *  >
                  *      <CWhiteNoise value={ { volume: 2 ** -3  } } />         
-                 *  </CBiquadFilterModulated>          
+                 *  </CBiquadFilterModulated>           
                  */  
-                V2XLwPassMsk ,          
+                V2XLwPassMsk ,           
                 //   
                 AmpSlideDown ,    
                 BassDrumKick ,    
-            } ;
+            } ; 
             const onv = ((version: Vr ): React.ReactElement => {  
                 if (version === Vr.SimpleBeep ) {
                     ;  
@@ -149,7 +156,7 @@ const BEEPBOPVR = (
                         </CAmpSlideDown>                   
                     ) ;                      
                 }                           
-                if (version === Vr.V2 ) {
+                if (version === Vr.V2 ) {  
                     ;
                     return (
                         <CAmpModulated value={ beepBopGraph1 } > 
@@ -165,17 +172,17 @@ const BEEPBOPVR = (
                             <WithDelay value={-7 } >
                                 { beepBopGraph1 }
                             </WithDelay> 
-                        ) } 
+                        ) }   
                         >
                             <CWhiteNoise value={ { volume: 2 ** -3  } } />         
                         </CAmpModulated>            
                     ) ;               
                 }            
                 if (version === Vr.V2XLwPassMsk ) {                  
-                    ;        
+                    ;         
                     return (  
                         <CBiquadFilterModulated       
-                        type="lowpass"     
+                        type="lowpass"      
                         freqArgument={(
                             <CFreqDmAnalyF value={{ refreshIntervalMillis: (2 ** -3 ) * 1000 } } >
                                 { beepBopGraph1  }    
@@ -187,7 +194,7 @@ const BEEPBOPVR = (
                         </CBiquadFilterModulated>          
                     ) ;               
                 }     
-                return (        
+                return (         
                     <>{ beepBopGraph1 }</>     
                 ) ;                 
             })  ;   
@@ -200,10 +207,10 @@ const BEEPBOPVR = (
                     const [vl, setVl] = (      
                         React.useReducer((
                             function (v0: Vr, v1: Vr ) : Vr {
-                                return v1 ;   
+                                return v1 ;     
                             }
                         ) , Vr.AmpSlideDown )
-                    ) ;        
+                    ) ;         
                     const btns = (      
                         allOptions       
                         .map((value ) => {           
@@ -212,7 +219,7 @@ const BEEPBOPVR = (
                                 <button type="button" onClick={() => setVl(value ) } >
                                     {String(Vr[value] ) } 
                                 </button>    
-                                </span>    
+                                </span>     
                             ) ;
                         })  
                     ) ;      
@@ -223,18 +230,18 @@ const BEEPBOPVR = (
                         btns ,    
                     } ;
                 }           
-            ) ;       
+            ) ;        
             return (function useE() {              
-                const C = (    
+                const C = (            
                     // TODO        
-                    React.useCallback((        
-                        function C () {     
+                    React.useCallback((            
+                        function ReactIoBasedAudioLoopDemoSpcSelectApp () {     
                             const {
                                 vl: selectedVl ,  
                                 btns: btns ,   
                             } = (         
-                                useXOptions()  
-                            ) ;
+                                useXOptions()          
+                            ) ; 
                             return (              
                                 <div>   
                                     <p>{ btns } </p>
@@ -243,16 +250,30 @@ const BEEPBOPVR = (
                                     </div>
                                 </div>
                             ) ;     
-                        }
-                    ) , [] )   
+                        }   
+                    ) , [BEEPBOPVRKEY ] )   
                 ) ;
-                return (
-                    <C />
+                React.useLayoutEffect(() => {
+                    console.log({ C }) ;
+                } , [C ]) ;
+                return (   
+                    <C />               
                 ) ;
-            })() ;
-        })() ;    
+            })() ;  
+        })() ;        
+        React.useEffect(() => console.log({ BEEPBOPVRKEY }), [BEEPBOPVRKEY ] ) ;
+        const c1 = (         
+            <K key={BEEPBOPVRKEY } >   
+            <div>   
+                DEFKEY : {BEEPBOPVRKEY }
+            </div>   
+            <div>
+            { c10 }
+            </div>   
+            </K>      
+        ) ;
         ;  
-        return {
+        return {    
             quantityReductiveDbgMode ,  
             beepBopGraph1 , 
             c1 ,        
@@ -260,13 +281,13 @@ const BEEPBOPVR = (
     }
 ) ; 
    
+        
 
 
 
 
 
-
-
+    
 
 
 

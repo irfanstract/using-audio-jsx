@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React from 'react';           
+import { K } from './code/commonElements';   
 import componentWithLoadingScreen from './code/componentWithLoadingScreen';       
 // asset imports
 import logo from './logo.svg';
+// App Code Imports
+import { AudioLoopDemoApp } from './code/audioLoopDemo';  
    
 // CSS imports         
 import './App.css';
@@ -33,7 +36,7 @@ function LoadingScreenApp() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" /> 
           <p>                                      
           </p>
           <a
@@ -48,45 +51,53 @@ function LoadingScreenApp() {
       </div>
     );   
   }   
+            
+const App = (  
+  AudioLoopDemoApp   
+) ;        
         
-const App = ( 
-  React.lazy(async () => {
-    const { AudioLoopDemoApp } = await import('./code/audioLoopDemo') ; 
-    return {                  
-      default: (
-        (componentWithLoadingScreen)({
-          LoadingScreenApp , 
-          MainApp: AudioLoopDemoApp ,    
-        })
-      ) ,     
-    } ;   
-  })
-) ;
-
 /**   
  * important consideration :  
  * - needs Error-bounding ; 
  *   otherwise HMR will not restart the mounting even on save .  
  * - needs {@link React.Suspense }       
  * - see "process is not defined, on hot-reload"
- */
-export default (() => { 
+ */         
+const App1 = () => {  
+  const key = (    
+    String(Math.random() )       
+  ) ;                             
+  console.log({ k: key }) ;
   class App1 extends React.Component<{}, { error ?: unknown } > {   
-    render() {          
+    render() {                  
       return (  
+        <K key={key }> 
+        <p> Application (id: <code>{key }</code> ) </p>
         <React.Suspense fallback={ <div /> } >
           { (this.state || {} ).error ? null : <App />    }       
-        </React.Suspense>                       
+        </React.Suspense>            
+        </K>                    
       ) ;                 
     }         
     componentDidCatch(e: unknown ) { 
       console.error(e) ; 
       this.setState({ error: e }) ;
-      setTimeout(() => {
-        (window.location).reload() ;
+      setTimeout(() => {                  
+        (window.location).reload() ;           
       } , 1 * 60 * 1000 ) ;       
-    }
-  }                        
-  return (): React.ReactElement => <App1/> ;           
-})();
-          
+    }   
+  }        
+  return (): React.ReactElement => (
+    <K key={key} > 
+      <App1/>   
+    </K>                 
+  ) ;           
+} ;   
+export default (
+  function AppApp() {               
+    return ( 
+      App1()()              
+    ) ;
+  }
+);
+                
