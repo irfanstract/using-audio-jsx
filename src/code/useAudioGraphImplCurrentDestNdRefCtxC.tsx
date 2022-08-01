@@ -5,7 +5,7 @@ import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
-import { K, asVoidElement } from "./commonElements";      
+import { K, asVoidElement } from "./commonElements";       
 import { CBC } from "./useStateInCallback";  
  
 // 
@@ -20,20 +20,21 @@ import {
     useHalfSecondBeep as useHalfSecondBeepAtAbsoluteT  ,
                
 } from "./useAudioNodesBasicUseBeep"; 
-import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";           
+import * as audioFltAtAbsTNodes from "./useAudioNodesBasicFlt11";           
 import { CFreqDmAnalyF1 } from "./useAudioNodesFreqDmAnalysisC";      
 import { USEM } from "./useAudioNodesParamAutomativeAsRegularNodes";   
 import { graphAfterNrmInterpretativeMode } from "./useAudioGraphAsBandFreqCtrlMode";   
 import {
     SpecialUsageExplainer, 
-    xWithUsableYyy , 
+    xWithUsableYyy ,  
     xWithUsableYyy1 ,   
 } from "./useAudioGraphImplUsableYyyNodes1"; 
 import { 
     useElasUsageOnMount,
-    useGainElas , 
+    useGainElas ,   
+    useConstantParamSrcElas ,       
 
-} from "./useAudioNodesBasicFixedElas";  
+} from "./useAudioNodesBasicFixedElas";    
 import {
     // XWithInterpretation ,    
    
@@ -46,12 +47,13 @@ import {
 import { 
     automativeInputRangeDefaultMode ,  
 
-    BiquadFltCProps , 
+    BiquadFltCProps ,         
     biquadFltCPropsParse , 
     WaveTableNodeProps , 
     waveTableCPropsShallParse , 
     ParamAutomativeNodeCProps , 
     evParamAutomativeNodeCPropsParse , 
+    evSingleArgumentTerminalNodeCPropsParse , 
      
 } from "./useAudioGraphImplBasicFltAutomableProps";    
 import {
@@ -70,58 +72,136 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
                        
               
                     
- 
+    
+;
+const XDC = (   
+    function AllChildrenRenderedEqually({ children } : { children: React.ReactElement[] ; } ) {
+        return (
+            <div style={{ display: "flex", flexDirection: "column" }} >
+                { children }
+            </div> 
+        ) ;           
+    }
+) ;            
+const UPM_SUPPORT = (
+    function () {
+        ;
+        const {   
+            TIMEDOMAIN_NORMALISED , 
+            EFFECTIVE_INTENSITY_NORMALISED: RESULTING_MAGN_NORMALISED ,   
+    
+        } = ABandpassFreqArgInputRangeMode ;   
+        const {            
+            usePModulating ,                               
+        } = (
+            audioFltAtAbsTNodes           
+        ) ;                 
+        return {
+            TIMEDOMAIN_NORMALISED , 
+            RESULTING_MAGN_NORMALISED ,        
+
+            usePModulating ,    
+        } ;
+    }
+) ;
 /**    
- * wrapper, for {@link useGainModulatedPt }   
+ * wrapper, for {@link useGainModulatedPt }    
  * - {@link CAmpSlideDownAtAbsoluteT }
- */
+ */  
 const { 
     AmpSlideDownAtAbsoluteT: CAmpSlideDownAtAbsoluteT ,
 
-    modulatedAmpUsageWrapC ,  
-    modulatedBiquadFltUsageWrapC ,  
-
+    modulatedCOnstantSrcNdUsageWrapC ,     
+    modulatedAmpUsageWrapC ,    
+    modulatedBiquadFltUsageWrapC ,     
+   
     modulatedWaveTableUsageWrapC ,    
 
-    CParamAutomative ,    
-    
-} = (() => {        
-    const {   
-        TIMEDOMAIN_NORMALISED , 
-        EFFECTIVE_INTENSITY_NORMALISED: RESULTING_MAGN_NORMALISED ,   
+    CParamAutomative ,       
+      
+} = ((...[config1 = {} ] : [
+    (
+        {                     
+            defkey ?: number ;  
+                   
+        }   
+        &   
+        {
+             
+            /**       
+             *     
+             * @see     
+             * {@link JSX.IntrinsicElements }       
+             * - {@link JSX.IntrinsicElements.ol `OL` } 
+             * @see  
+             * {@link React.detailed      }
+             */            
+            XList ?: ( 
+                (keyof Pick<JSX.IntrinsicElements, "ol" | "ul"> )  
+                |    
+                React.FC<React.PropsWithChildren<{}> >    
+                | 
+                (typeof React.Fragment)     
+            ) ;              
+               
+        }     
+    ) ? ,               
+] ) => {                                 
+    const {      
+        defkey = Math.random() , 
+        XList = "ul"  ,            
 
-    } = ABandpassFreqArgInputRangeMode ;   
-    const {            
-        usePModulating ,                               
-    } = (
-        audioFltAtAbsTNodes           
-    ) ;                      
+    } = config1 ;
     type CtxtualOutUsageProps = (    
         AGCtxtualOutUsageProps
-    ) ;  
-    /**    
-     * 
-     * @see     
-     * {@link JSX.IntrinsicElements }       
-     * - {@link JSX.IntrinsicElements.ol `OL` } 
-     * @see  
-     * {@link React.detailed      }
-     */
-    const XList : ( 
-        (keyof Pick<JSX.IntrinsicElements, "ol" | "ul"> )  
-        | 
-        React.FC<React.PropsWithChildren<{}> >    
-        | 
-        (typeof React.Fragment)
-    ) = (
-        "ul" as ("ol" | "ul" | React.FC<React.PropsWithChildren<{}> > )
-    ) ;  
-    const defkey = (
-        Math.random()    
-    ) ;
+    ) ;     
+    function newCPropsRenderComponent <CProps>({ 
+        dbgBox1 ,      
+        useC1P ,        
+    } : (
+        {
+            dbgBox1 : React.ReactElement ;       
+            useC1P : (
+                (mainProps : CProps, nd0 : CtxtualOutUsageProps["feedPt"] )
+                => { c1 : React.ReactElement ; }
+            ) ;   
+        }
+    )) {
+        return (                     
+            IterableOps.identity<(                   
+                React.FC<(               
+                    CProps         
+                )>                                 
+            ) >(function CFilteredC(mainProps ) {     
+                const useC11 = (    
+                    function ({ feedPt: nd0 } : (     
+                        CtxtualOutUsageProps    
+                    ) ): React.ReactElement {                                  
+                        ;    
+                        const { c1 } = (
+                            useC1P(mainProps, nd0 )
+                        ) ;     
+                        // TODO     
+                        return (                
+                            <XDC>      
+                            
+                            { dbgBox1 }
+                            { c1 }  
+                            </XDC >      
+                        ) ;             
+                    }           
+                );                                   
+                return (        
+                    <CTXTUALOUTPUTUSAGE_CBC> 
+                        { useC11 }
+                    </CTXTUALOUTPUTUSAGE_CBC>         
+                ) ;          
+            })    
+        ) ;
+    }  
     return {          
         AmpSlideDownAtAbsoluteT : (() => {  
-            /**    
+            /**     
              * {@link useGainElas }
              */
             type UGE_PROPS = (          
@@ -137,7 +217,7 @@ const {
                 return (            
                     function useSpcl (...[nd0 , { scheduledT: t, swingTConstant } ] : [ 
                         AudioNode | null ,                
-                        (        
+                        (         
                             Required<(       
                                 Pick<Props0, "swingTConstant">      
                                 &
@@ -172,7 +252,7 @@ const {
                     }      
                 ) ;    
             })() ;            
-            type Props = (   
+            type Props = (     
                 React.PropsWithChildren<{  
                     t: number ;                 
                     swingTConst ?: number ;               
@@ -195,7 +275,7 @@ const {
                                 const nd1 = (                        
                                     useGainElasSpcl(nd0, {   
                                         scheduledT : t ,  
-                                        swingTConstant : swingTConst , 
+                                        swingTConstant : swingTConst ,  
                                     })          
                                 ) ;           
                                 const mainFeed = nd1 ;      
@@ -207,7 +287,7 @@ const {
                                 ) ;          
                             }         
                         ) ;                                
-                        return (        
+                        return (            
                             <CTXTUALOUTPUTUSAGE_CBC>
                                 { useC11 } 
                             </CTXTUALOUTPUTUSAGE_CBC>    
@@ -223,7 +303,7 @@ const {
                 const {
                     dbgBox1 , 
                     useC1 ,  
-                    
+                     
                 } = xWithUsableYyy({ useYyy }) ;
                 type Props = {           
                     /**         
@@ -254,7 +334,7 @@ const {
                                     <XList>         
                                     <li key="value">          
                                         Modulating Graph  :      
-                                        <WithGivenDest value={ ampCtrl1 }>
+                                        <WithGivenDest value={ ampCtrl1 }> 
                                             { ctrlChildren }
                                         </WithGivenDest>                     
                                     </li>     
@@ -266,15 +346,15 @@ const {
                                         </WithGivenDest>           
                                     </li>
                                     </XList>       
-                                ) ;               
+                                ) ;                
                                 // TODO 
                                 return (                    
-                                    <div style={{ display: "flex", flexDirection: "column" }} >      
+                                    <XDC >      
                                      
                                     { dbgBox1 }  
                                     { c1 }   
-                                    </div >         
-                                ) ;          
+                                    </XDC >         
+                                ) ;                
                             }         
                         );                                       
                         return (           
@@ -286,88 +366,173 @@ const {
                 ) ;                                 
             }               
         ) ,                              
-                           
-        ...(() => {   
-            const RETURN = {                         
-                modulatedBiquadFltUsageWrapC : (            
-                    // TODO       
-                    function <Props1>(useYyy: (typeof audioFltAtAbsTNodes)["useBqFltPtModulated"] ) {    
-                        const {
-                            dbgBox1 , 
-                            useC1 ,             
-                            
-                        } = xWithUsableYyy({ useYyy }) ;            
-                        return (                     
-                            IterableOps.identity<(                   
-                                React.FC<(         
-                                    BiquadFltCProps  
-                                )>                   
-                            ) >(function CBiquadFltC(mainProps ) {    
-                                const {
-                                    flType ,      
-                                    freqArgGraph1 ,  
-                                    gainValArgument1 ,  
+                               
+        ...(() => {          
+            const RETURN = {    
+                // TODO                             
+                modulatedCOnstantSrcNdUsageWrapC : (            
+                    // TODO          
+                    function <Props1>(...mainArgs : (       
+                        [
+                            (typeof audioFltAtAbsTNodes)["useCModulatedPt"] ,  
+                            {
+                                propsParse : (      
+                                    (...args : [
+                                        Parameters<typeof evSingleArgumentTerminalNodeCPropsParse >[0] ,  
+                                    ] )
+                                    =>     
+                                    Pick<(
+                                        ReturnType<typeof evSingleArgumentTerminalNodeCPropsParse > 
+                                    ) , "valueCtrl">    
+                                ) ;   
+                            } ? ,        
+                        ]   
+                    ) ) {                  
+                        const [  , { propsParse } = { propsParse: (p : Parameters<typeof evSingleArgumentTerminalNodeCPropsParse>[0] ) => evSingleArgumentTerminalNodeCPropsParse(p) } ] = (
+                            mainArgs               
+                        );          
+                        const [useYyy ,  ] = (
+                            mainArgs        
+                        );              
+                        const {            
+                            dbgBox1 ,          
+                            useC1 ,                  
+                                 
+                        } = xWithUsableYyy({ useYyy }) ;     
+                        return (       
+                            newCPropsRenderComponent            
+                        )<Parameters<typeof propsParse >[0 ] >({
+     
+                            dbgBox1 ,    
+  
+                            useC1P  : (  
+                                function useC1P(      
+                                    mainProps  , nd0  ,     
+                                ) {   
+                                    ;         
+                                    const {          
+                                        valueCtrl : gainValArgument1 ,      
 
-                                    children ,        
-                                } = biquadFltCPropsParse(mainProps ) ;
-                                const useC11 = (    
-                                    function ({ feedPt: nd0 } : (     
-                                        CtxtualOutUsageProps    
-                                    ) ): React.ReactElement {                               
-                                        ;                 
-                                        const {                         
-                                            main: mainFeed ,                 
-                                            mFrequencyValue : freqArgCtrlDest1 ,         
-                                            mGainValue : gainCtrlDest1 ,                        
-                                        } = (          
-                                            useC1(nd0, flType ) 
-                                        ) ;    
-                                        const c1 = (                      
-                                            // TODO      
-                                            <XList >      
-                                            { freqArgCtrlDest1 && (       
-                                                <li key="freq">                   
-                                                    Freq Ctrl Mode :      
-                                                    <WithGivenDest value={ freqArgCtrlDest1 }>
-                                                        { freqArgGraph1 }
-                                                    </WithGivenDest>      
-                                                </li>      
-                                            )  }                            
-                                            { gainCtrlDest1 && ( 
-                                                <li key="gain">        
-                                                    Gain Value Ctrl Mode :      
-                                                    <WithGivenDest value={ gainCtrlDest1 }>
-                                                        { gainValArgument1 }
-                                                    </WithGivenDest>                      
-                                                </li>         
-                                            )           }  
-                                            <li key="main">    
-                                                   
-                                                Main :  
-                                                <WithGivenDest value={ mainFeed }>
-                                                    { children }
-                                                </WithGivenDest>          
-                                            </li>
-                                            </XList >           
-                                        ) ;          
-                                        // TODO 
-                                        return (                
-                                            <div style={{ display: "flex", flexDirection: "column" }} >      
-                                            
-                                            { dbgBox1 }
-                                            { c1 }  
-                                            </div >      
-                                        ) ;         
-                                    }           
-                                );                                  
-                                return (        
-                                    <CTXTUALOUTPUTUSAGE_CBC> 
-                                        { useC11 }
-                                    </CTXTUALOUTPUTUSAGE_CBC>         
-                                ) ;          
-                            })
-                        ) ;                                 
-                    }          
+                                    } = (    
+                                        // TODO  
+                                        React.useDeferredValue((
+                                            propsParse(mainProps )   
+                                        ))                    
+                                    ) ;                     
+                                    const {                        
+                                        valCtrl : gainCtrlDest1 ,                           
+                                    } = (           
+                                        useC1(nd0 ) 
+                                    ) ;     
+                                    const c1 = (                      
+                                        // TODO           
+                                        <XList >                 
+                                        { gainCtrlDest1 && (   
+                                            <li key="value">        
+                                                Value Ctrl Mode :      
+                                                <WithGivenDest value={ gainCtrlDest1 }>  
+                                                    { gainValArgument1 }
+                                                </WithGivenDest>                      
+                                            </li>         
+                                        )           }   
+                                        </XList >           
+                                    ) ;             
+                                    return {  
+                                        c1 ,   
+                                    } ;        
+                                }  
+                            ) , 
+
+                        }) ;                                    
+                    }             
+                ) ,                              
+                modulatedBiquadFltUsageWrapC : (            
+                    // TODO              
+                    function <Props1>(...mainArgs : (
+                        [
+                            (typeof audioFltAtAbsTNodes)["useBqFltPtModulated"] ,  
+                            {
+                                propsParse : typeof biquadFltCPropsParse ;   
+                            } ? ,   
+                        ]  
+                    ) ) {                  
+                        const [  , { propsParse } = { propsParse: biquadFltCPropsParse } ] = (
+                            mainArgs    
+                        );                 
+                        const [useYyy ,  ] = (
+                            mainArgs        
+                        );              
+                        const {     
+                            dbgBox1 ,    
+                            useC1 ,             
+                                
+                        } = xWithUsableYyy({ useYyy }) ;    
+                        return (       
+                            newCPropsRenderComponent           
+                        )<Parameters<typeof propsParse >[0 ] >({
+    
+                            dbgBox1 ,    
+
+                            useC1P  : (  
+                                function useC1P(      
+                                    mainProps  , nd0  ,     
+                                ) {
+                                    ;       
+                                    const {
+                                        flType ,      
+                                        freqArgGraph1 ,   
+                                        gainValArgument1 ,  
+    
+                                        children ,        
+                                    } = (    
+                                        // TODO
+                                        React.useDeferredValue((
+                                            propsParse(mainProps )   
+                                        ))      
+                                    ) ;                  
+                                    const {                         
+                                        main: mainFeed ,                 
+                                        mFrequencyValue : freqArgCtrlDest1 ,         
+                                        mGainValue : gainCtrlDest1 ,                        
+                                    } = (           
+                                        useC1(nd0, flType ) 
+                                    ) ;    
+                                    const c1 = (                      
+                                        // TODO        
+                                        <XList >      
+                                        { freqArgCtrlDest1 && (        
+                                            <li key="freq">                   
+                                                Freq Ctrl Mode :      
+                                                <WithGivenDest value={ freqArgCtrlDest1 }>
+                                                    { freqArgGraph1 }
+                                                </WithGivenDest>      
+                                            </li>      
+                                        )  }                            
+                                        { gainCtrlDest1 && ( 
+                                            <li key="gain">        
+                                                Gain Value Ctrl Mode :      
+                                                <WithGivenDest value={ gainCtrlDest1 }>
+                                                    { gainValArgument1 }
+                                                </WithGivenDest>                      
+                                            </li>         
+                                        )           }  
+                                        <li key="main">        
+                                               
+                                            Main :  
+                                            <WithGivenDest value={ mainFeed }>
+                                                { children }
+                                            </WithGivenDest>          
+                                        </li>
+                                        </XList >           
+                                    ) ;         
+                                    return {
+                                        c1 ,   
+                                    } ;        
+                                }  
+                            ) , 
+
+                        }) ;                                    
+                    }             
                 ) ,       
                                       
                 modulatedWaveTableUsageWrapC : (                
@@ -381,7 +546,7 @@ const {
                         return (            
                             IterableOps.identity<(              
                                 React.FC<(                       
-                                    WaveTableNodeProps           
+                                    WaveTableNodeProps            
                                 )>                    
                             ) >(function CWaveTableModulatedX(mainProps ) {         
                                 const {  
@@ -407,7 +572,7 @@ const {
                                             <p> DEFKEY: {defkey } </p>
                                             <XList>      
                                             { freqArgDest1 && (        
-                                                <li key="freq">                   
+                                                <li key="freq">                    
                                                     Freq :      
                                                     <WithGivenDest value={ freqArgDest1 }>
                                                         { freqArgGraph1 }
@@ -427,15 +592,15 @@ const {
                                         ) ;          
                                         // TODO  
                                         return (                
-                                            <div style={{ display: "flex", flexDirection: "column" }} >      
+                                            <XDC>      
                                             
-                                            { dbgBox1 }
-                                            { c1 }
-                                            </div >      
+                                            { dbgBox1 } 
+                                            { c1 } 
+                                            </XDC >        
                                         ) ;         
                                     }         
-                                );                                       
-                                return (        
+                                );                                         
+                                return (         
                                     <CTXTUALOUTPUTUSAGE_CBC>
                                         { useC11 }   
                                     </CTXTUALOUTPUTUSAGE_CBC>    
@@ -453,18 +618,18 @@ const {
                     ) >((
                         // TODO 
                         function CParamAutomatingC (mainProps) {  
-                            const {
+                            const { 
                                 valueCtrl: children ,      
                                 target : mainFeed0 ,            
                             } = (
                                 evParamAutomativeNodeCPropsParse(mainProps ) 
                             ) ;
                             const dbgBox1 = <></> ;  
-                            const useC11 = (
+                            const useC11 = ( 
                                 function ({ feedPt: nd0 } : (       
                                     CtxtualOutUsageProps               
                                 ) ): React.ReactElement {
-                                    const c = (
+                                    const c = (  
                                         nd0?.context      
                                         || null     
                                     ) ; 
@@ -472,7 +637,7 @@ const {
                                         useAParamModulativeNode(mainFeed0, c )
                                     ) ;
                                     ;
-                                    // TODO   
+                                    // TODO       
                                     return (
                                         <div>  
                                         Main :  
@@ -481,10 +646,10 @@ const {
                                         </WithGivenDest>       
                                         </div>
                                     ) ;    
-                                }     
+                                }      
                             ) ;
                             ;                                          
-                            return (        
+                            return (            
                                 <CTXTUALOUTPUTUSAGE_CBC>
                                     { useC11 }   
                                 </CTXTUALOUTPUTUSAGE_CBC>    
@@ -519,7 +684,7 @@ const CPersistingBeep = (() => {
         asVoidElement ((    
             terminalUsageWrapC(usePersistingBeep )   
         ) )   
-    ) ;      
+    ) ;       
 })() ;           
 /**           
  * the interpretation will                
@@ -534,34 +699,64 @@ const CAmpModulated = (
 ) ;   
 const CBuquadFilterModulated = (     
     modulatedBiquadFltUsageWrapC(audioFltAtAbsTNodes.useBqFltPtModulated )
+) ;        
+const CConstantValueModulated = (     
+    modulatedCOnstantSrcNdUsageWrapC(audioFltAtAbsTNodes.useCModulatedPt )
+) ;     
+const CConstantValue = ( 
+    function ({ value } : (  
+        { value : number ; }
+    )) {        
+        // TODO
+        ;              
+        const e = (     
+            <CTXTUALOUTPUTUSAGE_CBC> 
+                { function useC11({ feedPt : nd0 }) {
+                    useConstantParamSrcElas(nd0, { value : value  }) ;    
+                    return <></> ;  
+                } }
+            </CTXTUALOUTPUTUSAGE_CBC>         
+        ) ;
+        const dbg = (
+            <p> Constant Value : </p>     
+        ) ;     
+        return (
+            <XDC >        
+                { dbg }
+                {e }
+            </XDC >
+        ) ;
+    }
 ) ;
-
-                        
-
+               
+                            
+    
 
        
+   
 
 
 
 
 
-
-export {
+export { 
     WithCtxtualOut as Consm , 
-    WithGivenDest ,                
+    WithGivenDest ,                      
     
     CParamAutomative ,         
 
     CAmpSlideDownAtAbsoluteT ,    
-    CAmpModulated ,  
+    CAmpModulated ,          
     CBuquadFilterModulated ,      
     CBuquadFilterModulated as CBiquadFilterModulated ,        
     terminalUsageWrapC ,      
     nonterminalUsageWrapC ,         
-    modulatedAmpUsageWrapC ,       
+    modulatedAmpUsageWrapC ,        
     modulatedBiquadFltUsageWrapC ,  
     modulatedWaveTableUsageWrapC ,       
-
+ 
+    CConstantValueModulated ,   
+    CConstantValue ,  
     CHalfSecndBeepAtAbsoluteT as CHalfSecndBeepAtAbsoluteT ,   
     CPersistingBeep ,     
     

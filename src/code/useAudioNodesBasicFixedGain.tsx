@@ -20,6 +20,7 @@ import {
     useParamNodeWithGiven ,   
   
 } from "./useAudioNodesMounting11"; 
+import { USEYYYNODER } from "./useAudioNodesMounting1";  
 import { YyyUsable, YyyUsageDest, usePersistingBeep, useEternalBeep, useWhiteNoise1 } from "./useAudioNodesBasicFlt1";   
 import {      
     useGainElas , 
@@ -61,7 +62,7 @@ const useAmpByValue : (
  */
 const useFixedGain: (                         
     typeof useAmpByValue       
-) = ( 
+) = (     
     useAmpByValue     
 ); 
 /**   
@@ -69,30 +70,121 @@ const useFixedGain: (
  * these are {@link AudioParam}s rather than being {@link AudioNode}s . 
  * this `useYyy` will initialise `gain` to `initialValue` (`0`) ; calling-code can then subsequently    
  */
-const useGainModulatedPt = (
-    function (...[nd0] : [
+const {   
+    useGainModulatedPt ,   
+    useCModulatedPt ,   
+
+} = (() => {           
+    type Args = [             
         dest: AudioNode | null ,      
-    ] ) {               
-        /**       
-         * see alse {@link AudioNode.connect }, info about {@link AudioParam}s 
-         */
-        const initialValue : 0 = ( 
-            0    
-        );
-        const nd1 = (
-            useGainNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-        ) ;             
-        React.useLayoutEffect(() => {   
-            nd1 && (nd1.gain.value = initialValue ) ;       
-        } , [nd1 ]) ; 
-        ;    
-        return {       
-            main : (nd1 as (AudioNode | null ) ) || null ,            
-            ampCtrl : nd1?.gain || null ,  
-        } as const ;    
-    }  
-) ;                  
-/**              
+    ] ;                  
+    function kUseM1ModulatedPt<YyNode1 extends {}, Key1 extends keyof YyNode1 , RetKey extends "ampCtrl" | "valCtrl" >(...[props0] : [
+        Readonly<{          
+            YYN : YyNode1[] ;        
+            key : Key1 ;       
+            pName : RetKey ;                    
+            useYyNode1 : (             
+                USEYYYNODER<(
+                    { readonly [k in Key1 ] : AudioParam } 
+                )>
+            ) ;    
+            intrinsicValue : number ;       
+        }> ,                    
+    ]) {    
+        ;              
+        /**                  
+         * - {@link intrinsicValue } :
+         *    see alse {@link AudioNode.connect }, info about {@link AudioParam}s 
+         */     
+        const {    
+            key ,         
+            pName ,     
+            useYyNode1 ,             
+            intrinsicValue ,      
+        } = props0 ;    
+        return (
+            function useM1ModulatedPt(...[nd0] : Args ) {
+                ;                  
+                const nd1 = (
+                    useYyNode1(nd0, 0.5 )      
+                ) ;    
+                React.useLayoutEffect(() => {      
+                    nd1 && (nd1[key].value = intrinsicValue ) ;       
+                } , [nd1 ]) ;        
+                ;           
+                const objToReturn = {
+                    main : (nd1 as (AudioNode | null ) ) || null ,   
+                    [pName] : (() => (
+                        nd1?.[key] || null
+                    ))() ,  
+                } as (
+                    {
+                        main : AudioNode | null ; 
+                        //       
+                    } & { 
+                        [k in typeof pName ] : AudioParam | null ;    
+                    }
+                ) ;            
+                return objToReturn ;
+            }
+        ) ;                     
+    }      
+    return {       
+        useGainModulatedPt : (
+            // function useM1ModulatedPt(...[nd0] : Args ) {                
+            //     /**                  
+            //      * - {@link intrinsicValue } :
+            //      *    see alse {@link AudioNode.connect }, info about {@link AudioParam}s 
+            //      */     
+            //     const {    
+            //         key ,         
+            //         pName ,     
+            //         useYyNode1 ,          
+            //         intrinsicValue ,      
+            //     } = {  
+            //         key : "gain" ,    
+            //         pName : "ampCtrl" ,   
+            //         useYyNode1 : useGainNodeWithGivenFadeoutTimeConstant1 ,     
+            //         intrinsicValue : 0 ,         
+            //     } as const ;                   
+            //     const nd1 = (
+            //         useYyNode1(nd0, 0.5 )      
+            //     ) ;           
+            //     React.useLayoutEffect(() => {      
+            //         nd1 && (nd1[key].value = intrinsicValue ) ;       
+            //     } , [nd1 ]) ;    
+            //     ;    
+            //     return {       
+            //         main : (nd1 as (AudioNode | null ) ) || null ,            
+            //         [pName] : nd1?.[key] || null ,  
+            //     } as const ;    
+            // }               
+            (
+                kUseM1ModulatedPt((
+                    {   
+                        YYN : [] as GainNode[] ,    
+                        key : "gain" ,    
+                        pName : "ampCtrl" ,   
+                        useYyNode1 : useGainNodeWithGivenFadeoutTimeConstant1 ,     
+                        intrinsicValue : 0 ,                   
+                    } as const    
+                ))
+            )           
+        ) ,          
+        useCModulatedPt : (     
+            kUseM1ModulatedPt((     
+                {   
+                    YYN : [] as ConstantSourceNode[] ,    
+                    key : "offset" ,    
+                    pName : "valCtrl" ,   
+                    useYyNode1 : useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 ,     
+                    intrinsicValue : 0 ,                   
+                } as const    
+            ))
+        ) ,
+    } ;
+})() ;                  
+/**                      
  * CAVEAT .         
  * these are {@link AudioParam}s rather than being {@link AudioNode}s .          
  */        
@@ -258,9 +350,17 @@ const useWhiteNoise = (
 
 
 export {
-    useFixedGain ,    
-    useGainModulatedPt ,     
-    useOinModulatedWaveTable , 
+    // YyyModulatedPt   
 
-    useWhiteNoise ,  
+    useGainModulatedPt ,       
+
+    useCModulatedPt ,                
+    useOinModulatedWaveTable ,     
+
+    // Yyy
+    
+    useFixedGain ,             
+
+    useWhiteNoise ,    
+        
 } ;      

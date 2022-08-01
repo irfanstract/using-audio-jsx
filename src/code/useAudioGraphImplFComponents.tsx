@@ -18,7 +18,9 @@ import {
     CAmpSlideDownAtAbsoluteT ,   
     CBiquadFilterModulated ,          
       
-    CPersistingBeep as CPersistingBeep0 ,    
+    CPersistingBeep as CPersistingBeep0 ,   
+    CConstantValueModulated ,     
+    CConstantValue ,      
     
     nonterminalUsageWrapC , 
     terminalUsageWrapC ,  
@@ -190,7 +192,9 @@ export {
     // TERMINAL/INTRINSIC       
     
     CHalfSecndBeep1 ,          
-    CPersistingBeep ,                  
+    CPersistingBeep ,                           
     CWaveTable1 ,  
+    CConstantValueModulated ,  
+    CConstantValue , 
     CWhiteNoise ,    
-} ;                           
+} ;                              

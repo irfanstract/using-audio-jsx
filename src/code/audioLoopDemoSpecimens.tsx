@@ -10,6 +10,7 @@ import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF , 
+    CConstantValue ,   
     CAmpSlideDown ,         
 } from "./audioLoopDemoComponents1"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
@@ -83,7 +84,7 @@ const BEEPBOPVR = (
         const beepBopGraph1 = ( 
             <BeepsInLoop lowNumber={quantityReductiveDbgMode} />
         ) ;    
-        const c10 = (() => {   
+        const c10 = (() => {    
             enum Vr {
                 SimpleBeep ,   
                 /**   
@@ -123,7 +124,7 @@ const BEEPBOPVR = (
                  *          { beepBopGraph1  }    
                  *      </CFreqDmAnalyF> 
                  *  )} 
-                 *  freqArgumentInterpretation="timedomain-normalised"  
+                 *  freqArgumentInterpretation="timedomain-normalised"   
                  *  >
                  *      <CWhiteNoise value={ { volume: 2 ** -3  } } />         
                  *  </CBiquadFilterModulated>           
@@ -143,8 +144,11 @@ const BEEPBOPVR = (
                 if (version === Vr.AmpSlideDown ) {  
                     ;      
                     return (       
-                        <CAmpSlideDown   >    
-                            <CWaveTable1  />         
+                        <CAmpSlideDown   >                  
+                            <CWaveTable1 
+                            freqArgument={<CConstantValue value={2 ** -0.5 } /> }
+                            freqArgumentInterpretation="timedomain-normalised"    
+                            />         
                         </CAmpSlideDown>                   
                     ) ;                      
                 }                                           
@@ -154,8 +158,8 @@ const BEEPBOPVR = (
                         <CAmpSlideDown   > 
                             <CPersistingBeep value={ { toneFreq: 55 } } />         
                         </CAmpSlideDown>                   
-                    ) ;                      
-                }                           
+                    ) ;                       
+                }                             
                 if (version === Vr.V2 ) {  
                     ;
                     return (
@@ -165,7 +169,7 @@ const BEEPBOPVR = (
                     ) ;                    
                 }                    
                 if (version === Vr.V2P1 ) {     
-                    ;    
+                    ;      
                     return (    
                         <CAmpModulated     
                         value={ (        

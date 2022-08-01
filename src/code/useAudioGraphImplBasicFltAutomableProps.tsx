@@ -33,6 +33,39 @@ import {
 const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
     ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED  
 ) ;           
+  
+const SingleParamTerminalElementCProps = {} ; // TS-1205     
+type SingleParamTerminalElementCProps = ( 
+    Omit<(
+        XWithInterpretation<"value", React.ReactElement >      
+    ) , "value">     
+    &    
+    Required<(  
+        React.PropsWithChildren<{ }>
+    )>           
+) ;   
+const evSingleArgumentTerminalNodeCPropsParse = (    
+    function (mainProps : SingleParamTerminalElementCProps ) { 
+        const {          
+            children: gainValueGraph0 = null ,     
+            valueInterpretation: gainValArgumentInterpretation = (  
+                automativeInputRangeDefaultMode 
+            ) ,                     
+                           
+        } = mainProps ;        
+        ;          
+        const gainValArgument1: React.ReactElement = (
+            graphAfterNrmInterpretativeMode({ 
+                mode1 : gainValArgumentInterpretation  ,
+
+            } , <>{ gainValueGraph0 }</> )       
+        ) ;                               
+        ;    
+        return {  
+            valueCtrl : gainValArgument1 ,           
+        } ;
+    }
+);
 
 const BiquadFltCProps = {} as const ; // `--isolated-modules` - TS-1205 
 type BiquadFltCProps = (
@@ -185,42 +218,30 @@ const waveTableCPropsShallParse = (() => {
         }            
     ) ; 
 })() ;                     
-
-const ParamAutomativeNodeCProps = {} ; // TS-1205
-type ParamAutomativeNodeCProps = ( 
-    Omit<(
-        XWithInterpretation<"value", React.ReactElement >  
-    ) , "value">     
-    &    
-    Required<(  
-        React.PropsWithChildren<{ }>
-    )>        
+         
+const ParamAutomativeNodeCProps = {} ; // TS-1205 
+type ParamAutomativeNodeCProps = (  
+    SingleParamTerminalElementCProps       
     &
-    { target : AudioParam | null ; }
+    { target : AudioParam | null ; }        
 ) ;   
 const evParamAutomativeNodeCPropsParse = (    
-    function (mainProps : ParamAutomativeNodeCProps ) { 
+    function (mainProps : ParamAutomativeNodeCProps ) {    
         const {                 
             target ,         
-
-            children: gainValueGraph0 = null ,     
-            valueInterpretation: gainValArgumentInterpretation = (  
-                automativeInputRangeDefaultMode 
-            ) ,           
-                           
+          
         } = mainProps ;        
-        ;          
-        const gainValArgument1: React.ReactElement = (
-            graphAfterNrmInterpretativeMode({ 
-                mode1 : gainValArgumentInterpretation  ,
-
-            } , <>{ gainValueGraph0 }</> )       
-        ) ;                               
+        ;                
+        const {
+            valueCtrl : gainValArgument1 ,  
+        } = (
+            evSingleArgumentTerminalNodeCPropsParse(mainProps )
+        );                      
         ;    
         return {  
             valueCtrl : gainValArgument1 ,    
             target , 
-        } ;
+        } ; 
     }
 );
 
@@ -230,17 +251,19 @@ const evParamAutomativeNodeCPropsParse = (
 
 
 
-
+  
       
 
-    
+      
 export {
     automativeInputRangeDefaultMode ,  
    
+    SingleParamTerminalElementCProps , 
+    evSingleArgumentTerminalNodeCPropsParse ,  
     BiquadFltCProps ,       
     biquadFltCPropsParse , 
     WaveTableNodeProps , 
     waveTableCPropsShallParse ,    
     ParamAutomativeNodeCProps ,  
     evParamAutomativeNodeCPropsParse , 
-} ;          
+} ;                
