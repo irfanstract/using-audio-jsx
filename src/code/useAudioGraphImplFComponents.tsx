@@ -18,10 +18,11 @@ import {
     CAmpSlideDownAtAbsoluteT ,   
     CBiquadFilterModulated ,          
       
-    CPersistingBeep as CPersistingBeep0 ,   
+    CPersistingBeep as CPersistingBeep0 ,       
     CConstantValueModulated ,     
     CConstantValue ,      
-    
+    CFnValue as CFnValueAtAbsoluteT ,    
+       
     nonterminalUsageWrapC , 
     terminalUsageWrapC ,  
     modulatedWaveTableUsageWrapC , 
@@ -42,10 +43,11 @@ const CPersistingBeep : (
 const {
     WithDelay ,  
         
-} = tCtxs ;         
+} = tCtxs ;              
 const {
     CHalfSecndBeep1 , 
-    CAmpSlideDown , 
+    CAmpSlideDown ,   
+    CFnValue1 ,  
   
 } = (function () {     
     /**   
@@ -53,12 +55,12 @@ const {
      *  */    
     const TC = (           
         tCtxs.currentTInfCtx.Consumer
-    ) ;   
-    return {
+    ) ;       
+    return {  
         CHalfSecndBeep1 : (                            
             function C1() {    
                 return (            
-                    <TC>
+                    <TC>  
                         { ({ t }) => (
                             <>
                             <code>CH { t } </code>  
@@ -66,9 +68,26 @@ const {
                             </>
                         ) }
                     </TC>
-                ) ;       
-            }                        
+                ) ;          
+            }                            
         ) ,                   
+        CFnValue1 : (
+            function ({ value: compute } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+                ;      
+                return (                   
+                    <TC>  
+                        { ({ t: schedT }) => (
+                            <>       
+                            <code>CFnValue { schedT } </code>      
+                            <CFnValueAtAbsoluteT 
+                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }     
+                            />
+                            </>
+                        ) }      
+                    </TC>
+                ) ;          
+            }    
+        ) ,     
         CAmpSlideDown  : (   
             function C1(...[{ children, ...mainProps }] : [
                 (  
@@ -76,11 +95,11 @@ const {
                         ComponentProps<typeof CAmpSlideDownAtAbsoluteT> 
                     ) , "t" > 
                 ) ,        
-            ]) {       
-                return (                
+            ]) {        
+                return (                 
                     <TC>
                         { ({ t }) => (        
-                            <>       
+                            <>         
                             <code>CH { t } </code>     
                             <K key={t} >   
                             <CAmpSlideDownAtAbsoluteT t={t } {...mainProps } >
@@ -88,7 +107,7 @@ const {
                             </CAmpSlideDownAtAbsoluteT>    
                             </K>
                             </>
-                        ) }    
+                        ) }     
                     </TC>
                 ) ;        
             }
@@ -97,13 +116,13 @@ const {
 })() ;    
 const CWhiteNoise = (
     terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
-) ;            
+) ;              
 //    
 const CFreqDmAnalyFSpecial = (
     function ({ children : graph0 } : (
-        React.PropsWithChildren<{}> 
-    )) {           
-        const graph1 = (   
+        React.PropsWithChildren<{}>  
+    )) {    
+        const graph1 = (     
             // TODO        
             <CFreqDmAnalyF        
             value={(   
@@ -114,14 +133,14 @@ const CFreqDmAnalyFSpecial = (
                     return undefined ; 
                 } )(0 )
             ) }    
-            >
+            > 
                 { graph0 }     
             </CFreqDmAnalyF>      
         ) ;            
         ;      
         return (   
             graph1 
-        ) ;  
+        ) ;    
     } 
 ) ;                     
 /**   
@@ -147,7 +166,7 @@ const CAmpModulated1 = (
             ;         
             return (          
                 <CAmpModulated0 value={ctrlFnl} >
-                    { children }
+                    { children } 
                 </CAmpModulated0>
             ) ;
         }    
@@ -160,7 +179,7 @@ const CAmpModulated: (
     typeof CAmpModulated1 
 ) = (  
     CAmpModulated1   
-) ;   
+) ;     
   
 
     
@@ -192,9 +211,10 @@ export {
     // TERMINAL/INTRINSIC       
     
     CHalfSecndBeep1 ,          
-    CPersistingBeep ,                           
+    CPersistingBeep ,                                 
     CWaveTable1 ,  
     CConstantValueModulated ,  
-    CConstantValue , 
+    CConstantValue ,  
+    CFnValue1 , 
     CWhiteNoise ,    
-} ;                              
+} ;                                   

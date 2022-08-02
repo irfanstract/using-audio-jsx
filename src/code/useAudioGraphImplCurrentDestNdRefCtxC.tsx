@@ -5,9 +5,10 @@ import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
-import { K, asVoidElement } from "./commonElements";       
+import { K, asVoidElement, NUMERIC } from "./commonElements";             
 import { CBC } from "./useStateInCallback";  
- 
+import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
+     
 // 
 import {  
     WithGivenDest ,  
@@ -28,7 +29,11 @@ import {
     SpecialUsageExplainer, 
     xWithUsableYyy ,  
     xWithUsableYyy1 ,   
-} from "./useAudioGraphImplUsableYyyNodes1"; 
+} from "./useAudioGraphImplUsableYyyNodes1";     
+import { 
+    useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
+
+} from "./useAudioNodesMounting11";  
 import { 
     useElasUsageOnMount,
     useGainElas ,   
@@ -703,31 +708,144 @@ const CBuquadFilterModulated = (
 const CConstantValueModulated = (     
     modulatedCOnstantSrcNdUsageWrapC(audioFltAtAbsTNodes.useCModulatedPt )
 ) ;     
-const CConstantValue = ( 
-    function ({ value } : (  
-        { value : number ; }
-    )) {        
-        // TODO
-        ;              
-        const e = (     
-            <CTXTUALOUTPUTUSAGE_CBC> 
-                { function useC11({ feedPt : nd0 }) {
-                    useConstantParamSrcElas(nd0, { value : value  }) ;    
-                    return <></> ;  
-                } }
-            </CTXTUALOUTPUTUSAGE_CBC>         
-        ) ;
-        const dbg = (
-            <p> Constant Value : </p>     
-        ) ;     
-        return (
-            <XDC >        
-                { dbg }
-                {e }
-            </XDC >
-        ) ;
-    }
-) ;
+const {
+    CConstantValue ,   
+    CFnValue ,    
+
+} = (() => {
+    return {    
+        CConstantValue : ( 
+            function CConstantValueC ( props1 : (            
+                NonNullable<(
+                    Parameters<typeof useConstantParamSrcElas >[1 ]
+                )>
+            )) {        
+                const { value } = props1 ;    
+                // TODO
+                ;                          
+                const e = (                     
+                    <CTXTUALOUTPUTUSAGE_CBC> 
+                        { function useC11({ feedPt : nd0 }) {
+                            useConstantParamSrcElas(nd0, props1 ) ;    
+                            return <></> ;  
+                        } }   
+                    </CTXTUALOUTPUTUSAGE_CBC>         
+                ) ; 
+                const dbg = ( 
+                    <p>  
+                        Constant Value --      
+                        <NUMERIC>{ value }</NUMERIC>   
+                        (T-const specified : { props1.swingTConstant } )
+                    </p>     
+                ) ;     
+                return (   
+                    <XDC >        
+                        { dbg }
+                        {e }
+                    </XDC >
+                ) ;
+            }    
+        ) ,   
+      
+        CFnValue : (    
+            function CFncValueC({ value: compute } : {
+                value : (...args : [{ ctxT : number ; }] ) => { value : number ; } ;    
+            } ) {  
+                ;         
+                ;              
+                const C11 = (
+                    function useFn1(...[nd0] : [dest : AudioNode | null ] ) : { 
+                        t2 : number ;  
+                        vl : number ;                
+                    }  {                   
+                        type R0 = ReturnType<typeof useFn1 > ;
+                        const r0 = (() : R0  => {
+                            ;                   
+                            if (nd0 ) {                              
+                                const t1 = ( 
+                                    nd0.context.currentTime
+                                ) ;
+                                const t2 = +t1.toFixed(1 ) ; 
+                                const { value: vl } = compute({ ctxT: t2 }) ;
+                                return { t2 , vl } ;      
+                            } else {   
+                                return { t2 : -1, vl: 0 } ;                           
+                            }                 
+                        } )();   
+                        return (
+                            useRealTimeQueryInterval1(() => r0 , 0.032 * 1000  )
+                        ) ;
+                    }     
+                );                   
+                const e = ((mode : 1 | 2) => {        
+                    const swingTConst = ( 
+                        2 ** -6  
+                    ) ;  
+                    if (mode === 2 ) {
+                        ;           
+                        return (                       
+                            <CTXTUALOUTPUTUSAGE_CBC>   
+                                { function useC11({ feedPt : nd0 }) { 
+                                    const {              
+                                        t2 ,      
+                                        vl ,         
+                                    } = ( C11 )(nd0 ) ;    
+                                    const nd1 = (
+                                        useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
+                                    ) ;       
+                                    React.useLayoutEffect(() => {
+                                        ;        
+                                        if (nd1 ) {        
+                                            ;     
+                                            (      
+                                                nd1.offset
+                                                .setTargetAtTime(vl, nd1.context.currentTime , swingTConst )
+                                            ) ;     
+                                        }
+                                    } , [nd1, vl ]) ;
+                                    // TODO                         
+                                    return (   
+                                        <p>
+                                            directly using  
+                                            <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
+                                        </p>
+                                    ) ;      
+                                } }     
+                            </CTXTUALOUTPUTUSAGE_CBC>         
+                        ) ;    
+                    }
+                    return (                       
+                        <CTXTUALOUTPUTUSAGE_CBC>   
+                            { function useC11({ feedPt : nd0 }) { 
+                                const {              
+                                    t2 ,      
+                                    vl ,   
+                                } = ( C11 )(nd0 ) ;      
+                                // TODO                    
+                                return (  
+                                    <CConstantValue    
+                                    value={vl }                     
+                                    swingTConstant={swingTConst }
+                                    />  
+                                ) ;      
+                            } }        
+                        </CTXTUALOUTPUTUSAGE_CBC>         
+                    ) ;    
+                })( 1 ) ;
+                const dbg = (      
+                    <p> 
+                    </p>     
+                ) ;     
+                return (   
+                    <XDC >        
+                        { dbg }
+                        {e }
+                    </XDC >
+                ) ;              
+            }
+        )
+    } ;
+})() ;
                
                             
     
@@ -757,8 +875,9 @@ export {
  
     CConstantValueModulated ,   
     CConstantValue ,  
+    CFnValue ,      
     CHalfSecndBeepAtAbsoluteT as CHalfSecndBeepAtAbsoluteT ,   
     CPersistingBeep ,     
     
 } ;   
-              
+               

@@ -67,7 +67,8 @@ const useASetCurrentT = (
 ; 
 const {
     BeepsInLoop , 
-    BEEPBOPVR ,            
+    BEEPBOPVR , 
+    BEEPBOPVRAPP ,              
 } = BBVR ;
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
@@ -88,14 +89,14 @@ export const AudioLoopDemoApp = (function () {
             ) ;                       
             const [tT, { update: updateTT } ] = (      
                 useASetCurrentT(_1?.feedPt.context || null )    
-            ) ;     
-            const {  
-                beepBopGraph1 , 
-                c1: c1 ,         
-        
-            } = BEEPBOPVR({ quantityReductiveDbgMode , }) ;     
+            ) ;           
+            const c1  = (
+                <BEEPBOPVRAPP 
+                {...({ quantityReductiveDbgMode } as const )}  
+                />  
+            ) ;    
             return (
-                <div className="App" >  
+                <div className="App" >       
                     <p>     
                         <span>   
                                 
@@ -103,13 +104,13 @@ export const AudioLoopDemoApp = (function () {
                         Gettting some App Problems ?
                         </s> 
                         <span>
-                            need it play one more time ?
+                            needs it play one more time ?
                         </span>
                         <button onClick={() => updateTT() } >  
                             update 't'   
                         </button>        
                         </span>    
-                    </p>
+                    </p>     
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                       
                     <p> what </p>          
