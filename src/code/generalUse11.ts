@@ -3,7 +3,7 @@
 // const util = { } ;         
 import IterableOps, {  } from "lodash" ; 
 import * as Iterable from "immutable";       
-import * as Unix from "./unix" ;     
+import * as Unix from "./unix" ;       
 const util = { } ;                 
 type Optional<A> = (readonly [A]) | (readonly []) ;   
 /**    
@@ -23,8 +23,8 @@ type Optional<A> = (readonly [A]) | (readonly []) ;
  * // writing a type-predicate is rather nontrivial        
  *  . . .     
  * .filter((a) : a is C => { ... } )  
- *    
- * @example    
+ *     
+ * @example     
  * // writing a type-predicate is rather nontrivial          
  * BOundedIdentityFn<(v: A ) => v is B >( )((a: A ) => (
  *      ("c" in a  ) && (a.c.d() )    
@@ -39,17 +39,18 @@ const BoundedIdentityFunction = (
 );        
 /**      
  * to write a type-predicate 
- * having explicitly-specified return-type yet      
+ * having explicitly-specified return-type yet       
  * having inferred argument-type    
-*/ 
+*/  
 const RAndPBoundedTypePredicateLiterator = (  
     function <R>() {                                                           
         return (                                                                    
             // function <P > (a: (v: P) => v is (P & R ) ) { return a ; }                               
             function <Fnc extends ((v: R) => v is R ) > (a: Fnc ) { return a ; }      
         ) ;
-    }    
-) ;  
+    }      
+) ;   
+const PromiseReturnValue = {} ; // TS-1205      
 type PromiseReturnValue<P extends (               
     Record<keyof (
         Pick<Promise<void>, "catch" | "then" | "finally">
@@ -61,7 +62,7 @@ type PromiseReturnValue<P extends (
 ) ;         
 // import IterableOps, {  } from "lodash" ; 
 // import * as Iterable from "immutable";
-const { memoize, identity } = IterableOps ;    
+const { memoize, identity } = IterableOps ;        
 const BoundedIdentity = identity ;  
 /**    
  * rounded in-the-exponential-scale - to achieve pw-of-2           
@@ -83,7 +84,7 @@ const CanIncrementAndGet = (
         getAndIncrement = () => (this.#i ++ ) ;
     } 
 ) ;
-const onlyIfAllAreNonNull = (
+const onlyIfAllAreNonNull = ( 
     function onlyIfAllItemsAreNonNull<E extends ({} | true | {} | (unknown[] | readonly unknown[] ) | ((...a: any[] ) => void ) ) > (vls0: readonly (E | null | undefined)[]) {           
         return (                                       
 
@@ -91,7 +92,7 @@ const onlyIfAllAreNonNull = (
  
             .reduce<(E)[] | undefined >((r, v) => (                                     
                 (r && v ) && [...r, v ] || undefined  
-            ), [] )    
+            ), [] )     
 
         ) ;           
     }   
@@ -113,15 +114,16 @@ const PERIODIC = (
                         for (let t: number = firstPeriodStartT ; t<endT ; t += period ) {
                             yield t ;        
                         }         
-                    }         
+                    }          
                 ) ,               
             } as const           
         ) ;
     }
-) ;  
+) ;   
+      
    
-   
-type ArrayIndex<A extends readonly unknown[] > = (
+const ArrayIndex = {} ; // TS-1205   
+type ArrayIndex<A extends readonly unknown[] > = (  
     Extract<number, keyof A >      
 ) ;
 /**    
@@ -153,7 +155,7 @@ type AtLeastEitherInterface<
     D extends {} = {}  ,       
     E extends {} = {}  ,             
     F extends {} = {}  ,              
-    G extends {} = {}  ,                  
+    G extends {} = {}  ,                   
 > = (                      
     (                   
         // collected all keys in all the types, 
@@ -188,31 +190,45 @@ type AtLeastEitherInterface<
     }
 }
 
+  
+
+ 
 
 
 
 
-
-
-
-
-      
+ 
+       
+const Seq1 = {} ; // TS-1205     
+type Seq1<A> = (    
+    (readonly A[] )
+    |
+    IterableOps.List<A>
+    |
+    Iterable.List<A>
+    |       
+    Iterable.Seq.Indexed<A>       
+) ; 
 export * from "./generalUseTypeDefs";
 export * from "./polynomialsC";
-export type {
+export type {    
     
-    Optional ,                             
-    PromiseReturnValue,
+    Optional ,                 
 } ;
-export {                                  
-    BoundedIdentityFunction,     
-    identity , 
+export {                                
+    PromiseReturnValue,
+    Seq1 ,    
+    ArrayIndex ,     
+    
+    BoundedIdentityFunction,       
+    identity ,    
     BoundedIdentity,
     RAndPBoundedTypePredicateLiterator,       
     onlyIfAllAreNonNull ,         
 
     IterableOps ,     
     Iterable ,   
+    Iterable as Immutable ,    
     util ,                       
         
     memoize ,                
@@ -222,4 +238,4 @@ export {
     musicalSemitonesAsScalar,          
     Unix ,          
     PERIODIC , 
-} ;                                  
+} ;                                    

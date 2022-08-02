@@ -3,10 +3,11 @@
 import Immutable from "immutable";    
 import { IterableOps } from "./generalUse11";  
 import React from "react";               
-import { K } from "./commonElements";      
+import { K, arrayIndexedOrderedList } from "./commonElements";          
 
 // domain imports, and CSS imports
-import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;    
+import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
+import { WGD_DIV } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 
 
                 
@@ -23,14 +24,29 @@ const {
 }  =newInstance() ;        
 function CurrentTDisplay() {     
     return (                  
-        <currentTInfCtx.Consumer>           
-            { ({ t } ) => (
-                <p> current <code>t</code>: <code>{t }</code> </p> 
+        <currentTInfCtx.Consumer>                  
+            { ({ t, tScale } ) => (  
+                <div>   
+                    <p> <i> Absolute/Canonical Timing </i> information </p>  
+                    <table>          
+                    <tbody>        
+                            
+                    <tr>              
+                        <td> <code>t</code> </td>  
+                        <td> <code>{t }</code>      </td>  
+                    </tr>            
+                    <tr>           
+                        <td>  <code>t-scale</code> </td>  
+                        <td> <code>{tScale }</code>      </td>  
+                    </tr>         
+                    </tbody>
+                    </table>    
+                </div>
             ) }
         </currentTInfCtx.Consumer>
-    ) ;
+    ) ;     
 }              
-/**             
+/**               
  * applies `delay` ;    
  * this will be `relatively`, 
  * in face of {@link currentTScaleCtx presence of `current t-scale` }
@@ -43,11 +59,13 @@ const WithDelay = (
         /**   
          * tale caution of 'current t-scale'
          */
-        return (                             
-            <currentTInfCtx.Consumer>                     
+        return (   
+            <currentTInfCtx.Consumer>                             
                 { ({ t: parentTVal, tScale }) => (
-                    <currentTCtx.Provider value={parentTVal + (addend * tScale ) } >
-                        <>{ c } </>          
+                    <currentTCtx.Provider 
+                    value={parentTVal + (addend * tScale ) } 
+                    >
+                        <WGD_DIV>{ c } </WGD_DIV>              
                     </currentTCtx.Provider>
                 ) }
             </currentTInfCtx.Consumer>
@@ -62,40 +80,50 @@ const LoopingWithPeriod = (
 
                 /**  domain properties   */      
                 value: {   
-                    period: number ;             
+                    period: number ;   
+                    initialOffset ?: number ;        
                 } ;          
-  
-                /**   display properties  */ 
+   
+                /**   display properties  */       
                 renderRange : (
                     Readonly<{ n: number ; }>
-                ) ;                  
-
-            }>   
-        )>           
+                ) ;         
+                 
+            }>         
+        )>                  
     )>((                    
         function ({
-            children: item ,             
-            value: props ,                 
-            renderRange ,                
-        } ) {               
-            const vPeriod: typeof props.period = (
-                props.period         
-            ) ;                      
-            const itemsRendered = (   
+            children: item ,        
+            value: props ,                     
+            renderRange ,                      
+        } ) {   
+            const {    
+                period : vPeriod ,       
+                initialOffset : vInitialOffset = 0 ,    
+            } = props ;
+            const itemsRendered = (        
                 Immutable.Range(0, renderRange.n )  
-                .map((i: number) => ({ t: i * vPeriod }) )
-                .map(function ({ t }): React.ReactElement  {     
-                    return (           
-                        <K key={t } > 
+                .map((i: number) => (
+                    { 
+                        t: vInitialOffset + (i * vPeriod ) ,
+                    } as const  
+                ) )
+                .map(function ({ t }): React.ReactElement  {        
+                    return (                             
+                        <div  >    
+                            <p> item at <code>t= { t }</code> </p>
                             <WithDelay value={t} >
-                                { item }
-                            </WithDelay>  
-                        </K>
+                                { item }    
+                            </WithDelay>                
+                        </div>             
                     ) ;    
-                })       
-            ) ;       
-            return (              
-                <> { itemsRendered } </>        
+                })                 
+            ) ;    
+            return (    
+                <div>
+                    <p> a loop </p>
+                    { arrayIndexedOrderedList(itemsRendered )   }
+                </div> 
             ) ;          
         }  
     ))

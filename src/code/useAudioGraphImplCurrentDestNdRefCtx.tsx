@@ -5,14 +5,15 @@ import { IterableOps, PromiseReturnValue } from "./generalUse11";
 import React, { useMemo } from "react";               
 import { ContextReturnType } from "./commonElementsTypes";     
 import { K } from "./commonElements";      
-   
+     
 //        
 import { 
     getACtxMtWithoutAnyFilter1, 
     useACtxMtWithoutAnyFilter1, 
     AFeedableAndTappableNca ,
 
-} from "./useAudioNodexCtxInitAndBeepNcaOnce1";     
+} from "./useAudioNodexCtxInitAndBeepNcaOnce1";  
+import { WGD_DIV } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 
        
  
@@ -91,13 +92,13 @@ const {
         Consm : (   
             wrapped0(async() => (await ctx0() ).Consumer )
         ) ,   
-    } ;     
-})() ;       
+    } ;        
+})() ;            
 const WithGivenDest = (                      
     React.lazy(async () => {       
         const ctx1 = await ctx0() ;       
         return {        
-            default : (                   
+            default : (                    
                 IterableOps.identity<(
                     React.FC<(     
                         React.ProviderProps<(
@@ -110,16 +111,12 @@ const WithGivenDest = (
                     } = (     
                         React.useContext(ctx1 )        
                     ) ;    
-                    return (    
-                        <div 
-                        style={{ 
-                            border: `0.05em solid currentcolor`  ,  
-                            padding: `0.5em` ,   
-                        } }
-                        >             
+                    return (      
+                        <WGD_DIV     
+                        >                     
                             <Prv1 
                             // https://reactjs.org/docs/context.html#caveats 
-                            value={(
+                            value={(       
                                 useMemo(() => (
                                     (null && console.log({ sideTapPt, newDest })   ) 
                                     ,
@@ -131,11 +128,11 @@ const WithGivenDest = (
                             >       
                                 { children }
                             </Prv1>            
-                        </div>        
+                        </WGD_DIV>        
                     ) ;                 
                 })
             ) ,                   
-        } ;             
+        } ;                 
     })                             
 ) ;                      
 
@@ -167,6 +164,8 @@ const WithGivenDest = (
                    
                 
 export {
+    WGD_DIV ,  
+
     Prv1 , 
     Consm ,   
     WithGivenDest , 

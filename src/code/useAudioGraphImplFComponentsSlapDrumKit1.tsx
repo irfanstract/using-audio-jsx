@@ -2,6 +2,7 @@
 import { 
     interpolateBetweenTwo ,   
 } from "./polynomialsC";       
+import { IterableOps } from "./generalUse11";  
 import React, { useReducer, useState } from "react";   
 import { K } from "./commonElements";    
                
@@ -34,17 +35,21 @@ const CPitchdownBassDrumKickFluidly1 = (
     function () {    
         const conventionalFreq : number | 440 = 440 ;      
         const minimumFreq : number = (    
-            (2 ** -(3 + 0.333 ) ) * conventionalFreq       
+            (2 ** -(3 + 0.333 ) ) * conventionalFreq            
         ) ;
         return (               
             <CAmpModulated0                 
             value={       
                 <CFnValue1         
-                value={
+                value={   
                     ({ ctxT: t }) => (   
-                        (0 <= t ) ? (
-                            Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )   
-                        ) : 0      
+                        (0 <= t ) ? (      
+                            (
+                                IterableOps.clamp(1 + -(t * 2 ) , 0, 1 )
+                            ) * (
+                                Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )   
+                            )
+                        ) : 0        
                     )
                 }   
                 />     

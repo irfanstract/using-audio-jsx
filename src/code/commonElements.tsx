@@ -4,6 +4,8 @@ import {
     BoundedIdentityFunction, 
     Unix ,     
     IterableOps , 
+    Immutable ,    
+    Seq1 ,
 } from "./generalUse11";       
 import React, { 
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue ,
@@ -56,13 +58,43 @@ function useDebugDispatcher <A extends null | true | object > (...[] : [
     ;         
     const [ , DEBUG ] = (   
         React.useState<null | A >(null )       
-    ) ;                  
-    return DEBUG ;    
-}         
-export * from "./commonElementsTypes" ;  
+    ) ;    
+    return DEBUG ;         
+}                          
+/**   
+ * given an array of {@link React.ReactElement}s,    
+ * assumes that the item each identity is solely {@link Array.indexOf its index/position in the src list } ,
+ * renders `<ol>` with the `key`s being {@link Array.map the `i`s  } .    
+ * avoid using this 
+ * in case the identites of the items are something other than merely its position in the list.
+ */
+function arrayIndexedOrderedList(...[itemsRendered ] : [        
+    items : (
+        readonly (React.ReactElement)[] 
+        | Immutable.Seq.Indexed<React.ReactElement>          
+        // | IterableOps.List<React.ReactElement>
+    ) ,    
+] ) {    
+    return (               
+        <ol>   
+            { (                   
+                itemsRendered
+                .map((e, i) => (
+                    <li key={i} >       
+                        { e }
+                    </li>   
+                ))     
+            ) }
+        </ol>        
+    ) ;
+} 
+export * from "./commonElementsTypes" ;    
 export * from "./commonCodeSnippetAndNumericDisplay";  
 export * from "./commonNavigativeElements" ;         
 export * from "./headingNrm" ;     
 export * from "./useLocaleSPecificTextContent" ; 
-export * from "./usePriorityLevelling1";   
-export { K, asVoidElement, useDebugDispatcher ,   };  
+export * from "./usePriorityLevelling1";     
+export {   
+    arrayIndexedOrderedList as arrayIndexedOrderedList , 
+} ;
+export { K, asVoidElement, useDebugDispatcher ,   };       

@@ -138,21 +138,15 @@ const BeepsInLoop = (
                 a repetition, of an audio-sheet, at regularly-spaced time-stamps. 
                 it demonstrates.
                 , .
-            </p>                      
-            <ol>                           
+            </p>                         
             <LoopingWithPeriod value={{ period: 0.4 } } renderRange={{ n: !lowNumber ? 0x0C : 0x1 }} >
-                <li>  
                     <CurrentTDisplay />         
-                    <CHalfSecndBeep1    />           
-                </li>  
+                    <CHalfSecndBeep1    />              
             </LoopingWithPeriod>          
             <LoopingWithPeriod value={{ period: 5 } } renderRange={{ n: !lowNumber ? 0x20 : 0x1 }} >
-                <li>  
                     <CurrentTDisplay />              
-                    <CHalfSecndBeep1    />           
-                </li>
-            </LoopingWithPeriod>                 
-            </ol>    
+                    <CHalfSecndBeep1    />             
+            </LoopingWithPeriod>        
             </div>
         ) ;  
     }
@@ -199,7 +193,7 @@ const {
              *      <WithDelay value={-7 } > 
              *          { beepBopGraph1 }
              *      </WithDelay>
-             *  ) }  
+             *  ) }   
              *  > 
              *      <CWhiteNoise value={ { volume: 2 ** -3  } } />          
              *  </CAmpModulated>             
@@ -256,14 +250,12 @@ const {
                     }       
                     if (vrs === 2.25) {   
                         ;      
-                        return (    
-                            <ol>
-                                <LoopingWithPeriod value={{ period: 7 } } renderRange={{ n: 0x3 } } > 
-                                    <li>
-                                    <CBassDrumKick1 />        
-                                    </li>
+                        return (       
+                            <div>
+                                <LoopingWithPeriod value={{ period: 1 } } renderRange={{ n: 0x10 } } > 
+                                    <CBassDrumKick1 />    
                                 </LoopingWithPeriod>  
-                            </ol>
+                            </div >        
                         ) ;
                     }
                     return (         
