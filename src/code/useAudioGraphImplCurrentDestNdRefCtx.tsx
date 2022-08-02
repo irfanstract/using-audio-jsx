@@ -110,21 +110,28 @@ const WithGivenDest = (
                     } = (     
                         React.useContext(ctx1 )        
                     ) ;    
-                    return (         
-                        <Prv1 
-                        // https://reactjs.org/docs/context.html#caveats 
-                        value={(
-                            useMemo(() => (
-                                (null && console.log({ sideTapPt, newDest })   ) 
-                                ,
-                                (null && ({ } as { bar ?: () => void }).bar!()   )      
-                                ,
-                                { sideTapPt, feedPt: newDest }   
-                            ) , [sideTapPt, newDest] )  
-                        )}   
-                        >       
-                            { children }
-                        </Prv1>            
+                    return (    
+                        <div 
+                        style={{ 
+                            border: `0.05em solid currentcolor`  ,  
+                            padding: `0.5em` ,   
+                        } }
+                        >             
+                            <Prv1 
+                            // https://reactjs.org/docs/context.html#caveats 
+                            value={(
+                                useMemo(() => (
+                                    (null && console.log({ sideTapPt, newDest })   ) 
+                                    ,
+                                    (null && ({ } as { bar ?: () => void }).bar!()   )      
+                                    ,
+                                    { sideTapPt, feedPt: newDest }     
+                                ) , [sideTapPt, newDest] )  
+                            )}   
+                            >       
+                                { children }
+                            </Prv1>            
+                        </div>        
                     ) ;                 
                 })
             ) ,                   

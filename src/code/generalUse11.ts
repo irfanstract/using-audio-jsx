@@ -198,6 +198,7 @@ type AtLeastEitherInterface<
 
       
 export * from "./generalUseTypeDefs";
+export * from "./polynomialsC";
 export type {
     
     Optional ,                             

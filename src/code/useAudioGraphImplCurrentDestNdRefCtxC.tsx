@@ -749,7 +749,11 @@ const {
       
         CFnValue : (    
             function CFncValueC({ value: compute } : {
-                value : (...args : [{ ctxT : number ; }] ) => { value : number ; } ;    
+                value : ( 
+                    (...args : [{ ctxT : number ; }] )   
+                    => 
+                    (number | { value : number ; } )   
+                ) ;    
             } ) {  
                 ;         
                 ;              
@@ -763,13 +767,16 @@ const {
                             ;                   
                             if (nd0 ) {                              
                                 const t1 = ( 
-                                    nd0.context.currentTime
+                                    nd0.context.currentTime      
                                 ) ;
-                                const t2 = +t1.toFixed(1 ) ; 
-                                const { value: vl } = compute({ ctxT: t2 }) ;
+                                const t2 = +t1.toFixed(1 ) ;         
+                                const vl0 = compute({ ctxT: t2 }) ;
+                                const { value: vl } = (            
+                                    (typeof vl0 === "number" ? { value : vl0 } : vl0 )
+                                ) ;
                                 return { t2 , vl } ;      
                             } else {   
-                                return { t2 : -1, vl: 0 } ;                           
+                                return { t2 : -1, vl: 0 } ;                              
                             }                 
                         } )();   
                         return (

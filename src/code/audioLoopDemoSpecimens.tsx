@@ -1,6 +1,10 @@
+ 
+import { 
+    interpolateBetweenTwo ,   
+} from "./polynomialsC";       
 import React, { useReducer, useState } from "react";   
 import { K } from "./commonElements";    
-  
+               
 
 
 // domain-imports           
@@ -9,16 +13,20 @@ import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce
 import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";  
 import {    
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
-    CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF , 
+    CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
     CConstantValue ,  CFnValue1 , 
     CAmpSlideDown ,         
 } from "./audioLoopDemoComponents1"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
 
-   
+
+
+; 
+
+               
          
   
-
+  
             
 
 
@@ -59,7 +67,7 @@ const BeepsInLoop = (
             <LoopingWithPeriod value={{ period: 5 } } renderRange={{ n: !lowNumber ? 0x20 : 0x1 }} >
                 <li>  
                     <CurrentTDisplay />              
-                    <CHalfSecndBeep1    />          
+                    <CHalfSecndBeep1    />           
                 </li>
             </LoopingWithPeriod>                 
             </ol>    
@@ -139,7 +147,7 @@ const {
         const onv = ((version: Vr ): React.ReactElement => {  
             if (version === Vr.SimpleBeep ) {
                 ;  
-                return (    
+                return (         
                     <CHalfSecndBeep1 />     
                 ) ;                   
             }                       
@@ -159,27 +167,42 @@ const {
                 return ((vrs : 1 | 2 ): React.ReactElement => {
                     if (vrs === 2 ) {
                         ;              
+                        if (1) {}
                         return (              
-                            <CAmpSlideDown  
-                            swingTConst={2 ** -4 }  
-                            >                     
-                                <CWaveTable1            
+                            <CAmpModulated0              
+                            value={       
+                                <CFnValue1   
+                                value={
+                                    ({ ctxT: t }) => (   
+                                        Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )     
+                                    )
+                                }   
+                                />
+                            }                
+                            >                                     
+                                <CWaveTable1                 
+                                freqArgumentInterpretation="timedomain-normalised"     
                                 freqArgument={(       
-                                    <CFnValue1           
-                                    value={
-                                        ({ ctxT }) => { 
-                                            return {           
-                                                value: (
-                                                    2 ** -(3 + ((-0.2 + ctxT) * 8 ) ) 
-                                                ) ,   
-                                            } ;  
+                                    <CFnValue1                  
+                                    value={        
+                                        ({ ctxT }) => {       
+                                            const {                   
+                                                c0,           
+                                                f ,      
+                                            } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: 2 ** -4 }) ;   
+                                            const e10 = (
+                                                Math.min(3 + 0.333 , c0 + ctxT * f )    
+                                            );                   
+                                            const val1 = (           
+                                                2 ** -e10  
+                                            ) ;        
+                                            return val1  ;          
                                         }  
                                     } 
-                                    /> 
-                                )}
-                                freqArgumentInterpretation="timedomain-normalised"           
+                                    />       
+                                )}       
                                 />                       
-                            </CAmpSlideDown>                          
+                            </CAmpModulated0 >                          
                         ) ;       
                     }      
                     return (         
@@ -199,11 +222,11 @@ const {
             }                    
             if (version === Vr.V2P1 ) {     
                 ;      
-                return (    
+                return (     
                     <CAmpModulated     
                     value={ (        
                         <WithDelay value={-7 } >
-                            { beepBopGraph1 }
+                            { beepBopGraph1 }  
                         </WithDelay> 
                     ) }   
                     >
@@ -226,7 +249,7 @@ const {
                         <CWhiteNoise value={ { volume: 2 ** -3  } } />         
                     </CBiquadFilterModulated>          
                 ) ;               
-            }     
+            }      
             return (            
                 <>{ beepBopGraph1 }</>     
             ) ;                 
