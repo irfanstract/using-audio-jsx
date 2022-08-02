@@ -5,23 +5,103 @@ import {
 import React, { useReducer, useState } from "react";   
 import { K } from "./commonElements";    
                
-
-
+ 
+      
 // domain-imports           
-import * as tCtxs from "./audioLoopDemoScheduledTCtx";   
+import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";   
 import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
 import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";  
 import {    
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
     CConstantValue ,  CFnValue1 , 
-    CAmpSlideDown ,         
-} from "./audioLoopDemoComponents1"; 
+    CAmpSlideDown ,              
+} from "./useAudioGraphImplFComponents"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
 
-
-
-; 
+   
+     
+const CPitchdownBassDrumKickFluidly1 = (
+    function () {    
+        const conventionalFreq : number | 440 = 440 ;      
+        const minimumFreq : number = (    
+            (2 ** -(3 + 0.333 ) ) * conventionalFreq       
+        ) ;
+        return (               
+            <CAmpModulated0                 
+            value={      
+                <CFnValue1         
+                value={
+                    ({ ctxT: t }) => (   
+                        Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )     
+                    )
+                }   
+                />     
+            }                
+            >                                     
+                <CWaveTable1                   
+                freqArgumentInterpretation="timedomain-normalised"     
+                freqArgument={(       
+                    <CFnValue1                  
+                    value={        
+                        ({ ctxT }) => {  
+                            const {                  
+                                c0,        
+                                f ,             
+                            } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: 2 ** -2 }) ;   
+                            const e10 = (
+                                Math.min(Math.log2(conventionalFreq / minimumFreq ) , c0 + ctxT * f )    
+                            );                   
+                            const val1 = (             
+                                2 ** -e10  
+                            ) ;        
+                            return val1  ;          
+                        }  
+                    } 
+                    />       
+                )}       
+                />                       
+            </CAmpModulated0 >                          
+        ) ;  
+    }
+) ;  
+const CBassDrumKickFluidly1 = (
+    CPitchdownBassDrumKickFluidly1  
+);
+const CBassDrumKick1 = (
+    function (...[] : [
+        // TODO  
+    ] ) { 
+        const TC = (   
+            tCtxs.currentTInfCtx 
+            .Consumer      
+        ) ;       
+        const TOff = (    
+            tCtxs.WithDelay  
+        ) ;    
+        const {
+            shallRemountForEachKeystroke: remount , 
+            delay ,             
+        } = (() : {
+            shallRemountForEachKeystroke : boolean ; 
+            delay : number ;         
+        } => (
+            { shallRemountForEachKeystroke : false , delay : 0.1 }
+        ))() ; 
+        return (                                
+            <TC>           
+                { ({ t }) => (            
+                    // TODO    
+                    <K key={remount ? t : 0  }>
+                        <WithDelay value={delay } > 
+                            <CBassDrumKickFluidly1 />           
+                        </WithDelay>
+                    </K>   
+                ) }
+            </TC>
+        );       
+    }
+) ;
 
                
          
@@ -132,7 +212,7 @@ const {
              *  freqArgument={(
              *      <CFreqDmAnalyF value={{ refreshIntervalMillis: (2 ** -3 ) * 1000 } } >
              *          { beepBopGraph1  }    
-             *      </CFreqDmAnalyF> 
+             *      </CFreqDmAnalyF>  
              *  )} 
              *  freqArgumentInterpretation="timedomain-normalised"   
              *  >
@@ -162,51 +242,18 @@ const {
                     </CAmpSlideDown>                    
                 ) ;                      
             }                                                
-            if (version === Vr.BassDrumKick ) {
+            if (version === Vr.BassDrumKick ) {    
                 ;      
                 return ((vrs : 1 | 2 ): React.ReactElement => {
                     if (vrs === 2 ) {
-                        ;              
+                        ;                
                         if (1) {}
-                        return (              
-                            <CAmpModulated0              
-                            value={       
-                                <CFnValue1   
-                                value={
-                                    ({ ctxT: t }) => (   
-                                        Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )     
-                                    )
-                                }   
-                                />
-                            }                
-                            >                                     
-                                <CWaveTable1                 
-                                freqArgumentInterpretation="timedomain-normalised"     
-                                freqArgument={(       
-                                    <CFnValue1                  
-                                    value={        
-                                        ({ ctxT }) => {       
-                                            const {                   
-                                                c0,           
-                                                f ,      
-                                            } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: 2 ** -4 }) ;   
-                                            const e10 = (
-                                                Math.min(3 + 0.333 , c0 + ctxT * f )    
-                                            );                   
-                                            const val1 = (           
-                                                2 ** -e10  
-                                            ) ;        
-                                            return val1  ;          
-                                        }  
-                                    } 
-                                    />       
-                                )}       
-                                />                       
-                            </CAmpModulated0 >                          
+                        return (                 
+                            <CBassDrumKick1 />                   
                         ) ;       
                     }      
                     return (         
-                        <CAmpSlideDown   >        
+                        <CAmpSlideDown   >         
                             <CPersistingBeep value={ { toneFreq: 55 } } />         
                         </CAmpSlideDown>                   
                     ) ;       

@@ -38,50 +38,85 @@ import { useGainELasParamImpl , GEParam } from "./useAudioNodesParamAutomativeEl
 
 
   
-
+   
+/**  
+ * if the call argument changes, 
+ * the `AudioParam` will reflect the change           
+ */  
 const useGainElas : (                        
     YyyUsable<(      
         GEParam                 
     ) , { asDest: AudioNode | null ; }["asDest"]   >        
 ) = (    
-    (nd0, programProps ) => {     
-        const nd1 = (               
-            useGainNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-        ) ;            
-        useGainELasParamImpl<GainNode>(nd1, nd => nd.gain , programProps );     
-        ;                    
-        return {            
-            asDest: nd1 ,        
-        }.asDest ;       
-    }     
-) ;       
+    (nd0, programProps ) => {       
+        return (
+            useGainElasD(nd0, programProps )
+        ) ;   
+    }                       
+) ;            
 /**    
- * {@link ConstantSourceNode }
+ * {@link ConstantSourceNode } ;
+ * if the call argument changes, 
+ * the `AudioParam` will reflect the change     
  */
 const useConstantParamSrcElas : (                        
-    YyyUsable<(      
+    YyyUsable<(        
         GEParam                 
     ) , ( 
         // { asDest: AudioNode | null ; }["asDest"]       
         void     
     )  >           
 ) = (    
-    (nd0, programProps ) => {           
+    (nd0, programProps ) => {          
+        return (
+            useConstantParamSrcElasD(nd0, programProps )
+        ) ;       
+    }       
+) ;      
+const useConstantParamSrcElasD = (    
+    (...[nd0, ...pp0 ] : GEPI_ARGS) => {
+        ;                 
         const nd1 = (            
             useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-        ) ;                   
+        ) ;                      
         useGainELasParamImpl<(
-            NonNullable<typeof nd1 > 
-        )>(nd1, nd => nd.offset , programProps );     
+            NonNullable<typeof nd1 >    
+        )>(nd1, nd => nd.offset , ...pp0 );       
         ;                    
         return {                                   
             asDest: nd1 ,     
-        }.asDest ;         
+        }.asDest ;     
+    }
+) ;                     
+const useGainElasD = (      
+    (...[nd0, ...pp0 ] : GEPI_ARGS) => {                          
+        const nd1 = (               
+            useGainNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
+        ) ;            
+        useGainELasParamImpl<GainNode>(nd1, nd => nd.gain , ...pp0 );     
+        ;                    
+        return {                      
+            asDest: nd1 ,         
+        }.asDest ;       
     }     
-) ;               
+) ;         
+type GEPI_ARGS = ( 
+    [        
+        ...(          
+            Parameters<(     
+                YyyUsable<(        
+                    GEParam     
+                ) , { asDest: AudioNode | null ; }["asDest"]   >  
+            )>      
+        ) ,            
+        Parameters<typeof useGainELasParamImpl >[3 ] ? ,              
+    ]                   
+) ; 
 /**    
- * {@link OscillatorNode }
- */      
+ * {@link OscillatorNode } ;
+ * if the call argument changes, 
+ * the `AudioParam`s will reflect the change(s)       
+ */         
 const useWaveTableNdElas : (                                      
     YyyUsable<(                  
         GEParam 
@@ -112,7 +147,7 @@ const useWaveTableNdElas : (
                         if (waveTable instanceof PeriodicWave) {
                             nd1.setPeriodicWave(waveTable ) ;      
                             break A ;    
-                        }
+                        }  
                         nd1.type = waveTable ;     
                         break A ; 
                     }          
@@ -124,27 +159,53 @@ const useWaveTableNdElas : (
             asDest: nd1 ,     
         }.asDest ;     
     }           
-) ;               
-const useElasUsageOnMount = (  
-    function <V>(...[{ v0, v1, efName = "useLayoutEffect" }] : [     
-        (            
-            { v0: V, v1: V, }   
-            &           
-            { efName ?: keyof Pick<(typeof React) , "useLayoutEffect" | "useEffect"> }
-        ) ,      
-    ] ) {               
-        const [{ value: vPresently, d: dPresently }, complify] = (    
-            useOneWayChanger<{ value: V ; d: number }>({ v0: { value: v0, d: 0 } , v1: { value: v1, d: 0.001 } })
-        ) ;   
-        React[efName ](() => {
-            complify() ;      
-        }, [] );
-        return {
-            value: vPresently ,    
-            d: dPresently , 
-        } ;
-    }
-) ;  
+) ;                    
+/**   
+ * only occur as in `useLayoutEffect` with `deps` being `[] as const` (empty array)
+ */
+const useElasUsageOnMount = (() => {   
+    return (  
+        function useElasUsageOnMount <V>(...[{ v0, v1, efName = "useLayoutEffect" }] : [     
+            (            
+                { v0: V, v1: V, }   
+                &             
+                { efName ?: keyof Pick<(typeof React) , "useLayoutEffect" | "useEffect"> }
+            ) ,      
+        ] ) {               
+            type VND = {     
+                value: V ;     
+                /**   
+                 * time-difference ?? 
+                 */
+                d: number ; 
+            } ;               
+            return (
+                function use1(): VND {
+                    ;   
+                    const [{ value: vPresently, d: dPresently }, complify] = (    
+                        useOneWayChanger<VND >({ v0: { value: v0, d: 0 } , v1: { value: v1, d: 0.001 } })
+                    ) ;   
+                    React[efName ](() => {        
+                        /**   
+                         * note the indirection via `setTimeout(..., 0 )` to avoid race-condition
+                         */
+                        setTimeout(() => {
+                            ;
+                            complify() ;       
+                        } , (
+                            // ONE MILLISECOND
+                            1
+                        ) );  
+                    }, [] );
+                    return {
+                        value: vPresently ,    
+                        d: dPresently , 
+                    } ;       
+                }
+            )() ;
+        }
+    ) ;   
+})() ;  
 
 
 
@@ -161,7 +222,9 @@ const useElasUsageOnMount = (
 
 export {
     useGainElas ,   
+    useGainElasD , 
     useConstantParamSrcElas ,   
+    useConstantParamSrcElasD ,   
     useWaveTableNdElas ,            
 
     useElasUsageOnMount , 

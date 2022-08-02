@@ -136,64 +136,110 @@ type WaveTableNodeProps = (
     }   
     &          
     Partial<FreqArgsProps > 
-    &    
+    &       
     Partial<DetuningProps >                           
 ) ;        
-const waveTableCPropsShallParse = (() => {  
+const waveTableCPropsShallParse = ((...args2 : [
+    config ?: {
+        freqArumentDefaults : Required<FreqArgsProps > ,
+    } ,  
+]) => {        
     const CFC = (              
         IterableOps.once(() => (
             import ('./useAudioGraphImplFComponents')         
         ))
-    );
-    const CPersistingBeepX = (        
+    );                  
+    const CPersistingBeepX = (            
         // TODO                
         React.lazy(async () => {
             const {
                 CPersistingBeep ,     
             } = (      
-                await CFC()       
+                await CFC()        
             ) ;
             return {
                 default: CPersistingBeep ,    
             } ;
         })    
     ) ;    
-    const CWhiteNoiseX = (    
+    const CWhiteNoiseX = (      
         // TODO                
         React.lazy(async () => {
             const {   
                 CWhiteNoise ,       
             } = (  
-                await CFC()      
+                await CFC()        
             ) ;
             return {
                 default: CWhiteNoise ,    
             } ;
-        })
-    ) ;    
+        })   
+    ) ;      
+    const CConstantX = (        
+        // TODO                     
+        React.lazy(async () => {
+            const {     
+                CConstantValue ,       
+            } = (      
+                await CFC()        
+            ) ;
+            return {
+                default: CConstantValue ,    
+            } ;
+        })   
+    ) ;     
+    const {  
+        freqArumentDefaults ,    
+    } = (
+        args2[0 ]
+        ||           
+        {     
+            freqArumentDefaults : (() : Required<FreqArgsProps > => {  
+                const vol : number = 2 ** 0 ; 
+                if (1) { 
+                    return {    
+                        freqArgument:  (                           
+                            // TODO     
+                            <CConstantX value={vol } />  
+                        ) ,       
+                        freqArgumentInterpretation  : (      
+                            ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED        
+                        ) ,          
+                    } ;          
+                }  
+                return {               
+                    freqArgument:  (     
+                        // TODO     
+                        <CWhiteNoiseX value={{ volume: vol }} />  
+                    ) ,       
+                    freqArgumentInterpretation  : (      
+                        ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED        
+                    ) ,          
+                } ;        
+            })() ,   
+        }
+    );
     return (                  
         function (...[mainProps] : [
-            (              
+            (                        
                 WaveTableNodeProps              
-            ) ,        
-        ] ) {                   
-            const {       
-                freqArgument: freqArgGraph0 = (     
-                    // TODO     
-                    <CWhiteNoiseX value={{ volume: 2 ** 0 }} />  
-                ) ,       
-                freqArgumentInterpretation = (  
-                    automativeInputRangeDefaultMode    
-                ) ,                  
+            ) ,         
+        ] ) {                                  
+            const {          
+                freqArgument: freqArgGraph0 ,       
+                freqArgumentInterpretation ,                           
                             
                 detune: detuneGraph0 = <></> ,       
                 detuneInterpretation = (  
                     automativeInputRangeDefaultMode   
                 ) ,                            
-                
-                type : wvTable1 ,  
-    
-            } = mainProps ;    
+                  
+                type : wvTable1 ,   
+           
+            } = {
+                ...freqArumentDefaults ,      
+                ...mainProps ,  
+            } ;    
             const freqArgGraph1: React.ReactElement = (
                 graphAfterNrmInterpretativeMode({ 
                     mode1 : freqArgumentInterpretation  ,

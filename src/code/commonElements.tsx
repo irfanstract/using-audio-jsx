@@ -48,12 +48,21 @@ const asVoidElement = (
                 )>       
             ) >((C    ))       
         ) ;         
-    }                             
-) ;                       
+    }            
+) ;                             
+function useDebugDispatcher <A extends null | true | object > (...[] : [
+    //  
+]): React.Dispatch<() => A > {    
+    ;         
+    const [ , DEBUG ] = (   
+        React.useState<null | A >(null )       
+    ) ;                  
+    return DEBUG ;    
+}         
 export * from "./commonElementsTypes" ;  
 export * from "./commonCodeSnippetAndNumericDisplay";  
 export * from "./commonNavigativeElements" ;         
 export * from "./headingNrm" ;     
 export * from "./useLocaleSPecificTextContent" ; 
 export * from "./usePriorityLevelling1";   
-export { K, asVoidElement, };  
+export { K, asVoidElement, useDebugDispatcher ,   };  

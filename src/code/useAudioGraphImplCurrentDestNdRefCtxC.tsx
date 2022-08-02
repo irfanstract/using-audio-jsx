@@ -29,7 +29,7 @@ import {
     SpecialUsageExplainer, 
     xWithUsableYyy ,  
     xWithUsableYyy1 ,   
-} from "./useAudioGraphImplUsableYyyNodes1";     
+} from "./useAudioGraphImplUsableYyyNodes1";        
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
 
@@ -37,7 +37,9 @@ import {
 import { 
     useElasUsageOnMount,
     useGainElas ,   
-    useConstantParamSrcElas ,       
+    useGainElasD ,     
+    useConstantParamSrcElas ,          
+    useConstantParamSrcElasD ,   
 
 } from "./useAudioNodesBasicFixedElas";    
 import {
@@ -69,6 +71,9 @@ import {
     CTXTUALOUTPUTUSAGE_CBC , 
 } from "./useAudioGraphImplCurrentDestNdRefCtxC1";
 import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";  
+import { 
+    useUnexpectedZeroingBackCheck ,      
+} from "./useAudioNodesParamAutomativeElas";   
 
          
  
@@ -162,7 +167,7 @@ const {
     ) ;     
     function newCPropsRenderComponent <CProps>({ 
         dbgBox1 ,      
-        useC1P ,        
+        useC1P ,          
     } : (
         {
             dbgBox1 : React.ReactElement ;       
@@ -194,7 +199,7 @@ const {
                             { c1 }  
                             </XDC >      
                         ) ;             
-                    }           
+                    }            
                 );                                   
                 return (        
                     <CTXTUALOUTPUTUSAGE_CBC> 
@@ -210,14 +215,14 @@ const {
              * {@link useGainElas }
              */
             type UGE_PROPS = (          
-                Parameters<typeof useGainElas>[1 ]        
+                Parameters<typeof useGainElas>[1 ]          
             ) ;
             /**          
              * ad-hoc specialisation of {@link useGainElas }
              */
             const useGainElasSpcl = (() => {                    
                 type Props0 = ( 
-                    UGE_PROPS      
+                    UGE_PROPS       
                 ) ;         
                 return (            
                     function useSpcl (...[nd0 , { scheduledT: t, swingTConstant } ] : [ 
@@ -225,14 +230,14 @@ const {
                         (         
                             Required<(       
                                 Pick<Props0, "swingTConstant">      
-                                &
+                                & 
                                 Record<keyof (   
                                     Pick<Props0, "scheduledT" >  
                                 ) , number >    
                             )> & Partial<(    
                                 Pick<Props0, never >
                             ) >     
-                        ) ,   
+                        ) ,    
                     ]) {
                         ;               
                         const {
@@ -240,26 +245,51 @@ const {
                             d ,    
                         } = (
                             useElasUsageOnMount({ v0: 1, v1: 2 ** -40 })  
-                        ) ;    
-                        React.useLayoutEffect(() => {
+                        ) ;        
+                        React.useLayoutEffect(() => { 
                             if (0 ) { 
                                 console.log(useGainElasSpcl.name, { value, d });
-                            }       
+                            }               
                         }, [value, d ]) ;
-                        const nd1 = (                
-                            useGainElas(nd0, {    
+                        (function use3(e : false | true ) {    
+                            const r1 = React.useRef<number>(0 ) ;      
+                            const { UZM_CHECK } = (
+                                useUnexpectedZeroingBackCheck()    
+                            ) ;                   
+                            e && (                   
+                                UZM_CHECK({  
+                                    presentlyValue : r1.current ,     
+                                    newValue : (
+                                        // eslint-disable-next-line 
+                                        r1.current = value    
+                                    ) ,  
+                                })       
+                            ) ;             
+                            ;                   
+                        } )(false ) ;             
+                        React.useLayoutEffect((() => {
+                            if (0 ) {            
+                                ;
+                                if (nd0 ) {   
+                                    ;
+                                    console.log({ nd0  , swingTConstant , value, t, d ,   }) ;      
+                                }          
+                            }    
+                        }) , [nd0 , t , value ]) ;   
+                        const nd1 = (                   
+                            useGainElasD(nd0, {         
                                 swingTConstant : swingTConstant, 
                                 value: value ,
                                 scheduledT : t + d ,  
-                            })     
-                        ) ;                  
-                        return nd1 ;
-                    }      
+                            } , {   } )     
+                        ) ;                          
+                        return nd1 ;  
+                    }           
                 ) ;    
             })() ;            
             type Props = (     
                 React.PropsWithChildren<{  
-                    t: number ;                 
+                    t: number ;                   
                     swingTConst ?: number ;               
                 }>        
             ) ;        
@@ -272,17 +302,17 @@ const {
                     function CWithAmpSlideDown ({ t, swingTConst = 2 ** -2 , children }) {               
                         ;        
                         const useC11 = (       
-                            function (...[{ feedPt: nd0 }] : [
+                            function (...[{ feedPt: nd0 }] : [  
                                 (       
                                     CtxtualOutUsageProps                    
                                 ) ,     
                             ] ): React.ReactElement {         
                                 const nd1 = (                        
-                                    useGainElasSpcl(nd0, {   
+                                    useGainElasSpcl(nd0, {        
                                         scheduledT : t ,  
                                         swingTConstant : swingTConst ,  
-                                    })          
-                                ) ;           
+                                    })                  
+                                ) ;                      
                                 const mainFeed = nd1 ;      
                                 // TODO        
                                 return (
@@ -299,7 +329,7 @@ const {
                         ) ;                     
                     }
                 ))   
-            ) ;    
+            ) ;     
         })() , 
              
         modulatedAmpUsageWrapC : (           
@@ -318,12 +348,12 @@ const {
                     value: React.ReactElement | null ;  
                 } ;                 
                 return (      
-                    IterableOps.identity<(                
+                    IterableOps.identity<(                 
                         React.FC<(                 
                             React.PropsWithChildren<Props >     
                         )>              
                     ) >(function CWithAmpAutom ({ value: ctrlChildren, children }) {    
-                        const useC11 = (
+                        const useC11 = (  
                             function ({ feedPt: nd0 } : (   
                                 CtxtualOutUsageProps     
                             ) ): React.ReactElement {                            
@@ -342,7 +372,7 @@ const {
                                         <WithGivenDest value={ ampCtrl1 }> 
                                             { ctrlChildren }
                                         </WithGivenDest>                     
-                                    </li>     
+                                    </li>      
                                     <li key="main">             
                                            
                                         Main :  
@@ -353,7 +383,7 @@ const {
                                     </XList>       
                                 ) ;                
                                 // TODO 
-                                return (                    
+                                return (                     
                                     <XDC >      
                                      
                                     { dbgBox1 }  
@@ -361,7 +391,7 @@ const {
                                     </XDC >         
                                 ) ;                
                             }         
-                        );                                       
+                        );                                        
                         return (           
                             <CTXTUALOUTPUTUSAGE_CBC>
                                 { useC11 } 
@@ -389,7 +419,7 @@ const {
                                     Pick<(
                                         ReturnType<typeof evSingleArgumentTerminalNodeCPropsParse > 
                                     ) , "valueCtrl">    
-                                ) ;   
+                                ) ;    
                             } ? ,        
                         ]   
                     ) ) {                  
@@ -409,7 +439,7 @@ const {
                         )<Parameters<typeof propsParse >[0 ] >({
      
                             dbgBox1 ,    
-  
+   
                             useC1P  : (  
                                 function useC1P(      
                                     mainProps  , nd0  ,     
@@ -421,7 +451,7 @@ const {
                                     } = (    
                                         // TODO  
                                         React.useDeferredValue((
-                                            propsParse(mainProps )   
+                                            propsParse(mainProps )    
                                         ))                    
                                     ) ;                     
                                     const {                        
@@ -439,7 +469,7 @@ const {
                                                     { gainValArgument1 }
                                                 </WithGivenDest>                      
                                             </li>         
-                                        )           }   
+                                        )           }     
                                         </XList >           
                                     ) ;             
                                     return {  
@@ -469,7 +499,7 @@ const {
                         );              
                         const {     
                             dbgBox1 ,    
-                            useC1 ,             
+                            useC1 ,              
                                 
                         } = xWithUsableYyy({ useYyy }) ;    
                         return (       
@@ -557,7 +587,7 @@ const {
                                 const {  
                                     freqArgGraph1 ,         
                                     detuneGraph1 ,    
- 
+  
                                 }  = waveTableCPropsShallParse(mainProps ) ;             
                                 // TODO
                                 const useC11 = (    
@@ -725,14 +755,15 @@ const {
                 ;                          
                 const e = (                     
                     <CTXTUALOUTPUTUSAGE_CBC> 
-                        { function useC11({ feedPt : nd0 }) {
-                            useConstantParamSrcElas(nd0, props1 ) ;    
+                        { function useC11({ feedPt : nd0 }) {       
+                            useConstantParamSrcElasD(
+                                nd0, props1, { putInitailValue : 0 } ) ;    
                             return <></> ;  
                         } }   
                     </CTXTUALOUTPUTUSAGE_CBC>         
                 ) ; 
                 const dbg = ( 
-                    <p>  
+                    <p>      
                         Constant Value --      
                         <NUMERIC>{ value }</NUMERIC>   
                         (T-const specified : { props1.swingTConstant } )
