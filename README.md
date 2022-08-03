@@ -39,21 +39,36 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+First, check/consult the `package.json`'s `script` `eject`, since it might have been *prefixed as `echo ...`* to prevent accidentally execution.  
+
 ## Create React App   
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).    
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+The current (July 2022 ) build of `create-react-app` \
+will set the version of the dep `react-scripts` to `5.1.*` .  
+This means that \        
+there will be pitfalls like      
+ - *Node built-in modules not found*           
+ - *setting the port-no to other than 3000 will have incomplete effect*         
+
+This gives rise to the need to downgrade `react-scripts` to `4.*` and `react-error-overlay` to exactly (...)
 
 ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+React's `React.lazy` has some pitfalls when comes to WDS (Webpack Dev Server).
 
 ### Analyzing the Bundle Size
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
 ### Making a Progressive Web App
+
+TLS (hence `https:` prefix) is necessary for a PWA to do its thing.  Look for *self-signed certs*.
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
