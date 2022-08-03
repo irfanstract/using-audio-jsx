@@ -252,7 +252,7 @@ const {
                         ;      
                         return (       
                             <div>
-                                <LoopingWithPeriod value={{ period: 1 } } renderRange={{ n: 0x10 } } > 
+                                <LoopingWithPeriod value={{ period: 0.5 } } renderRange={{ n: 0x20 } } > 
                                     <CBassDrumKick1 />    
                                 </LoopingWithPeriod>  
                             </div >        
