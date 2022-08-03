@@ -11,8 +11,9 @@ import {
     usingInterval ,            
 } from "./usingTimeoutOrInterval";       
 import { 
-    useRealTimeQueryInterval ,  
+    useRealTimeQueryInterval ,    
     useNumericDigest ,   
+    useLogScaleNumericDigest ,    
 } from "./useNonHookValue";     
  
      
@@ -28,11 +29,11 @@ import { CFreqDmAnalyF1 } from "./useAudioNodesFreqDmAnalysisC";
 
 
 const {
-    TIMEDOMAIN_NORMALISED , 
+    TIMEDOMAIN_NORMALISED ,  
     EFFECTIVE_INTENSITY_NORMALISED: RESULTING_MAGN_NORMALISED ,   
 
 } = ABandpassFreqArgInputRangeMode ;   
-      
+         
 const CFreqDmAnalyF1X = (() => {                  
     type MountageProps0 = (         
         ComponentProps<typeof CFreqDmAnalyF1 >      
@@ -40,8 +41,17 @@ const CFreqDmAnalyF1X = (() => {
     type MountageProps1 = (
         MountageProps0  
         &
-        { inertialCoef ?: number ; }  
-    ) ;
+        { 
+            inertialCoef ?: number ;    
+
+            /**    
+             * debugging panel is the way to discover the inner workings in case something goes wrong. 
+             * sadly, in this case, it will significantly overhead the UI engine, so
+             * it should be disabled by default  
+             */
+            showDebug ?: false | true ;     
+        }               
+    ) ;           
     type EngineProps = (                     
         NonNullable<(        
             MountageProps0["value"]  
@@ -52,7 +62,7 @@ const CFreqDmAnalyF1X = (() => {
             ;          
             const [v, setV] = (
                 React.useState<number >(0 )    
-            ) ;   
+            ) ;    
             const props1 = (       
                 function intercepted(): (          
                     EngineProps | undefined           
@@ -60,7 +70,7 @@ const CFreqDmAnalyF1X = (() => {
                     if (props0 ) {                                          
                         const {   
                             onValue: onValue0 = Object , 
-                            ...vl1   
+                            ...vl1    
                         } = props0 ;         
                         const onValue1 = (
                             function ({ value } : { value: number ; } ) {
@@ -69,91 +79,85 @@ const CFreqDmAnalyF1X = (() => {
                             } 
                         );        
                         return {
-                            onValue: onValue1 , 
+                            onValue: onValue1 ,  
                             ...vl1 ,         
                         } ;  
                     } else {
                         return undefined ;  
-                    }      
+                    }        
                 }       
             )() ;             
             return {                
                 scnValue : v ,
                 props1 : props1 ,                 
-            } ;
-        }
+            } ; 
+        }      
     ) ;   
     return (   
         IterableOps.identity<(                                             
             React.FC< MountageProps1 >      
         )>((                            
-            function CFreqDmAnalyC({ children: graph, value : value0, inertialCoef = 2 ** -3 ,  }) {    
+            function CFreqDmAnalyC({ 
+                children: graph,   
+                value : value0,  
+                inertialCoef = 2 ** -3 ,      
+
+                showDebug = false ,   
+            }) {     
                 const {   
                     props1 : value1 , 
                     scnValue : v0 ,       
                 } = (   
                     useIntercepted(value0 )
-                ) ;                     
+                ) ;       
                 const v = (
-                    function useLogScaleNumericDigest(...[v00, properties ] : (
-                        Parameters<typeof useNumericDigest>
-                    ) ) {   
-                        const v0 = (                                
-                            Math.log2(1E-5 + v00 )    
-                        ) ;        
-                        const v1 = (                     
-                            useNumericDigest(v0, properties )
-                        ) ;    
-                        const v11 = (
-                            2 ** v1 
-                        );     
-                        return v11 ;
-                    }    
-                )(v0 , {   
-                    inertialCoef : inertialCoef , 
-                    timeoutMillis : ( 2 ** -3 ) * 1000 ,
-                } ) ;
-                const vlDeferred = (  
-                    React.useDeferredValue(v )        
+                    useLogScaleNumericDigest(v0 , {   
+                        inertialCoef : inertialCoef , 
+                        timeoutMillis : ( 2 ** -3 ) * 1000 ,
+                    } )  
                 ) ;   
+                const vlDeferred = (        
+                    React.useDeferredValue(v )           
+                ) ;    
                 const dbgBox : React.ReactElement = (() => {
-                    const LIVE = (
+                    const LIVE = (    
                         <i> non-constant value chnging ; </i>    
                     ) ;    
-                    return (      
-                        <table>      
-                        <tbody> 
+                    const rows: readonly ((null | false ) | React.ReactElement)[] = [  
+                        showDebug && (
                             <tr  title="the presently Value " >                  
                                 <td> 
-                                <i> Value </i>     
-                                </td>                             
-                                <td>      
-                                    { LIVE }
-                                </td>                    
+                                <i> Value </i>      
+                                </td>                
                                 <td> 
                                 <NUMERIC maxPrecision={3 } >
                                 {vlDeferred }        
-                                </NUMERIC>      
-                                </td>               
-                            </tr>                  
+                                </NUMERIC>       
+                                </td>                
+                            </tr>                    
+                        ) ,  
+                        (            
                             <tr title="the Inertial Coefficient value" >        
                                 <td>
                                 <i> Inertial Coefficient </i>
-                                </td>                             
-                                <td>     
-                                    { LIVE }
                                 </td>        
                                 <td>   
                                 <NUMERIC maxPrecision={3 } >
                                 {  inertialCoef    }  
                                 </NUMERIC>    
-                                </td>   
-                            </tr>          
+                                </td>    
+                            </tr>     
+                        ) , 
+                    ] ;        
+                    return (               
+                        <table>           
+                        <tbody>     
+                            { rows }
                         </tbody>
                         </table>  
                     ) ; 
                 })() ;  
-                const el = (
+                const el = ( 
                     <CFreqDmAnalyF1 value={value1} >
                         { graph } 
                     </CFreqDmAnalyF1>       
@@ -161,12 +165,12 @@ const CFreqDmAnalyF1X = (() => {
                 // TODO                               
                 return (        
                     <div>   
-                        <div>     
-                            { el }  
+                        <div>           
+                            { el }     
                         </div>   
                         { dbgBox }
                     </div>      
-                ) ;  
+                ) ;    
             }                    
         ))
     ) ;   

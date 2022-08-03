@@ -4,13 +4,15 @@ import {
 } from "./polynomialsC";       
 import { IterableOps } from "./generalUse11";  
 import React, { useReducer, useState } from "react";   
-import { K } from "./commonElements";    
+import { K } from "./commonElements";               
+import { CBC } from "./useStateInCallback";      
+import { useRealTimeQueryInterval1 } from "./useNonHookValue";  
                
  
       
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
-import {   } from "./useAudioGraphImplCurrentDestNdRefCtx";           
+import { Consm as NdRefConsm  } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import {                
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
@@ -20,24 +22,84 @@ import {
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
       
    
-      
-const {
+       
+const {    
     currentTCtx , 
     currentTScaleCtx ,        
     currentTInfCtx ,    
   
     CurrentTDisplay , 
     WithDelay ,     
-    LoopingWithPeriod ,   
+    LoopingWithPeriod ,        
 } = tCtxs ;
+const WithAutoUnmount = (
+    function ({ children: expectedChildren, preFT, postFT } : (
+        React.PropsWithChildren<{
+            /**        
+             * {@link currentTCtx  }  
+             */  
+            preFT : number ;      
+            /**        
+             * {@link currentTCtx  }  
+             */  
+            postFT : number ;     
+        }>    
+    ) ) { 
+        const STC = (
+            currentTInfCtx.Consumer   
+        ) ;
+        return (
+            <>    
+            <STC>         
+                { ({ t: expectedT }) => (        
+                    <>            
+                    <NdRefConsm>            
+                        { ({ feedPt: nd0 }) => (          
+                            <CBC>{ function useC1() {      
+                                enum Stat {               
+                                    TOO_EARLY = "too early" ,   
+                                    SUPPOSEDLY_NOW = "available" ,
+                                    SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
+                                } 
+                                const stat = (   
+                                    useRealTimeQueryInterval1((): Stat => {  
+                                        const ctxT = nd0 ? nd0.context.currentTime : -30000 ; 
+                                        ;                   
+                                        return (    
+                                            ((expectedT + -preFT ) <= ctxT ) 
+                                            ?
+                                            (   
+                                                (ctxT <= (expectedT + postFT ) ) ?
+                                                Stat.SUPPOSEDLY_NOW : Stat.SUPPOSEDLY_ALREADY_CONCLUDED
+                                            )   
+                                            : Stat.TOO_EARLY
+                                        ) ;                 
+                                    } , 100 )       
+                                ) ;     
+                                return (     
+                                    <>{ (      
+                                        (stat === Stat.SUPPOSEDLY_NOW ) ?
+                                        expectedChildren : <p>{ stat }</p>
+                                    ) } </>     
+                                ) ;            
+                            } }</CBC> 
+                        ) }   
+                    </NdRefConsm>     
+                    </>
+                ) }
+            </STC>
+            </> 
+        ) ;      
+    }  
+) ;
    
-const CPitchdownBassDrumKickFluidly1 = (
+const CPitchdownBassDrumKickFluidly1 = (      
     function () {    
         const conventionalFreq : number | 440 = 440 ;      
         const minimumFreq : number = (    
             (2 ** -(3 + 0.333 ) ) * conventionalFreq            
-        ) ;
-        return (               
+        ) ; 
+        const c1 = (               
             <CAmpModulated0                 
             value={       
                 <CFnValue1         
@@ -78,15 +140,22 @@ const CPitchdownBassDrumKickFluidly1 = (
                 )}       
                 />                       
             </CAmpModulated0 >                          
-        ) ;  
+        ) ;    
+        return (                      
+            <>            
+            <WithAutoUnmount preFT={0.5} postFT={1.5} >
+            { c1 }
+            </WithAutoUnmount>          
+            </>                     
+        ) ;
     }
-) ;    
-const CBassDrumKickFluidly1 = (
+) ;      
+const CBassDrumKickFluidly1 = ( 
     CPitchdownBassDrumKickFluidly1      
 );
 const {
     CBassDrumKick1 , 
-
+ 
 } = (() => { 
     const asSharpDueToKeying = (  
         (...[{ SDK , label , c  }] : [
@@ -95,7 +164,7 @@ const {
                     shallRemountForEachKeystroke : boolean ;    
                     delay : number ;         
                 } ,                   
-                c : React.ReactElement ;    
+                c : React.ReactElement ;      
                 label ?: React.ReactElement ,    
             }     ,    
         ] ) => {  
@@ -112,7 +181,7 @@ const {
                     ) ;           
                     const {       
                         shallRemountForEachKeystroke: remount , 
-                        delay ,             
+                        delay ,              
                     } = SDK ; 
                     return (                                          
                         <TC>               
@@ -155,7 +224,9 @@ const {
 
 
 export {
+    WithAutoUnmount , 
+
     CPitchdownBassDrumKickFluidly1 , 
     CBassDrumKick1 , 
     CBassDrumKickFluidly1 , 
-} ;
+} ;   

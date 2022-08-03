@@ -277,6 +277,20 @@ const {
         );
     }) ;
 })() ;
+function useLogScaleNumericDigest(...[v00, properties ] : (
+    Parameters<typeof useNumericDigest>
+) ) {   
+    const v0 = (                                
+        Math.log2(1E-5 + v00 )    
+    ) ;        
+    const v1 = (                     
+        useNumericDigest(v0, properties )
+    ) ;    
+    const v11 = (
+        2 ** v1 
+    );     
+    return v11 ;
+}      
 export {
     useCanForceRefresh ,        
     useRefreshByInterval ,        
@@ -285,6 +299,7 @@ export {
     useRealTimeQueryInterval1 ,     
     useIntervalDeferredValue as useIntervalDeferredValue1 ,  
 
-    useNumericDigest ,  
-    useNumericDigestWith , 
+    useNumericDigest ,      
+    useNumericDigestWith ,  
+    useLogScaleNumericDigest ,     
 } ;        
