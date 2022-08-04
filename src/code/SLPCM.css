@@ -1,0 +1,14 @@
+
+
+  
+       
+.SLPCM-M-NONPAST {
+    opacity: 0.25 !important    ;    
+}             
+.SLPCM-M-PAST      ,    
+.SLPCM-M-NONPAST:hover ,     
+.SLPCM-M-NONPAST:focus-within ,   
+#----e 
+{  
+    opacity: 1 !important ;
+}               

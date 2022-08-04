@@ -147,35 +147,59 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                         freqArgumentInitialValue  
                     ), 0 ) 
                 ) ;             
-            } , [nd1 ]) ;                 
-            /**    
+            } , [nd1 ]) ;                  
+            // debugging
+            {
+                ;
+                // TODO remove this debugging line-of-code           
+                React.useLayoutEffect(() => {      
+                    if (0 ) {
+                          ;
+                          if (nd1 instanceof AudioNode ) {  
+                              nd1.disconnect() ;       
+                          } ;     
+                    }         
+                }, [nd1 ] ) ;             
+                //      
+                React.useLayoutEffect(() => {      
+                    if (nd1 ) {   
+                        if (!(((nd1 as any ).BASICBEEPMODULATIONXNOREPEA += "+" ) === "undefined+" ) ) {
+                            console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
+                        }    
+                    }                 
+                }, [nd1 ] ) ;       
+            }   
+            /**      
              * present the `AudioParams` as specified    
              */
             const {
                 frqx ,     
-                detunex: detunx ,            
-            } = {                                       
+                detunex: detunx ,              
+            } = {                                        
                 frqx : (       
                     useNormalisedArgumentativeChnl11<(
                         Pick<OscillatorNode, "frequency">      
-                    )>(nd1 , "frequency", (     
+                    )>(nd1 , "frequency", (       
                         // TODO    
                         // ( nd1 ? ctxFrameRateOf(nd1.context ) : 48000  )      
                         freqArgumentNormalValue        
                     ) , {             
                         // TODO        
-                        destNdIntrinsicValue: freqArgumentInitialValue  ,  
+                        destNdIntrinsicValue: freqArgumentInitialValue  ,   
+
+                        // TODO 
+                        postInitDisconnectiveDebug : false , 
                     } )       
                 )         ,             
-                detunex : (       
+                detunex : (             
                     useNormalisedArgumentativeChnl11<(       
                         Pick<OscillatorNode, "detune">     
                     )>(nd1 , "detune", (  
-                        // TODO     
+                        // TODO        
                         detuneScale1
                     ) , {
-                        // TODO
-                        destNdIntrinsicValue: 0 , 
+                        // TODO            
+                        destNdIntrinsicValue: 0 ,   
                     } )     
                 )       ,              
             } ;   

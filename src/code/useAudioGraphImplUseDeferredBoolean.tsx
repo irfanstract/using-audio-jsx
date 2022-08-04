@@ -8,7 +8,19 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
 import { K, asVoidElement, NUMERIC } from "./commonElements";             
 import { CBC } from "./useStateInCallback";  
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
-import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
+import { 
+    useDeferredTrue as useDeferredTrue0  ,   
+} from "./usingDeferredBoolean";       
+import { 
+    useOneWayCheckBox , 
+} from "./useCompletion";  
+
+
+
+import { 
+    XDC , 
+
+} from "./useAudioGraphImplFComponentsSemanticsBasic";   
      
 
 
@@ -22,29 +34,91 @@ import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";
 
 
 
-
-const useDeferredTrue = (     
-    (...[{ deps = [] } = {} ] : [
+  
+const useDeferredTrue1 = (     
+    (...[options = {} ] : [        
         {
-            deps ?: React.DependencyList ;    
-        } ? ,    
-    ]) : boolean => {
+            deps ?: React.DependencyList ;  
+            UE ?: keyof Pick<typeof React, "useEffect" | "useLayoutEffect"> ;
+            ueDebug ?: false | true ;    
+        } ? ,      
+    ])  => {    
+        const { deps = [], UE = "useEffect", ueDebug = false } = options;
         const [s, setS] = (   
-            React.useState<boolean>(false ) 
-        );  
-        React.useLayoutEffect(() => {   
-            setTimeout(() => {
-                setS(() => true ) ; 
+            React.useState<boolean>(false )                       
+        );          
+        const setToTrue = (
+            function (): void {
+                setS(() => true ) ;     
+            }         
+        );                
+        React[UE ](() => {             
+            ueDebug && console.log(`useDeferredTrue1 > timeout effect  `) ; 
+            setTimeout(() => {    
+                ueDebug && console.log(`useDeferredTrue1 > timeout effect > callback `) ; 
+                setToTrue() ;     
             } , 1 * 1000 ) ;
         } , deps ) ;;
-        return s ;       
+        return [s, { setToTrue }] as const ;       
+    }    
+); 
+const useDeferredTrue = (
+    function (...a : Parameters<typeof useDeferredTrue1> ): boolean {
+        const [s, {} ] = (
+            useDeferredTrue1(...a )   
+        ) ;      
+        return s ;
     }
-);
+) ;     
 
+const DbbOrHovered = (
+    function ({ dBB, children: c1 } : React.PropsWithChildren<{ dBB : boolean ; }> ) {
+        const [asHovered, markAsHovered] = (
+            useOneWayCheckBox()        
+        ) ;   
+        return (   
+            <div            
+            style={{ background: `rgba(0, 0, 0, 0.01 )` }}
+            onMouseMove={markAsHovered } 
+            onPointerMove={markAsHovered}                    
+            >         
+                <div
+                style={{ visibility: (dBB || asHovered ) ? undefined : "hidden" }}   
+                >
+                { c1 }       
+                </div> 
+            </div>                   
+        ) ;
+    }
+);   
+const dBBC = (() => {
+    return (  
+        function (...[dBB , { dbgBox1, c1 }] : [ 
+            boolean,
+            { dbgBox1 : React.ReactElement ; c1: React.ReactElement ; } ,     
+        ]) {
+            ;
+            return (                
+                <XDC>      
+                         
+                { (dBB) ? dbgBox1 : <></> }    
+                <DbbOrHovered dBB={dBB } >
+                { c1 }
+                </DbbOrHovered>                   
+                </XDC >      
+            ) ;                      
+        }
+    ) ;  
+})();        
+   
 
+  
 
-
-
+          
 export {
     useDeferredTrue ,  
-} ;
+    useDeferredTrue1 ,  
+
+    DbbOrHovered , 
+    dBBC ,   
+} ;  

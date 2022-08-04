@@ -5,6 +5,9 @@ import { IterableOps, PromiseReturnValue } from "./generalUse11";
 import React, { useMemo } from "react";               
 import { ContextReturnType } from "./commonElementsTypes";     
 import { K } from "./commonElements";      
+import { 
+    useRefreshByInterval1 ,   
+} from "./usingIntervalRefresh"; 
    
 
 
@@ -19,9 +22,12 @@ const WGD_DIV : (
         Required<React.PropsWithChildren<{}> >   
     )>
 ) = (
-    function ({ children } : Required<React.PropsWithChildren<{}> > ) {
-        return (   
-            <div 
+    function ({ children } : Required<React.PropsWithChildren<{}> > ) {   
+        // TODO hoping that this LOC can be removed ..  
+        useRefreshByInterval1(true, 230, { LE: "useLayoutEffect" } );  
+        //  
+        return (             
+            <div          
             style={{ 
                 border: `0.05em solid currentcolor`  ,  
                 padding: `0.5em` ,        
@@ -67,10 +73,26 @@ const LWP_DIV : (
     }
 ) ;      
 
+/**    
+ * it's supposed that     
+ * a child renders a debug box (`dbgBox`) and 
+ * another renders the main content (`c1`, `children`, `content`)
+ */      
+ const XDC = (    
+    function AllChildrenRenderedEqually({ children } : { children: React.ReactElement[] ; } ) {
+        return (
+            <div style={{ display: "flex", flexDirection: "column" }} >
+                { children }
+            </div> 
+        ) ;                
+    }  
+) ;                
+
 
 
 
 export {  
     WGD_DIV as ModifyingCompPayloadDiv ,   
-    LWP_DIV as LoopingCompContentDiv ,   
+    LWP_DIV as LoopingCompContentDiv ,       
+    XDC ,  
 } ;

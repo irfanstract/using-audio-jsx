@@ -194,11 +194,11 @@ const waveTableCPropsShallParse = ((...args2 : [
         args2[0 ]
         ||           
         {     
-            freqArumentDefaults : (() : Required<FreqArgsProps > => {  
+            freqArumentDefaults : ((...[mode = 0.5 ] : [mode ?: 0 | 0.5 | 1 ] ) : Required<FreqArgsProps > => {  
                 const vol : number = 2 ** 0 ; 
-                if (1) { 
-                    return {    
-                        freqArgument:  (                           
+                if (mode === 1 ) { 
+                    return {             
+                        freqArgument:  (                                  
                             // TODO     
                             <CConstantX value={vol } />  
                         ) ,       
@@ -206,11 +206,23 @@ const waveTableCPropsShallParse = ((...args2 : [
                             ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED        
                         ) ,          
                     } ;          
-                }  
+                }            
+                if (mode === 0.5 ) {
+                    ;
+                    return {               
+                        freqArgument:  (     
+                            // TODO                      
+                            <CWhiteNoiseX value={{ volume: vol }} />  
+                        ) ,       
+                        freqArgumentInterpretation  : (      
+                            ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED        
+                        ) ,          
+                    } ;   
+                }          
                 return {               
                     freqArgument:  (     
-                        // TODO     
-                        <CWhiteNoiseX value={{ volume: vol }} />  
+                        // TODO                           
+                        <></>
                     ) ,       
                     freqArgumentInterpretation  : (      
                         ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED        

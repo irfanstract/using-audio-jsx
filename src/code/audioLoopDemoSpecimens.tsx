@@ -251,15 +251,15 @@ const {
                     if (vrs === 2.25) {   
                         ;      
                         return (       
-                            <div>
-                                <LoopingWithPeriod 
+                            <div>      
+                                <LoopingWithPeriod   
                                 value={(
                                     // { period: 0.5 }  as const  
-                                    { period: 0.5 }  as const 
+                                    { period: 2 ** 4 }  as const         
                                 )} 
                                 renderRange={{ n: 0x10 } }     
                                 > 
-                                    <CBassDrumKick1 />    
+                                    <CBassDrumKick1 tCoef1={2 ** 3} />    
                                 </LoopingWithPeriod>  
                             </div >        
                         ) ;
@@ -324,7 +324,7 @@ const {
                         function (v0: Vr, v1: Vr ) : Vr {
                             return v1 ;     
                         }
-                    ) , Vr.AmpSlideDown )
+                    ) , Vr.BassDrumKick )
                 ) ;         
                 const btns = (      
                     allOptions       

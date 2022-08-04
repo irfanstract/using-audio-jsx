@@ -135,14 +135,19 @@ const useOneWayChanger = (
 
 
 
-
-export { 
-    useOneWayCompletiveState ,   
-    useOneWayCheckedCompletiveStat as useBooleanCompletiveStat , 
-    useOneWayCheckedCompletiveStat ,  
+  
+export {                  
+    useOneWayCompletiveState ,     
+    useOneWayCompletiveState as useOneWayCompletionalState ,       
+    useOneWayCheckedCompletiveStat as useBooleanCompletiveStat ,   
+    useOneWayCheckedCompletiveStat as useBooleanCompletionalState ,   
+    useOneWayCheckedCompletiveStat ,          
     useOneWayChanger , 
-
-    useBooleanEffect , 
+    useOneWayCompletiveState as useOneWayCheckBox ,   
+    useOneWayCompletiveState as useOneWayCheckMarking ,           
+    useOneWayCompletiveState as useCompletionalState ,        
+  
+    useBooleanEffect ,   
     useBooleanLayoutEffect ,      
 
 } ;            

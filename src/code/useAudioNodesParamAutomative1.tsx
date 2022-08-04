@@ -31,22 +31,35 @@ import {
 // TODO
 /**       
  * {@link AudioParam }
- */
-const useAParamModulativeNode = (
-    function (dest: AudioParam | null, c: (
-        BaseAudioContext
-        | 
-        Readonly<{ c: BaseAudioContext ; }>
-    ) | null ) {         
-        return (   
-            useParamNodeWithGiven(dest, c ? (              
+ */  
+const useAParamModulativeNode = (   
+    function (...[dest, c ] : [
+        dest: AudioParam | null,   
+        c: (
+            BaseAudioContext
+            |       
+            Readonly<{ c: BaseAudioContext ; }>
+        ) | null  ,      
+    ]) {                
+        const c1: BaseAudioContext | null = (
+            c ? (              
                 (("c" in c ) ? (c.c || null ) : null )  
                 ||
                 ((c instanceof BaseAudioContext) ? c : null )
                 ||
                 BaseAudioContext.prototype       
-            ) : null )        
-        ) ;
+            ) : null     
+        );       
+        const ndR = (   
+            useParamNodeWithGiven(dest, c1 )        
+        ) ;             
+        {                              
+            // ;
+            // const ndmem = React.useMemo(() => new Array<typeof ndR>() , [] ) ;   
+            // React.useLayoutEffect(() =>{  ndmem.push(ndR) ; }, [ndR ] ) ;        
+            // console.log(`useAParamModulativeNode`, { ndmem: [...ndmem ] }) ;             
+        }       
+        return ndR ;   
     }       
 ) ;         
 /**       

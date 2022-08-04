@@ -51,11 +51,7 @@ function LoadingScreenApp() {
       </div>
     );   
   }   
-            
-const App = (  
-  AudioLoopDemoApp   
-) ;        
-        
+          
 /**   
  * important consideration :  
  * - needs Error-bounding ; 
@@ -63,9 +59,9 @@ const App = (
  * - needs {@link React.Suspense }       
  * - see "process is not defined, on hot-reload"
  */         
-const App1 = () => {  
+const AppWrapper1 = (App: () => React.ReactElement ) => {    
   const key = (    
-    String(Math.random() )       
+    String(Math.random() )         
   ) ;                             
   console.log({ k: key }) ;
   class App1 extends React.Component<{}, { error ?: unknown } > {   
@@ -88,16 +84,16 @@ const App1 = () => {
     }   
   }        
   return (): React.ReactElement => (
-    <K key={key} > 
+    <K key={key} >   
       <App1/>   
     </K>                 
   ) ;           
-} ;   
-export default (
-  function AppApp() {               
+} ;        
+export default (    
+  function AppApp() {                  
     return ( 
-      App1()()              
+      AppWrapper1(AudioLoopDemoApp )()              
     ) ;
-  }
+  }    
 );
                 

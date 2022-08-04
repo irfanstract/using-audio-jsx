@@ -6,6 +6,9 @@ import React, {
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
 } from "react"; 
 import { useEfectToMap } from "./useEffectToMap";  
+import { 
+    useWarnOnChange ,     
+} from "./usingTimeoutOrInterval";    
 
   
     
@@ -50,8 +53,25 @@ const {
     useBiquadFltNdFreqArgumentChnl , 
     useNormalisedArgumentativeChnl ,     
     useNormalisedArgumentativeChnl1 ,    
-
-} = (() => {        
+      
+} = (() => {          
+    const doubleInitCheckEnabled : 0 | 1 = 0 ;
+    /**   
+     *      
+     * @deprecated     
+     * typical structore of code-flow in apps means that 
+     * application of this `useYyy` will cause your app to violently thrash the console logging.   
+     */
+    function useCheckNoDoubleInit(nd1 : object | null ) {
+        ;   
+        React.useLayoutEffect(() => {      
+            if (nd1 && doubleInitCheckEnabled ) {              
+                if (!(((nd1 as any ).AUDIOBASICNORMALISATIONIMPL += "+" ) === "undefined+" ) ) {
+                    console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
+                }    
+            }                    
+        }, [nd1 ] ) ;    
+    }     
     type BqdProps = (    
         {   
             /**   
@@ -93,59 +113,114 @@ const {
         }              
     ) ;  
     const GNA = (
-        function <YyNode1 extends {} >(...[dest, type1, f , { destNdIntrinsicValue: destNdIntrinsicValue = "default" as "default" } = {} ] : (   
+        function <YyNode1 extends {} >(...[              
+            dest, type1, f ,   
+            { destNdIntrinsicValue: destNdIntrinsicValue = "default" as "default", postInitDisconnectiveDebug = false } = {}  ,  
+        ] : (   
             [       
                 dest : (Pick<AudioNode, "context"> & Record<keyof YyNode1, AudioParam > ) | null, 
                 key : keyof YyNode1,    
-                maxv : number ,                       
+                maxv : number ,                            
                 etc ?: {   
                     /**   
                      * this would default to `"default"` .        
                      * if set to a `number`,  
                      * there will be `setValue(...)` with given value as argument
                      */
-                    destNdIntrinsicValue ?: "default" | number ;                    
+                    destNdIntrinsicValue ?: "default" | number ;   
+                    
+                    postInitDisconnectiveDebug ?: false | true | 2 | 3 | 4 ;         
                 } ,
-            ]                
-        ) ) {               
-            const gnAfterMul: (    
-                null | AudioParam
+            ]                         
+        ) ) {                 
+            const gnAfterMul: (              
+                null | AudioParam  
             ) = (                   
                 dest?.[type1] || null                   
-            ) ;                
+            ) ;        
+            useCheckNoDoubleInit(gnAfterMul ) ;          
             /**   
              * intrinsic value
              *  */   
             React.useLayoutEffect(() => { 
                 if (gnAfterMul ) {
-                    ;
-                    if (typeof destNdIntrinsicValue === "number" ) {
-                        gnAfterMul.value = destNdIntrinsicValue ;
+                    ;    
+                    if (typeof destNdIntrinsicValue === "number" ) { 
+                        (
+                            function implAssigningInitialValue(a: AudioParam, v: number) {
+                                // a.value = v ;   
+                                a.setValueAtTime(v, 0 ) ;   
+                            }
+                        )(gnAfterMul, destNdIntrinsicValue);
                     }                      
                 }                               
-                ;           
+                ;                 
             } , [
                 gnAfterMul , 
-                // TODO 
-                // intrinsicValue ,
+                // TODO     
+                // intrinsicValue ,           
             ]) ;             
-            const gnBeforeMul1 = (                      
-                useFixedGain((    
-                    /**         
-                     * {@link gnAfterMul } (an AudioParam) as an AudioNode  
-                     */
-                    useParamModulation(gnAfterMul, dest?.context || null )                  
-                ) , f )      
-            ) ;                
-            const gnBeforeMul = ( 
+            useWarnOnChange(f , { severity: "warn" , name: "nrmValue" } ) ;
+            const gnBeforeMul1 = (    
+                function use1() {
+                    const ndx = (          
+                        /**          
+                         * {@link gnAfterMul } (an AudioParam) as an AudioNode  
+                         */
+                        useParamModulation(gnAfterMul, dest?.context || null )                  
+                    ) ;     
+                    useCheckNoDoubleInit(ndx ) ;  
+                    return (                      
+                        useFixedGain(ndx , f )      
+                    ) ;      
+                }
+            )() ;               
+            const gnBeforeMulX = ( 
                 (
                     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(( 
                         gnBeforeMul1 
-                    ), 0.5 )    
-                )?.offset      
-                ||
-                null             
-            ) ;              
+                    ), 0.5 )          
+                )                  
+            ) ;      
+            useCheckNoDoubleInit(gnBeforeMulX ) ;        
+            const gnBeforeMul = (   
+                gnBeforeMulX?.offset      
+                ||     
+                null              
+            ) ;                
+            useCheckNoDoubleInit(gnBeforeMul ) ;               
+            /**                        
+             * {@link postInitDisconnectiveDebug }       
+             */  
+            {         
+                ;                     
+                React.useLayoutEffect(() => {
+                    if (postInitDisconnectiveDebug === true ) {      
+                        (dest instanceof AudioNode ) && dest.disconnect() ;          
+                    }       
+                }, [dest ]) ;   
+                React.useLayoutEffect(() => {
+                    if (postInitDisconnectiveDebug === 2 ) {      
+                        gnBeforeMul1 && gnBeforeMul1.disconnect() ;    
+                    }       
+                }, [gnBeforeMul1 ]) ;                 
+                React.useLayoutEffect(() => {  
+                    if (postInitDisconnectiveDebug === 3 ) {        
+                        if (gnBeforeMul1 && gnAfterMul ) {
+                            gnBeforeMul1.disconnect() ;              
+                            (function aParamReset (a: AudioParam ) {    
+                                a.value = a.defaultValue ; 
+                            } )(gnAfterMul ) ;  
+                            ;   
+                        }        
+                    }       
+                }, [gnBeforeMul1 && gnAfterMul ]) ;            
+                React.useLayoutEffect(() => {
+                    if (postInitDisconnectiveDebug === 4 ) {      
+                        gnBeforeMulX && gnBeforeMulX.disconnect() ;    
+                    }       
+                }, [gnBeforeMulX ]) ;                                          
+            }                
             return {
                 /**   
                  * unnormalised form 
@@ -156,7 +231,7 @@ const {
                  */  
                 gnBeforeMul ,                           
                 /**    
-                 * normalised form 
+                 * normalised form  
                  */  
                 gnBeforeMul1 ,      
             } ;    
@@ -175,7 +250,7 @@ const {
                     Pick<NonNullable<typeof dest > , "Q" | "frequency" | "gain">
                 )>(dest, type1, f )
             ) ;
-            return cd ;                           
+            return cd ;                            
         }               
     ) ;      
     return {    
@@ -194,7 +269,7 @@ const {
                             { readonly f: unknown ; }
                         )
                     ) ,           
-                ]
+                ] 
             ) ) {    
                 return (
                     useBiquadFltNdFreqArgumentChnl1(dest, props )  
@@ -224,4 +299,4 @@ export {
     useNormalisedArgumentativeChnl , 
 
     ctxFrameRateOf , 
-} ;  
+} ;    

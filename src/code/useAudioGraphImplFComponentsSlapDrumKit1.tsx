@@ -155,9 +155,9 @@ const {
                             ({ ctxT: t }) => { 
                                 const p = (
                                     t / expectedTLen1    
-                                ) ;
+                                ) ;      
                                 return (     
-                                    (-0.05 <= t ) ? (   
+                                    (-21 <= t ) ? (   
                                         (  
                                             clampWithinZeroAndOne(1 + -p ,  )   
                                         ) * (      
@@ -169,42 +169,45 @@ const {
                         }   
                         />        
                     ) ;         
-                    return (                 
+                    const freqArgumSupposedGraph = (       
+                        <CFnValue1                  
+                        value={          
+                            ({ ctxT }) => {   
+                                const {                            
+                                    c0,                       
+                                    f ,             
+                                } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
+                                const e10 = (
+                                    Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
+                                );                   
+                                const val1 = (              
+                                    2 ** -e10   
+                                ) ;        
+                                return val1  ;          
+                            }  
+                        } 
+                        />       
+                    ) ;
+                    return (                      
                         <CAmpModulated0                      
                         value={         
-                            ampModulGraph  
-                        }                     
-                        >                                     
-                            <CWaveTable1                   
+                            ampModulGraph    
+                        }                   
+                        >                                                   
+                            <CWaveTable1                           
+                            detuneInterpretation="timedomain-normalised"  
+                            detune={1 ? <></> : <CConstantValue value={-3 / 12 } /> }
                             freqArgumentInterpretation="timedomain-normalised"     
-                            freqArgument={(       
-                                <CFnValue1                  
-                                value={        
-                                    ({ ctxT }) => {   
-                                        const {                            
-                                            c0,                       
-                                            f ,             
-                                        } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
-                                        const e10 = (
-                                            Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
-                                        );                   
-                                        const val1 = (              
-                                            2 ** -e10   
-                                        ) ;        
-                                        return val1  ;          
-                                    }  
-                                } 
-                                />       
-                            )}       
+                            freqArgument={1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> }       
                             />                       
                         </CAmpModulated0 >                          
-                    ) ;  
+                    ) ;         
                 })() ;      
                 return (                      
                     <>            
-                    <WithAutoUnmount preFT={1.5} postFT={1 * expectedTLen1 } >
+                    <WithAutoUnmount preFT={1.5} postFT={(1 * expectedTLen1 )} >
                     { c1 }
-                    </WithAutoUnmount>            
+                    </WithAutoUnmount>               
                     </>                     
                 ) ;
             }
@@ -212,72 +215,83 @@ const {
     } ;
 })() ;      
 const CBassDrumKickFluidly1 = ( 
-    CPitchdownBassDrumKickFluidly1      
-);
+    CPitchdownBassDrumKickFluidly1       
+);   
 const {
     CBassDrumKick1 , 
- 
-} = (() => { 
+    
+} = (() => {          
+    const NoChangeInTPlease = (        
+        function ({ value } : { value: number ; }) {
+            if ( value !== React.useState(value)[0] ) {
+                throw TypeError(`value changed. ` ) ;
+            }   
+            return <></> ;     
+        }
+    ) ;
     const asSharpDueToKeying = (  
-        (...[{ SDK , label , c  }] : [
+        function <ComponentProps1 extends ({} ) > (...[{ SDK , label , C  }] : [
             {     
-                SDK : {
-                    shallRemountForEachKeystroke : boolean ;    
-                    delay : number ;         
-                } ,                   
-                c : React.ReactElement ;      
-                label ?: React.ReactElement ,    
+                SDK : {               
+                    shallRemountForEachKeystroke : boolean ;            
+                    delay : number ;          
+                } ,                         
+                C : React.FC<ComponentProps1> ;      
+                label ?: React.ReactElement ,     
             }     ,    
-        ] ) => {  
+        ] ) {       
             return (     
-                function CDK(...[] : [        
-                    // TODO  
-                ] ) { 
-                    const TC = (   
-                        tCtxs.currentTInfCtx 
-                        .Consumer      
+                function CDK(...[propsMain1] : [             
+                    ComponentProps1 ,      
+                ] ) {  
+                    const TC = (       
+                        tCtxs.currentTInfCtx   
+                        .Consumer        
                     ) ;       
                     const TOff = (    
                         tCtxs.WithDelay  
-                    ) ;           
-                    const {       
+                    ) ;                
+                    const {        
                         shallRemountForEachKeystroke: remount , 
-                        delay ,              
-                    } = SDK ; 
-                    return (                                          
+                        delay ,                
+                    } = SDK ;      
+                    return (                
                         <TC>               
-                            { ({ t }) => (               
+                            { ({ t: ctxtualAbsoluteT, tScale: ctxtualTScl }) => (                     
                                 // TODO    
-                                <K key={remount ? t : 0  }>  
-                                    <p> { label } At T {t } </p>
-                                    <div>
-                                    <WithDelay value={delay } >  
-                                        { c }            
-                                    </WithDelay>           
-                                    </div>
-                                </K>   
-                            ) }      
-                        </TC>   
-                    );       
+                                <K key={remount ? ctxtualAbsoluteT : 0  }>      
+                                    { remount && <NoChangeInTPlease value={ctxtualAbsoluteT} />  }
+                                    <p> { label } At T {ctxtualAbsoluteT } </p>
+                                    <div>   
+                                    <WithDelay value={delay / ctxtualTScl } >  
+                                        <C {...propsMain1 } >   
+                                        </C>       
+                                    </WithDelay>                        
+                                                      
+                                    </div>   
+                                </K>     
+                            ) }          
+                        </TC>    
+                    );                
                 }
             ) ;    
-        }   
+        }        
     ) ;                  
-    return {
-        CBassDrumKick1 : (
-            (asSharpDueToKeying)({
-                SDK : { shallRemountForEachKeystroke : false , delay : 0.1 } as const ,  
+    return {      
+        CBassDrumKick1 : (   
+            asSharpDueToKeying({
+                SDK : { shallRemountForEachKeystroke : true , delay : 0.1 } as const ,  
                 label : <span> Bass Drum </span> ,  
-                c :  <CBassDrumKickFluidly1 />         ,  
-            })
-        ) ,  
-    } ;  
+                C : CBassDrumKickFluidly1      ,  
+            } )
+        ) ,                   
+    } ;                           
 })() ;          
      
      
 
 
-
+   
 
 
 

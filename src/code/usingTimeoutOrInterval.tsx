@@ -280,12 +280,42 @@ const useMillisecondsMemo: (
         return (
             useDeferredValue<() => (A | undefined) >(IterableOps.throttle(f, 0.5 * 1000, { leading: true } ) ) 
             ()  
-        ) || f() ;                                                                  
+        ) || f() ;                                                                     
     }           
 ) ;            
+function useWarnOnChange <A>(...[f , options = {} ] : [
+    A ,         
+    { 
+        name ?: string ; 
+        severity ?: keyof Pick<Console, "log" | "info" | "warn" | "error"> ; 
+    } ?  ,         
+]) {  
+    ;    
+    const { name = 'value' , severity = "error" } = options ;
+    ;   
+    const cb = React.useState<A>(f )[1 ]                                          
+    React.useEffect(() => {
+        (       
+            cb         
+            ((v0: A ) => (           
+                (                       
+                    (f === v0 )                    
+                    ||         
+                    console[severity ]((
+                        TypeError(`detected change in '${name}'. this likely is not what you expect. ` )  
+                    ) , [v0, f ] as const )     
+                ) 
+                ,
+                v0 
+            ))       
+        )  ;
+    } , [f ] )       ;       
+}       
 export * from "./usingTimeoutEventEmitter";
 export {             
     useAnimationFrameRefreshEffect ,    
 
-    useMillisecondsMemo ,   
+    useMillisecondsMemo ,    
+
+    useWarnOnChange ,       
 } ;

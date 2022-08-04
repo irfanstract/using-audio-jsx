@@ -6,6 +6,7 @@ import {
 import React, { 
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
 } from "react";   
+import { useWarnOnChange } from "./usingTimeoutOrInterval";     
 
                      
     
@@ -113,20 +114,23 @@ const useYyNodeWithGivenFadeoutTimeConstant1: (
     ToUseYyNodeWithGivenFadeoutTimeConstant1
         
 ) = (
-    function <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode  > (  
-        dest: (Dst1 ) | null, 
-        
-        { timeConstant1 } : {  
+    function <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode  > (...[
+        dest   ,  
+        { timeConstant1 } ,    
+        OeGainNode1 ,       
+        { onUnmount } ,   
+
+    ] : [
+        (Dst1 ) | null,  
+        {  
             timeConstant1: number ;  
-        },         
-
-        OeGainNode1: (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,         
-
-        { onUnmount } : {                                
-            onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;     
+        },          
+        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode , 
+        {                                
+            onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;          
         } ,   
 
-    ) {          
+    ]) {          
         /**    
          * {@link usingC }
          */
@@ -140,26 +144,37 @@ const useYyNodeWithGivenFadeoutTimeConstant1: (
         return gRef1 ;                               
     }                                      
 );        
-const useSingularSrcDestConnect = (
-    function useConnect(gRef1: AudioSourceNode | null , dest: AudioSinkNode | null ) {                                                        
-        ;              
-        React[AUDIONODES_USEEFFECT](() => {
-            /**           
-             * only if both are present
+const useSingularSrcDestConnect = (                          
+    function useReconnectSingleSrcSingleDest(...[gRef1, dest, ...etc ] : [   
+        src: AudioSourceNode | null ,       
+        dest: AudioSinkNode | null ,   
+        ...etc : (
+            [Parameters<typeof usingANodeCnnctM>] extends [readonly [  unknown,  unknown, ...( infer Args)] ] 
+            ?
+            Args  : never      
+        ),                                 
+    ] ) {                                                 
+        ;      
+        React[AUDIONODES_USEEFFECT](() => {     
+            /**            
+             * only if both are present   
              */
             if (dest && gRef1) {            
                 return (
-                    usingANodeCnnctM(gRef1, [dest ] as const )
+                    usingANodeCnnctM(gRef1, [dest ] as const, ...etc )
                 ) ;                                                                    
             };                                           
         }, [dest, gRef1] );    
     }  
-);
+);  
+const PN_LOG = (
+    (...a: any[] ) => console.log(...a )  
+) ;
 const useParamNodeWithGiven = (
     function (dest: AudioParam | null, c: BaseAudioContext | null ) {
         const {
             gRef: gRef1 , 
-        } = (function () {
+        } = (function () {  
             ;                
             type YyNode = AudioNode ;
             type Dst1 = AudioNode ;
@@ -171,49 +186,58 @@ const useParamNodeWithGiven = (
                 (c, _1) => (
                     c.createGain()       
                 )
-            ) ;        
+            ) ;            
             return (     
                 usingC<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
             ) ;
-        })() ;  
-        useSingularSrcDestConnect(gRef1 , dest ) ;      
-        ;                     
-        return gRef1 ;
-    }
+        })() ;          
+        const cncDebug : 0 | 1 = 0 ;
+        {        
+            ;    
+            React.useLayoutEffect(() => { cncDebug &&  PN_LOG("=========") ; } , []);
+            useSingularSrcDestConnect(gRef1 , dest, (
+                { dbg: cncDebug ? 1 : 2 } as const
+            ) ) ;         
+        }
+        ;                            
+        return gRef1 ;  
+    }  
 );     
 /**                                   
  * this `useYyy` will    
  * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
  * 2) return it  
  * 
- * @param OeGainNode1 this `new` `YyNode`
+ * @param OeGainNode1 this `new` `YyNode` 
 */
 const usingC = (    
-    function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  
-        dest: (Dst1 ) | null, 
-
-        {   } : {                                                               
-        },                      
-
-        OeGainNode1: (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,   
-    
-        { onUnmount } : {                             
+    function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
+        dest ,  
+        {   } ,         
+        OeGainNode1  ,          
+        { onUnmount }  ,               
+          
+    ] : [        
+        (Dst1 ) | null,    
+        {  },           
+        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,    
+        {                             
             onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;     
         } ,   
-          
-    ) {
+               
+    ]) {
         const [gRef, setGRef ] = (                                               
             useState<YyNode | null >(null )                                               
         ) ;                      
-        React[AUDIONODES_USEEFFECT](() => {
+        React[AUDIONODES_USEEFFECT](() => {  
             if (dest) {             
                 const ctx = dest.context ;          
                  
-                const gainNode1 = (                             
+                const gainNode1 = (                              
                     OeGainNode1(ctx, dest )                        
                 ) ;                                   
-                setGRef(gainNode1 ) ;                                                         
-                
+                setGRef(gainNode1 ) ;                         
+                  
                 return () => {                                                       
                     onUnmount(gainNode1, gainNode1.context ) ;             
                 } ;                           
@@ -224,14 +248,30 @@ const usingC = (
     }
 ) ;     
 const usingANodeCnnctM = (     
-    (gRef: AudioSourceNode, dests: readonly (AudioNode | AudioParam )[] ) => {
-        return (                         
-            ((gainNode1 : AudioSourceNode ) => {
-                ;                       
-                gainNode1.disconnect() ;                                                         
-                for (const dest of dests ) {    
+    (...[gRef, dests, options = {} ] : [       
+        src  : AudioSourceNode,    
+        dests: readonly (AudioNode | AudioParam )[] ,      
+        a ?: {
+            dbg ?: false | 1 | 2 ;   
+        } ,          
+    ] ) => {            
+        const {      
+            dbg = false ,    
+        } = options ;   
+        return (                                      
+            ((gainNode1 : AudioSourceNode ) => {        
+                if (dbg === 1) { 
+                    PN_LOG(`usingANodeCnnctM`, { src: gainNode1, dests }) ;  
+                    PN_LOG(`usingANodeCnnctM`, "src and dests", ...[gainNode1, ...dests ]) ;  
+                }
+                ;        
+                if (dbg !== 2 ) {
                     ;
-                    gainNode1.connect(dest ) ;                   
+                    gainNode1.disconnect() ;       
+                }                                                         
+                for (const dest of dests ) {    
+                    ;       
+                    gainNode1.connect(dest ) ;                     
                 }            
                 return () => {           
                     // setTimeout(() => {

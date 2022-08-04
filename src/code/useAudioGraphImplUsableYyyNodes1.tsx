@@ -38,12 +38,16 @@ const xWithUsableYyy = (
         {  
             readonly main : AudioNode | null ;  
         }                
-    ) , A extends readonly unknown[] >({ 
-        useYyy: useYyy , 
-     } : {
-        useYyy : (nd0: AudioNode | null, ...a: A ) => R ;      
-        // ea : A ;      
-    } ) {         
+    ) , A extends readonly unknown[] >(...[
+        { 
+            useYyy: useYyy , 
+         } ,    
+    ] : [
+        {
+            useYyy : (nd0: AudioNode | null, ...a: A ) => R ;      
+            // ea : A ;      
+        } ,         
+    ] ) {         
         const {
             dbgBox1 , 
 

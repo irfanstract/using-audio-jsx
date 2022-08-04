@@ -20,12 +20,13 @@ import {
     CAmpSlideDown ,              
 } from "./useAudioGraphImplFComponents"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
+import "./SLPCM.css";
       
    
        
 
 
-
+  
 
 
 
@@ -79,7 +80,14 @@ const WithAutoUnmount = (() => {
                                     } = (   
                                         useRealTimeQueryInterval11({
                                             f : ()  => {  
-                                                const ctxT = nd0 ? nd0.context.currentTime : -30000 ; 
+                                                const ctxT = (
+                                                    nd0 
+                                                    ? 
+                                                    nd0.context.currentTime 
+                                                    : 
+                                                    // -30000     
+                                                    0    
+                                                ) ; 
                                                 ;                        
                                                 return {
                                                     passageState : (    
@@ -93,14 +101,14 @@ const WithAutoUnmount = (() => {
                                                     ) ,   
                                                     hasPassedT : (expectedT <= ctxT ) ,  
                                                 } ;                 
-                                            } , 
+                                            } ,    
                                             LE : "useLayoutEffect" ,   
                                         } , (Math.min(preFT, postFT) / 2.5 ) * 1000 )       
                                     ) ;       
                                     return (        
-                                        <div                
-                                        style={{
-                                            opacity :  s ? 1 : (2 ** -3 ) ,       
+                                        <div      
+                                        className={`SLPCM-M-${s ? "PAST" : "NONPAST" }` }          
+                                        style={{ 
                                             transition : `all 0.5s ease-out` ,           
                                         }}
                                         >
