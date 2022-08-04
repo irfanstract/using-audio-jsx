@@ -20,8 +20,16 @@ import {
     CAmpSlideDown ,              
 } from "./useAudioGraphImplFComponents"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
+import { 
+    WithAutoUnmount as WithAutoUnmount0 ,    
+} from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";    
       
    
+
+
+
+
+
        
 const {    
     currentTCtx , 
@@ -32,67 +40,75 @@ const {
     WithDelay ,     
     LoopingWithPeriod ,        
 } = tCtxs ;
+// const WithAutoUnmount = (() => {
+//     const AbsoluteScheduledTCons = (
+//         currentTInfCtx.Consumer   
+//     ) ;   
+//     const useRealTimeQueryInterval11 = (
+//         useRealTimeQueryInterval1  
+//     ) ;
+//     return (
+//         function ({ children: expectedChildren, preFT, postFT } : (
+//             React.PropsWithChildren<{
+//                 /**        
+//                  * pre-incidential tolerance        
+//                  */  
+//                 preFT : number ;      
+//                 /**         
+//                  * post-incidential tolerance   
+//                  */  
+//                 postFT : number ;     
+//             }>    
+//         ) ) { 
+//             return (
+//                 <>    
+//                 <AbsoluteScheduledTCons>         
+//                     { ({ t: expectedT }) => (        
+//                         <>            
+//                         <NdRefConsm>            
+//                             { ({ feedPt: nd0 }) => (          
+//                                 <CBC>{ function useC1() {      
+//                                     enum Stat {               
+//                                         TOO_EARLY = "too early" ,   
+//                                         SUPPOSEDLY_NOW = "available" ,
+//                                         SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
+//                                     } 
+//                                     const stat = (   
+//                                         useRealTimeQueryInterval11((): Stat => {  
+//                                             const ctxT = nd0 ? nd0.context.currentTime : -30000 ; 
+//                                             ;                      
+//                                             return (    
+//                                                 ((expectedT + -preFT ) <= ctxT ) 
+//                                                 ?
+//                                                 (   
+//                                                     (ctxT <= (expectedT + postFT ) ) ?
+//                                                     Stat.SUPPOSEDLY_NOW : Stat.SUPPOSEDLY_ALREADY_CONCLUDED
+//                                                 )   
+//                                                 : Stat.TOO_EARLY
+//                                             ) ;                 
+//                                         } , 100 )       
+//                                     ) ;     
+//                                     return (     
+//                                         <>{ (      
+//                                             (stat === Stat.SUPPOSEDLY_NOW ) ?
+//                                             expectedChildren : <p>{ stat }</p>
+//                                         ) } </>     
+//                                     ) ;            
+//                                 } }</CBC> 
+//                             ) }   
+//                         </NdRefConsm>     
+//                         </>
+//                     ) }
+//                 </AbsoluteScheduledTCons>
+//                 </> 
+//             ) ;      
+//         }  
+//     ) ;  
+// })() ;            
 const WithAutoUnmount = (
-    function ({ children: expectedChildren, preFT, postFT } : (
-        React.PropsWithChildren<{
-            /**        
-             * pre-incidential tolerance        
-             */  
-            preFT : number ;      
-            /**         
-             * post-incidential tolerance
-             */  
-            postFT : number ;     
-        }>    
-    ) ) { 
-        const AbsoluteScheduledTCons = (
-            currentTInfCtx.Consumer   
-        ) ;
-        return (
-            <>    
-            <AbsoluteScheduledTCons>         
-                { ({ t: expectedT }) => (        
-                    <>            
-                    <NdRefConsm>            
-                        { ({ feedPt: nd0 }) => (          
-                            <CBC>{ function useC1() {      
-                                enum Stat {               
-                                    TOO_EARLY = "too early" ,   
-                                    SUPPOSEDLY_NOW = "available" ,
-                                    SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
-                                } 
-                                const stat = (   
-                                    useRealTimeQueryInterval1((): Stat => {  
-                                        const ctxT = nd0 ? nd0.context.currentTime : -30000 ; 
-                                        ;                   
-                                        return (    
-                                            ((expectedT + -preFT ) <= ctxT ) 
-                                            ?
-                                            (   
-                                                (ctxT <= (expectedT + postFT ) ) ?
-                                                Stat.SUPPOSEDLY_NOW : Stat.SUPPOSEDLY_ALREADY_CONCLUDED
-                                            )   
-                                            : Stat.TOO_EARLY
-                                        ) ;                 
-                                    } , 100 )       
-                                ) ;     
-                                return (     
-                                    <>{ (      
-                                        (stat === Stat.SUPPOSEDLY_NOW ) ?
-                                        expectedChildren : <p>{ stat }</p>
-                                    ) } </>     
-                                ) ;            
-                            } }</CBC> 
-                        ) }   
-                    </NdRefConsm>     
-                    </>
-                ) }
-            </AbsoluteScheduledTCons>
-            </> 
-        ) ;      
-    }  
-) ;
-   
+    WithAutoUnmount0    
+);
+      
 const {
     CPitchdownBassDrumKickFluidly1 , 
 
