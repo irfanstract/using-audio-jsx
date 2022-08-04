@@ -8,6 +8,7 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
 import { K, asVoidElement, NUMERIC } from "./commonElements";             
 import { CBC } from "./useStateInCallback";  
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
+import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
      
 // 
 import {  
@@ -27,7 +28,7 @@ import { USEM } from "./useAudioNodesParamAutomativeAsRegularNodes";
 import { graphAfterNrmInterpretativeMode } from "./useAudioGraphAsBandFreqCtrlMode";   
 import {
     SpecialUsageExplainer, 
-    xWithUsableYyy ,  
+    xWithUsableYyy ,   
     xWithUsableYyy1 ,   
 } from "./useAudioGraphImplUsableYyyNodes1";        
 import { 
@@ -74,17 +75,18 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
 import { 
     useUnexpectedZeroingBackCheck ,      
 } from "./useAudioNodesParamAutomativeElas";   
+import { useDeferredTrue } from "./useAudioGraphImplUseDeferredBoolean";    
 
          
  
   
-    
-                       
+                     
+                          
               
-                    
-    
-;
-const XDC = (   
+                                
+     
+; 
+const XDC = (    
     function AllChildrenRenderedEqually({ children } : { children: React.ReactElement[] ; } ) {
         return (
             <div style={{ display: "flex", flexDirection: "column" }} >
@@ -188,6 +190,7 @@ const {
                         CtxtualOutUsageProps    
                     ) ): React.ReactElement {                                  
                         ;    
+                        const dBB = useDeferredTrue() ;           
                         const { c1 } = (
                             useC1P(mainProps, nd0 )
                         ) ;     
@@ -195,7 +198,7 @@ const {
                         return (                
                             <XDC>      
                             
-                            { dbgBox1 }
+                            { dBB ? dbgBox1 : <></> }
                             { c1 }  
                             </XDC >      
                         ) ;             
@@ -222,7 +225,7 @@ const {
              */
             const useGainElasSpcl = (() => {                    
                 type Props0 = ( 
-                    UGE_PROPS       
+                    UGE_PROPS           
                 ) ;         
                 return (            
                     function useSpcl (...[nd0 , { scheduledT: t, swingTConstant } ] : [ 
@@ -236,7 +239,7 @@ const {
                                 ) , number >    
                             )> & Partial<(    
                                 Pick<Props0, never >
-                            ) >     
+                            ) >       
                         ) ,    
                     ]) {
                         ;               
@@ -245,12 +248,12 @@ const {
                             d ,    
                         } = (
                             useElasUsageOnMount({ v0: 1, v1: 2 ** -40 })  
-                        ) ;        
+                        ) ;            
                         React.useLayoutEffect(() => { 
                             if (0 ) { 
                                 console.log(useGainElasSpcl.name, { value, d });
                             }               
-                        }, [value, d ]) ;
+                        }, [value, d ]) ;  
                         (function use3(e : false | true ) {    
                             const r1 = React.useRef<number>(0 ) ;      
                             const { UZM_CHECK } = (
@@ -263,13 +266,13 @@ const {
                                         // eslint-disable-next-line 
                                         r1.current = value    
                                     ) ,  
-                                })       
+                                })        
                             ) ;             
                             ;                   
                         } )(false ) ;             
                         React.useLayoutEffect((() => {
                             if (0 ) {            
-                                ;
+                                ;  
                                 if (nd0 ) {   
                                     ;
                                     console.log({ nd0  , swingTConstant , value, t, d ,   }) ;      
@@ -294,28 +297,28 @@ const {
                 }>        
             ) ;        
             ;         
-            return (  
+            return (   
                 // TODO    
-                IterableOps.identity<(                
+                IterableOps.identity<(                  
                     React.FC<Props >       
                 ) >((
                     function CWithAmpSlideDown ({ t, swingTConst = 2 ** -2 , children }) {               
                         ;        
                         const useC11 = (       
                             function (...[{ feedPt: nd0 }] : [  
-                                (       
+                                (        
                                     CtxtualOutUsageProps                    
                                 ) ,     
                             ] ): React.ReactElement {         
                                 const nd1 = (                        
                                     useGainElasSpcl(nd0, {        
                                         scheduledT : t ,  
-                                        swingTConstant : swingTConst ,  
+                                        swingTConstant : swingTConst ,    
                                     })                  
                                 ) ;                      
                                 const mainFeed = nd1 ;      
                                 // TODO        
-                                return (
+                                return ( 
                                     <WithGivenDest value={ mainFeed }>
                                         { children }     
                                     </WithGivenDest>                 
@@ -324,7 +327,7 @@ const {
                         ) ;                                
                         return (            
                             <CTXTUALOUTPUTUSAGE_CBC>
-                                { useC11 } 
+                                { useC11 }   
                             </CTXTUALOUTPUTUSAGE_CBC>    
                         ) ;                     
                     }
@@ -337,7 +340,7 @@ const {
             function <Props1>(useYyy: (typeof audioFltAtAbsTNodes)["useGainModulatedPt"] ) {   
                 const {
                     dbgBox1 , 
-                    useC1 ,  
+                    useC1 ,   
                      
                 } = xWithUsableYyy({ useYyy }) ;
                 type Props = {           
@@ -355,9 +358,10 @@ const {
                     ) >(function CWithAmpAutom ({ value: ctrlChildren, children }) {    
                         const useC11 = (  
                             function ({ feedPt: nd0 } : (   
-                                CtxtualOutUsageProps     
+                                CtxtualOutUsageProps            
                             ) ): React.ReactElement {                            
-                                ;                                        
+                                ;                    
+                                const dBB = useDeferredTrue() ;                    
                                 const {     
                                     main: mainFeed ,  
                                     ampCtrl : ampCtrl1 ,                    
@@ -383,11 +387,11 @@ const {
                                     </XList>       
                                 ) ;                
                                 // TODO 
-                                return (                     
+                                return (                          
                                     <XDC >      
                                      
-                                    { dbgBox1 }  
-                                    { c1 }   
+                                    { dBB && dbgBox1 || <></> }  
+                                    { c1 }      
                                     </XDC >         
                                 ) ;                
                             }         
@@ -411,7 +415,7 @@ const {
                         [
                             (typeof audioFltAtAbsTNodes)["useCModulatedPt"] ,  
                             {
-                                propsParse : (      
+                                propsParse : (       
                                     (...args : [
                                         Parameters<typeof evSingleArgumentTerminalNodeCPropsParse >[0] ,  
                                     ] )
@@ -432,23 +436,23 @@ const {
                         const {            
                             dbgBox1 ,          
                             useC1 ,                  
-                                 
+                                   
                         } = xWithUsableYyy({ useYyy }) ;     
-                        return (       
+                        return (         
                             newCPropsRenderComponent            
                         )<Parameters<typeof propsParse >[0 ] >({
      
                             dbgBox1 ,    
-   
+    
                             useC1P  : (  
                                 function useC1P(      
                                     mainProps  , nd0  ,     
-                                ) {   
-                                    ;         
+                                ) {          
+                                    ;            
                                     const {          
                                         valueCtrl : gainValArgument1 ,      
 
-                                    } = (    
+                                    } = (        
                                         // TODO  
                                         React.useDeferredValue((
                                             propsParse(mainProps )    
@@ -460,8 +464,8 @@ const {
                                         useC1(nd0 ) 
                                     ) ;     
                                     const c1 = (                      
-                                        // TODO           
-                                        <XList >                 
+                                        // TODO     
+                                        <XList >                  
                                         { gainCtrlDest1 && (   
                                             <li key="value">        
                                                 Value Ctrl Mode :      
@@ -474,7 +478,7 @@ const {
                                     ) ;             
                                     return {  
                                         c1 ,   
-                                    } ;        
+                                    } ;            
                                 }  
                             ) , 
 
@@ -594,7 +598,8 @@ const {
                                     function ({ feedPt: nd0 } : (       
                                         CtxtualOutUsageProps                
                                     ) ): React.ReactElement {                                
-                                        ;                    
+                                        ;           
+                                        const dBB = useDeferredTrue() ;                  
                                         const {                                   
                                             frequency : freqArgDest1 ,       
                                             detune : detuneCtrlDest1 , // TODO                                   
@@ -622,14 +627,14 @@ const {
                                                     </WithGivenDest>      
                                                 </li>      
                                             )  }            
-                                            </XList>  
+                                            </XList>      
                                             </K>    
                                         ) ;          
                                         // TODO  
                                         return (                
                                             <XDC>      
                                             
-                                            { dbgBox1 } 
+                                            { dBB ? dbgBox1 : <></> } 
                                             { c1 } 
                                             </XDC >        
                                         ) ;         
@@ -769,9 +774,10 @@ const {
                         (T-const specified : { props1.swingTConstant } )
                     </p>     
                 ) ;     
-                return (   
-                    <XDC >        
-                        { dbg }
+                const dBB = useDeferredTrue() ;  
+                return (               
+                    <XDC >                        
+                        { dBB ? dbg : <></> }
                         {e }
                     </XDC >
                 ) ;
@@ -835,7 +841,7 @@ const {
                                         ;        
                                         if (nd1 ) {        
                                             ;     
-                                            (      
+                                            (       
                                                 nd1.offset
                                                 .setTargetAtTime(vl, nd1.context.currentTime , swingTConst )
                                             ) ;     
@@ -866,7 +872,7 @@ const {
                                     swingTConstant={swingTConst }
                                     />  
                                 ) ;      
-                            } }        
+                            } }           
                         </CTXTUALOUTPUTUSAGE_CBC>         
                     ) ;    
                 })( 1 ) ;
@@ -874,9 +880,10 @@ const {
                     <p> 
                     </p>     
                 ) ;     
+                const dBB = useDeferredTrue() ;    
                 return (   
                     <XDC >        
-                        { dbg }
+                        { dBB ? dbg : <></> }
                         {e }
                     </XDC >
                 ) ;              

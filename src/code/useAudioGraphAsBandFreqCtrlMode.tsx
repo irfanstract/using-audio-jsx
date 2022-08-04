@@ -17,7 +17,8 @@ import {
 } from "./useNonHookValue";     
  
      
-import { CFreqDmAnalyF1 } from "./useAudioNodesFreqDmAnalysisC";      
+import { CFreqDmAnalyF1 } from "./useAudioNodesFreqDmAnalysisC";   
+import { useDeferredTrue } from "./useAudioGraphImplUseDeferredBoolean";           
 
 
 
@@ -92,7 +93,7 @@ const CFreqDmAnalyF1X = (() => {
                 props1 : props1 ,                 
             } ; 
         }      
-    ) ;   
+    ) ;       
     return (   
         IterableOps.identity<(                                             
             React.FC< MountageProps1 >      
@@ -106,11 +107,11 @@ const CFreqDmAnalyF1X = (() => {
             }) {     
                 const {   
                     props1 : value1 , 
-                    scnValue : v0 ,       
+                    scnValue : v0 ,         
                 } = (   
                     useIntercepted(value0 )
                 ) ;       
-                const v = (
+                const v = ( 
                     useLogScaleNumericDigest(v0 , {   
                         inertialCoef : inertialCoef , 
                         timeoutMillis : ( 2 ** -3 ) * 1000 ,
@@ -125,19 +126,19 @@ const CFreqDmAnalyF1X = (() => {
                     ) ;    
                     const rows: readonly ((null | false ) | React.ReactElement)[] = [  
                         showDebug && (
-                            <tr  title="the presently Value " >                  
+                            <tr key="value" title="the presently Value " >                  
                                 <td> 
                                 <i> Value </i>      
                                 </td>                
                                 <td> 
                                 <NUMERIC maxPrecision={3 } >
-                                {vlDeferred }        
+                                {vlDeferred }         
                                 </NUMERIC>       
                                 </td>                
                             </tr>                    
-                        ) ,  
+                        ) ,          
                         (            
-                            <tr title="the Inertial Coefficient value" >        
+                            <tr key="iner-c" title="the Inertial Coefficient value" >        
                                 <td>
                                 <i> Inertial Coefficient </i>
                                 </td>        
@@ -149,7 +150,7 @@ const CFreqDmAnalyF1X = (() => {
                             </tr>     
                         ) , 
                     ] ;        
-                    return (               
+                    return (                
                         <table>           
                         <tbody>     
                             { rows }
@@ -161,17 +162,20 @@ const CFreqDmAnalyF1X = (() => {
                     <CFreqDmAnalyF1 value={value1} >
                         { graph } 
                     </CFreqDmAnalyF1>       
-                );
+                );   
+                const dBB = (
+                    useDeferredTrue()        
+                ) ;
                 // TODO                               
                 return (        
-                    <div>   
+                    <div>        
                         <div>           
                             { el }     
                         </div>   
-                        { dbgBox }
+                        { useDeferredTrue() ? dbgBox : <></> }
                     </div>      
                 ) ;    
-            }                    
+            }                       
         ))
     ) ;   
 })();

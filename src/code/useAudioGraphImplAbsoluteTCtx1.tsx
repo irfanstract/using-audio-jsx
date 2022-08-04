@@ -4,17 +4,21 @@ import Immutable from "immutable";
 import { IterableOps } from "./generalUse11";  
 import React from "react";               
 import { K, arrayIndexedOrderedList } from "./commonElements";          
-
+ 
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
-import { WGD_DIV } from "./useAudioGraphImplFComponentsSemanticsBasic";      
+import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 
-
+   
                 
 
             
   
 
+function useConditionalDeference1(e : React.ReactElement, perios : number ) {
+    const e0 = React.useDeferredValue(e ) ;
+    return (3 <= perios ) ? e0 : e  ;
+}     
 // import newInstance from "./audioLoopDemoScheduledTCtxConstructor" ;      
 const {       
     currentTCtx ,                              
@@ -22,7 +26,7 @@ const {
     currentTInfCtx ,                       
                      
 }  =newInstance() ;        
-function CurrentTDisplay() {     
+function CurrentTDisplay() {         
     return (                  
         <currentTInfCtx.Consumer>                  
             { ({ t, tScale } ) => (  
@@ -55,7 +59,7 @@ const WithDelay = (
     function WithRelativeDelay({ children: c, value: addend }: (
         React.PropsWithChildren<{ value: number ; }>      
     ) ) {
-        ; 
+        ;   
         /**   
          * tale caution of 'current t-scale'
          */
@@ -65,7 +69,9 @@ const WithDelay = (
                     <currentTCtx.Provider 
                     value={parentTVal + (addend * tScale ) } 
                     >
-                        <WGD_DIV>{ c } </WGD_DIV>              
+                        <ModifyingCompPayloadDiv>
+                        { c || null }
+                        </ModifyingCompPayloadDiv>              
                     </currentTCtx.Provider>
                 ) }
             </currentTInfCtx.Consumer>
@@ -119,12 +125,14 @@ const LoopingWithPeriod = (
                     ) ;    
                 })                 
             ) ;    
-            return (    
-                <div>
-                    <p> a loop </p>
-                    { arrayIndexedOrderedList(itemsRendered )   }
+            return (             
+                <div>           
+                    <p> a loop </p>         
+                    <LoopingCompContentDiv   >    
+                    { arrayIndexedOrderedList(itemsRendered )   } 
+                    </LoopingCompContentDiv >
                 </div> 
-            ) ;          
+            ) ;                
         }  
     ))
 ) ;
@@ -137,7 +145,7 @@ const LoopingWithPeriod = (
 
        
 
-export {
+export {   
     currentTCtx , 
     currentTScaleCtx ,       
     currentTInfCtx ,      

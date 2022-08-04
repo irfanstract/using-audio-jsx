@@ -218,7 +218,7 @@ const {
             V2XLwPassMsk ,           
             //   
             AmpSlideDown ,    
-            BassDrumKick ,    
+            BassDrumKick ,     
         } ;  
         const onv = ((version: Vr ): React.ReactElement => {  
             if (version === Vr.SimpleBeep ) {
@@ -237,7 +237,7 @@ const {
                         />            
                     </CAmpSlideDown>                    
                 ) ;                      
-            }                                                
+            }                                                  
             if (version === Vr.BassDrumKick ) {    
                 ;      
                 return ((vrs : 1 | 2 | 2.25 ): React.ReactElement => {  
@@ -252,7 +252,13 @@ const {
                         ;      
                         return (       
                             <div>
-                                <LoopingWithPeriod value={{ period: 0.5 } } renderRange={{ n: 0x20 } } > 
+                                <LoopingWithPeriod 
+                                value={(
+                                    // { period: 0.5 }  as const  
+                                    { period: 0.5 }  as const 
+                                )} 
+                                renderRange={{ n: 0x10 } }     
+                                > 
                                     <CBassDrumKick1 />    
                                 </LoopingWithPeriod>  
                             </div >        

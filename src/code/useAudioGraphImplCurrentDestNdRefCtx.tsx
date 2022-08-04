@@ -13,7 +13,7 @@ import {
     AFeedableAndTappableNca ,
 
 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";  
-import { WGD_DIV } from "./useAudioGraphImplFComponentsSemanticsBasic";      
+import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 
        
  
@@ -112,7 +112,7 @@ const WithGivenDest = (
                         React.useContext(ctx1 )        
                     ) ;    
                     return (      
-                        <WGD_DIV     
+                        <ModifyingCompPayloadDiv     
                         >                     
                             <Prv1 
                             // https://reactjs.org/docs/context.html#caveats 
@@ -128,7 +128,7 @@ const WithGivenDest = (
                             >       
                                 { children }
                             </Prv1>            
-                        </WGD_DIV>        
+                        </ModifyingCompPayloadDiv>        
                     ) ;                 
                 })
             ) ,                   
@@ -164,7 +164,7 @@ const WithGivenDest = (
                    
                 
 export {
-    WGD_DIV ,  
+    ModifyingCompPayloadDiv as WGD_DIV ,  
 
     Prv1 , 
     Consm ,   

@@ -36,21 +36,21 @@ const WithAutoUnmount = (
     function ({ children: expectedChildren, preFT, postFT } : (
         React.PropsWithChildren<{
             /**        
-             * {@link currentTCtx  }  
+             * pre-incidential tolerance        
              */  
             preFT : number ;      
-            /**        
-             * {@link currentTCtx  }  
+            /**         
+             * post-incidential tolerance
              */  
             postFT : number ;     
         }>    
     ) ) { 
-        const STC = (
+        const AbsoluteScheduledTCons = (
             currentTInfCtx.Consumer   
         ) ;
         return (
             <>    
-            <STC>         
+            <AbsoluteScheduledTCons>         
                 { ({ t: expectedT }) => (        
                     <>            
                     <NdRefConsm>            
@@ -87,69 +87,114 @@ const WithAutoUnmount = (
                     </NdRefConsm>     
                     </>
                 ) }
-            </STC>
+            </AbsoluteScheduledTCons>
             </> 
         ) ;      
     }  
 ) ;
    
-const CPitchdownBassDrumKickFluidly1 = (      
-    function () {    
-        const conventionalFreq : number | 440 = 440 ;      
-        const minimumFreq : number = (    
-            (2 ** -(3 + 0.333 ) ) * conventionalFreq            
-        ) ; 
-        const c1 = (               
-            <CAmpModulated0                 
-            value={       
-                <CFnValue1         
-                value={   
-                    ({ ctxT: t }) => (   
-                        (0 <= t ) ? (      
-                            (
-                                IterableOps.clamp(1 + -(t * 2 ) , 0, 1 )
-                            ) * (
-                                Math.max(0, -(2 ** -4 ) + (2 ** -(t * 4 ) ) )   
-                            )
-                        ) : 0        
-                    )
-                }   
-                />     
-            }                
-            >                                     
-                <CWaveTable1                   
-                freqArgumentInterpretation="timedomain-normalised"     
-                freqArgument={(       
-                    <CFnValue1                  
-                    value={        
-                        ({ ctxT }) => {   
-                            const {                          
-                                c0,                    
-                                f ,             
-                            } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: 2 ** -3 }) ;   
-                            const e10 = (
-                                Math.min(-1 * Math.log2(minimumFreq / conventionalFreq ) , c0 + Math.max(0, ctxT ) * f )    
-                            );                   
-                            const val1 = (             
-                                2 ** -e10   
-                            ) ;        
-                            return val1  ;          
-                        }  
-                    } 
-                    />       
-                )}       
-                />                       
-            </CAmpModulated0 >                          
-        ) ;    
-        return (                      
-            <>            
-            <WithAutoUnmount preFT={0.5} postFT={1.5} >
-            { c1 }
-            </WithAutoUnmount>          
-            </>                     
-        ) ;
-    }
-) ;      
+const {
+    CPitchdownBassDrumKickFluidly1 , 
+
+} = (() => {   
+    const conventionalFreq : number | 440 = 440 ;     
+    const clampWithinZeroAndOne = (  
+        function (v: number) {
+            return IterableOps.clamp(v, 0, 1 ) ;
+        }   
+    ) ;  
+    const { max, min, } = Math ;
+    return {
+        CPitchdownBassDrumKickFluidly1 : (      
+            function (mainProps : (      
+                Partial<{         
+                    tCoef1 : number ;             
+                    minimumFreq : number ;     
+                    /**   
+                     * such that `TM` be exactly {@link TM1 } times {@link tCoef1}
+                     */          
+                    TM1 : number ;    
+                }>
+            )) {               
+                const {     
+                    tCoef1 = (   
+                        // 2 ** -3    
+                        2 ** -2 
+                    )  ,          
+                    minimumFreq = (          
+                        (2 ** -(3 + 0.333 ) ) * 440               
+                    ) ,  
+                    TM1 = 4 ,    
+                } = mainProps ;        
+                const expectedTLen1 : number = (
+                    TM1 * tCoef1 
+                ) ;   
+                const maximumExp = (
+                    -1 * Math.log2(minimumFreq / conventionalFreq )  
+                ) ;
+                const c1 = (() => {   
+                    const ampModulGraph = (  
+                        <CFnValue1         
+                        value={            
+                            ({ ctxT: t }) => { 
+                                const p = (
+                                    t / expectedTLen1    
+                                ) ;
+                                return (     
+                                    (0 <= t ) ? (   
+                                        (  
+                                            clampWithinZeroAndOne(1 + -p ,  )   
+                                        ) * (      
+                                            max(0, -(2 ** -4 ) + (2 ** -( 6 * p ) ) )   
+                                        )   
+                                    ) : 0                         
+                                ) ;   
+                            }         
+                        }   
+                        />        
+                    ) ;         
+                    return (                 
+                        <CAmpModulated0                      
+                        value={         
+                            ampModulGraph  
+                        }                     
+                        >                                     
+                            <CWaveTable1                   
+                            freqArgumentInterpretation="timedomain-normalised"     
+                            freqArgument={(       
+                                <CFnValue1                  
+                                value={        
+                                    ({ ctxT }) => {   
+                                        const {                            
+                                            c0,                       
+                                            f ,             
+                                        } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: tCoef1 }) ;   
+                                        const e10 = (
+                                            Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
+                                        );                   
+                                        const val1 = (              
+                                            2 ** -e10   
+                                        ) ;        
+                                        return val1  ;          
+                                    }  
+                                } 
+                                />       
+                            )}       
+                            />                       
+                        </CAmpModulated0 >                          
+                    ) ;  
+                })() ;      
+                return (                      
+                    <>            
+                    <WithAutoUnmount preFT={1.5} postFT={1 * expectedTLen1 } >
+                    { c1 }
+                    </WithAutoUnmount>            
+                    </>                     
+                ) ;
+            }
+        ) ,   
+    } ;
+})() ;      
 const CBassDrumKickFluidly1 = ( 
     CPitchdownBassDrumKickFluidly1      
 );

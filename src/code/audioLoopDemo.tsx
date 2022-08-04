@@ -14,7 +14,7 @@ import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce
 import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";  
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
-    CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  
+    CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 } from "./audioLoopDemoComponents1"; 
 import * as BBVR from "./audioLoopDemoSpecimens";
 
@@ -90,7 +90,7 @@ export const AudioLoopDemoApp = (function () {
             const [tT, { update: updateTT } ] = (      
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = (
+            const c1  = ( 
                 <BEEPBOPVRAPP 
                 {...({ quantityReductiveDbgMode } as const )}  
                 />  
@@ -113,13 +113,15 @@ export const AudioLoopDemoApp = (function () {
                     </p>     
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                       
-                    <p> what </p>          
-                    <div key={key }> 
-                    { true && c1 }   
-                    </div>
+                    <p> what </p>            
+                    <div key={key }>   
+                    <CAmpModulated0 value={<CConstantValue value={2 ** -2} />} >
+                        { true && c1 }          
+                    </CAmpModulated0>
+                    </div>               
                     </TP>       
                 </div>
             ) ;         
         } 
     ) ;
-})() ;
+})() ;       
