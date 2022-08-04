@@ -74,15 +74,15 @@ const WithAutoUnmount = (() => {
                                         SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
                                     } 
                                     const {
-                                        stat ,     
-                                        s ,  
+                                        passageState: stat ,     
+                                        hasPassedT: s ,  
                                     } = (   
                                         useRealTimeQueryInterval11({
                                             f : ()  => {  
                                                 const ctxT = nd0 ? nd0.context.currentTime : -30000 ; 
                                                 ;                        
                                                 return {
-                                                    stat : (    
+                                                    passageState : (    
                                                         ((expectedT + -preFT ) <= ctxT ) 
                                                         ?
                                                         (   
@@ -91,16 +91,16 @@ const WithAutoUnmount = (() => {
                                                         )   
                                                         : Stat.TOO_EARLY
                                                     ) ,   
-                                                    s : (expectedT <= ctxT ) ,  
+                                                    hasPassedT : (expectedT <= ctxT ) ,  
                                                 } ;                 
                                             } , 
                                             LE : "useLayoutEffect" ,   
-                                        } , 100 )       
+                                        } , (Math.min(preFT, postFT) / 2.5 ) * 1000 )       
                                     ) ;       
                                     return (        
-                                        <div         
+                                        <div                
                                         style={{
-                                            opacity :  s ? 1 : (2 ** -3 ) ,  
+                                            opacity :  s ? 1 : (2 ** -3 ) ,       
                                             transition : `all 0.5s ease-out` ,           
                                         }}
                                         >

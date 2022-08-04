@@ -8,7 +8,7 @@ import {
 import React, { 
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef, Suspense ,
 } from "react";
-import { useIntervalDeferredValue1, useRealTimeQueryInterval, useRefreshByInterval } from "./useNonHookValue";        
+import { useIntervalDeferredValue1, useRealTimeQueryInterval, useRealTimeQueryInterval1, useRefreshByInterval } from "./useNonHookValue";        
 import { useAsyncStrm } from "./useAsyncMemo";
 // import { K, NUMERIC } from "./commonElements"; 
 // import { Div, SequenceOfEquallySizedElements } from "./commonplaceSequenceOfEquallySizedElements";  
@@ -65,7 +65,7 @@ const useAnalyserNodeValue1 = (
         AnalyserNode | null ,        
     ] ): number {                       
         return (
-            useRealTimeQueryInterval<number>(() => {        
+            useRealTimeQueryInterval1<number>(() => {        
                 if (gner05) { 
                     ;                                                    
                     const buf = (

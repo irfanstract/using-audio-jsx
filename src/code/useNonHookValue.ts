@@ -13,77 +13,85 @@
 // }
 import { BoundedIdentityFunction, } from "./generalUse11";
 import React, { 
-    useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useImperativeHandle, useTransition, useDebugValue ,
-} from "react"; 
-import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterval";   
+    useState, useReducer,      
+    useLayoutEffect, useEffect,
+    useCallback, useMemo, useDeferredValue,  useContext, 
+    useImperativeHandle,   
+    useTransition, 
+    useDebugValue ,
+} from "react";          
+import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterval"; 
+import { 
+    useCanForceRefresh , 
+
+    useRefreshByInterval1 ,  
+    useRefreshByInterval ,  
+ 
+} from "./usingIntervalRefresh";      
 
 
+  
+       
+  
+// const useRefreshByInterval1 = (         
+//     (...[      
+//         ,                   
+//         periofMillis ,             
+//         { LE = "useEffect" as "useEffect" } = {} ,      
+//     ] : [                                      
+//         // _ignored1: true ,      
+//         // periofMillis: number ,    
+//         _1 : true ,        
+//         periodMillis: number ,                    
+//         properties ?: {
 
-     
+//             /**   
+//              * React has two variations of `useEffect`, it's `useEffect` itself as well as `useLayoutEffect` .  
+//              * in general `useEffect` is strongly preferred for high-level (sub)modules, but  
+//              * `useEffect` is prone to timing distortion and therefore in timing-sensitive apps `useLayoutEffect` shall be used instead.
+//              * 
+//              * there's also `useInsertionEffect`, but it does not define parameter `deps` and hence not applicable
+//              */
+//             LE ?: (
+//                 keyof Pick<typeof React, "useLayoutEffect" | "useEffect">
+//             ) ; 
+//         } ,
+//     ]) => {            
+//         ;       
+//         const {    
+//             forceRefresh ,       
+//             c ,                                       
+//         } = (                                   
+//             useCanForceRefresh()                 
+//         ) ;               
+//         React[LE ](() => {   
+//             return (
+//                 usingInterval(() => {         
+//                     forceRefresh() ;    
+//                     return true ;
+//                 } , periofMillis ) 
+//             ) ;   
+//         }, [useDeferredValue(periofMillis) ] ) ;  
+//         const r1 = {  
+//             forceRefresh ,          
+//             c ,    
 
-const useCanForceRefresh = (            
-    (...[{ modN = 0x100 } = { } ] : [
-        properties ?: { modN ?: number } ,    
-    ]) => {
-        const [ c , forceRefresh ] = (
-            useReducer((v: number) => ((v + 1 ) % modN ) , 0 )
-        ) ;          
-        useDebugValue({ c }) ;
-        return ( 
-            useMemo(() => ({ c, forceRefresh }), [c, forceRefresh ])
-        );
-    }       
-) ;  
-const useRefreshByInterval1 = (      
-    (...[      
-        ,                   
-        periofMillis ,             
-        { LE = "useEffect" as "useEffect" } = {} ,      
-    ] : [                                      
-        // _ignored1: true ,      
-        // periofMillis: number ,    
-        _1 : true ,        
-        periodMillis: number ,                    
-        properties ?: {
-            LE ?: (
-                keyof Pick<typeof React, "useLayoutEffect" | "useEffect">
-            ) ; 
-        } ,
-    ]) => {            
-        ;       
-        const {    
-            forceRefresh ,       
-            c ,                                       
-        } = (                                   
-            useCanForceRefresh()                 
-        ) ;               
-        React[LE ](() => {   
-            return (
-                usingInterval(() => {         
-                    forceRefresh() ;    
-                    return true ;
-                } , periofMillis ) 
-            ) ;   
-        }, [useDeferredValue(periofMillis) ] ) ;  
-        const r1 = {  
-            forceRefresh ,          
-            c ,    
-
-            LE ,   
-            periodMillis : periofMillis ,    
-        } ;              
-        useDebugValue(r1 ) ;          
-        return(     
-            r1  
-        ) ;    
-    }            
-) ;                               
-const useRefreshByInterval = (      
-    (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
-        useRefreshByInterval1(...a ) ;                    
-        return JSON ;    
-    }    
-) ;    
+//             LE ,   
+//             periodMillis : periofMillis ,    
+//         } ;              
+//         useDebugValue(r1 ) ;          
+//         return(     
+//             r1  
+//         ) ;    
+//     }            
+// ) ;                               
+// const useRefreshByInterval = (      
+//     (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
+//         useRefreshByInterval1(...a ) ;                    
+//         return JSON ;    
+//     }    
+// ) ;    
+const [] = [] ;
 /**  
  * note that this does not provide `deps` ;   
  * `deps` will be unnecessary for this, due to how {@link useRefreshByInterval} works
@@ -123,10 +131,10 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
             RealTimeQueryIntervalUsageArgs<A>[0 ]        
         ) ) {        
             type Return = (
-                Pick<(                 
+                Pick<(                         
                     Required<(   
                         Exclude<(                 
-                            RealTimeQueryIntervalUsageArgs<A>[0 ]   
+                            RealTimeQueryIntervalUsageArgs<A>[0 ]                    
                         ),  (...Args : never[] ) => void >     
                     )>   
                 ), "f" | "LE">   
@@ -159,11 +167,21 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
  * both {@link useRealTimeQueryInterval } and {@link useRealTimeQueryInterval1 }  
  * are based on {@link Window.setInterval } . 
  * however,          
- * {@link useRealTimeQueryInterval } will not restrict calls to the tick-tock(s), while
- * {@link useRealTimeQueryInterval1} will 
+ * {@link useRealTimeQueryInterval } will generalise the dispatch to even outside the tick-tock(s), while 
+ * {@link useRealTimeQueryInterval1} will limit the dispatch to the tick-tock(s) .
+ * 
+ * some critial problems :  
+ * - in variation {@link useRealTimeQueryInterval } of `useRealtimeQuery` , 
+ *   dispatches will not be restricted to regular intervals and instead generalised to every refresh and therefore 
+ *   unexpected behaviour will arise.       
+ * - in case the invocand would be performance-heavy, 
+ *   {@link useRealTimeQueryInterval } will hog CPU usage.  
+ * - use the closely-named {@link useRealTimeQueryInterval1 } instead .   
  * 
  * note that this does not provide `deps` ;   
  * `deps` will be unnecessary for this, due to how {@link useRefreshByInterval} works
+ * 
+ * @deprecated       
 */  
 const useRealTimeQueryInterval = (       
     function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ): A {             
@@ -183,6 +201,13 @@ const useRealTimeQueryInterval = (
     }                  
 ) ;     
 /**         
+ * 
+ * both {@link useRealTimeQueryInterval } and {@link useRealTimeQueryInterval1 }  
+ * are based on {@link Window.setInterval } . 
+ * however,          
+ * {@link useRealTimeQueryInterval } will generalise the dispatch to even outside the tick-tock(s), while 
+ * {@link useRealTimeQueryInterval1} will limit the dispatch to the tick-tock(s)  
+ * 
  * note that this does not provide `deps` ;       
  * `deps` will be unnecessary for this, due to how {@link useRefreshByInterval} works
 */  
@@ -249,10 +274,13 @@ const {
                             // TODO        
                         }   
                     }    
-                );        
+                );          
                 (            
-                    useRealTimeQueryInterval1(()  => { 
-                        return digest() ;    
+                    useRealTimeQueryInterval1({
+                        f : ()  => { 
+                            return digest() ;    
+                        } ,  
+                        LE : "useLayoutEffect" , 
                     } , timeoutMillis  ) 
                 ) ;          
                 const c1 = {
@@ -267,6 +295,9 @@ const {
                 return c1 ;    
             }       
         ) ;      
+        /**   
+         * {@link useNumericDigestWith } yet only gives `vl` (*the value*).
+         */
         useNumericDigest = (
             (...args : Parameters<typeof this.useNumericDigestWith > ) => {
                 const { v1 } = (
@@ -277,28 +308,45 @@ const {
         );
     }) ;
 })() ;
-function useLogScaleNumericDigest(...[v00, properties ] : (
-    Parameters<typeof useNumericDigest>
-) ) {   
-    const v0 = (                                
-        Math.log2(1E-5 + v00 )    
-    ) ;        
-    const v1 = (                     
-        useNumericDigest(v0, properties )
+const {
+    useLogScaleNumericDigest , 
+} = (() => {
+    type UNDW0 = typeof useNumericDigestWith ;
+    const AS_UNDW = (
+        function <R extends number, A extends readonly unknown[] >(useNumericDigest : (...args : [number, ...A ] ) => R ) {
+            return (
+                function useLogScaleNumericDigest(...[v00, ...args ] : (
+                    Parameters<typeof useNumericDigest>
+                ) ) {          
+                    const v0 = (                                
+                        Math.log2(1E-5 + v00 )            
+                    ) ;            
+                    const v1 = (                     
+                        useNumericDigest(v0, ...args )  
+                    ) ;    
+                    const v11 = (                 
+                        2 ** v1 
+                    );     
+                    return v11 ;
+                }              
+            ) ;
+        }      
     ) ;    
-    const v11 = (
-        2 ** v1 
-    );     
-    return v11 ;
-}      
+    return {         
+        useLogScaleNumericDigest : (   
+            AS_UNDW(useNumericDigest )           
+        ) ,      
+    } ;
+})() ;
 export {
     useCanForceRefresh ,        
-    useRefreshByInterval ,        
+    useRefreshByInterval ,           
     useRefreshByInterval1 ,   
+
     useRealTimeQueryInterval ,           
     useRealTimeQueryInterval1 ,     
     useIntervalDeferredValue as useIntervalDeferredValue1 ,  
-
+  
     useNumericDigest ,      
     useNumericDigestWith ,  
     useLogScaleNumericDigest ,     

@@ -135,7 +135,7 @@ const {
                 const {     
                     tCoef1 = (   
                         // 2 ** -3    
-                        2 ** -2 
+                        2 ** -3 
                     )  ,          
                     minimumFreq = (          
                         (2 ** -(3 + 0.333 ) ) * 440               
@@ -157,7 +157,7 @@ const {
                                     t / expectedTLen1    
                                 ) ;
                                 return (     
-                                    (0 <= t ) ? (   
+                                    (-0.05 <= t ) ? (   
                                         (  
                                             clampWithinZeroAndOne(1 + -p ,  )   
                                         ) * (      
@@ -184,7 +184,7 @@ const {
                                         const {                            
                                             c0,                       
                                             f ,             
-                                        } = interpolateBetweenTwo({ c0: 2.3, c1: 2.9 , t: tCoef1 }) ;   
+                                        } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
                                         const e10 = (
                                             Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
                                         );                   
@@ -266,7 +266,7 @@ const {
     return {
         CBassDrumKick1 : (
             (asSharpDueToKeying)({
-                SDK : { shallRemountForEachKeystroke : true , delay : 0.1 } as const ,  
+                SDK : { shallRemountForEachKeystroke : false , delay : 0.1 } as const ,  
                 label : <span> Bass Drum </span> ,  
                 c :  <CBassDrumKickFluidly1 />         ,  
             })

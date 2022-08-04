@@ -35,7 +35,7 @@ const useDeferredTrue = (
         React.useLayoutEffect(() => {   
             setTimeout(() => {
                 setS(() => true ) ; 
-            } , 2 * 1000 ) ;
+            } , 1 * 1000 ) ;
         } , deps ) ;;
         return s ;       
     }

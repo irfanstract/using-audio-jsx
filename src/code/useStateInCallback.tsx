@@ -13,9 +13,10 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
               
                    
          
-/**    
+/**     
+ * it's the calling-code responsibility to ensure that `useYyy` remains the same expression. 
  * 
- * @example
+ * @example    
  * return (      
  *   <CBC>{ () => {   
  *      const data = (
@@ -29,21 +30,35 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
  * ) ;   
  */
 const CBC = (
-    function ({ children : useXYyy } : { 
+    function CBC({ children : useXYyy } : { 
         /**   
          * actual implementation is free to invoke `useEffect`, `useState`, etc .  
          * 
          */
         children : () => React.ReactElement ;  
-    }  ) {
-        const e = (      
-            useXYyy()             
-        ) ;
-        // TODO remove this line
-        null && (
-            ({ } as ({ bar ?: () => void } ) ).bar!()  
-        ) ;        
-        return e ;    
+    }  ) {   
+        const C = (     
+            /**        
+             * this needs ad-hoc separate Component.  
+             * this separation is necessary to keep playing well with React DevTools.  
+             */
+            React.useCallback(( 
+                function XYyyUsage ({ children: useXYyy } : ComponentProps<typeof CBC > ) {    
+                    ;       
+                    const e = (           
+                        useXYyy()                    
+                    ) ;            
+                    // TODO remove this line
+                    null && (
+                        ({ } as ({ bar ?: () => void } ) ).bar!()  
+                    ) ;        
+                    return e ;          
+                }
+            ) , [] )  
+        ) ; 
+        return (
+            <C >{ useXYyy }</C>
+        );
     }                         
 ) ;                              
 
