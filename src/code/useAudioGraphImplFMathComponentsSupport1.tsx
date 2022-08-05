@@ -188,7 +188,7 @@ const {
                                 if (nd0 ) {                               
                                     const t1 = (   
                                         nd0.context.currentTime        
-                                    ) ; 
+                                    ) ;     
                                     const t2 = (  
                                         // +t1.toFixed(1 )           
                                         t1                     
@@ -218,12 +218,22 @@ const {
              * {@link useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 }         
              * {@link CTXTUALOUTPUTUSAGE_CBC }   
              */          
-            const e = ((mode : 1 | 2) => {        
-                const swingTConst = ( 
-                    2 ** -6      
-                ) ;   
+            const e = ((...[mode, mode1 = {} ] : [
+                1 | 2 ,  
+                {
+                    timingArgMode ?: false | 1 ;    
+                    swingTConst ?: number ;           
+                } ? , 
+            ]) => {            
+                const {
+                    swingTConst = (        
+                        2 ** -6  
+                    ) ,  
+                    timingArgMode = 1 ,   
+
+                } = mode1 ;     
                 if (mode === 2 ) {   
-                    ;             
+                    ;              
                     return (                       
                         <CTXTUALOUTPUTUSAGE_CBC>   
                             { function useC11({ feedPt : nd0 }) { 
@@ -234,18 +244,20 @@ const {
                                 const nd1 = (
                                     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
                                 ) ;       
-                                React.useLayoutEffect(() => {
+                                React.useLayoutEffect(() => {   
                                     ;        
                                     if (1 ) {
                                         ; 
                                         if (nd1 ) {        
-                                            ;             
+                                            ;               
                                             (        
                                                 nd1.offset  
-                                                .setTargetAtTime(vl, nd1.context.currentTime , swingTConst )
+                                                .setTargetAtTime(vl, (
+                                                    timingArgMode ? t2 : nd1.context.currentTime      
+                                                ) , swingTConst )
                                             ) ;     
                                         }     
-                                    }
+                                    } 
                                 } , [nd1, vl ]) ;
                                 // TODO                             
                                 return (       
@@ -255,7 +267,7 @@ const {
                                     </p>
                                 ) ;       
                             } }       
-                        </CTXTUALOUTPUTUSAGE_CBC>         
+                        </CTXTUALOUTPUTUSAGE_CBC>           
                     ) ;    
                 }    
                 /**     
@@ -269,27 +281,28 @@ const {
                     <CTXTUALOUTPUTUSAGE_CBC>   
                         { function useC11({ feedPt : nd0 }) { 
                             const {              
-                                t2 ,       
+                                t2 ,          
                                 vl ,            
-                            } = ( C11 )(nd0 ) ;       
-                            // TODO                           
+                            } = ( C11 )(nd0 ) ;          
+                            // TODO                 
                             return (                     
-                                <CConstantValue      
-                                value={vl }                     
-                                swingTConstant={swingTConst }
+                                <CConstantValue              
+                                value={vl }                        
+                                swingTConstant={swingTConst } 
+                                {...(timingArgMode ? { scheduledT: t2 } : {} ) }
                                 />  
                             ) ;      
-                        } }           
-                    </CTXTUALOUTPUTUSAGE_CBC>               
+                        } }             
+                    </CTXTUALOUTPUTUSAGE_CBC>                   
                 ) ;     
-            })( 1 ) ;  
+            })( 1 ) ;         
             return {
                 C11 , 
                 e ,              
             } ;
         }
     ) ;      
-    return {    
+    return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : (            
                 NonNullable<(
@@ -301,46 +314,53 @@ const {
                 const { value } = props1 ;      
                 const { unmountDebug = false } = props1 ;           
                 // TODO     
-                ;                    
+                ;                      
                 useUnmountLogging(unmountDebug) ;     
                 const e = (    
                     renderConstantParamSrcElas1(props1, { putInitailValue : 1 } )           
                 ) ; 
-                const dbg = (    
+                const dbg = (      
                     <p>      
-                        Constant Value --      
+                        Constant Value --           
                         <NUMERIC>{ value }</NUMERIC>   
                         (T-const specified : { props1.swingTConstant } )
                     </p>     
-                ) ;     
-                const dBB = useDeferredTrue() ;             
+                ) ;       
+                const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;             
                 return (              
-                    dBBC(dBB, { dbgBox1: dbg, c1: e })  
+                    dBBC(dBB, { dbgBox1: dbg, c1: e })     
                 ) ; 
             }             
         ) ,      
       
         CFnValue : (        
-            function CFncValueC({ value: compute } : {
+            function CFncValueC({ value: compute } : {    
                 value : (              
                     Parameters<typeof cFnValueImpl1 >[0]["compute"]
                 ) ;           
             } ) {     
-                ;              
+                // debbugging   
+                {
+                    ;
+                    React.useEffect(() => {
+                        0 && console.log(CFncValueC.name ) ;
+                    }, [] ) ;      
+                }
+                ;                   
                 const { 
-                    e ,    
+                    e ,                    
                 } = (
                     cFnValueImpl1({ compute })
-                ) ;
+                ) ;             
                 ;              
-                const dbg = (      
+                const dbg = (                 
                     <p> 
-                    </p>      
+                    </p>         
                 ) ;     
-                const dBB = useDeferredTrue() ;    
+                const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;           
                 return (    
                     dBBC(dBB, { dbgBox1: dbg, c1: e })  
-                ) ;              
+                ) ;                      
             } 
         )
     } ;

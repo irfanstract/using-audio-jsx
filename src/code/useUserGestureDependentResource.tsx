@@ -38,7 +38,7 @@ const useUserGestureDependentResource = (
                 const onUserGesture = (
                     () => { INIT() ; FOUNDSOMEUSERGESTURES = true ; }      
                 ) ;
-                useEffect(() => {     
+                useLayoutEffect(() => {     
                     if (1) {                                                
                         return (() : (() => void) => {           
                             const listener = onUserGesture ;           

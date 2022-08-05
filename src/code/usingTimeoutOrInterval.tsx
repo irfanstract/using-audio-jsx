@@ -149,6 +149,10 @@ const useIntervalDeferredValue = (
         const [v2, setV2] = (       
             useState<A>(v0 )
         ) ;     
+        /**    
+         * `useLayoutEffect`-level of synchronicity becomes unnecessary here, since 
+         * calls to the callbacks will only come from within the `RAF` call-back(s)    
+        */     
         useEffect(() => {
             return (
                 usingInterval(() => {

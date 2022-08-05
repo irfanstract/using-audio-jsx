@@ -49,11 +49,7 @@ const useCanForceRefresh = (
 ) ;    
 
 const useRefreshByInterval1 = (      
-    (...[      
-        ,                   
-        periofMillis ,             
-        { LE = "useEffect" as "useEffect" } = {} ,      
-    ] : [                                      
+    (...args1 : [                                      
         // _ignored1: true ,      
         // periofMillis: number ,    
         _1 : true ,        
@@ -71,8 +67,13 @@ const useRefreshByInterval1 = (
                 keyof Pick<typeof React, "useLayoutEffect" | "useEffect">
             ) ; 
         } ,
-    ]) => {            
-        ;       
+    ]) => {    
+        const [      
+            ,                   
+            periofMillis ,             
+            { LE = (2500 < periofMillis ) ? "useEffect" : "useLayoutEffect"  } = {} ,      
+        ] = args1 ;        
+        ;         
         const {    
             forceRefresh ,       
             c ,                                       

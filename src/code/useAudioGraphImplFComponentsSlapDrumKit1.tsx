@@ -140,41 +140,41 @@ const {
                     minimumFreq = (          
                         (2 ** -(3 + 0.333 ) ) * 440               
                     ) ,  
-                    TM1 = 4 ,    
+                    TM1 = 2 ** 3 ,               
                 } = mainProps ;        
-                const expectedTLen1 : number = (
+                const expectedTLen1 : number = (    
                     TM1 * tCoef1 
                 ) ;   
                 const maximumExp = (
                     -1 * Math.log2(minimumFreq / conventionalFreq )  
                 ) ;
                 const c1 = (() => {   
-                    const ampModulGraph = (  
+                    const ampModulGraph = (      
                         <CFnValue1         
                         value={            
                             ({ ctxT: t }) => { 
                                 const p = (
                                     t / expectedTLen1    
-                                ) ;      
-                                return (     
-                                    (-21 <= t ) ? (   
+                                ) ;                    
+                                return (        
+                                    (-(2 ** -3 ) <= t ) ? (   
                                         (  
                                             clampWithinZeroAndOne(1 + -p ,  )   
                                         ) * (      
                                             max(0, -(2 ** -4 ) + (2 ** -( 6 * p ) ) )   
                                         )   
                                     ) : 0                         
-                                ) ;   
-                            }         
+                                ) ;              
+                            }          
                         }   
                         />        
-                    ) ;         
+                    ) ;   
                     const freqArgumSupposedGraph = (       
                         <CFnValue1                  
                         value={          
                             ({ ctxT }) => {   
-                                const {                            
-                                    c0,                       
+                                const {                                  
+                                    c0,                           
                                     f ,             
                                 } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
                                 const e10 = (
@@ -182,9 +182,9 @@ const {
                                 );                   
                                 const val1 = (              
                                     2 ** -e10   
-                                ) ;        
+                                ) ;                       
                                 return val1  ;          
-                            }  
+                            }              
                         } 
                         />       
                     ) ;
@@ -199,7 +199,7 @@ const {
                             detune={1 ? <></> : <CConstantValue value={-3 / 12 } /> }
                             freqArgumentInterpretation="timedomain-normalised"     
                             freqArgument={1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> }       
-                            />                       
+                            />                         
                         </CAmpModulated0 >                          
                     ) ;         
                 })() ;      
@@ -280,7 +280,7 @@ const {
     return {      
         CBassDrumKick1 : (   
             asSharpDueToKeying({
-                SDK : { shallRemountForEachKeystroke : true , delay : 0.1 } as const ,  
+                SDK : { shallRemountForEachKeystroke : false , delay : 0.1 } as const ,  
                 label : <span> Bass Drum </span> ,  
                 C : CBassDrumKickFluidly1      ,  
             } )

@@ -120,11 +120,11 @@ const {
                 return () => {   
                     audioNodeRef(null ) ;                                                   
                 } ;
-            }) ;    
+            }, [ds0 ]) ;    
             const ctxPauseBtn = (
                 <button   
                     role="switch" 
-                    type="button" 
+                    type="button"    
                     disabled={!(aCtx && (aCtx.state === "running") ) } 
                     onClick={() => SUSPEND()  } 
                 >

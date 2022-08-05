@@ -90,7 +90,7 @@ const useAudioCtxCurrentTime = (
             // (1 / 3 )
             // (isWindowOnFocus ? 0.11 : 0.5 )  
             ((c && c.state === "running") ? 0.11 : 1.5 )    
-        ) * 1000 ) ;
+        ) * 1000 , { LE: "useLayoutEffect" } ) ;
    
         const vl = (    
             c?.currentTime           

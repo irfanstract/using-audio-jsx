@@ -43,7 +43,7 @@ const useDeferredTrue1 = (
             ueDebug ?: false | true ;    
         } ? ,      
     ])  => {    
-        const { deps = [], UE = "useEffect", ueDebug = false } = options;
+        const { deps = [], UE = "useLayoutEffect", ueDebug = false } = options;
         const [s, setS] = (   
             React.useState<boolean>(false )                       
         );          

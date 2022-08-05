@@ -88,7 +88,7 @@ const useAudioCtxWithInitBtn = (
                 shallAutoStart && RESUME()    
             )
         ) ;
-        useEffect(() => {                                
+        useLayoutEffect(() => {                                
             if (s) {                   
                 if ((
                     // TODO      

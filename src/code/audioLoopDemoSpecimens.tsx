@@ -255,11 +255,11 @@ const {
                                 <LoopingWithPeriod   
                                 value={(
                                     // { period: 0.5 }  as const  
-                                    { period: 2 ** 4 }  as const         
+                                    { period: 0.5 }  as const            
                                 )} 
                                 renderRange={{ n: 0x10 } }     
                                 > 
-                                    <CBassDrumKick1 tCoef1={2 ** 3} />    
+                                    <CBassDrumKick1 tCoef1={2 ** -4 } />    
                                 </LoopingWithPeriod>  
                             </div >        
                         ) ;

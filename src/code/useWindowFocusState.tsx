@@ -77,7 +77,7 @@ const useWindowActivityStatus = (
             } , 250 ) ;                            
         };  
 
-        useEffect(() => {
+        useLayoutEffect(() => {
             REFRESH() ;  
             const focusAndBlurListener : {             
                 onFocus : () => void ; 

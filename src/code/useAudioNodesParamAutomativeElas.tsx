@@ -53,9 +53,9 @@ const {
             const { scheduledT: scheduledT, p } = (() : {              
                 scheduledT: number ;           
                 p: AudioParam | null ; 
-            } => (         
-                (                                
-                    nd1 ?              
+            } => (           
+                (                                  
+                    (nd1 && !(  scheduledT0 < 0 )) ?              
                     { 
                         scheduledT : ( 
                             scheduledT0 !== "presently"    

@@ -25,9 +25,22 @@ import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
 
 
 
-
+     
+/**    
+ * {@link globalADisconnectMode }
+ */
+enum GDCM {  
+    NONE ,   
+    DISCONNECT_IN_USING_C ,     
+    DISCONNECT_IN_USINGACNNCTM ,      
+} ;      
+let globalADisconnectMode :(   
+    GDCM  
+) = (  
+    GDCM.DISCONNECT_IN_USING_C   
+) ;     
 /**  
- * 
+ *      
  * @deprecated
  * WORK IN PROGRESS      
  *      
@@ -54,7 +67,7 @@ type USEYYYNODER<R extends {} > = (
     (dest: AudioNode | null , timeConstant1: number ) 
     => (R | null )
 ) ;
-export {
+export {  
     // usingGainNode1 , 
 } ;
 export type {
@@ -62,32 +75,26 @@ export type {
 } ;
     
 
+     
 
-
-/**   
-*/                                    
-type ToUseYyNodeWithGivenFadeoutTimeConstant1<
-    Dests1 = AudioNode | null ,       
-    D1 = AudioNode | null ,              
-> = (
-    /**  
-     * @param dest        if `null`, this node will be(come) inactive    
-     * 
-     * @param OeGainNode1 instantiations of {@link YyNode }
-    */                   
-    <YyNode extends AudioNode > (                  
-        dest: Dests1,     
+namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
+    export type Args<
+        Dests1 ,             
+        D1  ,        
+        YyNode extends AudioNode ,                     
+    > = [               
+        Dests1,       
            
-        { timeConstant1 } : { 
+        { 
             /**  
              * {@link AudioParam.setTargetAtTime }
             */               
             timeConstant1: number ;
         },                   
 
-        OeGainNode1: (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
+        (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
 
-        { onUnmount } : {            
+        {             
             /**                      
              * this method           
              * can be used to make fade-out AudioParam automation(s) (avoid `disconnect()`ing it ; such call will eventually happen automatically !) .  
@@ -98,7 +105,26 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
             onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;     
         } ,                   
        
-    ) => (YyNode | null )                                            
+    ]  
+}      
+/**        
+*/                                    
+type ToUseYyNodeWithGivenFadeoutTimeConstant1<
+    Dests1 = AudioNode | null ,       
+    D1 = AudioNode | null ,                         
+> = (    
+    /**  
+     * @param dest        if `null`, this node will be(come) inactive    
+     * 
+     * @param OeGainNode1 instantiations of {@link YyNode }
+    */                    
+    <YyNode extends AudioNode > (...[          
+        dest ,            
+        { timeConstant1 } ,        
+        OeGainNode1 ,           
+        { onUnmount } ,                   
+       
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, D1, YyNode > ) => (YyNode | null )                                            
 ) ;   
 /**  
  * {@link ToUseYyNodeWithGivenFadeoutTimeConstant1 }  . 
@@ -156,7 +182,7 @@ const useSingularSrcDestConnect = (
     ] ) {                                                 
         ;      
         React[AUDIONODES_USEEFFECT](() => {     
-            /**            
+            /**             
              * only if both are present   
              */
             if (dest && gRef1) {            
@@ -178,7 +204,7 @@ const useParamNodeWithGiven = (
             ;                
             type YyNode = AudioNode ;
             type Dst1 = AudioNode ;
-            const dest = c?.destination || null ;
+            const dest = c?.destination || null ; 
             const onUnmount = (
                 () => {} 
             );
@@ -236,12 +262,21 @@ const usingC = (
                 const gainNode1 = (                              
                     OeGainNode1(ctx, dest )                        
                 ) ;                                   
-                setGRef(gainNode1 ) ;                         
+                setGRef(gainNode1 ) ;                              
                   
-                return () => {                                                       
-                    onUnmount(gainNode1, gainNode1.context ) ;             
+                return () => {                                                                  
+                    onUnmount(gainNode1, gainNode1.context ) ;                
+                    if (globalADisconnectMode === GDCM.DISCONNECT_IN_USING_C ) {      
+                        setTimeout(() => {
+                            gainNode1.disconnect() ;           
+                        }, (          
+                            ((gainNode1 instanceof GainNode && gainNode1.gain.value !== 0 ) ? 0.5 : 0 ) 
+                            * 
+                            1000
+                        ) ) ;    
+                    }             
                 } ;                           
-            }         
+            }             
         }, [dest ] ) ;                 
         ;                         
         return { gRef , } ;
@@ -264,19 +299,29 @@ const usingANodeCnnctM = (
                     PN_LOG(`usingANodeCnnctM`, { src: gainNode1, dests }) ;  
                     PN_LOG(`usingANodeCnnctM`, "src and dests", ...[gainNode1, ...dests ]) ;  
                 }
-                ;        
-                if (dbg !== 2 ) {
-                    ;
-                    gainNode1.disconnect() ;       
-                }                                                         
-                for (const dest of dests ) {    
-                    ;       
-                    gainNode1.connect(dest ) ;                     
-                }            
-                return () => {           
-                    // setTimeout(() => {
-                    //     gainNode1.disconnect() ;           
-                    // }, 3 * 1000 ) ;                                   
+                ;    
+                /**   
+                 * disconnect, and then reconnect  
+                 *  
+                 * */  
+                {
+                    ;  
+                    if (dbg !== 2 ) {
+                        ;
+                        gainNode1.disconnect() ;       
+                    }                                                         
+                    for (const dest of dests ) {      
+                        ;       
+                        gainNode1.connect(dest ) ;                     
+                    }     
+                }       
+                return () => {        
+                    if (globalADisconnectMode === GDCM.DISCONNECT_IN_USINGACNNCTM ) {
+                        ;   
+                        setTimeout(() => {  
+                            gainNode1.disconnect() ;           
+                        }, 3 * 1000 ) ;          
+                    }                                  
                 } ;                                               
             })(gRef )        
         ) ;           
