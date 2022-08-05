@@ -218,4 +218,5 @@ export {
     CConstantValue ,  
     CFnValue1 , 
     CWhiteNoise ,    
-} ;                                   
+} ;                       
+export * from "./useAudioGraphImplFComponentsSlapDrumKit1";            
