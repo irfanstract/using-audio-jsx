@@ -71,10 +71,21 @@ type SameParametersAndReturnType<A extends (...args: any ) => any > = (
 
 
 
+ 
 
-
+type EMX = (
+    NonNullable<(
+        ({ a ?: number ; } & { a ?: string ; } )["a"]
+    )>
+) ;  
+type EMXB = (
+    ({ readonly a ?: number | "bar" ; } & { readonly a: unknown ; } )["a"]
+) ;  
+type EMXB1 = (  
+    Required<{ f ?: undefined ; }>["f"]
+) ;
 export type {
-    Generalisation ,      
+    Generalisation ,          
     Specialisation ,  
     Extract1 ,  
     OmitM ,     
