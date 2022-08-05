@@ -2,7 +2,7 @@
 import { 
     interpolateBetweenTwo ,   
 } from "./polynomialsC";       
-import React, { useReducer, useState } from "react";   
+import React, { useReducer, useState } from "react";    
 import { K } from "./commonElements";    
                
  
@@ -14,7 +14,7 @@ import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";
 import {    
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
-    CConstantValue ,  CFnValue1 , 
+    CConstantValue ,  CFnValue1 ,      
     CAmpSlideDown ,              
 } from "./useAudioGraphImplFComponents"; 
 import { CWaveTable1 } from "./useAudioGraphImplFComponents"; 
@@ -102,7 +102,9 @@ import { CWaveTable1 } from "./useAudioGraphImplFComponents";
 import {        
     CBassDrumKick1 , 
     CBassDrumKickFluidly1 , 
-    CPitchdownBassDrumKickFluidly1 , 
+    CPitchdownBassDrumKickFluidly1 ,  
+    CSnareDrum1,  
+    CSnareDrumFluidly1 ,     
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
 
                
@@ -218,59 +220,86 @@ const {
             V2XLwPassMsk ,           
             //   
             AmpSlideDown ,    
-            BassDrumKick ,     
+            BassDrumKick ,                 
+            BassDrumLoop ,               
+            BassDrumSnDrumLoop ,     
         } ;  
-        const onv = ((version: Vr ): React.ReactElement => {  
+        const onv = (function F (version: Vr ): React.ReactElement  {  
             if (version === Vr.SimpleBeep ) {
                 ;  
-                return (         
+                return (          
                     <CHalfSecndBeep1 />     
                 ) ;                   
             }                       
             if (version === Vr.AmpSlideDown ) {  
                 ;      
-                return (       
+                return (               
                     <CAmpSlideDown   >                  
                         <CWaveTable1 
                         freqArgument={<CConstantValue value={2 ** -0.5 } /> }
                         freqArgumentInterpretation="timedomain-normalised"    
                         />            
-                    </CAmpSlideDown>                    
+                    </CAmpSlideDown>       
                 ) ;                      
             }                                                  
             if (version === Vr.BassDrumKick ) {    
                 ;      
                 return ((vrs : 1 | 2 | 2.25 ): React.ReactElement => {  
                     if (vrs === 2 ) {
-                        ;                
+                        ;                       
                         if (1) {}
-                        return (                 
+                        return (      
                             <CBassDrumKick1 />                     
-                        ) ;         
-                    }       
+                        ) ;               
+                    }          
                     if (vrs === 2.25) {   
                         ;      
-                        return (       
-                            <div>      
-                                <LoopingWithPeriod   
-                                value={(
-                                    // { period: 0.5 }  as const  
-                                    { period: 0.5 }  as const            
-                                )} 
-                                renderRange={{ n: 0x10 } }     
-                                > 
-                                    <CBassDrumKick1 tCoef1={2 ** -4 } />    
-                                </LoopingWithPeriod>  
-                            </div >        
-                        ) ;
+                        return (   
+                            F(Vr.BassDrumLoop )
+                        ) ;        
                     }
-                    return (         
+                    return (          
                         <CAmpSlideDown   >         
                             <CPersistingBeep value={ { toneFreq: 55 } } />         
                         </CAmpSlideDown>                   
-                    ) ;       
-                } )(2.25 ) ;                       
-            }                             
+                    ) ;                  
+                } )(2 ) ;                       
+            }                       
+            if (version === Vr.BassDrumLoop) {
+                return (       
+                    <div>       
+                        <LoopingWithPeriod   
+                        value={(
+                            // { period: 0.5 }  as const  
+                            { period: 0.5 }  as const            
+                        )} 
+                        renderRange={{ n: 0x10 } }     
+                        > 
+                            <CBassDrumKick1 tCoef1={2 ** -4 } />    
+                        </LoopingWithPeriod>  
+                    </div >        
+                ) ;           
+            }                            
+            if (version === Vr.BassDrumSnDrumLoop) {
+                return (       
+                    <div>             
+                        <LoopingWithPeriod   
+                        value={( 
+                            { period: 1.0 }  as const       
+                        )} 
+                        renderRange={{ n: 0x10 } }                   
+                        >       
+                            <WithDelay value={0 } >          
+                                <CBassDrumKick1 tCoef1={2 ** -4 } />       
+                            </WithDelay>      
+                            <WithDelay value={0.5 } >          
+                                <CBassDrumKick1 tCoef1={2 ** -4 } />     
+                                <CSnareDrum1 tCoef1={2 ** -4 } />             
+                            </WithDelay>      
+                        </LoopingWithPeriod>     
+                    </div >        
+                ) ;           
+            }                 
             if (version === Vr.V2 ) {    
                 ; 
                 return (
@@ -278,10 +307,10 @@ const {
                         <CPersistingBeep value={ { } } />         
                     </CAmpModulated>                 
                 ) ;                    
-            }                    
+            }                     
             if (version === Vr.V2P1 ) {     
                 ;      
-                return (     
+                return (       
                     <CAmpModulated     
                     value={ (        
                         <WithDelay value={-7 } >
@@ -313,22 +342,22 @@ const {
                 <>{ beepBopGraph1 }</>     
             ) ;                 
         })  ;   
-        const useXOptions = (     
+        const useXOptions = (      
             function () {   
                 const allOptions = (
                     Object.values(Vr )         
                     .filter((v) : v is Vr => (typeof v === "number" ) )       
-                ) ;
+                ) ; 
                 const [vl, setVl] = (      
                     React.useReducer((
                         function (v0: Vr, v1: Vr ) : Vr {
                             return v1 ;     
                         }
-                    ) , Vr.BassDrumKick )
+                    ) , Vr.BassDrumSnDrumLoop )
                 ) ;         
                 const btns = (      
-                    allOptions       
-                    .map((value ) => {           
+                    allOptions            
+                    .map((value ) => {             
                         return (     
                             <span key={ value } >  
                             <button type="button" onClick={() => setVl(value ) } >
@@ -340,7 +369,7 @@ const {
                 ) ;      
                 return {
                     vl ,  
-                    setVl ,   
+                    setVl ,     
                     allOptions ,   
                     btns ,    
                 } ;
@@ -375,7 +404,7 @@ const {
                 <div>
                     <p>  
                         Bp . .
-                        <code>{ BEEPBOPVRKEY } </code>
+                        <code>{ BEEPBOPVRKEY } </code> 
                     </p>
                     <C />
                 </div>               

@@ -29,9 +29,17 @@ import {
 
 
 
+ 
 
+; 
+const clampWithinZeroAndOne = (  
+    function (v: number) {
+        return IterableOps.clamp(v, 0, 1 ) ;
+    }   
+) ;  
+const { max, min, } = Math ;     
        
-const {    
+const {       
     currentTCtx , 
     currentTScaleCtx ,        
     currentTInfCtx ,    
@@ -106,129 +114,295 @@ const {
 //     ) ;  
 // })() ;            
 const WithAutoUnmount = (
-    WithAutoUnmount0    
-);
-      
-const {
-    CPitchdownBassDrumKickFluidly1 , 
-
-} = (() => {   
-    const conventionalFreq : number | 440 = 440 ;     
-    const clampWithinZeroAndOne = (  
-        function (v: number) {
-            return IterableOps.clamp(v, 0, 1 ) ;
-        }   
+    WithAutoUnmount0        
+);  
+                 
+const snKit = (() => {       
+    const conventionalFreq : number | 440 = 440 ;    
+    type SlapPlaybackProps = (
+        Partial<( 
+            {
+                //    
+                tCoef1 : number ;         
+                //         
+                autoUnmount : boolean ;     
+            }  
+        )>
+    ) ;         
+    type BassDrumPlaybackProps1 = (    
+        SlapPlaybackProps
+        &             
+        Partial<( 
+            {                      
+                minimumFreq : number ;     
+                /**   
+                 * such that `TM` be exactly {@link TM1 } times {@link tCoef1}
+                 */          
+                TM1 : number ;    
+            }  
+        ) >        
+    ) ;
+    const applicableScanPeriodMillisFromTCoef = (
+        function (...[tCoef1] : [number] ) {
+            return (
+                (Math.max(1, tCoef1 ) * (2 ** -5 ) ) * 1000  
+            ) ;    
+        }      
+    );    
+    const applicableDecliningAmpGraphFromTCoef = (
+        function (...[expectedTLen1, { scanPeriodMillis } ] : [ 
+            number ,        
+            { scanPeriodMillis: number ; } ,   
+        ]) {         
+            return (        
+                <CFnValue1         
+                value={               
+                    ({ ctxT: t }) => { 
+                        const p = (         
+                            t / expectedTLen1    
+                        ) ;          
+                        return (      
+                            (-(2 ** -3 ) <= t ) ? (   
+                                (  
+                                    clampWithinZeroAndOne(1 + -p ,  )   
+                                ) * (      
+                                    max(0, -(2 ** -4 ) + (2 ** -( 6 * p ) ) )   
+                                )   
+                            ) : 0                         
+                        ) ;     
+                    }                 
+                }   
+                scanPeriodMillis={scanPeriodMillis }  
+                />           
+            ) ;  
+        }
     ) ;  
-    const { max, min, } = Math ;
-    return {
+    const applicableDecliningNormalisedToneFreqGraph1 = (          
+        function (...[eqt, { maximumExp }, { scanPeriodMillis } ] : [
+            ...mainConfig : [
+                ReturnType<typeof interpolateBetweenTwo > ,  
+                { maximumExp : number ; } ,    
+            ] ,
+            renderConfig : { scanPeriodMillis: number ; } ,    
+        ]) {           
+            return (                    
+                <CFnValue1                                
+                value={            
+                    ({ ctxT }) => {         
+                        const {                                    
+                            c0,                           
+                            f ,             
+                        } = eqt ;   
+                        const e10 = (
+                            Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
+                        );                   
+                        const val1 = (              
+                            2 ** -e10   
+                        ) ;                                     
+                        return val1  ;                     
+                    }                      
+                }     
+                scanPeriodMillis={scanPeriodMillis }   
+                />       
+            ) ;       
+        }    
+    ) ;
+    const slapDrumImplExpetctedTLenProps = (
+        function (...[mainProps] : [BassDrumPlaybackProps1 ] ) {
+            ;        
+            const {     
+                tCoef1 = (   
+                    // 2 ** -3       
+                    2 ** -3 
+                )  ,      
+                TM1 = 2 ** 3 ,                 
+            } = mainProps ;        
+            const expectedTLen1 : number = (    
+                TM1 * tCoef1         
+            ) ;          
+            return {
+                tCoef1 ,    
+                TM1 ,   
+                expectedTLen1 , 
+            } as const ;     
+        }  
+    ) ;
+    const slapDrumImplExpetctedTCoefProps = (
+        function (...[mainProps ] : Parameters<typeof slapDrumImplExpetctedTLenProps > ) {
+            ;  
+            const {
+                tCoef1 ,    
+                TM1 ,   
+                expectedTLen1 , 
+            } = (
+                slapDrumImplExpetctedTLenProps(mainProps )
+            ) ;              
+            const scanPeriodMillis = (   
+                applicableScanPeriodMillisFromTCoef((
+                    tCoef1
+                ) )   
+            ) ;        
+            const ampModulGraph = (         
+                applicableDecliningAmpGraphFromTCoef(
+                    expectedTLen1 , { scanPeriodMillis } )
+            ) ;              
+            return {  
+                tCoef1 ,    
+                expectedTLen1 ,     
+
+                TM1 , 
+                scanPeriodMillis ,  
+    
+                ampModulGraph ,     
+                
+            } as const ;
+        }
+    ) ;
+    return {  
         CPitchdownBassDrumKickFluidly1 : (      
-            function (mainProps : (      
-                Partial<{         
-                    tCoef1 : number ;             
-                    minimumFreq : number ;     
-                    /**   
-                     * such that `TM` be exactly {@link TM1 } times {@link tCoef1}
-                     */          
-                    TM1 : number ;    
-                }>
-            )) {               
-                const {     
-                    tCoef1 = (   
-                        // 2 ** -3    
-                        2 ** -3 
-                    )  ,          
+            function (mainProps : (    
+                BassDrumPlaybackProps1 
+                &   
+                {
+                    dbg ?: false | 1 ;    
+                }
+            )) {                 
+                const {      
                     minimumFreq = (          
                         (2 ** -(3 + 0.333 ) ) * 440               
-                    ) ,  
-                    TM1 = 2 ** 3 ,               
-                } = mainProps ;        
-                const expectedTLen1 : number = (    
-                    TM1 * tCoef1 
-                ) ;   
-                const maximumExp = (
-                    -1 * Math.log2(minimumFreq / conventionalFreq )  
-                ) ;
-                const c1 = (() => {        
-                    const scanPeriodMillis = (
-                        (Math.max(1, tCoef1 ) * (2 ** -5 ) ) * 1000  
-                    ) ;
-                    const ampModulGraph = (        
-                        <CFnValue1         
-                        value={            
-                            ({ ctxT: t }) => { 
-                                const p = (  
-                                    t / expectedTLen1    
-                                ) ;                    
-                                return (        
-                                    (-(2 ** -3 ) <= t ) ? (   
-                                        (  
-                                            clampWithinZeroAndOne(1 + -p ,  )   
-                                        ) * (      
-                                            max(0, -(2 ** -4 ) + (2 ** -( 6 * p ) ) )   
-                                        )   
-                                    ) : 0                         
-                                ) ;              
-                            }             
-                        }   
-                        scanPeriodMillis={scanPeriodMillis }  
-                        />        
-                    ) ;    
-                    const freqArgumSupposedGraph = (       
-                        <CFnValue1                    
-                        value={            
-                            ({ ctxT }) => {        
-                                const {                                    
-                                    c0,                           
-                                    f ,             
-                                } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
-                                const e10 = (
-                                    Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
-                                );                   
-                                const val1 = (              
-                                    2 ** -e10   
-                                ) ;                         
-                                return val1  ;                     
-                            }                
-                        }     
-                        scanPeriodMillis={scanPeriodMillis }  
-                        />       
+                    ) ,                       
+                } = mainProps ;    
+                const {  
+                    tCoef1 , 
+                    expectedTLen1 ,    
+    
+                    scanPeriodMillis ,    
+        
+                    ampModulGraph ,     
+                    
+                } = slapDrumImplExpetctedTCoefProps(mainProps ) ;
+                const {  
+                    autoUnmount = true ,     
+                    dbg: dbg1 = false ,    
+ 
+                } = mainProps ;  
+                const c1 = (() => {           
+                    const maximumExp = (
+                        -1 * Math.log2(minimumFreq / conventionalFreq )   
                     ) ;  
-                    return (                      
-                        <CAmpModulated0                      
-                        value={         
-                            ampModulGraph       
+                    const freqArgumSupposedGraph = (
+                        applicableDecliningNormalisedToneFreqGraph1((
+                            interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
+                        ) , { maximumExp }, { scanPeriodMillis } )  
+                    ) ;  
+                    return (   
+                        <CAmpModulated0                         
+                        value={             
+                            ampModulGraph        
                         }                   
-                        >                                                        
+                        >                                                            
                             <CWaveTable1                           
                             detuneInterpretation="timedomain-normalised"  
                             detune={(
-                                1 ? <></> : <CConstantValue value={-3 / 12 } /> 
+                                !dbg1 ? <></> : <CConstantValue value={-3 / 12 } /> 
                             )}
                             freqArgumentInterpretation="timedomain-normalised"     
                             freqArgument={(
-                                1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
+                                !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
                             )}       
                             />                         
-                        </CAmpModulated0 >                          
-                    ) ;         
+                        </CAmpModulated0 >                            
+                    ) ;             
                 })() ;      
-                return (                      
-                    <>            
-                    <WithAutoUnmount preFT={1.5} postFT={(1 * expectedTLen1 )} >
-                    { c1 }
-                    </WithAutoUnmount>               
-                    </>                     
+                return (
+                    autoUnmount ?
+                    (       
+                        <WithAutoUnmount preFT={1.5} postFT={(1 * expectedTLen1 )} >
+                        { c1 }
+                        </WithAutoUnmount>                     
+                    ) : c1 
                 ) ;
             }
         ) ,   
+        
+        CSnareDrumFluidly1 : (      
+            function (mainProps : (    
+                BassDrumPlaybackProps1 
+                &   
+                {   
+                    dbg ?: false | 1 ;    
+                }
+            )) {                 
+                const {      
+                    minimumFreq = (          
+                        (2 ** -(3 + 0.333 ) ) * 440               
+                    ) ,                       
+                } = mainProps ;    
+                const {  
+                    tCoef1 , 
+                    expectedTLen1 ,    
+    
+                    scanPeriodMillis ,    
+        
+                    ampModulGraph ,     
+                     
+                } = slapDrumImplExpetctedTCoefProps(mainProps ) ;
+                const {  
+                    autoUnmount = true ,     
+                    dbg: dbg1 = false ,    
+ 
+                } = mainProps ;  
+                const c1 = (() => {           
+                    const maximumExp = (
+                        -1 * Math.log2(minimumFreq / conventionalFreq )   
+                    ) ;  
+                    const freqArgumSupposedGraph = (
+                        applicableDecliningNormalisedToneFreqGraph1((
+                            interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
+                        ) , { maximumExp }, { scanPeriodMillis } )  
+                    ) ;  
+                    return (   
+                        <CAmpModulated0                         
+                        value={             
+                            ampModulGraph        
+                        }                           
+                        >                       
+                            <CBiquadFilterModulated   
+                            type="lowpass"    
+                            freqArgumentInterpretation="timedomain-normalised"     
+                            freqArgument={(
+                                !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
+                            )}              
+                            >    
+                                <CWhiteNoise value={{ volume: 2 ** -2 }} />
+                            </CBiquadFilterModulated>      
+                        </CAmpModulated0 >                            
+                    ) ;             
+                })() ;      
+                return (
+                    autoUnmount ?
+                    (       
+                        <WithAutoUnmount preFT={1.5} postFT={(1 * expectedTLen1 )} >
+                        { c1 }
+                        </WithAutoUnmount>                     
+                    ) : c1 
+                ) ;
+            }
+        ) ,     
     } ;
-})() ;      
+})() ;         
+const {    
+    CPitchdownBassDrumKickFluidly1 ,   
+    CSnareDrumFluidly1 ,     
+
+} = snKit;     
 const CBassDrumKickFluidly1 = ( 
     CPitchdownBassDrumKickFluidly1       
 );   
 const {
     CBassDrumKick1 , 
-    
+    CSnareDrum1 ,   
+      
 } = (() => {          
     const NoChangeInTPlease = (        
         function ({ value } : { value: number ; }) {
@@ -244,11 +418,17 @@ const {
                 SDK : {               
                     shallRemountForEachKeystroke : boolean ;            
                     delay : number ;            
-                } ,                         
+                } ,                                
                 C : React.FC<ComponentProps1> ;      
                 label ?: React.ReactElement ,     
             }     ,    
-        ] ) {       
+        ] ) {         
+            const cStringLength = (
+                C.toString().length
+            ) ;   
+            const keyPrefix: string = (
+                String(C.name || cStringLength )
+            ) ;
             /**   
              * note : name "CDK" is since the code were initiaally for "CBassDrumKit"
              */
@@ -271,32 +451,48 @@ const {
                         <TC>               
                             { ({ t: ctxtualAbsoluteT, tScale: ctxtualTScl }) => (                     
                                 // TODO    
-                                <K key={remount ? ctxtualAbsoluteT : 0  }>      
+                                <K key={`${keyPrefix } ${remount ? ctxtualAbsoluteT : 0 } `  }>      
                                     { remount && <NoChangeInTPlease value={ctxtualAbsoluteT} />  }
                                     <p> { label } At T {ctxtualAbsoluteT } </p>
                                     <div>   
                                     <WithDelay value={delay / ctxtualTScl } >  
-                                        <C {...propsMain1 } >   
+                                        <C {...propsMain1 } >          
                                         </C>       
                                     </WithDelay>                        
-                                                      
-                                    </div>   
-                                </K>     
+                                                       
+                                    </div>            
+                                </K>       
                             ) }          
                         </TC>    
                     );                
                 }
             ) ;    
-        }        
-    ) ;                  
-    return {      
+        }                    
+    ) ;                     
+    const remountProps: (
+        Required<(           
+            NonNullable<(
+                Parameters<typeof asSharpDueToKeying>[0]  
+            )> 
+        )>["SDK"]   
+    ) = (
+        { shallRemountForEachKeystroke : false , delay : 0.1 } as const
+    ) ;             
+    return {          
         CBassDrumKick1 : (   
             asSharpDueToKeying({
-                SDK : { shallRemountForEachKeystroke : false , delay : 0.1 } as const ,  
+                SDK : remountProps ,  
                 label : <span> Bass Drum </span> ,  
                 C : CBassDrumKickFluidly1      ,  
-            } )
-        ) ,                   
+            } )            
+        ) ,                        
+        CSnareDrum1 : (     
+            asSharpDueToKeying({  
+                SDK : remountProps ,  
+                label : <span> Snare Drum </span> ,  
+                C : CSnareDrumFluidly1      ,  
+            } ) 
+        ) ,                 
     } ;                           
 })() ;          
      
@@ -314,6 +510,8 @@ export {
     WithAutoUnmount , 
 
     CPitchdownBassDrumKickFluidly1 , 
-    CBassDrumKick1 , 
-    CBassDrumKickFluidly1 , 
-} ;   
+    CBassDrumKick1 ,      
+    CBassDrumKickFluidly1 ,            
+    CSnareDrum1 ,   
+    CSnareDrumFluidly1 , 
+} ;        
