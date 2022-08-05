@@ -72,15 +72,16 @@ const {
             }                            
         ) ,                   
         CFnValue1 : (
-            function ({ value: compute } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+            function ({ value: compute, ...otherProps } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
                 ;      
                 return (                   
-                    <TC>  
+                    <TC>                   
                         { ({ t: schedT }) => (
                             <>       
                             <code>CFnValue { schedT } </code>      
                             <CFnValueAtAbsoluteT 
-                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }     
+                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }  
+                            { ...otherProps }    
                             />
                             </>
                         ) }      

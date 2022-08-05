@@ -153,64 +153,82 @@ const {
     /**            
      * 
      * @see  
-     * import  :          
+     * import  :             
      * {@link CTXTUALOUTPUTUSAGE_CBC }     
      * {@link CConstantValue }  
      * {@link useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 }
      */         
     const cFnValueImpl1 = (     
-        function (...[{ compute }] : [ 
-            { 
-                compute : (            
+        function (...[{ compute, scanPeriodMillis, delayInSeconds = 0.1 }] : [ 
+            {   
+                // CORE LOGIC 
+                compute : (     
                     (...args : [{ ctxT : number ; }] )   
                     => 
                     (number | { value : number ; } )   
-                ) ,   
-            } ,         
-        ] ) {
-            ;  
-            /**   
+                ) ;        
+
+                // IMPLEMENTATIVE ARTIFACT CONTROL   
+                delayInSeconds ?: number ;   
+                scanPeriodMillis : number ;     
+            } ,              
+        ] ) {    
+            ;   
+            const lComputeAtT = (
+                function (...[t2] : [t: number ] ): (
+                    {} & { 
+                        t2 : number ;      
+                        vl : number ;       
+                    }  
+                ) {
+                    ;   
+                    const vl0 = (
+                        compute({ ctxT: t2 })  
+                    ) ;
+                    const { value: vl } = (            
+                        (typeof vl0 === "number" ? { value : vl0 } : vl0 )
+                    ) ;   
+                    return { t2 , vl } ;        
+                }  
+            );   
+            /**       
              *  
              * @see     
              * import  :     
              * none   
              */     
             const C11 = (
-                function useFn1(...[nd0] : [dest : AudioNode | null ] ) : { 
-                    t2 : number ;  
-                    vl : number ;                         
-                }  {                      
-                    type R0 = ReturnType<typeof useFn1 > ;   
-                    const return1 = (    
+                function useFn1(...[nd0] : [dest : AudioNode | null ] ) : (
+                    ReturnType<typeof lComputeAtT >
+                )  {            
+                    const return1 = (       
                         useRealTimeQueryInterval1X({        
-                            f : () : R0  => {       
-                                ;                   
+                            f : () : (ReturnType<typeof lComputeAtT > ) => {       
+                                ;                      
                                 if (nd0 ) {                               
                                     const t1 = (   
                                         nd0.context.currentTime        
-                                    ) ;     
-                                    const t2 = (  
+                                    ) ;      
+                                    const t2 = (        
                                         // +t1.toFixed(1 )           
-                                        t1                     
+                                        t1 + delayInSeconds      
                                     ) ;         
-                                    const vl0 = compute({ ctxT: t2 }) ;
-                                    const { value: vl } = (            
-                                        (typeof vl0 === "number" ? { value : vl0 } : vl0 )
-                                    ) ;
-                                    return { t2 , vl } ;          
+                                    return (
+                                        lComputeAtT(t2 )
+                                    ) ;        
                                 } else {   
                                     return { t2 : -1, vl: 0 } ;                               
-                                }                 
+                                }                      
                             } , 
                             LE : "useLayoutEffect" ,  
-                        } , 0.06 * 1000  ) 
-                    ) ;  
+                        } , scanPeriodMillis  ) 
+                    ) ;     
                     React.useLayoutEffect(() => {
-                        0 && console.log(return1 ) ;      
+                        0 && console.log(return1 ) ;       
                     } , [return1.t2 < 0.5 , return1.vl !== 0 ] ) ;
                     return return1 ;
                 }        
-            );                   
+            );                         
             /**   
              *  
              * @see  
@@ -223,12 +241,12 @@ const {
                 {
                     timingArgMode ?: false | 1 ;    
                     swingTConst ?: number ;           
-                } ? , 
-            ]) => {            
+                } ? ,          
+            ]) => {              
                 const {
                     swingTConst = (        
-                        2 ** -6  
-                    ) ,  
+                        2 ** -4  
+                    ) ,   
                     timingArgMode = 1 ,   
 
                 } = mode1 ;     
@@ -245,19 +263,19 @@ const {
                                     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
                                 ) ;       
                                 React.useLayoutEffect(() => {   
-                                    ;        
+                                    ;         
                                     if (1 ) {
                                         ; 
                                         if (nd1 ) {        
                                             ;               
-                                            (        
+                                            (          
                                                 nd1.offset  
                                                 .setTargetAtTime(vl, (
                                                     timingArgMode ? t2 : nd1.context.currentTime      
                                                 ) , swingTConst )
                                             ) ;     
                                         }     
-                                    } 
+                                    }    
                                 } , [nd1, vl ]) ;
                                 // TODO                             
                                 return (       
@@ -283,10 +301,10 @@ const {
                             const {              
                                 t2 ,          
                                 vl ,            
-                            } = ( C11 )(nd0 ) ;          
+                            } = ( C11 )(nd0 ) ;             
                             // TODO                 
-                            return (                     
-                                <CConstantValue              
+                            return (                      
+                                <CConstantValue               
                                 value={vl }                        
                                 swingTConstant={swingTConst } 
                                 {...(timingArgMode ? { scheduledT: t2 } : {} ) }
@@ -311,8 +329,8 @@ const {
                 &
                 { unmountDebug ?: boolean ; }
             )) {                   
-                const { value } = props1 ;      
-                const { unmountDebug = false } = props1 ;           
+                const { value } = props1 ;         
+                const { unmountDebug = false } = props1 ;            
                 // TODO     
                 ;                      
                 useUnmountLogging(unmountDebug) ;     
@@ -323,34 +341,43 @@ const {
                     <p>      
                         Constant Value --           
                         <NUMERIC>{ value }</NUMERIC>   
-                        (T-const specified : { props1.swingTConstant } )
+                        (T-const specified : { props1.swingTConstant } )   
                     </p>     
                 ) ;       
                 const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;             
                 return (              
                     dBBC(dBB, { dbgBox1: dbg, c1: e })     
-                ) ; 
+                ) ;            
             }             
-        ) ,      
+        ) ,        
       
         CFnValue : (        
-            function CFncValueC({ value: compute } : {    
-                value : (              
-                    Parameters<typeof cFnValueImpl1 >[0]["compute"]
-                ) ;           
-            } ) {     
+            function CFncValueC({ value: compute , scanPeriodMillis = 32 } : (
+                {    
+                    value : (              
+                        Required<(
+                            Parameters<typeof cFnValueImpl1 >[0]
+                        )>["compute"]  
+                    ) ;                   
+                    scanPeriodMillis ?: (                
+                        Required<(
+                            Parameters<typeof cFnValueImpl1 >[0]
+                        )>["scanPeriodMillis"]  
+                    )  ;           
+                }        
+            ) ) {                   
                 // debbugging   
                 {
                     ;
-                    React.useEffect(() => {
+                    React.useEffect(() => {    
                         0 && console.log(CFncValueC.name ) ;
-                    }, [] ) ;      
+                    }, [] ) ;                   
                 }
                 ;                   
-                const { 
+                const {     
                     e ,                    
                 } = (
-                    cFnValueImpl1({ compute })
+                    cFnValueImpl1({ compute, scanPeriodMillis })      
                 ) ;             
                 ;              
                 const dbg = (                 
@@ -366,7 +393,7 @@ const {
     } ;
 })() ;     
  
-
+  
 
 
  

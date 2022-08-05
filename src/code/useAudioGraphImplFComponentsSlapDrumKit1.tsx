@@ -148,12 +148,15 @@ const {
                 const maximumExp = (
                     -1 * Math.log2(minimumFreq / conventionalFreq )  
                 ) ;
-                const c1 = (() => {   
-                    const ampModulGraph = (      
+                const c1 = (() => {        
+                    const scanPeriodMillis = (
+                        (Math.max(1, tCoef1 ) * (2 ** -5 ) ) * 1000  
+                    ) ;
+                    const ampModulGraph = (        
                         <CFnValue1         
                         value={            
                             ({ ctxT: t }) => { 
-                                const p = (
+                                const p = (  
                                     t / expectedTLen1    
                                 ) ;                    
                                 return (        
@@ -165,15 +168,16 @@ const {
                                         )   
                                     ) : 0                         
                                 ) ;              
-                            }          
+                            }             
                         }   
+                        scanPeriodMillis={scanPeriodMillis }  
                         />        
-                    ) ;   
+                    ) ;    
                     const freqArgumSupposedGraph = (       
-                        <CFnValue1                  
-                        value={          
-                            ({ ctxT }) => {   
-                                const {                                  
+                        <CFnValue1                    
+                        value={            
+                            ({ ctxT }) => {        
+                                const {                                    
                                     c0,                           
                                     f ,             
                                 } = interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 }) ;   
@@ -182,23 +186,28 @@ const {
                                 );                   
                                 const val1 = (              
                                     2 ** -e10   
-                                ) ;                       
-                                return val1  ;          
-                            }              
-                        } 
+                                ) ;                         
+                                return val1  ;                     
+                            }                
+                        }     
+                        scanPeriodMillis={scanPeriodMillis }  
                         />       
-                    ) ;
+                    ) ;  
                     return (                      
                         <CAmpModulated0                      
                         value={         
-                            ampModulGraph    
+                            ampModulGraph       
                         }                   
-                        >                                                   
+                        >                                                        
                             <CWaveTable1                           
                             detuneInterpretation="timedomain-normalised"  
-                            detune={1 ? <></> : <CConstantValue value={-3 / 12 } /> }
+                            detune={(
+                                1 ? <></> : <CConstantValue value={-3 / 12 } /> 
+                            )}
                             freqArgumentInterpretation="timedomain-normalised"     
-                            freqArgument={1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> }       
+                            freqArgument={(
+                                1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
+                            )}       
                             />                         
                         </CAmpModulated0 >                          
                     ) ;         
@@ -234,19 +243,22 @@ const {
             {     
                 SDK : {               
                     shallRemountForEachKeystroke : boolean ;            
-                    delay : number ;          
+                    delay : number ;            
                 } ,                         
                 C : React.FC<ComponentProps1> ;      
                 label ?: React.ReactElement ,     
             }     ,    
         ] ) {       
+            /**   
+             * note : name "CDK" is since the code were initiaally for "CBassDrumKit"
+             */
             return (     
                 function CDK(...[propsMain1] : [             
                     ComponentProps1 ,      
                 ] ) {  
                     const TC = (       
                         tCtxs.currentTInfCtx   
-                        .Consumer        
+                        .Consumer               
                     ) ;       
                     const TOff = (    
                         tCtxs.WithDelay  
