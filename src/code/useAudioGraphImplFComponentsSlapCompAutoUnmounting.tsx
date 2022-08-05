@@ -108,8 +108,7 @@ const WithAutoUnmount = (() => {
                                     return (        
                                         <div      
                                         className={`SLPCM-M-${s ? "PAST" : "NONPAST" }` }          
-                                        style={{ 
-                                            transition : `all 0.5s ease-out` ,           
+                                        style={{            
                                         }}
                                         >
                                         <>{ (      
