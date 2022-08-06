@@ -39,94 +39,155 @@ const {
     CurrentTDisplay , 
     WithDelay ,     
     LoopingWithPeriod ,        
-} = tCtxs ;
+} = tCtxs ;   
+   
+const {
+    WithAutoUnmount ,  
+    WithAutoStopmount ,  
 
-const WithAutoUnmount = (() => {
+} = (() => {
     const AbsoluteScheduledTCons = (
         currentTInfCtx.Consumer   
     ) ;   
     const useRealTimeQueryInterval11 = (
         useRealTimeQueryInterval1  
+    ) ;        
+    enum PassageState {               
+        TOO_EARLY = "too early" ,   
+        SUPPOSEDLY_NOW = "available" ,
+        SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
+    }     
+    type PreFTAndPostFTProps = {
+        /**        
+         * pre-incidential tolerance        
+         */  
+        preFT : number ;      
+        /**         
+         * post-incidential tolerance   
+         */   
+        postFT : number ;               
+    } ;
+    const passageStateBy1 = (
+        (...[{ preFT, postFT }] : [PreFTAndPostFTProps] ) => {
+            ;
+            const passageStateBy = (
+                function (...[{ actualT, expectedT }] : [
+                    { actualT : number ; expectedT: number ; } ,    
+                ]) {           
+                    return (    
+                        ((expectedT + -preFT ) <= actualT ) 
+                        ?  
+                        (   
+                            (actualT <= (expectedT + postFT ) ) ?
+                            PassageState.SUPPOSEDLY_NOW : PassageState.SUPPOSEDLY_ALREADY_CONCLUDED
+                        )       
+                        : PassageState.TOO_EARLY
+                    ) ;           
+                }     
+            );     
+            return {
+                passageStateBy ,   
+            } ;
+        }    
     ) ;
-    return (
-        function ({ children: expectedChildren, preFT, postFT } : (
-            React.PropsWithChildren<{
-                /**        
-                 * pre-incidential tolerance        
-                 */  
-                preFT : number ;      
-                /**         
-                 * post-incidential tolerance   
-                 */  
-                postFT : number ;     
-            }>    
-        ) ) { 
+    type Props = (
+        React.PropsWithChildren<(
+            PreFTAndPostFTProps      
+        ) >         
+    ) ;                
+    //    
+    const render1 = (...[f] : [
+        (
+            (c: { passageState : PassageState ; expectedChildren: React.ReactNode ; } )
+            => 
+            React.ReactElement                   
+        ) ,           
+    ] ) => (  
+        function ({ children: expectedChildren, preFT, postFT } : ( 
+            Props   
+        ) ) {         
+            const {
+                passageStateBy ,     
+            } = (
+                passageStateBy1({ preFT, postFT })
+            ) ;  
             return (
                 <>    
                 <AbsoluteScheduledTCons>         
-                    { ({ t: expectedT }) => (        
+                    { ({ t: expectedT }) => (                  
                         <>            
                         <NdRefConsm>            
-                            { ({ feedPt: nd0 }) => (          
-                                <CBC>{ function useC1() {      
-                                    enum Stat {               
-                                        TOO_EARLY = "too early" ,   
-                                        SUPPOSEDLY_NOW = "available" ,
-                                        SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
-                                    } 
+                            { ({ feedPt: destNd }) => (          
+                                <CBC>{ function useC1() {   
                                     const {
-                                        passageState: stat ,     
-                                        hasPassedT: s ,  
+                                        passageState: passageState ,     
+                                        hasPassedT: hasPassedT ,  
                                     } = (   
                                         useRealTimeQueryInterval11({
                                             f : ()  => {  
                                                 const ctxT = (
-                                                    nd0 
+                                                    destNd 
                                                     ? 
-                                                    nd0.context.currentTime 
-                                                    : 
+                                                    destNd.context.currentTime 
+                                                    :   
                                                     // -30000     
                                                     0    
                                                 ) ; 
-                                                ;                        
+                                                const actualT = (
+                                                    ctxT    
+                                                ) ;
+                                                ;                           
                                                 return {
-                                                    passageState : (    
-                                                        ((expectedT + -preFT ) <= ctxT ) 
-                                                        ?
-                                                        (   
-                                                            (ctxT <= (expectedT + postFT ) ) ?
-                                                            Stat.SUPPOSEDLY_NOW : Stat.SUPPOSEDLY_ALREADY_CONCLUDED
-                                                        )   
-                                                        : Stat.TOO_EARLY
+                                                    passageState : (     
+                                                        passageStateBy({ expectedT, actualT })
                                                     ) ,   
-                                                    hasPassedT : (expectedT <= ctxT ) ,  
-                                                } ;                 
+                                                    hasPassedT : (expectedT <= actualT ) ,     
+                                                } ;                        
                                             } ,    
                                             LE : "useLayoutEffect" ,   
                                         } , (Math.min(preFT, postFT) / 2.5 ) * 1000 )       
                                     ) ;       
                                     return (        
-                                        <div      
-                                        className={`SLPCM-M-${s ? "PAST" : "NONPAST" }` }          
+                                        <div       
+                                        className={`SLPCM-M-${hasPassedT ? "PAST" : "NONPAST" }` }          
                                         style={{            
-                                        }}
-                                        >
-                                        <>{ (      
-                                            (stat === Stat.SUPPOSEDLY_NOW ) ?
-                                            expectedChildren : <p>{ stat }</p>
-                                        ) } </>   
+                                        }} 
+                                        >     
+                                        {f({ expectedChildren, passageState }) }
                                         </div>  
                                     ) ;            
-                                } }</CBC> 
-                            ) }   
+                                } }</CBC>   
+                            ) }                
                         </NdRefConsm>     
                         </>
                     ) }
                 </AbsoluteScheduledTCons>
                 </> 
             ) ;      
-        }  
-    ) ;  
+        }     
+    ) ;    
+    return {
+        WithAutoUnmount : (
+            render1(function ({ passageState, expectedChildren }) {
+                return (   
+                    <>{ (      
+                        (passageState === PassageState.SUPPOSEDLY_NOW ) ?
+                        expectedChildren : <p>{ passageState }</p>
+                    ) } </>         
+                );
+            })  
+        ) ,   
+        WithAutoStopmount : (
+            render1(function ({ passageState, expectedChildren }) {
+                return (   
+                    <>{ (      
+                        (passageState === PassageState.SUPPOSEDLY_NOW ) ?
+                        expectedChildren : <p>{ passageState }</p>
+                    ) } </>         
+                );
+            })
+        ) ,   
+    } ;
 })() ;  
 
 
