@@ -5,9 +5,9 @@ import { IterableOps, PromiseReturnValue } from "./generalUse11";
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";    
        
-       
+        
  
-  
+       
 
               
               
@@ -27,39 +27,49 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
  *        <VData value={data } />
  *      ) ;
  *   } }</CBC>       
- * ) ;   
+ * ) ;         
  */
 const CBC = (
-    function CBC({ children : useXYyy } : { 
-        /**   
-         * actual implementation is free to invoke `useEffect`, `useState`, etc .  
-         * 
-         */
-        children : () => React.ReactElement ;  
-    }  ) {   
-        const C = (     
-            /**        
-             * this needs ad-hoc separate Component.  
-             * this separation is necessary to keep playing well with React DevTools.  
+     IterableOps.identity<(                      
+        React.FC<{                  
+            /**   
+             * actual implementation is free to invoke `useEffect`, `useState`, etc .  
+             * 
              */
-            React.useCallback(( 
-                function XYyyUsage ({ children: useXYyy } : ComponentProps<typeof CBC > ) {    
-                    ;       
-                    const e = (           
-                        useXYyy()                    
-                    ) ;            
-                    // TODO remove this line
-                    null && (
-                        ({ } as ({ bar ?: () => void } ) ).bar!()  
-                    ) ;        
-                    return e ;          
-                }
-            ) , [] )  
-        ) ; 
-        return (
-            <C >{ useXYyy }</C>
-        );
-    }                         
+            children : () => React.ReactElement ;  
+        }>
+     )>         ((   
+         0
+         ?
+        function CBC({ children : useXYyy }  ) {        
+            const C = (       
+                /**        
+                 * this needs ad-hoc separate Component.  
+                 * this separation is necessary to keep playing well with React DevTools.  
+                 */
+                React.useCallback(( 
+                    function XYyyUsage ({ children: useXYyy } : ComponentProps<typeof CBC > ) {    
+                        ;       
+                        const e = (           
+                            useXYyy()                    
+                        ) ;            
+                        // TODO remove this line
+                        null && (
+                            ({ } as ({ bar ?: () => void } ) ).bar!()  
+                        ) ;        
+                        return e ;          
+                    }
+                ) , [] )  
+            ) ; 
+            return (
+                <C >{ useXYyy }</C>
+            );
+        }        
+        : 
+        function CBC({ children : useXYyy }  ) {
+            return useXYyy() ;
+        }
+     ))             
 ) ;                              
 
        
