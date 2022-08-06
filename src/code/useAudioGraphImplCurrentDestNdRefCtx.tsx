@@ -24,37 +24,24 @@ import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv } from "./useAudioGr
        
  
   
-
+       
           
-              
-                   
-               
-/**   
- * the same {@link React.Context `Context`} will be returned across calls.  
- * defines 'the current `dest` '.  
- * note the `null`ability intended to replect the `null`ability of the arg of {@link usePersistingBeep }
- */        
- const ctx0 = (                                 
-    IterableOps.once(async () => {    
-        const c0 = (           
-            React.createContext<(                                
-                Pick<AFeedableAndTappableNca, "sideTapPt">   
-                &  
-                Record<keyof Pick<AFeedableAndTappableNca, "feedPt"> , AudioNode | null >             
-            )>(await getACtxMtWithoutAnyFilter1() )
-        ) ;                   
-        c0.displayName = (
-            `ACtxtualDesinationRefCtx`
-        ) ;     
-        return (                     
-            c0     
-        ) ;  
-    })        
-) ;    
-/**   
+                
+                     
+                                            
+type NCtxValue = (                                             
+    {         
+        [k in keyof (
+            Pick<AFeedableAndTappableNca, "sideTapPt">    
+        ) ] : NonNullable<AFeedableAndTappableNca["sideTapPt"] > | null ;
+    }
+    &     
+    Record<keyof Pick<AFeedableAndTappableNca, "feedPt"> , AudioNode | null >             
+); 
+/**    
  * for these reasons :               
  * - {@link React.lazy } 
- *   dislikes intrinsic, non-callable components (including `ctx.Provider` ) 
+ *   dislikes intrinsic, non-callable components (including `ctx.Provider` )     
  * - use of {@link React.lazy }  
  *   will not play well with WebpackDevServer's HMR         
  */  
@@ -67,74 +54,116 @@ const PWrp = (
                 return (       
                     <K key={C.length || 3 }  > 
                     <C {...props } >    
-                        {props.children }
-                    </C>   
+                        {props.children }    
+                    </C>     
                     </K>   
                 ) ;                     
             }      
         ) ;            
     }                 
-) ;                     
+) ;                  
+const wrapped0 = (
+    function <P extends {    
+        children ?: unknown ;   
+    }>(C0 : () => Promise<React.ExoticComponent<P> > ) {
+        return (                
+            PWrp((
+                React.lazy(async () => ({ default: PWrp(await C0() ) }) )   
+            ))    
+        ) ;  
+    }   
+) ;                         
 const {
     Prv1 ,    
     Consm ,  
 
-} = (() => {             
-    const wrapped0 = (
-        function <P extends {    
-            children ?: unknown ;   
-        }>(C0 : () => Promise<React.ExoticComponent<P> > ) {
-            return (                
-                PWrp((
-                    React.lazy(async () => ({ default: PWrp(await C0() ) }) )
-                ))    
-            ) ;  
-        }
-    ) ;        
-    return {  
-        Prv1 : (   
-            wrapped0(async() => (await ctx0() ).Provider )
-        ) ,                
-        Consm : (   
-            wrapped0(async() => (await ctx0() ).Consumer )
-        ) ,            
-    } ;        
+    ctx0 ,   
+    
+} = ((): {    
+    Prv1: React.FC<React.ProviderProps<NCtxValue>>;     
+    Consm: React.FC<React.ConsumerProps<NCtxValue>>; 
+
+    ctx0: () => Promise<React.Context<NCtxValue>> ; 
+    
+} => {           
+    if (0 ) {
+        ;          
+        /**   
+         * the same {@link React.Context `Context`} will be returned across calls.  
+         * defines 'the current `dest` '.  
+         * note the `null`ability intended to replect the `null`ability of the arg of {@link usePersistingBeep }
+         */        
+         const ctx0 = (                                 
+            IterableOps.once(async () => {    
+                const c0 = (                 
+                    React.createContext<NCtxValue>(await getACtxMtWithoutAnyFilter1() )
+                ) ;                   
+                c0.displayName = (
+                    `ACtxtualDesinationRefCtx`      
+                ) ;         
+                return (                     
+                    c0           
+                ) ;                 
+            })     
+        ) ;       
+        return {           
+            Prv1 : (     
+                wrapped0(async() => (await ctx0() ).Provider )
+            ) ,                
+            Consm : (   
+                wrapped0(async() => (await ctx0() ).Consumer )
+            ) ,                    
+            ctx0 ,    
+        } ;    
+    }       
+    {              
+        const c0 = (                 
+            React.createContext<NCtxValue  >( { feedPt: null, sideTapPt: null } )
+        ) ;            
+        return {
+            Prv1 : c0.Provider ,     
+            Consm : c0.Consumer ,         
+            ctx0: async() => c0 ,
+        } ;
+    }
 })() ;            
 const WithGivenDest = (                      
-    React.lazy(async () => {       
-        const ctx1 = await ctx0() ;       
-        return {        
-            default : (                    
-                IterableOps.identity<(
+    React.lazy(async () => {        
+        return {                 
+            default : (             
+                IterableOps.identity<(     
                     React.FC<(     
                         React.ProviderProps<(
-                            ContextReturnType<typeof ctx1>["feedPt"]
+                            (NonNullable<NCtxValue> )["feedPt"]
                         )>
                     ) >
-                )>(function ({ value: newDest, children }) {             
-                    const {
-                        sideTapPt ,                 
-                    } = (     
-                        React.useContext(ctx1 )        
-                    ) ;    
-                    return (      
-                        <ModifyingCompPayloadDiv     
-                        >                     
-                            <Prv1 
-                            // https://reactjs.org/docs/context.html#caveats 
-                            value={(       
-                                useMemo(() => (
-                                    (null && console.log({ sideTapPt, newDest })   ) 
-                                    ,
-                                    (null && ({ } as { bar ?: () => void }).bar!()   )      
-                                    ,
-                                    { sideTapPt, feedPt: newDest }     
-                                ) , [sideTapPt, newDest] )  
-                            )}   
-                            >       
-                                { children }
-                            </Prv1>            
-                        </ModifyingCompPayloadDiv>        
+                )>(function ({ value: newDest, children }) {        
+                    return (                 
+                        <Consm>
+                        { ({ sideTapPt }) => (
+                            <ModifyingCompPayloadDiv          
+                            >    
+                            <CBC>{ function useC1() {
+                                return (                                 
+                                    <Prv1 
+                                    // https://reactjs.org/docs/context.html#caveats 
+                                    value={(       
+                                        useMemo(() => (
+                                            (null && console.log({ sideTapPt, newDest })   ) 
+                                            ,
+                                            (null && ({ } as { bar ?: () => void }).bar!()   )      
+                                            ,
+                                            { sideTapPt, feedPt: newDest }     
+                                        ) , [sideTapPt, newDest] )  
+                                    )}   
+                                    >       
+                                        { children }
+                                    </Prv1>                       
+                                ) ;
+                            } }</CBC>
+                            </ModifyingCompPayloadDiv>            
+                        ) }
+                        </Consm>            
                     ) ;                 
                 })
             ) ,                   
