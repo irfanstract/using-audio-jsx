@@ -1,27 +1,31 @@
 
-import React, { useReducer, useState } from "react";  
+import React, { useReducer, useState } from "react";   
+import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { 
-    useOneWayCompletiveState , 
-      
+    useOneWayCompletiveState ,      
+            
 } from "./useCompletion";    
+import { useAsyncMemo } from "./useAsyncMemo";          
 
-
-
+     
+   
 // domain-imports         
-import '../App.css';
 import * as tCtxs from "./audioLoopDemoScheduledTCtx";   
-import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
+import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";  
 import { 
     CHalfSecndBeepAtAbsoluteT ,     
 } from "./audioLoopDemoCurrentDestNdRefCtx";  
-import { 
-    CurrentCtxTInfoDisplay ,  
+import {        
+    CurrentCtxTInfoDisplay ,    
+    Prv1 ,              
+    ctx0 ,        
 } from "./useAudioGraphImplCurrentDestNdRefCtx";     
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 } from "./audioLoopDemoComponents1"; 
-import * as BBVR from "./audioLoopDemoSpecimens";
+import * as BBVR from "./audioLoopDemoSpecimens";  
+import '../App.css';        
 
     
 
@@ -66,7 +70,7 @@ const useASetCurrentT = (
                 }
             }     
         );         
-        return [tT, { update } ] as const ;
+        return [tT, { update } ] as const ; 
     }
 ) ;          
 ; 
@@ -74,11 +78,39 @@ const {
     BeepsInLoop , 
     BEEPBOPVR , 
     BEEPBOPVRAPP ,              
-} = BBVR ;
+} = BBVR ;    
+const useACtx1 = (
+    () => {
+        ;
+        const aCtx = (
+            useAsyncMemo({  
+                depsChangeImpliesInvalidation: true , 
+                f: () => ctx0() ,        
+            } , [ctx0 ] )   
+        ) ;      
+        const WithACtx : (  
+            React.FC<(               
+                React.ConsumerProps<(   
+                    ContextReturnType<(
+                        NonNullable<typeof aCtx >
+                    )>    
+                )>      
+            ) >  
+            |        
+            null                  
+        ) = (
+            aCtx ? aCtx.Consumer : null    
+        ) ;          
+        return {
+            aCtx , 
+            WithACtx ,    
+        } ;
+    }
+) ;
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
-    console.log({ key } , ...[2 ] );
-    return (  
+    console.log({ key } , ...[2 ] ); 
+    return (       
         function App () {             
             const _1 = (   
                 useACtxMtWithoutAnyFilter1()          
@@ -95,14 +127,15 @@ export const AudioLoopDemoApp = (function () {
             const [tT, { update: updateTT } ] = (      
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = ( 
+            const c1  = (    
                 <BEEPBOPVRAPP 
                 {...({ quantityReductiveDbgMode } as const )}  
                 />  
-            ) ;    
-            return (
-                <div className="App" >       
-                    <p>     
+            ) ;       
+            const { WithACtx } = useACtx1() ;         
+            return (       
+                <div className="App" >        
+                    <p>       
                         <span>   
                                 
                         <s >     
@@ -113,21 +146,29 @@ export const AudioLoopDemoApp = (function () {
                         </span>
                         <button onClick={() => updateTT() } >  
                             update 't'   
-                        </button>        
+                        </button>             
                         </span>         
                     </p>        
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                                   
-                    <p> what </p>            
-                    <div key={key }>   
-                    <CAmpModulated0 value={<CConstantValue value={2 ** -4} />} > 
-                        <CurrentCtxTInfoDisplay />  
-                        { true && c1 }              
-                    </CAmpModulated0>
-                    </div>               
+                    <p> what </p>          
+                    { (WithACtx && (        
+                        <WithACtx>   
+                        { (c ) => ( 
+                        <Prv1 value={c } >       
+                            <div key={key }>   
+                            <CAmpModulated0 value={<CConstantValue value={2 ** -4} />} > 
+                                <CurrentCtxTInfoDisplay />  
+                                { true && c1 }                       
+                            </CAmpModulated0>
+                            </div>                   
+                        </Prv1>   
+                        ) }
+                        </WithACtx>
+                    )) }          
                     </TP>       
                 </div>
             ) ;         
-        } 
+        }  
     ) ;
-})() ;        
+})() ;           
