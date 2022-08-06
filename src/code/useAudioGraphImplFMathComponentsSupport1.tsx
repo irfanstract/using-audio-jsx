@@ -339,11 +339,20 @@ const {
                 ) ; 
                 const dbg = (      
                     <p>      
-                        Constant Value --           
-                        <NUMERIC>{ value }</NUMERIC>   
-                        (T-const specified : { props1.swingTConstant } )   
+                        Constant Value --                               
+                        <span 
+                        style={{ 
+                            display: "inline-block", 
+                            width: "6em", 
+                            height: "2em", 
+                            overflow: "hidden" ,   
+                        }} 
+                        >
+                        <NUMERIC>{ value }</NUMERIC>  
+                        </span> 
+                        (T-const specified : { props1.swingTConstant } )          
                     </p>     
-                ) ;       
+                ) ;           
                 const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;             
                 return (              
                     dBBC(dBB, { dbgBox1: dbg, c1: e })     
