@@ -94,14 +94,16 @@ const LoopingWithPeriod = (
                 renderRange : (
                     Readonly<{ n: number ; }>
                 ) ;         
+                visual ?: false | true ;    
                  
             }>         
         )>                  
-    )>((                    
+    )>((                           
         function ({
             children: item ,        
             value: props ,                     
-            renderRange ,                      
+            renderRange ,       
+            visual = false ,                       
         } ) {   
             const {    
                 period : vPeriod ,       
@@ -121,22 +123,24 @@ const LoopingWithPeriod = (
                             <WithDelay value={t} >
                                 { item }    
                             </WithDelay>                
-                        </div>             
+                        </div>         
                     ) ;    
                 })                 
             ) ;    
-            return (             
-                <div>           
-                    <p> a loop </p>         
-                    <LoopingCompContentDiv   >    
-                    { arrayIndexedOrderedList(itemsRendered )   } 
-                    </LoopingCompContentDiv >
+            return (    
+                <div>              
+                    <p> a loop </p>          
+                    <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
+                        <LoopingCompContentDiv   >    
+                        { arrayIndexedOrderedList(itemsRendered )   } 
+                        </LoopingCompContentDiv >       
+                    </div>
                 </div> 
             ) ;                
         }  
     ))
 ) ;
-                
+                     
             
 
            
