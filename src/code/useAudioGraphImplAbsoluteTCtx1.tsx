@@ -23,7 +23,8 @@ function useConditionalDeference1(e : React.ReactElement, perios : number ) {
 const {       
     currentTCtx ,                              
     currentTScaleCtx ,           
-    currentTInfCtx ,                       
+    currentTInfCtx ,                          
+    useCurrentTInf ,    
                      
 }  =newInstance() ;        
 function CurrentTDisplay() {         
@@ -60,22 +61,26 @@ const WithDelay = (
         React.PropsWithChildren<{ value: number ; }>      
     ) ) {
         ;   
+        const tInf = (
+            useCurrentTInf()           
+        ) ;
         /**   
          * tale caution of 'current t-scale'
          */
-        return (   
-            <currentTInfCtx.Consumer>                             
-                { ({ t: parentTVal, tScale }) => (
-                    <currentTCtx.Provider 
-                    value={parentTVal + (addend * tScale ) } 
-                    >
-                        <ModifyingCompPayloadDiv>
-                        { c || null }
-                        </ModifyingCompPayloadDiv>              
-                    </currentTCtx.Provider>
-                ) }
-            </currentTInfCtx.Consumer>
-        ) ;
+        return (() => {      
+            const { t: parentTVal, tScale } = (   
+                tInf 
+            ) ;    
+            return (     
+                <currentTCtx.Provider 
+                value={parentTVal + (addend * tScale ) } 
+                >
+                    <ModifyingCompPayloadDiv>
+                    { c || null }
+                    </ModifyingCompPayloadDiv>              
+                </currentTCtx.Provider> 
+            ) ;     
+        })() ;
     }
 );
 //                        
@@ -86,9 +91,9 @@ const LoopingWithPeriod = (
 
                 /**  domain properties   */      
                 value: {   
-                    period: number ;   
+                    period: number ;    
                     initialOffset ?: number ;        
-                } ;          
+                } ;           
    
                 /**   display properties  */       
                 renderRange : (
@@ -105,7 +110,7 @@ const LoopingWithPeriod = (
             renderRange ,       
             visual = false ,                       
         } ) {   
-            const {    
+            const {     
                 period : vPeriod ,       
                 initialOffset : vInitialOffset = 0 ,    
             } = props ;
@@ -117,7 +122,7 @@ const LoopingWithPeriod = (
                     } as const  
                 ) )
                 .map(function ({ t }): React.ReactElement  {        
-                    return (                             
+                    return (   
                         <div  >    
                             <p> item at <code>t= { t }</code> </p>
                             <WithDelay value={t} >
@@ -125,7 +130,7 @@ const LoopingWithPeriod = (
                             </WithDelay>                
                         </div>         
                     ) ;    
-                })                 
+                })                      
             ) ;    
             return (    
                 <div>              
@@ -152,9 +157,10 @@ const LoopingWithPeriod = (
 export {   
     currentTCtx , 
     currentTScaleCtx ,       
-    currentTInfCtx ,      
+    currentTInfCtx ,    
+    useCurrentTInf ,      
 
     CurrentTDisplay , 
     WithDelay , 
     LoopingWithPeriod , 
-} ;   
+} ;     
