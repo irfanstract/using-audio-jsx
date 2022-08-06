@@ -90,7 +90,7 @@ const useAnalyserNodeValue1 = (
                 ?
                 refreshIntervalMillis
                 :
-                3000 
+                3800 
             ) )   
         ) ;     
     }   

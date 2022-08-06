@@ -221,7 +221,7 @@ const {
                                 }                      
                             } , 
                             LE : "useLayoutEffect" ,  
-                        } , (nd0 && (nd0.context.state === "running") ) ? scanPeriodMillis : 2000 ) 
+                        } , (nd0 && (nd0.context.state === "running") ) ? scanPeriodMillis : (4.8 * 1000 ) ) 
                     ) ;     
                     React.useLayoutEffect(() => {
                         0 && console.log(return1 ) ;       

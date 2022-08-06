@@ -155,7 +155,7 @@ const {
                                             ?
                                             (Math.min(preFT, postFT) / 2.5 )   
                                             :    
-                                            3   
+                                            5   
                                         ) * 1000 )       
                                     ) ;       
                                     return (        
