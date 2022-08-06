@@ -25,16 +25,19 @@ type AsyncMemoisedValue = (
  * {@link useMemo } alternative for `async`
 */
 const useAsyncMemo = (                                             
-    function <A extends AsyncMemoisedValue > (      
+    function <A extends AsyncMemoisedValue > (...[      
         {                         
             depsChangeImpliesInvalidation ,                                                
             f ,                                                                   
-        } : DCII & {              
+        }  ,                    
+        deps ,                                      
+    ] : [      
+        properties : DCII & {              
             f : () => Promise<A > ;                           
-        } ,                
+        } ,                   
         deps: React.DependencyList,                                  
-    ) : A | undefined {     
-        const [s, setS] = (                                    
+    ]) : A | undefined {     
+        const [s, setS] = (                                           
             useState<A | undefined >(undefined )       
         ) ;         
         const p = (
@@ -47,7 +50,7 @@ const useAsyncMemo = (
                     await f()                          
                 ) ;      
 
-                setS(() => v ) ;                       
+                setS(() => v ) ;                          
             } , deps )               
         ) ;      
         return s ;
@@ -60,15 +63,18 @@ const useAsyncMemo = (
  * - implementing a stream of continuous change 
 */
 const useAsyncStrm = (                                                 
-    function <A extends AsyncMemoisedValue > (            
-        {                             
+    function <A extends AsyncMemoisedValue > (   ...[      
+        {                         
             depsChangeImpliesInvalidation ,                                                
             f ,                                                                   
-        } : DCII & {              
-            f : () => AsyncGenerator<A > ;                            
-        } ,                                                    
+        }  ,                      
+        deps ,                                          
+    ] : [      
+        properties : DCII & {              
+            f : () => AsyncGenerator<A > ;                           
+        } ,                   
         deps: React.DependencyList,                                  
-    ) : A | undefined {     
+    ]) : A | undefined {       
         const [s, setS] = (                                    
             useState<A | undefined >(undefined )       
         ) ;        
