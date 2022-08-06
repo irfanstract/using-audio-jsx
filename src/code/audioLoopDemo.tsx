@@ -11,7 +11,12 @@ import {
 import '../App.css';
 import * as tCtxs from "./audioLoopDemoScheduledTCtx";   
 import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
-import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";  
+import { 
+    CHalfSecndBeepAtAbsoluteT ,     
+} from "./audioLoopDemoCurrentDestNdRefCtx";  
+import { 
+    CurrentCtxTInfoDisplay ,  
+} from "./useAudioGraphImplCurrentDestNdRefCtx";     
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
@@ -65,7 +70,7 @@ const useASetCurrentT = (
     }
 ) ;          
 ; 
-const {
+const {    
     BeepsInLoop , 
     BEEPBOPVR , 
     BEEPBOPVRAPP ,              
@@ -109,14 +114,15 @@ export const AudioLoopDemoApp = (function () {
                         <button onClick={() => updateTT() } >  
                             update 't'   
                         </button>        
-                        </span>    
-                    </p>     
+                        </span>         
+                    </p>        
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
-                      
+                                  
                     <p> what </p>            
                     <div key={key }>   
-                    <CAmpModulated0 value={<CConstantValue value={2 ** -4} />} >
-                        { true && c1 }          
+                    <CAmpModulated0 value={<CConstantValue value={2 ** -4} />} > 
+                        <CurrentCtxTInfoDisplay />  
+                        { true && c1 }              
                     </CAmpModulated0>
                     </div>               
                     </TP>       
@@ -124,4 +130,4 @@ export const AudioLoopDemoApp = (function () {
             ) ;         
         } 
     ) ;
-})() ;       
+})() ;        

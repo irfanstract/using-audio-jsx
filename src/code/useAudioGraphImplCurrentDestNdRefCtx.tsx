@@ -1,11 +1,17 @@
  
 // utility imports     
 import Immutable from "immutable";    
-import { IterableOps, PromiseReturnValue } from "./generalUse11";  
+import { IterableOps, PromiseReturnValue } from "./generalUse11";      
 import React, { useMemo } from "react";               
 import { ContextReturnType } from "./commonElementsTypes";     
-import { K } from "./commonElements";      
-     
+import { K, NUMERIC } from "./commonElements";       
+import { useRealTimeQueryInterval1 } from "./useNonHookValue";        
+import { CBC } from "./useStateInCallback";      
+import { 
+    isWindowActive , 
+    useWindowActivityStatus ,      
+} from "./useWindowFocusState";
+       
 //        
 import { 
     getACtxMtWithoutAnyFilter1, 
@@ -66,7 +72,7 @@ const PWrp = (
                     </K>   
                 ) ;                     
             }      
-        ) ;         
+        ) ;            
     }                 
 ) ;                     
 const {
@@ -84,14 +90,14 @@ const {
                 ))    
             ) ;  
         }
-    ) ;       
+    ) ;        
     return {  
         Prv1 : (   
             wrapped0(async() => (await ctx0() ).Provider )
         ) ,                
         Consm : (   
             wrapped0(async() => (await ctx0() ).Consumer )
-        ) ,   
+        ) ,            
     } ;        
 })() ;            
 const WithGivenDest = (                      
@@ -134,7 +140,41 @@ const WithGivenDest = (
             ) ,                   
         } ;                 
     })                             
-) ;                      
+) ;           
+const CurrentCtxTInfoDisplay = (
+    function () {
+        return (
+            // TODO    
+            <Consm>            
+                { ({ feedPt }) => (    
+                    feedPt 
+                    ?         
+                    <CBC>
+                    { function useC() {                     
+                        const { isWindowOnFocus } = (
+                            useWindowActivityStatus() 
+                        ) ;  
+                        const ctxTime = (
+                            React.useDeferredValue((
+                                useRealTimeQueryInterval1(
+                                    (): typeof feedPt.context.currentTime => feedPt.context.currentTime , isWindowOnFocus ? 100 : 2000  )
+                            ))
+                        ) ;    
+                        return (   
+                            <p>         
+                            Global ACtx Time =      
+                            <NUMERIC>{ +ctxTime.toFixed(3) }</NUMERIC>.  
+                            if it's laggy then the workload is too heavy.
+                            </p> 
+                        ) ;
+                    } }    
+                    </CBC>
+                    : <>-</>        
+                ) }
+            </Consm>   
+        ) ;   
+    }
+) ;     
 
 
 
@@ -142,13 +182,13 @@ const WithGivenDest = (
 
 
 
+  
+
+        
+  
 
 
-
-
-
-
-
+     
 
 
 
@@ -168,5 +208,6 @@ export {
 
     Prv1 , 
     Consm ,   
-    WithGivenDest , 
+    WithGivenDest ,  
+    CurrentCtxTInfoDisplay , 
 } ;
