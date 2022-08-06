@@ -24,7 +24,7 @@ const WGD_DIV : (
 ) = (
     function ({ children } : Required<React.PropsWithChildren<{}> > ) {   
         // TODO hoping that this LOC can be removed ..  
-        useRefreshByInterval1(true, 230, { LE: "useLayoutEffect" } );  
+        useRefreshByInterval1(true, (0 ? 230 : 2000 ), { LE: "useLayoutEffect" } );  
         //  
         return (             
             <div          

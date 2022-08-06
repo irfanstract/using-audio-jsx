@@ -22,6 +22,7 @@ import {
 import { CWaveTable1 } from "./useAudioGraphImplFComponents";
 import { 
     WithAutoUnmount as WithAutoUnmount0 ,    
+    WithAutoStopmount as WithAutoStopmount0 ,  
 } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";    
       
    
@@ -45,7 +46,7 @@ const {
     currentTInfCtx ,    
   
     CurrentTDisplay , 
-    WithDelay ,     
+    WithDelay ,           
     LoopingWithPeriod ,        
 } = tCtxs ;
 // const WithAutoUnmount = (() => {
@@ -114,8 +115,8 @@ const {
 //     ) ;  
 // })() ;            
 const WithAutoUnmount = (
-    WithAutoUnmount0        
-);  
+    WithAutoStopmount0             
+);    
                  
 const snKit = (() => {       
     const conventionalFreq : number | 440 = 440 ;    
@@ -186,7 +187,7 @@ const snKit = (() => {
             renderConfig : { scanPeriodMillis: number ; } ,    
         ]) {           
             return (                    
-                <CFnValue1                                
+                <CFnValue1                                 
                 value={            
                     ({ ctxT }) => {         
                         const {                                    
@@ -246,7 +247,7 @@ const snKit = (() => {
                 applicableDecliningAmpGraphFromTCoef(
                     expectedTLen1 , { scanPeriodMillis } )
             ) ;              
-            return {  
+            return {    
                 tCoef1 ,    
                 expectedTLen1 ,     
 

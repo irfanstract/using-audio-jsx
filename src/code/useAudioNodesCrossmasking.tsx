@@ -85,7 +85,13 @@ const useAnalyserNodeValue1 = (
                 } else {    
                     return 0 ; 
                 }      
-            }, refreshIntervalMillis )   
+            }, (
+                (gner05 && (gner05.context.state === "running") )
+                ?
+                refreshIntervalMillis
+                :
+                3000 
+            ) )   
         ) ;     
     }   
 ) ;     

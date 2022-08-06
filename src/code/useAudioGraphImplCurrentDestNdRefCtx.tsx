@@ -153,15 +153,20 @@ const CurrentCtxTInfoDisplay = (
                     { function useC() {                     
                         const { isWindowOnFocus } = (
                             useWindowActivityStatus() 
-                        ) ;  
-                        const ctxTime = (
+                        ) ;         
+                        const ctxTime = (  
                             React.useDeferredValue((
                                 useRealTimeQueryInterval1(
-                                    (): typeof feedPt.context.currentTime => feedPt.context.currentTime , isWindowOnFocus ? 100 : 2000  )
+                                    (): typeof feedPt.context.currentTime => feedPt.context.currentTime , 
+                                    (
+                                        isWindowOnFocus
+                                        &&
+                                        (feedPt && (feedPt.context.state === "running" ) )
+                                    ) ? 100 : (3 * 1000 )  )
                             ))
                         ) ;    
                         return (   
-                            <p>         
+                            <p>            
                             Global ACtx Time =      
                             <NUMERIC>{ +ctxTime.toFixed(3) }</NUMERIC>.  
                             if it's laggy then the workload is too heavy.

@@ -196,7 +196,7 @@ const {
              * @see     
              * import  :     
              * none   
-             */     
+             */        
             const C11 = (
                 function useFn1(...[nd0] : [dest : AudioNode | null ] ) : (
                     ReturnType<typeof lComputeAtT >
@@ -208,20 +208,20 @@ const {
                                 if (nd0 ) {                               
                                     const t1 = (   
                                         nd0.context.currentTime        
-                                    ) ;      
+                                    ) ;         
                                     const t2 = (        
                                         // +t1.toFixed(1 )           
-                                        t1 + delayInSeconds      
+                                        t1 + delayInSeconds       
                                     ) ;         
                                     return (
                                         lComputeAtT(t2 )
                                     ) ;        
                                 } else {   
-                                    return { t2 : -1, vl: 0 } ;                               
+                                    return { t2 : -1, vl: 0 } ;                                  
                                 }                      
                             } , 
                             LE : "useLayoutEffect" ,  
-                        } , scanPeriodMillis  ) 
+                        } , (nd0 && (nd0.context.state === "running") ) ? scanPeriodMillis : 2000 ) 
                     ) ;     
                     React.useLayoutEffect(() => {
                         0 && console.log(return1 ) ;       

@@ -1,10 +1,11 @@
 
 import { 
     interpolateBetweenTwo ,   
-} from "./polynomialsC";       
+} from "./polynomialsC";           
 import { IterableOps } from "./generalUse11";  
 import React, { useReducer, useState } from "react";   
 import { K } from "./commonElements";               
+import { NUMERIC } from "./commonCodeSnippetAndNumericDisplay";          
 import { CBC } from "./useStateInCallback";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";  
                
@@ -12,14 +13,17 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
       
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
-import { Consm as NdRefConsm  } from "./useAudioGraphImplCurrentDestNdRefCtx";           
+import { Consm as NdRefConsm , WithGivenDest } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import {                
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
     CConstantValue ,  CFnValue1 , 
     CAmpSlideDown ,              
 } from "./useAudioGraphImplFComponents"; 
-import { CWaveTable1 } from "./useAudioGraphImplFComponents";
+import { CWaveTable1 } from "./useAudioGraphImplFComponents"; 
+import { 
+    useGainNodeWithGivenFadeoutTimeConstant1 ,   
+} from "./useAudioNodesMounting11";    
 import "./SLPCM.css";
       
    
@@ -41,9 +45,10 @@ const {
     LoopingWithPeriod ,        
 } = tCtxs ;   
    
-const {
-    WithAutoUnmount ,  
-    WithAutoStopmount ,  
+const {  
+    WithAutoUnmount ,      
+    WithAutoStopmount ,         
+    WithAutoStopmountExtra ,         
 
 } = (() => {
     const AbsoluteScheduledTCons = (
@@ -60,7 +65,7 @@ const {
     type PreFTAndPostFTProps = {
         /**        
          * pre-incidential tolerance        
-         */  
+         */   
         preFT : number ;      
         /**         
          * post-incidential tolerance   
@@ -93,7 +98,7 @@ const {
     type Props = (
         React.PropsWithChildren<(
             PreFTAndPostFTProps      
-        ) >         
+        ) >          
     ) ;                
     //    
     const render1 = (...[f] : [
@@ -108,8 +113,8 @@ const {
         ) ) {         
             const {
                 passageStateBy ,     
-            } = (
-                passageStateBy1({ preFT, postFT })
+            } = (   
+                passageStateBy1({ preFT, postFT })        
             ) ;  
             return (
                 <>    
@@ -118,15 +123,15 @@ const {
                         <>            
                         <NdRefConsm>            
                             { ({ feedPt: destNd }) => (          
-                                <CBC>{ function useC1() {   
-                                    const {
-                                        passageState: passageState ,     
+                                <CBC>{ function useC1() {    
+                                    const {       
+                                        passageState: passageState ,          
                                         hasPassedT: hasPassedT ,  
                                     } = (   
                                         useRealTimeQueryInterval11({
-                                            f : ()  => {  
+                                            f : ()  => {     
                                                 const ctxT = (
-                                                    destNd 
+                                                    destNd         
                                                     ? 
                                                     destNd.context.currentTime 
                                                     :   
@@ -136,7 +141,7 @@ const {
                                                 const actualT = (
                                                     ctxT    
                                                 ) ;
-                                                ;                           
+                                                ;                                  
                                                 return {
                                                     passageState : (     
                                                         passageStateBy({ expectedT, actualT })
@@ -145,7 +150,13 @@ const {
                                                 } ;                        
                                             } ,    
                                             LE : "useLayoutEffect" ,   
-                                        } , (Math.min(preFT, postFT) / 2.5 ) * 1000 )       
+                                        } , (     
+                                            (destNd && (destNd.context.state === "running") )
+                                            ?
+                                            (Math.min(preFT, postFT) / 2.5 )   
+                                            :    
+                                            3   
+                                        ) * 1000 )       
                                     ) ;       
                                     return (        
                                         <div       
@@ -161,7 +172,7 @@ const {
                         </NdRefConsm>     
                         </>
                     ) }
-                </AbsoluteScheduledTCons>
+                </AbsoluteScheduledTCons>  
                 </> 
             ) ;      
         }     
@@ -176,26 +187,79 @@ const {
                     ) } </>         
                 );
             })  
-        ) ,   
-        WithAutoStopmount : (
+        ) ,     
+        WithAutoStopmount: (
             render1(function ({ passageState, expectedChildren }) {
-                return (   
-                    <>{ (      
+                return (    
+                    <CAmpModulated0            
+                    value={ (      
                         (passageState === PassageState.SUPPOSEDLY_NOW ) ?
-                        expectedChildren : <p>{ passageState }</p>
-                    ) } </>         
+                        (<CConstantValue value={1} /> ) : (<></> )
+                    )}  
+                    >                      
+                        { expectedChildren }
+                    </CAmpModulated0>
                 );
-            })
+            })  
+        ),
+        WithAutoStopmountExtra : (
+            render1(function ({ passageState, expectedChildren }) {    
+                return (   
+                    <> 
+                    <NdRefConsm>
+                        { ({ feedPt: givenDestNd }) => (     
+                            <>            
+                            <CBC>{ function useE() {    
+                                // supposedly, this value will never change for component lifetime  
+                                const SM1 = (
+                                    React.useMemo(() => (Math.random() ) , [] )
+                                ) ;
+                                const implied1: boolean = (      
+                                    (passageState === PassageState.SUPPOSEDLY_NOW ) 
+                                ) ;            
+                                const gnNd1 = ( 
+                                    React.useMemo(() => (
+                                        givenDestNd ?
+                                        givenDestNd.context.createGain() 
+                                        : null    
+                                    ), [givenDestNd ])     
+                                ) ;    
+                                React.useLayoutEffect(() => {
+                                    if (gnNd1 && givenDestNd ) {
+                                        if (implied1) {
+                                            gnNd1.connect(givenDestNd ) ;
+                                            return () => {  
+                                                gnNd1.disconnect() ;    
+                                            };
+                                        }     
+                                    } ;  
+                                } , [gnNd1, givenDestNd, implied1 ] ) ;  
+                                ;     
+                                return (          
+                                    <WithGivenDest              
+                                    value={gnNd1 }     
+                                    >                       
+                                    <p> MOUNT-ID : <NUMERIC>{SM1 }</NUMERIC> </p>
+                                    { expectedChildren }    
+                                    </WithGivenDest>           
+                                ) ;
+                            } }</CBC>         
+                            </>            
+                        ) }
+                    </NdRefConsm>
+                    </>         
+                );  
+            })  
         ) ,   
-    } ;
+    } ;   
 })() ;  
 
 
+    
 
 
 
-
-
+    
 
 
 
@@ -209,5 +273,6 @@ const {
 export  {
     tCtxs ,       
 
-    WithAutoUnmount ,  
+    WithAutoUnmount ,    
+    WithAutoStopmount , 
 } ;
