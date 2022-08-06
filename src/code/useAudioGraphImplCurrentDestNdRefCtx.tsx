@@ -85,27 +85,27 @@ const {
 
     ctx0: () => Promise<React.Context<NCtxValue>> ; 
     
-} => {           
+} => {              
+    /**   
+     * the same {@link React.Context `Context`} will be returned across calls.  
+     * defines 'the current `dest` '.  
+     * note the `null`ability intended to replect the `null`ability of the arg of {@link usePersistingBeep }
+     */        
+     const ctx0 = (                                 
+        IterableOps.once(async () => {    
+            const c0 = (                 
+                React.createContext<NCtxValue>(await getACtxMtWithoutAnyFilter1() )
+            ) ;                   
+            c0.displayName = (
+                `ACtxtualDesinationRefCtx`      
+            ) ;         
+            return (                     
+                c0           
+            ) ;                 
+        })     
+    ) ;           
     if (0 ) {
-        ;          
-        /**   
-         * the same {@link React.Context `Context`} will be returned across calls.  
-         * defines 'the current `dest` '.  
-         * note the `null`ability intended to replect the `null`ability of the arg of {@link usePersistingBeep }
-         */        
-         const ctx0 = (                                 
-            IterableOps.once(async () => {    
-                const c0 = (                 
-                    React.createContext<NCtxValue>(await getACtxMtWithoutAnyFilter1() )
-                ) ;                   
-                c0.displayName = (
-                    `ACtxtualDesinationRefCtx`      
-                ) ;         
-                return (                     
-                    c0           
-                ) ;                 
-            })     
-        ) ;       
+        ;        
         return {           
             Prv1 : (     
                 wrapped0(async() => (await ctx0() ).Provider )
@@ -123,8 +123,8 @@ const {
         return {
             Prv1 : c0.Provider ,     
             Consm : c0.Consumer ,         
-            ctx0: async() => c0 ,
-        } ;
+            ctx0: async() => ctx0() ,
+        } ;     
     }
 })() ;            
 const WithGivenDest = (                      
@@ -241,7 +241,8 @@ export {
     ModifyingCompPayloadDiv as WGD_DIV ,  
 
     Prv1 , 
-    Consm ,   
-    WithGivenDest ,  
+    Consm ,        
+    WithGivenDest ,
+    ctx0 ,        
     CurrentCtxTInfoDisplay , 
 } ;
