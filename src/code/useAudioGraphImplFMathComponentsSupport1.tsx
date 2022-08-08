@@ -9,15 +9,19 @@ import { CBC } from "./useStateInCallback";
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";             
 import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
 import { 
-    useOneWayCheckBox , 
+    useOneWayCheckBox ,   
 } from "./useCompletion";   
 import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";  
+import {
+    TAndVl , 
+    tAndVlSqExpand ,  
+} from "./useTValueSeqExpand1";
         
 
 
 
 // 
-import {  
+import {       
     WithGivenDest ,  
     Prv1 ,        
     Consm as WithCtxtualOut , 
@@ -50,7 +54,7 @@ import {
     CTXTUALOUTPUTUSAGE_CBC , 
 } from "./useAudioGraphImplCurrentDestNdRefCtxC1";  
 import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";  
-import {    
+import {     
     useUnexpectedZeroingBackCheck ,      
 } from "./useAudioNodesParamAutomativeElas";   
 import {   
@@ -61,13 +65,14 @@ import {
     dBBC , 
 
 } from "./useAudioGraphImplUseDeferredBoolean";     
-import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";
+import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";  
+import eSupport from "./useAudioNodesParamAutomativeExecET";
 
          
+   
 
 
-
-
+    
 
 
 
@@ -85,9 +90,9 @@ const useUnmountLogging = (
             } ;
         }, [] ) ;      
     }  
-) ;      
+) ;          
       
-const cFnValueCompImplSupport1 = (() => {
+const CFNVI0 = (() => {
     /**   
      * 
      * @see  
@@ -123,37 +128,31 @@ const cFnValueCompImplSupport1 = (() => {
         useRealTimeQueryInterval1       
     );          
     return { 
-        renderConstantParamSrcElas1 ,     
+        renderConstantParamSrcElas1 ,       
         useRealTimeQueryInterval1X ,     
     } ;
 })() ;      
-
-            
-//
-const {     
-    CConstantValue ,   
-    CFnValue ,                                                      
-     
-} = ((...[{ } = {} ] : [
-    {
-        // omissiveDebug ?: boolean ;     
-    } ? ,
-] ) => {             
+/**    
+ * @deprecated
+ */
+const CFNVI = (() => {
+    ;               
     /**                
      *          
      * @see  
      * import  :          
-     * {@link cFnValueCompImplSupport1 }       
+     * {@link CFNVI0  }       
      */            
     const { 
         renderConstantParamSrcElas1 ,     
         useRealTimeQueryInterval1X ,  
     } = (  
-        cFnValueCompImplSupport1
-    ) ;   
+        CFNVI0    
+    ) ;      
+    ;   
     /**            
      * 
-     * @see  
+     * @see    
      * import  :             
      * {@link CTXTUALOUTPUTUSAGE_CBC }     
      * {@link CConstantValue }  
@@ -175,7 +174,7 @@ const {
             } ,              
         ] ) {        
             const idleCaseRefreshPeriodMillis = (
-                (4.8 * 1000 )  
+                (4.8 * 1000 )   
             );
             ;   
             const lComputeAtT = (
@@ -228,7 +227,7 @@ const {
              * @see     
              * import  :     
              * none   
-             * 
+             *  
              * @deprecated          
              */                           
             const C11 = (() => { 
@@ -290,7 +289,7 @@ const {
                                             ) ;         
                                             const t2 = (        
                                                 // +t1.toFixed(1 )           
-                                                t1 + delayInSeconds       
+                                                t1 + delayInSeconds        
                                             ) ;         
                                             return (
                                                 lComputeAtT(t2 )
@@ -313,51 +312,30 @@ const {
                         }        
                     ))
                 ) ;
-            })() ;                             
+            })() ;                          
             /**      
-             *  
-             * @see  
+             *    
+             * @see   
              * import  : 
              * {@link useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 }         
              * {@link CTXTUALOUTPUTUSAGE_CBC }   
              */           
             const e = ((...[mode, mode1 = {} ] : [
                 1 | 2 | "3" ,  
-                {
-                    timingArgMode ?: false | 1 ;    
-                    swingTConst ?: number ;           
-                } ? ,          
-            ]) => {               
-                const {
-                    swingTConst = (        
-                        2 ** -4  
-                    ) ,   
-                    timingArgMode = 1 ,      
+                (
+                    NonNullable<(
+                        Parameters<typeof eSupport >[0 ]               
+                    )>   
+                ) ? ,                       
+            ]) => {                      
+                const {       
+                    swingTConst ,   
+                    timingArgMode , 
 
-                } = mode1 ;     
-                const SETTARGETATTIME = (
-                    (...[nd1, { t: t2, vl } ] : [
-                        NonNullable<(
-                            ReturnType<(
-                                typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
-                            )>
-                        )> | null , 
-                        { t: number ; vl: number ; } ,     
-                    ]) => {
-                        ;                                 { 
-                            ;   
-                            if (nd1 && (0 <= t2 ) ) {        
-                                ;                    
-                                (          
-                                    nd1.offset  
-                                    .setTargetAtTime(vl, (
-                                        timingArgMode ? t2 : nd1.context.currentTime      
-                                    ) , swingTConst ) 
-                                ) ;      
-                            }     
-                        }          
-                    }
-                ) ;  
+                    SETTARGETATTIME , 
+                    SETVALUECURVE_AT_TIME ,     
+
+                } = eSupport(mode1 ) ;  
                 if (mode === 2 ) {     
                     ;              
                     return (                       
@@ -401,19 +379,27 @@ const {
                                 React.useLayoutEffect(() => {       
                                     ;                 
                                     0 && console.log({ tScan1 });        
-                                    if (nd1) {
-                                        for (const t1 of tScan1 ) {               
-                                            const t2 = (        
-                                                // +t1.toFixed(1 )    
-                                                t1 + delayInSeconds       
-                                            ) ;         
-                                            const {
-                                                vl , 
-                                            } = (
-                                                lComputeAtT(t2 )          
-                                            ) ;
-                                            SETTARGETATTIME(nd1, { t: t2, vl }) ;   
-                                        }
+                                    if (nd1) {             
+                                        SETVALUECURVE_AT_TIME(nd1, (      
+                                            tScan1      
+                                            .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
+                                                const t2 = (        
+                                                    // +t1.toFixed(1 )    
+                                                    t1 + delayInSeconds       
+                                                ) ;    
+                                                ;                
+                                                const {
+                                                    vl , 
+                                                } = (
+                                                    lComputeAtT(t2 )          
+                                                ) ;        
+                                                return {
+                                                    t: t2 , 
+                                                    vl: vl ,               
+                                                } ;
+                                            })     
+                                            .toArray()     
+                                        ))   
                                     };
                                     // TODO       
                                 } , [nd1, tScan1.first ]) ;
@@ -453,13 +439,51 @@ const {
                         } }             
                     </CTXTUALOUTPUTUSAGE_CBC>                   
                 ) ;     
-            })(1 ) ;         
+            })("3" ) ;         
             return {
                 C11 , 
                 e ,              
             } ;
         }
-    ) ;        
+    ) ;                
+    ; 
+    return { 
+        default: cFnValueImpl1 ,          
+    } ;
+})() ;
+      
+     
+const cFnValueCompImplSupport1 = (
+    CFNVI0  
+) ;
+//
+const {     
+    CConstantValue ,   
+    CFnValue ,                                                      
+     
+} = ((...[{ } = {} ] : [
+    {
+        // omissiveDebug ?: boolean ;     
+    } ? ,    
+] ) => {             
+    const useXDeferredTrue = (
+        () => useDeferredTrue({ UE: "useLayoutEffect" }) 
+    ) ;
+    /**                
+     *          
+     * @see  
+     * import  :          
+     * {@link cFnValueCompImplSupport1 }       
+     */            
+    const { 
+        renderConstantParamSrcElas1 ,     
+        useRealTimeQueryInterval1X ,  
+    } = (  
+        cFnValueCompImplSupport1
+    ) ;          
+    const {
+         default: cFnValueImpl1 ,  
+    } = CFNVI ;
     return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : (            
@@ -470,7 +494,7 @@ const {
                 { unmountDebug ?: boolean ; }
             )) {                   
                 const { value } = props1 ;         
-                const { unmountDebug = false } = props1 ;            
+                const { unmountDebug = false } = props1 ;              
                 // TODO     
                 ;                      
                 useUnmountLogging(unmountDebug) ;     
@@ -479,7 +503,7 @@ const {
                 ) ; 
                 const dbg = (      
                     <p>      
-                        Constant Value --                               
+                        Constant Value --                                   
                         <span 
                         style={{ 
                             display: "inline-block", 
@@ -492,13 +516,15 @@ const {
                         </span> 
                         (T-const specified : { props1.swingTConstant } )          
                     </p>     
-                ) ;           
-                const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;             
+                ) ;          
                 return (              
-                    dBBC(dBB, { dbgBox1: dbg, c1: e })     
+                    dBBC((
+                        useXDeferredTrue() 
+
+                    ), { dbgBox1: dbg, c1: e })     
                 ) ;            
             }             
-        ) ,        
+        ) ,            
       
         CFnValue : (        
             function CFncValueC({ value: compute , scanPeriodMillis = 32 } : (
@@ -530,12 +556,14 @@ const {
                 ) ;             
                 ;              
                 const dbg = (                 
-                    <p> 
+                    <p>    
                     </p>         
-                ) ;     
-                const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;           
+                ) ;          
                 return (       
-                    dBBC(dBB, { dbgBox1: dbg, c1: e })  
+                    dBBC((
+                        useXDeferredTrue()    
+                         
+                    ), { dbgBox1: dbg, c1: e })  
                 ) ;                      
             } 
         )
