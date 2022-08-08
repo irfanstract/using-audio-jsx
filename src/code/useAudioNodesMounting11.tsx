@@ -164,6 +164,14 @@ const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (
         return nd2 ;            
     }
 );               
+const UABN_ARGPARSE = ( 
+    (...[nd0, timeConstant1] : Parameters<USEYYYNODER<{}> > ) => {
+        return {
+            nd0 , 
+            timeConstant1 ,            
+        } ;       
+    }
+) ;
 /**             
  * the returned {@link OscillatorNode} will immediately `start()` .    
  * avoid `stop()`ing it ; that {@link React.useEffect will happen automatically after (a few seconds ) unmount }  
@@ -175,13 +183,17 @@ const useOscilltorNodeWithGivenFadeoutTimeConstant1: (
         )>
     )>                  
 ) = (
-    function   (nd0 : AudioNode | null, timeConstant1: number ) {
+    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0 ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;         
         return (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1<OscillatorNode>(
                 nd0, timeConstant1 , ctx => ctx.createOscillator() )
         ) ;                  
     }                    
-);             
+);                    
 /**                           
  * in current version, 
  * as with {@link useOscilltorNodeWithGivenFadeoutTimeConstant1 } ,      
@@ -192,20 +204,24 @@ const useOscilltorNodeWithGivenFadeoutTimeConstant1: (
 */
 const useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1: (       
     USEYYYNODER<(
-        AudioNode    
-        &                  
+        AudioNode         
+        &                     
         Omit<AudioBufferSourceNode, (
             keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" >   
         )     >
     )>                  
 ) = (             
-    function (nd0 : AudioNode | null, timeConstant1: number ) {
+    function (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0 ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;           
         return (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1<AudioBufferSourceNode>(
                 nd0, timeConstant1 , ctx => ctx.createBufferSource() )
         ) ;                  
     }                              
-);                         
+);                              
 /**                   
  * the returned {@link OscillatorNode} will immediately `start()` .    
  * avoid `stop()`ing it ; that {@link React.useEffect will happen automatically after (a few seconds ) unmount }  
@@ -217,10 +233,14 @@ const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
         Omit<ConstantSourceNode, (
             keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" >   
         )>
-    )>      
+    )>           
 ) = (   
-    function   (nd0 : AudioNode | null, timeConstant1: number ) {
-        const nd1 = (
+    function (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0 ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;         
+        const nd1 = (   
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1(
                 nd0, timeConstant1 , ctx => ctx.createConstantSource() )
         ) ;       
