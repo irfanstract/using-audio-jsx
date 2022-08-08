@@ -32,7 +32,7 @@ import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
 enum GDCM {  
     NONE ,   
     /**    
-     * this advocates that it should be within {@link usingC }.    
+     * this advocates that it should be within {@link useInitUnconnectedYyyNodeFor }.    
      */
     DISCONNECT_IN_USING_C ,     
     /**   
@@ -172,7 +172,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
  * 
  * @param OeGainNode1 instantiation of {@link YyNode }
 */        
-const useYyNodeWithGivenFadeoutTimeConstant1: (      
+const useInitAndConnectYyyNodeFor: (      
     ToUseYyNodeWithGivenFadeoutTimeConstant1
         
 ) = (
@@ -194,12 +194,12 @@ const useYyNodeWithGivenFadeoutTimeConstant1: (
 
     ]) {          
         /**    
-         * {@link usingC }
+         * {@link useInitUnconnectedYyyNodeFor }
          */
         const {               
             gRef: gRef1 ,  
         } = (     
-            usingC<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
+            useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
         ) ;    
         useSingularSrcDestConnect(gRef1 , dest ) ;           
     
@@ -236,7 +236,7 @@ const useParamNodeWithGiven = (
     function (dest: AudioParam | null, c: BaseAudioContext | null ) {
         const {
             gRef: gRef1 , 
-        } = (function () {  
+        } = (function useINC() {  
             ;                
             type YyNode = AudioNode ;
             type Dst1 = AudioNode ;
@@ -250,7 +250,7 @@ const useParamNodeWithGiven = (
                 )
             ) ;            
             return (     
-                usingC<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
+                useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
             ) ;
         })() ;          
         const cncDebug : 0 | 1 = 0 ;
@@ -265,14 +265,16 @@ const useParamNodeWithGiven = (
         return gRef1 ;  
     }  
 );     
-/**                                   
+/**                   
+ * {@link useInitAndConnectYyyNodeFor } without the `useCnnectAndDiscnnct(...)` .
+ *                 
  * this `useYyy` will    
  * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
  * 2) return it  
  * 
  * @param OeGainNode1 this `new` `YyNode` 
 */
-const usingC = (    
+const useInitUnconnectedYyyNodeFor = (    
     function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
         dest ,  
         {   } ,         
@@ -387,12 +389,12 @@ const useATapNode = (() => {
             const {        
                 gRef: gMainRef ,          
             } = (     
-                usingC<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
+                useInitUnconnectedYyyNodeFor<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
             ) ;                     
             const {                               
                 gRef: gTapRef ,                
             } = (     
-                usingC<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
+                useInitUnconnectedYyyNodeFor<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
             ) ;        
             (() => {                                                             
                 ;
@@ -417,8 +419,10 @@ const useATapNode = (() => {
 export type {
     ToUseYyNodeWithGivenFadeoutTimeConstant1 ,  
 } ;
-export {
-    useYyNodeWithGivenFadeoutTimeConstant1,   
+export { 
+    useInitUnconnectedYyyNodeFor ,     
+    useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
+    useInitAndConnectYyyNodeFor ,    
     useParamNodeWithGiven , 
 
     useATapNode , 
