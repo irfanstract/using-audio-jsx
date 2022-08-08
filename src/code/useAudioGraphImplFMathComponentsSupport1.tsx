@@ -1,6 +1,6 @@
  
 // utility imports                  
-import Immutable from "immutable";        
+import Immutable from "immutable";            
 import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";   
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
@@ -11,6 +11,7 @@ import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";
 import { 
     useOneWayCheckBox , 
 } from "./useCompletion";   
+import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";  
         
 
 
@@ -172,7 +173,10 @@ const {
                 delayInSeconds ?: number ;   
                 scanPeriodMillis : number ;     
             } ,              
-        ] ) {    
+        ] ) {        
+            const idleCaseRefreshPeriodMillis = (
+                (4.8 * 1000 )  
+            );
             ;   
             const lComputeAtT = (
                 function (...[t2] : [t: number ] ): (
@@ -191,66 +195,170 @@ const {
                     return { t2 , vl } ;        
                 }  
             );   
-            /**       
+            const useXTScan1 = (
+                (...[nd0] : [AudioNode | null ]) => {
+                    ;
+                    const scnF1PeriodSeconds : number = 3 ;       
+                    /**   
+                     * INTERVAL : {@link scnF1PeriodSeconds } SECOND
+                     *  */               
+                    const t10 = (          
+                        useRealTimeQueryInterval1X({
+                            // TODO    
+                            f: () => (nd0 ? nd0.context.currentTime : -1 ) ,  
+                            LE: "useLayoutEffect" ,      
+                        } , scnF1PeriodSeconds * 1000  )  
+                    ) ;        
+                    React.useLayoutEffect(() =>  {          
+                        0 && console.log({ scnF1PeriodSeconds, t10 }) ;
+                        // 
+                    }, [t10 ] ) ;      
+                    const tScan1 = (
+                        React.useMemo(() => (
+                            Immutable.Range(t10, t10 + scnF1PeriodSeconds , scanPeriodMillis / 1000 )  
+                        ) , [t10, scnF1PeriodSeconds, scanPeriodMillis ])
+                    ) ;            
+                    return {      
+                        tScan1 ,   
+                    } ;
+                }
+            ); 
+            /**                 
              *  
              * @see     
              * import  :     
              * none   
-             */        
-            const C11 = (
-                function useFn1(...[nd0] : [dest : AudioNode | null ] ) : (
-                    ReturnType<typeof lComputeAtT >
-                )  {            
-                    const return1 = (       
-                        useRealTimeQueryInterval1X({        
-                            f : () : (ReturnType<typeof lComputeAtT > ) => {       
-                                ;                      
-                                if (nd0 ) {                               
-                                    const t1 = (   
-                                        nd0.context.currentTime        
-                                    ) ;         
-                                    const t2 = (        
-                                        // +t1.toFixed(1 )           
-                                        t1 + delayInSeconds       
-                                    ) ;         
-                                    return (
-                                        lComputeAtT(t2 )
-                                    ) ;        
-                                } else {   
-                                    return { t2 : -1, vl: 0 } ;                                  
-                                }                      
-                            } , 
-                            LE : "useLayoutEffect" ,  
-                        } , (nd0 && (nd0.context.state === "running") ) ? scanPeriodMillis : (4.8 * 1000 ) ) 
-                    ) ;     
-                    React.useLayoutEffect(() => {
-                        0 && console.log(return1 ) ;       
-                    } , [return1.t2 < 0.5 , return1.vl !== 0 ] ) ;
-                    return return1 ;
-                }        
-            );                         
-            /**   
+             * 
+             * @deprecated          
+             */                           
+            const C11 = (() => { 
+                return (   
+                    IterableOps.identity<(     
+                        (dest : AudioNode | null  )
+                        =>        
+                        ReturnType<typeof lComputeAtT >          
+                    )>((               
+                        1
+                        ?
+                        function useFn1(...[nd0] )  {          
+                            const { tScan1  } = (
+                                useXTScan1(nd0)    
+                            ) ;
+                            const return10 = (       
+                                useAsyncStrm<ReturnType<typeof lComputeAtT > >({   
+                                    depsChangeImpliesInvalidation : true ,      
+       
+                                    f: async function* () {
+                                        {                                
+                                            for (const t1 of ( 
+                                                tScan1
+                                            )) {                     
+                                                const t2 = (        
+                                                    // +t1.toFixed(1 )    
+                                                    t1 + delayInSeconds       
+                                                ) ;    
+                                                ;          
+                                                yield (
+                                                    lComputeAtT(t2 ) 
+                                                ) ;           
+                                            }    
+                                            ;   
+                                        }      
+                                    }  
+  
+                                } , [ tScan1.first ])
+                            ) ;     
+                            const return1: ReturnType<typeof lComputeAtT > = (      
+                                return10
+                                ||
+                                { t2: -1, vl: 0 }
+                            ) ;     
+                            React.useLayoutEffect(() => {     
+                                0 && console.log(return1 ) ;            
+                            } , [return1.t2 < 0.5 , return1.vl !== 0 ] ) ;
+                            return return1 ;
+                        }   
+                        :   
+                        function useFn1(...[nd0] )  {             
+                            const return1 = (       
+                                useRealTimeQueryInterval1X({        
+                                    f : () : (ReturnType<typeof lComputeAtT > ) => {       
+                                        ;                      
+                                        if (nd0 ) {                               
+                                            const t1 = (   
+                                                nd0.context.currentTime        
+                                            ) ;         
+                                            const t2 = (        
+                                                // +t1.toFixed(1 )           
+                                                t1 + delayInSeconds       
+                                            ) ;         
+                                            return (
+                                                lComputeAtT(t2 )
+                                            ) ;        
+                                        } else {          
+                                            return { t2 : -1, vl: 0 } ;                                  
+                                        }                              
+                                    } ,                   
+                                    LE : "useLayoutEffect" ,       
+                                } , (
+                                    (nd0 && (nd0.context.state === "running") ) 
+                                    ? 
+                                    scanPeriodMillis : idleCaseRefreshPeriodMillis    
+                                ) ) 
+                            ) ;     
+                            React.useLayoutEffect(() => {     
+                                0 && console.log(return1 ) ;            
+                            } , [return1.t2 < 0.5 , return1.vl !== 0 ] ) ;
+                            return return1 ;
+                        }        
+                    ))
+                ) ;
+            })() ;                             
+            /**      
              *  
              * @see  
              * import  : 
              * {@link useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 }         
              * {@link CTXTUALOUTPUTUSAGE_CBC }   
-             */          
+             */           
             const e = ((...[mode, mode1 = {} ] : [
-                1 | 2 ,  
+                1 | 2 | "3" ,  
                 {
                     timingArgMode ?: false | 1 ;    
                     swingTConst ?: number ;           
                 } ? ,          
-            ]) => {              
+            ]) => {               
                 const {
                     swingTConst = (        
                         2 ** -4  
                     ) ,   
-                    timingArgMode = 1 ,   
+                    timingArgMode = 1 ,      
 
                 } = mode1 ;     
-                if (mode === 2 ) {   
+                const SETTARGETATTIME = (
+                    (...[nd1, { t: t2, vl } ] : [
+                        NonNullable<(
+                            ReturnType<(
+                                typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
+                            )>
+                        )> | null , 
+                        { t: number ; vl: number ; } ,     
+                    ]) => {
+                        ;                                 { 
+                            ;   
+                            if (nd1 && (0 <= t2 ) ) {        
+                                ;                    
+                                (          
+                                    nd1.offset  
+                                    .setTargetAtTime(vl, (
+                                        timingArgMode ? t2 : nd1.context.currentTime      
+                                    ) , swingTConst ) 
+                                ) ;      
+                            }     
+                        }          
+                    }
+                ) ;  
+                if (mode === 2 ) {     
                     ;              
                     return (                       
                         <CTXTUALOUTPUTUSAGE_CBC>   
@@ -258,27 +366,59 @@ const {
                                 const {              
                                     t2 ,      
                                     vl ,  
-                                } = ( C11 )(nd0 ) ;      
+                                } = ( C11 )(nd0 ) ;         
                                 const nd1 = (
                                     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
                                 ) ;       
                                 React.useLayoutEffect(() => {   
-                                    ;         
+                                    ;                
                                     if (1 ) {
-                                        ; 
-                                        if (nd1 ) {        
-                                            ;               
-                                            (          
-                                                nd1.offset  
-                                                .setTargetAtTime(vl, (
-                                                    timingArgMode ? t2 : nd1.context.currentTime      
-                                                ) , swingTConst )
-                                            ) ;     
-                                        }     
-                                    }    
-                                } , [nd1, vl ]) ;
+                                        SETTARGETATTIME(nd1, { t: t2, vl }) ;   
+                                    }        
+                                } , [nd1, vl ]) ;       
                                 // TODO                             
                                 return (       
+                                    <p>
+                                        directly using   
+                                        <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
+                                    </p>
+                                ) ;       
+                            } }       
+                        </CTXTUALOUTPUTUSAGE_CBC>           
+                    ) ;      
+                }    
+                if (mode === "3" ) {      
+                    ;                       
+                    return (                       
+                        <CTXTUALOUTPUTUSAGE_CBC>   
+                            { function useC11({ feedPt : nd0 }) {        
+                                const nd1 = (
+                                    useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
+                                ) ;               
+                                const { tScan1  } = (
+                                    useXTScan1(nd0)    
+                                ) ;
+                                React.useLayoutEffect(() => {       
+                                    ;                 
+                                    0 && console.log({ tScan1 });        
+                                    if (nd1) {
+                                        for (const t1 of tScan1 ) {               
+                                            const t2 = (        
+                                                // +t1.toFixed(1 )    
+                                                t1 + delayInSeconds       
+                                            ) ;         
+                                            const {
+                                                vl , 
+                                            } = (
+                                                lComputeAtT(t2 )          
+                                            ) ;
+                                            SETTARGETATTIME(nd1, { t: t2, vl }) ;   
+                                        }
+                                    };
+                                    // TODO       
+                                } , [nd1, tScan1.first ]) ;
+                                // TODO                                              
+                                return (            
                                     <p>
                                         directly using   
                                         <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
@@ -301,7 +441,7 @@ const {
                             const {              
                                 t2 ,          
                                 vl ,            
-                            } = ( C11 )(nd0 ) ;             
+                            } = ( C11 )(nd0 ) ;               
                             // TODO                 
                             return (                      
                                 <CConstantValue               
@@ -313,13 +453,13 @@ const {
                         } }             
                     </CTXTUALOUTPUTUSAGE_CBC>                   
                 ) ;     
-            })( 1 ) ;         
+            })(1 ) ;         
             return {
                 C11 , 
                 e ,              
             } ;
         }
-    ) ;      
+    ) ;        
     return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : (            
@@ -394,7 +534,7 @@ const {
                     </p>         
                 ) ;     
                 const dBB = useDeferredTrue({ UE: "useLayoutEffect" }) ;           
-                return (    
+                return (       
                     dBBC(dBB, { dbgBox1: dbg, c1: e })  
                 ) ;                      
             } 
