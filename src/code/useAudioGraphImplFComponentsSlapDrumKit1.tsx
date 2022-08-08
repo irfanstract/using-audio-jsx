@@ -33,7 +33,7 @@ import {
  
 
 ; 
-const clampWithinZeroAndOne = (  
+const clampWithinZeroAndOne = (      
     function (v: number) {
         return IterableOps.clamp(v, 0, 1 ) ;
     }   
@@ -115,7 +115,7 @@ const {
 //     ) ;  
 // })() ;            
 const WithAutoUnmount = (
-    WithAutoStopmount0             
+    WithAutoUnmount0              
 );    
                  
 const snKit = (() => {       
