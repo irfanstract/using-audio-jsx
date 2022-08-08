@@ -267,16 +267,33 @@ const {
             }                       
             if (version === Vr.BassDrumLoop) {
                 return (       
-                    <div>       
-                        <LoopingWithPeriod   
-                        value={(
-                            // { period: 0.5 }  as const  
-                            { period: 0.5 }  as const            
-                        )} 
-                        renderRange={{ n: 0x10 } }     
-                        > 
-                            <CBassDrumKick1 tCoef1={2 ** -4 } />    
-                        </LoopingWithPeriod>  
+                    <div>                   
+                    <LoopingWithPeriod               
+                    value={(   
+                        { period: 2 * 0x04 * 0.5 }  as const            
+                    )} 
+                    renderRange={{ n: 0x08 } }                  
+                    >         
+  
+                        <LoopingWithPeriod                   
+                        value={(     
+                            { period: 0x04 * 0.5 }  as const            
+                        )}         
+                        renderRange={{ n: 2 } }            
+                        >  
+                                   
+                            <LoopingWithPeriod             
+                            value={( 
+                                { period: 0.5 }  as const            
+                            )} 
+                            renderRange={{ n: 0x04 } }     
+                            > 
+                                 <CBassDrumKick1 tCoef1={2 ** -4 } /> 
+                            </LoopingWithPeriod>      
+                            
+                        </LoopingWithPeriod>            
+
+                    </LoopingWithPeriod>                
                     </div >        
                 ) ;           
             }                            
@@ -306,7 +323,7 @@ const {
                     <CAmpModulated value={ beepBopGraph1 } > 
                         <CPersistingBeep value={ { } } />         
                     </CAmpModulated>                 
-                ) ;                    
+                ) ;                     
             }                     
             if (version === Vr.V2P1 ) {     
                 ;      
@@ -342,7 +359,7 @@ const {
                 <>{ beepBopGraph1 }</>     
             ) ;                 
         })  ;   
-        const useXOptions = (      
+        const useXOptions = (       
             function () {   
                 const allOptions = (
                     Object.values(Vr )         
@@ -353,7 +370,7 @@ const {
                         function (v0: Vr, v1: Vr ) : Vr {
                             return v1 ;     
                         }
-                    ) , Vr.BassDrumSnDrumLoop )
+                    ) , Vr.AmpSlideDown )
                 ) ;         
                 const btns = (      
                     allOptions            
@@ -366,7 +383,7 @@ const {
                             </span>     
                         ) ;
                     })   
-                ) ;      
+                ) ;         
                 return {
                     vl ,  
                     setVl ,     
