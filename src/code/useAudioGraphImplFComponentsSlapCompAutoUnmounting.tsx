@@ -101,23 +101,28 @@ const {
         ) >          
     ) ;                
     //    
-    const render1 = (...[f] : [
+    const wrapC1 = (...[f] : [
         (
             (c: { passageState : PassageState ; expectedChildren: React.ReactNode ; } )
             => 
-            React.ReactElement                   
+            React.ReactElement                          
         ) ,           
     ] ) => (  
-        function ({ children: expectedChildren, preFT, postFT } : ( 
-            Props   
-        ) ) {         
-            const {
+        function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0 } : ( 
+            Props    
+        ) ) {   
+            // TODO  
+            const [preFT, postFT] = ( 
+                [preFT0, postFt0 ] 
+                .map((v: number ) => Math.max(8, v ) )   
+            ) ;     
+            const {       
                 passageStateBy ,     
             } = (   
                 passageStateBy1({ preFT, postFT })        
             ) ;  
-            return (
-                <>    
+            return ( 
+                <>               
                 <AbsoluteScheduledTCons>         
                     { ({ t: expectedT }) => (                  
                         <>            
@@ -128,7 +133,7 @@ const {
                                         passageState: passageState ,          
                                         hasPassedT: hasPassedT ,  
                                     } = (   
-                                        useRealTimeQueryInterval11({
+                                        useRealTimeQueryInterval11({ 
                                             f : ()  => {     
                                                 const ctxT = (
                                                     destNd         
@@ -141,7 +146,7 @@ const {
                                                 const actualT = (
                                                     ctxT    
                                                 ) ;
-                                                ;                                  
+                                                ;                                      
                                                 return {
                                                     passageState : (     
                                                         passageStateBy({ expectedT, actualT })
@@ -150,13 +155,18 @@ const {
                                                 } ;                        
                                             } ,    
                                             LE : "useLayoutEffect" ,   
-                                        } , (     
-                                            (destNd && (destNd.context.state === "running") )
-                                            ?
-                                            (Math.min(preFT, postFT) / 2.5 )   
-                                            :    
-                                            5   
-                                        ) * 1000 )       
+                                        } , (
+                                            Math.max(...[
+                                                (     
+                                                    (destNd && (destNd.context.state === "running") )
+                                                    ?   
+                                                    0.1         
+                                                    :    
+                                                    5     
+                                                ) , 
+                                                Math.min(preFT, postFT) / 2.5  ,  
+                                            ])          
+                                        ) * 1000 )            
                                     ) ;       
                                     return (        
                                         <div       
@@ -179,7 +189,7 @@ const {
     ) ;    
     return {
         WithAutoUnmount : (
-            render1(function ({ passageState, expectedChildren }) {
+            wrapC1(function ({ passageState, expectedChildren }) {
                 return (   
                     <>{ (      
                         (passageState === PassageState.SUPPOSEDLY_NOW ) ?
@@ -189,7 +199,7 @@ const {
             })  
         ) ,     
         WithAutoStopmount: (
-            render1(function ({ passageState, expectedChildren }) {
+            wrapC1(function ({ passageState, expectedChildren }) {
                 return (    
                     <CAmpModulated0            
                     value={ (      
@@ -203,7 +213,7 @@ const {
             })  
         ),
         WithAutoStopmountExtra : (
-            render1(function ({ passageState, expectedChildren }) {    
+            wrapC1(function ({ passageState, expectedChildren }) {    
                 return (   
                     <> 
                     <NdRefConsm>
