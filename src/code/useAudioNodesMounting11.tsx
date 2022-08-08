@@ -20,17 +20,26 @@ import { fillWithWhiteNoise } from "./audioBufferFWhiteNoise";
 
 
 
+   
 
 
-
-import {   USEYYYNODER, } from "./useAudioYyyNodeO";       
-import { ToUseYyNodeWithGivenFadeoutTimeConstant1, useYyNodeWithGivenFadeoutTimeConstant1, useParamNodeWithGiven } from "./useAudioYyyNodeO";  
+import {   USEYYYNODER, UABN_ARGPARSE, } from "./useAudioYyyNodeO";       
+import { 
+    ToUseYyNodeWithGivenFadeoutTimeConstant1,  
+    useYyNodeWithGivenFadeoutTimeConstant1,   
+    useParamNodeWithGiven,    
+             
+} from "./useAudioYyyNodeO";  
 import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
-
+       
 const useGainNodeWithGivenFadeoutTimeConstant1 : (
-    USEYYYNODER<GainNode >      
-) = (
-    function (dest: AudioNode | null, timeConstant1: number ) {           
+    USEYYYNODER<GainNode >                 
+) = (    
+    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0: dest ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;           
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<GainNode>(dest, { timeConstant1 }, (
                 (ctx: BaseAudioContext, dest: AudioNode ) => {
@@ -52,12 +61,16 @@ const useGainNodeWithGivenFadeoutTimeConstant1 : (
                 } ,
             } )                  
         ) ;
-    }       
+    }           
 ) ;    
-const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (       
+const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (        
     USEYYYNODER<BiquadFilterNode >      
 ) = (
-    function (dest: AudioNode | null, timeConstant1: number ) {                   
+    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0: dest ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;            
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<BiquadFilterNode>(dest, { timeConstant1 }, (
                 (ctx: BaseAudioContext, dest: AudioNode ) => {
@@ -66,7 +79,7 @@ const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (
                         .createBiquadFilter()   
                     ) ;                 
                     // (              
-                    //     gainNode1.gain.value = 0              
+                    //     gainNode1.gain.value = 0               
                     // );                                                                  
                     
                     return gainNode1 ;    
@@ -79,12 +92,16 @@ const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (
                 } ,
             } )                  
         ) ;      
-    }            
+    }                
 ) ;    
-const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (       
+const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (        
     USEYYYNODER<DynamicsCompressorNode >           
 ) = (
-    function (dest: AudioNode | null, timeConstant1: number ) {                   
+    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
+        const {
+            nd0: dest ,         
+            timeConstant1 ,               
+        } = UABN_ARGPARSE(...args ) ;                
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<DynamicsCompressorNode     >(dest, { timeConstant1 }, (
                 (ctx: BaseAudioContext, dest: AudioNode ) => {
@@ -110,11 +127,11 @@ const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (
  * avoid `stop()`ing it ; that {@link React.useEffect will happen automatically after (a few seconds ) unmount }  .  
  * 
  * this is 
- * a generalisation of both  
+ * a generalisation of both         
  * - {@link useOscilltorNodeWithGivenFadeoutTimeConstant1 } 
  * - {@link useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1 }
 */
-const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (
+const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (  
     function <SNode1 extends AudioScheduledSourceNode> (                    
         nd0 : AudioNode | null,                                                             
         timeConstant1: number ,  
@@ -163,15 +180,7 @@ const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (
 
         return nd2 ;            
     }
-);               
-const UABN_ARGPARSE = ( 
-    (...[nd0, timeConstant1] : Parameters<USEYYYNODER<{}> > ) => {
-        return {
-            nd0 , 
-            timeConstant1 ,            
-        } ;       
-    }
-) ;
+);            
 /**             
  * the returned {@link OscillatorNode} will immediately `start()` .    
  * avoid `stop()`ing it ; that {@link React.useEffect will happen automatically after (a few seconds ) unmount }  

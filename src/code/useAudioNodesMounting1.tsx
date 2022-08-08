@@ -31,7 +31,13 @@ import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
  */
 enum GDCM {  
     NONE ,   
+    /**    
+     * this advocates that it should be within {@link usingC }.    
+     */
     DISCONNECT_IN_USING_C ,     
+    /**   
+     * this advocates that it should be within {@link usingANodeCnnctM }.   
+     */
     DISCONNECT_IN_USINGACNNCTM ,      
 } ;      
 let globalADisconnectMode :(   
@@ -41,9 +47,9 @@ let globalADisconnectMode :(
 ) ;     
 /**  
  *      
- * @deprecated
  * WORK IN PROGRESS      
  *      
+ * @deprecated
  * @see      
  * naming inspired by         
  * {@link usingTimeout }
@@ -61,18 +67,45 @@ const usingGainNode1 = (
  * do not call `connect` and `disconnect`; 
  * the calls will be made automatically as necessary ;     
  * we can't {@link Omit } any method(s) since 
- * that'll prevent usability as `connect` and `disconnect` arg     
- */
+ * that'll prevent usability as `connect` and `disconnect` arg        
+ *                 
+ * NEEDS AMENDMENT. 
+ * the naming  
+ * does not suggest (the fact that it requires 'timeConstant' as second argument ).      
+ */   
 type USEYYYNODER<R extends {} > = (
-    (dest: AudioNode | null , timeConstant1: number ) 
-    => (R | null )
-) ;
-export {  
-    // usingGainNode1 , 
-} ;
-export type {
-    USEYYYNODER , 
-} ;
+    (dest: AudioNode | null , ...etc: [a: number | { timeConstant1 ?: number ; } ] ) 
+    => (R | null )              
+) ;  
+const USEYYYNODER = {} ; // TS-1205                                        
+/**               
+ * this is supposed to be    
+ * shared/common protocol 
+ * extracted as necessary 
+ * to support possible future extension trivially.      
+ */      
+const UABN_ARGPARSE = ( 
+    (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ) => { 
+        const timeConstant1 = ((): number => {
+            if (typeof timeConstant10 === "number" ) {
+                return timeConstant10 ; 
+            }            
+            if (typeof timeConstant10 === "object" ) {
+                const { timeConstant1: v = 0.5 } = timeConstant10;
+                return v ;   
+            }
+            return 0.5 ;  
+        })() ;       
+        return {
+            nd0 ,       
+            timeConstant1 ,                 
+        } ;       
+    }
+) ;      
+export {     
+    UABN_ARGPARSE ,  
+    USEYYYNODER ,     
+} ;   
     
 
      
@@ -118,13 +151,16 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
      * 
      * @param OeGainNode1 instantiations of {@link YyNode }
     */                    
-    <YyNode extends AudioNode > (...[          
+    <YyNode extends AudioNode > 
+    (...[          
         dest ,            
         { timeConstant1 } ,        
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, D1, YyNode > ) => (YyNode | null )                                            
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, D1, YyNode > )    
+    => 
+    (YyNode | null )                                            
 ) ;   
 /**  
  * {@link ToUseYyNodeWithGivenFadeoutTimeConstant1 }  . 
