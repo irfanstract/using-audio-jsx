@@ -28,14 +28,11 @@ const useAsyncMemo = (
     function <A extends AsyncMemoisedValue > (...[      
         {                         
             depsChangeImpliesInvalidation ,                                                
-            f ,                                                                   
+            f ,                                                                        
         }  ,                    
         deps ,                                      
-    ] : [      
-        properties : DCII & {              
-            f : () => Promise<A > ;                           
-        } ,                   
-        deps: React.DependencyList,                                  
+    ] : [       
+        ...AsyncMemoUsageArgs<A> ,                                 
     ]) : A | undefined {     
         const [s, setS] = (                                           
             useState<A | undefined >(undefined )       
@@ -56,6 +53,24 @@ const useAsyncMemo = (
         return s ;
     }
 ) ;        
+const AsyncMemoUsageArgs = {} ; // TS-1205   
+type AsyncMemoUsageArgs<A> = (
+    [      
+        properties : DCII & {              
+            f : () => Promise<A > ;                           
+        } ,                   
+        deps: React.DependencyList,                                  
+    ]  
+) ;
+const AsyncStrmUsageArgs = {} ; // TS-1205  
+type AsyncStrmUsageArgs<A> = (
+    [           
+        properties : DCII & {              
+            f : () => AsyncGenerator<A > ;                           
+        } ,                   
+        deps: React.DependencyList,                                  
+    ]           
+) ;
 /**     
  * an alternative to {@link useAsyncMemo } 
  * based on `yield`s and intended to 
@@ -69,11 +84,8 @@ const useAsyncStrm = (
             f ,                                                                   
         }  ,                      
         deps ,                                          
-    ] : [      
-        properties : DCII & {              
-            f : () => AsyncGenerator<A > ;                           
-        } ,                   
-        deps: React.DependencyList,                                  
+    ] : [     
+        ...AsyncStrmUsageArgs<A> ,                                      
     ]) : A | undefined {       
         const [s, setS] = (                                    
             useState<A | undefined >(undefined )       
@@ -93,9 +105,11 @@ const useAsyncStrm = (
                 const g = f() ;     
                  
                 LOOP :      
-                for await (const a of g ) {                                                       
-                    if (!remainsValid() ) {               
-                        1 && console.info("invalidated") ;    
+                for await (const a of g ) {                                                         
+                    if (!remainsValid() ) {          
+                        // logging needs to be disabled, 
+                        // to allow real-time usage.      
+                        0 && console.info("invalidated") ;    
                         break LOOP ;                                                                           
                     }  
 
@@ -105,7 +119,42 @@ const useAsyncStrm = (
         ) ;      
         return s ;  
     }
-) ;          
+) ;      
+const useAsyncDictStrm = (() => {
+    type Stat<A> = ( 
+        { [k in keyof A] ?: A[k] ; }     
+    ) ; 
+    return (
+        function <A extends {} > (   ...[      
+            {    
+                depsChangeImpliesInvalidation ,                                                
+                f ,     
+            }  ,           
+            deps ,                                          
+        ] : [     
+            ...AsyncStrmUsageArgs<Stat<A> > ,                                      
+        ]): Stat<A> { 
+            return (           
+                useAsyncStrm<Stat<A> >({
+
+                    depsChangeImpliesInvalidation ,  
+
+                    f: async function* () {
+                        var s : Stat<A> = {} ;    
+                        for await (const sAug of f() ) {  
+                            s = { ...s, ...sAug } ;
+                            yield s ;     
+                        }
+                    } , 
+
+                } , deps)
+                ||
+                { }
+            ) ;   
+        }    
+    ) ;
+})() ;    
+
 const useMemoImplSeqInvalidation = (
     function () {             
         ;                                                               
@@ -140,7 +189,11 @@ const useMemoImplSeqInvalidation = (
 
 
 
-export {
+export {  
     useAsyncMemo ,     
-    useAsyncStrm ,      
-} ;
+    useAsyncStrm ,       
+    useAsyncDictStrm , 
+
+    AsyncMemoUsageArgs , 
+    AsyncStrmUsageArgs ,   
+} ;  
