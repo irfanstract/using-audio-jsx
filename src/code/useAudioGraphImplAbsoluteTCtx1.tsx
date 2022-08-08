@@ -108,7 +108,7 @@ const LoopingWithPeriod = (
             children: item ,        
             value: props ,                     
             renderRange ,       
-            visual = false ,                       
+            visual = true ,                       
         } ) {   
             const {     
                 period : vPeriod ,       
