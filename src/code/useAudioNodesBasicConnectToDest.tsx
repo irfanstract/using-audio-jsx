@@ -40,17 +40,23 @@ const M_ONMOUNT_RECONNECT_ONUNMOUNT_DISCONNECT = 1.5 ;
  */
 const M_ONMOUNT_RECONNECT_ONUNMOUNT_NOOP = 2 ;
 const useAudioNodeConnectToDest = (
-    (...[      
-        src , destination , 
-        { cncDebug = false, omitUnmountTimeDisconnectiveCall: omitDisconnectiveCallOnUnmount = false } = {} ,  
-    ] : [         
+    (...args1 : [         
         src: AudioSourceNode | null,            
         destination: (AudioSinkNode ) | null, 
         properties ?: {    
-            cncDebug ?: boolean ;           
+            /**    
+             * CAVEAT - this will cause your app to violently dump logging.
+             * @deprecated    
+             * BILLION LAUGHS    
+             */
+            cncDebug ?: boolean ;                
             omitUnmountTimeDisconnectiveCall ?: boolean ;     
         }  ,     
-    ]): void => {        
+    ]): void => {             
+        const [      
+            src , destination , 
+            { cncDebug = false, omitUnmountTimeDisconnectiveCall: omitDisconnectiveCallOnUnmount = false } = {} ,  
+        ] = args1 ;
         const mode1 = (
             (      
                 omitDisconnectiveCallOnUnmount ? 
@@ -64,8 +70,10 @@ const useAudioNodeConnectToDest = (
             )              
         ) ;                  
         ;                   
-        useLayoutEffect(() => {                 
-            cncDebug && (console.log({ src, destination }), console.log(new DbgException(`ConnectToDest - printed some debug at cll ctx `) ) ) ;                
+        useLayoutEffect(() => {                         
+            cncDebug && (
+                console.log({ src, destination }), console.log(new DbgException(`ConnectToDest - printed some debug at cll ctx `) )       
+            ) ;                
             if (src && destination) {  
                 switch (mode1 ) {      
                     case M_ONMOUNT_MKCONNECT_ONUNMOUNT_DISCONNECT : {                                                                                                   
