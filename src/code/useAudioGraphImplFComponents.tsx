@@ -95,13 +95,14 @@ const {
                                 null &&  
                                 <span key={2} style={{ display: "block" }}>           
                                     code :   
-                                    { renderSrcCodeView() }   
+                                    { renderSrcCodeView() }     
                                 </span>       ,           
-                            ] }     
+                            ] }           
                             <CFnValueAtAbsoluteT 
-                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }  
+                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }
+                            codeDeps={[schedT ]}       
                             { ...otherProps }    
-                            />
+                            />     
                             </>
                         ) }      
                     </TC>
