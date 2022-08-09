@@ -186,26 +186,37 @@ const snKit = (() => {
             ] ,
             renderConfig : { scanPeriodMillis: number ; } ,    
         ]) {           
-            return (                    
-                <CFnValue1                                 
-                value={            
-                    ({ ctxT }) => {         
-                        const {                                    
-                            c0,                           
-                            f ,             
-                        } = eqt ;   
-                        const e10 = (
-                            Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
-                        );                   
-                        const val1 = (              
-                            2 ** -e10   
-                        ) ;                                     
-                        return val1  ;                     
-                    }                      
-                }     
-                scanPeriodMillis={scanPeriodMillis }   
-                />       
-            ) ;       
+            return <CBC>{ function use1() {
+                const key = (
+                    React.useMemo(() => (
+                        // TODO
+                        // Math.random()
+                        0   
+                    ), [maximumExp, scanPeriodMillis ])
+                ) ;            
+                return (     
+                    <K key={key}>                       
+                    <CFnValue1                                         
+                    value={                        
+                        ({ ctxT }) => {         
+                            const {                                    
+                                c0,                           
+                                f ,             
+                            } = eqt ;   
+                            const e10 = (
+                                Math.min(maximumExp , c0 + Math.max(0, ctxT ) * f )    
+                            );                   
+                            const val1 = (              
+                                2 ** -e10   
+                            ) ;                                     
+                            return val1  ;                     
+                        }                      
+                    }     
+                    scanPeriodMillis={scanPeriodMillis }   
+                    />           
+                    </K>
+                )  ;  
+            } }</CBC>;       
         }    
     ) ;
     const slapDrumImplExpetctedTLenProps = (
@@ -296,7 +307,7 @@ const snKit = (() => {
                             interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
                         ) , { maximumExp }, { scanPeriodMillis } )  
                     ) ;  
-                    return (   
+                    const e11 = (   
                         <CAmpModulated0                         
                         value={             
                             ampModulGraph        
@@ -313,8 +324,11 @@ const snKit = (() => {
                             )}       
                             />                         
                         </CAmpModulated0 >                            
-                    ) ;             
-                })() ;      
+                    ) ;        
+                    return (
+                        e11    
+                    ) ;     
+                })() ;         
                 return (
                     autoUnmount ?
                     (       
@@ -353,7 +367,7 @@ const snKit = (() => {
                     dbg: dbg1 = false ,    
  
                 } = mainProps ;  
-                const c1 = (() => {           
+                const c1 = (() => {            
                     const maximumExp = (
                         -1 * Math.log2(minimumFreq / conventionalFreq )   
                     ) ;  
@@ -428,7 +442,7 @@ const {
                 C.toString().length
             ) ;   
             const keyPrefix: string = (
-                String(C.name || cStringLength )
+                String(C.name || cStringLength )  
             ) ;
             /**   
              * note : name "CDK" is since the code were initiaally for "CBassDrumKit"
