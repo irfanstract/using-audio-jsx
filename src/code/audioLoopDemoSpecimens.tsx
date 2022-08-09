@@ -370,7 +370,7 @@ const {
                         function (v0: Vr, v1: Vr ) : Vr {
                             return v1 ;     
                         }
-                    ) , Vr.AmpSlideDown )
+                    ) , Vr.BassDrumKick )
                 ) ;         
                 const btns = (      
                     allOptions            
