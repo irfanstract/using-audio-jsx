@@ -264,9 +264,12 @@ const CurrentCtxTInfoDisplay = (
 export {
     ModifyingCompPayloadDiv as WGD_DIV ,  
 
-    Prv1 , 
+    ctx0 ,             
+    CurrentCtxTInfoDisplay ,   
     Consm ,        
-    WithGivenDest ,
-    ctx0 ,        
-    CurrentCtxTInfoDisplay , 
+    useWithCurrentSideTapPtRef ,               
+        
+    Prv1 , 
+    WithGivenDest , 
+           
 } ;
