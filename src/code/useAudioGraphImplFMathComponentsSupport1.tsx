@@ -276,87 +276,124 @@ const {
         ) ,              
       
         CFnValue : (        
-            function CFncValueC({ value: compute , scanPeriodMillis = 32 } : ( 
+            function CFncValueC(propsC : ( 
                 {    
                     value : (              
                         Required<(  
                             CFnVIProps
                         )>["compute"]  
                     ) ;                   
+                    codeDeps ?: React.DependencyList ;
                     scanPeriodMillis ?: (                
                         Required<(  
                             CFnVIProps
-                        )>["scanPeriodMillis"]  
-                    )  ;             
+                        )>["scanPeriodMillis"]       
+                    )  ;                
                 }        
-            ) ) {                    
-                // debbugging             
-                {
+            ) ) {                       
+                const { 
+                    value: compute , 
+                    scanPeriodMillis = 32  ,      
+                    codeDeps = [] ,    
+                } = propsC;    
+                function usePeriodicCtxTScan1  (...[nd0 ] : [ AudioNode ] ) {
+                    return (              
+                        useRealTimeQueryInterval1X(() => {    
+                            const ctxT = (
+                                nd0.context.currentTime                     
+                            ) ;         
+                            return {  
+                                ctxT ,      
+                            } ;             
+                        } , scanPeriodMillis )            
+                    ) ;
+                }  
+                function useCScanTs(...[nd0, properties1 = {}] : [
+                    AudioNode, 
+                    { sp ?: number ; } ? ,     
+                ]) { 
+                    const {                
+                        sp: sp0 = 2 ** -2 ,      
+                    } = properties1 ;         
+                    const sp = Math.max(2 ** -3  , sp0 );
+                    ;
+                    const {       
+                        ctxT ,           
+                    } = (             
+                        usePeriodicCtxTScan1(nd0 )   
+                    );         
+                    const ctxTFloored = (               
+                        Math.floor(ctxT )               
+                    ) ;                       
+                    const {  
+                        tScan1 ,           
+                    } = (
+                        React.useMemo(() => {      
+                            ;                            
+                            const tScan1 =  (             
+                                Immutable.Range(
+                                    ctxTFloored, ctxTFloored + 1 ,   
+                                    scanPeriodMillis / 1000 )   
+                            ) ;                 
+                            return {
+                                tScan1 ,     
+                            } ;       
+                        } , [ctxTFloored ] )   
+                    ) ;              
+                    return {
+                        ctxT , 
+                        ctxTFloored     , 
+                        tScan1 ,     
+                    } ;
+                } ;
+                // debbugging               
+                {          
                     ;
                     React.useEffect(() => {     
                         0 && console.log(CFncValueC.name ) ;      
                     }, [] ) ;                   
-                }       
+                }           
                 ;
-                const delayInSeconds = 0.07 ;         
+                const delayInSeconds = 0.07 ;               
                 const lComputeAtT = (
-                    function (...[t2] : [t: number ] ): (      
-                        {} & { 
-                            t2 : number ;      
-                            vl : number ;          
-                        }    
-                    ) {    
-                        ;   
-                        const vl0 = (
-                            compute({ ctxT: t2 })  
-                        ) ;
-                        const { value: vl } = (            
-                            (typeof vl0 === "number" ? { value : vl0 } : vl0 )
-                        ) ;   
-                        return { t2 , vl } ;        
-                    }      
+                    React.useCallback(( 
+                        function (...[t2] : [t: number ] ): (      
+                            {} & { 
+                                t2 : number ;     
+                                vl : number ;          
+                            }    
+                        ) {    
+                            ;             
+                            const vl0 = (  
+                                compute({ ctxT: t2 })  
+                            ) ;
+                            const { value: vl } = (            
+                                (typeof vl0 === "number" ? { value : vl0 } : vl0 )
+                            ) ;   
+                            return { t2 , vl } ;         
+                        }      
+                    ), codeDeps )     
                 );                   
-                const {           
+                const {               
                     e ,                      
                 } = (   
-                    (
+                    (     
                         function useCFVI(): { e: React.ReactElement ; } {          
                             const e = (        
                                 useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
                                     nd0      
-                                    ?     
+                                    ?          
                                     <CBC>
-                                    { function useE() {               
-                                        const {  
-                                            ctxT ,     
-                                        } = (      
-                                            useRealTimeQueryInterval1X(() => {
-                                                const ctxT = (
-                                                    nd0.context.currentTime           
-                                                ) ;         
-                                                return {  
-                                                    ctxT ,      
-                                                } ;  
-                                            } , scanPeriodMillis )   
-                                        );     
-                                        const ctxTFloored = (             
-                                            Math.floor(ctxT )               
-                                        ) ;            
+                                    { function useE() {       
                                         const {
-                                            tScan1 ,           
-                                        } = (
-                                            React.useMemo(() => {      
-                                                ;                                         
-                                                const tScan1 =  (     
-                                                    Immutable.Range(
-                                                        ctxTFloored, ctxTFloored + 1,   
-                                                        scanPeriodMillis / 1000 )   
-                                                ) ;                 
-                                                return {
-                                                    tScan1 ,     
-                                                } ;
-                                            } , [ctxTFloored ] )   
-                                        ) ;         
+                                            ctxT , 
+                                            ctxTFloored     ,    
+                                            tScan1 ,          
+
+                                        } = useCScanTs(nd0 ) ;     
+                                        const remountDeps : number = (
+                                            Math.floor(ctxT * 1 )  
+                                        ) ;
                                         const graph = (    
                                             React.useMemo(() => (                  
                                                 tScan1            
@@ -377,16 +414,16 @@ const {
                                                         ) )          
                                                     ) ;        
                                                     return {               
-                                                        t: t2 ,        
-                                                        vl: vl ,               
+                                                        t: t2 ,          
+                                                        vl: vl ,                     
                                                     } ;      
                                                 })     
-                                                .toArray()      
-                                            ) , [tScan1.first() ] )
+                                                .toArray()        
+                                            ) , [remountDeps, lComputeAtT ]   )
                                         ) ;                                
                                         ;       
-                                        // TODO      
-                                        const {           
+                                        // TODO            
+                                        const {             
                                             swingTConst ,                
                                             timingArgMode ,         
                              
@@ -394,28 +431,60 @@ const {
                                             SETVALUECURVE_AT_TIME ,      
                            
                                         } = eSupport({}    ) ;               
-                                        ;       
+                                        ;               
+                                        const {
+                                            remountDebugBeep = false ,     
+                                        } = {} as { remountDebugBeep ?: boolean ; } ;
                                         // TODO                             
                                         const nd10 = (  
                                             (                          
                                                 useDepsRemount         
-                                            )({ deps: [tScan1.first() ], dest: nd0 })
+                                            )({         
+                                                deps: [remountDeps, lComputeAtT ], 
+                                                dest: nd0  , 
+                                                     
+                                                unmountTransitiveLenSeconds: 0.2 ,  
+                                            })
                                         ) ;
                                         // TODO remove this LOC ; this is only for debugging   
                                         {
-                                            ;        
-                                            const nd11 = (          
-                                                useFixedGain(nd10, (     
-                                                    // 2 ** -4   
+                                            const beepT = (
+                                                React.useMemo(() => (        
+                                                    (nd10 && remountDebugBeep )   
+                                                    ?    
+                                                    (nd10.context.currentTime ) 
+                                                    : 
+                                                    ((1 + Math.random() ) *  5E5  )     
+                                                ) , [nd10 ] )           
+                                            ) ;  
+                                            ;                             
+                                            const nd11 = (         
+                                                useFixedGain(nd10, (            
+                                                    // 2 ** -4        
                                                     2 ** -32      
-                                                ) )          
+                                                ) )                 
                                             ) ;    
                                             useHalfSecondBeep(
-                                                nd11, { t: (nd11 ? nd11.context.currentTime : 1E5 ) }) ;      
+                                                nd11, { t: beepT }) ;      
                                         }          
                                         const nd1 = (             
-                                            useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd10 , 0.5 )        
-                                        ) ;              
+                                            React.useMemo(():(
+                                                (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
+                                                | null     
+                                            ) => {                  
+                                                if (nd10) {             
+                                                    const cnd11 = (
+                                                        nd10.context.createConstantSource()        
+                                                    ) ;     
+                                                    cnd11.connect(nd10 ) ;
+                                                    cnd11.offset.value = 0 ;
+                                                    cnd11.start() ;         
+                                                    return cnd11;   
+                                                } else {
+                                                    return null ;    
+                                                }
+                                            } , [nd10 ] )              
+                                        ) ;                            
                                         // DEBUGGING       
                                         const mountRandom1 = [
                                             (  
@@ -426,7 +495,7 @@ const {
                                             (
                                                 React.useMemo(() => (       
                                                     Math.random() 
-                                                ) , [nd1 ])
+                                                ) , [nd1 ])  
                                             ) ,       
                                         ] ;          
                                         //   
@@ -434,26 +503,28 @@ const {
                                             ;                        
                                             0 && console.log({ tScan1 });                     
                                             if (nd1  ) {   
-                                                // console.log((  
+                                                // console.log((            
                                                 //     ((nd1 as any) )                                
                                                 // ));                    
                                                 if ((         
-                                                    1 || (          
+                                                    0 || (          
                                                         (() => {           
                                                             const v = (
                                                                 ((nd1 as any).FNCMATHCOMPONENTSSS_MNT_PRM += "+")   
                                                             ) ;     
                                                             0 && console.log({ nd1, v });                
                                                             return v ;         
-                                                        })()      
+                                                        })()           
                                                         ===  
-                                                        `${undefined }+`               
+                                                        `${undefined }+`                  
                                                     )           
                                                 )) {
                                                     SETVALUECURVE_AT_TIME(nd1, (      
                                                         graph       
                                                     ) , a => a.offset )    ;       
-                                                }  
+                                                }  else {
+                                                    // throw TypeError(`asserion error, secondary dispatch`) ;
+                                                }
                                             };    
                                             // TODO           
                                         } ,   

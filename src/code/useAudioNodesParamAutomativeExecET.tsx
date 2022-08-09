@@ -74,14 +74,14 @@ const eSupport = (
                         typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
                     )>    
                 )>             
-            ) ;
+            ) ;  
             return {                      
                 SETTARGETATTIME : (        
-                    function<Dest extends AudioNode > (...[nd1, { t: t2, vl } , DP ] : [
+                    function<Dest extends Pick<AudioNode, "context"> > (...[nd1, { t: t2, vl } , DP ] : [
                         dest: Dest | null ,    
                         value: TAndVlL ,             
                         destParam : (...a: [Dest] ) => AudioParam  ,    
-                    ]) {  
+                    ]) {    
                         if (nd1  ) {               
                             if (0 <= t2 ) {       
                                 (             
@@ -95,42 +95,61 @@ const eSupport = (
                     }          
                 ) ,                              
                 SETVALUECURVE_AT_TIME : (
-                    function<Dest extends AudioNode > (...[nd1,  evtSq0, DP ] : [                    
+                    function<Dest extends Pick<AudioNode, "context"> > (...[nd1,  evtSq0, DP ] : [                    
                         dest: Dest | null ,        
                         values: (readonly TAndVlL[] ) ,                
-                        destParam : (...a: [Dest] ) => AudioParam  ,      
-                    ])  {   
-                        const {
-                            omitBypassedT = false ,   
-                        } = (                          
-                            () : { omitBypassedT ?: boolean ; } => ({})
-                        )();   
-                        ;                              
+                        destParam : (...a: [Dest] ) => AudioParam  ,        
+                    ])  {      
+                        const OMBT = (                          
+                            () : { 
+                                omitBypassedT ?: boolean ;   
+                                shrinkDurationAsNecessary ?: boolean ,    
+                            } => ({})        
+                        )();     
+                        const {       
+                            omitBypassedT = true ,        
+                        } = OMBT ;  
+                        const {         
+                            shrinkDurationAsNecessary = omitBypassedT ? true : false ,   
+                        } = OMBT ;     
+                        ;                                  
                         // TODO                                           
                         if (0 ) {          
                             return ;   
-                        } ;               
+                        } ;                  
                         ;      
                         if (nd1) {                                      
-                            const evtSq = (                  
-                                evtSq0   
-                                // omit negative `t`s                 
-                                .filter(({ t }) => (0 <= t ) )    
-                                // omit bypassed `t`s                         
-                                .flatMap(({ t, vl }) => (
-                                    (
-                                        omitBypassedT ?
-                                        (nd1.context.currentTime <= t )
-                                        : true                        
-                                    ) ?          
-                                    [{ t, vl }]
-                                    : [ ]
-                                ) )   
-                            ) ;            
+                            const actualCtxTime = (
+                                nd1.context.currentTime    
+                            ) ;                 
+                            const evtSq = (() => {
+                                const sq1 = (                    
+                                    evtSq0                  
+                                    // omit negative `t`s                 
+                                    .filter(({ t }, _1, sq ) =>  (  0 <= t ) )      
+                                    // omit bypassed `t`s                         
+                                    .flatMap(({ t, vl }, i, sq) => (
+                                        ( 
+                                            (                 
+                                                omitBypassedT ?
+                                                ((actualCtxTime + 0.01 ) <= t )
+                                                : true                            
+                                            )
+                                        ) ?          
+                                        [{ t, vl }]                    
+                                        : [ ]
+                                    ) )          
+                                ) ;
+                                return (
+                                    2 <= sq1.length 
+                                    ?
+                                    sq1 : evtSq0      
+                                ) ;
+                            })() ;            
                             0 && console.log({ evtSq }) ;
                             ;          
                             if (evtSq.length ) {                      
-                                const {                         
+                                const {                           
                                     lastEvtT , 
                                     lastEvtVl ,          
                                     firstEvtT ,  
@@ -138,23 +157,20 @@ const eSupport = (
                                     duration: idealDuration ,    
                                 }  = (
                                     tAndVlSqExpand(evtSq )
-                                ) ;                  
-                                const actualCtxTime = (
-                                    nd1.context.currentTime    
-                                ) ;  
+                                ) ;        
+                                const feasibleDuration = (
+                                    idealDuration           
+                                ) ;
                                 // 'AudioParam'       
-                                const tm = (                
-                                    timingArgMode ?      
+                                const tm = (                 
+                                    timingArgMode ?            
                                     firstEvtT     
                                     : actualCtxTime       
                                 ) ;         
-                                const feasibleDuration = (
-                                    lastEvtT - actualCtxTime    
-                                ) ;
                                 ((mode : 0 | 1 | 2) : void => {     
                                     if (mode === 1) {      
                                         ;           
-                                        (            
+                                        (                     
                                             DP(nd1 )      
                                             .cancelAndHoldAtTime(( 
                                                 // TODO   
@@ -165,37 +181,44 @@ const eSupport = (
                                     if (mode === 2) {  
                                         ;                 
                                         (   
-                                            DP(nd1 )     
+                                            DP(nd1 )       
                                             .cancelScheduledValues(0 )    
                                         );         
                                         (
                                             DP(nd1 )     
                                             .cancelScheduledValues(tm) 
                                         );          
-                                    }    
+                                    }     
                                 } )(0 ) ;                           
-                                ((   ) => {
-                                    // if (! (((nd1 as any).PARAMAUTOMATIVESEQEXEC_ET += "+") === `${undefined }+` ) ) {
-                                    //     throw TypeError(`assertion error     `) ;
-                                    // }    
+                                ((   ) => {  
+                                    const nd11 = (
+                                        nd1 as { PARAMAUTOMATIVESEQEXEC_ET ?: undefined | string ; }      
+                                    ) ;                      
+                                    if ((                             
+                                        nd11.PARAMAUTOMATIVESEQEXEC_ET       
+                                        || 
+                                        ! ((nd11.PARAMAUTOMATIVESEQEXEC_ET += "+") === `${undefined }+` )    
+                                    ) ) {  
+                                        throw TypeError(`cannot run this twice on same AP.    `) ;
+                                    }      
                                 } )(  ) ;       
-                                (                         
-                                    DP(nd1 )                      
-                                    .setValueCurveAtTime(( 
-                                        // TODO avoid the assumption that the timing is regular.    
+                                (                 
+                                    // TODO avoid the assumption that the timing is regular.           
+                                    DP(nd1 )                          
+                                    .setValueCurveAtTime((    
                                         evtSq     
                                         .map(({ vl }): TAndVlL["vl"] => vl )    
                                     ), (       
                                         Math.max((
                                             // it's important to give 'tolerance' .           
                                             actualCtxTime             
-                                            + 0.15       
-                                        ), (              
-                                            tm     
+                                            + 0.00       
+                                        ), (                     
+                                            tm                              
                                         ))                    
                                     ) , (        
                                         // it's important to give 'tolerance' .    
-                                        Math.max(0.15, feasibleDuration )  
+                                        Math.max(0.03, feasibleDuration )  
                                     ) )      
                                 ) ;          
                             }        
