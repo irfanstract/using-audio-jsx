@@ -43,13 +43,16 @@ import {
   
     
 
-const eSupport = (
+/**    
+ * {@link BaseAudioContext.currentTime  `t`s will be treated as WRT the `nd.ctx`'s `currentTime` }.
+ */
+const eSupport = (  
     (...[mode1 = {} ] : [
         {
             timingArgMode ?: false | 1 ;    
             swingTConst ?: number ;                  
         } ,      
-    ] ) => {          
+    ] ) => {             
         type TAndVlL = TAndVl ;     
         ;
         const {
@@ -65,7 +68,7 @@ const eSupport = (
             SETVALUECURVE_AT_TIME , 
   
         } = (() => {     
-            type CSN1 = (   
+            type CSN1 = (     
                 NonNullable<(     
                     ReturnType<(   
                         typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
@@ -89,7 +92,7 @@ const eSupport = (
                                 ) ;                 
                             }  
                         }                               
-                    }        
+                    }          
                 ) ,                              
                 SETVALUECURVE_AT_TIME : (
                     function<Dest extends AudioNode > (...[nd1,  evtSq0, DP ] : [                    
@@ -97,43 +100,66 @@ const eSupport = (
                         values: (readonly TAndVlL[] ) ,                
                         destParam : (...a: [Dest] ) => AudioParam  ,      
                     ])  {   
-                        // TODO                             
-                        if (0 ) {    
-                            return ;                
-                        } ;                
-                        ;     
-                        if (nd1) {                                 
-                            const evtSq = (             
-                                evtSq0 
-                                .filter(({ t }) => (0 <= t ) )      
+                        const {
+                            omitBypassedT = false ,   
+                        } = (                          
+                            () : { omitBypassedT ?: boolean ; } => ({})
+                        )();   
+                        ;                              
+                        // TODO                                           
+                        if (0 ) {          
+                            return ;   
+                        } ;               
+                        ;      
+                        if (nd1) {                                      
+                            const evtSq = (                  
+                                evtSq0   
+                                // omit negative `t`s                 
+                                .filter(({ t }) => (0 <= t ) )    
+                                // omit bypassed `t`s                         
+                                .flatMap(({ t, vl }) => (
+                                    (
+                                        omitBypassedT ?
+                                        (nd1.context.currentTime <= t )
+                                        : true                        
+                                    ) ?          
+                                    [{ t, vl }]
+                                    : [ ]
+                                ) )   
                             ) ;            
                             0 && console.log({ evtSq }) ;
                             ;          
-                            if (evtSq.length ) {                  
+                            if (evtSq.length ) {                      
                                 const {                         
                                     lastEvtT , 
-                                    lastEvtVl ,     
+                                    lastEvtVl ,          
                                     firstEvtT ,  
                                     vl0 ,      
-                                    duration ,    
+                                    duration: idealDuration ,    
                                 }  = (
                                     tAndVlSqExpand(evtSq )
                                 ) ;                  
+                                const actualCtxTime = (
+                                    nd1.context.currentTime    
+                                ) ;  
                                 // 'AudioParam'       
-                                const tm = (          
-                                    timingArgMode ?   
-                                    firstEvtT   
-                                    : nd1.context.currentTime      
-                                ) ; 
-                                ((mode : 0 | 1 | 2) : void => {  
+                                const tm = (                
+                                    timingArgMode ?      
+                                    firstEvtT     
+                                    : actualCtxTime       
+                                ) ;         
+                                const feasibleDuration = (
+                                    lastEvtT - actualCtxTime    
+                                ) ;
+                                ((mode : 0 | 1 | 2) : void => {     
                                     if (mode === 1) {      
                                         ;           
                                         (            
                                             DP(nd1 )      
                                             .cancelAndHoldAtTime(( 
                                                 // TODO   
-                                                tm   
-                                            )  )  
+                                                tm    
+                                            )  )            
                                         );                   
                                     }        
                                     if (mode === 2) {  
@@ -141,7 +167,7 @@ const eSupport = (
                                         (   
                                             DP(nd1 )     
                                             .cancelScheduledValues(0 )    
-                                        );        
+                                        );         
                                         (
                                             DP(nd1 )     
                                             .cancelScheduledValues(tm) 
@@ -151,28 +177,30 @@ const eSupport = (
                                 ((   ) => {
                                     // if (! (((nd1 as any).PARAMAUTOMATIVESEQEXEC_ET += "+") === `${undefined }+` ) ) {
                                     //     throw TypeError(`assertion error     `) ;
-                                    // }
-                                } )(  ) ;      
-                                (                      
-                                    DP(nd1 )                   
+                                    // }    
+                                } )(  ) ;       
+                                (                         
+                                    DP(nd1 )                      
                                     .setValueCurveAtTime(( 
                                         // TODO avoid the assumption that the timing is regular.    
                                         evtSq     
                                         .map(({ vl }): TAndVlL["vl"] => vl )    
                                     ), (       
                                         Math.max((
-                                            nd1.context.currentTime     
-                                            + 0.001
-                                        ), (          
-                                            tm       
-                                        ))         
-                                    ) , (   
-                                        duration  
+                                            // it's important to give 'tolerance' .           
+                                            actualCtxTime             
+                                            + 0.15       
+                                        ), (              
+                                            tm     
+                                        ))                    
+                                    ) , (        
+                                        // it's important to give 'tolerance' .    
+                                        Math.max(0.15, feasibleDuration )  
                                     ) )      
                                 ) ;          
                             }        
                         } ;              
-                    }    
+                    }      
                 ) ,
             } ;
         })() ;        
@@ -181,14 +209,14 @@ const eSupport = (
         return {
             swingTConst , 
             timingArgMode , 
-
+            
+            /**    
+             * {@link BaseAudioContext.currentTime  `t`s will be treated as WRT the `nd.ctx`'s `currentTime` }.
+             */      
             SETTARGETATTIME , 
-            /**   
-             * caveat - the logic remains incomplete.
-             * 
-             * @deprecated  
-             * 
-             */
+            /**      
+             * {@link BaseAudioContext.currentTime  `t`s will be treated as WRT the `nd.ctx`'s `currentTime` }.
+             */      
             SETVALUECURVE_AT_TIME ,     
         } ;    
     }      
