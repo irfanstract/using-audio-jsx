@@ -5,19 +5,21 @@ import {
     memoize, 
     BoundedIdentityFunction,        
     // PERIODIC ,              
-} from "./generalUse11" ;      
-class DbgException extends TypeError {}                                                         
+} from "./generalUse11" ;                                              
 import React, {                   
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
 } from "react";   
 import {                          
 } from "./commonElements"; 
-import { usingTimeout } from "./usingTimeoutOrInterval";        
-;
+import { usingTimeout } from "./usingTimeoutOrInterval";     
 
 
 
-import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicS";        
+import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicS";    
+
+
+
+class DbgException extends TypeError {}                 
         
 
 
@@ -71,9 +73,9 @@ const useAudioNodeConnectToDest = (
         ) ;                  
         ;                   
         useLayoutEffect(() => {                         
-            cncDebug && (
+            cncDebug && ([
                 console.log({ src, destination }), console.log(new DbgException(`ConnectToDest - printed some debug at cll ctx `) )       
-            ) ;                
+            ]) && String("") ;                
             if (src && destination) {  
                 switch (mode1 ) {      
                     case M_ONMOUNT_MKCONNECT_ONUNMOUNT_DISCONNECT : {                                                                                                   
@@ -109,6 +111,29 @@ const useAudioNodeConnectToDest = (
     }      
 ) ;      
 
+/**    
+ * when(ever) `deps` changes,  
+ * the unit will be replaced/substituted
+ */
+function useDepsRemount(...[{ deps: deps0, dest: nd0 }] : [ 
+    { deps: React.DependencyList ; dest: AudioNode | null ; } , 
+]): AudioNode | null {
+    ;
+    const nd10 = (   
+        React.useMemo(() => {
+            if (nd0 ) {
+                const gnNd = nd0.context.createGain() ; 
+                return gnNd ;       
+            } else {
+                return null ;            
+            } 
+            // eslint-disable-next-line react-hooks/exhaustive-deps                 
+        } , [nd0 , ...deps0 ])          
+    ) ;   
+    useAudioNodeConnectToDest(nd10, nd0 ) ;
+    return nd10 ;           
+}                     
+
 
 
 
@@ -119,6 +144,7 @@ const useAudioNodeConnectToDest = (
 
 
 
-export {
+export {  
     useAudioNodeConnectToDest , 
-} ;
+    useDepsRemount as useDepsRemount , 
+} ;    
