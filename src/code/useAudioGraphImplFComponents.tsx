@@ -73,12 +73,27 @@ const {
         ) ,                   
         CFnValue1 : (
             function ({ value: compute, ...otherProps } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+                const renderSrcCodeView = (
+                    () => (  
+                        <code style={{ whiteSpace: "pre-wrap" }}>
+                            { String(compute ) }    
+                        </code> 
+                    )
+                ) ;
                 ;      
                 return (                   
-                    <TC>                   
-                        { ({ t: schedT }) => (
-                            <>       
-                            <code>CFnValue { schedT } </code>      
+                    <TC>     
+                        { ({ t: schedT }) => (                 
+                            <>             
+                            <code>CFnValue  </code>            
+                            <span style={{ display: "block" }}>    
+                                at <i>absolute t</i> { schedT }      
+                                value { JSON.stringify(compute({ ctxT: schedT }) ) }   
+                            </span>             
+                            <span style={{ display: "block" }}>       
+                                code :   
+                                { renderSrcCodeView() }   
+                            </span>           
                             <CFnValueAtAbsoluteT 
                             value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }  
                             { ...otherProps }    
