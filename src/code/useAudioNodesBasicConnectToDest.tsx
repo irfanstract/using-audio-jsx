@@ -114,33 +114,78 @@ const useAudioNodeConnectToDest = (
 /**    
  * when(ever) `deps` changes,  
  * the unit will be replaced/substituted
- */
-function useDepsRemount(...[{ deps: deps0, dest: nd0 }] : [ 
-    { deps: React.DependencyList ; dest: AudioNode | null ; } , 
-]): AudioNode | null {
-    ;
-    const nd1 = (       
+ */   
+function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSeconds: timeout = 1 }] : [ 
+    { deps: React.DependencyList ; dest: AudioNode | null ; unmountTransitiveLenSeconds ?: number ; } , 
+]): AudioNode | null {   
+    ;     
+    const nd1 = (           
         React.useMemo(() => {
-            if (nd0 ) {
+            if (nd0 ) {       
                 const gnNd = nd0.context.createGain() ;         
                 return gnNd ;       
-            } else {         
+            } else {           
                 return null ;            
             } 
             // eslint-disable-next-line react-hooks/exhaustive-deps                 
         } , [nd0 , ...deps0 ])          
-    ) ;                      
-    React.useLayoutEffect(() => {            
-        if (nd1) {           
-            return () => {
-                nd1.gain.setTargetAtTime(
-                    0, nd1.context.currentTime, 0.1 ) ;       
-            } ;          
+    ) ;         
+    React.useLayoutEffect(() => {   
+        if (nd1 && nd0 ) {             
+            const fadeoutCurve = (
+                [
+                    1,
+                    2 ** -2 , 
+                    2 ** -4,             
+                    2 ** -6,   
+                    2 ** -8,  
+                    2 ** -10 ,      
+                    0 ,           
+                ]   
+            ) ;
+            if (((nd1 as any ).RLE_ABCDE += "+" ) !== `${undefined}+` ) {
+                // throw TypeError(`assertion error : secondary init`) ;     
+            } else {                    
+                nd1.connect(nd0 ) ;        
+                const mountTime = (   
+                    nd1.context.currentTime   
+                ) ;  
+                {    
+                    ;                      
+                    nd1.gain.setValueAtTime(0, 0 ) ;   
+                    (            
+                        nd1.gain.setValueCurveAtTime(
+                            (
+                                fadeoutCurve
+                                .map((v: number) => Math.max(0, (1 + -v ) ) )    
+                            ) ,       
+                            mountTime,    
+                            timeout )                    
+                    );                             
+                }   
+                return () => {           
+                    ;              
+                    const unmountTime = (   
+                        nd1.context.currentTime   
+                    ) ;  
+                    (            
+                        nd1.gain.setValueCurveAtTime(
+                            fadeoutCurve, 
+                            Math.max((
+                                mountTime + timeout  
+                                + 0.02
+                            ) , (     
+                                unmountTime          
+                            )),   
+                            timeout )  
+                    );                   
+                    setTimeout(() => nd1.disconnect(), (3 * timeout ) * 1000 ) ;            
+                } ;                
+            }                  
         }
-        ;         
-    } , [nd1]);   
-    ;
-    useAudioNodeConnectToDest(nd1, nd0 ) ;
+        ;   
+    } , [nd1, nd0 ]);         
+    ; 
     ;
     return nd1 ;               
 }                           
