@@ -29,7 +29,7 @@ import {
 } from "./useAudioGraphImplUsableYyyNodes1";                   
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
-      
+        
 } from "./useAudioNodesMounting11";     
 
          
@@ -49,14 +49,7 @@ const eSupport = (
             timingArgMode ?: false | 1 ;    
             swingTConst ?: number ;                  
         } ,      
-    ] ) => {            
-        type Dest = (
-            NonNullable<(     
-                ReturnType<(
-                    typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
-                )>    
-            )>         
-        ) ;          
+    ] ) => {          
         type TAndVlL = TAndVl ;     
         ;
         const {
@@ -70,45 +63,54 @@ const eSupport = (
         const {
             SETTARGETATTIME ,    
             SETVALUECURVE_AT_TIME , 
-
-        } = (() => {    
-            return {                 
-                SETTARGETATTIME : ( 
-                    (...[nd1, { t: t2, vl } ] : [
-                        Dest | null ,    
-                        TAndVlL ,           
-                    ]) => {  
-                        if (nd1  ) {        
-                            if (0 <= t2 ) { 
-                                (          
-                                    nd1.offset  
+  
+        } = (() => {     
+            type CSN1 = (   
+                NonNullable<(     
+                    ReturnType<(   
+                        typeof useConstantParamSrcNodeWithGivenFadeoutTimeConstant1
+                    )>    
+                )>             
+            ) ;
+            return {                      
+                SETTARGETATTIME : (        
+                    function<Dest extends AudioNode > (...[nd1, { t: t2, vl } , DP ] : [
+                        dest: Dest | null ,    
+                        value: TAndVlL ,             
+                        destParam : (...a: [Dest] ) => AudioParam  ,    
+                    ]) {  
+                        if (nd1  ) {               
+                            if (0 <= t2 ) {       
+                                (             
+                                    DP(nd1 )     
                                     .setTargetAtTime(vl, (
                                         timingArgMode ? t2 : nd1.context.currentTime      
                                     ) , swingTConst )    
                                 ) ;                 
-                            }
-                        }            
-                    }
-                ) ,                          
+                            }  
+                        }                               
+                    }        
+                ) ,                              
                 SETVALUECURVE_AT_TIME : (
-                    (...[nd1,  evtSq0 ] : [                 
-                        Dest | null ,        
-                        (readonly TAndVlL[] ) ,         
-                    ]) => {   
-                        // TODO
-                        if (0 ) {
-                            return ;            
-                        } ;    
-                        ;   
+                    function<Dest extends AudioNode > (...[nd1,  evtSq0, DP ] : [                    
+                        dest: Dest | null ,        
+                        values: (readonly TAndVlL[] ) ,                
+                        destParam : (...a: [Dest] ) => AudioParam  ,      
+                    ])  {   
+                        // TODO                             
+                        if (0 ) {    
+                            return ;                
+                        } ;                
+                        ;     
                         if (nd1) {                                 
                             const evtSq = (             
                                 evtSq0 
-                                .filter(({ t }) => (0 <= t ) )    
+                                .filter(({ t }) => (0 <= t ) )      
                             ) ;            
-                            console.log({ evtSq }) ;
-                            ;        
+                            0 && console.log({ evtSq }) ;
+                            ;          
                             if (evtSq.length ) {                  
-                                const {                
+                                const {                         
                                     lastEvtT , 
                                     lastEvtVl ,     
                                     firstEvtT ,  
@@ -122,38 +124,48 @@ const eSupport = (
                                     timingArgMode ?   
                                     firstEvtT   
                                     : nd1.context.currentTime      
-                                ) ;
+                                ) ; 
                                 ((mode : 0 | 1 | 2) : void => {  
-                                    if (mode === 1) {   
-                                        ;        
+                                    if (mode === 1) {      
+                                        ;           
                                         (            
-                                            nd1.offset
-                                            .cancelAndHoldAtTime((
+                                            DP(nd1 )      
+                                            .cancelAndHoldAtTime(( 
                                                 // TODO   
                                                 tm   
                                             )  )  
                                         );                   
-                                    }   
+                                    }        
                                     if (mode === 2) {  
                                         ;                 
-                                        (
-                                            nd1.offset 
-                                            .cancelScheduledValues(0 ) 
+                                        (   
+                                            DP(nd1 )     
+                                            .cancelScheduledValues(0 )    
                                         );        
                                         (
-                                            nd1.offset 
+                                            DP(nd1 )     
                                             .cancelScheduledValues(tm) 
-                                        );        
+                                        );          
                                     }    
-                                } )(2 ) ;            
+                                } )(0 ) ;                           
+                                ((   ) => {
+                                    // if (! (((nd1 as any).PARAMAUTOMATIVESEQEXEC_ET += "+") === `${undefined }+` ) ) {
+                                    //     throw TypeError(`assertion error     `) ;
+                                    // }
+                                } )(  ) ;      
                                 (                      
-                                    nd1.offset                        
+                                    DP(nd1 )                   
                                     .setValueCurveAtTime(( 
                                         // TODO avoid the assumption that the timing is regular.    
                                         evtSq     
                                         .map(({ vl }): TAndVlL["vl"] => vl )    
                                     ), (       
-                                        tm   
+                                        Math.max((
+                                            nd1.context.currentTime     
+                                            + 0.001
+                                        ), (          
+                                            tm       
+                                        ))         
                                     ) , (   
                                         duration  
                                     ) )      

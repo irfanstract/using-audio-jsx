@@ -36,8 +36,12 @@ import {
 } from "./useAudioGraphImplUsableYyyNodes1";            
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
+    useInitUnconnectedYyyNodeFor ,   
       
 } from "./useAudioNodesMounting11";    
+import { 
+    useAudioNodeConnectToDest, useDepsRemount,      
+} from "./useAudioNodesBasicConnectToDest";     
 import {  
     useElasUsageOnMount,
     useGainElas ,   
@@ -194,11 +198,13 @@ const CFNVI = (() => {
                     return { t2 , vl } ;        
                 }  
             );   
-            const useXTScan1 = (
-                (...[nd0] : [AudioNode | null ]) => {
-                    ;
-                    const scnF1PeriodSeconds : number = 3 ;       
-                    /**   
+            const useXTScan1 = (   
+                (...[nd0, config = {} ] : [AudioNode | null, { scnF1PeriodSeconds ?: number ; } ? ]) => { 
+                    const {
+                        scnF1PeriodSeconds = 3 ,    
+                    } = config ;
+                    ;                   
+                    /**            
                      * INTERVAL : {@link scnF1PeriodSeconds } SECOND
                      *  */               
                     const t10 = (          
@@ -335,7 +341,7 @@ const CFNVI = (() => {
                     SETTARGETATTIME , 
                     SETVALUECURVE_AT_TIME ,     
 
-                } = eSupport(mode1 ) ;  
+                } = eSupport(mode1 ) ;      
                 if (mode === 2 ) {     
                     ;              
                     return (                       
@@ -351,58 +357,82 @@ const CFNVI = (() => {
                                 React.useLayoutEffect(() => {   
                                     ;                
                                     if (1 ) {
-                                        SETTARGETATTIME(nd1, { t: t2, vl }) ;   
-                                    }        
-                                } , [nd1, vl ]) ;       
-                                // TODO                             
+                                        SETTARGETATTIME(nd1, { t: t2, vl }, (a ) => a.offset ) ;   
+                                    }             
+                                } , [nd1, vl ]) ;                
+                                // TODO      
                                 return (       
-                                    <p>
+                                    <p>   
                                         directly using   
                                         <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
                                     </p>
                                 ) ;       
                             } }       
-                        </CTXTUALOUTPUTUSAGE_CBC>           
+                        </CTXTUALOUTPUTUSAGE_CBC>                       
                     ) ;      
                 }    
                 if (mode === "3" ) {      
                     ;                       
                     return (                       
                         <CTXTUALOUTPUTUSAGE_CBC>   
-                            { function useC11({ feedPt : nd0 }) {        
-                                const nd1 = (
-                                    useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
-                                ) ;               
+                            { function useC11({ feedPt : nd0 }) {           
                                 const { tScan1  } = (
                                     useXTScan1(nd0)    
-                                ) ;
-                                React.useLayoutEffect(() => {       
-                                    ;                 
+                                ) ;       
+                                const nd1 = (         
+                                    useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
+                                        (
+                                            useDepsRemount      
+                                        )({ deps: [tScan1.first ], dest: nd0 })
+                                    ) , 0.5 )  
+                                ) ;            
+                                React.useLayoutEffect(() => {        
+                                    ;                      
                                     0 && console.log({ tScan1 });        
-                                    if (nd1) {             
-                                        SETVALUECURVE_AT_TIME(nd1, (      
-                                            tScan1      
-                                            .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
-                                                const t2 = (        
-                                                    // +t1.toFixed(1 )    
-                                                    t1 + delayInSeconds       
-                                                ) ;    
-                                                ;                
-                                                const {
-                                                    vl , 
-                                                } = (
-                                                    lComputeAtT(t2 )          
-                                                ) ;        
-                                                return {
-                                                    t: t2 , 
-                                                    vl: vl ,               
-                                                } ;
-                                            })     
-                                            .toArray()     
-                                        ))   
-                                    };
-                                    // TODO       
-                                } , [nd1, tScan1.first ]) ;
+                                    if (nd1  ) {   
+                                        // console.log((  
+                                        //     ((nd1 as any) )                          
+                                        // ));                  
+                                        if ((        
+                                            (() => {
+                                                const v = (
+                                                    ((nd1 as any).FCSS_MT_PRM += "+")   
+                                                ) ;  
+                                                0 && console.log({ nd1, v });                
+                                                return v ;         
+                                            })()      
+                                            === 
+                                            `${undefined }+` 
+                                        )) {
+                                            const graph = (      
+                                                tScan1      
+                                                .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
+                                                    const t2 = (        
+                                                        // +t1.toFixed(1 )    
+                                                        t1 + delayInSeconds       
+                                                    ) ;    
+                                                    ;                
+                                                    const { 
+                                                        vl , 
+                                                    } = (
+                                                        lComputeAtT(t2 )          
+                                                    ) ;        
+                                                    return {
+                                                        t: t2 , 
+                                                        vl: vl ,               
+                                                    } ;  
+                                                })     
+                                                .toArray()     
+                                            ) ;       
+                                            SETVALUECURVE_AT_TIME(nd1, (      
+                                                graph       
+                                            ) , a => a.offset )    ;    
+                                        }
+                                    };    
+                                    // TODO           
+                                } ,   
+                                // eslint-disable-next-line react-hooks/exhaustive-deps         
+                                [nd1 ]) ;
                                 // TODO                                              
                                 return (            
                                     <p>
