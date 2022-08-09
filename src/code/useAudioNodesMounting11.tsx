@@ -261,8 +261,11 @@ const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
         ) ;       
         React.useLayoutEffect(() => {
             if (nd1) {
-                // nd1.offset.value = 0 ;      
-                nd1.offset.setValueAtTime(0, 0 ) ;     
+                if (1 ) {
+                    ;
+                    // nd1.offset.value = 0 ;      
+                    nd1.offset.setValueAtTime(0, 0 ) ;  
+                }   
             }
         }, [nd1]) ;
         return nd1 ;                  
