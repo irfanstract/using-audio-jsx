@@ -72,33 +72,63 @@ const usingGainNode1 = (
  * NEEDS AMENDMENT. 
  * the naming  
  * does not suggest (the fact that it requires 'timeConstant' as second argument ).      
- */   
-type USEYYYNODER<R extends {} > = (
-    (dest: AudioNode | null , ...etc: [a: number | { timeConstant1 ?: number ; } ] ) 
-    => (R | null )              
-) ;  
-const USEYYYNODER = {} ; // TS-1205                                        
-/**               
- * this is supposed to be    
- * shared/common protocol 
+ */           
+type USEYYYNODER<R extends {} > = (         
+    (...args : [          
+        dest: AudioNode | null ,       
+        properties: number | { 
+            timeConstant1 ?: number ; 
+
+            rerunCtorEveryDestChg ?: false ;        
+            renewInstanceDeps ?: React.DependencyList ;                
+        } ,      
+    ])        
+    => (R | null )                            
+) ;    
+const USEYYYNODER = {} ; // TS-1205                         
+/**                          
+ * this is supposed to be         
+ * shared/common protocol       
  * extracted as necessary 
  * to support possible future extension trivially.      
- */      
+ */     
 const UABN_ARGPARSE = ( 
-    (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ) => { 
-        const timeConstant1 = ((): number => {
+    (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ): (
+        Required<(
+            (object & Exclude<Parameters<USEYYYNODER<{}> >[1 ], number > )    
+        )>
+        &
+        { nd0: AudioNode | null ; }   
+    ) => {             
+        const {              
+            timeConstant1 = 0.5 ,      
+
+            rerunCtorEveryDestChg = false ,       
+            renewInstanceDeps: ctorRerunDeps = [] as const , 
+         
+        } = ((): (object & Exclude<Parameters<USEYYYNODER<{}> >[1 ], number > ) => {
             if (typeof timeConstant10 === "number" ) {
-                return timeConstant10 ; 
-            }            
+                return {
+                    timeConstant1: timeConstant10 ,          
+                } ;      
+            }       
             if (typeof timeConstant10 === "object" ) {
-                const { timeConstant1: v = 0.5 } = timeConstant10;
-                return v ;   
-            }
-            return 0.5 ;  
-        })() ;       
+                const { timeConstant1: v , rerunCtorEveryDestChg } = timeConstant10;
+                return {   
+                    timeConstant1: v ,     
+                    rerunCtorEveryDestChg ,           
+                } ;               
+            }     
+            return {    
+            } ;                       
+        })() ;           
         return {
-            nd0 ,       
-            timeConstant1 ,                 
+            timeConstant1 , 
+  
+            nd0 ,  
+                         
+            rerunCtorEveryDestChg ,       
+            renewInstanceDeps: ctorRerunDeps ,               
         } ;       
     }
 ) ;      
@@ -127,7 +157,7 @@ namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
 
         (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
 
-        {             
+        {                  
             /**                      
              * this method           
              * can be used to make fade-out AudioParam automation(s) (avoid `disconnect()`ing it ; such call will eventually happen automatically !) .  
@@ -136,18 +166,24 @@ namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
              * {@link GainNode.gain}, {@link OscillatorNode.frequency}, {@link AudioBufferSourceNode.playba}
             */   
             onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;     
+
+            /**       
+             * defaults to never happen ;       
+             * would be the case for empty array (`[]`). 
+             */
+            renewInstanceDeps ?: React.DependencyList ; 
         } ,                   
        
-    ]  
+    ]    
 }      
-/**        
+/**             
 */                                    
 type ToUseYyNodeWithGivenFadeoutTimeConstant1<
     Dests1 = AudioNode | null ,       
     D1 = AudioNode | null ,                         
 > = (    
     /**  
-     * @param dest        if `null`, this node will be(come) inactive    
+     * @param dest        if `null`, this node will be(come) inactive       
      * 
      * @param OeGainNode1 instantiations of {@link YyNode }
     */                    
@@ -168,7 +204,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
  * this `useYyy` will    
  * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
  * 2) connect it to `dest`    
- * 5) return it             
+ * 5) return it               
  * 
  * @param OeGainNode1 instantiation of {@link YyNode }
 */        
@@ -177,35 +213,86 @@ const useInitAndConnectYyyNodeFor: (
         
 ) = (
     function <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode  > (...[
-        dest   ,  
+        nd0   ,  
         { timeConstant1 } ,    
-        OeGainNode1 ,       
-        { onUnmount } ,   
-
-    ] : [
+        newInstanceNd ,       
+        properties3  ,       
+        
+    ] : [       
         (Dst1 ) | null,  
         {  
             timeConstant1: number ;  
         },          
         (ctx: BaseAudioContext, dest: Dst1 ) => YyNode , 
-        {                                
-            onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;          
-        } ,   
-
+        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, unknown, YyNode >[3 ] ,   
+                
     ]) {          
         /**    
-         * {@link useInitUnconnectedYyyNodeFor }
-         */
-        const {               
+         * {@link useInitUnconnectedYyyNodeFor }   
+         */               
+        const {                         
             gRef: gRef1 ,  
         } = (     
-            useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
+            useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(nd0, {}, newInstanceNd, properties3 )
         ) ;    
-        useSingularSrcDestConnect(gRef1 , dest ) ;           
+        useSingularSrcDestConnect(gRef1 , nd0 ) ;                  
     
-        return gRef1 ;                               
-    }                                      
-);        
+        return gRef1 ;                                
+    }            
+);         
+/**                   
+ * {@link useInitAndConnectYyyNodeFor } without the `useCnnectAndDiscnnct(...)` .
+ *                 
+ * this `useYyy` will    
+ * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
+ * 2) return it  
+ * 
+ * @param OeGainNode1 this `new` `YyNode`   
+*/     
+const useInitUnconnectedYyyNodeFor = (    
+    function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
+        dest ,  
+        {   } ,         
+        OeGainNode1  ,          
+        { onUnmount, renewInstanceDeps = [] }  ,                   
+          
+    ] : [        
+        (Dst1 ) | null,                    
+        {  },                
+        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,    
+        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, unknown, YyNode >[3 ] ,   
+               
+    ]) {  
+        const [gRef, setGRef ] = (                                               
+            useState<YyNode | null >(null )                                               
+        ) ;                      
+        React[AUDIONODES_USEEFFECT](() => {  
+            if (dest) {             
+                const ctx = dest.context ;          
+                    
+                const gainNode1 = (                              
+                    OeGainNode1(ctx, dest )                        
+                ) ;                                   
+                setGRef(gainNode1 ) ;                              
+                  
+                return () => {                                                                  
+                    onUnmount(gainNode1, gainNode1.context ) ;                
+                    if (globalADisconnectMode === GDCM.DISCONNECT_IN_USING_C ) {      
+                        setTimeout(() => {
+                            gainNode1.disconnect() ;           
+                        }, (          
+                            ((gainNode1 instanceof GainNode && gainNode1.gain.value !== 0 ) ? 0.5 : 0 ) 
+                            * 
+                            1000
+                        ) ) ;    
+                    }             
+                } ;                           
+            }             
+        }, [dest, ...renewInstanceDeps ] ) ;                    
+        ;                         
+        return { gRef , } ;
+    }
+) ;       
 const useSingularSrcDestConnect = (                          
     function useReconnectSingleSrcSingleDest(...[gRef1, dest, ...etc ] : [   
         src: AudioSourceNode | null ,       
@@ -213,13 +300,13 @@ const useSingularSrcDestConnect = (
         ...etc : (
             [Parameters<typeof usingANodeCnnctM>] extends [readonly [  unknown,  unknown, ...( infer Args)] ] 
             ?
-            Args  : never      
+            Args  : never             
         ),                                 
     ] ) {                                                 
-        ;      
+        ;        
         React[AUDIONODES_USEEFFECT](() => {     
             /**             
-             * only if both are present   
+             * only if both are present        
              */
             if (dest && gRef1) {            
                 return (
@@ -228,10 +315,10 @@ const useSingularSrcDestConnect = (
             };                                           
         }, [dest, gRef1] );    
     }  
-);  
+);            
 const PN_LOG = (
-    (...a: any[] ) => console.log(...a )  
-) ;
+    (...a: any[] ) => console.log(...a )       
+) ; 
 const useParamNodeWithGiven = (
     function (dest: AudioParam | null, c: BaseAudioContext | null ) {
         const {
@@ -265,61 +352,6 @@ const useParamNodeWithGiven = (
         return gRef1 ;  
     }  
 );     
-/**                   
- * {@link useInitAndConnectYyyNodeFor } without the `useCnnectAndDiscnnct(...)` .
- *                 
- * this `useYyy` will    
- * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
- * 2) return it  
- * 
- * @param OeGainNode1 this `new` `YyNode` 
-*/
-const useInitUnconnectedYyyNodeFor = (    
-    function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
-        dest ,  
-        {   } ,         
-        OeGainNode1  ,          
-        { onUnmount }  ,               
-          
-    ] : [        
-        (Dst1 ) | null,    
-        {  },           
-        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,    
-        {                             
-            onUnmount: (nd: YyNode , ctx: BaseAudioContext ) => void ;     
-        } ,   
-               
-    ]) {
-        const [gRef, setGRef ] = (                                               
-            useState<YyNode | null >(null )                                               
-        ) ;                      
-        React[AUDIONODES_USEEFFECT](() => {  
-            if (dest) {             
-                const ctx = dest.context ;          
-                 
-                const gainNode1 = (                              
-                    OeGainNode1(ctx, dest )                        
-                ) ;                                   
-                setGRef(gainNode1 ) ;                              
-                  
-                return () => {                                                                  
-                    onUnmount(gainNode1, gainNode1.context ) ;                
-                    if (globalADisconnectMode === GDCM.DISCONNECT_IN_USING_C ) {      
-                        setTimeout(() => {
-                            gainNode1.disconnect() ;           
-                        }, (          
-                            ((gainNode1 instanceof GainNode && gainNode1.gain.value !== 0 ) ? 0.5 : 0 ) 
-                            * 
-                            1000
-                        ) ) ;    
-                    }             
-                } ;                           
-            }             
-        }, [dest ] ) ;                 
-        ;                         
-        return { gRef , } ;
-    }
-) ;     
 const usingANodeCnnctM = (     
     (...[gRef, dests, options = {} ] : [       
         src  : AudioSourceNode,    

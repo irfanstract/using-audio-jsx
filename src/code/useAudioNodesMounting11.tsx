@@ -44,7 +44,8 @@ const useGainNodeWithGivenFadeoutTimeConstant1 : (
     function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
         const {
             nd0: dest ,         
-            timeConstant1 ,               
+            timeConstant1 ,                 
+            renewInstanceDeps: ctorRerunDeps ,          
         } = UABN_ARGPARSE(...args ) ;           
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<GainNode>(dest, { timeConstant1 }, (
@@ -52,7 +53,7 @@ const useGainNodeWithGivenFadeoutTimeConstant1 : (
                     const gainNode1 = (
                         ctx                                         
                         .createGain()   
-                    ) ;                 
+                    ) ;                   
                     // (              
                     //     gainNode1.gain.value = 0              
                     // );       
@@ -60,12 +61,13 @@ const useGainNodeWithGivenFadeoutTimeConstant1 : (
                     return gainNode1 ;    
                 }     
             ), {
-                onUnmount: (gainNode1, ctx ) => {           
+                renewInstanceDeps: ctorRerunDeps ,      
+                onUnmount: (gainNode1, ctx ) => {                  
                     ((c: AudioParam ) => {                   
                         c.setTargetAtTime(0, ctx.currentTime, timeConstant1 );
                     } )(gainNode1.gain ) ; 
-                } ,
-            } )                  
+                } ,    
+            } )                    
         ) ;
     }           
 ) ;    
@@ -74,8 +76,9 @@ const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (
 ) = (
     function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
         const {
-            nd0: dest ,         
-            timeConstant1 ,               
+            nd0: dest ,          
+            timeConstant1 ,                    
+            renewInstanceDeps: ctorRerunDeps ,              
         } = UABN_ARGPARSE(...args ) ;            
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<BiquadFilterNode>(dest, { timeConstant1 }, (
@@ -89,15 +92,16 @@ const useBiquadFilterNodeWithGivenFadeoutTimeConstant1 : (
                     // );                                                                  
                     
                     return gainNode1 ;    
-                }     
-            ), {
+                }       
+            ), {     
+                renewInstanceDeps: ctorRerunDeps ,      
                 onUnmount: (gainNode1, ctx ) => {           
                     ((c: AudioParam ) => {                   
                         c.setTargetAtTime(0, ctx.currentTime, timeConstant1 );
                     } )(gainNode1.gain ) ; 
                 } ,
             } )                  
-        ) ;      
+        ) ;        
     }                
 ) ;    
 const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (        
@@ -105,8 +109,9 @@ const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (
 ) = (
     function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
         const {
-            nd0: dest ,         
-            timeConstant1 ,               
+            nd0: dest ,          
+            timeConstant1 ,                 
+            renewInstanceDeps: ctorRerunDeps ,            
         } = UABN_ARGPARSE(...args ) ;                
         return (
             useYyNodeWithGivenFadeoutTimeConstant1<DynamicsCompressorNode     >(dest, { timeConstant1 }, (
@@ -115,35 +120,36 @@ const useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1 : (
                         ctx                                            
                         .createDynamicsCompressor()   
                     ) ;                                                                                
-                    
+                       
                     return gainNode1 ;    
                 }     
-            ), {
+            ), {  
+                renewInstanceDeps: ctorRerunDeps ,      
                 onUnmount: (gainNode1, ctx ) => {           
                     // ((c: AudioParam ) => {                   
                     //     c.setTargetAtTime(0, ctx.currentTime, timeConstant1 );
                     // } )(gainNode1.gain ) ; 
                 } ,
             } )                  
-        ) ;                                                     
+        ) ;                                                          
     }                                         
 ) ;        
 /**             
  * the returned {@link AudioScheduledSourceNode} will immediately `start()` .    
  * avoid `stop()`ing it ; that {@link React.useEffect will happen automatically after (a few seconds ) unmount }  .  
  * 
- * this is 
- * a generalisation of both         
+ * this is    
+ * a generalisation of both (examples of {@link AudioScheduledSourceNode}s )      
  * - {@link useOscilltorNodeWithGivenFadeoutTimeConstant1 } 
- * - {@link useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1 }
+ * - {@link useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1 }   
+ * - {@link useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 }
 */
 const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (  
-    function <SNode1 extends AudioScheduledSourceNode> (                    
-        nd0 : AudioNode | null,                                                             
-        timeConstant1: number ,  
-        CREATE : (c: BaseAudioContext) => SNode1 ,
-           
-    ): ReturnType<(            
+    function <SNode1 extends AudioScheduledSourceNode> (...argsM : [                  
+        ...args: Parameters<typeof UABN_ARGPARSE > ,        
+        CREATE : (c: BaseAudioContext) => SNode1 ,               
+                                            
+    ]): ReturnType<(            
         USEYYYNODER<(        
             AudioNode
             &         
@@ -158,8 +164,17 @@ const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (
             Omit<SNode1, (
                 keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" | "numberOfInputs" | "dispatchEvent" >   
             )   >          
-        ) >        
-    )   > {
+        ) >      
+    )   > {                
+        const args = [argsM[0], argsM[1] ] as const ;    
+        const CREATE = argsM[2] ;
+        const {   
+            nd0 ,               
+            timeConstant1 ,
+            renewInstanceDeps: ctorRerunDeps , 
+
+        } = UABN_ARGPARSE(...args ) ;                   
+        ;  
         const nd1 = (
             useGainNodeWithGivenFadeoutTimeConstant1(nd0, timeConstant1 )     
         ) ;
@@ -175,14 +190,15 @@ const useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1 = (
                             gainNode1.start() ;
                             return gainNode1 ;     
                         }                                
-                    ), {            
+                    ), {              
+                        renewInstanceDeps: ctorRerunDeps ,         
                         onUnmount: (gainNode1, ctx ) => {   
                             gainNode1.stop(ctx.currentTime + Math.max(2, timeConstant1 ) ) ;
                         } ,
                     } )                     
                 ) ;   
             } )(nd1 )              
-        ) ;        
+        ) ;             
 
         return nd2 ;            
     }
@@ -196,20 +212,16 @@ const useOscilltorNodeWithGivenFadeoutTimeConstant1: (
         Omit<OscillatorNode, (
             keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" >   
         )>
-    )>                  
-) = (
-    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {
-        const {
-            nd0 ,         
-            timeConstant1 ,               
-        } = UABN_ARGPARSE(...args ) ;         
+    )>                   
+) = (  
+    function   (...args : Parameters<typeof UABN_ARGPARSE > ) {   
         return (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1<OscillatorNode>(
-                nd0, timeConstant1 , ctx => ctx.createOscillator() )
-        ) ;                  
+                ...args , ctx => ctx.createOscillator() )
+        ) ;                    
     }                    
-);                    
-/**                           
+);                        
+/**                                                
  * in current version, 
  * as with {@link useOscilltorNodeWithGivenFadeoutTimeConstant1 } ,      
  * the returned {@link AudioBufferSourceNode} will always immediately `start()` 
@@ -223,17 +235,13 @@ const useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1: (
         &                     
         Omit<AudioBufferSourceNode, (
             keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" >   
-        )     >
+        )     >    
     )>                  
 ) = (             
-    function (...args : Parameters<typeof UABN_ARGPARSE > ) {
-        const {
-            nd0 ,         
-            timeConstant1 ,               
-        } = UABN_ARGPARSE(...args ) ;           
+    function (...args : Parameters<typeof UABN_ARGPARSE > ) {         
         return (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1<AudioBufferSourceNode>(
-                nd0, timeConstant1 , ctx => ctx.createBufferSource() )
+                ...args , ctx => ctx.createBufferSource() )
         ) ;                  
     }                              
 );                              
@@ -250,14 +258,10 @@ const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
         )>
     )>           
 ) = (   
-    function (...args : Parameters<typeof UABN_ARGPARSE > ) {
-        const {
-            nd0 ,         
-            timeConstant1 ,               
-        } = UABN_ARGPARSE(...args ) ;         
+    function (...args : Parameters<typeof UABN_ARGPARSE > ) {        
         const nd1 = (   
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1(
-                nd0, timeConstant1 , ctx => ctx.createConstantSource() )
+                ...args , ctx => ctx.createConstantSource() )
         ) ;       
         React.useLayoutEffect(() => {
             if (nd1) {
