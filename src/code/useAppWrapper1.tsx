@@ -30,20 +30,44 @@ import componentWithLoadingScreen from './componentWithLoadingScreen';
       render() {                  
         return (  
           <K key={key }> 
-          <p> Application (id: <code>{key }</code> ) </p>
-          <React.Suspense fallback={ <div /> } >
-            { (this.state || {} ).error ? null : <App />    }       
-          </React.Suspense>            
+          <p> Application (id: <code>{key }</code> ) </p> 
+          { (this.state || {} ).error ? null : (
+               <React.Suspense fallback={ <div /> } >
+                  <App />         
+                </React.Suspense>      
+          )   }       
           </K>                    
         ) ;                 
       }         
       componentDidCatch(e: unknown ) { 
         console.error(e) ; 
-        this.setState({ error: e }) ;
-        setTimeout(() => {                  
-          (window.location).reload() ;           
-        } , 1 * 60 * 1000 ) ;       
+        this.setState({ error: e }) ;  
+        const {
+            globalReload = true , 
+            autoClearError = true ,     
+        } = (              
+            {} as {         
+                globalReload ?: boolean ;      
+                autoClearError ?: boolean ;       
+            }   
+        ) ;   
+        if (globalReload ) {   
+            ;                      
+            setTimeout(() => {          
+                if (this.state.error ) {
+                    ;        
+                    (window.location).reload() ;                         
+                }            
+            } , 1 * 60 * 1000 ) ;              
+        }  
+        if (autoClearError ) {      
+            ;
+            setTimeout(() => {                
+                this.setState({ error: null }) ;      
+            } , 28 * 1000 ) ;          
+        }  
       }   
+    //   static getDerivedStateFromError() { return {} ; }   
     }        
     return (): React.ReactElement => (
       <K key={key} >   
