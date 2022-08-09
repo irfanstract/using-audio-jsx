@@ -16,8 +16,10 @@ import {
 // 
 import {  
     WithGivenDest ,  
-    Prv1 ,        
-    Consm as WithCtxtualOut , 
+    Prv1 ,         
+
+    Consm as WithCtxtualOut ,     
+    useWithCurrentSideTapPtRef , 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";      
 import { usePersistingBeep, YyyUsable } from "./useAudioNodesBasicFlt1";        
