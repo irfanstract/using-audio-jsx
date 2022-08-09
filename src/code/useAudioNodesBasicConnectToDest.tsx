@@ -119,7 +119,7 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0 }] : [
     { deps: React.DependencyList ; dest: AudioNode | null ; } , 
 ]): AudioNode | null {
     ;
-    const nd10 = (   
+    const nd1 = (   
         React.useMemo(() => {
             if (nd0 ) {
                 const gnNd = nd0.context.createGain() ; 
@@ -130,8 +130,8 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0 }] : [
             // eslint-disable-next-line react-hooks/exhaustive-deps                 
         } , [nd0 , ...deps0 ])          
     ) ;   
-    useAudioNodeConnectToDest(nd10, nd0 ) ;
-    return nd10 ;           
+    useAudioNodeConnectToDest(nd1, nd0 ) ;
+    return nd1 ;           
 }                     
 
 
