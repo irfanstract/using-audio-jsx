@@ -84,16 +84,20 @@ const {
                 return (                   
                     <TC>     
                         { ({ t: schedT }) => (                 
-                            <>             
-                            <code>CFnValue  </code>            
-                            <span style={{ display: "block" }}>    
-                                at <i>absolute t</i> { schedT }      
-                                value { JSON.stringify(compute({ ctxT: schedT }) ) }   
-                            </span>             
-                            <span style={{ display: "block" }}>       
-                                code :   
-                                { renderSrcCodeView() }   
-                            </span>           
+                            <>                
+                            <code>CFnValue  </code>                 
+                            { [      
+                                null &&  
+                                <span key={1} style={{ display: "block" }}>    
+                                    at <i>absolute t</i> { schedT }      
+                                    value { JSON.stringify(compute({ ctxT: schedT }) ) }   
+                                </span>             ,   
+                                null &&  
+                                <span key={2} style={{ display: "block" }}>           
+                                    code :   
+                                    { renderSrcCodeView() }   
+                                </span>       ,           
+                            ] }     
                             <CFnValueAtAbsoluteT 
                             value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }  
                             { ...otherProps }    
