@@ -302,9 +302,9 @@ const {
                     <div>             
                         <LoopingWithPeriod   
                         value={( 
-                            { period: 1.0 }  as const       
+                            { period: 1.0 }  as const         
                         )} 
-                        renderRange={{ n: 0x10 } }                   
+                        renderRange={{ n: 0x03 } }                   
                         >       
                             <WithDelay value={0 } >          
                                 <CBassDrumKick1 tCoef1={2 ** -4 } />       
