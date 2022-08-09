@@ -70,8 +70,8 @@ const useRefreshByInterval1 = (
     ]) => {    
         const [      
             ,                   
-            periofMillis ,             
-            { LE = (2500 < periofMillis ) ? "useEffect" : "useLayoutEffect"  } = {} ,      
+            requestedPeriodMillis ,             
+            { LE = (2500 < requestedPeriodMillis ) ? "useEffect" : "useLayoutEffect"  } = {} ,      
         ] = args1 ;        
         ;         
         const {    
@@ -79,21 +79,24 @@ const useRefreshByInterval1 = (
             c ,                                       
         } = (                                   
             useCanForceRefresh()                 
-        ) ;               
+        ) ;        
+        const accceptedPeriodMillis = (
+            useDeferredValue(requestedPeriodMillis)    
+        ) ;       
         React[LE ](() => {   
-            return (
+            return (    
                 usingInterval(() => {         
-                    forceRefresh() ;    
+                    forceRefresh() ;         
                     return true ;
-                } , periofMillis ) 
+                } , accceptedPeriodMillis ) 
             ) ;   
-        }, [useDeferredValue(periofMillis) ] ) ;  
+        }, [accceptedPeriodMillis ] ) ;  
         const r1 = {  
             forceRefresh ,          
             c ,    
 
             LE ,   
-            periodMillis : periofMillis ,    
+            periodMillis : requestedPeriodMillis ,    
         } ;              
         useDebugValue(r1 ) ;          
         return(     

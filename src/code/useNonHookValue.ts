@@ -98,13 +98,17 @@ const [] = [] ;
 */  
 type RealTimeQueryIntervalUsageArgs<A> = [
     properties : (
-        {        
-            // deps: React.DependencyList ;                 
-            // defaultVl ?: A ;                
-            f: () => A ;                                   
-                
+        {                      
+            f: () => A ;                          
+            /**       
+             * if left unset, then the resulting intervals would be defined solely by `timeoutInterval`.       
+             * to achieve that, the default value would be `[]` (empty array) .           
+             *  */   
+            deps ?: React.DependencyList ;                    
+            // defaultVl ?: A ;                         
+                      
             strictInterval ?: boolean ;          
-                     
+                         
             LE ?: (         
                 NonNullable<(
                     (
@@ -115,43 +119,80 @@ type RealTimeQueryIntervalUsageArgs<A> = [
     
         } | (() => A )      
     ) , 
-    timeoutMillis: number  ,                   
+    timeoutMillis: number  ,       
 ] ;        
+/**    
+ * implementation of both methods share this section of procedure. 
+ */
+const useRealtimeQueryIntervalUsageArgsParse = (
+    function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ) {
+        ;     
+        const { f, LE, deps = [] } = (                 
+            REFQUER_CALL_ARG_UPGRDE(props )                                                                 
+        ) ;                             
+        ;   
+        const { c, forceRefresh } = (           
+            useRefreshByInterval1(true, timeoutMillis, { LE } )   
+        ) ;                                     
+        React[LE ](() => forceRefresh() , deps )  ;
+        ;    
+        return {                            
+            props ,        
+            timeoutMillis ,  
+
+            LE ,             
+            f ,          
+            c ,   
+             
+            forceRefresh ,              
+        } ;
+    }
+) ;
 /**         
  * {@link RealTimeQueryIntervalUsageArgs } . 
  * utility for reliably interpret the argument.   
-*/        
+*/         
 const REFQUER_CALL_ARG_UPGRDE = (() => {  
     return (    
         (function <A> (props: (          
-            // {                                       
-            //     f: () => A ;                           
+            // {                                            
+            //     f: () => A ;                             
                   
             // } | (() => A )                             
             RealTimeQueryIntervalUsageArgs<A>[0 ]        
         ) ) {        
-            type Return = (
-                Pick<(                         
-                    Required<(   
+            type Return = (               
+                Pick<(                                   
+                    Required<(     
                         Exclude<(                 
                             RealTimeQueryIntervalUsageArgs<A>[0 ]                    
                         ),  (...Args : never[] ) => void >     
                     )>   
-                ), "f" | "LE">   
+                ), "f" | "LE">               
+                &
+                Partial<(          
+                    Pick<(                                   
+                        Required<(         
+                            Exclude<(                 
+                                RealTimeQueryIntervalUsageArgs<A>[0 ]                    
+                            ),  (...Args : never[] ) => void >     
+                        )>   
+                    ), "deps">           
+                )>           
             ) ;            
             const DEFAULT_LE : Return["LE"] = (
                 "useLayoutEffect"
             ) ;   
-            return (   
+            return (         
                 function REFQUER_ () : Return  {       
-                    if ("f" in props) {                
+                    if ("f" in props) {                 
                         const {                                         
                             // defaultVl ,               
                             f ,        
                             LE = DEFAULT_LE ,                                                                           
                         } = props ;    
                         return { f, LE } as const ;     
-                    } else {              
+                    } else {               
                         const f = (
                             BoundedIdentityFunction<() => A>()(props )    
                         ) ;               
@@ -159,10 +200,10 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
                         return { f, LE } ;        
                     }      
                 }
-            )() ;      
+            )() ;               
         })                          
     ) ;   
-})() ;      
+})() ;        
 /**  
  * both {@link useRealTimeQueryInterval } and {@link useRealTimeQueryInterval1 }  
  * are based on {@link Window.setInterval } . 
@@ -184,13 +225,17 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
  * @deprecated       
 */  
 const useRealTimeQueryInterval = (       
-    function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ): A {             
-        const { f, LE } = (                
-            REFQUER_CALL_ARG_UPGRDE(props )                                                            
-        ) ;                 
-        const { c } = (           
-            useRefreshByInterval1(true, timeoutMillis, { LE } )   
-        ) ;                                          
+    function <A>(...args1 : RealTimeQueryIntervalUsageArgs<A> ): A {             
+        const {
+            props ,    
+            timeoutMillis ,           
+      
+            LE ,             
+            f ,          
+            c ,   
+            
+            forceRefresh ,            
+        } = useRealtimeQueryIntervalUsageArgsParse(...args1 ) ;                                  
         const vl = (               
             (function useM(): A {     
                 useDebugValue({ f });        
@@ -212,13 +257,17 @@ const useRealTimeQueryInterval = (
  * `deps` will be unnecessary for this, due to how {@link useRefreshByInterval} works
 */  
 const useRealTimeQueryInterval1 = (     
-    function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ): A {             
-        const { f, LE } = (              
-            REFQUER_CALL_ARG_UPGRDE(props )                                                             
-        ) ;                 
-        const { c } = (           
-            useRefreshByInterval1(true, timeoutMillis, { LE } )   
-        ) ;                    
+    function <A>(...args1 : RealTimeQueryIntervalUsageArgs<A> ): A {             
+        const {
+            props ,    
+            timeoutMillis ,           
+      
+            LE ,             
+            f ,          
+            c ,   
+            
+            forceRefresh ,            
+        } = useRealtimeQueryIntervalUsageArgsParse(...args1 ) ;      
         const vl = React.useMemo(() => f() , [c] ) ;
         useDebugValue({ c, vl }) ;
         return vl ;   
