@@ -4,18 +4,18 @@ import Immutable from "immutable";
 import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";   
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
-import { K, asVoidElement, NUMERIC, useDebugDispatcher } from "./commonElements";             
-import { CBC } from "./useStateInCallback";  
+import { K, asVoidElement, NUMERIC, useDebugDispatcher, } from "./commonElements";             
+import { CBC } from "./useStateInCallback";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";             
 import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
 import { 
-    useOneWayCheckBox ,   
+    useOneWayCheckBox ,      
 } from "./useCompletion";   
 import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";  
 import {
     TAndVl , 
     tAndVlSqExpand ,  
-} from "./useTValueSeqExpand1";
+} from "./useTValueSeqExpand1";      
         
 
 
@@ -24,10 +24,10 @@ import {
 import {       
     WithGivenDest ,  
     Prv1 ,        
-    Consm as WithCtxtualOut , 
+    Consm as WithCtxtualOut ,  
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";     
-import * as audioFltAtAbsTNodes from "./useAudioNodesBasicFlt11";     
+import * as audioFltAtAbsTNodes from "./useAudioNodesBasicFlt11";        
 import { USEM } from "./useAudioNodesParamAutomativeAsRegularNodes";      
 import {
     SpecialUsageExplainer,   
@@ -36,12 +36,13 @@ import {
 } from "./useAudioGraphImplUsableYyyNodes1";            
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
-    useInitUnconnectedYyyNodeFor ,   
+    useInitUnconnectedYyyNodeFor ,     
       
 } from "./useAudioNodesMounting11";    
-import { 
+import {      
     useAudioNodeConnectToDest, useDepsRemount,      
-} from "./useAudioNodesBasicConnectToDest";     
+} from "./useAudioNodesBasicConnectToDest";    
+import { useFixedGain } from "./useAudioNodesBasicFlt11";          
 import {  
     useElasUsageOnMount,
     useGainElas ,   
@@ -54,9 +55,13 @@ import {
     terminalUsageWrapC ,     
     nonterminalUsageWrapC , 
 
-    AGCtxtualOutUsageProps ,         
+    AGCtxtualOutUsageProps ,          
     CTXTUALOUTPUTUSAGE_CBC , 
-} from "./useAudioGraphImplCurrentDestNdRefCtxC1";  
+} from "./useAudioGraphImplCurrentDestNdRefCtxC1";   
+import { useWithCurrentSideTapPtRef } from "./useAudioGraphImplCurrentDestNdRefCtx";     
+import { 
+    useHalfSecondBeep ,           
+} from "./useAudioNodesBasicFlt11";        
 import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";  
 import {     
     useUnexpectedZeroingBackCheck ,      
@@ -83,7 +88,7 @@ import eSupport from "./useAudioNodesParamAutomativeExecET";
   
     
 const useUnmountLogging = (    
-    function (v: false | true ) {  
+    function (v: false | true ) {   
         const LOGGING = (
             useDebugDispatcher()          
         ) ;
@@ -134,10 +139,58 @@ const CFNVI0 = (() => {
     return { 
         renderConstantParamSrcElas1 ,       
         useRealTimeQueryInterval1X ,     
-    } ;
-})() ;      
-/**    
- * @deprecated
+    } ;          
+})() ;            
+const {
+    usingCurrentTScanCtx ,         
+} = (() => {
+    type Vls = (
+        Immutable.Seq.Indexed<number>     
+    ) ;
+    const currentTScanCtx = (      
+        React.createContext<Vls | "unknown" >("unknown")
+    ) ;  
+    currentTScanCtx.displayName = "currentTScanCtx";           
+    const usingCurrentTScanCtx = (  
+        function (...[vls , r ] : [  
+            Vls ,  
+            (ctx: { vls: Vls ; } ) =>  React.ReactElement ,           
+        ] ) {       
+            const { Consumer: C, Provider: CP } = (    
+                currentTScanCtx   
+            ) ;               
+            return (                                       
+                <C>           
+                { (vlsParent : Vls | "unknown") => {
+                    if (vlsParent === "unknown" ) {
+                        return (         
+                            <CP value={vls} >  
+                            { r({ vls: vls }) }   
+                            </CP>       
+                        ) ;     
+                    }          
+                    if (typeof vlsParent === "object" ) {
+                        return (       
+                            <>  
+                             { r({ vls: vlsParent }) } 
+                            </>
+                        ) ;     
+                    }       
+                    return <>
+                    ( error )
+                    </> ;    
+                } }
+                </C>
+            ) ;
+            ;           
+        }
+    ) ;
+    return {
+        usingCurrentTScanCtx ,  
+    } ;  
+})() ;          
+/**       
+ * @deprecated  
  */
 const CFNVI = (() => {
     ;               
@@ -146,14 +199,14 @@ const CFNVI = (() => {
      * @see  
      * import  :          
      * {@link CFNVI0  }       
-     */            
+     */              
     const { 
         renderConstantParamSrcElas1 ,     
         useRealTimeQueryInterval1X ,  
     } = (  
         CFNVI0    
-    ) ;      
-    ;   
+    ) ;        
+    ;    
     /**            
      * 
      * @see    
@@ -164,7 +217,7 @@ const CFNVI = (() => {
      */         
     const cFnValueImpl1 = (     
         function (...[{ compute, scanPeriodMillis, delayInSeconds = 0.1 }] : [ 
-            {   
+            {     
                 // CORE LOGIC 
                 compute : (     
                     (...args : [{ ctxT : number ; }] )   
@@ -196,13 +249,13 @@ const CFNVI = (() => {
                         (typeof vl0 === "number" ? { value : vl0 } : vl0 )
                     ) ;   
                     return { t2 , vl } ;        
-                }  
+                }    
             );   
-            const useXTScan1 = (   
+            const useDestNdCtxAsTScan1 = (   
                 (...[nd0, config = {} ] : [AudioNode | null, { scnF1PeriodSeconds ?: number ; } ? ]) => { 
                     const {
                         scnF1PeriodSeconds = 3 ,    
-                    } = config ;
+                    } = config ;  
                     ;                   
                     /**            
                      * INTERVAL : {@link scnF1PeriodSeconds } SECOND
@@ -211,6 +264,7 @@ const CFNVI = (() => {
                         useRealTimeQueryInterval1X({
                             // TODO    
                             f: () => (nd0 ? nd0.context.currentTime : -1 ) ,  
+                            deps: [nd0 ] ,   
                             LE: "useLayoutEffect" ,      
                         } , scnF1PeriodSeconds * 1000  )  
                     ) ;        
@@ -225,7 +279,7 @@ const CFNVI = (() => {
                     ) ;            
                     return {      
                         tScan1 ,   
-                    } ;
+                    } ;       
                 }
             ); 
             /**                 
@@ -247,7 +301,7 @@ const CFNVI = (() => {
                         ?
                         function useFn1(...[nd0] )  {          
                             const { tScan1  } = (
-                                useXTScan1(nd0)    
+                                useDestNdCtxAsTScan1(nd0)    
                             ) ;
                             const return10 = (       
                                 useAsyncStrm<ReturnType<typeof lComputeAtT > >({   
@@ -337,7 +391,7 @@ const CFNVI = (() => {
                 const {       
                     swingTConst ,   
                     timingArgMode , 
-
+     
                     SETTARGETATTIME , 
                     SETVALUECURVE_AT_TIME ,     
 
@@ -370,85 +424,140 @@ const CFNVI = (() => {
                             } }       
                         </CTXTUALOUTPUTUSAGE_CBC>                       
                     ) ;      
-                }    
+                }         
                 if (mode === "3" ) {      
-                    ;                       
-                    return (                       
-                        <CTXTUALOUTPUTUSAGE_CBC>   
-                            { function useC11({ feedPt : nd0 }) {           
-                                const { tScan1  } = (
-                                    useXTScan1(nd0)    
-                                ) ;       
-                                const nd1 = (         
-                                    useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
-                                        (
-                                            useDepsRemount      
-                                        )({ deps: [tScan1.first ], dest: nd0 })
-                                    ) , 0.5 )  
-                                ) ;            
-                                React.useLayoutEffect(() => {        
-                                    ;                      
-                                    0 && console.log({ tScan1 });        
-                                    if (nd1  ) {   
-                                        // console.log((  
-                                        //     ((nd1 as any) )                          
-                                        // ));                  
-                                        if ((        
-                                            (() => {
-                                                const v = (
-                                                    ((nd1 as any).FCSS_MT_PRM += "+")   
-                                                ) ;  
-                                                0 && console.log({ nd1, v });                
-                                                return v ;         
-                                            })()      
-                                            === 
-                                            `${undefined }+` 
-                                        )) {
-                                            const graph = (      
-                                                tScan1      
-                                                .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
-                                                    const t2 = (        
-                                                        // +t1.toFixed(1 )    
-                                                        t1 + delayInSeconds       
-                                                    ) ;    
-                                                    ;                
-                                                    const { 
-                                                        vl , 
-                                                    } = (
-                                                        lComputeAtT(t2 )          
-                                                    ) ;        
-                                                    return {
-                                                        t: t2 , 
-                                                        vl: vl ,               
-                                                    } ;  
-                                                })     
-                                                .toArray()     
-                                            ) ;       
-                                            SETVALUECURVE_AT_TIME(nd1, (      
-                                                graph       
-                                            ) , a => a.offset )    ;    
-                                        }
-                                    };    
-                                    // TODO           
-                                } ,   
-                                // eslint-disable-next-line react-hooks/exhaustive-deps         
-                                [nd1 ]) ;
-                                // TODO                                              
-                                return (            
-                                    <p>
-                                        directly using   
-                                        <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
-                                    </p>
-                                ) ;       
-                            } }       
-                        </CTXTUALOUTPUTUSAGE_CBC>           
-                    ) ;    
+                    ;                    
+                    return (
+                        useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => (
+                            <CBC>
+                            { function useC11() {  
+                                // TODO    
+                                const SCNFP : number = (                   
+                                    React.useMemo(() => (     
+                                        // 3 + (2 * Math.random() )     
+                                         1.2 * (1 + Math.random() )
+                                    ) , [] ) 
+                                ) ;                                      
+                                ;
+                                return (  
+                                    usingCurrentTScanCtx((   
+                                        useDestNdCtxAsTScan1(nd0, { scnF1PeriodSeconds: SCNFP })
+                                        .tScan1 
+                                                    
+                                    ), ({ vls: tScan1 }) => (  
+                                        <CBC>
+                                        { function useC12() {
+                                            ;                
+                                            const nd10 = (  
+                                                (                          
+                                                    useDepsRemount         
+                                                )({ deps: [tScan1.first ], dest: nd0 })
+                                            ) ;
+                                            // TODO remove this LOC ; this is only for debugging   
+                                            {
+                                                ;        
+                                                const nd11 = (  
+                                                    useFixedGain(nd10, 2 ** -4 )          
+                                                ) ;    
+                                                useHalfSecondBeep(
+                                                    nd11, { t: (nd11 ? nd11.context.currentTime : 1E5 ) }) ;      
+                                            }  
+                                            const nd1 = (             
+                                                useConstantParamSrcNodeWithGivenFadeoutTimeConstant1(nd10 , 0.5 )        
+                                            ) ;               
+                                            //  
+                                            React.useLayoutEffect(() => {                 
+                                                ;                        
+                                                0 && console.log({ tScan1 });              
+                                                if (nd1  ) {   
+                                                    // console.log((  
+                                                    //     ((nd1 as any) )                          
+                                                    // ));                    
+                                                    if (( 
+                                                        1 || (          
+                                                            (() => {
+                                                                const v = (
+                                                                    ((nd1 as any).FNCMATHCOMPONENTSSS_MNT_PRM += "+")   
+                                                                ) ;     
+                                                                0 && console.log({ nd1, v });                
+                                                                return v ;         
+                                                            })()      
+                                                            === 
+                                                            `${undefined }+`        
+                                                        )
+                                                    )) {
+                                                        const graph = (         
+                                                            tScan1      
+                                                            .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
+                                                                const t2 = (        
+                                                                    // +t1.toFixed(1 )    
+                                                                    t1 + delayInSeconds       
+                                                                ) ;    
+                                                                ;                
+                                                                const { 
+                                                                    vl , 
+                                                                } = (
+                                                                    lComputeAtT(t2 )          
+                                                                ) ;        
+                                                                return {
+                                                                    t: t2 ,        
+                                                                    vl: vl ,               
+                                                                } ;      
+                                                            })     
+                                                            .toArray()      
+                                                        ) ;        
+                                                        SETVALUECURVE_AT_TIME(nd1, (      
+                                                            graph       
+                                                        ) , a => a.offset )    ;    
+                                                    }
+                                                };    
+                                                // TODO           
+                                            } ,   
+                                            // eslint-disable-next-line react-hooks/exhaustive-deps         
+                                            [nd1 ]) ;        
+                                            // TODO                                              
+                                            return (  
+                                                <div>                         
+                                                <p>                  
+                                                    now :                          
+                                                    {  null && (
+                                                        <code style={{ whiteSpace: "pre-wrap" }}>  
+                                                        <> ctxT : {tScan1.first()  } </>            
+                                                        </code>                     
+                                                    ) }      
+                                                    { null && (    
+                                                        <code style={{ whiteSpace: "pre-wrap" }}>       
+                                                        vlue(ctxT) :     
+                                                        {lComputeAtT(tScan1.first() ).vl  }                     
+                                                        </code>   
+                                                    ) }                    
+                                                    {  null &&  (  
+                                                          <code style={{ whiteSpace: "pre-wrap" }}>   
+                                                          [...vlue(ts) ] : 
+                                                          {JSON.stringify( tScan1.toArray().map(t => +(lComputeAtT(t).vl ).toFixed(3 ) ) )  }     
+                                                          </code> 
+                                                    ) }         
+                                                </p>                                      
+                                                <p>    
+                                                    directly using         
+                                                    <code>{ useConstantParamSrcNodeWithGivenFadeoutTimeConstant1.name }</code>
+                                                </p>     
+                                                </div>
+                                            ) ;                        
+                                        } }
+                                        </CBC>
+                                    ))
+                                ) ;                            
+                            } }
+                            </CBC>                 
+                        ))       
+                    ) ;      
                 }    
                 /**     
-                 * 
+                 *  
                  * @see  
                  * import  :          
-                 * {@link CTXTUALOUTPUTUSAGE_CBC }     
+                 * {@link CTXTUALOUTPUTUSAGE_CBC }         
                  * {@link CConstantValue }
                  */          
                 return (                       
@@ -461,7 +570,7 @@ const CFNVI = (() => {
                             // TODO                 
                             return (                      
                                 <CConstantValue               
-                                value={vl }                        
+                                value={vl }                         
                                 swingTConstant={swingTConst } 
                                 {...(timingArgMode ? { scheduledT: t2 } : {} ) }
                                 />  
@@ -469,16 +578,16 @@ const CFNVI = (() => {
                         } }             
                     </CTXTUALOUTPUTUSAGE_CBC>                   
                 ) ;     
-            })("3" ) ;         
+            })("3" ) ;          
             return {
-                C11 , 
+                C11 ,  
                 e ,              
             } ;
-        }
+        }    
     ) ;                
     ; 
     return { 
-        default: cFnValueImpl1 ,          
+        default: cFnValueImpl1 ,           
     } ;
 })() ;
       
@@ -492,7 +601,7 @@ const {
     CFnValue ,                                                      
      
 } = ((...[{ } = {} ] : [
-    {
+    { 
         // omissiveDebug ?: boolean ;     
     } ? ,    
 ] ) => {             
@@ -505,7 +614,7 @@ const {
      * import  :          
      * {@link cFnValueCompImplSupport1 }       
      */            
-    const { 
+    const {  
         renderConstantParamSrcElas1 ,     
         useRealTimeQueryInterval1X ,  
     } = (  
@@ -517,7 +626,7 @@ const {
     return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : (            
-                NonNullable<(
+                NonNullable<( 
                     Parameters<typeof renderConstantParamSrcElas1 >[0 ]
                 )>          
                 &
@@ -532,7 +641,7 @@ const {
                     renderConstantParamSrcElas1(props1, { putInitailValue : 1 } )           
                 ) ; 
                 const dbg = (      
-                    <p>      
+                    <p>         
                         Constant Value --                                   
                         <span 
                         style={{ 
@@ -551,13 +660,13 @@ const {
                     dBBC((
                         useXDeferredTrue() 
 
-                    ), { dbgBox1: dbg, c1: e })     
+                    ), { dbgBox1: dbg, c1: e })      
                 ) ;            
             }             
         ) ,            
       
         CFnValue : (        
-            function CFncValueC({ value: compute , scanPeriodMillis = 32 } : (
+            function CFncValueC({ value: compute , scanPeriodMillis = 32 } : ( 
                 {    
                     value : (              
                         Required<(
@@ -568,9 +677,9 @@ const {
                         Required<(
                             Parameters<typeof cFnValueImpl1 >[0]
                         )>["scanPeriodMillis"]  
-                    )  ;           
+                    )  ;             
                 }        
-            ) ) {                   
+            ) ) {                    
                 // debbugging   
                 {
                     ;
@@ -586,13 +695,13 @@ const {
                 ) ;             
                 ;              
                 const dbg = (                 
-                    <p>    
+                    <p>       
                     </p>         
                 ) ;          
                 return (       
                     dBBC((
                         useXDeferredTrue()    
-                         
+                            
                     ), { dbgBox1: dbg, c1: e })  
                 ) ;                      
             } 
