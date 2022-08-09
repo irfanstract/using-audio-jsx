@@ -119,20 +119,35 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0 }] : [
     { deps: React.DependencyList ; dest: AudioNode | null ; } , 
 ]): AudioNode | null {
     ;
-    const nd1 = (   
+    const nd1 = (       
         React.useMemo(() => {
             if (nd0 ) {
-                const gnNd = nd0.context.createGain() ; 
+                const gnNd = nd0.context.createGain() ;         
                 return gnNd ;       
-            } else {
+            } else {         
                 return null ;            
             } 
             // eslint-disable-next-line react-hooks/exhaustive-deps                 
         } , [nd0 , ...deps0 ])          
-    ) ;   
+    ) ;                      
+    React.useLayoutEffect(() => {            
+        if (nd1) {           
+            return () => {
+                nd1.gain.setTargetAtTime(
+                    0, nd1.context.currentTime, 0.1 ) ;       
+            } ;          
+        }
+        ;         
+    } , [nd1]);   
+    ;
     useAudioNodeConnectToDest(nd1, nd0 ) ;
-    return nd1 ;           
-}                     
+    ;
+    return nd1 ;               
+}                           
+// const useGainNodeFromSameCtx1 = (    
+//     (...[{} , deps0 ] : [{} , React.DependencyList ]) =>
+// );         
+;  
 
 
 
