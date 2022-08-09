@@ -72,13 +72,18 @@ const {
             }                            
         ) ,                   
         CFnValue1 : (
-            function ({ value: compute, ...otherProps } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+            function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+                const {
+                    codeDeps: higherLevelCodeDeps = [] ,  
+                    ...
+                    otherProps   
+                } = otherProps0 ;
                 const renderSrcCodeView = (
                     () => (  
                         <code style={{ whiteSpace: "pre-wrap" }}>
                             { String(compute ) }    
                         </code> 
-                    )
+                    )     
                 ) ;
                 ;      
                 return (                   
@@ -100,11 +105,11 @@ const {
                             ] }           
                             <CFnValueAtAbsoluteT 
                             value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }
-                            codeDeps={[schedT ]}       
+                            codeDeps={[schedT, ...higherLevelCodeDeps ]}       
                             { ...otherProps }    
-                            />     
-                            </>
-                        ) }      
+                            />                   
+                            </>   
+                        ) }          
                     </TC>
                 ) ;          
             }    
