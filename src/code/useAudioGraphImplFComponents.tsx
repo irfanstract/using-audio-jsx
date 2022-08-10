@@ -93,7 +93,7 @@ const LoopingWithPeriod = (
                         OmitOrPropagate.PROPAGATE   
                     ) ?      
                     // TODO
-                    100 : 0.2        
+                    100 : 3    
                 ) ,    
                 postFT: (      
                     (
@@ -102,7 +102,7 @@ const LoopingWithPeriod = (
                         OmitOrPropagate.PROPAGATE   
                     ) ?          
                     // value should be at-least `preFT`
-                    30000 : 0.2 
+                    30000 : (period + 0.5)
                 ) ,  
             } }       
             >    
@@ -113,15 +113,13 @@ const LoopingWithPeriod = (
             useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => {     
                 if (nd0 ) {
                     const outputCtxT = nd0.context.currentTime ;       
-                    ;                
-                    return (                                     
-                        <LoopingWithPeriodImpl {...props1 } >    
-                            { itemAfterAutoUnmounting  }
-                        </LoopingWithPeriodImpl>     
-                    ) ;     
-                }
-                // TODO
-                return <></> ;  
+                    ;      
+                }          
+                return (                                     
+                    <LoopingWithPeriodImpl {...props1 } >    
+                        { itemAfterAutoUnmounting  }
+                    </LoopingWithPeriodImpl>     
+                ) ;       
             })
         ) ;
     }     
