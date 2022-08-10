@@ -169,13 +169,15 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
                     const unmountTime = (   
                         nd1.context.currentTime   
                     ) ;  
+                    nd1.gain.cancelAndHoldAtTime(unmountTime) ;     
+                    nd1.gain.cancelScheduledValues(unmountTime) ;      
                     (            
                         nd1.gain.setValueCurveAtTime(
                             fadeoutCurve, 
-                            Math.max((
+                            Math.max((   
                                 mountTime + timeout  
                                 + 0.02
-                            ) , (     
+                            ) , (                 
                                 unmountTime          
                             )),   
                             timeout )  
