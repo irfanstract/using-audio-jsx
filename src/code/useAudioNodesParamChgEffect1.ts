@@ -33,7 +33,7 @@ import React, {
 const AUDIONODES_USEEFFECT : (
     keyof Pick<typeof React, "useEffect" | "useLayoutEffect" | "useInsertionEffect" >
 ) = (
-    "useInsertionEffect"     
+    "useLayoutEffect"     
 ) ;      
 
      
