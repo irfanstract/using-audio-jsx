@@ -35,7 +35,12 @@ const AUDIONODES_USEEFFECT : (
 ) = (
     "useLayoutEffect"     
 ) ;      
-
+const AUDIONODES_USEEFFECT1 : (
+    keyof (
+        Pick<typeof React, "useInsertionEffect" | "useLayoutEffect" >
+    )
+) = "useInsertionEffect";      
+     
      
 
 
@@ -55,4 +60,5 @@ const AUDIONODES_USEEFFECT : (
 
 export {
     AUDIONODES_USEEFFECT , 
-} ;   
+    AUDIONODES_USEEFFECT1 as AUDIONODES_USE_AUDIONODEEFFECT ,        
+} ;     
