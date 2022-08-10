@@ -4,12 +4,12 @@ import {
 } from "./polynomialsC";       
 import { IterableOps } from "./generalUse11";  
 import React, { useReducer, useState } from "react";   
-import { K } from "./commonElements";               
+import { K , NUMERIC } from "./commonElements";               
 import { CBC } from "./useStateInCallback";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";  
                
  
-      
+         
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
 import { Consm as NdRefConsm  } from "./useAudioGraphImplCurrentDestNdRefCtx";           
@@ -325,7 +325,7 @@ const snKit = (() => {
                             />                         
                         </CAmpModulated0 >                            
                     ) ;        
-                    return (
+                    return (   
                         e11    
                     ) ;     
                 })() ;         
@@ -369,7 +369,7 @@ const snKit = (() => {
                 } = mainProps ;  
                 const c1 = (() => {            
                     const maximumExp = (
-                        -1 * Math.log2(minimumFreq / conventionalFreq )   
+                        -1 * Math.log2(minimumFreq / conventionalFreq )    
                     ) ;  
                     const freqArgumSupposedGraph = (
                         applicableDecliningNormalisedToneFreqGraph1((
@@ -417,7 +417,7 @@ const CBassDrumKickFluidly1 = (
 const {
     CBassDrumKick1 , 
     CSnareDrum1 ,   
-      
+       
 } = (() => {          
     const NoChangeInTPlease = (        
         function ({ value } : { value: number ; }) {
@@ -434,7 +434,7 @@ const {
                     shallRemountForEachKeystroke : boolean ;            
                     delay : number ;            
                 } ,                                
-                C : React.FC<ComponentProps1> ;      
+                C : React.FC<ComponentProps1> ;        
                 label ?: React.ReactElement ,     
             }     ,    
         ] ) {         
@@ -443,7 +443,7 @@ const {
             ) ;   
             const keyPrefix: string = (
                 String(C.name || cStringLength )  
-            ) ;
+            ) ;  
             /**   
              * note : name "CDK" is since the code were initiaally for "CBassDrumKit"
              */
@@ -468,13 +468,25 @@ const {
                                 // TODO    
                                 <K key={`${keyPrefix } ${remount ? ctxtualAbsoluteT : 0 } `  }>      
                                     { remount && <NoChangeInTPlease value={ctxtualAbsoluteT} />  }
-                                    <p> { label } At T {ctxtualAbsoluteT } </p>
+                                    <p> { label } At T {ctxtualAbsoluteT } </p>  
+                                    { (function useM(topic: React.ReactElement ) {           
+                                        const renderCount1 = (
+                                            React.useRef<number>(0 ).current  ++             
+                                        ) ;               
+                                        return (                    
+                                            <p>     
+                                                { topic } : 
+                                                <NUMERIC>{ renderCount1 }</NUMERIC>  
+                                            </p>        
+                                                    
+                                        )     ;
+                                    })( <i> { label } ID </i> ) }                
                                     <div>   
                                     <WithDelay value={delay / ctxtualTScl } >  
                                         <C {...propsMain1 } >          
                                         </C>       
                                     </WithDelay>                        
-                                                       
+                                                                
                                     </div>            
                                 </K>       
                             ) }          
