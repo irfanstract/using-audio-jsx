@@ -1,7 +1,9 @@
  
 // utility imports                  
 import Immutable from "immutable";            
-import { IterableOps, PromiseReturnValue, OmitM } from "./generalUse11";   
+import { 
+    IterableOps, PromiseReturnValue, OmitM, FrequencyAndPeriod  ,    
+} from "./generalUse11";   
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
 import { K, asVoidElement, NUMERIC, useDebugDispatcher, } from "./commonElements";             
@@ -12,7 +14,7 @@ import {
     useOneWayCheckBox ,      
 } from "./useCompletion";    
 import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";  
-import {
+import {    
     TAndVl , 
     tAndVlSqExpand ,  
 } from "./useTValueSeqExpand1";      
@@ -304,7 +306,7 @@ const {
                 function (propsC: Props ) {
                     ;                                                 
                     const { 
-                        value: compute , 
+                        value: compute ,   
                         scanPeriodMillis = 32  ,      
                         codeDeps = [] ,                
                     } = propsC;    
@@ -376,12 +378,17 @@ const {
                                 return { t2 , vl } ;         
                             }      
                         ), codeDeps )     
-                    );                         
-                    ;             
-                    return {
+                    );          
+                    ;     
+                    const scanChunkFrequency = (
+                        FrequencyAndPeriod.byPeriod(1 )
+                    ) ;                                               
+                    ;                              
+                    return {         
                         scanPeriodMillis ,  
+                        scanChunkFrequency ,       
                         codeDeps ,   
-
+    
                         usePeriodicCtxTScan1 ,  
                         useCScanTs , 
                         /**  
@@ -396,13 +403,20 @@ const {
                 function CFncValueC(propsC : (  Props  ) ) {                        
                     const {
                         scanPeriodMillis ,  
+                        scanChunkFrequency ,   
                         codeDeps ,   
 
-                        usePeriodicCtxTScan1 ,  
+                        usePeriodicCtxTScan1 ,       
                         useCScanTs , 
-                        lComputeAtT ,          
+                        lComputeAtT ,                  
 
-                    } = usePropsExpand(propsC ) ;         
+                    } = usePropsExpand(propsC ) ;           
+                    const {
+                        frequency: scanFrq ,     
+                        period: scanPeriod ,             
+                    } = (         
+                        scanChunkFrequency    
+                    ) ;      
                     // debbugging               
                     {          
                         ;
@@ -421,21 +435,21 @@ const {
                                     useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
                                         nd0      
                                         ?          
-                                        <CBC>
+                                        <CBC>      
                                         { function useE() {       
                                             const {
                                                 ctxT , 
                                                 ctxTFloored     ,    
-                                                tScan1 ,                  
-      
-                                            } = useCScanTs(nd0 ) ;     
+                                                tScan1 ,                    
+                   
+                                            } = useCScanTs(nd0 ) ;       
                                             const actualScanKey : number = (
-                                                Math.floor(ctxT * 1 )  
+                                                Math.floor(ctxT / scanFrq )  
                                             ) ;     
                                             const remountDeps1 = (  
                                                 [actualScanKey, lComputeAtT ]  as const     
                                             ) ;
-                                            const graph = (    
+                                            const graph = (        
                                                 React.useMemo(() => (                  
                                                     tScan1            
                                                     .map(v => (v + -delayInSeconds ) )        
@@ -451,9 +465,9 @@ const {
                                                             lComputeAtT(( 
                                                                 // TODO restore to 't2'   
                                                                 // t2       
-                                                                t2 
+                                                                t2  
                                                             ) )          
-                                                        ) ;        
+                                                        ) ;          
                                                         return {                 
                                                             t: t2 ,          
                                                             vl: vl ,                     
@@ -467,25 +481,27 @@ const {
                                             const {               
                                                 swingTConst ,                
                                                 timingArgMode ,         
-                                 
+                                     
                                                 SETTARGETATTIME , 
                                                 SETVALUECURVE_AT_TIME ,      
-                               
+                                    
                                             } = eSupport({}    ) ;               
-                                            ;                    
+                                            ;                        
                                             const { 
                                                 remountDebugBeep = false ,     
                                             } = {} as { remountDebugBeep ?: boolean ; } ;
                                             // TODO                             
                                             const nd10 = (  
-                                                (                          
+                                                (                            
                                                     useDepsRemount           
                                                 )({         
                                                     deps: remountDeps1, 
-                                                    dest: nd0  , 
+                                                    dest: nd0  ,       
                                                          
-                                                    unmountTransitiveLenSeconds: 0.2 ,  
-                                                })
+                                                    unmountTransitiveLenSeconds: (
+                                                        (0.75) * scanPeriod   
+                                                    ) ,  
+                                                })  
                                             ) ;
                                             // TODO remove this LOC ; this is only for debugging   
                                             {
@@ -498,14 +514,14 @@ const {
                                                         ((1 + Math.random() ) *  5E5  )     
                                                     ) , [nd10 ] )           
                                                 ) ;  
-                                                ;                             
+                                                ;                              
                                                 const nd11 = (         
                                                     useFixedGain(nd10, (            
                                                         // 2 ** -4        
                                                         2 ** -32      
                                                     ) )                 
                                                 ) ;    
-                                                useHalfSecondBeep(
+                                                useHalfSecondBeep(   
                                                     nd11, { t: beepT }) ;      
                                             }          
                                             const nd1 = (             
@@ -520,7 +536,7 @@ const {
                                                         cnd11.connect(nd10 ) ;
                                                         cnd11.offset.value = 0 ;
                                                         cnd11.start() ;         
-                                                        return cnd11;   
+                                                        return cnd11;    
                                                     } else {
                                                         return null ;    
                                                     }
@@ -587,7 +603,7 @@ const {
                                                 ) }    
                                                 </pre>
                                                 </>
-                                            ) ;                
+                                            ) ;                   
                                         }    }          
                                         </CBC>          
                                         :
