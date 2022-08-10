@@ -209,6 +209,22 @@ type Seq1<A> = (
     |       
     Iterable.Seq.Indexed<A>       
 ) ; 
+interface FrequencyAndPeriod {
+    readonly frequency : number ; 
+    readonly period : number ;       
+} ;  
+const FrequencyAndPeriod = {
+    byFrequencyValue : (      
+        (v: number): ({} & FrequencyAndPeriod) => (
+            { frequency: v, period: 1 / v }
+        )      
+    ) ,       
+    byPeriod : (      
+        (v: number): ({} & FrequencyAndPeriod) => (
+            { period: v, frequency: 1 / v }
+        )    
+    ) ,   
+} ;
 export * from "./generalUseTypeDefs";
 export * from "./polynomialsC";
 export type {    
@@ -231,9 +247,10 @@ export {
     Iterable as Immutable ,    
     util ,                       
         
-    memoize ,                
+    memoize ,                   
     CanIncrementAndGet,    
 
+    FrequencyAndPeriod , 
     roundToExponentiallyClosesPwOf2,
     musicalSemitonesAsScalar,          
     Unix ,          
