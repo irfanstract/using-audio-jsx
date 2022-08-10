@@ -9,7 +9,7 @@ import { useEfectToMap } from "./useEffectToMap";
    
   
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";        
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";        
 import {     
     useBiquadFilterNodeWithGivenFadeoutTimeConstant1,
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1,
@@ -108,7 +108,7 @@ const {
                 const nd1 = (
                     useYyNode1(nd0, 0.5 )      
                 ) ;    
-                React[AUDIONODES_USEEFFECT](() => {      
+                React[AUDIONODES_USE_AUDIONODEEFFECT](() => {      
                     nd1 && (nd1[key].value = intrinsicValue ) ;       
                 } , [nd1 ]) ;        
                 ;           

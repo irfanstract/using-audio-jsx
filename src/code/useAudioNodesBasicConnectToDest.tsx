@@ -16,7 +16,7 @@ import { usingTimeout } from "./usingTimeoutOrInterval";
 
 
 import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicS";    
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";      
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";      
 
 
 
@@ -131,7 +131,7 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
             // eslint-disable-next-line react-hooks/exhaustive-deps                 
         } , [nd0 , ...deps0 ])          
     ) ;         
-    React[AUDIONODES_USEEFFECT](() => {   
+    React[AUDIONODES_USE_AUDIONODEEFFECT](() => {   
         if (nd1 && nd0 ) {             
             const fadeoutCurve = (
                 [

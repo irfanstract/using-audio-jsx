@@ -9,7 +9,7 @@ import { useEfectToMap } from "./useEffectToMap";
 
   
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";    
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";    
 import { useFixedGain } from "./useAudioNodesBasicFixedGain";   
 import { useParamModulation } from "./useAudioNodesParamAutomative1";      
 import { 
@@ -48,7 +48,7 @@ const useBqFltPtModulated = (
             useBiquadFilterNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
         ) ;       
         ;             
-        React[AUDIONODES_USEEFFECT](() => {        
+        React[AUDIONODES_USE_AUDIONODEEFFECT](() => {        
             nd1 && (nd1.type = tpe1 ) ;
         } , [nd1, tpe1 ]);        
         const mf1 = (       

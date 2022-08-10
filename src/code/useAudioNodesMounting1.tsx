@@ -304,7 +304,7 @@ const useSingularSrcDestConnect = (
         ),                                 
     ] ) {                                                 
         ;        
-        React[AUDIONODES_USEEFFECT](() => {     
+        React.useInsertionEffect(() => {     
             /**             
              * only if both are present        
              */

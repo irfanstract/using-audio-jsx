@@ -13,7 +13,7 @@ import {
 
           
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";      
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";      
 
 
 
@@ -129,7 +129,7 @@ const {
                         /**   
                          * like above or below, yet to define its initial value  
                          */        
-                        React[AUDIONODES_USEEFFECT](() => {      
+                        React[AUDIONODES_USE_AUDIONODEEFFECT](() => {      
                             if (putInitailValue) {
                                 ;                    
                                 if (p) {                  
@@ -157,7 +157,7 @@ const {
                      *  
                      *                      
                      */  
-                    React[AUDIONODES_USEEFFECT ](() => {         
+                    React[AUDIONODES_USE_AUDIONODEEFFECT ](() => {         
                         if (p) {                 
                             if (UGEPI_DEBUG1 ) {    
                                 ;                   

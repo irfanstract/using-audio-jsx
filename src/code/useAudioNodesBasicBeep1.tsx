@@ -9,7 +9,7 @@ import { useEfectToMap } from "./useEffectToMap";
 
 
           
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1"; 
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1"; 
 import { 
     useGainNodeWithGivenFadeoutTimeConstant1, 
     useOscilltorNodeWithGivenFadeoutTimeConstant1 , 
@@ -46,7 +46,7 @@ const usePersistingBeep = (() => {
             const nd2 = (
                 useOscilltorNodeWithGivenFadeoutTimeConstant1(nd1 , 0.5 )   
             ) ;                 
-            const X_EFFECT = AUDIONODES_USEEFFECT ;
+            const X_EFFECT = AUDIONODES_USE_AUDIONODEEFFECT ;
             React[X_EFFECT ](() => {      
                 if (nd2) {    
                     nd2.frequency.value = toneFreq ;       

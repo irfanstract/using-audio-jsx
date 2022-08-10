@@ -9,7 +9,7 @@ import { useEfectToMap } from "./useEffectToMap";
    
   
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";        
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";        
 import {     
     useBiquadFilterNodeWithGivenFadeoutTimeConstant1,
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1,
@@ -24,22 +24,22 @@ import { YyyUsable, YyyUsageDest, usePersistingBeep, useEternalBeep, useWhiteNoi
 import {      
     useGainElas , 
     useConstantParamSrcElas ,
-   
+     
 } from "./useAudioNodesBasicFixedElas";                  
-import { 
+import {   
     ctxFrameRateOf,
     useNormalisedArgumentativeChnl1 , 
-
+    
 } from "./useAudioNodesBasicNormalisation1";         
 import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";    
-
+   
          
   
           
     
 
 
- 
+     
 
 
 
@@ -106,7 +106,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                 freqArgumentInitialValue ?: number ;    
             } ,         
         ] ) {                                  
-            const { 
+            const {  
                 waveTable: wvTable = "sine",    
 
                 detuneScale1 = (12 * 100 ) ,          
@@ -124,15 +124,15 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             /**   
              * `type`     
              */
-            React[AUDIONODES_USEEFFECT](() => {         
+            React[AUDIONODES_USE_AUDIONODEEFFECT](() => {         
                 nd1 && ( 
                     setPeriodicWave1(nd1, wvTable )          
                 ) ;                 
-            } , [nd1 ]) ;                    
-            /**                
+            } , [nd1 ]) ;                        
+            /**                    
              * assigns initial value(s).      
              */
-            React[AUDIONODES_USEEFFECT](() => {
+            React[AUDIONODES_USE_AUDIONODEEFFECT](() => {  
                 nd1 && (        
                     /**   
                      * using `yy.value = (...)` is not an option here, as    

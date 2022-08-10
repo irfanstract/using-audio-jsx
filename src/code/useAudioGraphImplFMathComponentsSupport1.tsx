@@ -557,7 +557,7 @@ const {
                                                 ) ,       
                                             ] ;              
                                             //   
-                                            React[AUDIONODES_USEEFFECT ](() => {                   
+                                            React.useInsertionEffect(() => {                   
                                                 ;                          
                                                 0 && console.log({ tScan1 });                     
                                                 if (nd1  ) {   

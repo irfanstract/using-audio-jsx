@@ -12,7 +12,7 @@ import { useOneWayChanger } from "./useCompletion";
 
           
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";      
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";      
 import { 
     useBiquadFilterNodeWithGivenFadeoutTimeConstant1,
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1,
@@ -141,7 +141,7 @@ const useWaveTableNdElas : (
                 waveTable: waveTable  ,       
                   
             } = { waveTable: "sine" , ...programProps } as const ;                  
-            React[AUDIONODES_USEEFFECT](() => {                           
+            React[AUDIONODES_USE_AUDIONODEEFFECT](() => {                           
                 if (nd1) {                
                     A: {   
                         if (waveTable instanceof PeriodicWave) {

@@ -12,7 +12,7 @@ import {
 
   
     
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";    
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";    
 import { useFixedGain } from "./useAudioNodesBasicFixedGain";   
 import { useParamModulation } from "./useAudioNodesParamAutomative1";      
 import { 
@@ -142,7 +142,7 @@ const {
             /**   
              * intrinsic value
              *  */   
-            React[AUDIONODES_USEEFFECT](() => { 
+            React[AUDIONODES_USE_AUDIONODEEFFECT](() => { 
                 if (gnAfterMul ) {
                     ;    
                     if (typeof destNdIntrinsicValue === "number" ) { 

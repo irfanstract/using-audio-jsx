@@ -27,7 +27,7 @@ import {
     useParamNodeWithGiven,    
              
 } from "./useAudioNodesMounting1";  
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";
        
    
 
@@ -252,7 +252,7 @@ const useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1: (
 const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
     USEYYYNODER<(
         AudioNode    
-        &
+        &  
         Omit<ConstantSourceNode, (
             keyof Pick<AudioScheduledSourceNode, "start" | "stop" | "connect" | "disconnect" >   
         )>
@@ -263,7 +263,7 @@ const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1(
                 ...args , ctx => ctx.createConstantSource() )
         ) ;       
-        React[AUDIONODES_USEEFFECT](() => {
+        React[AUDIONODES_USE_AUDIONODEEFFECT](() => {
             if (nd1) {
                 if (1 ) {
                     ;
@@ -304,17 +304,17 @@ const useWhiteNoiseNodeWithGivenProps: (
         const nd = (
             useAudioBufferPlaybackNodeWithGivenFadeoutTimeConstant1(dest, 0.5 )       
         ) ;
-        React[AUDIONODES_USEEFFECT](() => {
+        React[AUDIONODES_USE_AUDIONODEEFFECT](() => {
             if (nd) {
                 const c = (
                     nd.context
-                ) ;
+                ) ;      
 
                 const b1 = (
                     AUDIOCTXWHITENOISEBUFFER(c )     
                 ) ;      
   
-                {
+                {   
                     ;
                     nd.buffer = b1 ; // assign Buffer            
                     nd.playbackRate.value = 1 ; // make the speed the original speed     
