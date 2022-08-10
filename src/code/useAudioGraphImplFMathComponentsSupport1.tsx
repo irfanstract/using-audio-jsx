@@ -495,11 +495,11 @@ const {
                                                 (                            
                                                     useDepsRemount           
                                                 )({         
-                                                    deps: remountDeps1, 
+                                                    deps: remountDeps1,    
                                                     dest: nd0  ,       
                                                          
                                                     unmountTransitiveLenSeconds: (
-                                                        (0.75) * scanPeriod   
+                                                        (0.2) * scanPeriod   
                                                     ) ,  
                                                 })  
                                             ) ;
