@@ -575,7 +575,11 @@ const {
                                                             ===  
                                                             `${undefined }+`                  
                                                         )           
-                                                    )) {
+                                                    )) {         
+                                                        (graph[0] ) && (                    
+                                                            nd1.offset
+                                                            .setValueAtTime((graph[0] ).vl , 0 )     
+                                                        );
                                                         SETVALUECURVE_AT_TIME(nd1, (      
                                                             graph       
                                                         ) , a => a.offset )    ;       
