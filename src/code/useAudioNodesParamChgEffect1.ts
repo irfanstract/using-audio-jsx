@@ -27,12 +27,12 @@ import React, {
  * support is quite limited, and that's probably unnecessary given `useLayoutEffect`
 */     
 const AUDIONODES_USEEFFECT : (
-    keyof Pick<typeof React, "useEffect" | "useLayoutEffect" >
+    keyof Pick<typeof React, "useEffect" | "useLayoutEffect" | "useInsertionEffect" >
 ) = (
-    "useLayoutEffect"     
-) ;
+    "useInsertionEffect"     
+) ;      
 
-
+     
 
 
 
