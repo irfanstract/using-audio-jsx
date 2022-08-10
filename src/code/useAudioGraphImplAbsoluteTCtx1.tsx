@@ -2,18 +2,22 @@
 // utility imports     
 import Immutable from "immutable";    
 import { IterableOps } from "./generalUse11";  
+import { 
+    AudioTrackConcatClippingMode , 
+    avTrackConcatShallPropagate ,   
+} from "./timelineConcatClippingMode";    
 import React from "react";               
 import { K, arrayIndexedOrderedList } from "./commonElements";          
- 
+        
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 
    
-                
+                   
 
             
-  
+    
 
 function useConditionalDeference1(e : React.ReactElement, perios : number ) {
     const e0 = React.useDeferredValue(e ) ;
@@ -22,12 +26,12 @@ function useConditionalDeference1(e : React.ReactElement, perios : number ) {
 // import newInstance from "./audioLoopDemoScheduledTCtxConstructor" ;      
 const {       
     currentTCtx ,                              
-    currentTScaleCtx ,           
+    currentTScaleCtx ,              
     currentTInfCtx ,                          
-    useCurrentTInf ,    
+    useCurrentTInf ,          
                      
 }  =newInstance() ;        
-function CurrentTDisplay() {         
+function CurrentTDisplay() {                  
     return (                  
         <currentTInfCtx.Consumer>                  
             { ({ t, tScale } ) => (  
@@ -49,7 +53,7 @@ function CurrentTDisplay() {
                 </div>
             ) }
         </currentTInfCtx.Consumer>
-    ) ;     
+    ) ;      
 }              
 /**               
  * applies `delay` ;    
@@ -61,7 +65,7 @@ const WithDelay = (
         React.PropsWithChildren<{ value: number ; }>      
     ) ) {
         ;   
-        const tInf = (
+        const tInf = (  
             useCurrentTInf()           
         ) ;
         /**   
@@ -81,58 +85,78 @@ const WithDelay = (
                 </currentTCtx.Provider> 
             ) ;     
         })() ;
-    }
-);
-//                        
+    }  
+);     
+const WithCurrentTInfo = (
+    currentTInfCtx.Consumer  
+) ;
+//                         
 const LoopingWithPeriod = (
     IterableOps.identity<(                 
-        React.FC<(     
-            React.PropsWithChildren<{      
-
-                /**  domain properties   */      
-                value: {   
-                    period: number ;    
-                    initialOffset ?: number ;        
-                } ;           
-   
-                /**   display properties  */       
-                renderRange : (
-                    Readonly<{ n: number ; }>
-                ) ;         
-                visual ?: false | true ;    
-                 
-            }>         
+        React.FC<(       
+            React.PropsWithChildren< (   
+                /**  domain properties   */   
+                {             
+        
+                    value: {      
+                        period: number ;      
+                        initialOffset ?: number ;    
+                        // clippingMode ?: AudioTrackConcatClippingMode ;          
+                    } ;                     
+           
+                }    
+                &    
+                /**   display properties  */        
+                {      
+                   
+                    visual ?: false | true ;     
+                    /**    
+                     *  controls the number of looping to display   
+                     * */      
+                    renderRange : (
+                        Readonly<{ n: number ; }>  
+                    ) ;                        
+                    // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
+                     
+                }        
+            )>                
         )>                  
     )>((                           
-        function ({
-            children: item ,        
-            value: props ,                     
-            renderRange ,       
-            visual = true ,                       
-        } ) {   
-            const {     
-                period : vPeriod ,       
-                initialOffset : vInitialOffset = 0 ,    
-            } = props ;
+        function ({      
+            children: item ,              
+            value: props ,            
+
+            renderRange ,   
+            // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
+            visual = true ,                   
+
+        } ) {     
+            const {              
+                period : vPeriod ,    
+                initialOffset : vInitialOffset = 0 ,        
+            } = props ;     
+            const effectiveLoopRange = (  
+                Immutable.Range(0, renderRange.n )       
+            );
             const itemsRendered = (        
-                Immutable.Range(0, renderRange.n )  
+                effectiveLoopRange        
                 .map((i: number) => (
                     { 
                         t: vInitialOffset + (i * vPeriod ) ,
                     } as const  
-                ) )
-                .map(function ({ t }): React.ReactElement  {        
-                    return (   
+                ) )            
+                .map(function ({ t: itemT }): React.ReactElement  {  
+                    return (        
                         <div  >    
-                            <p> item at <code>t= { t }</code> </p>
-                            <WithDelay value={t} >
+                            <p> item at <code>t= { itemT }</code> </p>
+                            <WithDelay value={itemT} >
                                 { item }    
                             </WithDelay>                
-                        </div>         
-                    ) ;    
+                        </div>          
+                    ) ;              
                 })                      
             ) ;    
-            return (    
+            return (        
                 <div>              
                     <p> a loop </p>          
                     <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
@@ -145,7 +169,7 @@ const LoopingWithPeriod = (
         }  
     ))
 ) ;
-                     
+                      
             
 
            
@@ -158,9 +182,10 @@ export {
     currentTCtx , 
     currentTScaleCtx ,       
     currentTInfCtx ,    
-    useCurrentTInf ,      
+    useCurrentTInf ,    
+    WithCurrentTInfo ,        
 
     CurrentTDisplay , 
     WithDelay , 
     LoopingWithPeriod , 
-} ;     
+} ;           
