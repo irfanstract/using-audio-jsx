@@ -489,9 +489,9 @@ const {
             NonNullable<(
                 Parameters<typeof asSharpDueToKeying>[0]  
             )> 
-        )>["SDK"]   
+        )>["SDK"]      
     ) = (
-        { shallRemountForEachKeystroke : false , delay : 0.1 } as const
+        { shallRemountForEachKeystroke : false , delay : 0.02 } as const
     ) ;             
     return {          
         CBassDrumKick1 : (   
