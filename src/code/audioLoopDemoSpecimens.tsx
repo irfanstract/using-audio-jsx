@@ -16,7 +16,9 @@ import {
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
     CConstantValue ,  CFnValue1 ,      
     CAmpSlideDown ,              
-} from "./useAudioGraphImplFComponents"; 
+
+    LoopingWithPeriod ,   
+} from "./useAudioGraphImplFComponents";      
 import { CWaveTable1 } from "./useAudioGraphImplFComponents"; 
 // const CPitchdownBassDrumKickFluidly1 = (
 //     function () {    
@@ -125,8 +127,7 @@ const {
     currentTInfCtx ,    
   
     CurrentTDisplay , 
-    WithDelay ,     
-    LoopingWithPeriod ,   
+    WithDelay ,      
 } = tCtxs ;
    
 const BeepsInLoop = (
@@ -304,7 +305,7 @@ const {
                         value={( 
                             { period: 1.0 }  as const         
                         )} 
-                        renderRange={{ n: 0x03 } }                   
+                        renderRange={{ n: 0x08 } }                   
                         >       
                             <WithDelay value={0 } >          
                                 <CBassDrumKick1 tCoef1={2 ** -4 } />       
