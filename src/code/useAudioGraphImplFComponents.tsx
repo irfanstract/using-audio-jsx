@@ -3,9 +3,15 @@ import {
     IterableOps , 
      
 } from "./generalUse11";     
+import { 
+    AudioTrackConcatClippingMode , 
+    avTrackConcatShallPropagate, 
+    OmitOrPropagate,          
+
+} from "./timelineConcatClippingMode";    
 import React, { useReducer, useState } from "react";  
 import { ComponentProps } from "./commonElementsTypes";
-import { K } from "./commonElements";   
+import { K } from "./commonElements";         
 
          
 
@@ -14,23 +20,39 @@ import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";
 import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
 import { 
     CHalfSecndBeepAtAbsoluteT ,    
-    CAmpModulated as CAmpModulated0 ,  
+    CAmpModulated as CAmpModulatedTimeDomain ,  
     CAmpSlideDownAtAbsoluteT ,   
-    CBiquadFilterModulated ,          
+    CBiquadFilterModulated ,             
       
     CPersistingBeep as CPersistingBeep0 ,       
     CConstantValueModulated ,     
     CConstantValue ,      
     CFnValue as CFnValueAtAbsoluteT ,    
        
-    nonterminalUsageWrapC , 
-    terminalUsageWrapC ,  
-    modulatedWaveTableUsageWrapC , 
+    nonterminalUsageWrapC ,   
+    terminalUsageWrapC ,          
+    modulatedWaveTableUsageWrapC ,      
   
-} from "./useAudioGraphImplCurrentDestNdRefCtxC";        
+} from "./useAudioGraphImplCurrentDestNdRefCtxC";           
+import {
+    Consm as WithCurrentDestNdRef , 
+    useWithCurrentSideTapPtRef , 
+
+} from "./useAudioGraphImplCurrentDestNdRefCtx";    
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";      
 import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";     
 import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";   
+import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
+
+
+
+
+
+
+
+
+  
+
 /**    
  * {@link CPersistingBeep0 }. 
  * 
@@ -41,12 +63,72 @@ const CPersistingBeep : (
     typeof CPersistingBeep0  
 ) = CPersistingBeep0  ;
 const {
-    WithDelay ,  
-        
-} = tCtxs ;              
+    WithDelay ,              
+    LoopingWithPeriod : LoopingWithPeriodImpl ,   
+    
+    WithCurrentTInfo: WithCurrentScheduledTInfo ,    
+           
+} = tCtxs ;                      
+const LoopingWithPeriod = (    
+    function ({ 
+        children: item  , 
+        autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
+        ...
+        props1   
+    } : (          
+        ComponentProps<typeof LoopingWithPeriodImpl>     
+        &              
+        { 
+            autoUnmountMode ?: AudioTrackConcatClippingMode ;
+        }
+    ) ) {   
+        const { value: { period } } = props1 ;               
+        const itemAfterAutoUnmounting = (  
+            <WithAutoUnmount
+            {...{     
+                preFT: (  
+                    (
+                        (avTrackConcatShallPropagate(autoUnmountMode, 0 ) || OmitOrPropagate.OMIT )
+                        === 
+                        OmitOrPropagate.PROPAGATE   
+                    ) ?      
+                    // TODO
+                    100 : 0.2        
+                ) ,    
+                postFT: (      
+                    (
+                        (avTrackConcatShallPropagate(autoUnmountMode, 1 ) || OmitOrPropagate.OMIT )
+                        === 
+                        OmitOrPropagate.PROPAGATE   
+                    ) ?          
+                    // value should be at-least `preFT`
+                    30000 : 0.2 
+                ) ,  
+            } }       
+            >    
+                { item }
+            </WithAutoUnmount>         
+        ) ;
+        return (
+            useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => {     
+                if (nd0 ) {
+                    const outputCtxT = nd0.context.currentTime ;       
+                    ;                
+                    return (                                     
+                        <LoopingWithPeriodImpl {...props1 } >    
+                            { itemAfterAutoUnmounting  }
+                        </LoopingWithPeriodImpl>     
+                    ) ;     
+                }
+                // TODO
+                return <></> ;  
+            })
+        ) ;
+    }     
+) ;
 const {
-    CHalfSecndBeep1 , 
-    CAmpSlideDown ,   
+    CHalfSecndBeep1 ,   
+    CAmpSlideDown ,      
     CFnValue1 ,  
   
 } = (function () {     
@@ -191,9 +273,9 @@ const CAmpModulated1 = (
             ) ;                   
             ;         
             return (          
-                <CAmpModulated0 value={ctrlFnl} >
+                <CAmpModulatedTimeDomain value={ctrlFnl} >
                     { children } 
-                </CAmpModulated0>
+                </CAmpModulatedTimeDomain>
             ) ;
         }    
     ))
@@ -219,23 +301,29 @@ const CAmpModulated: (
 
   
 export {
-    // FILTERING   
+    
+    // MODIFYING   
        
+    // LOOPING            
+    LoopingWithPeriod ,    
+
+    // FILTERING       
     CAmpModulated , 
     CAmpModulated1 ,               
-    CAmpModulated0 ,    
+    CAmpModulatedTimeDomain as CAmpModulated0 ,     
+    CAmpModulatedTimeDomain ,            
     CAmpSlideDown ,       
     CBiquadFilterModulated ,  
     CFreqDmAnalyF ,   
    
     CHalfSecndBeepAtAbsoluteT ,    
 
-    // 'T'               
-        
-    WithDelay ,     
+    // 'T' OFFSET-OR-SCALING       
+    WithDelay ,       
 
-    // TERMINAL/INTRINSIC       
+    // TERMINAL 
     
+    // INTRINSICS 
     CHalfSecndBeep1 ,          
     CPersistingBeep ,                                 
     CWaveTable1 ,  
@@ -244,4 +332,4 @@ export {
     CFnValue1 , 
     CWhiteNoise ,    
 } ;                       
-export * from "./useAudioGraphImplFComponentsSlapDrumKit1";            
+export * from "./useAudioGraphImplFComponentsSlapDrumKit1";             
