@@ -124,7 +124,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             /**   
              * `type`     
              */
-            React.useLayoutEffect(() => {         
+            React[AUDIONODES_USEEFFECT](() => {         
                 nd1 && ( 
                     setPeriodicWave1(nd1, wvTable )          
                 ) ;                 
@@ -132,7 +132,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             /**                
              * assigns initial value(s).      
              */
-            React.useLayoutEffect(() => {
+            React[AUDIONODES_USEEFFECT](() => {
                 nd1 && (        
                     /**   
                      * using `yy.value = (...)` is not an option here, as    
@@ -152,7 +152,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             {
                 ;
                 // TODO remove this debugging line-of-code           
-                React.useLayoutEffect(() => {      
+                React[AUDIONODES_USEEFFECT](() => {      
                     if (0 ) {
                           ;
                           if (nd1 instanceof AudioNode ) {  
@@ -161,7 +161,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                     }         
                 }, [nd1 ] ) ;             
                 //      
-                React.useLayoutEffect(() => {      
+                React[AUDIONODES_USEEFFECT](() => {      
                     if (nd1 ) {   
                         if (!(((nd1 as any ).BASICBEEPMODULATIONXNOREPEA += "+" ) === "undefined+" ) ) {
                             console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;

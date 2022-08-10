@@ -64,7 +64,7 @@ const {
      */
     function useCheckNoDoubleInit(nd1 : object | null ) {
         ;   
-        React.useLayoutEffect(() => {      
+        React[AUDIONODES_USEEFFECT](() => {      
             if (nd1 && doubleInitCheckEnabled ) {              
                 if (!(((nd1 as any ).AUDIOBASICNORMALISATIONIMPL += "+" ) === "undefined+" ) ) {
                     console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
@@ -142,7 +142,7 @@ const {
             /**   
              * intrinsic value
              *  */   
-            React.useLayoutEffect(() => { 
+            React[AUDIONODES_USEEFFECT](() => { 
                 if (gnAfterMul ) {
                     ;    
                     if (typeof destNdIntrinsicValue === "number" ) { 
@@ -194,17 +194,17 @@ const {
              */  
             {         
                 ;                     
-                React.useLayoutEffect(() => {
+                React[AUDIONODES_USEEFFECT](() => {
                     if (postInitDisconnectiveDebug === true ) {      
                         (dest instanceof AudioNode ) && dest.disconnect() ;          
                     }       
                 }, [dest ]) ;   
-                React.useLayoutEffect(() => {
+                React[AUDIONODES_USEEFFECT](() => {
                     if (postInitDisconnectiveDebug === 2 ) {      
                         gnBeforeMul1 && gnBeforeMul1.disconnect() ;    
                     }       
                 }, [gnBeforeMul1 ]) ;                 
-                React.useLayoutEffect(() => {  
+                React[AUDIONODES_USEEFFECT](() => {  
                     if (postInitDisconnectiveDebug === 3 ) {        
                         if (gnBeforeMul1 && gnAfterMul ) {
                             gnBeforeMul1.disconnect() ;              
@@ -215,7 +215,7 @@ const {
                         }        
                     }       
                 }, [gnBeforeMul1 && gnAfterMul ]) ;            
-                React.useLayoutEffect(() => {
+                React[AUDIONODES_USEEFFECT](() => {
                     if (postInitDisconnectiveDebug === 4 ) {      
                         gnBeforeMulX && gnBeforeMulX.disconnect() ;    
                     }       

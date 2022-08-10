@@ -343,7 +343,7 @@ const useParamNodeWithGiven = (
         const cncDebug : 0 | 1 = 0 ;
         {        
             ;    
-            React.useLayoutEffect(() => { cncDebug &&  PN_LOG("=========") ; } , []);
+            React[AUDIONODES_USEEFFECT](() => { cncDebug &&  PN_LOG("=========") ; } , []);
             useSingularSrcDestConnect(gRef1 , dest, (
                 { dbg: cncDebug ? 1 : 2 } as const
             ) ) ;         

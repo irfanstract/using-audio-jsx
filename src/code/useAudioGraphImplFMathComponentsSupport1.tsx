@@ -23,6 +23,7 @@ import {
 
 
 // 
+import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";      
 import {       
     WithGivenDest ,  
     Prv1 ,        
@@ -428,7 +429,7 @@ const {
                     const delayInSeconds = 0.07 ;                   
                     const {               
                         e ,                       
-                    } = (   
+                    } = (    
                         (     
                             function useCFVI(): { e: React.ReactElement ; } {          
                                 const e = (        
@@ -451,7 +452,7 @@ const {
                                             ) ;
                                             const graph = (        
                                                 React.useMemo(() => (                  
-                                                    tScan1            
+                                                    tScan1             
                                                     .map(v => (v + -delayInSeconds ) )        
                                                     .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
                                                         const t2 = (        
@@ -480,7 +481,7 @@ const {
                                             // TODO            
                                             const {               
                                                 swingTConst ,                
-                                                timingArgMode ,         
+                                                timingArgMode ,          
                                      
                                                 SETTARGETATTIME , 
                                                 SETVALUECURVE_AT_TIME ,      
@@ -494,14 +495,14 @@ const {
                                             const nd10 = (  
                                                 (                            
                                                     useDepsRemount           
-                                                )({         
+                                                )({          
                                                     deps: remountDeps1,    
                                                     dest: nd0  ,       
                                                          
                                                     unmountTransitiveLenSeconds: (
                                                         (0.2) * scanPeriod   
                                                     ) ,  
-                                                })  
+                                                })    
                                             ) ;
                                             // TODO remove this LOC ; this is only for debugging   
                                             {
@@ -523,7 +524,7 @@ const {
                                                 ) ;    
                                                 useHalfSecondBeep(   
                                                     nd11, { t: beepT }) ;      
-                                            }          
+                                            }           
                                             const nd1 = (             
                                                 React.useMemo(():(
                                                     (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
@@ -542,7 +543,7 @@ const {
                                                     }
                                                 } , [nd10 ] )              
                                             ) ;                            
-                                            // DEBUGGING       
+                                            // DEBUGGING        
                                             const mountRandom1 = [
                                                 (  
                                                     React.useMemo(() => (       
@@ -554,10 +555,10 @@ const {
                                                         Math.random() 
                                                     ) , [nd1 ])   
                                                 ) ,       
-                                            ] ;          
+                                            ] ;              
                                             //   
-                                            React.useLayoutEffect(() => {                   
-                                                ;                        
+                                            React[AUDIONODES_USEEFFECT ](() => {                   
+                                                ;                          
                                                 0 && console.log({ tScan1 });                     
                                                 if (nd1  ) {   
                                                     // console.log((            
@@ -568,7 +569,7 @@ const {
                                                             (() => {           
                                                                 const v = (
                                                                     ((nd1 as any).FNCMATHCOMPONENTSSS_MNT_PRM += "+")   
-                                                                ) ;     
+                                                                ) ;      
                                                                 0 && console.log({ nd1, v });                
                                                                 return v ;         
                                                             })()           
@@ -599,10 +600,7 @@ const {
                                                 { (             
                                                     JSON.stringify((  
                                                         { 
-                                                            ctxTFloored,  
-                                                            tScan1First : tScan1.first() , 
-                                                            mountRandom1, 
-                                                        }
+                                                        } 
                                                     ), null, 2 )
                                                 ) }    
                                                 </pre>
@@ -634,7 +632,7 @@ const {
                 } 
             )  ;  
         })()
-    } ;
+    } ;   
 })() ;     
  
   

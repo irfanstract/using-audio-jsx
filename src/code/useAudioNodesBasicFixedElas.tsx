@@ -141,7 +141,7 @@ const useWaveTableNdElas : (
                 waveTable: waveTable  ,       
                   
             } = { waveTable: "sine" , ...programProps } as const ;                  
-            React.useLayoutEffect(() => {                           
+            React[AUDIONODES_USEEFFECT](() => {                           
                 if (nd1) {                
                     A: {   
                         if (waveTable instanceof PeriodicWave) {

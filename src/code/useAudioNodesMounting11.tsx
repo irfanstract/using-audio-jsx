@@ -263,7 +263,7 @@ const useConstantParamSrcNodeWithGivenFadeoutTimeConstant1: (
             useAudioScheduledSrcNodeWithGivenFadeoutTimeConstant1(
                 ...args , ctx => ctx.createConstantSource() )
         ) ;       
-        React.useLayoutEffect(() => {
+        React[AUDIONODES_USEEFFECT](() => {
             if (nd1) {
                 if (1 ) {
                     ;

@@ -108,7 +108,7 @@ const {
                 const nd1 = (
                     useYyNode1(nd0, 0.5 )      
                 ) ;    
-                React.useLayoutEffect(() => {      
+                React[AUDIONODES_USEEFFECT](() => {      
                     nd1 && (nd1[key].value = intrinsicValue ) ;       
                 } , [nd1 ]) ;        
                 ;           
@@ -150,7 +150,7 @@ const {
             //     const nd1 = (
             //         useYyNode1(nd0, 0.5 )      
             //     ) ;           
-            //     React.useLayoutEffect(() => {      
+            //     React[AUDIONODES_USEEFFECT](() => {      
             //         nd1 && (nd1[key].value = intrinsicValue ) ;       
             //     } , [nd1 ]) ;    
             //     ;    
@@ -255,7 +255,7 @@ const useOinModulatedWaveTable = (() => {
     //         /**   
     //          * `type`     
     //          */
-    //         React.useLayoutEffect(() => {         
+    //         React[AUDIONODES_USEEFFECT](() => {         
     //             nd1 && ( 
     //                 setPeriodicWave1(nd1, wvTable )          
     //             ) ;                 
@@ -263,7 +263,7 @@ const useOinModulatedWaveTable = (() => {
     //         /**   
     //          * assigns initial value   
     //          */
-    //         React.useLayoutEffect(() => {
+    //         React[AUDIONODES_USEEFFECT](() => {
     //             nd1 && (       
     //                 /**   
     //                  * using `yy.value = (...)` is not an option here, as    
