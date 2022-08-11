@@ -51,16 +51,7 @@ const asVoidElement = (
             ) >((C    ))       
         ) ;         
     }            
-) ;                             
-function useDebugDispatcher <A extends null | true | object > (...[] : [
-    //  
-]): React.Dispatch<() => A > {    
-    ;         
-    const [ , DEBUG ] = (   
-        React.useState<null | A >(null )       
-    ) ;    
-    return DEBUG ;         
-}                          
+) ;                           
 /**   
  * given an array of {@link React.ReactElement}s,    
  * assumes that the item each identity is solely {@link Array.indexOf its index/position in the src list } ,
@@ -87,7 +78,8 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
             ) }
         </ol>        
     ) ;
-} 
+}  
+export * from "./usingComponentMountRenderStat";
 export * from "./commonElementsTypes" ;    
 export * from "./commonCodeSnippetAndNumericDisplay";  
 export * from "./commonNavigativeElements" ;         
@@ -96,5 +88,5 @@ export * from "./useLocaleSPecificTextContent" ;
 export * from "./usePriorityLevelling1";     
 export {   
     arrayIndexedOrderedList as arrayIndexedOrderedList , 
-} ;
-export { K, asVoidElement, useDebugDispatcher ,   };       
+} ;    
+export { K, asVoidElement,      };          
