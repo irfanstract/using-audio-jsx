@@ -12,23 +12,39 @@ import { ComponentProps, ContextReturnType } from "./commonElementsTypes";
               
               
                    
-         
+            
 /**     
+ * normally `useYyy` will not play well with branched code, so 
+ * there's need for indirection.
+ * 
  * it's the calling-code responsibility to ensure that `useYyy` remains the same expression. 
  * 
- * @example    
- * return (      
+ * @example       
+ * return (     
+ *   (!!accntIdent )          
+ *   ? 
+ *   // it's guaranteed to be non-null at-this-point, so 
+ *   // lets just craft the display . 
+ *   // sadly, `useYyy`s will not play well in branched code, so
+ *   // we need this indirection via Component {@link CBC }
  *   <CBC>{ () => {   
  *      const data = (
- *        useSyncExternalStore(() => ... , [....] ) 
+ *        useWEventStream(() => ... , [....] )       
+ *      ) ;         
+ *      const .... = (
+ *        useMemo(() => .... , [.....] )
  *      ) ;
- *      useYyyEffect(.... ... ) ;    
- *      return (
- *        <VData value={data } />
- *      ) ;
- *   } }</CBC>       
+ *      const .... = (
+ *        useYyyy(.... ... )
+ *      ) ;            
+ *      return (    
+ *        <VData value={data } ..... />  
+ *      ) ;         
+ *   } }</CBC>           
+ *   :
+ *   null    
  * ) ;         
- */
+ */     
 const CBC = (
      IterableOps.identity<(                      
         React.FC<{                  
