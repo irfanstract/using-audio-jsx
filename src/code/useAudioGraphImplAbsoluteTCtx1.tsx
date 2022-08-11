@@ -31,28 +31,27 @@ const {
     useCurrentTInf ,          
                      
 }  =newInstance() ;        
-function CurrentTDisplay() {                  
-    return (                  
-        <currentTInfCtx.Consumer>                  
-            { ({ t, tScale } ) => (  
-                <div>   
-                    <p> <i> Absolute/Canonical Timing </i> information </p>  
-                    <table>          
-                    <tbody>        
-                            
-                    <tr>              
-                        <td> <code>t</code> </td>  
-                        <td> <code>{t }</code>      </td>  
-                    </tr>            
-                    <tr>           
-                        <td>  <code>t-scale</code> </td>  
-                        <td> <code>{tScale }</code>      </td>  
-                    </tr>         
-                    </tbody>
-                    </table>    
-                </div>
-            ) }
-        </currentTInfCtx.Consumer>
+function CurrentTDisplay() {      
+    const { t, tScale } = (
+        useCurrentTInf()        
+    ) ;                     
+    return (       
+        <div>   
+            <p> <i> Absolute/Canonical Timing </i> information </p>  
+            <table>          
+            <tbody>        
+                    
+            <tr>              
+                <td> <code>t</code> </td>  
+                <td> <code>{t }</code>      </td>  
+            </tr>            
+            <tr>           
+                <td>  <code>t-scale</code> </td>  
+                <td> <code>{tScale }</code>      </td>  
+            </tr>         
+            </tbody>
+            </table>    
+        </div>   
     ) ;      
 }              
 /**               
@@ -85,7 +84,7 @@ const WithDelay = (
                 </currentTCtx.Provider> 
             ) ;     
         })() ;
-    }  
+    }     
 );     
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
