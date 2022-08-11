@@ -269,21 +269,24 @@ const {
                         codeDeps = [] ,                
                     } = propsC;    
                     function usePeriodicCtxTScan1  (...[nd0 ] : [ AudioNode ] ) {
+                        const usedPausedStatePeriodSeconds = (
+                            React.useMemo(() => (1.8 + (Math.random() * 2.2 ) ) , [] )
+                        ) ;   
                         return (              
                             useRealTimeQueryInterval1X(() => {    
                                 const ctxT = (
-                                    nd0.context.currentTime                     
+                                    nd0.context.currentTime                             
                                 ) ;         
-                                return {    
+                                return {             
                                     ctxT ,      
-                                } ;             
+                                } ;        
                             } , (
                                 // TODO
                                 (
                                     nd0 && (nd0.context.state === "running" ) ?
-                                    (scanChunkFrequency.period / 9.8 )   
-                                    : 1.2     
-                                )
+                                    (scanChunkFrequency.period / 4.7 )   
+                                    : (usedPausedStatePeriodSeconds )      
+                                )             
                                 *    
                                 1000
                             ) )            
