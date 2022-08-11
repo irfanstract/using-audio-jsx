@@ -259,7 +259,10 @@ const {
             ) ;        
             const usePropsExpand = (   
                 function (propsC: Props ) {
-                    ;                                                 
+                    ;                                                              
+                    const scanChunkFrequency = (
+                        FrequencyAndPeriod.byPeriod(1 )            
+                    ) ;      
                     const { 
                         value: compute ,   
                         scanPeriodMillis = 32  ,      
@@ -271,10 +274,19 @@ const {
                                 const ctxT = (
                                     nd0.context.currentTime                     
                                 ) ;         
-                                return {  
+                                return {    
                                     ctxT ,      
                                 } ;             
-                            } , scanPeriodMillis )            
+                            } , (
+                                // TODO
+                                (
+                                    nd0 && (nd0.context.state === "running" ) ?
+                                    (scanChunkFrequency.period / 9.8 )   
+                                    : 1.2     
+                                )
+                                *    
+                                1000
+                            ) )            
                         ) ;
                     }  
                     function useCScanTs(...[nd0, properties1 = {}] : [
@@ -310,7 +322,7 @@ const {
                             } , [ctxTFloored ] )   
                         ) ;              
                         return {
-                            ctxT , 
+                            ctxT ,       
                             ctxTFloored     , 
                             tScan1 ,     
                         } ;
@@ -334,10 +346,7 @@ const {
                             }      
                         ), codeDeps )     
                     );          
-                    ;     
-                    const scanChunkFrequency = (
-                        FrequencyAndPeriod.byPeriod(1 )
-                    ) ;                                               
+                    ;                                              
                     ;                              
                     return {         
                         scanPeriodMillis ,  
