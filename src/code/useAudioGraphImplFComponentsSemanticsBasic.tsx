@@ -24,16 +24,12 @@ const WGD_DIV : (
 ) = (
     function ({ children } : Required<React.PropsWithChildren<{}> > ) {   
         // TODO hoping that this LOC can be removed ..  
-        useRefreshByInterval1(true, (0 ? 230 : 2000 ), { LE: "useLayoutEffect" } );  
+        useRefreshByInterval1(true, (0 ? 520 : 2230 ), { LE: "useLayoutEffect" } );  
         //  
-        return (             
-            <div          
-            style={{ 
-                border: `0.05em solid currentcolor`  ,  
-                padding: `0.5em` ,        
-                maxWidth : `60em` ,       
-                fontSize : `98%` ,   
-                textAlign: "start" ,     
+        return (                         
+            <div      
+            className="WGD_DIV_BORDERSTYLE WGD_DIV_PADDINGSTYLE WGD_DIV_FONTSIZING WGD_DIV_BOXSIZING"    
+            style={{     
             } }
             >                
                 { children }        
@@ -62,9 +58,12 @@ const LWP_DIV : (
                 overflowY: `auto` ,             
                 fontSize : `98%` ,         
                 textAlign: "start" ,        
-                borderBlockStart: borderStyle ,     
+                borderBlockStart: borderStyle ,              
                 borderInlineStart: borderStyle ,     
                 margin : `0.5em` ,    
+                // ...({      
+                //     "--borderstyle0" : `0.05em solid currentcolor` ,    
+                // }) ,
             } }    
             >             
                 { children }        
