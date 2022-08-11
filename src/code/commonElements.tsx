@@ -12,17 +12,19 @@ import React, {
 } from "react";
 import { Fragment as K } from "react";  
 import { useJsonStringificativeMemo } from "./usingTimeoutOrInterval";         
-// type JsxBoolean = null | " " | "_" ;
+// type JsxBoolean = null | " " | "_" ;      
 // export {
-//     JsxBoolean , 
+//     JsxBoolean ,    
 // } ;
 import { ComponentRefValue, ComponentProps, JsxBoolean } from "./commonElementsTypes"; 
+import { useRenderCount } from "./usingComponentMountRenderStat";     
+import { NUMERIC } from "./commonCodeSnippetAndNumericDisplay";               
 
 
+  
 
 
-
-
+   
 
 
 
@@ -55,7 +57,7 @@ const asVoidElement = (
             IterableOps.identity<(     
                 C1     
             ) >((C   as C1  )        )           
-        ) ;         
+        ) ;           
     }            
 ) ;                           
 /**   
@@ -74,7 +76,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
 ] ) {    
     return (               
         <ol>   
-            { (                   
+            { (                       
                 itemsRendered
                 .map((e, i) => (
                     <li key={i} >       
@@ -85,14 +87,28 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
         </ol>        
     ) ;
 }  
+const useTopicHeadedRenderCount = (     
+    function useM(topic: React.ReactElement ) {           
+        const mountGUid = (  
+            useRenderCount()             
+        ) ;               
+        return (                    
+            <p>   
+                { topic } : 
+                <NUMERIC>{ mountGUid }</NUMERIC>  
+            </p>        
+                         
+        )     ;    
+    }       
+) ;        
 export * from "./usingComponentMountRenderStat";
 export * from "./commonElementsTypes" ;    
 export * from "./commonCodeSnippetAndNumericDisplay";  
-export * from "./commonNavigativeElements" ;         
+export * from "./commonNavigativeElements" ;           
 export * from "./headingNrm" ;     
 export * from "./useLocaleSPecificTextContent" ; 
-export * from "./usePriorityLevelling1";     
+export * from "./usePriorityLevelling1";          
 export {   
     arrayIndexedOrderedList as arrayIndexedOrderedList , 
 } ;    
-export { K, asVoidElement,      };          
+export { K, asVoidElement, useTopicHeadedRenderCount  };                             
