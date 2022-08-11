@@ -13,7 +13,7 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
       
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
-import { Consm as NdRefConsm , WithGivenDest } from "./useAudioGraphImplCurrentDestNdRefCtx";           
+import { Consm as NdRefConsm , WithGivenDest, useWithCurrentSideTapPtRef } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import {                
     CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
     CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
@@ -62,7 +62,7 @@ const {
         SUPPOSEDLY_NOW = "available" ,
         SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
     }     
-    type PreFTAndPostFTProps = {
+    type PreFTAndPostFTProps = { 
         /**        
          * pre-incidential tolerance        
          */   
@@ -95,7 +95,7 @@ const {
             } ;
         }    
     ) ;
-    type Props = (
+    type Props = ( 
         React.PropsWithChildren<(
             PreFTAndPostFTProps      
         ) >          
@@ -119,71 +119,64 @@ const {
             const {       
                 passageStateBy ,     
             } = (   
-                passageStateBy1({ preFT, postFT })        
-            ) ;  
-            return ( 
-                <>               
-                <AbsoluteScheduledTCons>         
-                    { ({ t: expectedT }) => (                  
-                        <>            
-                        <NdRefConsm>            
-                            { ({ feedPt: destNd }) => (          
-                                <CBC>{ function useC1() {    
-                                    const {       
-                                        passageState: passageState ,          
-                                        hasPassedT: hasPassedT ,  
-                                    } = (   
-                                        useRealTimeQueryInterval11({ 
-                                            f : ()  => {     
-                                                const ctxT = (
-                                                    destNd         
-                                                    ? 
-                                                    destNd.context.currentTime 
-                                                    :   
-                                                    // -30000     
-                                                    0    
-                                                ) ; 
-                                                const actualT = (
-                                                    ctxT    
-                                                ) ;
-                                                ;                                      
-                                                return {
-                                                    passageState : (     
-                                                        passageStateBy({ expectedT, actualT })
-                                                    ) ,   
-                                                    hasPassedT : (expectedT <= actualT ) ,     
-                                                } ;                        
-                                            } ,    
-                                            LE : "useLayoutEffect" ,   
-                                        } , (
-                                            Math.max(...[
-                                                (     
-                                                    (destNd && (destNd.context.state === "running") )
-                                                    ?   
-                                                    0.1         
-                                                    :    
-                                                    5     
-                                                ) , 
-                                                Math.min(preFT, postFT) / 2.5  ,  
-                                            ])          
-                                        ) * 1000 )            
-                                    ) ;       
-                                    return (        
-                                        <div       
-                                        className={`SLPCM-M-${hasPassedT ? "PAST" : "NONPAST" }` }          
-                                        style={{            
-                                        }} 
-                                        >     
-                                        {f({ expectedChildren, passageState }) }
-                                        </div>  
-                                    ) ;            
-                                } }</CBC>   
-                            ) }                
-                        </NdRefConsm>     
-                        </>
-                    ) }
-                </AbsoluteScheduledTCons>  
-                </> 
+                passageStateBy1({ preFT, postFT })    
+            ) ;      
+            const { t: expectedT } = (
+                tCtxs.useCurrentTInf()     
+            ) ;
+            return (         
+                useWithCurrentSideTapPtRef(({ feedPt: destNd }) => (          
+                    <CBC>{ function useC1() {    
+                        const {       
+                            passageState: passageState ,          
+                            hasPassedT: hasPassedT ,  
+                        } = (   
+                            useRealTimeQueryInterval11({ 
+                                f : ()  => {         
+                                    const ctxT = (
+                                        destNd          
+                                        ? 
+                                        destNd.context.currentTime 
+                                        :   
+                                        // -30000     
+                                        0    
+                                    ) ; 
+                                    const actualT = (
+                                        ctxT    
+                                    ) ;
+                                    ;                                      
+                                    return {
+                                        passageState : (     
+                                            passageStateBy({ expectedT, actualT })
+                                        ) ,   
+                                        hasPassedT : (expectedT <= actualT ) ,     
+                                    } ;                        
+                                } ,    
+                                LE : "useLayoutEffect" ,   
+                            } , (
+                                Math.max(...[
+                                    (     
+                                        (destNd && (destNd.context.state === "running") )
+                                        ?   
+                                        0.1         
+                                        :    
+                                        5     
+                                    ) , 
+                                    Math.min(preFT, postFT) / 2.5  ,  
+                                ])          
+                            ) * 1000 )            
+                        ) ;       
+                        return (        
+                            <div       
+                            className={`SLPCM-M-${hasPassedT ? "PAST" : "NONPAST" }` }          
+                            style={{            
+                            }} 
+                            >     
+                            {f({ expectedChildren, passageState }) }
+                            </div>  
+                        ) ;            
+                    } }</CBC>   
+                ) )   
             ) ;      
         }     
     ) ;    
@@ -214,50 +207,46 @@ const {
         ),
         WithAutoStopmountExtra : (
             wrapC1(function ({ passageState, expectedChildren }) {    
-                return (   
-                    <> 
-                    <NdRefConsm>
-                        { ({ feedPt: givenDestNd }) => (     
-                            <>            
-                            <CBC>{ function useE() {    
-                                // supposedly, this value will never change for component lifetime  
-                                const SM1 = (
-                                    React.useMemo(() => (Math.random() ) , [] )
-                                ) ;
-                                const implied1: boolean = (      
-                                    (passageState === PassageState.SUPPOSEDLY_NOW ) 
-                                ) ;            
-                                const gnNd1 = ( 
-                                    React.useMemo(() => (
-                                        givenDestNd ?
-                                        givenDestNd.context.createGain() 
-                                        : null    
-                                    ), [givenDestNd ])     
-                                ) ;    
-                                React.useLayoutEffect(() => {
-                                    if (gnNd1 && givenDestNd ) {
-                                        if (implied1) {
-                                            gnNd1.connect(givenDestNd ) ;
-                                            return () => {  
-                                                gnNd1.disconnect() ;    
-                                            };
-                                        }     
-                                    } ;  
-                                } , [gnNd1, givenDestNd, implied1 ] ) ;  
-                                ;     
-                                return (          
-                                    <WithGivenDest              
-                                    value={gnNd1 }     
-                                    >                       
-                                    <p> MOUNT-ID : <NUMERIC>{SM1 }</NUMERIC> </p>
-                                    { expectedChildren }    
-                                    </WithGivenDest>           
-                                ) ;
-                            } }</CBC>         
-                            </>            
-                        ) }
-                    </NdRefConsm>
-                    </>         
+                return (       
+                    useWithCurrentSideTapPtRef(({ feedPt: givenDestNd }) => (     
+                        <>            
+                        <CBC>{ function useE() {    
+                            // supposedly, this value will never change for component lifetime  
+                            const SM1 = (
+                                React.useMemo(() => (Math.random() ) , [] )
+                            ) ;
+                            const implied1: boolean = (      
+                                (passageState === PassageState.SUPPOSEDLY_NOW ) 
+                            ) ;              
+                            const gnNd1 = ( 
+                                React.useMemo(() => (
+                                    givenDestNd ?
+                                    givenDestNd.context.createGain() 
+                                    : null    
+                                ), [givenDestNd ])     
+                            ) ;    
+                            React.useLayoutEffect(() => {
+                                if (gnNd1 && givenDestNd ) {
+                                    if (implied1) {
+                                        gnNd1.connect(givenDestNd ) ;
+                                        return () => {  
+                                            gnNd1.disconnect() ;    
+                                        };
+                                    }     
+                                } ;  
+                            } , [gnNd1, givenDestNd, implied1 ] ) ;  
+                            ;     
+                            return (          
+                                <WithGivenDest              
+                                value={gnNd1 }     
+                                >                       
+                                <p> MOUNT-ID : <NUMERIC>{SM1 }</NUMERIC> </p>
+                                { expectedChildren }    
+                                </WithGivenDest>           
+                            ) ;
+                        } }</CBC>         
+                        </>            
+                    ) )   
                 );  
             })  
         ) ,   

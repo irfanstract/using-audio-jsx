@@ -12,6 +12,8 @@ import { CBC } from "./useStateInCallback";
 import { 
     WithGivenDest ,  
     Prv1 ,        
+
+    useWithCurrentSideTapPtRef ,   
     Consm as WithCtxtualOut , 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";   
@@ -50,23 +52,21 @@ const {
                 return (   
                     IterableOps.identity<C >(function CAUsageWrapTerminal ({ value, }) {    
                         return (
-                            <WithCtxtualOut> 
-                                { function ({ feedPt: nd0 }) {
-                                    ;     
-                                    return ( 
-                                        <CBC>{ function use1() { 
-                                            ;               
-                                            // return value                                       
-                                            const _2: void = (                 
-                                                useYyy(nd0, value )                            
-                                            ) ;
-                                            return (         
-                                                <>{ dbgBox1 } </>
-                                            ) ;         
-                                        } }</CBC> 
-                                    ) ; 
-                                } }
-                            </WithCtxtualOut>         
+                            useWithCurrentSideTapPtRef(function ({ feedPt: nd0 }) {
+                                ;     
+                                return ( 
+                                    <CBC>{ function use1() { 
+                                        ;               
+                                        // return value                                       
+                                        const _2: void = (                 
+                                            useYyy(nd0, value )                            
+                                        ) ;
+                                        return (         
+                                            <>{ dbgBox1 } </>
+                                        ) ;         
+                                    } }</CBC> 
+                                ) ; 
+                            } )       
                         ) ;                     
                     })     
                 ) ;   
@@ -86,28 +86,25 @@ const {
                 return (   
                     IterableOps.identity<C >(function CAUsageWrapNonterminal ({ value, children }) {    
                         return ( 
-                            <WithCtxtualOut>
-                                { function ({ feedPt: nd0 }) {     
-                                    ;     
-                                    return (    
-                                        <CBC>{ function use1() { 
-                                            ;               
-                                            // return value                                      
-                                            const nd2: AudioNode | null = (                    
-                                                useYyy(nd0, value )                            
-                                            ) ;
-                                            return (                                        
-                                                <div>        
-                                                    { dbgBox1 }
-                                                    <WithGivenDest value={nd2 }>
-                                                        { children }   
-                                                    </WithGivenDest>
-                                                </div>                        
-                                            ) ;         
-                                        } }</CBC>
-                                    ) ;   
+                            useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => (    
+                                <CBC>
+                                { function use1() { 
+                                    ;                  
+                                    // return value                                                
+                                    const nd2: AudioNode | null = (                    
+                                        useYyy(nd0, value )                            
+                                    ) ;
+                                    return (                                        
+                                        <div>        
+                                            { dbgBox1 }
+                                            <WithGivenDest value={nd2 }>
+                                                { children }   
+                                            </WithGivenDest>
+                                        </div>                        
+                                    ) ;         
                                 } }
-                            </WithCtxtualOut>    
+                                </CBC>
+                            ) )
                         ) ;                      
                     })
                 ) ;   
@@ -132,16 +129,14 @@ const CTXTUALOUTPUTUSAGE_CBC = (
                 }["useC11"]
             ) ;         
         }>  
-    )>((
+    )>((    
         function ({ children: useC11 , }) {
-            ;                                                     
-            return (                  
-                <WithCtxtualOut>                                   
-                    { a => (
-                        true && <CBC>{ () => useC11(a ) }</CBC>  
-                    ) }        
-                </WithCtxtualOut>       
-            ) ;                 
+            ;       
+            return (
+                useWithCurrentSideTapPtRef(a => (
+                    <CBC>{ () => useC11(a ) }</CBC>     
+                ))                
+            );                
         }   
     )) 
 ) ;  

@@ -197,39 +197,37 @@ const WithGivenDest = (() => {
 const CurrentCtxTInfoDisplay = (
     function () {
         return (
-            // TODO    
-            <Consm>            
-                { ({ feedPt }) => (    
-                    feedPt 
-                    ?         
-                    <CBC>
-                    { function useC() {                     
-                        const { isWindowOnFocus } = (
-                            useWindowActivityStatus() 
-                        ) ;         
-                        const ctxTime = (  
-                            React.useDeferredValue((
-                                useRealTimeQueryInterval1(
-                                    (): typeof feedPt.context.currentTime => feedPt.context.currentTime , 
-                                    (
-                                        isWindowOnFocus
-                                        &&
-                                        (feedPt && (feedPt.context.state === "running" ) )
-                                    ) ? 100 : (3 * 1000 )  )
-                            ))
-                        ) ;    
-                        return (   
-                            <p>            
-                            Global ACtx Time =      
-                            <NUMERIC>{ +ctxTime.toFixed(3) }</NUMERIC>.  
-                            if it's laggy then the workload is too heavy.
-                            </p> 
-                        ) ;
-                    } }    
-                    </CBC>
-                    : <>-</>        
-                ) }
-            </Consm>   
+            // TODO     
+            useWithCurrentSideTapPtRef(({ feedPt }) => (    
+                feedPt 
+                ?         
+                <CBC>
+                { function useC() {                     
+                    const { isWindowOnFocus } = (
+                        useWindowActivityStatus() 
+                    ) ;         
+                    const ctxTime = (  
+                        React.useDeferredValue((
+                            useRealTimeQueryInterval1(
+                                (): typeof feedPt.context.currentTime => feedPt.context.currentTime , 
+                                (
+                                    isWindowOnFocus
+                                    &&
+                                    (feedPt && (feedPt.context.state === "running" ) )
+                                ) ? 100 : (3 * 1000 )  )
+                        ))
+                    ) ;    
+                    return (   
+                        <p>            
+                        Global ACtx Time =      
+                        <NUMERIC>{ +ctxTime.toFixed(3) }</NUMERIC>.  
+                        if it's laggy then the workload is too heavy.
+                        </p> 
+                    ) ;
+                } }    
+                </CBC>
+                : <>-</>        
+            ) )
         ) ;   
     }
 ) ;     
