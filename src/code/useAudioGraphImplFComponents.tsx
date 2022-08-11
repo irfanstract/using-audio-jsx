@@ -137,17 +137,16 @@ const {
         tCtxs.currentTInfCtx.Consumer
     ) ;       
     return {  
-        CHalfSecndBeep1 : (                            
+        CHalfSecndBeep1 : (                                
             function C1() {    
-                return (            
-                    <TC>  
-                        { ({ t }) => (
-                            <>
-                            <code>CH { t } </code>  
-                            <CHalfSecndBeepAtAbsoluteT value={{ t: t, toneFreq: 418 }} />
-                            </>
-                        ) }
-                    </TC>
+                const { t } = (
+                    tCtxs.useCurrentTInf()   
+                ) ;       
+                return (
+                    <>
+                    <code>CH { t } </code>  
+                    <CHalfSecndBeepAtAbsoluteT value={{ t: t, toneFreq: 418 }} />
+                    </>
                 ) ;          
             }                            
         ) ,                   
@@ -168,14 +167,14 @@ const {
                 ;      
                 return (                   
                     <TC>     
-                        { ({ t: schedT }) => (                 
+                        { ({ t: originPtAbsoluteT }) => (                 
                             <>                
                             <code>CFnValue  </code>                 
                             { [      
                                 null &&  
                                 <span key={1} style={{ display: "block" }}>    
-                                    at <i>absolute t</i> { schedT }      
-                                    value { JSON.stringify(compute({ ctxT: schedT }) ) }   
+                                    at <i>absolute t</i> { originPtAbsoluteT }      
+                                    value { JSON.stringify(compute({ ctxT: originPtAbsoluteT }) ) }   
                                 </span>             ,   
                                 null &&  
                                 <span key={2} style={{ display: "block" }}>           
@@ -184,8 +183,8 @@ const {
                                 </span>       ,           
                             ] }           
                             <CFnValueAtAbsoluteT 
-                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -schedT + ctxTAbsolutely }) }
-                            codeDeps={[schedT, ...higherLevelCodeDeps ]}       
+                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -originPtAbsoluteT + ctxTAbsolutely }) }
+                            codeDeps={[originPtAbsoluteT, ...higherLevelCodeDeps ]}       
                             { ...otherProps }    
                             />                   
                             </>   
@@ -202,18 +201,19 @@ const {
                     ) , "t" > 
                 ) ,        
             ]) {        
+                const remountOnScheduledAbsoluteTChg : boolean = false ;
                 return (                 
                     <TC>
-                        { ({ t }) => (        
+                        { ({ t: originAbsoluteT }) => (     
                             <>         
-                            <code>CH { t } </code>     
-                            <K key={t} >   
-                            <CAmpSlideDownAtAbsoluteT t={t } {...mainProps } >
+                            <code>CAmpSlideDown : { originAbsoluteT } </code>     
+                            <K key={remountOnScheduledAbsoluteTChg ? originAbsoluteT : 0 } >   
+                            <CAmpSlideDownAtAbsoluteT t={originAbsoluteT } {...mainProps } >
                                 { children }
                             </CAmpSlideDownAtAbsoluteT>    
                             </K>
                             </>
-                        ) }     
+                        ) }             
                     </TC>
                 ) ;        
             }
