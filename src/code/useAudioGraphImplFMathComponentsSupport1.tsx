@@ -4,7 +4,12 @@ import Immutable from "immutable";
 import { 
     IterableOps, PromiseReturnValue, OmitM, FrequencyAndPeriod  ,    
 } from "./generalUse11";   
-import React, { useMemo } from "react";               
+import React, { useMemo } from "react";                
+import { 
+    useRenderCount , 
+    useUnmountLogging , 
+
+} from "./commonElements";    
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
 import { K, asVoidElement, NUMERIC, useDebugDispatcher, } from "./commonElements";             
 import { CBC } from "./useStateInCallback";      
@@ -13,7 +18,7 @@ import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";
 import { 
     useOneWayCheckBox ,      
 } from "./useCompletion";    
-import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";  
+import { useAsyncStrm, useAsyncDictStrm } from "./useAsyncMemo";       
 import {    
     TAndVl , 
     tAndVlSqExpand ,  
@@ -23,7 +28,10 @@ import {
 
 
 // 
-import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";      
+import { 
+    AUDIONODES_USEEFFECT , 
+    AUDIONODES_USE_AUDIONODEEFFECT ,  
+} from "./useAudioNodesParamChgEffect1";      
 import {       
     WithGivenDest ,  
     Prv1 ,        
@@ -34,14 +42,14 @@ import {
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicFlt11";        
 import { USEM } from "./useAudioNodesParamAutomativeAsRegularNodes";      
 import {
-    SpecialUsageExplainer,   
+    SpecialUsageExplainer,            
     xWithUsableYyy ,            
     xWithUsableYyy1 ,   
 } from "./useAudioGraphImplUsableYyyNodes1";            
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
     useInitUnconnectedYyyNodeFor ,     
-                 
+             
 } from "./useAudioNodesMounting11";    
 import {      
     useAudioNodeConnectToDest, useDepsRemount,      
@@ -49,12 +57,12 @@ import {
 import { useFixedGain } from "./useAudioNodesBasicFlt11";          
 import {  
     useElasUsageOnMount,
-    useGainElas ,    
+    useGainElas ,      
     useGainElasD ,      
     useConstantParamSrcElas ,            
     useConstantParamSrcElasD ,   
 
-} from "./useAudioNodesBasicFixedElas";     
+} from "./useAudioNodesBasicFixedElas";        
 import {
     terminalUsageWrapC ,     
     nonterminalUsageWrapC , 
@@ -66,7 +74,7 @@ import {
     useHalfSecondBeep ,           
 } from "./useAudioNodesBasicFlt11";        
 import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";  
-import {     
+import {          
     useUnexpectedZeroingBackCheck ,      
 } from "./useAudioNodesParamAutomativeElas";   
 import {   
@@ -84,30 +92,12 @@ import eSupport from "./useAudioNodesParamAutomativeExecET";
    
 
 
-    
+      
 
 
 
   
-    
-const useUnmountLogging = (    
-    function (v: false | true ) {   
-        const LOGGING = (
-            useDebugDispatcher()          
-        ) ;
-        React.useLayoutEffect(() => {
-            ;  
-            return () => {
-                v && LOGGING(() => (console.warn(TypeError(`component unmounting` ) ), true ) ) ;
-            } ;
-        }, [] ) ;      
-    }  
-) ;          
-const useRenderCount = (
-    () => (
-        React.useRef<number>(0 ).current  ++          
-    )      
-) ;
+     
 const useTopicHeadedRenderCount = (
     function useM(topic: React.ReactElement ) {           
         const mountGUid = (  
