@@ -17,6 +17,17 @@ const useRenderCount = (
         React.useRef<number>(0 ).current  ++          
     )      
 ) ;
+const useDepsChgCount = (
+    function (...[{} , deps ] : [{} , React.DependencyList ]) {
+        const r = (
+            React.useRef<number>(0 )   
+        ) ;            
+        return (
+            // TODO
+            React.useMemo(() => (r.current ++ ) , deps )
+        ) ;
+    }   
+) ;     
 
 function useDebugDispatcher <A extends void | (null | true | object ) > (...[] : [
    //  
@@ -44,8 +55,9 @@ const useUnmountLogging = (
 
 
 export {
-   useRenderCount , 
-
+   useRenderCount ,  
+   useDepsChgCount ,   
+  
    useDebugDispatcher ,     
    useUnmountLogging ,    
 } ;
