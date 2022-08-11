@@ -178,54 +178,6 @@ const CFNVI0 = (() => {
         useRealTimeQueryInterval1X ,     
     } ;          
 })() ;            
-const {
-    usingCurrentTScanCtx ,         
-} = (() => {
-    type Vls = (
-        Immutable.Seq.Indexed<number>     
-    ) ;
-    const currentTScanCtx = (      
-        React.createContext<Vls | "unknown" >("unknown")
-    ) ;  
-    currentTScanCtx.displayName = "currentTScanCtx";           
-    const usingCurrentTScanCtx = (  
-        function (...[vls , r ] : [  
-            Vls ,  
-            (ctx: { vls: Vls ; } ) =>  React.ReactElement ,           
-        ] ) {       
-            const { Consumer: C, Provider: CP } = (    
-                currentTScanCtx   
-            ) ;               
-            return (                                       
-                <C>           
-                { (vlsParent : Vls | "unknown") => {
-                    if (vlsParent === "unknown" ) {
-                        return (         
-                            <CP value={vls} >  
-                            { r({ vls: vls }) }   
-                            </CP>       
-                        ) ;     
-                    }          
-                    if (typeof vlsParent === "object" ) {
-                        return (       
-                            <>  
-                             { r({ vls: vlsParent }) } 
-                            </>
-                        ) ;     
-                    }       
-                    return <>
-                    ( error )
-                    </> ;    
-                } }
-                </C>
-            ) ;
-            ;            
-        }
-    ) ;
-    return {
-        usingCurrentTScanCtx ,  
-    } ;  
-})() ;          
       
      
 const cFnValueCompImplSupport1 = (
