@@ -156,7 +156,7 @@ const {
                     codeDeps: higherLevelCodeDeps = [] ,  
                     ...
                     otherProps   
-                } = otherProps0 ;
+                } = otherProps0 ; 
                 const renderSrcCodeView = (
                     () => (  
                         <code style={{ whiteSpace: "pre-wrap" }}>
@@ -167,7 +167,7 @@ const {
                 ;      
                 return (                   
                     <TC>     
-                        { ({ t: originPtAbsoluteT }) => (                 
+                        { ({ t: originPtAbsoluteT, tScale }) => (                 
                             <>                
                             <code>CFnValue  </code>                 
                             { [      
@@ -180,10 +180,22 @@ const {
                                 <span key={2} style={{ display: "block" }}>           
                                     code :   
                                     { renderSrcCodeView() }     
-                                </span>       ,           
-                            ] }           
-                            <CFnValueAtAbsoluteT 
-                            value={({ ctxT: ctxTAbsolutely }) => compute({ ctxT: -originPtAbsoluteT + ctxTAbsolutely }) }
+                                </span>       ,                     
+                            ] }                               
+                            <CFnValueAtAbsoluteT       
+                            value={({ ctxT: ctxTAbsolutely }) => {  
+                                const ctxTRelativelyAfterScaled = (
+                                    ctxTAbsolutely - originPtAbsoluteT  
+                                );        
+                                const ctxTRelatively = (  
+                                    ctxTRelativelyAfterScaled
+                                    /
+                                    tScale         
+                                ) ;               
+                                return (
+                                    compute({ ctxT: ctxTRelatively })
+                                ) ;  
+                            } }
                             codeDeps={[originPtAbsoluteT, ...higherLevelCodeDeps ]}       
                             { ...otherProps }    
                             />                   
