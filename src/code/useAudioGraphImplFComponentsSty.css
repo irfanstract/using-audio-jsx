@@ -1,3 +1,37 @@
 
 
 
+
+   
+
+
+/* border width  */  
+.WGD_DIV_BORDERSTYLE {   
+   border-width: 0.05em ;     
+}
+
+/* sizing */   
+.WGD_DIV_PADDINGSTYLE {                
+   padding: 0.5em ;              
+}     
+.WGD_DIV_BOXSIZING {   
+   max-width: 60em ;            
+}   
+.WGD_DIV_FONTSIZING {   
+   font-size: 98% ;
+   text-align: start ; /* not 'left' as 'left' is LTR-specific */   
+}
+           
+
+
+
+
+/* colouring */            
+.WGD_DIV_FONTSIZING { 
+   background-color: white;     
+   color: rgba(0, 64, 192, 1.0 ) ;        
+}
+.WGD_DIV_BORDERSTYLE {   
+   border-style: dashed ;      
+   border-color:  rgba(128, 192, 128, 1.0) ;     
+}
