@@ -17,13 +17,14 @@ import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterva
 
 
 const useModularIncrementation = (
-    function ({ period : modN } : { period : number ; }) {
+    function ({ period : modN } : { period : number ; }) {        
         if (!(0 < modN )) {
-            throw TypeError(`invalid period it does not larger than zero : ${modN } `) ;  
-        }
-        return (
-            useReducer((v: number) => ((v + 1 ) % modN ) , 0 )
-        ) ;        
+            throw TypeError(`invalid period ${modN }, it does not larger than zero.`) ;  
+        } else {
+            return (
+                useReducer((v: number) => ((v + 1 ) % modN ) , 0 )  
+            ) ;      
+        }  
     }
 ) ;   
 
@@ -61,10 +62,13 @@ const useRefreshByInterval1 = (
              * in general `useEffect` is strongly preferred for high-level (sub)modules, but  
              * `useEffect` is prone to timing distortion and therefore in timing-sensitive apps `useLayoutEffect` shall be used instead.
              * 
-             * there's also `useInsertionEffect`, but it does not define parameter `deps` and hence not applicable
+             * there's also `useInsertionEffect`, but 
+             * it can't be used for `dispatch(...)` or `setState(...)` and hence not applicable. 
+             * 
+             * *this argument shall never change for the Component lifetime as React does not support succh change*.   
              */
-            LE ?: (
-                keyof Pick<typeof React, "useLayoutEffect" | "useEffect">
+            LE ?: (           
+                keyof Pick<typeof React, "useLayoutEffect" | "useEffect">         
             ) ; 
         } ,
     ]) => {    
