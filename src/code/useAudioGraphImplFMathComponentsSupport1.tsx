@@ -6,8 +6,10 @@ import {
 } from "./generalUse11";   
 import React, { useMemo } from "react";                
 import { 
-    useRenderCount , 
-    useUnmountLogging , 
+    useRenderCount ,      
+    useDepsChgCount , 
+    useUnmountLogging ,   
+    useTopicHeadedRenderCount ,    
 
 } from "./commonElements";    
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
@@ -26,7 +28,7 @@ import {
         
 
 
-
+ 
 // 
 import { 
     AUDIONODES_USEEFFECT , 
@@ -34,7 +36,7 @@ import {
 } from "./useAudioNodesParamChgEffect1";      
 import {       
     WithGivenDest ,  
-    Prv1 ,        
+    Prv1 ,           
     Consm as WithCtxtualOut ,    
     useWithCurrentSideTapPtRef ,            
 
@@ -48,7 +50,7 @@ import {
 } from "./useAudioGraphImplUsableYyyNodes1";            
 import { 
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1 , 
-    useInitUnconnectedYyyNodeFor ,     
+    useInitUnconnectedYyyNodeFor ,      
              
 } from "./useAudioNodesMounting11";    
 import {      
@@ -98,31 +100,7 @@ import eSupport from "./useAudioNodesParamAutomativeExecET";
 
   
      
-const useTopicHeadedRenderCount = (
-    function useM(topic: React.ReactElement ) {           
-        const mountGUid = (  
-            useRenderCount()             
-        ) ;               
-        return (                    
-            <p>   
-                { topic } : 
-                <NUMERIC>{ mountGUid }</NUMERIC>  
-            </p>        
-                         
-        )     ;    
-    }       
-) ;
-const useDepsChgCount = (
-    function (...[{} , deps ] : [{} , React.DependencyList ]) {
-        const r = (
-            React.useRef<number>(0 )   
-        ) ;            
-        return (
-            // TODO
-            React.useMemo(() => (r.current ++ ) , deps )
-        ) ;
-    }   
-) ;
+;
 
       
 // const useATimeDomainVisWithDeps = (
@@ -436,7 +414,11 @@ const {
                                     ) ;  
                                     ; 
                                     ;      
-                                    ;
+                                    ;     
+                                    /**     
+                                     * re-render(s) had been like brute-force trial-and-error, so  
+                                     * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
+                                     */
                                     return React.useMemo(() => (
                                         <CBC > 
                                         { function useCE1() {  
