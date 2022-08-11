@@ -34,21 +34,27 @@ import { ComponentRefValue, ComponentProps, JsxBoolean } from "./commonElementsT
 
 
  
-/**   
- * this is wrapper, omiiting `children`.          
+/**      
+ * this is wrapper, omiiting `children`.   
+ * `C` shall allow omission of `children`, otherwise
+ * the returned component will be an unusable one.             
  */
-const asVoidElement = (
-    function <C0 extends React.FC<any>  > (C : ( 
-        C0 
-    ) ) {                        
-        type P = ComponentProps<C0 > ;
-        ;                                                       
-        return (                                  
+const asVoidElement = (  
+    function <P0 extends {  }  > (C : ( 
+        React.FC<P0 >        
+    ) ) {            
+        type C0 = typeof C ;                                       
+        type P = ComponentProps<C0 > ; 
+        type C1 = (                
+            React.FC<(       
+                (Omit<P, "children">) & { children ?: undefined ; }
+            )>       
+        )  ;
+        ;                                                                      
+        return (                                   
             IterableOps.identity<(     
-                React.FC<(       
-                    Omit<P , "children">
-                )>       
-            ) >((C    ))       
+                C1     
+            ) >((C   as C1  )        )           
         ) ;         
     }            
 ) ;                           
