@@ -38,10 +38,11 @@ import {
     Consm as WithCurrentDestNdRef , 
     useWithCurrentSideTapPtRef , 
 
-} from "./useAudioGraphImplCurrentDestNdRefCtx";    
+} from "./useAudioGraphImplCurrentDestNdRefCtx";            
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";      
 import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";     
-import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";   
+import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";    
+import { LoopingWithPeriod } from "./useAudioGraphImplFComponentsLoopingWrapper1";
 import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS
@@ -67,82 +68,10 @@ const CPersistingBeep : (
 ) = CPersistingBeep0  ;
 const {
     WithDelay ,              
-    LoopingWithPeriod : LoopingWithPeriodImpl ,   
-    
-    WithCurrentTInfo: WithCurrentScheduledTInfo ,    
            
-} = tCtxs ;                                        
-const LoopingWithPeriod = (() => { 
-    type PeerChildrenPropType = (                            
-        (
-            ComponentProps<typeof LoopingWithPeriodImpl >["children"]
-        )
-    ) ;
-    return (       
-        function LoopingWithPeriodC (props10 : (          
-            ComponentProps<typeof LoopingWithPeriodImpl>     
-            &              
-            { 
-                autoUnmountMode ?: AudioTrackConcatClippingMode ;
-            }
-        ) ) {     
-            const { 
-                children: item  , 
-                autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
-                ...
-                props1             
-    
-            } = props10 ;  
-            const { value: { period } } = props1 ;               
-            const itemAfterAutoUnmounting: (PeerChildrenPropType & Function ) = (  
-                function ({ perInstanceRelativeT }) { 
-                    return (    
-                        <WithAutoUnmount
-                            preFT={(  
-                                (
-                                    (avTrackConcatShallPropagate(autoUnmountMode, 0 ) || OmitOrPropagate.OMIT )
-                                    === 
-                                    OmitOrPropagate.PROPAGATE   
-                                ) ?        
-                                // TODO            
-                                100 : 1    
-                            )}                    
-                            postFT={(      
-                                (
-                                    (avTrackConcatShallPropagate(autoUnmountMode, 1 ) || OmitOrPropagate.OMIT )
-                                    === 
-                                    OmitOrPropagate.PROPAGATE   
-                                ) ?          
-                                // value should be at-least `preFT`
-                                30000 : (period + 0.5)   
-                            ) }  
-                        >  
-                            { (
-                                (typeof item === "function") ?           
-                                item({ perInstanceRelativeT }) : item  
-                            )  }              
-                        </WithAutoUnmount>                     
-                    ) ; 
-                }
-            ) ;
-            return (
-                useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => {     
-                    if (nd0 ) {
-                        const outputCtxT = nd0.context.currentTime ;       
-                        ;      
-                    }          
-                    return (                                     
-                        <LoopingWithPeriodImpl {...props1 } >    
-                            { itemAfterAutoUnmounting  }
-                        </LoopingWithPeriodImpl>     
-                    ) ;       
-                })
-            ) ;
-        }     
-    ) ;  
-})() ;
+} = tCtxs ;                  
 const {
-    CHalfSecndBeep1 ,   
+    CHalfSecndBeep1 ,          
     CAmpSlideDown ,      
     CFnValue1 ,  
   
@@ -176,7 +105,7 @@ const {
                 } = otherProps0 ; 
                 const renderSrcCodeView = (
                     () => (  
-                        <code style={{ whiteSpace: "pre-wrap" }}>
+                        <code style={{ whiteSpace: "pre-wrap" }}> 
                             { String(compute ) }    
                         </code> 
                     )     
@@ -327,7 +256,8 @@ const CAmpModulated: (
 
 
   
-export * from "./useAudioGraphImplFComponentsSemanticsBasic" ;               
+export * from "./useAudioGraphImplFComponentsSemanticsBasic" ;    
+export * from "./useAudioGraphImplFComponentsLoopingWrapper1";                 
 export {
        
     // MODIFYING   
@@ -336,7 +266,7 @@ export {
     LoopingWithPeriod ,    
 
     // FILTERING       
-    CAmpModulated , 
+    CAmpModulated ,     
     CAmpModulated1 ,               
     CAmpModulatedTimeDomain as CAmpModulated0 ,     
     CAmpModulatedTimeDomain ,            
@@ -358,6 +288,6 @@ export {
     CConstantValueModulated ,  
     CConstantValue ,  
     CFnValue1 , 
-    CWhiteNoise ,    
-} ;                       
-export * from "./useAudioGraphImplFComponentsSlapDrumKit1";               
+    CWhiteNoise ,       
+} ;                        
+export * from "./useAudioGraphImplFComponentsSlapDrumKit1";                      
