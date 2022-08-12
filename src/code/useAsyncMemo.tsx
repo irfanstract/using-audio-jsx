@@ -8,12 +8,21 @@ import {
 import {} from "lodash" ;
 import React, { 
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
-} from "react";     
+} from "react";      
+
+
+
+
+
+
+
+const { throttle: throttledFunction } = IterableOps ;
 
 type DCII = {              
 
-    /**   
-     * whether change in `deps` implies that the existing (cached) value is no longer valid
+    /**     
+     * whether change in `deps` implies 
+     * - the existing (cached) value be no longer valid
     */
     depsChangeImpliesInvalidation : boolean ;     
 
@@ -56,7 +65,10 @@ const useAsyncMemo = (
 const AsyncMemoUsageArgs = {} ; // TS-1205   
 type AsyncMemoUsageArgs<A> = (
     [      
-        properties : DCII & {              
+        properties : DCII & {        
+            /**          
+             * the primary/main code
+             * */      
             f : () => Promise<A > ;                           
         } ,                   
         deps: React.DependencyList,                                  
@@ -71,11 +83,16 @@ type AsyncStrmUsageArgs<A> = (
         deps: React.DependencyList,                                  
     ]           
 ) ;
-/**     
- * an alternative to {@link useAsyncMemo } 
+/**       
+ * an alternative to {@link useAsyncMemo }    
  * based on `yield`s and intended to 
  * - facilitate iterative-algo-ic code to provide transient results one replaced by subsequently-returned values  
  * - implementing a stream of continuous change 
+ * 
+ * instantly consecutive `yield`s without intermediating `await`s     
+ * could end up being effectively truncated leaving only the last one ;    
+ * if "intermediate states" happen to be important,       
+ * place `await new Promise(R => setImmediate(R) )` everywhere between the relevant `yield`s.  
 */
 const useAsyncStrm = (                                                 
     function <A extends AsyncMemoisedValue > (   ...[      
@@ -120,35 +137,61 @@ const useAsyncStrm = (
         return s ;  
     }
 ) ;      
-const useAsyncDictStrm = (() => {
+const useAsyncDictStrm = (() => {    
     type Stat<A> = ( 
         { [k in keyof A] ?: A[k] ; }     
-    ) ; 
-    return (
-        function <A extends {} > (   ...[      
+    ) ;   
+    const logPrototypeOddity = (
+        throttledFunction(function (...[v] : [NonNullable<unknown> ? ]): void {
+            (
+                console.error((   
+                    TypeError((     
+                        [
+                            `detected occurence of obj whose 'prototype' is not 'Object.prototype'.`    ,  
+                            `this indicates likelyhood of bugs like missing argument-lists like (examples below) (hence getting Function(s) instead of the intended object(s) ) .`  ,    
+                            `'yield this.getState /* missing argument-list */ ;' ` ,   
+                            `'yield data.clientSync.getLastStatChgs /* missing argument-list */ ;' ` ,
+                        ].join("\n")
+                    ))             
+                ) , ...(v ? [v] : [] ) )
+            ) ;                            
+        } , 3 * 60 * 1000 , { leading: true } )            
+    ) ;       
+    return (             
+        function <A extends {} > (   ...[       
             {    
-                depsChangeImpliesInvalidation ,                                                
+                depsChangeImpliesInvalidation ,                                                    
                 f ,     
             }  ,           
             deps ,                                          
-        ] : [     
+        ] : [          
             ...AsyncStrmUsageArgs<Stat<A> > ,                                      
         ]): Stat<A> { 
             return (           
-                useAsyncStrm<Stat<A> >({
-
+                useAsyncStrm<Stat<A> >({     
+ 
                     depsChangeImpliesInvalidation ,  
-
+ 
                     f: async function* () {
                         var s : Stat<A> = {} ;    
-                        for await (const sAug of f() ) {  
-                            s = { ...s, ...sAug } ;
+                        for await (const sAug of f() ) {     
+                            {
+                                const sAugObjProto = Object.getPrototypeOf(sAug) ;  
+                                if (sAugObjProto && (sAugObjProto !== Object.prototype) ) {
+                                    logPrototypeOddity(sAugObjProto ) ;
+                                    // penalty
+                                    await (
+                                        new Promise(R => setTimeout(R, (3 + (5 * Math.random() ) ) * 1000 ) )
+                                    ) ;
+                                }
+                            }                  
+                            s = { ...s, ...sAug } ;           
                             yield s ;     
                         }
                     } , 
-
+   
                 } , deps)
-                ||
+                ||   
                 { }
             ) ;   
         }    
