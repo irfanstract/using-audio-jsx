@@ -73,41 +73,41 @@ const {
            
 } = tCtxs ;                      
 const LoopingWithPeriod = (    
-    function ({ 
-        children: item  , 
-        autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
-        ...
-        props1   
-    } : (          
+    function (props10 : (          
         ComponentProps<typeof LoopingWithPeriodImpl>     
         &              
         { 
             autoUnmountMode ?: AudioTrackConcatClippingMode ;
         }
-    ) ) {   
+    ) ) {     
+        const { 
+            children: item  , 
+            autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
+            ...
+            props1             
+
+        } = props10 ;
         const { value: { period } } = props1 ;               
         const itemAfterAutoUnmounting = (  
             <WithAutoUnmount
-            {...{     
-                preFT: (  
+                preFT={(  
                     (
                         (avTrackConcatShallPropagate(autoUnmountMode, 0 ) || OmitOrPropagate.OMIT )
                         === 
                         OmitOrPropagate.PROPAGATE   
-                    ) ?      
+                    ) ?        
                     // TODO
                     100 : 3    
-                ) ,    
-                postFT: (      
+                )}                    
+                postFT={(      
                     (
                         (avTrackConcatShallPropagate(autoUnmountMode, 1 ) || OmitOrPropagate.OMIT )
                         === 
                         OmitOrPropagate.PROPAGATE   
                     ) ?          
                     // value should be at-least `preFT`
-                    30000 : (period + 0.5)
-                ) ,  
-            } }       
+                    30000 : (period + 0.5)   
+                ) }  
             >    
                 { item }
             </WithAutoUnmount>         
