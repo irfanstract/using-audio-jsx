@@ -134,24 +134,71 @@ const LoopingWithPeriod = (
    LoopingWithPeriodAndAutoUnmounting
 ) ;      
 
+/**    
+ * using this, compared to using {@link LoopingWithPeriod }, would be way easier.  
+ * 
+ * merely increasing the `period` of an app of {@link LoopingWithPeriod }
+ * will leave it one with the each turn being padded with idle period.   
+ * copying the existing loop child, and shifting the `t`-argument(s) will not be an option.  
+ * instead,    
+ * it's preferable to mount a *metronome*, listen for each change in `t` (by default every `0.5 sec` ), and 
+ * selectively fire an instrument depending on the `t`. 
+ */
 const MetronomeCheckAndExpandingElem = (
-   function ({ children: givenChildren } : ( 
+   function ({ children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } : ( 
       {
-         children : (ctx: { t: number ; } ) => React.ReactElement ;
-      }
-   )) {         
-      return (            
-         <LoopingWithPeriodSimple 
-         value={{ period: 1 }}      
-         renderRange={{
-            n: (   
-               // TODO         
-               0x20 
-            ) ,    
-         }} 
+         children : (ctx: { t: number ; } ) => React.ReactElement ;    
+         /**     
+          * the engine constraints
+          */
+         value ?: {    
+            tickTockPeriod ?: number ;
+         } ;
+      }        
+   )) {                  
+      if (!(0 < tickTockPeriod ) ) {
+         throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
+      } ;                
+      if (!(0.05 < tickTockPeriod ) ) {     
+         throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ;
+      } ;   
+      const [lastRenderT1, setLastRenderT1] = (
+         React.useState<number>(0 )
+      ) ;         
+      return (                
+         <LoopingWithPeriodAndAutoUnmounting      
+               
+         /**    
+          * the engine properties 
+          * 
+          * assign the looping period      
+          * 
+          * assign `renderRange` and `initialOffset` as appropriate
+          */ 
+         value={{  
+            // TODO make this configurable
+            period: tickTockPeriod ,            
+                 
+            initialOffset: lastRenderT1 , 
+         }}                                  
+         renderRange={{     
+            n: (    
+               // TODO
+               Math.round((
+                  (0x40 / tickTockPeriod) 
+               ))
+            ) ,      
+         }}   
+         /**     
+          * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
+         */
+         autoUnmountMode={(
+            AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
+         ) }
+    
          >       
             { ({ perInstanceRelativeT: t }) => givenChildren({ t }) }    
-         </LoopingWithPeriodSimple>
+         </LoopingWithPeriodAndAutoUnmounting>
       ) ;
    }
 ) ;
