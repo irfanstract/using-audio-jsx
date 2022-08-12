@@ -13,10 +13,19 @@ import React, { useReducer, useState } from "react";
 import { ComponentProps } from "./commonElementsTypes";
 import { K } from "./commonElements";         
 
-        
+          
 
 // domain-imports        
-import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
+import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";        
+import {
+   WithDelay ,              
+   LoopingWithPeriod as LoopingWithPeriodSimple ,  
+   LwpPayloadCallback , 
+    
+   WithCurrentTInfo as WithCurrentScheduledTInfo ,    
+                 
+   //  
+} from "./useAudioGraphImplAbsoluteTCtx1";      
 import { 
    CHalfSecndBeepAtAbsoluteT ,    
    CAmpModulated as CAmpModulatedTimeDomain ,      
@@ -41,16 +50,11 @@ import {
 import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS imports
-
+      
 
 
 // destructuring  
-const {
-   WithDelay ,              
-   LoopingWithPeriod : LoopingWithPeriodSimple ,   
-    
-   WithCurrentTInfo: WithCurrentScheduledTInfo ,    
-          
+const {    
 } = tCtxs ;           
  
 
@@ -59,7 +63,7 @@ const {
 
 
 
-
+  
  
                        
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
@@ -88,7 +92,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                (p: 0 | 1 ) => (
                    avTrackConcatShallPropagate(autoUnmountMode, 0 )
                    || 
-                   OmitOrPropagate.OMIT   
+                   OmitOrPropagate.OMIT    
                )     
            ) ;   
            const itemAfterAutoUnmounting: (PeerChildrenPropType & Function ) = (  
@@ -110,7 +114,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                                    === 
                                    OmitOrPropagate.PROPAGATE                 
                                ) ?          
-                               // value should be at-least `preFT`
+                               // value should be at-least `preFT` 
                                30000 : (period + 0.5)   
                            ) }  
                        >  
@@ -143,12 +147,19 @@ const LoopingWithPeriod = (
  * instead,    
  * it's preferable to mount a *metronome*, listen for each change in `t` (by default every `0.5 sec` ), and 
  * selectively fire an instrument depending on the `t`. 
- */
+ * 
+ * for performance reasons, it might be necessary to make the return-type `null` ; 
+ * see {@link LwpPayloadCallback}.
+ */ 
 const MetronomeCheckAndExpandingElem = (
    function ({ children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } : ( 
       {
-         children : (ctx: { t: number ; } ) => React.ReactElement ;    
-         /**     
+         children : (
+            (ctx: { t: number ; } ) 
+            =>  
+            ReturnType<LwpPayloadCallback >
+         ) ;    
+         /**        
           * the engine constraints
           */
          value ?: {    
@@ -173,7 +184,7 @@ const MetronomeCheckAndExpandingElem = (
           * 
           * assign the looping period      
           * 
-          * assign `renderRange` and `initialOffset` as appropriate
+          * assign `renderRange` and `initialOffset` as appropriate 
           */ 
          value={{  
             // TODO make this configurable
@@ -213,11 +224,12 @@ const MetronomeCheckAndExpandingElem = (
 
 
 
-
+  
 
 export {
    LoopingWithPeriodSimple , 
    LoopingWithPeriodAndAutoUnmounting , 
    LoopingWithPeriod ,         
+   LwpPayloadCallback , 
    MetronomeCheckAndExpandingElem , 
-} ;
+} ;   
