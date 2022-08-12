@@ -134,6 +134,28 @@ const LoopingWithPeriod = (
    LoopingWithPeriodAndAutoUnmounting
 ) ;      
 
+const MetronomeCheckAndExpandingElem = (
+   function ({ children: givenChildren } : ( 
+      {
+         children : (ctx: { t: number ; } ) => React.ReactElement ;
+      }
+   )) {         
+      return (            
+         <LoopingWithPeriodSimple 
+         value={{ period: 1 }}      
+         renderRange={{
+            n: (   
+               // TODO         
+               0x20 
+            ) ,    
+         }} 
+         >       
+            { ({ perInstanceRelativeT: t }) => givenChildren({ t }) }    
+         </LoopingWithPeriodSimple>
+      ) ;
+   }
+) ;
+
 
 
 
@@ -149,5 +171,6 @@ const LoopingWithPeriod = (
 export {
    LoopingWithPeriodSimple , 
    LoopingWithPeriodAndAutoUnmounting , 
-   LoopingWithPeriod ,      
+   LoopingWithPeriod ,         
+   MetronomeCheckAndExpandingElem , 
 } ;
