@@ -313,8 +313,9 @@ const CAmpModulated: (
 
 
   
+export * from "./useAudioGraphImplFComponentsSemanticsBasic" ;               
 export {
-    
+       
     // MODIFYING   
        
     // LOOPING            
@@ -327,7 +328,7 @@ export {
     CAmpModulatedTimeDomain ,            
     CAmpSlideDown ,       
     CBiquadFilterModulated ,  
-    CFreqDmAnalyF ,   
+    CFreqDmAnalyF ,                         
    
     CHalfSecndBeepAtAbsoluteT ,    
 
@@ -345,4 +346,4 @@ export {
     CFnValue1 , 
     CWhiteNoise ,    
 } ;                       
-export * from "./useAudioGraphImplFComponentsSlapDrumKit1";             
+export * from "./useAudioGraphImplFComponentsSlapDrumKit1";               
