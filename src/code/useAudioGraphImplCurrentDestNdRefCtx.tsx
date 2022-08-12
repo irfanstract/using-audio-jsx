@@ -5,6 +5,7 @@ import { IterableOps, PromiseReturnValue } from "./generalUse11";
 import React, { useMemo } from "react";               
 import { ContextReturnType } from "./commonElementsTypes";     
 import { K, NUMERIC } from "./commonElements";               
+import { useAsyncMemo } from "./useAsyncMemo";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
 import { CBC } from "./useStateInCallback";      
 import {
@@ -42,6 +43,7 @@ type NCtxValue = (
     &     
     Record<keyof Pick<AFeedableAndTappableNca, "feedPt"> , AudioNode | null >             
 );                  
+
 const {     
     Prv1 ,    
     Consm ,   
@@ -91,7 +93,7 @@ const {
             ) ,            
             useCurrentDestNd0 : null ,            
             ctx0 ,    
-        } ;    
+        } ;     
     }       
     {              
         const c0 = (                 
@@ -104,7 +106,7 @@ const {
             ctx0: async() => ctx0() ,   
         } ;           
     }
-})() ;                              
+})() ;                                
 const useWithCurrentSideTapPtRef: (
     (a: (v: NCtxValue ) => React.ReactElement )
     =>             
@@ -127,7 +129,7 @@ const useWithCurrentSideTapPtRef: (
     })        
 ) ;                    
 const WithGivenDest = (() => {          
-    return (               
+    return (                  
         IterableOps.identity<(         
             React.FC<(       
                 React.ProviderProps<(   
@@ -162,7 +164,41 @@ const WithGivenDest = (() => {
             ) ;                 
         })
     ) ;  
-})() ;           
+})() ;                    
+const useADestNdRefCtx1 = (
+    () => { 
+        ;
+        const aDestNdRefsCtx = (
+            useAsyncMemo({  
+                depsChangeImpliesInvalidation: true , 
+                f: () => ctx0() ,        
+            } , [ctx0 ] )   
+        ) ;      
+        type ADestNdRefsCtxValue = (   
+            ContextReturnType<(
+                NonNullable<typeof aDestNdRefsCtx >
+            )>    
+        ) ;
+        const WithACtx : (    
+            React.FC<(               
+                React.ConsumerProps<(    
+                    ADestNdRefsCtxValue         
+                )>      
+            ) >  
+            |        
+            null                  
+        ) = (
+            aDestNdRefsCtx ? 
+            aDestNdRefsCtx.Consumer 
+            : null    
+        ) ;          
+        return {
+            aCtx: aDestNdRefsCtx , 
+            WithACtx ,    
+        } ;
+    }
+) ;     
+
 const CurrentCtxTInfoDisplay = (
     function () {
         return (
@@ -234,9 +270,10 @@ export {
     ctx0 ,             
     CurrentCtxTInfoDisplay ,   
     Consm ,        
-    useWithCurrentSideTapPtRef ,               
+    useWithCurrentSideTapPtRef ,       
+    useADestNdRefCtx1 ,                
         
     Prv1 , 
     WithGivenDest , 
            
-} ;
+} ;                   
