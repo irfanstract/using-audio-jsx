@@ -15,11 +15,13 @@ import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce
 import { 
     CHalfSecndBeepAtAbsoluteT ,     
 } from "./audioLoopDemoCurrentDestNdRefCtx";  
-import {        
+import {            
     CurrentCtxTInfoDisplay ,    
-    Prv1 ,              
-    ctx0 ,        
-} from "./useAudioGraphImplCurrentDestNdRefCtx";     
+    Prv1 ,               
+    ctx0 ,         
+    useADestNdRefCtx1 , 
+
+} from "./useAudioGraphImplCurrentDestNdRefCtx";      
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
@@ -41,7 +43,7 @@ import '../App.css';
        
 const {
     currentTCtx , 
-    currentTScaleCtx ,        
+    currentTScaleCtx ,         
     currentTInfCtx ,    
 
     CurrentTDisplay , 
@@ -50,7 +52,7 @@ const {
 } = tCtxs ;
 const AudioLoopDemoApp1 = () => (
     <p> Audio Loop </p>
-) ;     
+) ;      
 const useASetCurrentT = (
     function (s: BaseAudioContext | null ) {
         const [tT, setTT ] = (      
@@ -78,35 +80,7 @@ const {
     BeepsInLoop , 
     BEEPBOPVR , 
     BEEPBOPVRAPP ,              
-} = BBVR ;    
-const useACtx1 = (
-    () => {
-        ;
-        const aCtx = (
-            useAsyncMemo({  
-                depsChangeImpliesInvalidation: true , 
-                f: () => ctx0() ,        
-            } , [ctx0 ] )   
-        ) ;      
-        const WithACtx : (  
-            React.FC<(               
-                React.ConsumerProps<(   
-                    ContextReturnType<(
-                        NonNullable<typeof aCtx >
-                    )>    
-                )>      
-            ) >  
-            |        
-            null                  
-        ) = (
-            aCtx ? aCtx.Consumer : null    
-        ) ;          
-        return {
-            aCtx , 
-            WithACtx ,    
-        } ;
-    }
-) ;
+} = BBVR ;     
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
     console.log({ key } , ...[2 ] ); 
@@ -132,7 +106,7 @@ export const AudioLoopDemoApp = (function () {
                 {...({ quantityReductiveDbgMode } as const )}  
                 />  
             ) ;       
-            const { WithACtx } = useACtx1() ;         
+            const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
                 <div className="App" >        
                     <p>       
@@ -147,7 +121,7 @@ export const AudioLoopDemoApp = (function () {
                         <button onClick={() => updateTT() } >  
                             update 't'   
                         </button>             
-                        </span>         
+                        </span>          
                     </p>        
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                                   
@@ -155,7 +129,7 @@ export const AudioLoopDemoApp = (function () {
                     { (WithACtx && (        
                         <WithACtx>   
                         { (c ) => ( 
-                        <Prv1 value={c } >       
+                        <Prv1 value={c } >          
                             <div key={key }>   
                             <CAmpModulated0 value={<CConstantValue value={2 ** -4} />} > 
                                 { null && <CurrentCtxTInfoDisplay /> }  
@@ -163,7 +137,7 @@ export const AudioLoopDemoApp = (function () {
                             </CAmpModulated0>
                             </div>                   
                         </Prv1>   
-                        ) }
+                        ) }       
                         </WithACtx>
                     )) }          
                     </TP>       
