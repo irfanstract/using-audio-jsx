@@ -49,27 +49,27 @@ const {
     Consm ,   
     useCurrentDestNd0 ,  
    
-    ctx0 ,          
+    ctx0 ,            
      
 } = ((): {    
     Prv1: React.FC<React.ProviderProps<NCtxValue>>;     
     Consm: React.FC<React.ConsumerProps<NCtxValue>>; 
     useCurrentDestNd0 : (
         null | (       
-            () => NCtxValue
+            () => NCtxValue  
         )        
     ) ;        
  
-    ctx0: () => Promise<React.Context<NCtxValue>> ; 
-    
+    ctx0: () => Promise<React.Context<NCtxValue>> ;  
+      
      
-} => {              
+} => {                
     /**   
      * the same {@link React.Context `Context`} will be returned across calls.  
      * defines 'the current `dest` '.  
      * note the `null`ability intended to replect the `null`ability of the arg of {@link usePersistingBeep }
      */        
-     const ctx0 = (                                 
+     const ctx0 = (                                     
         IterableOps.once(async () => {     
             const c0 = (                 
                 React.createContext<NCtxValue>(await getACtxMtWithoutAnyFilter1() )
@@ -79,10 +79,10 @@ const {
             ) ;         
             return (                     
                 c0                
-            ) ;                 
+            ) ;                   
         })     
     ) ;           
-    if (0 ) {  
+    if (0 ) {                        
         ;        
         return {              
             Prv1 : (     
@@ -92,9 +92,9 @@ const {
                 asyncLoadedComponentWrp(async() => (await ctx0() ).Consumer )
             ) ,            
             useCurrentDestNd0 : null ,            
-            ctx0 ,    
+            ctx0 ,          
         } ;     
-    }       
+    }          
     {              
         const c0 = (                 
             React.createContext<NCtxValue  >( { feedPt: null, sideTapPt: null } )
@@ -103,7 +103,7 @@ const {
             Prv1 : c0.Provider ,         
             Consm : c0.Consumer ,             
             useCurrentDestNd0 : () => React.useContext(c0 ) ,
-            ctx0: async() => ctx0() ,   
+            ctx0: async() => ctx0() ,      
         } ;           
     }
 })() ;                                
@@ -164,15 +164,20 @@ const WithGivenDest = (() => {
             ) ;                 
         })
     ) ;  
-})() ;                    
+})() ;   
+const useADestNdRefCtx10 = (
+    () => (
+        useAsyncMemo({  
+            depsChangeImpliesInvalidation: true , 
+            f: () => ctx0() ,        
+        } , [ctx0 ] )      
+    )  
+);                 
 const useADestNdRefCtx1 = (
     () => { 
         ;
-        const aDestNdRefsCtx = (
-            useAsyncMemo({  
-                depsChangeImpliesInvalidation: true , 
-                f: () => ctx0() ,        
-            } , [ctx0 ] )   
+        const aDestNdRefsCtx = ( 
+            useADestNdRefCtx10()
         ) ;      
         type ADestNdRefsCtxValue = (   
             ContextReturnType<(
@@ -267,7 +272,6 @@ const CurrentCtxTInfoDisplay = (
 export {
     ModifyingCompPayloadDiv as WGD_DIV ,  
 
-    ctx0 ,             
     CurrentCtxTInfoDisplay ,   
     Consm ,        
     useWithCurrentSideTapPtRef ,       
