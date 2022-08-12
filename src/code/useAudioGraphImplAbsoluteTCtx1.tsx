@@ -92,14 +92,23 @@ const WithCurrentTInfo = (
 //                         
 const LoopingWithPeriod = (
     IterableOps.identity<(                 
-        React.FC<(       
-            React.PropsWithChildren< (   
+        React.FC<(                                      
+            (   
                 /**  domain properties   */   
                 {             
+ 
+                    /**       
+                     * the markup children will be the *repeand*.        
+                     */  
+                    children : (   
+                        React.ReactNode  
+                        | 
+                        ((ctx: { perInstanceRelativeT: number ; } ) => React.ReactElement )
+                    ) ;
         
                     value: {      
-                        period: number ;      
-                        initialOffset ?: number ;    
+                        period: number ;                                             
+                        initialOffset ?: number ;         
                         // clippingMode ?: AudioTrackConcatClippingMode ;          
                     } ;                     
            
@@ -118,7 +127,7 @@ const LoopingWithPeriod = (
                     // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
                      
                 }        
-            )>                
+            )           
         )>                  
     )>((                           
         function ({      
@@ -129,7 +138,7 @@ const LoopingWithPeriod = (
             // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
             visual = true ,                   
 
-        } ) {     
+        } ) {      
             const {              
                 period : vPeriod ,    
                 initialOffset : vInitialOffset = 0 ,        
@@ -138,18 +147,22 @@ const LoopingWithPeriod = (
                 Immutable.Range(0, renderRange.n )       
             );
             const itemsRendered = (        
-                effectiveLoopRange        
+                effectiveLoopRange          
                 .map((i: number) => (
                     { 
                         t: vInitialOffset + (i * vPeriod ) ,
                     } as const  
-                ) )            
-                .map(function ({ t: itemT }): React.ReactElement  {  
-                    return (        
+                ) )             
+                .map(function ({ t: itemT }): React.ReactElement  {       
+                    const itemRendered = (
+                        (typeof item === "function" ) ?  
+                        item({ perInstanceRelativeT: itemT }) : item
+                    ) ;
+                    return (                      
                         <div  >    
                             <p> item at <code>t= { itemT }</code> </p>
                             <WithDelay value={itemT} >
-                                { item }    
+                                { itemRendered }    
                             </WithDelay>                
                         </div>          
                     ) ;              
