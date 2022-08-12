@@ -29,7 +29,24 @@ type DCII = {
 } ;                             
 type AsyncMemoisedValue = (
     Exclude<({} | true | symbol | number | string ), 0 | "" >      
-) ;
+) ; 
+/**   
+ * 
+ */
+const useAsyncStrmState = (
+    function<A extends Exclude<unknown, undefined> >() {
+        ;
+        const [s, setS] = (                                           
+            useState<A | undefined >(undefined )        
+        ) ;                   
+        const reset = (
+            () => {
+                setS(() => undefined ) ;       
+            }
+        ) ;   
+        return [s, { setState: setS, reset } ] as const ;
+    }
+) ;                     
 /**   
  * {@link useMemo } alternative for `async`
 */
@@ -39,22 +56,22 @@ const useAsyncMemo = (
             depsChangeImpliesInvalidation ,                                                
             f ,                                                                        
         }  ,                    
-        deps ,                                      
+        deps ,                                           
     ] : [       
         ...AsyncMemoUsageArgs<A> ,                                 
-    ]) : A | undefined {     
-        const [s, setS] = (                                           
-            useState<A | undefined >(undefined )       
-        ) ;         
+    ]) : A | undefined {               
+        const [s, { setState: setS, reset: clearValueRef } ]  = (
+            useAsyncStrmState<A>()            
+        ) ;  
         const p = (
             useMemo(async () => {     
                 if (depsChangeImpliesInvalidation ) {
-                    setS(() => undefined ) ;
-                }                                           
-
+                    clearValueRef() ;
+                }                                             
+  
                 const v: A = (    
                     await f()                          
-                ) ;      
+                ) ;         
 
                 setS(() => v ) ;                          
             } , deps )               
@@ -70,7 +87,7 @@ type AsyncMemoUsageArgs<A> = (
              * the primary/main code
              * */      
             f : () => Promise<A > ;                           
-        } ,                   
+        } ,                     
         deps: React.DependencyList,                                  
     ]  
 ) ;
@@ -78,7 +95,7 @@ const AsyncStrmUsageArgs = {} ; // TS-1205
 type AsyncStrmUsageArgs<A> = (
     [           
         properties : DCII & {              
-            f : () => AsyncGenerator<A > ;                           
+            f : () => AsyncGenerator<A > ;                             
         } ,                   
         deps: React.DependencyList,                                  
     ]           
@@ -101,13 +118,13 @@ const useAsyncStrm = (
             f ,                                                                   
         }  ,                      
         deps ,                                          
-    ] : [     
+    ] : [       
         ...AsyncStrmUsageArgs<A> ,                                      
-    ]) : A | undefined {       
-        const [s, setS] = (                                    
-            useState<A | undefined >(undefined )       
-        ) ;        
-        const {
+    ]) : A | undefined {         
+        const [s, { setState: setS, reset: clearValueRef } ]  = (
+            useAsyncStrmState<A>()            
+        ) ;  
+        const {    
             usingCurrentSeqInvalidation1 , 
         } = useMemoImplSeqInvalidation() ;                            
         const p = (   
@@ -115,13 +132,13 @@ const useAsyncStrm = (
                 const {                
                     remainsValid ,                                           
                 } = usingCurrentSeqInvalidation1() ;
-                if (depsChangeImpliesInvalidation ) {
-                    setS(() => undefined ) ;                                                       
+                if (depsChangeImpliesInvalidation ) {   
+                    clearValueRef() ;                                           
                 }                                                                                  
                 
                 const g = f() ;     
                  
-                LOOP :      
+                LOOP :             
                 for await (const a of g ) {                                                         
                     if (!remainsValid() ) {          
                         // logging needs to be disabled, 
