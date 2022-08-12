@@ -27,6 +27,10 @@ import {
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 } from "./audioLoopDemoComponents1"; 
 import * as BBVR from "./audioLoopDemoSpecimens";  
+import {
+    CBassDrumLoop , 
+
+} from "./audioLoopDemoSpecimens1";
 import '../App.css';        
 
     
@@ -74,7 +78,7 @@ const useASetCurrentT = (
         );         
         return [tT, { update } ] as const ; 
     }
-) ;          
+) ;            
 ; 
 const {    
     BeepsInLoop , 
@@ -97,14 +101,12 @@ export const AudioLoopDemoApp = (function () {
              */
             const TP = (
                 tCtxs.currentTCtx.Provider            
-            ) ;                       
-            const [tT, { update: updateTT } ] = (      
+            ) ;                                    
+            const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = (    
-                <BEEPBOPVRAPP 
-                {...({ quantityReductiveDbgMode } as const )}  
-                />  
+            const c1  = (  
+                <CBassDrumLoop />       
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
@@ -116,7 +118,7 @@ export const AudioLoopDemoApp = (function () {
                         Gettting some App Problems ?
                         </s> 
                         <span>
-                            needs it play one more time ?
+                            needs it play one more time ?         
                         </span>
                         <button onClick={() => updateTT() } >  
                             update 't'   
