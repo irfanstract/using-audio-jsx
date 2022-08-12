@@ -99,9 +99,14 @@ export const AudioLoopDemoApp = (function () {
             /**    
              * {@link tCtxs.currentTCtx.Provider }
              */
-            const TP = (
-                tCtxs.currentTCtx.Provider            
-            ) ;                                    
+            const {
+                Provider: TP ,     
+            } = (
+                tCtxs.currentTCtx             
+            ) ;                        
+            const {  
+                Consumer: TCP ,    
+            } = tCtxs.currentTInfCtx ;
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
