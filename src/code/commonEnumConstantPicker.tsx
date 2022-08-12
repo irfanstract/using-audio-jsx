@@ -9,21 +9,24 @@ import React, { useReducer, useState } from "react";
 
 
 
+      
 
-
-function useEnumConstantPicker<Vr extends number >(...[{ initialValue, static: Vr }] : [    
+function useEnumConstantPicker<Vr0 extends number >(...[{ initialValue, static: Vr0 }] : [    
    {    
-       initialValue : Vr ;    
-       static : { readonly [k: string] : Vr | string ; } ; 
+       initialValue : Vr0 ;           
+       static : { readonly [k: string] : Vr0 | string ; } ; 
    } ,         
 ]) {     
-   const allOptions = (       
-       Object.values(Vr )         
-       .filter((v) : v is Vr => (typeof v === "number" ) )       
+   type Value = Vr0 ;
+   const Value = Vr0 ;
+   ;    
+   const allOptions = (          
+       Object.values(Value )         
+       .filter((v) : v is Value => (typeof v === "number" ) )       
    ) ;       
    const [vl, setVl] = (      
        React.useReducer((
-           function (v0: Vr, v1: Vr ) : Vr {
+           function (v0: Value, v1: Value ) : Value {
                return v1 ;     
            }
        ) , initialValue )  
@@ -34,7 +37,7 @@ function useEnumConstantPicker<Vr extends number >(...[{ initialValue, static: V
            return (     
                <span key={ value } >  
                <button type="button" onClick={() => setVl(value ) } >
-                   {String(Vr[value] ) } 
+                   {String(Value[value] ) } 
                </button>    
                </span>     
            ) ;
