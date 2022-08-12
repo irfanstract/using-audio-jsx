@@ -153,13 +153,13 @@ const LoopingWithPeriod = (
                         t: vInitialOffset + (i * vPeriod ) ,
                     } as const  
                 ) )             
-                .map(function ({ t: itemT }): React.ReactElement  {        
+                .map(function ({ t: itemT }): ReturnType<LwpPayloadCallback > {        
                     const itemRendered = (        
                         (typeof item === "function" ) ?  
                         item({ perInstanceRelativeT: itemT }) 
-                        : (<>{ item }</> )
+                        : (<>{ item }</> )   
                     ) ;
-                    return (
+                    return (   
                         itemRendered ?
                         (           
                             <div  >    
@@ -169,9 +169,10 @@ const LoopingWithPeriod = (
                                 </WithDelay>                
                             </div>          
                         )
-                        : <></> 
-                    ) ;              
-                })                      
+                        : itemRendered
+                    ) ;         
+                })  
+                .toArray()    
             ) ;    
             return (        
                 <div>              
@@ -186,7 +187,7 @@ const LoopingWithPeriod = (
         }  
     ))                 
 ) ;  
-/**   
+/**           
  * side note. 
  * as a prerequisite to *automatic omission of elements (which is necessary to avoid significant delays )* ,   
  * the return-type shall be assignable to `null`. 
@@ -194,10 +195,11 @@ const LoopingWithPeriod = (
 type LwpPayloadCallback = (        
     (ctx: { perInstanceRelativeT: number ; } )  
     => 
-    (LwpPayloadCallback.EmptyItem | React.ReactElement )  
+    (LwpPayloadCallback.OmittedItem | LwpPayloadCallback.EmptyItem | React.ReactElement )  
 ) ;      
 namespace LwpPayloadCallback {
-    export type EmptyItem = null ;        
+    export type EmptyItem = false ;   
+    export type OmittedItem = null ;        
     const bar = {} ; // TS-1205            
 } ;        
                       
