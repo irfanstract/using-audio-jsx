@@ -232,7 +232,7 @@ const {
                         value={( 
                             { period: 1.0 }  as const         
                         )} 
-                        renderRange={{ n: 0x08 } }                   
+                        renderRange={{ n: 0x10 } }                   
                         >       
                             <WithDelay value={0 } >          
                                 <CBassDrumKick1 tCoef1={2 ** -4 } />       

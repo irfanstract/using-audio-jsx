@@ -97,7 +97,7 @@ const LoopingWithPeriod = (
                         OmitOrPropagate.PROPAGATE   
                     ) ?        
                     // TODO
-                    100 : 3    
+                    100 : 1    
                 )}                    
                 postFT={(      
                     (
