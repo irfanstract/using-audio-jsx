@@ -12,21 +12,28 @@ import { K } from "./commonElements";
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";   
 import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
 import { CHalfSecndBeepAtAbsoluteT } from "./audioLoopDemoCurrentDestNdRefCtx";  
-import {    
-    CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
-    CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
+import {     
+    // TIME-DOMAIN SOUrCES
     CConstantValue ,  CFnValue1 ,      
-    CAmpSlideDown ,              
 
-    LoopingWithPeriod ,   
-} from "./useAudioGraphImplFComponents";      
-import { CWaveTable1 } from "./useAudioGraphImplFComponents"; 
-import {        
+    // SIMPLE-OR-COMMON AUDIO SOURCES
+    CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,   
+    CWaveTable1 ,        
     CBassDrumKick1 , 
     CBassDrumKickFluidly1 , 
-    CPitchdownBassDrumKickFluidly1 ,  
+    CPitchdownBassDrumKickFluidly1 ,                
     CSnareDrum1,  
-    CSnareDrumFluidly1 ,     
+    CSnareDrumFluidly1 ,         
+    
+    // ISOTEMPORAL FILTERS        
+    CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
+    CAmpSlideDown ,                   
+
+    // TIME-DILATING FILTERS, INCLUDING LOOPING  
+    LoopingWithPeriod ,   
+
+} from "./useAudioGraphImplFComponents";                    
+import {         
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
 
                
