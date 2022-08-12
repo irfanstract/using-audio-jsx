@@ -71,62 +71,76 @@ const {
     
     WithCurrentTInfo: WithCurrentScheduledTInfo ,    
            
-} = tCtxs ;                      
-const LoopingWithPeriod = (    
-    function (props10 : (          
-        ComponentProps<typeof LoopingWithPeriodImpl>     
-        &              
-        { 
-            autoUnmountMode ?: AudioTrackConcatClippingMode ;
-        }
-    ) ) {     
-        const { 
-            children: item  , 
-            autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
-            ...
-            props1             
-
-        } = props10 ;
-        const { value: { period } } = props1 ;               
-        const itemAfterAutoUnmounting = (  
-            <WithAutoUnmount
-                preFT={(  
-                    (
-                        (avTrackConcatShallPropagate(autoUnmountMode, 0 ) || OmitOrPropagate.OMIT )
-                        === 
-                        OmitOrPropagate.PROPAGATE   
-                    ) ?        
-                    // TODO
-                    100 : 1    
-                )}                    
-                postFT={(      
-                    (
-                        (avTrackConcatShallPropagate(autoUnmountMode, 1 ) || OmitOrPropagate.OMIT )
-                        === 
-                        OmitOrPropagate.PROPAGATE   
-                    ) ?          
-                    // value should be at-least `preFT`
-                    30000 : (period + 0.5)   
-                ) }  
-            >    
-                { item }
-            </WithAutoUnmount>         
-        ) ;
-        return (
-            useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => {     
-                if (nd0 ) {
-                    const outputCtxT = nd0.context.currentTime ;       
-                    ;      
-                }          
-                return (                                     
-                    <LoopingWithPeriodImpl {...props1 } >    
-                        { itemAfterAutoUnmounting  }
-                    </LoopingWithPeriodImpl>     
-                ) ;       
-            })
-        ) ;
-    }     
-) ;
+} = tCtxs ;                                        
+const LoopingWithPeriod = (() => { 
+    type PeerChildrenPropType = (                            
+        (
+            ComponentProps<typeof LoopingWithPeriodImpl >["children"]
+        )
+    ) ;
+    return (       
+        function LoopingWithPeriodC (props10 : (          
+            ComponentProps<typeof LoopingWithPeriodImpl>     
+            &              
+            { 
+                autoUnmountMode ?: AudioTrackConcatClippingMode ;
+            }
+        ) ) {     
+            const { 
+                children: item  , 
+                autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
+                ...
+                props1             
+    
+            } = props10 ;  
+            const { value: { period } } = props1 ;               
+            const itemAfterAutoUnmounting: (PeerChildrenPropType & Function ) = (  
+                function ({ perInstanceRelativeT }) { 
+                    return (    
+                        <WithAutoUnmount
+                            preFT={(  
+                                (
+                                    (avTrackConcatShallPropagate(autoUnmountMode, 0 ) || OmitOrPropagate.OMIT )
+                                    === 
+                                    OmitOrPropagate.PROPAGATE   
+                                ) ?        
+                                // TODO            
+                                100 : 1    
+                            )}                    
+                            postFT={(      
+                                (
+                                    (avTrackConcatShallPropagate(autoUnmountMode, 1 ) || OmitOrPropagate.OMIT )
+                                    === 
+                                    OmitOrPropagate.PROPAGATE   
+                                ) ?          
+                                // value should be at-least `preFT`
+                                30000 : (period + 0.5)   
+                            ) }  
+                        >  
+                            { (
+                                (typeof item === "function") ?           
+                                item({ perInstanceRelativeT }) : item  
+                            )  }              
+                        </WithAutoUnmount>                     
+                    ) ; 
+                }
+            ) ;
+            return (
+                useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => {     
+                    if (nd0 ) {
+                        const outputCtxT = nd0.context.currentTime ;       
+                        ;      
+                    }          
+                    return (                                     
+                        <LoopingWithPeriodImpl {...props1 } >    
+                            { itemAfterAutoUnmounting  }
+                        </LoopingWithPeriodImpl>     
+                    ) ;       
+                })
+            ) ;
+        }     
+    ) ;  
+})() ;
 const {
     CHalfSecndBeep1 ,   
     CAmpSlideDown ,      
