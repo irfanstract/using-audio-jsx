@@ -69,7 +69,7 @@ const asVoidElement = (
  */
 function arrayIndexedOrderedList(...[itemsRendered ] : [        
     items : (
-        readonly (React.ReactElement)[] 
+        readonly (React.ReactElement | false | null )[] 
         | Immutable.Seq.Indexed<React.ReactElement>          
         // | IterableOps.List<React.ReactElement>
     ) ,    
@@ -79,9 +79,14 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
             { (                       
                 itemsRendered
                 .map((e, i) => (
-                    <li key={i} >       
-                        { e }
-                    </li>   
+                    e ? 
+                    (
+                        <li key={i} >       
+                            { e }       
+                        </li>   
+                    )  
+                    : 
+                    ((e === null ) ? null : <></> )
                 ))     
             ) }
         </ol>        
