@@ -88,7 +88,7 @@ const WithDelay = (
 );     
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
-) ;
+) ;       
 //                         
 const LoopingWithPeriod = (
     IterableOps.identity<(                 
@@ -103,11 +103,11 @@ const LoopingWithPeriod = (
                     children : (   
                         React.ReactNode  
                         | 
-                        ((ctx: { perInstanceRelativeT: number ; } ) => React.ReactElement )
+                        LwpPayloadCallback
                     ) ;
         
                     value: {      
-                        period: number ;                                             
+                        period: number ;                                                
                         initialOffset ?: number ;         
                         // clippingMode ?: AudioTrackConcatClippingMode ;          
                     } ;                     
@@ -122,7 +122,7 @@ const LoopingWithPeriod = (
                      *  controls the number of looping to display   
                      * */      
                     renderRange : (
-                        Readonly<{ n: number ; }>  
+                        Readonly<{ n: number ; }>    
                     ) ;                        
                     // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
                      
@@ -138,7 +138,7 @@ const LoopingWithPeriod = (
             // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
             visual = true ,                   
 
-        } ) {      
+        } ) {       
             const {              
                 period : vPeriod ,    
                 initialOffset : vInitialOffset = 0 ,        
@@ -153,18 +153,23 @@ const LoopingWithPeriod = (
                         t: vInitialOffset + (i * vPeriod ) ,
                     } as const  
                 ) )             
-                .map(function ({ t: itemT }): React.ReactElement  {       
-                    const itemRendered = (
+                .map(function ({ t: itemT }): React.ReactElement  {        
+                    const itemRendered = (        
                         (typeof item === "function" ) ?  
-                        item({ perInstanceRelativeT: itemT }) : item
+                        item({ perInstanceRelativeT: itemT }) 
+                        : (<>{ item }</> )
                     ) ;
-                    return (                      
-                        <div  >    
-                            <p> item at <code>t= { itemT }</code> </p>
-                            <WithDelay value={itemT} >
-                                { itemRendered }    
-                            </WithDelay>                
-                        </div>          
+                    return (
+                        itemRendered ?
+                        (           
+                            <div  >    
+                                <p> item at <code>t= { itemT }</code> </p>     
+                                <WithDelay value={itemT} >
+                                    { itemRendered }    
+                                </WithDelay>                
+                            </div>          
+                        )
+                        : <></> 
                     ) ;              
                 })                      
             ) ;    
@@ -179,8 +184,22 @@ const LoopingWithPeriod = (
                 </div> 
             ) ;                
         }  
-    ))
-) ;
+    ))                 
+) ;  
+/**   
+ * side note. 
+ * as a prerequisite to *automatic omission of elements (which is necessary to avoid significant delays )* ,   
+ * the return-type shall be assignable to `null`. 
+ */
+type LwpPayloadCallback = (        
+    (ctx: { perInstanceRelativeT: number ; } )  
+    => 
+    (LwpPayloadCallback.EmptyItem | React.ReactElement )  
+) ;      
+namespace LwpPayloadCallback {
+    export type EmptyItem = null ;        
+    const bar = {} ; // TS-1205            
+} ;        
                       
             
 
@@ -199,5 +218,6 @@ export {
 
     CurrentTDisplay , 
     WithDelay , 
-    LoopingWithPeriod , 
+    LoopingWithPeriod ,   
+    LwpPayloadCallback ,       
 } ;           
