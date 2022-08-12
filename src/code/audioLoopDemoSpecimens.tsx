@@ -2,11 +2,12 @@
 import { 
     interpolateBetweenTwo ,   
 } from "./polynomialsC";       
-import React, { useReducer, useState } from "react";    
+import React, { useReducer, useState } from "react";   
+import {    useEnumConstantPicker } from "./commonElements";     
 import { K } from "./commonElements";    
                
- 
-      
+    
+           
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";   
 import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
@@ -357,52 +358,22 @@ const {
                 ) ;               
             }      
             return (            
-                <>{ beepBopGraph1 }</>     
-            ) ;                 
+                <>{ beepBopGraph1 }</>         
+            ) ;                      
         })  ;   
-        const useXOptions = (       
-            function () {   
-                const allOptions = (
-                    Object.values(Vr )         
-                    .filter((v) : v is Vr => (typeof v === "number" ) )       
-                ) ; 
-                const [vl, setVl] = (      
-                    React.useReducer((
-                        function (v0: Vr, v1: Vr ) : Vr {
-                            return v1 ;     
-                        }
-                    ) , Vr.BassDrumKick )
-                ) ;         
-                const btns = (      
-                    allOptions            
-                    .map((value ) => {             
-                        return (     
-                            <span key={ value } >  
-                            <button type="button" onClick={() => setVl(value ) } >
-                                {String(Vr[value] ) } 
-                            </button>    
-                            </span>     
-                        ) ;
-                    })   
-                ) ;         
-                return {
-                    vl ,  
-                    setVl ,     
-                    allOptions ,   
-                    btns ,    
-                } ;
-            }             
-        ) ;        
+        const useXOptions = (   
+            useEnumConstantPicker              
+        ) ;         
         return (function useE() {              
             const C = (            
                 // TODO        
                 React.useCallback((            
                     function ReactIoBasedAudioLoopDemoSpcSelectApp () {     
-                        const {
+                        const {     
                             vl: selectedVl ,  
-                            btns: btns ,   
+                            btns: btns ,          
                         } = (         
-                            useXOptions()          
+                            useXOptions({ initialValue: Vr.BassDrumKick , static: Vr })          
                         ) ; 
                         return (               
                             <div>   
