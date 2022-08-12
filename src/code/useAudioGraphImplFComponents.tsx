@@ -42,7 +42,13 @@ import {
 import * as audioFltAtAbsTNodes from "./useAudioNodesBasicUseBeep";      
 import * as audioFrqAnlyAtAbsTNodes from "./useAudioNodesCrossmasking1";     
 import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";    
-import { LoopingWithPeriod } from "./useAudioGraphImplFComponentsLoopingWrapper1";
+import { 
+    LoopingWithPeriod , 
+    LoopingWithPeriodAndAutoUnmounting , 
+    LoopingWithPeriodSimple , 
+    MetronomeCheckAndExpandingElem ,  
+     
+} from "./useAudioGraphImplFComponentsLoopingWrapper1";
 import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS
@@ -123,7 +129,7 @@ const {
                                     value { JSON.stringify(compute({ ctxT: originPtAbsoluteT }) ) }   
                                 </span>             ,   
                                 null &&  
-                                <span key={2} style={{ display: "block" }}>           
+                                <span key={2} style={{ display: "block" }}>                 
                                     code :   
                                     { renderSrcCodeView() }     
                                 </span>       ,                     
@@ -263,7 +269,10 @@ export {
     // MODIFYING   
        
     // LOOPING            
-    LoopingWithPeriod ,    
+    LoopingWithPeriod , 
+    // LoopingWithPeriodAndAutoUnmounting ,         
+    // LoopingWithPeriodSimple , 
+    // MetronomeCheckAndExpandingElem ,  
 
     // FILTERING       
     CAmpModulated ,     
@@ -287,7 +296,7 @@ export {
     CWaveTable1 ,  
     CConstantValueModulated ,  
     CConstantValue ,  
-    CFnValue1 , 
+    CFnValue1 ,     
     CWhiteNoise ,       
 } ;                        
 export * from "./useAudioGraphImplFComponentsSlapDrumKit1";                      
