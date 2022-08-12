@@ -132,18 +132,7 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
         } , [nd0 , ...deps0 ])          
     ) ;         
     React[AUDIONODES_USE_AUDIONODEEFFECT](() => {   
-        if (nd1 && nd0 ) {             
-            const fadeoutCurve = (
-                [
-                    1,
-                    2 ** -2 , 
-                    2 ** -4,             
-                    2 ** -6,   
-                    2 ** -8,  
-                    2 ** -10 ,      
-                    0 ,           
-                ]   
-            ) ;
+        if (nd1 && nd0 ) {          
             if (((nd1 as any ).RLE_ABCDE += "+" ) !== `${undefined}+` ) {
                 // throw TypeError(`assertion error : secondary init`) ;     
             } else {                    
@@ -155,32 +144,29 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
                     ;                      
                     nd1.gain.setValueAtTime(0, 0 ) ;   
                     (            
-                        nd1.gain.setValueCurveAtTime(
-                            (
-                                fadeoutCurve
-                                .map((v: number) => Math.max(0, (1 + -v ) ) )    
-                            ) ,       
+                        nd1.gain.setTargetAtTime(
+                            1 ,       
                             mountTime,    
-                            timeout )                    
+                            timeout / 2 )                    
                     );                             
-                }   
+                }     
                 return () => {           
                     ;              
                     const unmountTime = (   
-                        nd1.context.currentTime   
+                        nd1.context.currentTime    
                     ) ;  
                     nd1.gain.cancelAndHoldAtTime(unmountTime) ;     
                     nd1.gain.cancelScheduledValues(unmountTime) ;      
                     (            
-                        nd1.gain.setValueCurveAtTime(
-                            fadeoutCurve, 
+                        nd1.gain.setTargetAtTime(
+                            0, 
                             Math.max((   
                                 mountTime + timeout  
                                 + 0.02
                             ) , (                 
                                 unmountTime          
                             )),   
-                            timeout )  
+                            timeout  / 2)  
                     );                   
                     setTimeout(() => nd1.disconnect(), (3 * timeout ) * 1000 ) ;            
                 } ;                
