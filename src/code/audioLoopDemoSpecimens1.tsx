@@ -4,7 +4,7 @@ import {
 } from "./polynomialsC";       
 import React, { useReducer, useState } from "react";   
 import {    useEnumConstantPicker } from "./commonElements";     
-import { K } from "./commonElements";    
+import { K, ComponentProps, ContextReturnType } from "./commonElements";    
  
     
            
@@ -31,6 +31,7 @@ import {
 
     // TIME-DILATING FILTERS, INCLUDING LOOPING  
     LoopingWithPeriod ,   
+    MetronomeCheckAndExpandingElem ,
 
 } from "./useAudioGraphImplFComponents";                    
 import {         
@@ -49,13 +50,40 @@ import {
 
     
 // TODO define some speciments
-; 
+const CBassDrumLoop = (() => { 
+   const BD : (typeof CBassDrumKickFluidly1) = (
+      CBassDrumKickFluidly1
+   );
+   return (
+      function CMetronomousBassDrumKickLoopC({ instrumentProps = {}, metronomeProps = {} } : {   
+         instrumentProps ?: (
+            Omit<(
+               ComponentProps<typeof BD  > 
+            ) , "children">
+         ) ; 
+         metronomeProps ?: (
+            Omit<(
+               ComponentProps<typeof MetronomeCheckAndExpandingElem >
+            ), "children">
+         ) ;
+      }) {      
+         return (       
+            <MetronomeCheckAndExpandingElem>  
+               { ({ }) => (                   
+                  <BD {...instrumentProps } />       
+               ) }
+            </MetronomeCheckAndExpandingElem>
+         ) ;
+      }
+   ) ;  
+})() ;     
 
 
 
 
 
 
-export {
-   // TODO export the speciments here
-}
+export * from "./useAudioGraphImplFComponents" ;
+export { 
+   CBassDrumLoop , 
+}  
