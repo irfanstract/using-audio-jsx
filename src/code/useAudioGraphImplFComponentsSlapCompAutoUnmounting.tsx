@@ -168,9 +168,9 @@ const {
                         ) ;       
                         return (        
                             <div       
-                            className={`SLPCM-M-${hasPassedT ? "PAST" : "NONPAST" }` }          
-                            style={{            
-                            }} 
+                            className={`SLPCM-M-BASE SLPCM-M-${hasPassedT ? "PAST" : "NONPAST" } splcm-m-passageStated-${passageState.replace(" ", "") }` }          
+                            style={{                     
+                            }}   
                             >     
                             {f({ expectedChildren, passageState }) }
                             </div>  

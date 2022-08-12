@@ -3,17 +3,37 @@
 
 
 
+
+.SLPCM-M-BASE {
+
+    transition: all 0.5s ease-out ;
+}
+
+
+
+
+
+
+
+
   
 .SLPCM-M-NONPAST ,  
 .SLPCM-M-PAST , 
 #----e {
     overflow-y: auto;    
-    max-height: 4em ;  
-    max-height: 16em ;
     overflow-x: auto;  
+    padding-bottom: auto ;
 
-    transition: all 0.5s ease-out ;
 }
+.splcm-m-passageStated-available {
+    height: 16em ;                   
+}             
+.splcm-m-passageStated-tooearly      ,   
+.splcm-m-passageStated-alreadyconcluded      ,     
+#----e 
+{  
+    height: 4em ;     
+}            
 
 
 
