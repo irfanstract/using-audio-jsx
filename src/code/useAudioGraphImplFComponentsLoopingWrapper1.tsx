@@ -22,7 +22,7 @@ import {
    LoopingWithPeriod as LoopingWithPeriodSimple ,  
    LwpPayloadCallback , 
     
-   WithCurrentTInfo as WithCurrentScheduledTInfo ,    
+   WithCurrentTInfo as WithCurrentScheduledTInfo ,              
                  
    //  
 } from "./useAudioGraphImplAbsoluteTCtx1";      
@@ -54,8 +54,8 @@ import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmou
 
 
 // destructuring  
-const {    
-} = tCtxs ;           
+const {         
+} = tCtxs ;         
  
 
 
@@ -88,7 +88,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
    
            } = props10 ;  
            const { value: { period } } = props1 ;            
-           const getOverflowDeservesVisibility = (   
+           const getOverflowDeservesVisibility = (    
                (p: 0 | 1 ) => (
                    avTrackConcatShallPropagate(autoUnmountMode, 0 )
                    || 
@@ -147,10 +147,18 @@ const LoopingWithPeriod: (
    (typeof LoopingWithPeriodAndAutoUnmounting )
    |
    (typeof LoopingWithPeriodSimple )  
-) = (
+) = (    
    LoopingWithPeriodAndAutoUnmounting
 ) ;      
-   
+            
+const MetronomePayloadCallback = {} ; // TS-1205
+type MetronomePayloadCallback = (
+   ( 
+      (ctx: { t: number ; } )  
+      =>  
+      ReturnType<LwpPayloadCallback >
+   )     
+) ;
 /**    
  * using this, compared to using {@link LoopingWithPeriod }, would be way easier.  
  *     
@@ -167,10 +175,8 @@ const LoopingWithPeriod: (
 const MetronomeCheckAndExpandingElem = (
    function ({ children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } : ( 
       {
-         children : (
-            (ctx: { t: number ; } )  
-            =>  
-            ReturnType<LwpPayloadCallback >
+         children : ( 
+            MetronomePayloadCallback  
          ) ;    
          /**        
           * the engine constraints
@@ -191,7 +197,7 @@ const MetronomeCheckAndExpandingElem = (
       ) ;         
       return (                  
          <LoopingWithPeriodAndAutoUnmounting      
-               
+                 
          /**    
           * the engine properties 
           * 
@@ -220,8 +226,8 @@ const MetronomeCheckAndExpandingElem = (
             AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
          ) }
     
-         >       
-            { ({ perInstanceRelativeT: t }) => givenChildren({ t }) }    
+         >     
+         { ({ perInstanceRelativeT: t }) => givenChildren({ t }) }    
          </LoopingWithPeriodAndAutoUnmounting>
       ) ;
    }
@@ -230,7 +236,7 @@ const MetronomeCheckAndExpandingElem = (
 
 
 
-
+ 
 
 
 
@@ -239,10 +245,11 @@ const MetronomeCheckAndExpandingElem = (
 
   
 
-export {
+export {  
    LoopingWithPeriodSimple , 
    LoopingWithPeriodAndAutoUnmounting , 
    LoopingWithPeriod ,         
-   LwpPayloadCallback , 
-   MetronomeCheckAndExpandingElem , 
+   LwpPayloadCallback ,   
+   MetronomeCheckAndExpandingElem ,  
+   MetronomePayloadCallback , 
 } ;   
