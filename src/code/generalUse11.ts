@@ -1,11 +1,17 @@
  
 // import util from "util" ;
 // const util = { } ;         
-import IterableOps, {  } from "lodash" ; 
+import IterableOps0 , {  } from "lodash" ; 
 import * as Iterable from "immutable";       
 import * as Unix from "./unix" ;       
-const util = { } ;                 
-type Optional<A> = (readonly [A]) | (readonly []) ;   
+const util = { } ;                   
+type Optional<A> = (readonly [A]) | (readonly []) ;            
+/**       
+ *   
+ * @deprecated 
+ * in future version this will point to {@link Immutable.List.Indexed } instead.   
+ * */                      
+import IterableOps = IterableOps0 ;                      
 /**    
  * returns an 'identity function' which's upper-bounded .   
  * 
@@ -22,7 +28,7 @@ type Optional<A> = (readonly [A]) | (readonly []) ;
  * @example
  * // writing a type-predicate is rather nontrivial        
  *  . . .     
- * .filter((a) : a is C => { ... } )  
+ * .filter((a) : a is C => { ... } )   
  *     
  * @example     
  * // writing a type-predicate is rather nontrivial          
@@ -41,7 +47,7 @@ const BoundedIdentityFunction = (
  * to write a type-predicate 
  * having explicitly-specified return-type yet       
  * having inferred argument-type    
-*/  
+*/     
 const RAndPBoundedTypePredicateLiterator = (  
     function <R>() {                                                           
         return (                                                                    
@@ -207,7 +213,7 @@ type Seq1<A> = (
     |
     Iterable.List<A>
     |       
-    Iterable.Seq.Indexed<A>       
+    Iterable.Seq.Indexed<A>                
 ) ; 
 interface FrequencyAndPeriod {
     readonly frequency : number ; 
