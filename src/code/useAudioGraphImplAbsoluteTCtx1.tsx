@@ -89,6 +89,41 @@ const WithDelay = (
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
 ) ;         
+const useDescendantCurrentTDiffing = (    
+    function () {
+        const {   
+            t: componentLevelT ,               
+            tScale: componentLevelTScale ,        
+        } = useCurrentTInf() ;         
+        const renderWithInfo = (  
+            function (...[cb] : [
+                (ctx: { xTDiff : number ; xTScaleValueMultiplitude : number ; } ) => React.ReactElement ,  
+            ] ) {   
+                return (
+                    <WithCurrentTInfo>     
+                        { ({ t: descendantTVal, tScale: descendantTSclVal }) => (
+                            cb({  
+                                xTDiff: (              
+                                    descendantTVal - componentLevelT
+                                ) ,      
+                                xTScaleValueMultiplitude : (
+                                    descendantTSclVal / componentLevelTScale
+                                ) , 
+                            })
+                        ) }
+                    </WithCurrentTInfo>
+                ) ;
+            }
+        ) ;  
+        return {
+            componentLevelT , 
+            componentLevelTScale , 
+
+            renderWithInfo , 
+
+        } ;
+    }
+) ;
 /**    
  * {@link LwpPayloadCallback }. 
  * */               
@@ -242,7 +277,8 @@ export {
     currentTScaleCtx ,       
     currentTInfCtx ,    
     useCurrentTInf ,    
-    WithCurrentTInfo ,        
+    WithCurrentTInfo ,   
+    useDescendantCurrentTDiffing ,      
 
     CurrentTDisplay , 
     WithDelay , 
