@@ -74,7 +74,7 @@ const WithDelay = (
             const { t: parentTVal, tScale } = (   
                 tInf 
             ) ;    
-            return (     
+            return (      
                 <currentTCtx.Provider 
                 value={parentTVal + (addend * tScale ) } 
                 >
@@ -128,10 +128,10 @@ const LoopingWithPeriod = (
                     ) ;                        
                     // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
                      
-                }            
+                }             
             )             
         )>                  
-    )>((                           
+    )>((                             
         function ({      
             children: item ,              
             value: props ,            
@@ -145,52 +145,69 @@ const LoopingWithPeriod = (
                 period : vPeriod ,      
                 initialOffset : vInitialOffset = 0 ,        
             } = props ;                           
-            const {
-                start: renderRangeStart = 0 ,     
-            } = renderRange ;           
-            const itemsRendered = (        
-                Immutable.Range(0 , renderRangeStart + renderRange.n )       
-                .toSeq()          
-                .map((i: number) => (
-                    { 
-                        t: vInitialOffset + (i * vPeriod ) ,
-                    } as const  
-                ) )             
-                .map(function ({ t: itemT }): ReturnType<LwpPayloadCallback > {        
-                    const itemRendered = (        
-                        (typeof item === "function" ) ?  
-                        item({ perInstanceRelativeT: itemT }) 
-                        : (<>{ item }</> )   
-                    ) ;
-                    return (                     
-                        itemRendered ?
-                        (           
-                            <div  >    
-                                <p> item at <code>t= { itemT }</code> </p>     
-                                <WithDelay value={itemT} >
-                                    { itemRendered }    
-                                </WithDelay>                
-                            </div>          
-                        )
-                        : itemRendered   
-                    ) ;             
-                })         
-                .map((_v, i ) => (
-                    (renderRangeStart <= i ) ?
-                    _v 
-                    : null 
-                ) )
-                .toArray()    
-            ) ;    
+            const {    
+                start: renderRangeStart = 0 ,        
+                n : renderRangeN ,   
+            } = renderRange ;             
+            const itemsRendered = (            
+                function useIR() {             
+                    return (      
+                        (
+                            React.useMemo(() => (   
+                                Immutable.Range(0 , renderRangeStart + renderRangeN )  
+                                .toSeq()   
+                                .map<null | number >((i: number) => (
+                                    (renderRangeStart <= i ) ?  
+                                    i : null           
+                                ) )               
+                                .map((i: null | number ) => (     
+                                    (typeof i === "number" ) ?  
+                                    (              
+                                        { 
+                                            t: vInitialOffset + (i * vPeriod ) ,
+                                        } as const         
+                                    )           
+                                    : null         
+                                ) )                                 
+                            ) , [renderRangeStart, renderRangeN, vInitialOffset, vPeriod  ])   
+                        )                 
+                        .map(function (prps1 , itemI ): ReturnType<LwpPayloadCallback > {   
+                            if (prps1) {
+                                const { t: itemT } = prps1 ; 
+                                {  
+                                    const itemRendered = (            
+                                        (typeof item === "function" ) ?   
+                                        item({ perInstanceRelativeT: itemT }) 
+                                        : (<>{ item }</> )   
+                                    ) ;
+                                    return (   
+                                        itemRendered ?
+                                        (             
+                                            <div  >    
+                                                <p> item at <code>t= { itemT }</code> </p>     
+                                                <WithDelay value={itemT} >
+                                                    { itemRendered }    
+                                                </WithDelay>                
+                                            </div>          
+                                        )
+                                        : itemRendered      
+                                    ) ;                        
+                                }      
+                            }   
+                            return null ;     
+                        })           
+                    ) ;  
+                }
+            )() ;        
             return (        
                 <div>              
                     <p> a loop </p>          
                     <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
                         <LoopingCompContentDiv   >    
-                        { arrayIndexedOrderedList(itemsRendered )   } 
+                        { arrayIndexedOrderedList(itemsRendered.toArray()  )   } 
                         </LoopingCompContentDiv >       
                     </div>
-                </div> 
+                </div>   
             ) ;                
         }  
     ))                 
