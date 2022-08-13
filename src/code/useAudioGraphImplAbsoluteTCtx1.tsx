@@ -186,6 +186,11 @@ const LoopingWithPeriod = (
             } = renderRange ;             
             const itemsRendered = (            
                 function useIR() {             
+                    const {
+                        t : componentLevelAbsolTValue , 
+                    } = ( 
+                        useCurrentTInf() 
+                    ) ;
                     return (      
                         (
                             React.useMemo(() => (   
