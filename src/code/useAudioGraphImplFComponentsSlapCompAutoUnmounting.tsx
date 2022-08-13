@@ -44,24 +44,25 @@ const {
     WithDelay ,     
     LoopingWithPeriod ,        
 } = tCtxs ;   
-   
+            
+enum PassageState {               
+    TOO_EARLY = "too early" ,   
+    SUPPOSEDLY_NOW = "available" ,
+    SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded" , 
+}       
 const {  
-    WithAutoUnmount ,      
+    WithAutoUnmount ,               
+    withAutoUnmount ,                 
     WithAutoStopmount ,         
     WithAutoStopmountExtra ,         
-
-} = (() => {
+  
+} = (() => { 
     const AbsoluteScheduledTCons = (
         currentTInfCtx.Consumer   
     ) ;   
     const useRealTimeQueryInterval11 = (
         useRealTimeQueryInterval1  
     ) ;        
-    enum PassageState {               
-        TOO_EARLY = "too early" ,   
-        SUPPOSEDLY_NOW = "available" ,
-        SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded"
-    }     
     type PreFTAndPostFTProps = { 
         /**        
          * pre-incidential tolerance        
@@ -95,7 +96,7 @@ const {
             } ;
         }    
     ) ;
-    type Props = ( 
+    type Props = (   
         React.PropsWithChildren<(
             PreFTAndPostFTProps      
         ) >          
@@ -113,7 +114,7 @@ const {
         ) ) {   
             // TODO  
             const [preFT, postFT] = ( 
-                [preFT0, postFt0 ] 
+                [preFT0, postFt0 ]  
                 .map((v: number ) => Math.max(8, v ) )   
             ) ;     
             const {       
@@ -174,23 +175,39 @@ const {
                             >     
                             {f({ expectedChildren, passageState }) }
                             </div>  
-                        ) ;            
+                        ) ;              
                     } }</CBC>   
                 ) )   
             ) ;      
         }     
-    ) ;    
-    return {
-        WithAutoUnmount : (
-            wrapC1(function ({ passageState, expectedChildren }) {
-                return (   
-                    <>{ (      
-                        (passageState === PassageState.SUPPOSEDLY_NOW ) ?
-                        expectedChildren : <p>{ passageState }</p>
-                    ) } </>         
+    ) ;         
+    const withAutoUnmountImpl = (   
+        function (...[passageState, expectedChildren ] : [             
+            PassageState ,    
+            React.ReactElement , // TODO        
+        ]): false | React.ReactElement {                 
+            return (      
+                (passageState === PassageState.SUPPOSEDLY_NOW ) ?
+                expectedChildren : false
+            ) ;     
+        }         
+    ) ;
+    return {            
+        withAutoUnmount: withAutoUnmountImpl , 
+        WithAutoUnmount : (       
+            wrapC1(function ({ passageState, expectedChildren }) { 
+                const rendered1 = (
+                    withAutoUnmountImpl(
+                        passageState, 
+                        <>{ expectedChildren }</> )
+                ) ;                     
+                return (    
+                    rendered1 
+                    ||      
+                    <p>{ passageState }</p>
                 );
             })  
-        ) ,     
+        ) ,       
         WithAutoStopmount: (
             wrapC1(function ({ passageState, expectedChildren }) {
                 return (    
@@ -272,6 +289,8 @@ const {
 export  {
     tCtxs ,       
 
+    withAutoUnmount ,    
     WithAutoUnmount ,    
     WithAutoStopmount , 
-} ;
+    PassageState ,  
+} ;  
