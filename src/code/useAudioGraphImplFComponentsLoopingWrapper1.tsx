@@ -253,9 +253,13 @@ const MetronomeCheckAndExpandingElem = (
          } ,  
  
       } = properties11 ;
-      const [lastRenderT1, setLastRenderT1] = (
-         React.useState<number>(0 )
-      ) ;           
+      const [lastRenderT1, tryAdvanceLastRenderT1] = (     
+         React.useReducer((v0: number, v1: number) => (
+            ((v0 + 20 ) <= v1 ) ?
+            v1 
+            : v0       
+         ) , 0 )
+      ) ;                          
       return (
          <WithCurrentDestNdRef>  
          { ({ feedPt: nd0 }) => (        
