@@ -88,8 +88,10 @@ const WithDelay = (
 );     
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
-) ;       
-//                         
+) ;         
+/**    
+ * {@link LwpPayloadCallback }. 
+ * */               
 const LoopingWithPeriod = (
     IterableOps.identity<(                 
         React.FC<(                                      
@@ -188,9 +190,10 @@ const LoopingWithPeriod = (
     ))                 
 ) ;  
 /**           
- * side note. 
- * as a prerequisite to *automatic omission of elements (which is necessary to avoid significant delays )* ,   
- * the return-type shall be assignable to `null`. 
+ * possible return values of implemts : 
+ * - {@link LwpPayloadCallback.OmittedItem } - omitted item
+ * - {@link LwpPayloadCallback.EmptyItem } - item as blank 
+ * - concrete elements    
  */
 type LwpPayloadCallback = (        
     (ctx: { perInstanceRelativeT: number ; } )  
