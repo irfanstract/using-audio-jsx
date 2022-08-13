@@ -45,6 +45,12 @@ const {
     LoopingWithPeriod ,        
 } = tCtxs ;    
         
+/**      
+ * one of the three         
+ * 1) "too early"
+ * 2) "the right time"
+ * 3) "too late"
+ */
 enum PassageState {               
     TOO_EARLY = "too early" ,   
     SUPPOSEDLY_NOW = "available" ,
