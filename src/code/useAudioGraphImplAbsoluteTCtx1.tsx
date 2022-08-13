@@ -124,12 +124,12 @@ const LoopingWithPeriod = (
                      *  controls the number of looping to display   
                      * */      
                     renderRange : (
-                        Readonly<{ n: number ; }>    
+                        Readonly<{ n: number ; start ?: number ; }>    
                     ) ;                        
                     // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
                      
-                }        
-            )           
+                }            
+            )             
         )>                  
     )>((                           
         function ({      
@@ -142,14 +142,15 @@ const LoopingWithPeriod = (
 
         } ) {       
             const {              
-                period : vPeriod ,    
+                period : vPeriod ,      
                 initialOffset : vInitialOffset = 0 ,        
-            } = props ;     
-            const effectiveLoopRange = (  
-                Immutable.Range(0, renderRange.n )       
-            );
+            } = props ;                           
+            const {
+                start: renderRangeStart = 0 ,     
+            } = renderRange ;           
             const itemsRendered = (        
-                effectiveLoopRange          
+                Immutable.Range(0 , renderRangeStart + renderRange.n )       
+                .toSeq()          
                 .map((i: number) => (
                     { 
                         t: vInitialOffset + (i * vPeriod ) ,
@@ -161,7 +162,7 @@ const LoopingWithPeriod = (
                         item({ perInstanceRelativeT: itemT }) 
                         : (<>{ item }</> )   
                     ) ;
-                    return (   
+                    return (                     
                         itemRendered ?
                         (           
                             <div  >    
@@ -171,9 +172,10 @@ const LoopingWithPeriod = (
                                 </WithDelay>                
                             </div>          
                         )
-                        : itemRendered
-                    ) ;         
-                })  
+                        : itemRendered   
+                    ) ;             
+                })   
+                .filter((_v, i ): boolean => (renderRangeStart <= i ) )
                 .toArray()    
             ) ;    
             return (        
