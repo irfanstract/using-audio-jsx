@@ -179,6 +179,9 @@ const LoopingWithPeriod: (
 ) ;      
             
 const MetronomePayloadCallback = {} ; // TS-1205
+/**    
+ * `t` will be relative to the resulting M. 
+ */
 type MetronomePayloadCallback = (
    ( 
       (ctx: { t: number ; } )  
