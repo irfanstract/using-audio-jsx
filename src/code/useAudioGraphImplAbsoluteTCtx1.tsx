@@ -132,7 +132,7 @@ const LoopingWithPeriod = (
             )             
         )>                  
     )>((                             
-        function ({      
+        function SimpleLoopingWithPeriodC ({      
             children: item ,              
             value: props ,            
 
