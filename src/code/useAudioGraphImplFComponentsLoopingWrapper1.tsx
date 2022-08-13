@@ -69,7 +69,7 @@ const {
 
 
   
- 
+   
                        
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
    type PeerChildrenPropType = (                            
@@ -77,7 +77,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
            ComponentProps<typeof LoopingWithPeriodSimple >["children"]
        )
    ) ;                  
-   return (
+   return (    
       function LoopingWithPeriodC(props10: (
          ComponentProps<typeof LoopingWithPeriodSimple>
          &
@@ -89,7 +89,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
             children: item,
             autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED,
             ... 
-            props1
+            props1      
 
          } = props10;
          const { value: { period } } = props1;
@@ -97,7 +97,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
             (p: 0 | 1) => (
                avTrackConcatShallPropagate(autoUnmountMode, 0)
                ||
-               OmitOrPropagate.OMIT
+               OmitOrPropagate.OMIT 
             )
          );
          const itemAfterAutoUnmounting: (PeerChildrenPropType & Function) = (
@@ -111,7 +111,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      // TODO                         
                      100 : 1
                );
-               const mountDuration = (  
+               const mountDuration = (     
                   (
                      getOverflowDeservesVisibility(1)
                      ===
@@ -119,27 +119,38 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                   ) ?
                      // value should be at-least `preFT` 
                      30000 : (period + 0.5)
-               );        
+               );             
+               const item11 = (   
+                  (typeof item === "function") ?      
+                       (() => {            
+                        const item110 = (
+                           item({ perInstanceRelativeT })           
+                        );
+                        return item110  ;   
+                       })()
+                     : (<>{ item }</> )  
+               ) ;
                // return (                         
                //    withAutoUnmount((
                //       passageStateBy1({ preFT: premountTime, postFT: mountDuration })
-               //    ) )
+               //    ) )          
                // ) ;  
-               return (          
-                  <WithAutoUnmount
-                     preFT={(
-                        premountTime
-                     )}
-                     postFT={(
-                        mountDuration
-                     )}
-                  >    
-                     {(
-                        (typeof item === "function") ?
-                           item({ perInstanceRelativeT }) : item
-                     )}
-                  </WithAutoUnmount>
-               );
+               return (             
+                  (item11 !== null || (typeof item11 === "boolean") ) ?
+                  (          
+                     <WithAutoUnmount  
+                        preFT={(  
+                           premountTime
+                        )}                    
+                        postFT={( 
+                           mountDuration
+                        )}   
+                     >    
+                        {item11 }               
+                     </WithAutoUnmount>          
+                  )
+                  : null
+               ) ;
             }
          );
          return (
