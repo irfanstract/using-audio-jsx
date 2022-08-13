@@ -1,17 +1,18 @@
  
 // import util from "util" ;
 // const util = { } ;         
-import IterableOps0 , {  } from "lodash" ; 
+import IterableOps0 , {  } from "lodash" ;     
 import Immutable, * as Iterable from "immutable";       
-import * as Unix from "./unix" ;       
-const util = { } ;                   
-type Optional<A> = (readonly [A]) | (readonly []) ;            
-/**       
- *   
- * @deprecated 
+import * as Unix from "./unix" ;            
+/**         
+ * Lodash (`lodash` ) . a collection of general-purpose.    
+ * @deprecated   
+ * in terms of *IterableOps* this will be substituted with `immutable` (Immutable) .
  * in future version this will point to {@link Immutable.List.Indexed } instead.   
- * */                      
-import IterableOps = IterableOps0 ;                      
+ * */                                      
+import IterableOps = IterableOps0 ;      
+const util = { } ;                   
+type Optional<A> = (readonly [A]) | (readonly []) ;                     
 /**    
  * returns an 'identity function' which's upper-bounded .   
  * 
