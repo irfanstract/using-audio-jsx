@@ -1,5 +1,6 @@
 
 import { 
+   Iterable,
    IterableOps , 
     
 } from "./generalUse11";     
@@ -12,6 +13,8 @@ import {
 import React, { useReducer, useState } from "react";  
 import { ComponentProps } from "./commonElementsTypes";
 import { K } from "./commonElements";         
+import { CBC } from "./useStateInCallback";  
+import { useRealTimeQueryInterval1 } from "./useNonHookValue";   
 
           
 
@@ -251,43 +254,81 @@ const MetronomeCheckAndExpandingElem = (
       const [lastRenderT1, setLastRenderT1] = (
          React.useState<number>(0 )
       ) ;           
-      return (                  
-         <LoopingWithPeriodAndAutoUnmounting      
-                 
-         /**          
-          * the engine properties 
-          *      
-          * assign the looping period      
-          * 
-          * assign `renderRange` and `initialOffset` as appropriate 
-          */ 
-         value={{  
-            // TODO make this configurable
-            period: tickTockPeriod ,            
-                          
-            initialOffset: lastRenderT1 , 
-         }}                                  
-         renderRange={renderRange }   
-         /**     
-          * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
-         */
-         autoUnmountMode={(
-            AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
-         ) }
-    
-         >       
-            { ({ perInstanceRelativeT: t }) => {
-               const e0 = (
-                  givenChildren({ t })        
-               );
-               const e = (         
-                  e0 && ( 
-                     e0    
-                  )     
+      return (
+         <WithCurrentDestNdRef>  
+         { ({ feedPt: nd0 }) => (        
+            <CBC>
+            { function useE () {  
+               const actualCtxT = (
+                  useRealTimeQueryInterval1({
+                     f: () => (
+                        nd0 ?  
+                        nd0.context.currentTime
+                        : false    
+                     ) , 
+                     deps: [nd0 ] ,   
+                  } , (
+                     // TODO 
+                     1100
+                  ) )    
                ) ;
-               return e ;  
-            } }    
-         </LoopingWithPeriodAndAutoUnmounting>
+               return (                      
+                     (nd0 && (typeof actualCtxT === "number")) 
+                     ?         
+                  <LoopingWithPeriodAndAutoUnmounting        
+                        
+                  /**          
+                   * the engine properties 
+                   *      
+                   * assign the looping period      
+                   * 
+                   * assign `renderRange` and `initialOffset` as appropriate 
+                   */ 
+                  value={{  
+                     // TODO make this configurable
+                     period: tickTockPeriod ,            
+                                 
+                     initialOffset: lastRenderT1 , 
+                  }}                                    
+                  renderRange={renderRange }   
+                  /**      
+                   * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
+                  */
+                  autoUnmountMode={(
+                     AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
+                  ) }
+            
+                  >       
+                     { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }) => { 
+                        ;
+                        const actualCtxTReoundedDownToTens = (
+                           Iterable.Range(-10, actualCtxT, 10 ).last(0 ) 
+                        );
+                        const e0 = (   
+                           givenChildren({ t })          
+                        );    
+                        const e = (             
+                           e0 && (            
+                              (
+                                 ((CVATX + t ) + -(Math.max(2, 2 * tickTockPeriod ) ) ) <= actualCtxT
+                                 && 
+                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + t ) + (Math.max(3, 2 * tickTockPeriod ) ) )
+                              )    
+                              ?             
+                              e0  
+                              : false   
+                           )         
+                        ) ;
+                        return e ;   
+                     } }    
+                  </LoopingWithPeriodAndAutoUnmounting>
+                  : 
+                  <></>
+               ) ; 
+            } }
+            </CBC>
+         ) }
+         </WithCurrentDestNdRef> 
       ) ;
    }     
 ) ;
