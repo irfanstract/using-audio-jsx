@@ -43,13 +43,13 @@ const {
     CurrentTDisplay , 
     WithDelay ,     
     LoopingWithPeriod ,        
-} = tCtxs ;   
-            
+} = tCtxs ;    
+        
 enum PassageState {               
     TOO_EARLY = "too early" ,   
     SUPPOSEDLY_NOW = "available" ,
     SUPPOSEDLY_ALREADY_CONCLUDED = "already concluded" , 
-}       
+}                    
 const {  
     WithAutoUnmount ,               
     withAutoUnmount ,                 
@@ -59,43 +59,10 @@ const {
 } = (() => { 
     const AbsoluteScheduledTCons = (
         currentTInfCtx.Consumer   
-    ) ;   
-    const useRealTimeQueryInterval11 = (
+    ) ;                      
+    const useRealTimeQueryInterval11 = (     
         useRealTimeQueryInterval1  
-    ) ;        
-    type PreFTAndPostFTProps = { 
-        /**        
-         * pre-incidential tolerance        
-         */   
-        preFT : number ;      
-        /**         
-         * post-incidential tolerance   
-         */   
-        postFT : number ;               
-    } ;
-    const passageStateBy1 = (
-        (...[{ preFT, postFT }] : [PreFTAndPostFTProps] ) => {
-            ;
-            const passageStateBy = (
-                function (...[{ actualT, expectedT }] : [
-                    { actualT : number ; expectedT: number ; } ,    
-                ]) {           
-                    return (    
-                        ((expectedT + -preFT ) <= actualT ) 
-                        ?  
-                        (   
-                            (actualT <= (expectedT + postFT ) ) ?
-                            PassageState.SUPPOSEDLY_NOW : PassageState.SUPPOSEDLY_ALREADY_CONCLUDED
-                        )       
-                        : PassageState.TOO_EARLY
-                    ) ;           
-                }     
-            );     
-            return {
-                passageStateBy ,   
-            } ;
-        }    
-    ) ;
+    ) ;           
     type Props = (   
         React.PropsWithChildren<(
             PreFTAndPostFTProps      
@@ -269,6 +236,40 @@ const {
         ) ,   
     } ;   
 })() ;  
+const PreFTAndPostFTProps = {} ; // TS-1205  
+type PreFTAndPostFTProps = { 
+    /**        
+     * pre-incidential tolerance        
+     */   
+    preFT : number ;      
+    /**         
+     * post-incidential tolerance   
+     */   
+    postFT : number ;               
+} ;      
+const passageStateBy1 = (
+    (...[{ preFT, postFT }] : [PreFTAndPostFTProps] ) => {
+        ;
+        const passageStateBy = (
+            function (...[{ actualT, expectedT }] : [
+                { actualT : number ; expectedT: number ; } ,    
+            ]) {           
+                return (    
+                    ((expectedT + -preFT ) <= actualT ) 
+                    ?  
+                    (   
+                        (actualT <= (expectedT + postFT ) ) ?
+                        PassageState.SUPPOSEDLY_NOW : PassageState.SUPPOSEDLY_ALREADY_CONCLUDED
+                    )       
+                    : PassageState.TOO_EARLY
+                ) ;           
+            }     
+        );     
+        return {
+            passageStateBy ,   
+        } ;
+    }    
+) ;
 
 
     
@@ -293,4 +294,5 @@ export  {
     WithAutoUnmount ,    
     WithAutoStopmount , 
     PassageState ,  
+    passageStateBy1 , 
 } ;  
