@@ -216,9 +216,18 @@ const LoopingWithPeriod = (
                                 const { t: itemT } = prps1 ; 
                                 {  
                                     const itemRendered = (            
-                                        (typeof item === "function" ) ?   
-                                        item({ perInstanceRelativeT: itemT }) 
-                                        : (<>{ item }</> )   
+                                        (typeof item === "function" ) 
+                                        ?   
+                                        item({          
+                                            perInstanceRelativeT: (
+                                                itemT
+                                            )  , 
+                                            componentLevelAbsoluteT : (
+                                                componentLevelAbsolTValue
+                                            ) ,   
+                                        }) 
+                                        : 
+                                        (<>{ item }</> )    
                                     ) ;
                                     return (   
                                         itemRendered ?
@@ -259,7 +268,17 @@ const LoopingWithPeriod = (
  * - concrete elements    
  */
 type LwpPayloadCallback = (        
-    (ctx: { perInstanceRelativeT: number ; } )  
+    (ctx: {
+        /**    
+         * relative to the whole component. 
+         * */ 
+        perInstanceRelativeT: number ;  
+
+        /**     
+         * the component-level {@link useCurrentTInf `absoluteTValue` }.  
+        */
+        componentLevelAbsoluteT : number ; 
+    } )  
     => 
     (LwpPayloadCallback.OmittedItem | LwpPayloadCallback.EmptyItem | React.ReactElement )  
 ) ;      
