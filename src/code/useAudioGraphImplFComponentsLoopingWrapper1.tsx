@@ -201,7 +201,10 @@ type MetronomePayloadCallback = (
  */ 
 const MetronomeCheckAndExpandingElem = (
    function (properties11 : ( 
-      {  
+      { 
+         /**    
+          * the payload
+          */
          children : ( 
             MetronomePayloadCallback  
          ) ;         
@@ -210,7 +213,16 @@ const MetronomeCheckAndExpandingElem = (
           */ 
          value ?: {    
             tickTockPeriod ?: number ;      
-         } ;   
+         } ; 
+         /**        
+          * {@link LoopingWithPeriodAndAutoUnmounting } and 
+          * {@link LoopingWithPeriod }
+         */
+         renderRange ?: (
+            Required<(
+               ComponentProps<typeof LoopingWithPeriodAndAutoUnmounting >
+            )>["renderRange"]
+         ) ;       
       }        
    )) {                  
       const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
@@ -221,16 +233,27 @@ const MetronomeCheckAndExpandingElem = (
       } ;                
       if (!(0.05 < tickTockPeriod ) ) {     
          throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ; 
-      } ;    
+      } ;      
+      const {  
+         renderRange = {       
+            n: (    
+               // TODO
+               Math.round((
+                  (0x40 / tickTockPeriod) 
+               ))         
+            ) ,      
+         } ,  
+ 
+      } = properties11 ;
       const [lastRenderT1, setLastRenderT1] = (
          React.useState<number>(0 )
-      ) ;         
+      ) ;           
       return (                  
          <LoopingWithPeriodAndAutoUnmounting      
                  
-         /**    
+         /**          
           * the engine properties 
-          * 
+          *      
           * assign the looping period      
           * 
           * assign `renderRange` and `initialOffset` as appropriate 
@@ -238,17 +261,10 @@ const MetronomeCheckAndExpandingElem = (
          value={{  
             // TODO make this configurable
             period: tickTockPeriod ,            
-                 
+                          
             initialOffset: lastRenderT1 , 
          }}                                  
-         renderRange={{     
-            n: (    
-               // TODO
-               Math.round((
-                  (0x40 / tickTockPeriod) 
-               ))
-            ) ,      
-         }}   
+         renderRange={renderRange }   
          /**     
           * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
          */
