@@ -174,8 +174,12 @@ const LoopingWithPeriod = (
                         )
                         : itemRendered   
                     ) ;             
-                })   
-                .filter((_v, i ): boolean => (renderRangeStart <= i ) )
+                })         
+                .map((_v, i ) => (
+                    (renderRangeStart <= i ) ?
+                    _v 
+                    : null 
+                ) )
                 .toArray()    
             ) ;    
             return (        
