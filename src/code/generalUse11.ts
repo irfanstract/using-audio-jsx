@@ -2,7 +2,7 @@
 // import util from "util" ;
 // const util = { } ;         
 import IterableOps0 , {  } from "lodash" ; 
-import * as Iterable from "immutable";       
+import Immutable, * as Iterable from "immutable";       
 import * as Unix from "./unix" ;       
 const util = { } ;                   
 type Optional<A> = (readonly [A]) | (readonly []) ;            
@@ -103,29 +103,34 @@ const onlyIfAllAreNonNull = (
         ) ;           
     }   
 ) ;
-const PERIODIC = (
-    ({ 
-        period , 
-        firstPeriodStartT , 
-        endT ,                                         
-    } : Readonly<{
-        period : number ;       
-        firstPeriodStartT : number ;            
-        endT : number ;     
-    } & {} > ) => {   
+/**    
+ * the return type will be {@link Immutable.Seq } rather than {@link Immutable.List } ; 
+ * this is necessary to defer computation without extra syntax.   
+ */  
+const periodicNumericSequence = (
+    (properties : (           
+        Readonly<{       
+            firstPeriodStartT : number ;   
+            period : number ;                              
+            endT ?: number ;             
+        } >  
+    ) ) => {         
+        const { 
+            period , 
+            firstPeriodStartT ,      
+            endT = Number.MAX_SAFE_INTEGER ,                                                         
+        } = properties ;    
         return (
-            {                                                
-                [Symbol.iterator]: (
-                    function* () {  
-                        for (let t: number = firstPeriodStartT ; t<endT ; t += period ) {
-                            yield t ;        
-                        }         
-                    }          
-                ) ,               
-            } as const           
-        ) ;
-    }
-) ;   
+            Immutable.Range(firstPeriodStartT, endT, period )
+            .toSeq()           
+        ) ;                    
+    }     
+) ;    
+/**    
+ * the return type will be {@link Immutable.Seq } rather than {@link Immutable.List } ; 
+ * this is necessary to defer computation without extra syntax.   
+ */    
+const PERIODIC = periodicNumericSequence ;       
       
    
 const ArrayIndex = {} ; // TS-1205   
@@ -254,11 +259,12 @@ export {
     util ,                       
         
     memoize ,                   
-    CanIncrementAndGet,    
+    CanIncrementAndGet,        
 
     FrequencyAndPeriod , 
     roundToExponentiallyClosesPwOf2,
     musicalSemitonesAsScalar,          
-    Unix ,          
+    Unix ,           
+    periodicNumericSequence , 
     PERIODIC , 
 } ;                                    
