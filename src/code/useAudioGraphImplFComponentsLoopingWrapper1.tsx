@@ -200,25 +200,28 @@ type MetronomePayloadCallback = (
  * see {@link LwpPayloadCallback}.  
  */ 
 const MetronomeCheckAndExpandingElem = (
-   function ({ children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } : ( 
-      {
+   function (properties11 : ( 
+      {  
          children : ( 
             MetronomePayloadCallback  
-         ) ;    
+         ) ;         
          /**        
           * the engine constraints
-          */
+          */ 
          value ?: {    
-            tickTockPeriod ?: number ;
-         } ;
+            tickTockPeriod ?: number ;      
+         } ;   
       }        
    )) {                  
+      const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
+         properties11    
+      ) ;    
       if (!(0 < tickTockPeriod ) ) {
          throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
       } ;                
       if (!(0.05 < tickTockPeriod ) ) {     
          throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ; 
-      } ;   
+      } ;    
       const [lastRenderT1, setLastRenderT1] = (
          React.useState<number>(0 )
       ) ;         
