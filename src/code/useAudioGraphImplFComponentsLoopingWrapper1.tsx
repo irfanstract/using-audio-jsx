@@ -78,7 +78,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
            &              
            { 
                autoUnmountMode ?: AudioTrackConcatClippingMode ;
-           }
+           }       
        ) ) {     
            const { 
                children: item  , 
@@ -133,14 +133,27 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
            ) ;
        }     
    ) ;  
-})() ;   
-const LoopingWithPeriod = (
+})() ;        
+/**      
+ * this Component renders a loop(ing) (every `t` *seconds* ) of children.  
+ *             
+ * {@link LoopingWithPeriod } is simple in usage. however, 
+ * it's recommended to switch to {@link MetronomeCheckAndExpandingElem} instead.  
+ *   
+ * for performance reasons, it might be necessary to make the return-type `null` ; 
+ * see {@link LwpPayloadCallback}.   
+ */
+const LoopingWithPeriod: (    
+   (typeof LoopingWithPeriodAndAutoUnmounting )
+   |
+   (typeof LoopingWithPeriodSimple )  
+) = (
    LoopingWithPeriodAndAutoUnmounting
 ) ;      
-
+   
 /**    
  * using this, compared to using {@link LoopingWithPeriod }, would be way easier.  
- * 
+ *     
  * merely increasing the `period` of an app of {@link LoopingWithPeriod }
  * will leave it one with the each turn being padded with idle period.   
  * copying the existing loop child, and shifting the `t`-argument(s) will not be an option.  
@@ -149,13 +162,13 @@ const LoopingWithPeriod = (
  * selectively fire an instrument depending on the `t`. 
  * 
  * for performance reasons, it might be necessary to make the return-type `null` ; 
- * see {@link LwpPayloadCallback}.
+ * see {@link LwpPayloadCallback}.  
  */ 
 const MetronomeCheckAndExpandingElem = (
    function ({ children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } : ( 
       {
          children : (
-            (ctx: { t: number ; } ) 
+            (ctx: { t: number ; } )  
             =>  
             ReturnType<LwpPayloadCallback >
          ) ;    
@@ -171,12 +184,12 @@ const MetronomeCheckAndExpandingElem = (
          throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
       } ;                
       if (!(0.05 < tickTockPeriod ) ) {     
-         throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ;
+         throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ; 
       } ;   
       const [lastRenderT1, setLastRenderT1] = (
          React.useState<number>(0 )
       ) ;         
-      return (                
+      return (                  
          <LoopingWithPeriodAndAutoUnmounting      
                
          /**    
