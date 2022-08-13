@@ -101,7 +101,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
             )
          );
          const itemAfterAutoUnmounting: (PeerChildrenPropType & Function) = (
-            function ({ perInstanceRelativeT }) {
+            function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
                const premountTime = (
                   (
                      getOverflowDeservesVisibility(0)
@@ -124,7 +124,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                   (typeof item === "function") ?      
                        (() => {            
                         const item110 = (
-                           item({ perInstanceRelativeT })           
+                           item({ perInstanceRelativeT, componentLevelAbsoluteT })           
                         );
                         return item110  ;   
                        })()
