@@ -27,7 +27,7 @@ import {
    //  
 } from "./useAudioGraphImplAbsoluteTCtx1";      
 import { 
-   CHalfSecndBeepAtAbsoluteT ,    
+   CHalfSecndBeepAtAbsoluteT ,         
    CAmpModulated as CAmpModulatedTimeDomain ,      
    CAmpSlideDownAtAbsoluteT ,   
    CBiquadFilterModulated ,             
@@ -47,11 +47,16 @@ import {
    useWithCurrentSideTapPtRef , 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";           
-import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
+import { 
+   WithAutoUnmount , 
+   withAutoUnmount , 
+   passageStateBy1 ,   
+
+} from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS imports
-      
-
+         
+  
 
 // destructuring  
 const {         
@@ -71,67 +76,78 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
        (
            ComponentProps<typeof LoopingWithPeriodSimple >["children"]
        )
-   ) ;    
-   return (        
-       function LoopingWithPeriodC (props10 : (          
-           ComponentProps<typeof LoopingWithPeriodSimple>     
-           &              
-           { 
-               autoUnmountMode ?: AudioTrackConcatClippingMode ;
-           }       
-       ) ) {     
-           const { 
-               children: item  , 
-               autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,   
-               ...
-               props1             
-   
-           } = props10 ;  
-           const { value: { period } } = props1 ;            
-           const getOverflowDeservesVisibility = (    
-               (p: 0 | 1 ) => (
-                   avTrackConcatShallPropagate(autoUnmountMode, 0 )
-                   || 
-                   OmitOrPropagate.OMIT    
-               )     
-           ) ;   
-           const itemAfterAutoUnmounting: (PeerChildrenPropType & Function ) = (  
-               function ({ perInstanceRelativeT }) { 
-                   return (    
-                       <WithAutoUnmount
-                           preFT={(  
-                               (
-                                   getOverflowDeservesVisibility(0 )
-                                   === 
-                                   OmitOrPropagate.PROPAGATE       
-                               ) ?        
-                               // TODO            
-                               100 : 1    
-                           )}                    
-                           postFT={(      
-                               (
-                                   getOverflowDeservesVisibility(1 )
-                                   === 
-                                   OmitOrPropagate.PROPAGATE                 
-                               ) ?          
-                               // value should be at-least `preFT` 
-                               30000 : (period + 0.5)   
-                           ) }  
-                       >  
-                           { (
-                               (typeof item === "function") ?           
-                               item({ perInstanceRelativeT }) : item  
-                           )  }              
-                       </WithAutoUnmount>                     
-                   ) ; 
-               }
-           ) ;
-           return (                                     
-               <LoopingWithPeriodSimple {...props1 } >    
-                   { itemAfterAutoUnmounting  }
-               </LoopingWithPeriodSimple>     
-           ) ;
-       }     
+   ) ;                  
+   return (
+      function LoopingWithPeriodC(props10: (
+         ComponentProps<typeof LoopingWithPeriodSimple>
+         &
+         {
+            autoUnmountMode?: AudioTrackConcatClippingMode;
+         }
+      )) {
+         const {
+            children: item,
+            autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED,
+            ... 
+            props1
+
+         } = props10;
+         const { value: { period } } = props1;
+         const getOverflowDeservesVisibility = (
+            (p: 0 | 1) => (
+               avTrackConcatShallPropagate(autoUnmountMode, 0)
+               ||
+               OmitOrPropagate.OMIT
+            )
+         );
+         const itemAfterAutoUnmounting: (PeerChildrenPropType & Function) = (
+            function ({ perInstanceRelativeT }) {
+               const premountTime = (
+                  (
+                     getOverflowDeservesVisibility(0)
+                     ===
+                     OmitOrPropagate.PROPAGATE
+                  ) ?
+                     // TODO                         
+                     100 : 1
+               );
+               const mountDuration = (  
+                  (
+                     getOverflowDeservesVisibility(1)
+                     ===
+                     OmitOrPropagate.PROPAGATE
+                  ) ?
+                     // value should be at-least `preFT` 
+                     30000 : (period + 0.5)
+               );        
+               // return (                         
+               //    withAutoUnmount((
+               //       passageStateBy1({ preFT: premountTime, postFT: mountDuration })
+               //    ) )
+               // ) ;  
+               return (          
+                  <WithAutoUnmount
+                     preFT={(
+                        premountTime
+                     )}
+                     postFT={(
+                        mountDuration
+                     )}
+                  >    
+                     {(
+                        (typeof item === "function") ?
+                           item({ perInstanceRelativeT }) : item
+                     )}
+                  </WithAutoUnmount>
+               );
+            }
+         );
+         return (
+            <LoopingWithPeriodSimple {...props1} >
+               {itemAfterAutoUnmounting}
+            </LoopingWithPeriodSimple>
+         );
+      }     
    ) ;  
 })() ;        
 /**      
@@ -226,11 +242,21 @@ const MetronomeCheckAndExpandingElem = (
             AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
          ) }
     
-         >     
-         { ({ perInstanceRelativeT: t }) => givenChildren({ t }) }    
+         >       
+            { ({ perInstanceRelativeT: t }) => {
+               const e0 = (
+                  givenChildren({ t })        
+               );
+               const e = (         
+                  e0 && ( 
+                     e0    
+                  )     
+               ) ;
+               return e ;  
+            } }    
          </LoopingWithPeriodAndAutoUnmounting>
       ) ;
-   }
+   }     
 ) ;
 
 
