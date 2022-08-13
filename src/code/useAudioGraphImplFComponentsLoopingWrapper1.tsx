@@ -141,6 +141,8 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                return (             
                   (item11 !== null || (typeof item11 === "boolean") ) ?
                   (          
+                     item11
+                     &&
                      <WithAutoUnmount  
                         preFT={(  
                            premountTime
