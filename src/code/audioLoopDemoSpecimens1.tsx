@@ -80,6 +80,23 @@ const CBassDrumLoop = (() => {
       }
    ) ;  
 })() ;     
+const WithNSecondsFadeInBF = (
+   function ({ children } : Required<React.PropsWithChildren<{}> > ) {
+      return (
+         <CBiquadFilterModulated  
+            type="lowpass"
+            freqArgumentInterpretation="timedomain-normalised"
+            freqArgument={(
+               <CFnValue1 
+               value={({ ctxT: t }) => (t / 2 ) }
+               />
+            )}
+         >
+            { children }
+         </CBiquadFilterModulated>
+      ) ;;       
+   }
+) ;
 
 
 
@@ -88,5 +105,6 @@ const CBassDrumLoop = (() => {
 
 export * from "./useAudioGraphImplFComponents" ;
 export { 
-   CBassDrumLoop , 
+   CBassDrumLoop ,  
+   WithNSecondsFadeInBF , 
 }  
