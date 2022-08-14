@@ -1,12 +1,16 @@
 
 
 
-.CLE_KEYEDLIST > li {
+.CLE_KEYEDLIST     > li ,  
+.CLE_UNORDEREDLIST > li ,  
+#----e {
    display: list-item !important ;     
    opacity: 1 ;  
    max-height: 20em ; 
 } 
-.CLE_KEYEDLIST > li[hidden] {
+.CLE_KEYEDLIST     > li[hidden] ,  
+.CLE_UNORDEREDLIST > li[hidden] ,  
+#----e  {
    display: list-item !important ;   
    opacity: 0.25 ;
    max-height: 0 ; 
