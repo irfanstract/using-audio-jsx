@@ -61,20 +61,27 @@ const ACMT_TP = (
  * - a {@link DynamicsCompressorNode } lies in middle of the stream,         
  *   preventing clipoff 
 */
-const aCtxMt0 = (                           
-    IterableOps.memoize((       
-        async () : Promise<(
-            AFeedableAndTappableNca    
-        )> => {  
-            const P1: AudioNode = (          
-                await newAudioCtxAsync( )      
-            ) ;                      
-            return (
-                ACMT_TP(P1 )     
-            ) ;                                                      
-        }
-    ) , IterableOps.identity )                    
-) ;       
+// needs to prevent second-time init
+const aCtxMt0 = (() => {
+    const shareSymbol = "AudioNodexCtx&&Init BaseAudioCtxInit &&&" ;
+    return (                           
+        IterableOps.memoize((       
+            async () : Promise<(
+                AFeedableAndTappableNca    
+            )> => {  
+                const P1: AudioNode = (   
+                    ((window as any )[shareSymbol] as (undefined | AudioNode) )
+                    ||       
+                    await newAudioCtxAsync( )      
+                ) ;             
+                (window as any )[shareSymbol] = P1 ;         
+                return (
+                    ACMT_TP(P1 )     
+                ) ;                                                      
+            }
+        ) , IterableOps.identity )                    
+    ) ;  
+})() ;       
 const useACtxMtWithoutAnyFilter1 = (
     () => (
         (              
