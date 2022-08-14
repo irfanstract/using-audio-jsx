@@ -58,9 +58,13 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                .map((e, i) => (
                    (!(e === undefined || (e === null ) ) ) ?    
                    (
-                       <li key={i} >       
-                           { e }       
-                       </li>   
+                       !(e === false || /* e === "" || */ false ) ?
+                       (      
+                           <li key={i} >         
+                              { e }       
+                           </li>   
+                     ) 
+                     : <li hidden />  
                    )  
                    : 
                    ((e === null ) ? null : <></> )
