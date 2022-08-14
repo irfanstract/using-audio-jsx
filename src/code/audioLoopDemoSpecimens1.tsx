@@ -110,7 +110,7 @@ const CAmbientNoise = (
             type="lowpass"
             freqArgumentInterpretation="timedomain-normalised"
             freqArgument={( 
-               <CConstantValue value={ 220 / 48000 } />
+               <CConstantValue value={ 4000 / 48000 } />
             )}
          >
             <CWhiteNoise value={{ volume: 2 ** -6 }} />
