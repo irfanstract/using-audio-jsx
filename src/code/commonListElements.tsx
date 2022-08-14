@@ -19,6 +19,7 @@ import { useJsonStringificativeMemo } from "./usingTimeoutOrInterval";
 import { ComponentRefValue, ComponentProps, JsxBoolean } from "./commonElementsTypes"; 
 import { useRenderCount } from "./usingComponentMountRenderStat";     
 import { NUMERIC } from "./commonCodeSnippetAndNumericDisplay";               
+import "./CLE1.css";
 
 
   
@@ -52,7 +53,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
    ) ,    
 ] ) {      
    return (               
-       <ol>   
+       <ol className="CLE_KEYEDLIST ">   
            { (                       
                itemsRendered
                .map((e, i) => (
@@ -64,7 +65,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                               { e }       
                            </li>   
                      ) 
-                     : <li style={{ maxHeight: 0, overflow: "hidden" }} />  
+                     : <li hidden />  
                    )  
                    : 
                    ((e === null ) ? null : <></> )
