@@ -81,11 +81,6 @@ const CBassDrumLoop = (() => {
       }
    ) ;  
 })() ;     
-const xTValueLogging = (
-   IterableOps.throttle((v: number) => {
-      console.log(`AudioLoopDemoDebug TValue` , { v } ) ; 
-   } , 5 * 1000 , { leading: true } )
-);
 const WithNSecondsFadeInBF = (
    function ({ children } : Required<React.PropsWithChildren<{}> > ) {
       return (
