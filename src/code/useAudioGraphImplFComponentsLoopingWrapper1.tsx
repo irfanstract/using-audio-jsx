@@ -231,6 +231,8 @@ const MetronomeCheckAndExpandingElem = (
                ComponentProps<typeof LoopingWithPeriodAndAutoUnmounting >
             )>["renderRange"]
          ) ;       
+         preFT ?: number ;
+         postFT ?: number ;
       }        
    )) {                  
       const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
@@ -242,6 +244,10 @@ const MetronomeCheckAndExpandingElem = (
       if (!(0.05 < tickTockPeriod ) ) {     
          throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ; 
       } ;      
+      const {
+         preFT: mtPreFT = 2 , 
+         postFT: mtPostFT = 3 ,
+      } = properties11 ;
       const {  
          renderRange = {       
             n: (    
@@ -316,9 +322,9 @@ const MetronomeCheckAndExpandingElem = (
                         const e = (             
                            e0 && (            
                               (
-                                 ((CVATX + t ) + -(Math.max(2, 2 * tickTockPeriod ) ) ) <= actualCtxT
+                                 ((CVATX + t ) + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + t ) + (Math.max(3, 2 * tickTockPeriod ) ) )
+                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + t ) + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
