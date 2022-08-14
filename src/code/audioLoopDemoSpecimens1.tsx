@@ -110,10 +110,30 @@ const CAmbientNoise = (
             type="lowpass"
             freqArgumentInterpretation="timedomain-normalised"
             freqArgument={( 
-               <CConstantValue value={ 4000 / 48000 } />
+               <CConstantValue value={ 20000 / 48000 } />
             )}
          >
-            <CWhiteNoise value={{ volume: 2 ** -6 }} />
+            <CWhiteNoise value={{ volume: 2 ** -9 }} />
+         </CBiquadFilterModulated>
+         
+         <CBiquadFilterModulated  
+            type="lowpass"
+            freqArgumentInterpretation="timedomain-normalised"
+            freqArgument={( 
+               <CConstantValue value={ 400 / 48000 } />
+            )}
+         >
+            <CWhiteNoise value={{ volume: 2 ** -9 }} />
+         </CBiquadFilterModulated>
+         
+         <CBiquadFilterModulated  
+            type="lowpass"
+            freqArgumentInterpretation="timedomain-normalised"
+            freqArgument={( 
+               <CConstantValue value={ 55 / 48000 } />
+            )}
+         >
+            <CWhiteNoise value={{ volume: 2 ** -2 }} />
          </CBiquadFilterModulated>
       </>
    )
