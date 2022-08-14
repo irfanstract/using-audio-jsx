@@ -83,13 +83,23 @@ const CBassDrumLoop = (() => {
 })() ;     
 const WithNSecondsFadeInBF = (
    function ({ children } : Required<React.PropsWithChildren<{}> > ) {
+      const maxFreq : number = 44100;
+      const minFreq : number = 16 ;
       return (
          <CBiquadFilterModulated  
             type="lowpass"
             freqArgumentInterpretation="timedomain-normalised"
             freqArgument={(
                <CFnValue1 
-               value={({ ctxT: t }) => ( IterableOps.clamp(2 ** (4 + t * 0.5 )  , 16 , 44100 ) / 44100 ) }
+               value={({ ctxT: t }) => (
+                  IterableOps.clamp((
+                     2 ** (
+                        Math.log2(minFreq ) + t * 0.5 
+                     ) 
+                  ) , minFreq , maxFreq ) 
+                  / 
+                  maxFreq
+               ) }
                />
             )}
          >
