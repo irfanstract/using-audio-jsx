@@ -105,7 +105,17 @@ const WithNSecondsFadeInBF = (
 ) ;
 const CAmbientNoise = (
    () => (
-      <CWhiteNoise value={{ volume: 2 ** -6 }} />
+      <>
+         <CBiquadFilterModulated  
+            type="lowpass"
+            freqArgumentInterpretation="timedomain-normalised"
+            freqArgument={( 
+               <CConstantValue value={ 220 / 48000 } />
+            )}
+         >
+            <CWhiteNoise value={{ volume: 2 ** -6 }} />
+         </CBiquadFilterModulated>
+      </>
    )
 ) ;
 
