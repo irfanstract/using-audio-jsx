@@ -65,7 +65,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                               { e }       
                            </li>   
                      ) 
-                     : <li hidden />  
+                     : <li key={i} hidden />  
                    )  
                    : 
                    ((e === null ) ? null : <></> )
