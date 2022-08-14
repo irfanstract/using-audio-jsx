@@ -2,6 +2,7 @@
 import { 
    interpolateBetweenTwo ,   
 } from "./polynomialsC";       
+import { Iterable, IterableOps } from "./generalUse11";
 import React, { useReducer, useState } from "react";   
 import {    useEnumConstantPicker } from "./commonElements";     
 import { K, ComponentProps, ContextReturnType } from "./commonElements";    
@@ -80,6 +81,11 @@ const CBassDrumLoop = (() => {
       }
    ) ;  
 })() ;     
+const xTValueLogging = (
+   IterableOps.throttle((v: number) => {
+      console.log(`AudioLoopDemoDebug TValue` , { v } ) ; 
+   } , 5 * 1000 , { leading: true } )
+);
 const WithNSecondsFadeInBF = (
    function ({ children } : Required<React.PropsWithChildren<{}> > ) {
       return (
@@ -88,7 +94,7 @@ const WithNSecondsFadeInBF = (
             freqArgumentInterpretation="timedomain-normalised"
             freqArgument={(
                <CFnValue1 
-               value={({ ctxT: t }) => (t / 2 ) }
+               value={({ ctxT: t }) => ( IterableOps.clamp(2 ** (4 + t * 0.5 )  , 16 , 44100 ) / 44100 ) }
                />
             )}
          >
@@ -96,6 +102,11 @@ const WithNSecondsFadeInBF = (
          </CBiquadFilterModulated>
       ) ;;       
    }
+) ;
+const CAmbientNoise = (
+   () => (
+      <CWhiteNoise value={{ volume: 2 ** -6 }} />
+   )
 ) ;
 
 
@@ -107,4 +118,5 @@ export * from "./useAudioGraphImplFComponents" ;
 export { 
    CBassDrumLoop ,  
    WithNSecondsFadeInBF , 
+   CAmbientNoise ,
 }  
