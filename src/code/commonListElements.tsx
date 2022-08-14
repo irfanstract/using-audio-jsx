@@ -64,7 +64,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                               { e }       
                            </li>   
                      ) 
-                     : <li hidden />  
+                     : <li style={{ maxHeight: 0, overflow: "hidden" }} />  
                    )  
                    : 
                    ((e === null ) ? null : <></> )
