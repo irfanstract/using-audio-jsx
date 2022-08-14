@@ -29,6 +29,8 @@ import {
 import * as BBVR from "./audioLoopDemoSpecimens";  
 import {
     CBassDrumLoop , 
+    CAmbientNoise , 
+    WithNSecondsFadeInBF ,     
 
 } from "./audioLoopDemoSpecimens1";
 import '../App.css';        
@@ -111,7 +113,10 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (  
-                <CBassDrumLoop />       
+               <WithNSecondsFadeInBF>
+                 <CBassDrumLoop />       
+                 <CAmbientNoise />
+               </WithNSecondsFadeInBF>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
