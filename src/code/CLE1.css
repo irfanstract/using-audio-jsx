@@ -1,0 +1,28 @@
+
+
+
+.CLE_KEYEDLIST > li {
+   display: list-item !important ;     
+   opacity: 1 ;  
+   max-height: 20em ; 
+} 
+.CLE_KEYEDLIST > li[hidden] {
+   display: list-item !important ;   
+   opacity: 0 ;
+   max-height: 0 ; 
+   overflow-y: hidden ;    
+}
+
+
+
+
+
+
+
+
+
+.CLE_KEYEDLIST > li {
+   transition: all 0.5s ease-out ;
+}
+
+
