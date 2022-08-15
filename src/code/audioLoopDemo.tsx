@@ -112,9 +112,14 @@ const HouseMusicShortBrkDemo = () => {
           renderRange={{ n: 4 * 4 * 8 }}
           >
           { ({ t }) => (
-            (([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 ) ?
-            (<></> )
-            :  <BD />
+            <>
+            { (
+                (([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 ) ?
+                null 
+                :  <BD />
+            )}
+            { ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null }
+            </>
           ) }
           </MetronomeCheckAndExpandingElem>
           <CAmbientNoise />
