@@ -54,6 +54,7 @@ const {
 
     CurrentTDisplay , 
     WithDelay ,     
+    WithSlowdown,
     LoopingWithPeriod , 
 } = tCtxs ;
 const AudioLoopDemoApp1 = () => (
@@ -113,10 +114,12 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (  
-               <WithNSecondsFadeInBF>
-                 <CBassDrumLoop />       
-                 <CAmbientNoise />
-               </WithNSecondsFadeInBF>
+                <WithSlowdown value={2} >
+                <WithNSecondsFadeInBF>
+                  <CBassDrumLoop />       
+                  <CAmbientNoise />
+                </WithNSecondsFadeInBF>
+                </WithSlowdown>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
