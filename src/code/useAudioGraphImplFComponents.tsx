@@ -157,7 +157,7 @@ const {
     ) ;       
     return {  
         CAmpSlideDown  : (   
-            function C1(...[{ children, ...mainProps }] : [
+            function CAmpSlideDownC(...[{ children, ...mainProps }] : [
                 (  
                     Omit<(
                         ComponentProps<typeof CAmpSlideDownAtAbsoluteT> 
