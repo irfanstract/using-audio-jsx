@@ -36,6 +36,7 @@ import {
 } from "./useAudioGraphImplCurrentDestNdRefCtxC";           
 import { CHalfSecndBeepAtRelativeT } from "./useAudioGraphImplFComponentsBeepAtRelativeT";           
 import { CFnValueFromRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
+import { CAmpSlideDown } from "./useAudioGraphImplFComponentsAmpModulative";
 import {
     Consm as WithCurrentDestNdRef , 
     useWithCurrentSideTapPtRef , 
@@ -78,44 +79,6 @@ const {
     WithDelay ,              
            
 } = tCtxs ;                  
-const {
-    CAmpSlideDown ,       
-  
-} = (function () {     
-    /**   
-     * {@link tCtxs.currentTInfCtx.Consumer }
-     *  */    
-    const TC = (           
-        tCtxs.currentTInfCtx.Consumer
-    ) ;       
-    return {  
-        CAmpSlideDown  : (   
-            function CAmpSlideDownC(...[{ children, ...mainProps }] : [
-                (  
-                    Omit<(
-                        ComponentProps<typeof CAmpSlideDownAtAbsoluteT> 
-                    ) , "t" > 
-                ) ,        
-            ]) {        
-                const remountOnScheduledAbsoluteTChg : boolean = false ;
-                return (                 
-                    <TC>
-                        { ({ t: originAbsoluteT }) => (     
-                            <>         
-                            <code>CAmpSlideDown : { originAbsoluteT } </code>     
-                            <K key={remountOnScheduledAbsoluteTChg ? originAbsoluteT : 0 } >   
-                            <CAmpSlideDownAtAbsoluteT t={originAbsoluteT } {...mainProps } >
-                                { children }
-                            </CAmpSlideDownAtAbsoluteT>    
-                            </K>
-                            </>
-                        ) }             
-                    </TC>
-                ) ;        
-            }
-        ) ,
-    } ;
-})() ;    
 const CWhiteNoise = (
     terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
 ) ;              
