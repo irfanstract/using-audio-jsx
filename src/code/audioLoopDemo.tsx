@@ -114,7 +114,7 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (  
-                <WithSlowdown value={1 } >
+                <WithSlowdown value={2 ** 0.5 } >
                 <WithNSecondsFadeInBF>
                   <CBassDrumLoop />       
                   <CAmbientNoise />
