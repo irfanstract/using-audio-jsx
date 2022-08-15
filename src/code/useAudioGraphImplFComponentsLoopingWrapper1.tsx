@@ -284,6 +284,11 @@ const MetronomeCheckAndExpandingElem = (
                      1100
                   ) )    
                ) ;
+               const {
+                  tScale: tCtxTScaleVl , 
+               } = (
+                  tCtxs.useCurrentTInf()
+               ) ;
                return (                      
                      (nd0 && (typeof actualCtxT === "number")) 
                      ?         
@@ -322,9 +327,9 @@ const MetronomeCheckAndExpandingElem = (
                         const e = (             
                            e0 && (            
                               (
-                                 ((CVATX + t ) + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
+                                 ((CVATX + (t * tCtxTScaleVl ) ) + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + t ) + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + (t * tCtxTScaleVl) ) + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
