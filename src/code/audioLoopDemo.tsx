@@ -25,6 +25,7 @@ import { WGD_DIV } from "./useAudioGraphImplCurrentDestNdRefCtx";
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
     CBassDrumKickFluidly1 ,
+    CSnareDrumFluidly1 , 
     
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 
