@@ -93,6 +93,35 @@ const {
     BEEPBOPVR , 
     BEEPBOPVRAPP ,              
 } = BBVR ;     
+const HouseMusicShortBrkDemo = () => {
+
+    const BD : (
+        (typeof CBassDrumKickFluidly1 )
+    ) = (
+        CBassDrumKickFluidly1
+    ) ;
+    return (  
+        <WithSlowdown value={2 ** 0 } >
+        <WithSlowdown value={2 ** -1 }>
+        <WithNSecondsFadeInBF>
+          <MetronomeCheckAndExpandingElem
+          preFT={2 }
+          postFT={3 }
+          value={{ tickTockPeriod: 1 }}
+          renderRange={{ n: 4 * 4 * 8 }}
+          >
+          { ({ t }) => (
+            (([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 ) ?
+            (<></> )
+            :  <BD />
+          ) }
+          </MetronomeCheckAndExpandingElem>
+          <CAmbientNoise />
+        </WithNSecondsFadeInBF>
+        </WithSlowdown>
+        </WithSlowdown>
+    ) ;
+} ;
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
     console.log({ key } , ...[2 ] ); 
@@ -118,35 +147,9 @@ export const AudioLoopDemoApp = (function () {
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = (() => {
-
-                const BD : (
-                    (typeof CBassDrumKickFluidly1 )
-                ) = (
-                    CBassDrumKickFluidly1
-                ) ;
-                return (  
-                    <WithSlowdown value={2 ** 0 } >
-                    <WithSlowdown value={2 ** -1 }>
-                    <WithNSecondsFadeInBF>
-                      <MetronomeCheckAndExpandingElem
-                      preFT={2 }
-                      postFT={3 }
-                      value={{ tickTockPeriod: 1 }}
-                      renderRange={{ n: 3 * 4 * 8 }}
-                      >
-                      { ({ t }) => (
-                        (([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 ) ?
-                        (<></> )
-                        :  <BD />
-                      ) }
-                      </MetronomeCheckAndExpandingElem>
-                      <CAmbientNoise />
-                    </WithNSecondsFadeInBF>
-                    </WithSlowdown>
-                    </WithSlowdown>
-                ) ;
-            })() ;       
+            const c1  = (
+                <HouseMusicShortBrkDemo />
+            ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
                 <div className="App" >        
