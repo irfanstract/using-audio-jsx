@@ -77,7 +77,6 @@ const {
            
 } = tCtxs ;                  
 const {
-    CHalfSecndBeep1 ,          
     CAmpSlideDown ,      
     CFnValue1 ,  
   
@@ -89,19 +88,6 @@ const {
         tCtxs.currentTInfCtx.Consumer
     ) ;       
     return {  
-        CHalfSecndBeep1 : (                                
-            function C1() {    
-                const { t } = (
-                    tCtxs.useCurrentTInf()   
-                ) ;       
-                return (
-                    <>
-                    <code>CH { t } </code>  
-                    <CHalfSecndBeepAtAbsoluteT value={{ t: t, toneFreq: 418 }} />
-                    </>
-                ) ;          
-            }                            
-        ) ,                   
         CFnValue1 : (
             function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
                 const {
@@ -184,6 +170,31 @@ const {
         ) ,
     } ;
 })() ;    
+const {  
+    CHalfSecndBeep1 , 
+} = (function () {
+    /**   
+     * {@link tCtxs.currentTInfCtx.Consumer }
+     *  */    
+    const TC = (           
+        tCtxs.currentTInfCtx.Consumer
+    ) ;       
+    return {
+        CHalfSecndBeep1 : (                                
+            function C1() {    
+                const { t } = (
+                    tCtxs.useCurrentTInf()   
+                ) ;       
+                return (
+                    <>
+                    <code>CH { t } </code>  
+                    <CHalfSecndBeepAtAbsoluteT value={{ t: t, toneFreq: 418 }} />
+                    </>
+                ) ;          
+            }                            
+        ) ,           
+    } ;
+} )() ;
 const CWhiteNoise = (
     terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
 ) ;              
