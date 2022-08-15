@@ -61,6 +61,7 @@ function CurrentTDisplay() {
  */    
 const {
     WithDelay ,  
+    WithSlowdown ,  
     
 } = (() => {
     return {
@@ -92,6 +93,33 @@ const {
                             { c || null }
                             </ModifyingCompPayloadDiv>              
                         </currentTCtx.Provider> 
+                    ) ;     
+                })() ;
+            }     
+        ) ,   
+        WithSlowdown : (
+            function WithRelativeDelay({ children: c, value: fct }: (
+                React.PropsWithChildren<{ value: number ; }>      
+            ) ) {
+                ;   
+                const tInf = (  
+                    useCurrentTInf()           
+                ) ;
+                /**   
+                 * tale caution of 'current t-scale'
+                 */
+                return (() => {      
+                    const { t: parentTVal, tScale } = (   
+                        tInf 
+                    ) ;     
+                    return (      
+                        <currentTScaleCtx.Provider 
+                        value={fct } 
+                        >
+                            <ModifyingCompPayloadDiv>
+                            { c || null }
+                            </ModifyingCompPayloadDiv>              
+                        </currentTScaleCtx.Provider> 
                     ) ;     
                 })() ;
             }     
@@ -320,4 +348,5 @@ export {
     WithDelay , 
     LoopingWithPeriod ,   
     LwpPayloadCallback ,       
+    WithSlowdown ,
 } ;           
