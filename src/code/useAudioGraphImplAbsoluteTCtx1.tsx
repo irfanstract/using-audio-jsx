@@ -79,9 +79,14 @@ const {
                     const { t: parentTVal, tScale } = (   
                         tInf 
                     ) ;    
+                    const v = (
+                        parentTVal 
+                        + 
+                        (addend * tScale )
+                    );
                     return (      
                         <currentTCtx.Provider 
-                        value={parentTVal + (addend * tScale ) } 
+                        value={v } 
                         >
                             <ModifyingCompPayloadDiv>
                             { c || null }
