@@ -34,6 +34,7 @@ import {
     modulatedWaveTableUsageWrapC ,      
   
 } from "./useAudioGraphImplCurrentDestNdRefCtxC";           
+import { CHalfSecndBeepAtRelativeT } from "./useAudioGraphImplFComponentsBeepAtRelativeT";           
 import {
     Consm as WithCurrentDestNdRef , 
     useWithCurrentSideTapPtRef , 
@@ -170,31 +171,6 @@ const {
         ) ,
     } ;
 })() ;    
-const {  
-    CHalfSecndBeep1 , 
-} = (function () {
-    /**   
-     * {@link tCtxs.currentTInfCtx.Consumer }
-     *  */    
-    const TC = (           
-        tCtxs.currentTInfCtx.Consumer
-    ) ;       
-    return {
-        CHalfSecndBeep1 : (                                
-            function C1() {    
-                const { t } = (
-                    tCtxs.useCurrentTInf()   
-                ) ;       
-                return (
-                    <>
-                    <code>CH { t } </code>  
-                    <CHalfSecndBeepAtAbsoluteT value={{ t: t, toneFreq: 418 }} />
-                    </>
-                ) ;          
-            }                            
-        ) ,           
-    } ;
-} )() ;
 const CWhiteNoise = (
     terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
 ) ;              
@@ -302,7 +278,7 @@ export {
     // TERMINAL 
     
     // INTRINSICS 
-    CHalfSecndBeep1 ,          
+    CHalfSecndBeepAtRelativeT as CHalfSecndBeep1 ,            
     CPersistingBeep ,                                 
     CWaveTable1 ,  
     CConstantValueModulated ,  
