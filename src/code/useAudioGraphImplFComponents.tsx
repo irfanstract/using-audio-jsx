@@ -78,7 +78,6 @@ const {
            
 } = tCtxs ;                  
 const {
-    CAmpSlideDown ,      
     CFnValue1 ,  
   
 } = (function () {     
@@ -144,6 +143,19 @@ const {
                 ) ;          
             }    
         ) ,     
+    } ;
+})() ;                  
+const {
+    CAmpSlideDown ,       
+  
+} = (function () {     
+    /**   
+     * {@link tCtxs.currentTInfCtx.Consumer }
+     *  */    
+    const TC = (           
+        tCtxs.currentTInfCtx.Consumer
+    ) ;       
+    return {  
         CAmpSlideDown  : (   
             function C1(...[{ children, ...mainProps }] : [
                 (  
