@@ -85,19 +85,23 @@ const {
         function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0 } : ( 
             Props    
         ) ) {   
+            const { t: expectedT, tScale } = (
+                tCtxs.useCurrentTInf()     
+            ) ;
             // TODO  
             const [preFT, postFT] = ( 
                 [preFT0, postFt0 ]  
-                .map((v: number ) => Math.max(8, v ) )   
+                .map((v: number ) => (
+                    tScale
+                    *
+                    Math.max(8, v )
+                ) )   
             ) ;     
             const {       
                 passageStateBy ,     
             } = (   
                 passageStateBy1({ preFT, postFT })    
             ) ;      
-            const { t: expectedT } = (
-                tCtxs.useCurrentTInf()     
-            ) ;
             return (         
                 useWithCurrentSideTapPtRef(({ feedPt: destNd }) => (          
                     <CBC>{ function useC1() {    
