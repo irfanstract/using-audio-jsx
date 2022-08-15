@@ -317,7 +317,8 @@ const {
                                 const tScan1 =  (             
                                     Immutable.Range(
                                         ctxTFloored, ctxTFloored + 1 ,   
-                                        scanPeriodMillis / 1000 )   
+                                        scanPeriodMillis / 1000 ,
+                                         )  
                                 ) ;                 
                                 return {
                                     tScan1 ,     
