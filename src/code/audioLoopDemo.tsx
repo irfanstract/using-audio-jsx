@@ -24,7 +24,12 @@ import {
 import { WGD_DIV } from "./useAudioGraphImplCurrentDestNdRefCtx";             
 import { 
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
+    CBassDrumKickFluidly1 ,
+    
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
+
+    MetronomeCheckAndExpandingElem , 
+    
 } from "./audioLoopDemoComponents1"; 
 import * as BBVR from "./audioLoopDemoSpecimens";  
 import {
