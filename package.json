@@ -1,6 +1,6 @@
 {
   "name": "v20220714",
-  "version": "0.1.202208151118",
+  "version": "0.1.202208151949",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
