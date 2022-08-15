@@ -70,8 +70,7 @@ const CBassDrumLoop = (() => {
       }) {      
          return (       
             <MetronomeCheckAndExpandingElem
-            preFT={2 }
-            postFT={3 }
+            {...{ preFT: 2, postFT: 3, ...metronomeProps, } }
             >  
                { ({ }) => (                   
                   <BD {...instrumentProps } />       
