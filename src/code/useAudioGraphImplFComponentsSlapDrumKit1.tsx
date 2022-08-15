@@ -303,9 +303,13 @@ const snKit = (() => {
                         -1 * Math.log2(minimumFreq / conventionalFreq )   
                     ) ;  
                     const freqArgumSupposedGraph = (
-                        applicableDecliningNormalisedToneFreqGraph1((
-                            interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
-                        ) , { maximumExp }, { scanPeriodMillis } )  
+                        <WithDelay value={-0.11 } >
+                        {(
+                            applicableDecliningNormalisedToneFreqGraph1((
+                                interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
+                            ) , { maximumExp }, { scanPeriodMillis } )  
+                        )}
+                        </WithDelay>
                     ) ;  
                     const e11 = (   
                         <CAmpModulated0                         
