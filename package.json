@@ -1,7 +1,6 @@
 {
   "name": "v20220714",
   "version": "0.1.202208152123",
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
