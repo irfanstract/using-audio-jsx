@@ -77,6 +77,7 @@ const CPersistingBeep : (
 ) = CPersistingBeep0  ;
 const {
     WithDelay ,              
+    WithSlowdown ,   
            
 } = tCtxs ;                  
 const CWhiteNoise = (
@@ -182,6 +183,7 @@ export {
 
     // 'T' OFFSET-OR-SCALING       
     WithDelay ,       
+    WithSlowdown,
 
     // TERMINAL 
     
