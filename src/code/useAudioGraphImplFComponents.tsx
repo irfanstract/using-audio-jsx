@@ -35,6 +35,7 @@ import {
   
 } from "./useAudioGraphImplCurrentDestNdRefCtxC";           
 import { CHalfSecndBeepAtRelativeT } from "./useAudioGraphImplFComponentsBeepAtRelativeT";           
+import { CFnValueFromRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
 import {
     Consm as WithCurrentDestNdRef , 
     useWithCurrentSideTapPtRef , 
@@ -77,74 +78,6 @@ const {
     WithDelay ,              
            
 } = tCtxs ;                  
-const {
-    CFnValue1 ,  
-  
-} = (function () {     
-    /**   
-     * {@link tCtxs.currentTInfCtx.Consumer }
-     *  */    
-    const TC = (           
-        tCtxs.currentTInfCtx.Consumer
-    ) ;       
-    return {  
-        CFnValue1 : (
-            function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
-                const {
-                    codeDeps: higherLevelCodeDeps = [] ,  
-                    ...
-                    otherProps   
-                } = otherProps0 ; 
-                const renderSrcCodeView = (
-                    () => (  
-                        <code style={{ whiteSpace: "pre-wrap" }}> 
-                            { String(compute ) }    
-                        </code> 
-                    )     
-                ) ;
-                ;      
-                return (                   
-                    <TC>     
-                        { ({ t: originPtAbsoluteT, tScale }) => (                 
-                            <>                
-                            <code>CFnValue  </code>                 
-                            { [      
-                                null &&  
-                                <span key={1} style={{ display: "block" }}>    
-                                    at <i>absolute t</i> { originPtAbsoluteT }      
-                                    value { JSON.stringify(compute({ ctxT: originPtAbsoluteT }) ) }   
-                                </span>             ,   
-                                null &&  
-                                <span key={2} style={{ display: "block" }}>                 
-                                    code :   
-                                    { renderSrcCodeView() }     
-                                </span>       ,                     
-                            ] }                               
-                            <CFnValueAtAbsoluteT       
-                            value={({ ctxT: ctxTAbsolutely }) => {  
-                                const ctxTRelativelyAfterScaled = (
-                                    ctxTAbsolutely - originPtAbsoluteT  
-                                );        
-                                const ctxTRelatively = (  
-                                    ctxTRelativelyAfterScaled
-                                    /
-                                    tScale         
-                                ) ;               
-                                return (
-                                    compute({ ctxT: ctxTRelatively })
-                                ) ;  
-                            } }
-                            codeDeps={[originPtAbsoluteT, ...higherLevelCodeDeps ]}       
-                            { ...otherProps }    
-                            />                   
-                            </>   
-                        ) }          
-                    </TC>
-                ) ;          
-            }    
-        ) ,     
-    } ;
-})() ;                  
 const {
     CAmpSlideDown ,       
   
