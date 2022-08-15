@@ -59,33 +59,40 @@ function CurrentTDisplay() {
  * this will be `relatively`, 
  * in face of {@link currentTScaleCtx presence of `current t-scale` }
  */    
-const WithDelay = (
-    function WithRelativeDelay({ children: c, value: addend }: (
-        React.PropsWithChildren<{ value: number ; }>      
-    ) ) {
-        ;   
-        const tInf = (  
-            useCurrentTInf()           
-        ) ;
-        /**   
-         * tale caution of 'current t-scale'
-         */
-        return (() => {      
-            const { t: parentTVal, tScale } = (   
-                tInf 
-            ) ;    
-            return (      
-                <currentTCtx.Provider 
-                value={parentTVal + (addend * tScale ) } 
-                >
-                    <ModifyingCompPayloadDiv>
-                    { c || null }
-                    </ModifyingCompPayloadDiv>              
-                </currentTCtx.Provider> 
-            ) ;     
-        })() ;
-    }     
-);     
+const {
+    WithDelay ,  
+    
+} = (() => {
+    return {
+        WithDelay: (
+            function WithRelativeDelay({ children: c, value: addend }: (
+                React.PropsWithChildren<{ value: number ; }>      
+            ) ) {
+                ;   
+                const tInf = (  
+                    useCurrentTInf()           
+                ) ;
+                /**   
+                 * tale caution of 'current t-scale'
+                 */
+                return (() => {      
+                    const { t: parentTVal, tScale } = (   
+                        tInf 
+                    ) ;    
+                    return (      
+                        <currentTCtx.Provider 
+                        value={parentTVal + (addend * tScale ) } 
+                        >
+                            <ModifyingCompPayloadDiv>
+                            { c || null }
+                            </ModifyingCompPayloadDiv>              
+                        </currentTCtx.Provider> 
+                    ) ;     
+                })() ;
+            }     
+        ) ,   
+    } ;
+})() ;     
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
 ) ;         
