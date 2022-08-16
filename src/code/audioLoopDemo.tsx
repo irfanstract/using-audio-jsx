@@ -101,18 +101,19 @@ const HouseMusicShortBrkDemo = () => {
     ) = (
         CBassDrumKickFluidly1
     ) ;
+    const dv : 1 | 2 = 2 ;
     return (  
         <WithSlowdown 
         /**  this filtering is here to debug the one timing issues. */
-        value={2 ** 1 } 
+        value={2 ** 0.9 } 
         >
         <WithSlowdown value={2 ** -1 }>
         <WithNSecondsFadeInBF>
           <MetronomeCheckAndExpandingElem
           preFT={2 }
           postFT={3 }
-          value={{ tickTockPeriod: 1 }}
-          renderRange={{ n: 4 * 4 * 8 }}
+          value={{ tickTockPeriod: 0.5 }}
+          renderRange={{ n: 4 * 4 * 8 * dv }}
           >
           { ({ t }) => (
             <>
@@ -121,7 +122,16 @@ const HouseMusicShortBrkDemo = () => {
                 null 
                 :  <BD />
             )}
-            { ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null }
+            { (
+                ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
+            ) }
+            { (
+                (((t * 2 ) % 2 ) === 1 ) ? 
+                <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
+                    <CSnareDrumFluidly1 />
+                </CAmpModulated0> 
+                : null
+            ) }
             </>
           ) }
           </MetronomeCheckAndExpandingElem>
