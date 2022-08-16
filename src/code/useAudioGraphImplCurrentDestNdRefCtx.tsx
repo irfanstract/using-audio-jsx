@@ -25,7 +25,8 @@ import {
 
 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";  
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
-import { WithCtxtualDestCtxTInfo1 } from "./useAudioGraphImplCurrentDestNdACtxCurrentTimeC";     
+// import { WithCtxtualDestCtxTInfo1 } from "./useAudioGraphImplCurrentDestNdACtxCurrentTimeC";  
+;   
 
        
  
@@ -123,12 +124,36 @@ const {
                 React.FC<React.ProviderProps<NCtxValue > >
             ) >(function ({ value, children: payload }  ) {
                 const PrvImpl = c0.Provider ;
+                // const parentACtx = (
+                //     (
+                //         React.useContext(c0 )
+                //     ).feedPt?.context
+                //     ||
+                //     null 
+                // ) ;
                 const value1 = (
-                    React.useMemo((): ContextReturnType<typeof c0 > => ({ ...value, currentTime: null }) , [value] ) 
+                    React.useMemo((): ContextReturnType<typeof c0 > => ({ currentTime: null, ...value }) , [value] ) 
                 );
+                // const requestedACtx = (
+                //     ( 
+                //         value1
+                //     ).feedPt?.context
+                //     ||
+                //     null 
+                // ) ;
+                // const parentCT = (
+                //     value1.currentTime
+                // ) ;
+                // const actualCT = (
+                //     useRealTimeQueryInterval1(() => (
+                //         value1.currentTime
+                //     ) , 2.7 * 1000 )
+                // ) ;
                 return (
                     <PrvImpl value={value1 }>
-                        { payload }
+                        { ( 
+                            payload
+                        ) }
                     </PrvImpl>
                 ) ;
             } ) , 
@@ -314,6 +339,6 @@ export {
     Prv1 , 
     WithGivenDest , 
 
-    WithCtxtualDestCtxTInfo1 , 
+    // WithCtxtualDestCtxTInfo1 , 
            
 } ;                   
