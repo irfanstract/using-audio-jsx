@@ -111,10 +111,21 @@ type RealTimeQueryIntervalUsageArgs<A> = [
                          
             LE ?: (         
                 NonNullable<(
-                    (
-                        Parameters<typeof useRefreshByInterval1 >[2 ]
-                    ) 
-                )>["LE"]
+                    NonNullable<(
+                        (
+                            Parameters<typeof useRefreshByInterval1 >[2 ]
+                        ) 
+                    )>["LE"]
+                )>
+            ) ;     
+            catchupPolicy ?: (    
+                NonNullable<(     
+                    NonNullable<(
+                        (
+                            Parameters<typeof useRefreshByInterval1 >[2 ]
+                        ) 
+                    )>["catchupPolicy"]
+                )>
             ) ;
     
         } | (() => A )      
@@ -127,12 +138,12 @@ type RealTimeQueryIntervalUsageArgs<A> = [
 const useRealtimeQueryIntervalUsageArgsParse = (
     function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ) {
         ;     
-        const { f, LE, deps = [] } = (                 
+        const { f, LE, catchupPolicy, deps = [] } = (                 
             REFQUER_CALL_ARG_UPGRDE(props )                                                                 
         ) ;                             
         ;   
         const { c, forceRefresh } = (           
-            useRefreshByInterval1(true, timeoutMillis, { LE } )   
+            useRefreshByInterval1(true, timeoutMillis, { LE, catchupPolicy } )   
         ) ;                                     
         React[LE ](() => forceRefresh() , deps )  ;
         ;    
@@ -177,7 +188,7 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
                                 RealTimeQueryIntervalUsageArgs<A>[0 ]                    
                             ),  (...Args : never[] ) => void >     
                         )>   
-                    ), "deps">           
+                    ), "deps" | "catchupPolicy">           
                 )>           
             ) ;            
             const DEFAULT_LE : Return["LE"] = (
@@ -189,15 +200,17 @@ const REFQUER_CALL_ARG_UPGRDE = (() => {
                         const {                                         
                             // defaultVl ,               
                             f ,        
-                            LE = DEFAULT_LE ,                                                                           
+                            LE = DEFAULT_LE ,     
+                            catchupPolicy ,                                                                      
                         } = props ;    
-                        return { f, LE } as const ;     
+                        return { f, LE, catchupPolicy } as const ;     
                     } else {               
                         const f = (
                             BoundedIdentityFunction<() => A>()(props )    
                         ) ;               
+                        const catchupPolicy = undefined ;
                         const LE = DEFAULT_LE ;     
-                        return { f, LE } ;        
+                        return { f, LE, catchupPolicy } ;        
                     }      
                 }
             )() ;               
