@@ -123,8 +123,16 @@ const snKit = (() => {
     type SlapPlaybackProps = (
         Partial<( 
             {
-                //    
+                // TODO clarification
+                /**   
+                 * 
+                 */
                 tCoef1 : number ;         
+            }  
+        )>
+        &
+        Partial<( 
+            { 
                 //         
                 autoUnmount : boolean ;     
             }  
@@ -135,6 +143,11 @@ const snKit = (() => {
         &             
         Partial<( 
             {                      
+                /**   
+                 * the frequency decline 
+                 * shall stop at this point.  
+                 * *Hertz*.  
+                 */
                 minimumFreq : number ;     
                 /**   
                  * such that `TM` be exactly {@link TM1 } times {@link tCoef1}
