@@ -104,13 +104,25 @@ const {
             XCons ,
         } = {
             XPrv : IterableOps.identity<(
-                React.Provider<NCtxValue> 
-                | React.FC<React.ProviderProps<NCtxValue > >
-            ) >(c0.Provider ) , 
+                React.FC<React.ProviderProps<NCtxValue > >
+            ) >(function ({ value, children: payload }  ) {
+                const PrvImpl = c0.Provider ;
+                return (
+                    <PrvImpl value={value} >
+                        { payload }
+                    </PrvImpl>
+                ) ;
+            } ) , 
             XCons : IterableOps.identity<(
-                React.Consumer<NCtxValue> 
-                | React.FC<React.ConsumerProps<NCtxValue > >
-            )>(c0.Consumer ) , 
+                React.FC<React.ConsumerProps<NCtxValue > >
+            )>(function ({ children: payload }) {
+                const ConsmImpl = c0.Consumer ;
+                return (
+                    <ConsmImpl>
+                        { (value) => payload(value ) }
+                    </ConsmImpl>
+                ) ;
+            } ) , 
         }  ;
         return {
             Prv1 : XPrv ,         
