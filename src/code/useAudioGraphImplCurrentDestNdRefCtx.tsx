@@ -3,7 +3,7 @@
 import Immutable from "immutable";    
 import { IterableOps, PromiseReturnValue } from "./generalUse11";      
 import React, { useMemo } from "react";               
-import { ContextReturnType } from "./commonElementsTypes";     
+import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
 import { K, NUMERIC } from "./commonElements";               
 import { useAsyncMemo } from "./useAsyncMemo";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
@@ -17,6 +17,7 @@ import {
     useWindowActivityStatus ,      
 } from "./useWindowFocusState";
            
+import { useAudioCtxCurrentTime } from "./useAudioCtxCurrentTime";
 //        
 import { 
     getACtxMtWithoutAnyFilter1, 
@@ -46,6 +47,9 @@ type NCtxValue = (
     Record<keyof Pick<AFeedableAndTappableNca, "feedPt"> , AudioNode | null >             
 );                  
 
+type NCtxV1 = (
+    NCtxValue & { currentTime : null | number ; }
+);
 const {     
     Prv1 ,    
     Consm ,   
@@ -55,10 +59,10 @@ const {
      
 } = ((): {    
     Prv1: React.FC<React.ProviderProps<NCtxValue>>;     
-    Consm: React.FC<React.ConsumerProps<NCtxValue>>; 
+    Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
     useCurrentDestNd0 : (
         null | (       
-            () => NCtxValue  
+            () => NCtxV1  
         )        
     ) ;        
  
@@ -84,30 +88,17 @@ const {
             ) ;                   
         })     
     ) ;           
-    if (0 ) {                        
-        ;        
-        return {              
-            Prv1 : (     
-                asyncLoadedComponentWrp(async() => (await ctx0() ).Provider )
-            ) ,                
-            Consm : (   
-                asyncLoadedComponentWrp(async() => (await ctx0() ).Consumer )
-            ) ,            
-            useCurrentDestNd0 : null ,            
-            ctx0 ,          
-        } ;     
-    }          
     {              
         const c0 = (                 
             React.createContext<(
-                NCtxValue & { currentTime : null | number ; }
+                NCtxV1
             )  >( { feedPt: null, sideTapPt: null , currentTime: null , } )
         ) ;            
         const {
             XCons ,
         } = { 
             XCons : IterableOps.identity<(
-                React.FC<React.ConsumerProps<NCtxValue > >
+                React.FC<React.ConsumerProps<NCtxV1 > >
             )>(function ({ children: payload }) {
                 const ConsmImpl = c0.Consumer ;
                 return (
@@ -124,6 +115,9 @@ const {
                 React.FC<React.ProviderProps<NCtxValue > >
             ) >(function ({ value, children: payload }  ) {
                 const PrvImpl = c0.Provider ;
+                const parentValue = (
+                    React.useContext(c0 )
+                );
                 // const parentACtx = (
                 //     (
                 //         React.useContext(c0 )
@@ -131,8 +125,30 @@ const {
                 //     ||
                 //     null 
                 // ) ;
+                const requestedCtxCurrentTime = (
+                    function useCtxCurrentT() {
+                        const v0 = (
+                            parentValue.currentTime
+                        );
+                        const v1 = (
+                            useAudioCtxCurrentTime(value.feedPt?.context || null )
+                            ||
+                            null
+                        ) ;
+                        return ( 
+                            (typeof v0 === "number" ) ?
+                            v0 
+                            : v1
+                        ) ;
+                    }
+                )();
                 const value1 = (
-                    React.useMemo((): ContextReturnType<typeof c0 > => ({ currentTime: null, ...value }) , [value] ) 
+                    React.useMemo((): ContextReturnType<typeof c0 > => (
+                        { 
+                            ...value, 
+                            currentTime: requestedCtxCurrentTime ,
+                        }
+                    ) , [value, requestedCtxCurrentTime ] ) 
                 );
                 // const requestedACtx = (
                 //     ( 
@@ -167,7 +183,7 @@ const {
     }
 })() ;                                
 const useWithCurrentSideTapPtRef: (
-    (a: (v: NCtxValue ) => React.ReactElement )
+    (a: (v: Parameters<ComponentProps<typeof Consm >["children"] >[0] ) => React.ReactElement )
     =>             
     React.ReactElement               
 ) = (          
