@@ -102,7 +102,10 @@ const HouseMusicShortBrkDemo = () => {
         CBassDrumKickFluidly1
     ) ;
     return (  
-        <WithSlowdown value={2 ** 0 } >
+        <WithSlowdown 
+        /**  this filtering is here to debug the one timing issues. */
+        value={2 ** 1 } 
+        >
         <WithSlowdown value={2 ** -1 }>
         <WithNSecondsFadeInBF>
           <MetronomeCheckAndExpandingElem
