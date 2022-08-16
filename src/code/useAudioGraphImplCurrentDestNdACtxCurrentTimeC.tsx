@@ -3,7 +3,7 @@
 import Immutable from "immutable";    
 import { IterableOps, PromiseReturnValue } from "./generalUse11";      
 import React, { useMemo } from "react";               
-import { ContextReturnType } from "./commonElementsTypes";     
+import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
 import { K, NUMERIC } from "./commonElements";               
 import { useAsyncMemo } from "./useAsyncMemo";      
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
@@ -104,7 +104,11 @@ const {
    ) ;
    return {
       WithCtxtualDestCtxTInfo1 : (
-         function WithCtxtualDestCtxTInfo1C({ children: payload } : PayloadRelatedProps ) {
+         function WithCtxtualDestCtxTInfo1C({ children: payload , WithCtxtualOut1 = WithCtxtualOut } : (
+            PayloadRelatedProps
+            &
+            { WithCtxtualOut1 ?: React.FC<ComponentProps<typeof WithCtxtualOut > > ; }
+         ) ) {
             const v0 = (
                React.useContext(ctx )
             ) ;
@@ -117,7 +121,7 @@ const {
                case "boolean" :
                   if (v0 === false ) {
                      return (
-                        <WithCtxtualOut>  
+                        <WithCtxtualOut1 >  
                         { ({ feedPt: nd }) => (
                            nd ? 
                            (
@@ -127,7 +131,7 @@ const {
                            )
                            : null
                         ) }
-                        </WithCtxtualOut>
+                        </WithCtxtualOut1 >
                      ) ;
                   }
                   return <></> ;
