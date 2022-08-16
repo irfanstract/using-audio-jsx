@@ -24,6 +24,7 @@ import {
     WithAutoUnmount as WithAutoUnmount0 ,    
     WithAutoStopmount as WithAutoStopmount0 ,  
 } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";    
+import { standardSnareDrumInstrumentAmp } from "./useAudioGraphImplFComponentsSustainingInstruments";
       
    
 
