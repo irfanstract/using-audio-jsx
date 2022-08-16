@@ -96,6 +96,7 @@ import {
 
 } from "./useAudioGraphImplUseDeferredBoolean";     
 import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";
+import "./useAudioGraphImplCu.css";
 
          
  
@@ -419,13 +420,13 @@ const {
                                 const c1 = (         
                                     // TODO                    
                                     <XList>         
-                                    <li key="value">          
+                                    <li key="value" className="UAGICU_INFOBOX_AMPCOMP_MODULATION" >          
                                         Modulating Graph  :      
                                         <WithGivenDest value={ ampCtrl1 }> 
                                             { ctrlChildren }
                                         </WithGivenDest>                     
                                     </li>      
-                                    <li key="main">             
+                                    <li key="main" className="UAGICU_INFOBOX_AMPCOMP_MAIN" >             
                                            
                                         Main :  
                                         <WithGivenDest value={ mainFeed }>
@@ -600,7 +601,7 @@ const {
                                         // TODO         
                                         <XList >              
                                         { freqArgCtrlDest1 && (           
-                                            <li key="freq">                    
+                                            <li key="freq" className="UAGICU_INFOBOX_BIQUADFLTCOMP_FREQUEORDETUNE" >                    
                                                 Freq Ctrl Mode :      
                                                 <WithGivenDest value={ freqArgCtrlDest1 }>
                                                     { POD(freqArgGraph1, "b") }
@@ -608,14 +609,14 @@ const {
                                             </li>      
                                         )  }                              
                                         { gainCtrlDest1 && (    
-                                            <li key="gain">                  
+                                            <li key="gain" className="UAGICU_INFOBOX_BIQUADFLTCOMP_GAINVALCTRL" >                  
                                                 Gain Value Ctrl Mode :      
                                                 <WithGivenDest value={ gainCtrlDest1 }>
                                                     { POD(gainValArgument1, "b" ) }
                                                 </WithGivenDest>                      
                                             </li>         
                                         )           }  
-                                        <li key="main">        
+                                        <li key="main" className="UAGICU_INFOBOX_BIQUADFLTCOMP_MAIN">        
                                                 
                                             Main :  
                                             <WithGivenDest value={ mainFeed }>
@@ -672,7 +673,7 @@ const {
                                             <p> DEFKEY: {defkey } </p>
                                             <XList>      
                                             { freqArgDest1 && (        
-                                                <li key="freq">                    
+                                                <li key="freq" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE">                    
                                                     Freq :      
                                                     <WithGivenDest value={ freqArgDest1 }>
                                                         { POD(freqArgGraph1 , "W" ) }
@@ -680,7 +681,7 @@ const {
                                                 </li>        
                                             )  }                        
                                             { detuneCtrlDest1 && (                
-                                                <li key="detune">                             
+                                                <li key="detune" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE" >                             
                                                     Detune :               
                                                     <WithGivenDest value={ detuneCtrlDest1 }>
                                                         { POD(detuneGraph1 , "W" ) }
