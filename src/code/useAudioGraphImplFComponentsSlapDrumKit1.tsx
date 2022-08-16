@@ -385,13 +385,8 @@ const snKit = (() => {
  
                 } = mainProps ;  
                 const c1 = (() => {            
-                    const maximumExp = (
-                        -1 * Math.log2(minimumFreq / conventionalFreq )    
-                    ) ;  
                     const freqArgumSupposedGraph = (
-                        applicableDecliningNormalisedToneFreqGraph1((
-                            interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
-                        ) , { maximumExp }, { scanPeriodMillis } )  
+                        <CConstantValue value={minimumFreq / 44100 } />
                     ) ;  
                     return (   
                         <CAmpModulated0                         
@@ -400,7 +395,7 @@ const snKit = (() => {
                         }                           
                         >                       
                             <CBiquadFilterModulated   
-                            type="lowpass"    
+                            type="highpass"    
                             freqArgumentInterpretation="timedomain-normalised"     
                             freqArgument={(
                                 !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
