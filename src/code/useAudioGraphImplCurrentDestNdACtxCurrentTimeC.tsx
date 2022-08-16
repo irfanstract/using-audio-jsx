@@ -48,7 +48,10 @@ import {
             
 /**  
  * TBD :
+ * - handle multiple disjoint component trees
  * - support for multiple {@link BaseAudioContext}s
+ * 
+ * @deprecated
  */
 const WithCtxtualDestCtxTInfo1 = (() => {
    const ctx = (
