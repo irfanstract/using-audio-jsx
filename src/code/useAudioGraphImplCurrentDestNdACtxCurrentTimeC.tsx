@@ -53,7 +53,10 @@ import {
  * 
  * @deprecated
  */
-const WithCtxtualDestCtxTInfo1 = (() => {
+const {
+   WithCtxtualDestCtxTInfo1 , 
+   
+} = (() => {
    const ctx = (
       React.createContext<false | number >(false )
    );
@@ -99,43 +102,45 @@ const WithCtxtualDestCtxTInfo1 = (() => {
          ) ;
       }
    ) ;
-   return (
-      function WithCtxtualDestCtxTInfo1C({ children: payload } : PayloadRelatedProps ) {
-         const v0 = (
-            React.useContext(ctx )
-         ) ;
-         switch (typeof v0 ) {
-            case "number" :
-               return (
-                  payload({ currentTime: v0 , })
-               ) ;
-               break ;  
-            case "boolean" :
-               if (v0 === false ) {
+   return {
+      WithCtxtualDestCtxTInfo1 : (
+         function WithCtxtualDestCtxTInfo1C({ children: payload } : PayloadRelatedProps ) {
+            const v0 = (
+               React.useContext(ctx )
+            ) ;
+            switch (typeof v0 ) {
+               case "number" :
                   return (
-                     <WithCtxtualOut>  
-                     { ({ feedPt: nd }) => (
-                        nd ? 
-                        (
-                           <WithScn c={nd.context} > 
-                           { payload }
-                           </WithScn>
-                        )
-                        : null
-                     ) }
-                     </WithCtxtualOut>
+                     payload({ currentTime: v0 , })
                   ) ;
-               }
-               return <></> ;
-               break ;  
-            default :
-               return (
-                  <p> (failed) </p>
-               ) ;
-               break ;  
+                  break ;  
+               case "boolean" :
+                  if (v0 === false ) {
+                     return (
+                        <WithCtxtualOut>  
+                        { ({ feedPt: nd }) => (
+                           nd ? 
+                           (
+                              <WithScn c={nd.context} > 
+                              { payload }
+                              </WithScn>
+                           )
+                           : null
+                        ) }
+                        </WithCtxtualOut>
+                     ) ;
+                  }
+                  return <></> ;
+                  break ;  
+               default :
+                  return (
+                     <p> (failed) </p>
+                  ) ;
+                  break ;  
+            }
          }
-      }
-   );
+      ) , 
+   };
 })() ;
 
 
