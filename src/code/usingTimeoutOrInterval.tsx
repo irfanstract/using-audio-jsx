@@ -127,7 +127,15 @@ const usingInterval = (
             ) ) ; 
             return true ;      
         })({
-            nextSchTMillis: GET_CURRENT_T() + periodMillis , 
+            nextSchTMillis: (() => {
+                const v0 = (
+                    GET_CURRENT_T() + periodMillis
+                ) ;
+                const v1 = (
+                    v0 + -(v0 % periodMillis )
+                ) ;
+                return v1 ;
+            })() , 
         }) ;   
 
         return () => {
