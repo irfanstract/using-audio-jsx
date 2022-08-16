@@ -302,43 +302,28 @@ const {
                         scanPeriodMillis = 32  ,      
                         codeDeps = [] ,                
                     } = propsC;    
-                    function usePeriodicCtxTScan1  (...[nd0 ] : [ AudioNode ] ) {
+                    function usePeriodicCtxTScan1  (...[nd0, { ctxT } ] : [ AudioNode,  { ctxT: number ; }] ) {
                         const usedPausedStatePeriodSeconds = (
                             React.useMemo(() => (1.8 + (Math.random() * 2.2 ) ) , [] )
                         ) ;   
-                        return (              
-                            useRealTimeQueryInterval1X(() => {    
-                                const ctxT = (
-                                    nd0.context.currentTime                             
-                                ) ;         
-                                return {             
-                                    ctxT ,      
-                                } ;        
-                            } , (
-                                // TODO
-                                (
-                                    nd0 && (nd0.context.state === "running" ) ?
-                                    (Math.min(0.062, scanChunkFrequency.period / 4.7 ) )   
-                                    : (usedPausedStatePeriodSeconds )      
-                                )             
-                                *    
-                                1000
-                            ) )            
+                        return (        
+                            { ctxT: ctxT }       
                         ) ;
                     }  
-                    function useCScanTs(...[nd0, properties1 = {}] : [
+                    function useCScanTs(...[nd0, properties1 ] : [
                         AudioNode, 
-                        { sp ?: number ; } ? ,      
+                        { sp ?: number ; currentTimeE : number ; } ,      
                     ]) { 
                         const {                
                             sp: sp0 = 2 ** -2 ,      
+                            currentTimeE , 
                         } = properties1 ;         
                         const sp = Math.max(2 ** -3  , sp0 );
                         ;
                         const {       
                             ctxT ,           
                         } = (             
-                            usePeriodicCtxTScan1(nd0 )   
+                            usePeriodicCtxTScan1(nd0 , { ctxT: currentTimeE } )   
                         );         
                         const ctxTFloored = (               
                             Math.floor(ctxT )               
@@ -403,273 +388,283 @@ const {
             ) ;      
             return (                    
                 function CFncValueC(propsC : (  Props  ) ) {                        
-                    const {
-                        scanPeriodMillis ,  
-                        scanChunkFrequency ,   
-                        codeDeps ,   
+                    return (
+                        <WithCtxtualOut>
+                        { ({ currentTime: currentTimeE }) => (
+                        <CBC>
+                        { function useCFVRender() {                        
+                            const {
+                                scanPeriodMillis ,  
+                                scanChunkFrequency ,   
+                                codeDeps ,   
 
-                        usePeriodicCtxTScan1 ,       
-                        useCScanTs , 
-                        lComputeAtT ,                  
+                                usePeriodicCtxTScan1 ,       
+                                useCScanTs , 
+                                lComputeAtT ,                  
 
-                    } = usePropsExpand(propsC ) ;           
-                    const {
-                        frequency: scanFrq ,     
-                        period: scanPeriod ,             
-                    } = (         
-                        scanChunkFrequency    
-                    ) ;      
-                    // debbugging               
-                    {          
-                        ;
-                        React.useEffect(() => {     
-                            0 && console.log(CFncValueC.name ) ;      
-                        }, [] ) ;                   
-                    }           
-                    ;      
-                    const delayInSeconds = 0.07 ;          
-                    // TODO            
-                    const {               
-                        swingTConst ,                
-                        timingArgMode ,          
-             
-                        SETTARGETATTIME , 
-                        SETVALUECURVE_AT_TIME ,      
-              
-                    } = eSupport({}    ) ;               
-                    const { 
-                        remountDebugBeep = false ,     
-                    } = {} as { remountDebugBeep ?: boolean ; } ;  
-                    function useCScannedImpl(): { e: React.ReactElement ; } {          
-                        const e = (        
-                            useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
-                                nd0         
-                                ?                   
-                                <CBC>      
-                                { function useE() {       
-                                    const {
-                                        ctxT ,     
-                                        ctxTFloored     ,        
-                                        tScan1 ,                            
-                
-                                    } = useCScanTs(nd0 ) ;       
-                                    const actualScanKey : number = (
-                                        Math.floor(ctxTFloored / scanFrq )  
-                                    ) ;     
-                                    const remountDeps1 = (       
-                                        [actualScanKey, lComputeAtT ]  as const     
-                                    ) ;  
-                                    ; 
-                                    ;      
-                                    ;     
-                                    /**     
-                                     * re-render(s) had been like brute-force trial-and-error, so  
-                                     * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
-                                     */
-                                    return React.useMemo(() => (
-                                        <CBC > 
-                                        { function useCE1() {  
-                                            ;
-                                            const graph = (        
-                                                React.useMemo(() => (                        
-                                                    tScan1             
-                                                    .map(v => (v + -delayInSeconds ) )        
-                                                    .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
-                                                        const t2 = (        
-                                                            // +t1.toFixed(1 )    
-                                                            t1  
-                                                        ) ;            
-                                                        ;                              
-                                                        const {    
-                                                            vl ,            
-                                                        } = (         
-                                                            lComputeAtT(( 
-                                                                // TODO restore to 't2'   
-                                                                // t2       
-                                                                t2  
-                                                            ) )          
-                                                        ) ;          
-                                                        return {                 
-                                                            t: t2 ,          
-                                                            vl: vl ,                     
-                                                        } ;          
-                                                    })     
-                                                    .toArray()          
-                                                ) , remountDeps1 )
-                                            ) ;                                    
+                            } = usePropsExpand(propsC ) ;           
+                            const {
+                                frequency: scanFrq ,     
+                                period: scanPeriod ,             
+                            } = (         
+                                scanChunkFrequency    
+                            ) ;      
+                            // debbugging               
+                            {          
+                                ;
+                                React.useEffect(() => {     
+                                    0 && console.log(CFncValueC.name ) ;      
+                                }, [] ) ;                   
+                            }           
+                            ;      
+                            const delayInSeconds = 0.07 ;          
+                            // TODO            
+                            const {               
+                                swingTConst ,                
+                                timingArgMode ,          
+                    
+                                SETTARGETATTIME , 
+                                SETVALUECURVE_AT_TIME ,      
+                    
+                            } = eSupport({}    ) ;               
+                            const { 
+                                remountDebugBeep = false ,     
+                            } = {} as { remountDebugBeep ?: boolean ; } ;  
+                            function useCScannedImpl(): { e: React.ReactElement ; } {          
+                                const e = (        
+                                    useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
+                                        nd0         
+                                        ?                   
+                                        <CBC>      
+                                        { function useE() {       
+                                            const {
+                                                ctxT ,     
+                                                ctxTFloored     ,        
+                                                tScan1 ,                            
+                        
+                                            } = useCScanTs(nd0, { currentTimeE: currentTimeE || 0 } ) ;       
+                                            const actualScanKey : number = (
+                                                Math.floor(ctxTFloored / scanFrq )  
+                                            ) ;     
+                                            const remountDeps1 = (       
+                                                [actualScanKey, lComputeAtT ]  as const     
+                                            ) ;  
+                                            ; 
+                                            ;      
                                             ;     
-                                            ;
-                                            ;                           
-                                            // TODO     
-                                            const nd10 = (  
-                                                (                              
-                                                    useDepsRemount           
-                                                )({          
-                                                    deps: remountDeps1,      
-                                                    dest: nd0  ,       
-                                                         
-                                                    unmountTransitiveLenSeconds: (
-                                                        (0.2) * scanPeriod   
-                                                    ) ,  
-                                                })              
-                                            ) ;
-                                            // TODO remove this LOC ; this is only for debugging   
-                                            {
-                                                const beepT = (
-                                                    React.useMemo(() => (        
-                                                        (nd10 && remountDebugBeep )   
-                                                        ?    
-                                                        (nd10.context.currentTime ) 
-                                                        : 
-                                                        ((1 + Math.random() ) *  5E5  )     
-                                                    ) , [nd10 ] )           
-                                                ) ;  
-                                                ;                              
-                                                const nd11 = (           
-                                                    useFixedGain(nd10, (            
-                                                        // 2 ** -4        
-                                                        2 ** -32      
-                                                    ) )                 
-                                                ) ;     
-                                                useHalfSecondBeep(   
-                                                    nd11, { t: beepT }) ;         
-                                            }             
-                                            const nd1 = (             
-                                                React.useMemo(():(
-                                                    (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
-                                                    | null     
-                                                ) => {                  
-                                                    if (nd10) {             
-                                                        const cnd11 = (
-                                                            nd10.context.createConstantSource()        
-                                                        ) ;     
-                                                        cnd11.connect(nd10 ) ;     
-                                                        {        
-                                                            ;              
-                                                            (graph[0] ) && (                    
-                                                                cnd11.offset
-                                                                .setValueAtTime((graph[0] ).vl , 0 )     
-                                                            );   
-                                                            SETVALUECURVE_AT_TIME(cnd11, (      
-                                                                graph       
-                                                            ) , a => a.offset )    ;      
-                                                        }
-                                                        cnd11.start() ;         
-                                                        return cnd11;    
-                                                    } else {
-                                                        return null ;         
-                                                    }  
-                                                } , [nd10 ] )              
-                                            ) ;            
-                                            ;
-                                            ;     
-                                            // DEBUGGING                         
-                                            const mountRandom1 = [     
-                                                (  
-                                                    React.useMemo(() => (       
-                                                        Math.random()   
-                                                    ) , [nd10 ])  
-                                                ) ,      
-                                                ( 
-                                                    React.useMemo(() => (       
-                                                        Math.random() 
-                                                    ) , [nd1 ])       
-                                                ) ,       
-                                            ] ;                             
-                                            ;          
-                                            const useBbgArray10 = (
-                                                () => [               
-                                                    <>         
-                                                    { useTopicHeadedRenderCount((
-                                                        <i> ConstantSourceNode init </i>
-                                                    ))  }   
-                                                    </>   ,       
-                                                    <p>               
-                                                    <i> Remount Deps Chg </i> : 
-                                                    { useDepsChgCount({}, remountDeps1 ) }    
-                                                    </p>   ,     
-                                                    <p>      
-                                                        <i> <code>nd10</code> Instance </i> : 
-                                                        { useDepsChgCount({}, [nd10 ] ) }      
-                                                        ;  
-                                                        <i> <code>nd1</code> Instance </i> :   
-                                                        { useDepsChgCount({}, [nd1  ] ) }     
-                                                    </p>   ,  
-                                                    <p>    
-                                                    <i> <code>ctxT</code> chg </i> :     
-                                                    { useDepsChgCount({}, [ctxT] ) }              
-                                                    </p>   ,                           
-                                                      <p>     
-                                                    <i> <code>lComputeAtT</code> chg </i> : 
-                                                    { useDepsChgCount({}, [lComputeAtT] ) }    
-                                                    </p>   ,                             
-                                                 ]          
-                                            );             
-                                            const useDbgArray101 = (
-                                                function () {              
-                                                    const depsChgCnt = (
-                                                        useDepsChgCount({} , [
-        
-                                                            ctxT ,        
-        
-                                                            scanPeriodMillis ,    
-                                                            scanChunkFrequency ,   
-                                                            codeDeps ,                    
-                                    
-                                                            usePeriodicCtxTScan1 ,       
-                                                            useCScanTs ,       
-                                                            lComputeAtT ,  
-                                                            
-                                                            nd1,   
-                                                        ])
-                                                    ) ;  
-                                                    return (
-                                                        <> { depsChgCnt } </>
+                                            /**     
+                                             * re-render(s) had been like brute-force trial-and-error, so  
+                                             * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
+                                             */
+                                            return React.useMemo(() => (
+                                                <CBC > 
+                                                { function useCE1() {  
+                                                    ;
+                                                    const graph = (        
+                                                        React.useMemo(() => (                        
+                                                            tScan1             
+                                                            .map(v => (v + -delayInSeconds ) )        
+                                                            .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
+                                                                const t2 = (        
+                                                                    // +t1.toFixed(1 )    
+                                                                    t1  
+                                                                ) ;            
+                                                                ;                              
+                                                                const {    
+                                                                    vl ,            
+                                                                } = (         
+                                                                    lComputeAtT(( 
+                                                                        // TODO restore to 't2'   
+                                                                        // t2       
+                                                                        t2  
+                                                                    ) )          
+                                                                ) ;          
+                                                                return {                 
+                                                                    t: t2 ,          
+                                                                    vl: vl ,                     
+                                                                } ;          
+                                                            })     
+                                                            .toArray()          
+                                                        ) , remountDeps1 )
+                                                    ) ;                                    
+                                                    ;     
+                                                    ;
+                                                    ;                           
+                                                    // TODO     
+                                                    const nd10 = (  
+                                                        (                              
+                                                            useDepsRemount           
+                                                        )({          
+                                                            deps: remountDeps1,      
+                                                            dest: nd0  ,       
+                                                                
+                                                            unmountTransitiveLenSeconds: (
+                                                                (0.2) * scanPeriod   
+                                                            ) ,  
+                                                        })              
                                                     ) ;
-                                                }  
-                                            );       
-                                            // TODO       
-                                            return (                        
-                                                <>        
-                                                <pre>     
-                                                    { (
-                                                        JSON.stringify({  }, null, 2 )
-                                                    ) }   
-                                                </pre>                    
-                                                { useDbgArray101() }
-                                                </>       
-                                            ) ;                               
-                                        } }
-                                        </CBC >
-                                    ) , remountDeps1 ) ;               
-                                }    }                
-                                </CBC>          
-                                :              
-                                <></>         
-                            ))
-                        ) ;   
-                        return {            
-                            e ,  
-                        } ;  
-                    }            
-                    const {               
-                        e ,                       
-                    } = (  
-                        useCScannedImpl()    
-                    ) ;             
-                    ;                 
-                    const dbg = (   
-                        <div>
-                        { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
-                        </div>  
-                    ) ;          
-                    return (           
-                        dBBC((
-                            useXDeferredTrue()    
-                                
-                        ), { dbgBox1: dbg, c1: e })  
-                    ) ;                      
-                } 
+                                                    // TODO remove this LOC ; this is only for debugging   
+                                                    {
+                                                        const beepT = (
+                                                            React.useMemo(() => (        
+                                                                (nd10 && remountDebugBeep )   
+                                                                ?    
+                                                                (nd10.context.currentTime ) 
+                                                                : 
+                                                                ((1 + Math.random() ) *  5E5  )     
+                                                            ) , [nd10 ] )           
+                                                        ) ;  
+                                                        ;                              
+                                                        const nd11 = (           
+                                                            useFixedGain(nd10, (            
+                                                                // 2 ** -4        
+                                                                2 ** -32      
+                                                            ) )                 
+                                                        ) ;     
+                                                        useHalfSecondBeep(   
+                                                            nd11, { t: beepT }) ;         
+                                                    }             
+                                                    const nd1 = (             
+                                                        React.useMemo(():(
+                                                            (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
+                                                            | null     
+                                                        ) => {                  
+                                                            if (nd10) {             
+                                                                const cnd11 = (
+                                                                    nd10.context.createConstantSource()        
+                                                                ) ;     
+                                                                cnd11.connect(nd10 ) ;     
+                                                                {        
+                                                                    ;              
+                                                                    (graph[0] ) && (                    
+                                                                        cnd11.offset
+                                                                        .setValueAtTime((graph[0] ).vl , 0 )     
+                                                                    );   
+                                                                    SETVALUECURVE_AT_TIME(cnd11, (      
+                                                                        graph       
+                                                                    ) , a => a.offset )    ;      
+                                                                }
+                                                                cnd11.start() ;         
+                                                                return cnd11;    
+                                                            } else {
+                                                                return null ;         
+                                                            }  
+                                                        } , [nd10 ] )              
+                                                    ) ;            
+                                                    ;
+                                                    ;     
+                                                    // DEBUGGING                         
+                                                    const mountRandom1 = [     
+                                                        (  
+                                                            React.useMemo(() => (       
+                                                                Math.random()   
+                                                            ) , [nd10 ])  
+                                                        ) ,      
+                                                        ( 
+                                                            React.useMemo(() => (       
+                                                                Math.random() 
+                                                            ) , [nd1 ])       
+                                                        ) ,       
+                                                    ] ;                             
+                                                    ;          
+                                                    const useBbgArray10 = (
+                                                        () => [               
+                                                            <>         
+                                                            { useTopicHeadedRenderCount((
+                                                                <i> ConstantSourceNode init </i>
+                                                            ))  }   
+                                                            </>   ,       
+                                                            <p>               
+                                                            <i> Remount Deps Chg </i> : 
+                                                            { useDepsChgCount({}, remountDeps1 ) }    
+                                                            </p>   ,     
+                                                            <p>      
+                                                                <i> <code>nd10</code> Instance </i> : 
+                                                                { useDepsChgCount({}, [nd10 ] ) }      
+                                                                ;  
+                                                                <i> <code>nd1</code> Instance </i> :   
+                                                                { useDepsChgCount({}, [nd1  ] ) }     
+                                                            </p>   ,  
+                                                            <p>    
+                                                            <i> <code>ctxT</code> chg </i> :     
+                                                            { useDepsChgCount({}, [ctxT] ) }              
+                                                            </p>   ,                           
+                                                            <p>     
+                                                            <i> <code>lComputeAtT</code> chg </i> : 
+                                                            { useDepsChgCount({}, [lComputeAtT] ) }    
+                                                            </p>   ,                             
+                                                        ]          
+                                                    );             
+                                                    const useDbgArray101 = (
+                                                        function () {              
+                                                            const depsChgCnt = (
+                                                                useDepsChgCount({} , [
+                
+                                                                    ctxT ,        
+                
+                                                                    scanPeriodMillis ,    
+                                                                    scanChunkFrequency ,   
+                                                                    codeDeps ,                    
+                                            
+                                                                    usePeriodicCtxTScan1 ,       
+                                                                    useCScanTs ,       
+                                                                    lComputeAtT ,  
+                                                                    
+                                                                    nd1,   
+                                                                ])
+                                                            ) ;  
+                                                            return (
+                                                                <> { depsChgCnt } </>
+                                                            ) ;
+                                                        }  
+                                                    );       
+                                                    // TODO       
+                                                    return (                        
+                                                        <>        
+                                                        <pre>     
+                                                            { (
+                                                                JSON.stringify({  }, null, 2 )
+                                                            ) }   
+                                                        </pre>                    
+                                                        { useDbgArray101() }
+                                                        </>       
+                                                    ) ;                               
+                                                } }
+                                                </CBC >
+                                            ) , remountDeps1 ) ;               
+                                        }    }                
+                                        </CBC>          
+                                        :              
+                                        <></>         
+                                    ))
+                                ) ;   
+                                return {            
+                                    e ,  
+                                } ;  
+                            }            
+                            const {               
+                                e ,                       
+                            } = (  
+                                useCScannedImpl()    
+                            ) ;             
+                            ;                 
+                            const dbg = (   
+                                <div>
+                                { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                                </div>  
+                            ) ;          
+                            return (           
+                                dBBC((
+                                    useXDeferredTrue()    
+                                        
+                                ), { dbgBox1: dbg, c1: e })  
+                            ) ;                      
+                        }  }
+                        </CBC>
+                        ) }
+                        </WithCtxtualOut>
+                    ) ;
+                }
             )  ;  
         })()
     } ;   
