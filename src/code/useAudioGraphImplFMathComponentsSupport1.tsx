@@ -318,7 +318,7 @@ const {
                                 // TODO
                                 (
                                     nd0 && (nd0.context.state === "running" ) ?
-                                    (scanChunkFrequency.period / 4.7 )   
+                                    (Math.min(0.062, scanChunkFrequency.period / 4.7 ) )   
                                     : (usedPausedStatePeriodSeconds )      
                                 )             
                                 *    
