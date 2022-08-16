@@ -350,7 +350,7 @@ const MetronomeCheckAndExpandingElem = (
       return (
          // TODO 
          <div style={{ display: "none" }} >
-         { mainRendered }
+         { true && mainRendered }
          </div>
       )  ;
    }     
