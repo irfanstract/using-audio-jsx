@@ -119,7 +119,7 @@ const {
                 const ConsmImpl = c0.Consumer ;
                 return (
                     <ConsmImpl>
-                        { (value) => payload(value ) }
+                        { ({ ...p }) => payload({ ...p } ) }
                     </ConsmImpl>
                 ) ;
             } ) , 
