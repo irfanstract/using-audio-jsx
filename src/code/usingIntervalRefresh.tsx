@@ -70,13 +70,25 @@ const useRefreshByInterval1 = (
             LE ?: (           
                 keyof Pick<typeof React, "useLayoutEffect" | "useEffect">         
             ) ; 
+
+            catchupPolicy ?: (
+                NonNullable<(
+                    NonNullable<(
+                        Parameters<typeof usingInterval >[2]
+                    )>["catchupPolicy"]
+                )>
+            ) ;
         } ,
     ]) => {    
         const [      
             ,                   
             requestedPeriodMillis ,             
-            { LE = (2500 < requestedPeriodMillis ) ? "useEffect" : "useLayoutEffect"  } = {} ,      
-        ] = args1 ;        
+            args1P = {} ,      
+        ] = args1 ;       
+        const { 
+            LE = (2500 < requestedPeriodMillis ) ? "useEffect" : "useLayoutEffect"  , 
+            catchupPolicy ,
+        } = args1P ; 
         ;         
         const {    
             forceRefresh ,       
@@ -92,7 +104,9 @@ const useRefreshByInterval1 = (
                 usingInterval(() => {         
                     forceRefresh() ;         
                     return true ;
-                } , accceptedPeriodMillis ) 
+                } , accceptedPeriodMillis, ...(
+                    catchupPolicy ? [{ catchupPolicy }] : [] 
+                ) ) 
             ) ;   
         }, [accceptedPeriodMillis ] ) ;  
         const r1 = {  
