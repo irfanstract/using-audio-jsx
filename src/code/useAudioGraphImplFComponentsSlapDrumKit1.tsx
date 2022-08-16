@@ -25,6 +25,7 @@ import {
     WithAutoStopmount as WithAutoStopmount0 ,  
 } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";    
 import { standardSnareDrumInstrumentAmp } from "./useAudioGraphImplFComponentsSustainingInstruments";
+import { CContinuousSnareDrumSound } from "./useAudioGraphImplFComponentsSustainingInstruments";
       
    
 
@@ -386,26 +387,15 @@ const snKit = (() => {
  
                 } = mainProps ;  
                 const c1 = (() => {            
-                    const freqArgumSupposedGraph = (
-                        <CConstantValue value={minimumFreq / 44100 } />
-                    ) ;  
                     return (   
                         <CAmpModulated0                         
                         value={             
                             ampModulGraph        
                         }                           
                         >                       
-                            <CBiquadFilterModulated   
-                            type="highpass"    
-                            freqArgumentInterpretation="timedomain-normalised"     
-                            freqArgument={(
-                                !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
-                            )}              
-                            >    
-                                <CWhiteNoise 
-                                value={{ volume: standardSnareDrumInstrumentAmp }} 
-                                />
-                            </CBiquadFilterModulated>      
+                            <CContinuousSnareDrumSound 
+                            {...{ dbg1, minimumFreq }}
+                            />
                         </CAmpModulated0 >                            
                     ) ;             
                 })() ;      
