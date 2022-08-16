@@ -56,7 +56,7 @@ const WithAutoUnmount = (
 const standardSnareDrumInstrumentAmp : number = 2 ** -2 ;
 
 const CContinuousSnareDrumSound = (
-   function ({ minimumFreq, dbg1 } : { minimumFreq: number ; dbg1 ?: boolean ; }) {        
+   function ({ minimumFreq, dbg1 } : { minimumFreq: number ; dbg1 ?: false | 1 ; }) {        
       ;
       const freqArgumSupposedGraph = (
           <CConstantValue value={minimumFreq / 44100 } />
