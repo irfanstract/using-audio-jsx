@@ -98,7 +98,7 @@ const {
             }     
         ) ,   
         WithSlowdown : (
-            function WithRelativeDelay({ children: c, value: fct }: (
+            function WithRelativeDelay({ children: c, value: specifiedFct }: (
                 React.PropsWithChildren<{ value: number ; }>      
             ) ) {
                 ;   
@@ -109,12 +109,12 @@ const {
                  * tale caution of 'current t-scale'
                  */
                 return (() => {      
-                    const { t: parentTVal, tScale } = (   
+                    const { t: parentTVal, tScale: parentTSclVal } = (   
                         tInf 
                     ) ;     
                     return (      
                         <currentTScaleCtx.Provider 
-                        value={fct } 
+                        value={specifiedFct * parentTSclVal } 
                         >
                             <ModifyingCompPayloadDiv>
                             { c || null }
