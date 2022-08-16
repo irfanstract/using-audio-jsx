@@ -32,7 +32,18 @@ type XWithInterpretation<Key extends string, E > = (
     )> 
 ) ;             
 type FreqArgsProps = (
-    XWithInterpretation<"freqArgument", React.ReactElement >      
+    // XWithInterpretation<"freqArgument", React.ReactElement >   
+    (
+        {
+            freqArgument : React.ReactElement ;
+            freqArgumentInterpretation : ABandpassFreqArgInputRangeMode ;
+        }   
+        // |
+        // {
+        //     freqArgument ?: undefined | null ; 
+        //     freqArgumentInterpretation ?: undefined ;
+        // }   
+    )
 ) ;             
 type DetuningProps = (
     XWithInterpretation<"detune", React.ReactElement >          
