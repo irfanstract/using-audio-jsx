@@ -402,7 +402,9 @@ const snKit = (() => {
                                 !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
                             )}              
                             >    
-                                <CWhiteNoise value={{ volume: 2 ** -2 }} />
+                                <CWhiteNoise 
+                                value={{ volume: standardSnareDrumInstrumentAmp }} 
+                                />
                             </CBiquadFilterModulated>      
                         </CAmpModulated0 >                            
                     ) ;             
