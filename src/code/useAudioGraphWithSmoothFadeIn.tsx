@@ -10,8 +10,7 @@ import { K, ComponentProps, ContextReturnType } from "./commonElements";
     
            
 // domain-imports           
-import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";   
-import { useACtxMtWithoutAnyFilter1 } from "./useAudioNodexCtxInitAndBeepNcaOnce1";
+import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
 import {     
     // TIME-DOMAIN SOUrCES
     CConstantValue ,  CFnValue1 ,      
@@ -36,8 +35,6 @@ import {
 } from "./useAudioGraphImplFComponents";                    
 import {         
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
-import { CBassDrumLoop } from "./useAudioGraphForBassDrumLoop1";
-import { WithNSecondsFadeInBF } from "./useAudioGraphWithSmoothFadeIn";
 
                
          
@@ -51,40 +48,32 @@ import { WithNSecondsFadeInBF } from "./useAudioGraphWithSmoothFadeIn";
 
 
     
-const CAmbientNoise = (
-   () => (
-      <>
+const WithNSecondsFadeInBF = (
+   function ({ children } : Required<React.PropsWithChildren<{}> > ) {
+      const maxFreq : number = 44100;
+      const minFreq : number = 16 ;
+      return (
          <CBiquadFilterModulated  
             type="lowpass"
             freqArgumentInterpretation="timedomain-normalised"
-            freqArgument={( 
-               <CConstantValue value={ 20000 / 48000 } />
+            freqArgument={(
+               <CFnValue1 
+               value={({ ctxT: t }) => (
+                  IterableOps.clamp((
+                     2 ** (
+                        Math.log2(minFreq ) + t * 0.5 
+                     ) 
+                  ) , minFreq , maxFreq ) 
+                  / 
+                  maxFreq
+               ) }
+               />
             )}
          >
-            <CWhiteNoise value={{ volume: 2 ** -9 }} />
+            { children }
          </CBiquadFilterModulated>
-         
-         <CBiquadFilterModulated  
-            type="lowpass"
-            freqArgumentInterpretation="timedomain-normalised"
-            freqArgument={( 
-               <CConstantValue value={ 400 / 48000 } />
-            )}
-         >
-            <CWhiteNoise value={{ volume: 2 ** -9 }} />
-         </CBiquadFilterModulated>
-         
-         <CBiquadFilterModulated  
-            type="lowpass"
-            freqArgumentInterpretation="timedomain-normalised"
-            freqArgument={( 
-               <CConstantValue value={ 55 / 48000 } />
-            )}
-         >
-            <CWhiteNoise value={{ volume: 2 ** -2 }} />
-         </CBiquadFilterModulated>
-      </>
-   )
+      ) ;;       
+   }
 ) ;
 
 
@@ -92,9 +81,6 @@ const CAmbientNoise = (
 
 
 
-export * from "./useAudioGraphImplFComponents" ;
-export { 
-   CBassDrumLoop ,  
+export {
    WithNSecondsFadeInBF , 
-   CAmbientNoise ,
-}  
+} ;
