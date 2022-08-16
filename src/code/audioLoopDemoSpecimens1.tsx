@@ -36,6 +36,7 @@ import {
 } from "./useAudioGraphImplFComponents";                    
 import {         
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
+import { CBassDrumLoop } from "./useAudioGraphForBassDrumLoop1";
 
                
          
@@ -49,36 +50,6 @@ import {
 
 
     
-// TODO define some speciments
-const CBassDrumLoop = (() => { 
-   const BD : (typeof CBassDrumKickFluidly1) = (
-      CBassDrumKickFluidly1
-   );
-   return (
-      function CMetronomousBassDrumKickLoopC({ instrumentProps = {}, metronomeProps = {} } : {   
-         instrumentProps ?: (
-            Omit<(
-               ComponentProps<typeof BD  > 
-            ) , "children">
-         ) ; 
-         metronomeProps ?: (
-            Omit<(
-               ComponentProps<typeof MetronomeCheckAndExpandingElem >
-            ), "children">
-         ) ;
-      }) {      
-         return (       
-            <MetronomeCheckAndExpandingElem
-            {...{ preFT: 2, postFT: 3, ...metronomeProps, } }
-            >  
-               { ({ }) => (                   
-                  <BD {...instrumentProps } />       
-               ) }
-            </MetronomeCheckAndExpandingElem>
-         ) ;
-      }
-   ) ;  
-})() ;     
 const WithNSecondsFadeInBF = (
    function ({ children } : Required<React.PropsWithChildren<{}> > ) {
       const maxFreq : number = 44100;
