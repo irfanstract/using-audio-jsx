@@ -76,6 +76,17 @@ const CContinuousSnareDrumSound = (
       )  ;
   }
 ) ;
+const CContinuousCymbalSound = (
+   function (p : Parameters<typeof CContinuousSnareDrumSound>[0 ] ) {
+      return (
+         <CAmpModulated0 
+         value={<CConstantValue value={ 2 ** -3 } />}
+         >
+            <CContinuousSnareDrumSound {...p } />
+         </CAmpModulated0>
+      ) ;
+   }
+) ;
          
 
 
@@ -89,4 +100,5 @@ export {
    standardSnareDrumInstrumentAmp , 
 
    CContinuousSnareDrumSound ,
+   CContinuousCymbalSound ,
 } ;
