@@ -100,8 +100,21 @@ const {
             React.createContext<NCtxValue  >( { feedPt: null, sideTapPt: null } )
         ) ;            
         const {
-            XPrv , 
             XCons ,
+        } = { 
+            XCons : IterableOps.identity<(
+                React.FC<React.ConsumerProps<NCtxValue > >
+            )>(function ({ children: payload }) {
+                const ConsmImpl = c0.Consumer ;
+                return (
+                    <ConsmImpl>
+                        { ({ ...p }) => payload({ ...p } ) }
+                    </ConsmImpl>
+                ) ;
+            } ) , 
+        }  ;
+        const {
+            XPrv ,  
         } = {
             XPrv : IterableOps.identity<(
                 React.FC<React.ProviderProps<NCtxValue > >
@@ -111,16 +124,6 @@ const {
                     <PrvImpl value={value} >
                         { payload }
                     </PrvImpl>
-                ) ;
-            } ) , 
-            XCons : IterableOps.identity<(
-                React.FC<React.ConsumerProps<NCtxValue > >
-            )>(function ({ children: payload }) {
-                const ConsmImpl = c0.Consumer ;
-                return (
-                    <ConsmImpl>
-                        { ({ ...p }) => payload({ ...p } ) }
-                    </ConsmImpl>
                 ) ;
             } ) , 
         }  ;
