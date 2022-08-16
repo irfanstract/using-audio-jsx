@@ -98,7 +98,9 @@ const {
     }          
     {              
         const c0 = (                 
-            React.createContext<NCtxValue  >( { feedPt: null, sideTapPt: null } )
+            React.createContext<(
+                NCtxValue & { currentTime : null | number ; }
+            )  >( { feedPt: null, sideTapPt: null , currentTime: null , } )
         ) ;            
         const {
             XCons ,
@@ -121,8 +123,11 @@ const {
                 React.FC<React.ProviderProps<NCtxValue > >
             ) >(function ({ value, children: payload }  ) {
                 const PrvImpl = c0.Provider ;
+                const value1 = (
+                    React.useMemo((): ContextReturnType<typeof c0 > => ({ ...value, currentTime: null }) , [value] ) 
+                );
                 return (
-                    <PrvImpl value={value} >
+                    <PrvImpl value={value1 }>
                         { payload }
                     </PrvImpl>
                 ) ;
@@ -308,5 +313,7 @@ export {
         
     Prv1 , 
     WithGivenDest , 
+
+    WithCtxtualDestCtxTInfo1 , 
            
 } ;                   
