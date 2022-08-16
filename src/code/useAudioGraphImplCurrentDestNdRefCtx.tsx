@@ -99,9 +99,22 @@ const {
         const c0 = (                 
             React.createContext<NCtxValue  >( { feedPt: null, sideTapPt: null } )
         ) ;            
+        const {
+            XPrv , 
+            XCons ,
+        } = {
+            XPrv : IterableOps.identity<(
+                React.Provider<NCtxValue> 
+                | React.FC<React.ProviderProps<NCtxValue > >
+            ) >(c0.Provider ) , 
+            XCons : IterableOps.identity<(
+                React.Consumer<NCtxValue> 
+                | React.FC<React.ConsumerProps<NCtxValue > >
+            )>(c0.Consumer ) , 
+        }  ;
         return {
-            Prv1 : c0.Provider ,         
-            Consm : c0.Consumer ,             
+            Prv1 : XPrv ,         
+            Consm : XCons ,             
             useCurrentDestNd0 : () => React.useContext(c0 ) ,
             ctx0: async() => ctx0() ,      
         } ;           
