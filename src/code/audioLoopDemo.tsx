@@ -118,7 +118,11 @@ const HouseMusicShortBrkDemo = () => {
           { ({ t }) => (
             <>
             { (
-                (([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 ) ?
+                (
+                    (t % 1 ) === 0
+                    &&
+                    ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) !== -1 
+                ) ?
                 null 
                 :  <BD />
             )}
