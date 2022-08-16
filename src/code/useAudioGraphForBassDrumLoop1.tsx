@@ -11,28 +11,8 @@ import { K, ComponentProps, ContextReturnType } from "./commonElements";
            
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
-import {     
-    // TIME-DOMAIN SOUrCES
-    CConstantValue ,  CFnValue1 ,      
-
-    // SIMPLE-OR-COMMON AUDIO SOURCES
-    CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,   
-    CWaveTable1 ,        
-    CBassDrumKick1 , 
-    CBassDrumKickFluidly1 , 
-    CPitchdownBassDrumKickFluidly1 ,                
-    CSnareDrum1,  
-    CSnareDrumFluidly1 ,         
-    
-    // ISOTEMPORAL FILTERS        
-    CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
-    CAmpSlideDown ,                   
-
-    // TIME-DILATING FILTERS, INCLUDING LOOPING  
-    LoopingWithPeriod ,   
-    MetronomeCheckAndExpandingElem ,
-
-} from "./useAudioGraphImplFComponents";                    
+import { MetronomeCheckAndExpandingElem } from "./useAudioGraphImplFComponentsLoopingWrapper1";
+import { CBassDrumKickFluidly1 } from "./useAudioGraphImplFComponentsSlapDrumKit1";           
 import {         
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
 
