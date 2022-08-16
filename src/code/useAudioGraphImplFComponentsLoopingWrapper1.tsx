@@ -266,7 +266,7 @@ const MetronomeCheckAndExpandingElem = (
             : v0       
          ) , 0 )
       ) ;                          
-      return (
+      const mainRendered = (
          <WithCurrentDestNdRef>  
          { ({ feedPt: nd0 }) => (        
             <CBC>
@@ -347,6 +347,12 @@ const MetronomeCheckAndExpandingElem = (
          ) }
          </WithCurrentDestNdRef> 
       ) ;
+      return (
+         // TODO 
+         <div style={{ display: "none" }} >
+         { mainRendered }
+         </div>
+      )  ;
    }     
 ) ;
 
