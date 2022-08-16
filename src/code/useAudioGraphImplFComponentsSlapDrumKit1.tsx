@@ -367,7 +367,7 @@ const snKit = (() => {
             )) {                 
                 const {      
                     minimumFreq = (          
-                        (2 ** -(3 + 0.333 ) ) * 440               
+                        110
                     ) ,                       
                 } = mainProps ;    
                 const {  
