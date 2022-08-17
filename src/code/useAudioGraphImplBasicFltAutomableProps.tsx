@@ -135,10 +135,6 @@ const biquadFltCPropsParse = (
         BiquadFltCProps       
     ) ) {            
         const {                      
-            freqArgument: freqArgGraph0,   
-            freqArgumentInterpretation = (  
-                automativeInputRangeDefaultMode   
-            ) ,             
             gainValArgument: gainValueGraph0 = null ,       
             gainValArgumentInterpretation = (  
                 automativeInputRangeDefaultMode 
@@ -148,6 +144,13 @@ const biquadFltCPropsParse = (
             children ,           
 
         } = mainProps ;    
+        const { //
+            freqArgGraphSpecified ,
+            freqArgumentInterpretation , 
+            freqArgGraph0 ,
+        } = (
+            freqCtrlRelatedPropsParse(mainProps )
+        ) ;
         const freqArgGraph1: React.ReactElement = (
             graphAfterNrmInterpretativeMode({ 
                 mode1 : freqArgumentInterpretation  ,
