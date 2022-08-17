@@ -108,30 +108,30 @@ const HouseMusicShortBrkDemo = () => {
        </MetronomeCheckAndExpandingElem>
    ) ;
    const bassLineGraph = (
-       <CWaveTable1 
-       detuneInterpretation="timedomain-normalised"
-       detune={(
-           <>
-           <CConstantValue value={-(3 + (9 / 12 ) ) } />
-           <CFnValue1 
-           value={({ ctxT: t }) => ( 
-               (() => {
-                   const t1 = t % 8 ;
-                   // TODO
-                   return (
-                       (
-                           ((IterableOps.clamp(Math.min(t1 - 6, 8 - t1 ) , 0, 1 ) ) * 3 )
-                       )
-                       /
-                       12
-                   ) ;
-               })()
-           ) } 
-           /> 
-           </>
-       ) }
-       type="triangle"
-       />
+      <CWaveTable1
+      detuneInterpretation="timedomain-normalised"
+      detune={(
+         <>
+         <CConstantValue value={-(3 + (9 / 12 ) ) } />
+         <CFnValue1
+         value={({ ctxT: t }) => ( 
+            (() => {
+                  const t1 = t % 8 ;
+                  // TODO
+                  return (
+                     (
+                        ((IterableOps.clamp(Math.min(t1 - 6, 8 - t1 ) , 0, 1 ) ) * 3 )
+                     )
+                     /
+                     12
+                  ) ;
+            })()
+         ) } 
+         />
+         </>
+      ) }
+      type="triangle"
+      />
    );
    return (  
        <WithSlowdown 
