@@ -100,11 +100,6 @@ const {
 } = BBVR ;     
 const HouseMusicShortBrkDemo = () => {
 
-    const BD : (
-        (typeof CBassDrumKickFluidly1 )
-    ) = (
-        CBassDrumKickFluidly1
-    ) ;
     const dv : 1 | 2 = 2 ;
     const bassDrumLoopGraph = (
         <MetronomeCheckAndExpandingElem
@@ -122,7 +117,7 @@ const HouseMusicShortBrkDemo = () => {
                     &&
                     ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
                 ) ?
-                <BD /> 
+                <CBassDrumKickFluidly1 /> 
                 :  null
             )}
 
