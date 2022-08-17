@@ -26,6 +26,7 @@ type EitherBothSetOrBothUnset<A extends {} > = (
 ) ;
 const EitherBothSetOrBothUnset = {} ; // TS-1205
 
+const XWithInterpretation = {} ; // TS-1205
 type XWithInterpretation<Key extends string, E > = (
     {            
         /**                      
@@ -41,6 +42,7 @@ type XWithInterpretation<Key extends string, E > = (
         Record<`${Key}Interpretation`, ABandpassFreqArgInputRangeMode > 
     )> 
 ) ;             
+const FreqArgsProps = {} ;   // TS-1205
 type FreqArgsProps = (
     // XWithInterpretation<"freqArgument", React.ReactElement >   
     (
@@ -55,12 +57,15 @@ type FreqArgsProps = (
         // }   
     )
 ) ;             
+const DetuningProps = {} ; // TS-1205
 type DetuningProps = (
     XWithInterpretation<"detune", React.ReactElement >          
 ) ;         
+const GainValArgsProps = {} ; // TS-1205
 type GainValArgsProps<E = React.ReactElement > = (            
     XWithInterpretation<"gainValArgument", E >        
 ) ;                           
+const GainValArgsProps1 = {} ; // TS-1205                
 type GainValArgsProps1 = (     
     /**      
      * either
@@ -73,6 +78,7 @@ type GainValArgsProps1 = (
         )>            
     ) | GainValArgsProps<React.ReactElement> )       
 ) ;          
+const QFactualProps = {} ; // TS-1205
 type QFactualProps = (
     XWithInterpretation<"qFactual", React.ReactElement >      
 ) ;   
@@ -87,7 +93,7 @@ type QFactualProps = (
 
 
  
-export type {
+export {
     EitherBothSetOrBothUnset , 
     
     XWithInterpretation ,  
