@@ -9,7 +9,7 @@ import React, {
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
 } from "react"; 
 import { usingInterval } from "./usingTimeoutOrInterval";  
-import { useCanForceRefresh, useRefreshByInterval } from "./useNonHookValue";
+import { useCanForceRefresh, useRealTimeQueryInterval1, useRefreshByInterval } from "./useNonHookValue";
 // const isWindowActive = (() => {           
 //     let F : boolean = false ;               
 //     window.addEventListener("pointerdown" , () => { F = true  ; } ) ;    
@@ -91,12 +91,15 @@ const useAudioCtxCurrentTime1 = (
             useWindowActivityStatus()        
         ) ;    
 
-        (       
-            useRefreshByInterval           
-        )(true, periodMillis , refreshIntervalProperties ) ;
-   
         const vl = (    
-            c?.currentTime           
+            useRealTimeQueryInterval1({
+                f: () => (    
+                    c ? 
+                    c.currentTime
+                    : null        
+                ) , 
+                ...refreshIntervalProperties , 
+            } , periodMillis )
         ) ;
 
         return (() => {           
@@ -113,18 +116,24 @@ const useAudioCtxCurrentTime1 = (
  * @deprecated
  */
 const useAudioCtxCurrentTime = (  
-    (c: BaseAudioContext | undefined | null ) => (
-        useAudioCtxCurrentTime1(c , {
-            periodMillis : (
-                (     
-                    // 0.19          
-                    // (1 / 3 )
-                    // (isWindowOnFocus ? 0.11 : 0.5 )  
-                    ((c && c.state === "running") ? 0.11 : 1.5 )    
-                ) * 1000
-            ) , 
-        } , { LE: "useLayoutEffect" } )
-    )
+    (c: BaseAudioContext | undefined | null ) => {
+        const vl = (
+            useAudioCtxCurrentTime1(c , {
+                periodMillis : (
+                    (     
+                        // 0.19          
+                        // (1 / 3 )
+                        // (isWindowOnFocus ? 0.11 : 0.5 )  
+                        ((c && c.state === "running") ? 0.11 : 1.5 )    
+                    ) * 1000
+                ) , 
+            } , { LE: "useLayoutEffect" } )
+        ) ; 
+        return (
+            (typeof vl === "number" ) ?
+            vl : undefined
+        ) ;
+    }
 );
 /**      
  *     
