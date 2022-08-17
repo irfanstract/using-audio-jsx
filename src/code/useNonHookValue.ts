@@ -28,6 +28,7 @@ import {
     useRefreshByInterval ,  
  
 } from "./usingIntervalRefresh";      
+import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 
 
   
@@ -133,7 +134,7 @@ type RealTimeQueryIntervalUsageArgs<A> = [
     timeoutMillis: number  ,       
 ] ;        
 /**    
- * implementation of both methods share this section of procedure. 
+ * 
  */
 const useRealtimeQueryIntervalUsageArgsParse = (
     function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ) {
@@ -158,6 +159,51 @@ const useRealtimeQueryIntervalUsageArgsParse = (
             forceRefresh ,              
         } ;
     }
+) ;
+const useRealtimeQueryIntervalUsageArgsParse1 = (
+    function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ) {
+        ;     
+        const { f, LE, catchupPolicy = "MAINTAIN_FIXED_PACE", deps = [] } = (                 
+            REFQUER_CALL_ARG_UPGRDE(props )                                                                 
+        ) ;                             
+        ;   
+        const [{ value: vl, count: c }, setVl] = (
+            React.useState<{ value: A, count: number ; }>({
+                value: f(), 
+                count: 0 ,
+            } )
+        ) ;
+        React[LE](() => (
+            usingInterval((
+                (): void => { 
+                    const newValue = f() ;
+                    setVl(({ count: c0 }) => (
+                        { 
+                            value: newValue, 
+                            count: (c0 + 1 ) % 256 ,
+                        }
+                    ) ) ;
+                }
+            ), timeoutMillis, { catchupPolicy })
+        )); 
+        // TODO
+        const forceRefresh = (
+            () => {}
+        );
+        ;  
+        return {                            
+            props ,        
+            timeoutMillis ,  
+
+            LE ,             
+            f ,          
+            c ,   
+             
+            forceRefresh ,         
+            
+            vl , 
+        } ;
+    } /* */
 ) ;
 /**         
  * {@link RealTimeQueryIntervalUsageArgs } . 
@@ -280,8 +326,9 @@ const useRealTimeQueryInterval1 = (
             c ,   
             
             forceRefresh ,            
-        } = useRealtimeQueryIntervalUsageArgsParse(...args1 ) ;      
-        const vl = React.useMemo(() => f() , [c] ) ;
+
+            vl , 
+        } = useRealtimeQueryIntervalUsageArgsParse1(...args1 ) ;    
         useDebugValue({ c, vl }) ;
         return vl ;   
     }                   
