@@ -109,18 +109,17 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
             REFQUER_CALL_ARG_UPGRDE(props )                                                                 
         ) ;                             
         ;   
-        const [{ value: vl, count: c }, setVl] = (
+        const [vl, setVl] = (
             (function useSt () {
-                type State = { value: A, count: number ; } ;
+                type State = A ;
                 return (
                     React.useReducer((
-                        (...[{ count: c0 }, newValue ] : [State, A ]): State => {
-                            return { 
-                                count: (c0 + 1 ) % 256 , 
-                                value: newValue ,
-                            } ;
+                        (...[vl0 , newValue ] : [State, A ]): State => {
+                            return (
+                                newValue
+                            );
                         } 
-                    ) , { count: 0, value: f() } as State )
+                    ) , f() )
                 ) ;
             })()
         ) ;
@@ -143,7 +142,6 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
 
             LE ,             
             f ,          
-            c ,   
              
             forceRefresh ,         
             
@@ -269,13 +267,12 @@ const useRealTimeQueryInterval1 = (
       
             LE ,             
             f ,          
-            c ,   
             
             forceRefresh ,            
 
             vl , 
         } = useRealtimeQueryIntervalUsageArgsParse1(...args1 ) ;    
-        useDebugValue({ c, vl }) ;
+        useDebugValue({ vl }) ;
         return vl ;   
     }                   
 ) ;                      
