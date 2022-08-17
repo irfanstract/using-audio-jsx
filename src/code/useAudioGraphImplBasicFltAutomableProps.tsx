@@ -173,58 +173,17 @@ const waveTableCPropsShallParse = ((...args2 : [
     const CConstantX = (        
         CConstantValue
     ) ;     
-    const {  
-        freqArumentDefaults ,    
-    } = (
-        args2[0 ]
-        ||           
-        {     
-            freqArumentDefaults : ((...[mode = 0.5 ] : [mode ?: 0 | 0.5 | 1 ] ) : Required<FreqArgsProps > => {  
-                const vol : number = 2 ** 0 ; 
-                if (mode === 1 ) { 
-                    return {             
-                        freqArgument:  (                                  
-                            // TODO     
-                            <CConstantX value={vol } />  
-                        ) ,       
-                        freqArgumentInterpretation  : (      
-                            ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED        
-                        ) ,          
-                    } ;          
-                }            
-                if (mode === 0.5 ) {
-                    ;
-                    return {               
-                        freqArgument:  (     
-                            // TODO                      
-                            <CWhiteNoiseX value={{ volume: vol }} />  
-                        ) ,       
-                        freqArgumentInterpretation  : (      
-                            ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED        
-                        ) ,          
-                    } ;   
-                }          
-                return {               
-                    freqArgument:  (     
-                        // TODO                           
-                        <></>
-                    ) ,       
-                    freqArgumentInterpretation  : (      
-                        ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED        
-                    ) ,          
-                } ;        
-            })() ,   
-        }
-    );
     return (                  
         function (...[mainProps] : [
             (                        
                 WaveTableNodeProps              
             ) ,         
         ] ) {                                  
+            const FMP = {
+                ...mainProps ,  
+            };                       
             const {          
-                freqArgument: freqArgGraph0 ,       
-                freqArgumentInterpretation ,                           
+                freqArgument: freqArgGraphSpecified ,                            
                             
                 detune: detuneGraph0 = <></> ,       
                 detuneInterpretation = (  
@@ -233,10 +192,34 @@ const waveTableCPropsShallParse = ((...args2 : [
                   
                 type : wvTable1 ,   
            
-            } = {
-                ...freqArumentDefaults ,      
-                ...mainProps ,  
-            } ;    
+            } = FMP ;     
+            const {
+                freqArgumentInterpretation , 
+                freqArgument: freqArgGraph0 , 
+            } = ((): (
+                {}
+                & 
+                Required<(
+                    Pick<WaveTableNodeProps, "freqArgument" | "freqArgumentInterpretation">
+                )>
+            ) => {
+                if (freqArgGraphSpecified ) {
+                    return {
+                        freqArgument: freqArgGraphSpecified , 
+                        freqArgumentInterpretation: (
+                            FMP.freqArgumentInterpretation
+                            ||
+                            "resulting-magn-normalised"
+                        )
+                    } ;
+                } else {
+                    return {
+                        freqArgument: <></> , 
+                        freqArgumentInterpretation: "timedomain-normalised", 
+                    }
+                }
+                ;
+            })() ;
             const freqArgGraph1: React.ReactElement = (
                 graphAfterNrmInterpretativeMode({ 
                     mode1 : freqArgumentInterpretation  ,
