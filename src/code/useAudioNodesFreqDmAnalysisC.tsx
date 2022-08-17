@@ -28,23 +28,6 @@ import { CFreqDmAnalyF } from "./useAudioGraphImplFComponentsAnalyticalF";
  * can't implement/apply it directly due to the implied *`import`-cycle*
  */ 
  const CFreqDmAnalyF1 = (function () {
-    // const C0 = (   
-    //     React.lazy(async () => {      
-    //         const { 
-    //             CFreqDmAnalyF ,    
-    //         } = (
-    //             await import ('./useAudioGraphImplFComponents')
-    //         ) ;  
-    //         return {
-    //             default : CFreqDmAnalyF ,  
-    //         } ;
-    //     })      
-    // );                
-    // return (p : ComponentProps<typeof C0 > ) => (
-    //     <C0 {...p } >
-    //         { p.children }
-    //     </C0>  
-    // ) ;           
     return CFreqDmAnalyF;
  })() ;                      
 
