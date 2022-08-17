@@ -145,23 +145,23 @@ const waveTableCPropsShallParse = ((...args2 : [
     } ,  
 ]) => {        
     const CFC = (              
-        IterableOps.once(() => (
-            import ('./useAudioGraphImplFComponents')         
-        ))
-    );                  
-    const CPersistingBeepX = (            
-        // TODO                
-        React.lazy(async () => {
-            const {
-                CPersistingBeep ,     
-            } = (      
-                await CFC()        
-            ) ;
+        IterableOps.once(async () => {
+            const I1 = (
+                await (
+                    import ('./useAudioGraphImplFMathComponentsSupport1')     
+                )    
+            ) ; 
+            const I2 = (
+                await (
+                    import ('./useAudioGraphImplFComponentsWhiteNoise')     
+                )    
+            ) ; 
             return {
-                default: CPersistingBeep ,    
+                ...I1 , 
+                ...I2 , 
             } ;
-        })    
-    ) ;    
+        })
+    );              
     const CWhiteNoiseX = (      
         // TODO                
         React.lazy(async () => {
