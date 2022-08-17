@@ -77,20 +77,23 @@ import { isWindowActive, useWindowActivityStatus } from "./useWindowFocusState";
 
 
 
-const useAudioCtxCurrentTime = (  
-    (c: BaseAudioContext | undefined | null ) => {    
+const useAudioCtxCurrentTime1 = (  
+    (...[c, { periodMillis }, refreshIntervalProperties] : [
+        BaseAudioContext | undefined | null ,
+        {
+            periodMillis : number ;  
+        },
+        Required<(
+            Parameters<typeof useRefreshByInterval >
+        )>[2] ,
+    ] ) => {    
         const { isWindowOnFocus } = (         
             useWindowActivityStatus()        
         ) ;    
 
         (       
             useRefreshByInterval           
-        )(true, (     
-            // 0.19          
-            // (1 / 3 )
-            // (isWindowOnFocus ? 0.11 : 0.5 )  
-            ((c && c.state === "running") ? 0.11 : 1.5 )    
-        ) * 1000 , { LE: "useLayoutEffect" } ) ;
+        )(true, periodMillis , refreshIntervalProperties ) ;
    
         const vl = (    
             c?.currentTime           
@@ -103,6 +106,26 @@ const useAudioCtxCurrentTime = (
         })() ;
     }
 ) ;
+/**   
+ * switch to the mangled variant ; 
+ * this non-mangled variant does not allow precisive config.
+ * 
+ * @deprecated
+ */
+const useAudioCtxCurrentTime = (  
+    (c: BaseAudioContext | undefined | null ) => (
+        useAudioCtxCurrentTime1(c , {
+            periodMillis : (
+                (     
+                    // 0.19          
+                    // (1 / 3 )
+                    // (isWindowOnFocus ? 0.11 : 0.5 )  
+                    ((c && c.state === "running") ? 0.11 : 1.5 )    
+                ) * 1000
+            ) , 
+        } , { LE: "useLayoutEffect" } )
+    )
+);
 /**      
  *     
  * @deprecated  
@@ -133,5 +156,6 @@ const useCanAudioCtxUpdateCurrentT = (
 ) ;     
 export {
     useAudioCtxCurrentTime , 
+    useAudioCtxCurrentTime1,
     useCanAudioCtxUpdateCurrentT ,      
 } ;
