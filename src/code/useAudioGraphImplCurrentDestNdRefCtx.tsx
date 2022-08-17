@@ -17,7 +17,7 @@ import {
     useWindowActivityStatus ,      
 } from "./useWindowFocusState";
            
-import { useAudioCtxCurrentTime } from "./useAudioCtxCurrentTime";
+import { useAudioCtxCurrentTime, useAudioCtxCurrentTime1 } from "./useAudioCtxCurrentTime";
 //        
 import { 
     getACtxMtWithoutAnyFilter1, 
@@ -131,7 +131,7 @@ const {
                             parentValue.currentTime
                         );
                         const v1 = (
-                            useAudioCtxCurrentTime(value.feedPt?.context || null )
+                            useAudioCtxCurrentTime1(value.feedPt?.context || null , { periodMillis: 62.5 }, {} )
                             ||
                             null
                         ) ;
