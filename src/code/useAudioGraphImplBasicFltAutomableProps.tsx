@@ -12,6 +12,8 @@ import { CBC } from "./useStateInCallback";
 
 import { graphAfterNrmInterpretativeMode } from "./useAudioGraphAsBandFreqCtrlMode";   
 import {
+    EitherBothSetOrBothUnset,
+    
     XWithInterpretation ,    
 
     FreqArgsProps ,  
@@ -35,15 +37,6 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
     ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED  
 ) ;           
   
-/**   
- * either 
- * - all properties set
- * - all properties unset
- */
-type EitherBothSetOrBothUnset<A extends {} > = (
-    A | { [k in keyof A ] ?: undefined ; }
-) ;
-const EitherBothSetOrBothUnset = {} ; // TS-1205
 /**    
  * use this method to properly evaluate the `freqCtrl` argument(s). `^_^`
  */
