@@ -34,64 +34,6 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
   
        
   
-// const useRefreshByInterval1 = (         
-//     (...[      
-//         ,                   
-//         periofMillis ,             
-//         { LE = "useEffect" as "useEffect" } = {} ,      
-//     ] : [                                      
-//         // _ignored1: true ,      
-//         // periofMillis: number ,    
-//         _1 : true ,        
-//         periodMillis: number ,                    
-//         properties ?: {
-
-//             /**   
-//              * React has two variations of `useEffect`, it's `useEffect` itself as well as `useLayoutEffect` .  
-//              * in general `useEffect` is strongly preferred for high-level (sub)modules, but  
-//              * `useEffect` is prone to timing distortion and therefore in timing-sensitive apps `useLayoutEffect` shall be used instead.
-//              * 
-//              * there's also `useInsertionEffect`, but it does not define parameter `deps` and hence not applicable
-//              */
-//             LE ?: (
-//                 keyof Pick<typeof React, "useLayoutEffect" | "useEffect">
-//             ) ; 
-//         } ,
-//     ]) => {            
-//         ;       
-//         const {    
-//             forceRefresh ,       
-//             c ,                                       
-//         } = (                                   
-//             useCanForceRefresh()                 
-//         ) ;               
-//         React[LE ](() => {   
-//             return (
-//                 usingInterval(() => {         
-//                     forceRefresh() ;    
-//                     return true ;
-//                 } , periofMillis ) 
-//             ) ;   
-//         }, [useDeferredValue(periofMillis) ] ) ;  
-//         const r1 = {  
-//             forceRefresh ,          
-//             c ,    
-
-//             LE ,   
-//             periodMillis : periofMillis ,    
-//         } ;              
-//         useDebugValue(r1 ) ;          
-//         return(     
-//             r1  
-//         ) ;    
-//     }            
-// ) ;                               
-// const useRefreshByInterval = (      
-//     (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
-//         useRefreshByInterval1(...a ) ;                    
-//         return JSON ;    
-//     }    
-// ) ;    
 const [] = [] ;
 /**  
  * note that this does not provide `deps` ;   
