@@ -102,6 +102,12 @@ const useRealtimeQueryIntervalUsageArgsParse = (
         } ;
     }
 ) ;
+/**   
+ * avoid using this as, for some reason,
+ * usage of this will, for some reason, result in infinite re-render.
+ * 
+ * @deprecated
+ */
 const useRealtimeQueryIntervalUsageArgsParse1 = (
     function <A>(...[props, timeoutMillis ] : RealTimeQueryIntervalUsageArgs<A> ) {
         ;     
@@ -267,12 +273,12 @@ const useRealTimeQueryInterval1 = (
       
             LE ,             
             f ,          
+            c ,   
             
             forceRefresh ,            
-
-            vl , 
-        } = useRealtimeQueryIntervalUsageArgsParse1(...args1 ) ;    
-        useDebugValue({ vl }) ;
+        } = useRealtimeQueryIntervalUsageArgsParse(...args1 ) ;      
+        const vl = React.useMemo(() => f() , [c] ) ;
+        useDebugValue({ c, vl }) ;
         return vl ;   
     }                   
 ) ;                      
