@@ -1,4 +1,5 @@
 
+import { IterableOps } from "./generalUse11";
 import React, { useReducer, useState } from "react";   
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { 
@@ -23,6 +24,8 @@ import {
 } from "./useAudioGraphImplCurrentDestNdRefCtx";     
 import { WGD_DIV } from "./useAudioGraphImplCurrentDestNdRefCtx";             
 import { 
+    CFnValue1 ,
+    
     CHalfSecndBeep1 , CPersistingBeep , CWaveTable1 , CWhiteNoise ,    
     CBassDrumKickFluidly1 ,
     CSnareDrumFluidly1 , 
@@ -147,7 +150,28 @@ const HouseMusicShortBrkDemo = () => {
             )}
             <CWaveTable1 
             detuneInterpretation="timedomain-normalised"
-            detune={<CConstantValue value={-3 + -(9 / 12 ) } /> }
+            detune={(
+                <>
+                <CConstantValue value={-3 + -(9 / 12 ) } />
+                <CFnValue1 
+                value={({ ctxT: t }) => ( 
+                    (() => {
+                        const t1 = t % 8 ;
+                        // TODO
+                        return (
+                            (
+                                ((IterableOps.clamp((t1 - 6 ) , 0, 1 ) ) * 3 )
+                                +
+                                ((IterableOps.clamp((8 - t1 ) , 0, 1 ) ) * 3 )
+                            )
+                            /
+                            12
+                        ) ;
+                    })()
+                ) } 
+                /> 
+                </>
+            ) }
             type="triangle"
             />
             { null && <CAmbientNoise /> }
