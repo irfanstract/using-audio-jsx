@@ -28,19 +28,21 @@ const EitherBothSetOrBothUnset = {} ; // TS-1205
 
 const XWithInterpretation = {} ; // TS-1205
 type XWithInterpretation<Key extends string, E > = (
-    {            
-        /**                      
-         * defines the control graph   . 
-         * as opposed to `children` which would defines the main/primary graph.   
-         *       
-         */            
-        [ k in Key ] : E ;                   
-
-    }           
-    &  
-    Partial<(
-        Record<`${Key}Interpretation`, ABandpassFreqArgInputRangeMode > 
-    )> 
+    EitherBothSetOrBothUnset<(
+        {            
+            /**                      
+             * defines the control graph   . 
+             * as opposed to `children` which would defines the main/primary graph.   
+             *       
+             */            
+            [ k in Key ] : E ;                   
+    
+        }           
+        &  
+        (
+            Record<`${Key}Interpretation`, ABandpassFreqArgInputRangeMode > 
+        )
+    )>
 ) ;             
 const FreqArgsProps = {} ;   // TS-1205
 type FreqArgsProps = (
