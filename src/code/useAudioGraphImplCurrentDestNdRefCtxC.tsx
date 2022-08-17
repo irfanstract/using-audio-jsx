@@ -652,6 +652,7 @@ const {
                                 const {  
                                     freqArgGraph1 ,         
                                     detuneGraph1 ,    
+                                    type: wvTableNme ,
   
                                 }  = waveTableCPropsShallParse(mainProps ) ;             
                                 // TODO
@@ -665,7 +666,7 @@ const {
                                             frequency : freqArgDest1 ,       
                                             detune : detuneCtrlDest1 , // TODO                                   
                                         } = (          
-                                            useC1(nd0, )  
+                                            useC1(nd0, { waveTable: wvTableNme })  
                                         ) ;           
                                         const c1 = (                         
                                             // TODO      
