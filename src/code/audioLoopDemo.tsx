@@ -43,6 +43,7 @@ import {
     WithNSecondsFadeInBF ,     
 
 } from "./audioLoopDemoSpecimens1";
+import { HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumLoops"; 
 import '../App.css';        
 
     
@@ -93,84 +94,6 @@ const useASetCurrentT = (
     }
 ) ;            
 ; 
-const HouseMusicShortBrkDemo = () => {
-
-    const dv : 1 | 2 = 2 ;
-    const bassDrumLoopGraph = (
-        <MetronomeCheckAndExpandingElem
-        preFT={2 }
-        postFT={3 }
-        value={{ tickTockPeriod: 0.5 }}
-        renderRange={{ n: 4 * 4 * 8 * dv }}
-        >
-        { ({ t }) => (
-            <>
-            
-            { (
-                (
-                    (t % 1 ) === 0
-                    &&
-                    ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
-                ) ?
-                <CBassDrumKickFluidly1 /> 
-                :  null
-            )}
-
-            { (
-                ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
-            ) }
-
-            { (
-                (((t * 2 ) % 2 ) === 1 ) ? 
-                <CBriefHiHatFluidly />
-                : null
-            ) }
-
-            </>
-        ) }
-        </MetronomeCheckAndExpandingElem>
-    ) ;
-    const bassLineGraph = (
-        <CWaveTable1 
-        detuneInterpretation="timedomain-normalised"
-        detune={(
-            <>
-            <CConstantValue value={-(3 + (9 / 12 ) ) } />
-            <CFnValue1 
-            value={({ ctxT: t }) => ( 
-                (() => {
-                    const t1 = t % 8 ;
-                    // TODO
-                    return (
-                        (
-                            ((IterableOps.clamp(Math.min(t1 - 6, 8 - t1 ) , 0, 1 ) ) * 3 )
-                        )
-                        /
-                        12
-                    ) ;
-                })()
-            ) } 
-            /> 
-            </>
-        ) }
-        type="triangle"
-        />
-    );
-    return (  
-        <WithSlowdown 
-        /**  this filtering is here to debug the one timing issues. */
-        value={2 ** 0 } 
-        >
-        <WithSlowdown value={2 ** -1 }>
-        <WithNSecondsFadeInBF>
-            {true && bassDrumLoopGraph}
-            { bassLineGraph }
-            { null && <CAmbientNoise /> }
-        </WithNSecondsFadeInBF>
-        </WithSlowdown>
-        </WithSlowdown>
-    ) ;
-} ;
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
     console.log({ key } , ...[2 ] ); 
