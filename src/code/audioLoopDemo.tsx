@@ -152,7 +152,7 @@ const HouseMusicShortBrkDemo = () => {
             detuneInterpretation="timedomain-normalised"
             detune={(
                 <>
-                <CConstantValue value={-3 + -(9 / 12 ) } />
+                <CConstantValue value={-(3 + (9 / 12 ) ) } />
                 <CFnValue1 
                 value={({ ctxT: t }) => ( 
                     (() => {
