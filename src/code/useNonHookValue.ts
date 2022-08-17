@@ -110,21 +110,25 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
         ) ;                             
         ;   
         const [{ value: vl, count: c }, setVl] = (
-            React.useState<{ value: A, count: number ; }>({
-                value: f(), 
-                count: 0 ,
-            } )
+            (function useSt () {
+                type State = { value: A, count: number ; } ;
+                return (
+                    React.useReducer((
+                        (...[{ count: c0 }, newValue ] : [State, A ]): State => {
+                            return { 
+                                count: (c0 + 1 ) % 256 , 
+                                value: newValue ,
+                            } ;
+                        } 
+                    ) , { count: 0, value: f() } as State )
+                ) ;
+            })()
         ) ;
         React[LE](() => (
             usingInterval((
                 (): void => { 
                     const newValue = f() ;
-                    setVl(({ count: c0 }) => (
-                        { 
-                            value: newValue, 
-                            count: (c0 + 1 ) % 256 ,
-                        }
-                    ) ) ;
+                    setVl(newValue ) ;
                 }
             ), timeoutMillis, { catchupPolicy })
         )); 
