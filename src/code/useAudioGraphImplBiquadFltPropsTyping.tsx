@@ -16,6 +16,16 @@ import { CBC } from "./useStateInCallback";
               
                    
     
+/**   
+ * either 
+ * - all properties set
+ * - all properties unset
+ */
+type EitherBothSetOrBothUnset<A extends {} > = (
+    A | { [k in keyof A ] ?: undefined ; }
+) ;
+const EitherBothSetOrBothUnset = {} ; // TS-1205
+
 type XWithInterpretation<Key extends string, E > = (
     {            
         /**                      
@@ -78,6 +88,8 @@ type QFactualProps = (
 
  
 export type {
+    EitherBothSetOrBothUnset , 
+    
     XWithInterpretation ,  
 
     FreqArgsProps , 
