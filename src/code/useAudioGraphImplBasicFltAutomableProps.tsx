@@ -43,6 +43,7 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
 type EitherBothSetOrBothUnset<A extends {} > = (
     A | { [k in keyof A ] ?: undefined ; }
 ) ;
+const EitherBothSetOrBothUnset = {} ; // TS-1205
 /**    
  * use this method to properly evaluate the `freqCtrl` argument(s). `^_^`
  */
@@ -321,6 +322,7 @@ const evParamAutomativeNodeCPropsParse = (
       
 export {
     automativeInputRangeDefaultMode ,  
+    EitherBothSetOrBothUnset ,
    
     SingleParamTerminalElementCProps , 
     evSingleArgumentTerminalNodeCPropsParse ,  
