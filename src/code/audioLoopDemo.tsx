@@ -47,16 +47,6 @@ import '../App.css';
 
     
 
-  
-
-            
-
-
-   
-  
-
-
-       
 const {
     currentTCtx , 
     currentTScaleCtx ,         
@@ -67,6 +57,19 @@ const {
     WithSlowdown,
     LoopingWithPeriod , 
 } = tCtxs ;
+
+    
+
+  
+
+            
+
+
+   
+  
+
+
+       
 const useASetCurrentT = (
     function (s: BaseAudioContext | null ) {
         const [tT, setTT ] = (      
