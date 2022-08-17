@@ -99,7 +99,11 @@ const useAudioCtxCurrentTime1 = (
                     : null        
                 ) , 
                 ...refreshIntervalProperties , 
-            } , periodMillis )
+            } , (
+                (      
+                    ((c && c.state === "running") ? periodMillis : 1500 )    
+                )  
+            ) )
         ) ;
 
         return (() => {           
