@@ -52,6 +52,7 @@ import {
     MetronomeCheckAndExpandingElem ,  
      
 } from "./useAudioGraphImplFComponentsLoopingWrapper1";
+import { CWhiteNoise } from "./useAudioGraphImplFComponentsWhiteNoise";
 import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS
@@ -80,9 +81,6 @@ const {
     WithSlowdown ,   
            
 } = tCtxs ;                  
-const CWhiteNoise = (
-    terminalUsageWrapC(audioFltAtAbsTNodes.useWhiteNoise )
-) ;              
 //    
 const CFreqDmAnalyFSpecial = (
     function ({ children : graph0 } : (
