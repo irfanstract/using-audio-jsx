@@ -105,41 +105,52 @@ const HouseMusicShortBrkDemo = () => {
     return (  
         <WithSlowdown 
         /**  this filtering is here to debug the one timing issues. */
-        value={2 ** 0.9 } 
+        value={2 ** 0 } 
         >
         <WithSlowdown value={2 ** -1 }>
         <WithNSecondsFadeInBF>
-          <MetronomeCheckAndExpandingElem
-          preFT={2 }
-          postFT={3 }
-          value={{ tickTockPeriod: 0.5 }}
-          renderRange={{ n: 4 * 4 * 8 * dv }}
-          >
-          { ({ t }) => (
-            <>
-            { (
-                (
-                    (t % 1 ) === 0
-                    &&
-                    ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
-                ) ?
-                <BD /> 
-                :  null
+            {true && (
+                <MetronomeCheckAndExpandingElem
+                preFT={2 }
+                postFT={3 }
+                value={{ tickTockPeriod: 0.5 }}
+                renderRange={{ n: 4 * 4 * 8 * dv }}
+                >
+                { ({ t }) => (
+                    <>
+                    
+                    { (
+                        (
+                            (t % 1 ) === 0
+                            &&
+                            ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
+                        ) ?
+                        <BD /> 
+                        :  null
+                    )}
+
+                    { (
+                        ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
+                    ) }
+
+                    { (
+                        (((t * 2 ) % 2 ) === 1 ) ? 
+                        <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
+                            <CSnareDrumFluidly1 />
+                        </CAmpModulated0> 
+                        : null
+                    ) }
+
+                    </>
+                ) }
+                </MetronomeCheckAndExpandingElem>
             )}
-            { (
-                ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
-            ) }
-            { (
-                (((t * 2 ) % 2 ) === 1 ) ? 
-                <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
-                    <CSnareDrumFluidly1 />
-                </CAmpModulated0> 
-                : null
-            ) }
-            </>
-          ) }
-          </MetronomeCheckAndExpandingElem>
-          <CAmbientNoise />
+            <CWaveTable1 
+            detuneInterpretation="timedomain-normalised"
+            detune={<CConstantValue value={-3 + -(9 / 12 ) } /> }
+            type="triangle"
+            />
+            { null && <CAmbientNoise /> }
         </WithNSecondsFadeInBF>
         </WithSlowdown>
         </WithSlowdown>
