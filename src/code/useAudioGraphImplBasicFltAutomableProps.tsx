@@ -35,6 +35,51 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
     ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED  
 ) ;           
   
+const freqCtrlRelatedPropsParse = (
+    function (...[FMP] : [Partial<FreqArgsProps > ]) {
+        ; 
+        const { //
+            freqArgument: freqArgGraphSpecified ,                            
+                        
+        } = FMP ; //  
+        const {
+            freqArgumentInterpretation , 
+            freqArgument: freqArgGraph0 , 
+        } = ((): (
+            {}
+            & 
+            Required<(
+                FreqArgsProps
+            )>
+        ) => {
+            if (freqArgGraphSpecified ) {
+                return {
+                    freqArgument: freqArgGraphSpecified , 
+                    freqArgumentInterpretation: (
+                        FMP.freqArgumentInterpretation
+                        ||
+                        "resulting-magn-normalised"
+                    )
+                } ;
+            } else {
+                return {
+                    freqArgument: (
+                        <CConstantValue value={1 } />
+                    ) , 
+                    freqArgumentInterpretation: "timedomain-normalised", 
+                }
+            }
+            ;
+        })() ;
+        ;
+        return {
+            freqArgGraphSpecified ,
+            freqArgumentInterpretation ,
+            freqArgGraph0 ,
+        } ;
+    }
+) ;
+
 const SingleParamTerminalElementCProps = {} ; // TS-1205     
 type SingleParamTerminalElementCProps = ( 
     Omit<(
@@ -183,7 +228,6 @@ const waveTableCPropsShallParse = ((...args2 : [
                 ...mainProps ,  
             };                       
             const {          
-                freqArgument: freqArgGraphSpecified ,                            
                             
                 detune: detuneGraph0 = <></> ,       
                 detuneInterpretation = (  
@@ -193,35 +237,13 @@ const waveTableCPropsShallParse = ((...args2 : [
                 type : wvTable1 ,   
            
             } = FMP ;     
-            const {
+            const { //
+                freqArgGraphSpecified ,
                 freqArgumentInterpretation , 
-                freqArgument: freqArgGraph0 , 
-            } = ((): (
-                {}
-                & 
-                Required<(
-                    Pick<WaveTableNodeProps, "freqArgument" | "freqArgumentInterpretation">
-                )>
-            ) => {
-                if (freqArgGraphSpecified ) {
-                    return {
-                        freqArgument: freqArgGraphSpecified , 
-                        freqArgumentInterpretation: (
-                            FMP.freqArgumentInterpretation
-                            ||
-                            "resulting-magn-normalised"
-                        )
-                    } ;
-                } else {
-                    return {
-                        freqArgument: (
-                            <CConstantValue value={1 } />
-                        ) , 
-                        freqArgumentInterpretation: "timedomain-normalised", 
-                    }
-                }
-                ;
-            })() ;
+                freqArgGraph0 ,
+            } = (
+                freqCtrlRelatedPropsParse(FMP )
+            ) ;
             const freqArgGraph1: React.ReactElement = (
                 graphAfterNrmInterpretativeMode({ 
                     mode1 : freqArgumentInterpretation  ,
