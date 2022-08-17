@@ -35,6 +35,7 @@ import {
     MetronomeCheckAndExpandingElem , 
     
 } from "./audioLoopDemoComponents1"; 
+import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";
 import * as BBVR from "./audioLoopDemoSpecimens";  
 import {
     CBassDrumLoop , 
@@ -138,9 +139,7 @@ const HouseMusicShortBrkDemo = () => {
 
                     { (
                         (((t * 2 ) % 2 ) === 1 ) ? 
-                        <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
-                            <CSnareDrumFluidly1 />
-                        </CAmpModulated0> 
+                        <CBriefHiHatFluidly />
                         : null
                     ) }
 
