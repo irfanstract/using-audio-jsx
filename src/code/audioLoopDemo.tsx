@@ -67,9 +67,6 @@ const {
     WithSlowdown,
     LoopingWithPeriod , 
 } = tCtxs ;
-const AudioLoopDemoApp1 = () => (
-    <p> Audio Loop </p>
-) ;      
 const useASetCurrentT = (
     function (s: BaseAudioContext | null ) {
         const [tT, setTT ] = (      
@@ -93,11 +90,6 @@ const useASetCurrentT = (
     }
 ) ;            
 ; 
-const {    
-    BeepsInLoop , 
-    BEEPBOPVR , 
-    BEEPBOPVRAPP ,              
-} = BBVR ;     
 const HouseMusicShortBrkDemo = () => {
 
     const dv : 1 | 2 = 2 ;
