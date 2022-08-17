@@ -214,7 +214,9 @@ const waveTableCPropsShallParse = ((...args2 : [
                     } ;
                 } else {
                     return {
-                        freqArgument: <></> , 
+                        freqArgument: (
+                            <CConstantValue value={1 } />
+                        ) , 
                         freqArgumentInterpretation: "timedomain-normalised", 
                     }
                 }
