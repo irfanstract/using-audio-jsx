@@ -107,61 +107,80 @@ const HouseMusicShortBrkDemo = () => {
        ) }
        </MetronomeCheckAndExpandingElem>
    ) ;
+   const tnLn = (
+      <>
+      <CConstantValue value={-((11 / 12 ) ) } />
+      <CFnValue1 
+      value={({ ctxT: t }): number => {
+         const t1 = t % 8 ;
+         // TODO
+         return (
+            ((t: number ) => { 
+               {
+                  if (t < 1 ) {
+                     return 0 ;
+                  }
+                  if (t < 1.25 ) {
+                     return 0 ;
+                  }
+                  if (t < 1.5 ) {
+                     return -2 ;
+                  }
+                  if (t < 1.75 ) {
+                     return 0 ;
+                  }
+                  if (t < 2.5 ) {
+                     return 1 ;
+                  }
+                  if (t < 4.5 ) {
+                     return 3 ;
+                  }
+                  if (t < 5.25 ) { 
+                     return 3 + 2 ;
+                  }
+                  if (t < 5.75 ) { 
+                     return 3 ;
+                  }
+                  if (t < 6.5 ) { 
+                     return -2 ;
+                  }
+                  if (t < 7.25 ) { 
+                     return 0 ;
+                  }
+                  return -2 ;
+               }
+            })(t1 )
+            /
+            12
+         );
+      } } 
+      />
+      </>
+   );
    const bassLineGraph = (
+      <>
       <CWaveTable1
       detuneInterpretation="timedomain-normalised"
       detune={(
          <>
-         <CConstantValue value={-(3 + (11 / 12 ) ) } />
-         <CFnValue1 
-         value={({ ctxT: t }): number => {
-            const t1 = t % 8 ;
-            // TODO
-            return (
-               ((t: number ) => { 
-                  {
-                     if (t < 1 ) {
-                        return 0 ;
-                     }
-                     if (t < 1.25 ) {
-                        return 0 ;
-                     }
-                     if (t < 1.75 ) {
-                        return -2 ;
-                     }
-                     if (t < 2.5 ) {
-                        return 1 ;
-                     }
-                     if (t < 4.25 ) {
-                        return 3 ;
-                     }
-                     if (t < 5 ) { 
-                        return 3 + 2 ;
-                     }
-                     if (t < 5.25 ) { 
-                        return 3 + 2 ;
-                     }
-                     if (t < 5.75 ) { 
-                        return 3 ;
-                     }
-                     if (t < 6.5 ) { 
-                        return -2 ;
-                     }
-                     if (t < 7.25 ) { 
-                        return 0 ;
-                     }
-                     return -2 ;
-                  }
-               })(t1 )
-               /
-               12
-            );
-         } } 
-         />
+         <CConstantValue value={-3 } />
+         { tnLn } 
          </>
       ) }
       type="triangle"
       />
+      <CWaveTable1
+      detuneInterpretation="timedomain-normalised"
+      detune={(
+         <>
+         <CConstantValue value={-3 } />
+         <CConstantValue value={1 + (7 / 12 ) } />
+         { tnLn } 
+         </>
+      ) }
+      type="sine"
+      />
+      </>
    );
    return (  
        <WithSlowdown 
