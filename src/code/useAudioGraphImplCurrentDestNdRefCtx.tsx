@@ -97,16 +97,18 @@ const {
         const {
             XCons ,
         } = { 
-            XCons : IterableOps.identity<(
-                React.FC<React.ConsumerProps<NCtxV1 > >
-            )>(function ({ children: payload }) {
-                const ConsmImpl = c0.Consumer ;
-                return (
-                    <ConsmImpl>
-                        { ({ ...p }) => payload({ ...p } ) }
-                    </ConsmImpl>
-                ) ;
-            } ) , 
+            XCons : (
+                IterableOps.identity<(
+                    React.FC<React.ConsumerProps<NCtxV1 > >
+                )>(function ({ children: payload }) {
+                    const ConsmImpl = c0.Consumer ;
+                    return (
+                        <ConsmImpl>
+                            { ({ ...p }) => payload({ ...p } ) }
+                        </ConsmImpl>
+                    ) ;
+                } )
+            ) , 
         }  ;
         const {
             XPrv ,  
@@ -118,18 +120,18 @@ const {
                 const parentValue = (
                     React.useContext(c0 )
                 );
-                // const parentACtx = (
-                //     (
-                //         React.useContext(c0 )
-                //     ).feedPt?.context
-                //     ||
-                //     null 
-                // ) ;
                 const requestedCtxCurrentTime = (
+                    /**   
+                     * 
+                     */
                     function useCtxCurrentT() {
                         const v0 = (
                             parentValue.currentTime
                         );
+                        /**   
+                         * this can't be made conditional - 
+                         * `react-eslint/react-hooks`
+                         */
                         const v1 = (
                             useAudioCtxCurrentTime1(value.feedPt?.context || null , { periodMillis: 62.5 }, {} )
                             ||
@@ -150,21 +152,6 @@ const {
                         }
                     ) , [value, requestedCtxCurrentTime ] ) 
                 );
-                // const requestedACtx = (
-                //     ( 
-                //         value1
-                //     ).feedPt?.context
-                //     ||
-                //     null 
-                // ) ;
-                // const parentCT = (
-                //     value1.currentTime
-                // ) ;
-                // const actualCT = (
-                //     useRealTimeQueryInterval1(() => (
-                //         value1.currentTime
-                //     ) , 2.7 * 1000 )
-                // ) ;
                 return (
                     <PrvImpl value={value1 }>
                         { ( 
