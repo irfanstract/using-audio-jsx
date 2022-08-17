@@ -195,7 +195,7 @@ const graphAfterNrmInterpretativeMode = (
         } ,  
         React.ReactElement ,    
     ]) {
-        return (
+        const comp = (
             (
                 (interpretativeMde === TIMEDOMAIN_NORMALISED ? (
                     graph          
@@ -216,6 +216,12 @@ const graphAfterNrmInterpretativeMode = (
                 null
             ) || <></>                
         ) ;      
+        return (
+            <> 
+                <p> after interpretative mode <code>{ interpretativeMde }</code> </p>
+                { comp }
+            </>
+        ) ;
     }
 ) ;   
 
