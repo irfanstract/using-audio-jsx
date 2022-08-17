@@ -39,5 +39,5 @@ const CContinousHiHatFluidly = (
 
 
 export {
-   CContinousHiHatFluidly ,
+   CContinousHiHatFluidly as CBriefHiHatFluidly ,
 } ;
