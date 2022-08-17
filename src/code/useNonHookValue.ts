@@ -131,7 +131,7 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
                     setVl(newValue ) ;
                 }
             ), timeoutMillis, { catchupPolicy })
-        )); 
+        ) , deps ); 
         // TODO
         const forceRefresh = (
             () => {}
