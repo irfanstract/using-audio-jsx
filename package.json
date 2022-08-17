@@ -1,6 +1,6 @@
 {
   "name": "v20220714",
-  "version": "0.1.202208172251-alpha",
+  "version": "0.1.202208172315-alpha",
   "peerDependencies": {
     "socket.io": "^4.5.0",
     "socket.io-client": "^4.5.0",
