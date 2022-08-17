@@ -23,6 +23,7 @@ import {
 import { 
     usePersistingBeep ,      
 } from "./useAudioNodesBasicBeep1";    
+import { CConstantValue } from "./useAudioGraphImplFMathComponentsSupport1";
 
      
      
@@ -146,18 +147,12 @@ const waveTableCPropsShallParse = ((...args2 : [
 ]) => {        
     const CFC = (              
         IterableOps.once(async () => {
-            const I1 = (
-                await (
-                    import ('./useAudioGraphImplFMathComponentsSupport1')     
-                )    
-            ) ; 
             const I2 = (
                 await (
                     import ('./useAudioGraphImplFComponentsWhiteNoise')     
                 )    
             ) ; 
             return {
-                ...I1 , 
                 ...I2 , 
             } ;
         })
@@ -176,17 +171,7 @@ const waveTableCPropsShallParse = ((...args2 : [
         })   
     ) ;      
     const CConstantX = (        
-        // TODO                     
-        React.lazy(async () => {
-            const {     
-                CConstantValue ,       
-            } = (      
-                await CFC()        
-            ) ;
-            return {
-                default: CConstantValue ,    
-            } ;
-        })   
+        CConstantValue
     ) ;     
     const {  
         freqArumentDefaults ,    
