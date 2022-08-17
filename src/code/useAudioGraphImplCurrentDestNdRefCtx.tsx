@@ -279,6 +279,9 @@ const useADestNdRefCtx1 = (
     }
 ) ;     
 
+const useWithCurrentACtxCurrentT = (
+    useWithCurrentSideTapPtRef
+) ;
 const CurrentCtxTInfoDisplay = (
     function () {
         return (
@@ -348,6 +351,7 @@ export {
     ModifyingCompPayloadDiv as WGD_DIV ,  
 
     CurrentCtxTInfoDisplay ,   
+    useWithCurrentACtxCurrentT , 
     Consm ,        
     useWithCurrentSideTapPtRef ,       
     useADestNdRefCtx1 ,                
