@@ -160,9 +160,7 @@ const HouseMusicShortBrkDemo = () => {
                         // TODO
                         return (
                             (
-                                ((IterableOps.clamp((t1 - 6 ) , 0, 1 ) ) * 3 )
-                                +
-                                ((IterableOps.clamp((8 - t1 ) , 0, 1 ) ) * 3 )
+                                ((IterableOps.clamp(Math.min(t1 - 6, 8 - t1 ) , 0, 1 ) ) * 3 )
                             )
                             /
                             12
