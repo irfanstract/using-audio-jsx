@@ -35,6 +35,17 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
     ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED  
 ) ;           
   
+/**   
+ * either 
+ * - all properties set
+ * - all properties unset
+ */
+type EitherBothSetOrBothUnset<A extends {} > = (
+    A | { [k in keyof A ] ?: undefined ; }
+) ;
+/**    
+ * use this method to properly evaluate the `freqCtrl` argument(s). `^_^`
+ */
 const freqCtrlRelatedPropsParse = (
     function (...[FMP] : [Partial<FreqArgsProps > ]) {
         ; 
@@ -184,9 +195,9 @@ type WaveTableNodeProps = (
         ) ;       
     }   
     &          
-    Partial<FreqArgsProps > 
+    EitherBothSetOrBothUnset<FreqArgsProps>
     &       
-    Partial<DetuningProps >                           
+    EitherBothSetOrBothUnset<DetuningProps >                           
 ) ;        
 const waveTableCPropsShallParse = ((...args2 : [
     config ?: {
