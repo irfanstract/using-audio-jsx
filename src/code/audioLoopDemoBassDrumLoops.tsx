@@ -270,9 +270,9 @@ const HouseMusicShortBrkDemo = () => {
            
            <XTreeble 
            freqArgumentInterpretation="timedomain-normalised" 
-           freqArgument={<CConstantValue value={440 / 44100 } /> } 
+           freqArgument={<CConstantValue value={220 / 44100 } /> } 
            gainValArgumentInterpretation="timedomain-normalised"
-           gainValArgument={<CConstantValue value={2 ** 1 } /> }
+           gainValArgument={<CConstantValue value={2 ** 3 } /> }
            >
            { treebleGraph }
            </XTreeble>
