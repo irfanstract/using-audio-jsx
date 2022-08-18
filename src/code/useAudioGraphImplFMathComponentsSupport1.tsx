@@ -149,40 +149,6 @@ const CFNVI0 = (() => {
 })() ;            
       
      
-// const aCtxGetPeriodiccScanning = (
-//     // TODO
-//     IterableOps.memoize((
-//         function (c: BaseAudioContext) {
-//             const tCtx = (
-//                 React.createContext<null | number >(null  )
-//             ) ;
-//             type PayloadRelatedProps = { children : (ctx: Pick<BaseAudioContext, "currentTime"> ) => React.ReactNode ; } ;
-//             return {
-//                 WithCurrentT: (
-//                     function ({ children: payload } : PayloadRelatedProps) { 
-//                         const tCtxParentVal = (
-//                             React.useContext(tCtx )
-//                         ) ; 
-//                         const { Provider: TCP } = tCtx ;
-//                         return (
-//                             (typeof tCtxParentVal === "number") 
-//                             ?
-//                             <>
-//                             { payload({ currentTime: tCtxParentVal }) }
-//                             </>
-//                             : ( 
-//                                 <TCP>
-//                                 { payload({ currentTime }) }
-//                                 </TCP>
-//                             )
-//                         ) ;
-//                     }
-//                 ) ,  
-//             } ;
-//         }
-//     ) , IterableOps.identity )
-// ) ;
-     
 const cFnValueCompImplSupport1 = (
     CFNVI0  
 ) ;
