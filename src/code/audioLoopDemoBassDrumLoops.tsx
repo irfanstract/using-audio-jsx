@@ -70,6 +70,44 @@ const {
 
 
        
+const XTreeble = (
+   function ({
+      children : payload,
+      //
+      freqArgument, 
+      freqArgumentInterpretation,
+      gainValArgument,
+      gainValArgumentInterpretation,
+   } : (
+      { children: React.ReactElement ; }
+      &
+      Pick<ComponentProps<typeof CBiquadFilterModulated> , "freqArgument" | "freqArgumentInterpretation" >
+      &
+      Pick<ComponentProps<typeof CBiquadFilterModulated> , "gainValArgument" | "gainValArgumentInterpretation" >
+   ) ) {
+      const gm = (
+         (gainValArgument && gainValArgumentInterpretation) ? 
+         ({ gainValArgument, gainValArgumentInterpretation } as const ) 
+         : {} 
+      ) ;
+      return (
+         <CBiquadFilterModulated
+         type="highshelf"
+         freqArgumentInterpretation={freqArgumentInterpretation }
+         freqArgument={freqArgument}
+         {...gm }
+         >
+         <CBiquadFilterModulated
+         type="highpass"
+         freqArgumentInterpretation={freqArgumentInterpretation }
+         freqArgument={freqArgument}
+         >
+            { payload }
+         </CBiquadFilterModulated>
+         </CBiquadFilterModulated>
+      ) ;
+   }
+) ;
 const HouseMusicShortBrkDemo = () => {
 
    const dv : 1 | 2 = 2 ;
@@ -174,6 +212,10 @@ const HouseMusicShortBrkDemo = () => {
       ) }
       type="triangle"
       />
+      </CAmpModulated0>
+   );
+   const treebleGraph = (
+      <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> }>
       <CAmpModulated0 value={<CConstantValue value={2 ** -0.5 } /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
@@ -223,8 +265,20 @@ const HouseMusicShortBrkDemo = () => {
        <WithSlowdown value={2 ** -1 }>
        <WithNSecondsFadeInBF>
            {true && bassDrumLoopGraph}
+
            { bassLineGraph }
+           
+           <XTreeble 
+           freqArgumentInterpretation="timedomain-normalised" 
+           freqArgument={<CConstantValue value={440 / 44100 } /> } 
+           gainValArgumentInterpretation="timedomain-normalised"
+           gainValArgument={<CConstantValue value={2 ** 1 } /> }
+           >
+           { treebleGraph }
+           </XTreeble>
+
            { null && <CAmbientNoise /> }
+           
        </WithNSecondsFadeInBF>
        </WithSlowdown>
        </WithSlowdown>
