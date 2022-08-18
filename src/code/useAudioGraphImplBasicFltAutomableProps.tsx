@@ -197,10 +197,6 @@ const biquadFltCPropsParse = (
         BiquadFltCProps       
     ) ) {            
         const {                      
-            gainValArgument: gainValueGraph0 = null ,       
-            gainValArgumentInterpretation = (  
-                automativeInputRangeDefaultMode 
-            ) ,        
             type: flType ,     
  
             children ,           
@@ -220,10 +216,13 @@ const biquadFltCPropsParse = (
             } , freqArgGraph0 )   
         ) ;                 
         const gainValArgument1: React.ReactElement = (
-            graphAfterNrmInterpretativeMode({ 
-                mode1 : gainValArgumentInterpretation  ,
-
-            } , gainValueGraph0 || <></> )       
+            graphAfterNrmInterpretativeModeC((
+                cCtrlPropsParse((
+                    mainProps.gainValArgument
+                ), mainProps.gainValArgumentInterpretation, {
+                    defaultGraph: <></> ,
+                } )
+            ))  
         ) ;       
         ;             
         return {  
@@ -267,22 +266,6 @@ const waveTableCPropsShallParse = ((...args2 : [
             } ;
         })
     );              
-    const CWhiteNoiseX = (      
-        // TODO                
-        React.lazy(async () => {
-            const {   
-                CWhiteNoise ,       
-            } = (  
-                await CFC()        
-            ) ;
-            return {
-                default: CWhiteNoise ,    
-            } ;
-        })   
-    ) ;      
-    const CConstantX = (        
-        CConstantValue
-    ) ;     
     return (                  
         function (...[mainProps] : [
             (                        
@@ -296,7 +279,7 @@ const waveTableCPropsShallParse = ((...args2 : [
                             
                 detune: detuneGraph0 = <></> ,       
                 detuneInterpretation = (  
-                    automativeInputRangeDefaultMode   
+                    ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED   
                 ) ,                            
                   
                 type : wvTable1 ,   
