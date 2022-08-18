@@ -53,6 +53,7 @@ import {
      
 } from "./useAudioGraphImplFComponentsLoopingWrapper1";
 import { CWhiteNoise } from "./useAudioGraphImplFComponentsWhiteNoise";
+import { CWaveTable1 } from "./useAudioGraphImplFComponentsBasicWaveTable";
 import { WithAutoUnmount } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
 
 // CSS
@@ -136,9 +137,6 @@ const CAmpModulated1 = (
         }    
     ))
 ) ;  
-const CWaveTable1 = (  
-    modulatedWaveTableUsageWrapC(audioFltAtAbsTNodes.useOinModulatedWaveTable )
-) ;
 const CAmpModulated: (
     typeof CAmpModulated1 
 ) = (  
