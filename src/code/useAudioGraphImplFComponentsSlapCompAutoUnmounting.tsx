@@ -13,7 +13,7 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
       
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
-import { Consm as NdRefConsm , WithGivenDest, useWithCurrentSideTapPtRef } from "./useAudioGraphImplCurrentDestNdRefCtx";           
+import { Consm as NdRefConsm , WithGivenDest, useWithCurrentSideTapPtRef, useWithCurrentACtxCurrentT } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import { 
     CConstantValue, 
 } from "./useAudioGraphImplFMathComponentsSupport1";
@@ -104,46 +104,26 @@ const {
                 passageStateBy1({ preFT, postFT })    
             ) ;      
             return (         
-                useWithCurrentSideTapPtRef(({ feedPt: destNd }) => (          
+                useWithCurrentACtxCurrentT(({ currentTime: ctxT }) => (        
+                    (typeof ctxT === "number")
+                    ?  
                     <CBC>{ function useC1() {    
                         const {       
                             passageState: passageState ,          
                             hasPassedT: hasPassedT ,  
                         } = (   
-                            useRealTimeQueryInterval11({ 
-                                f : ()  => {         
-                                    const ctxT = (
-                                        destNd          
-                                        ? 
-                                        destNd.context.currentTime 
-                                        :   
-                                        // -30000     
-                                        0    
-                                    ) ; 
-                                    const actualT = (
-                                        ctxT    
-                                    ) ;
-                                    ;                                      
-                                    return {
-                                        passageState : (     
-                                            passageStateBy({ expectedT, actualT })
-                                        ) ,   
-                                        hasPassedT : (expectedT <= actualT ) ,     
-                                    } ;                        
-                                } ,    
-                                LE : "useLayoutEffect" ,   
-                            } , (
-                                Math.max(...[
-                                    (     
-                                        (destNd && (destNd.context.state === "running") )
-                                        ?   
-                                        0.1         
-                                        :    
-                                        5     
-                                    ) , 
-                                    Math.min(preFT, postFT) / 2.5  ,  
-                                ])          
-                            ) * 1000 )            
+                            (()  => {   
+                                const actualT = (
+                                    ctxT    
+                                ) ;
+                                ;                                      
+                                return {
+                                    passageState : (     
+                                        passageStateBy({ expectedT, actualT })
+                                    ) ,   
+                                    hasPassedT : (expectedT <= actualT ) ,     
+                                } ;                        
+                            } )()        
                         ) ;       
                         return (        
                             <div       
@@ -155,6 +135,8 @@ const {
                             </div>  
                         ) ;              
                     } }</CBC>   
+                    :
+                    <></> 
                 ) )   
             ) ;      
         }     
