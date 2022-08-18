@@ -191,15 +191,40 @@ const {
             scanPeriodMillis : number ;           
         }           
     );
+    type CConstantValueProps = (            
+        NonNullable<(
+            Parameters<typeof renderConstantParamSrcElas1 >[0 ]
+        )>          
+        &
+        { unmountDebug ?: boolean ; }
+    ) ;
+    type CFnValueProps = (
+        {          
+            value : (              
+                Required<(  
+                    CFnVIProps
+                )>["compute"]  
+            ) ;            
+            /**   
+             * `setTargetAtTime` and `setValueCurveAtTime` both can't easily be reconfigured.  
+             * instead, the engine is supposed to do reconfig periodically, but    
+             * this will mean that the autom will not be able to easily respond to higher-level changes, 
+             * hence {@link React.useEffect `deps` as in `useEffect` }.    
+             *    */            
+            codeDeps ?: React.DependencyList ;  
+            /**   
+             * this is because `AudioParam`s are *polylineal* while *function*s are *continuous*.
+            */
+            scanPeriodMillis ?: (                
+                Required<(  
+                    CFnVIProps
+                )>["scanPeriodMillis"]       
+            )  ;                
+        }              
+    );
     return {     
         CConstantValue : (     
-            function CConstantValueC ( props1 : (            
-                NonNullable<( 
-                    Parameters<typeof renderConstantParamSrcElas1 >[0 ]
-                )>          
-                &
-                { unmountDebug ?: boolean ; }
-            )) {                   
+            function CConstantValueC ( props1 : CConstantValueProps ) {                   
                 const { value } = props1 ;          
                 const { unmountDebug = false } = props1 ;              
                 // TODO     
@@ -235,28 +260,7 @@ const {
       
         CFnValue : (() => {    
             type Props = (
-                {          
-                    value : (              
-                        Required<(  
-                            CFnVIProps
-                        )>["compute"]  
-                    ) ;            
-                    /**   
-                     * `setTargetAtTime` and `setValueCurveAtTime` both can't easily be reconfigured.  
-                     * instead, the engine is supposed to do reconfig periodically, but    
-                     * this will mean that the autom will not be able to easily respond to higher-level changes, 
-                     * hence {@link React.useEffect `deps` as in `useEffect` }.    
-                     *    */            
-                    codeDeps ?: React.DependencyList ;  
-                    /**   
-                     * this is because `AudioParam`s are *spline*-based while (...)      
-                    */
-                    scanPeriodMillis ?: (                
-                        Required<(  
-                            CFnVIProps
-                        )>["scanPeriodMillis"]       
-                    )  ;                
-                }              
+                CFnValueProps      
             ) ;        
             const usePropsExpand = (   
                 function (propsC: Props ) {
@@ -336,10 +340,20 @@ const {
                             }      
                         ), codeDeps )     
                     );          
+                    ; //
+                    const {
+                        frequency: scanFrq ,     
+                        period: scanPeriod ,             
+                    } = (         
+                        scanChunkFrequency    
+                    ) ;      
+                    const delayInSeconds = 0.07 ;    
                     ;                                              
                     ;                              
                     return {         
                         scanPeriodMillis ,  
+                        scanPeriod,
+                        scanFrq,
                         scanChunkFrequency ,       
                         codeDeps ,   
       
@@ -350,6 +364,8 @@ const {
                          * it's safe to make this part of {@link React.useEffect `deps`}.
                          */
                         lComputeAtT ,         
+                        
+                        delayInSeconds,
                     } ;   
                 }
             ) ;      
@@ -358,22 +374,22 @@ const {
             ) ) {                        
                 const {
                     scanPeriodMillis ,  
+                    scanPeriod,
+                    scanFrq,
                     scanChunkFrequency ,   
                     codeDeps ,   
 
                     usePeriodicCtxTScan1 ,       
                     useCScanTs , 
+                    /**  
+                     * this woul be one returned from {@link React.useCallback `useCallback`} and therefore
+                     * it's safe to make this part of {@link React.useEffect `deps`}.
+                     */
                     lComputeAtT ,                  
 
+                    delayInSeconds,
                 } = usePropsExpand(propsC ) ;           
-                const {
-                    frequency: scanFrq ,     
-                    period: scanPeriod ,             
-                } = (         
-                    scanChunkFrequency    
-                ) ;      
                 ;      
-                const delayInSeconds = 0.07 ;          
                 // TODO            
                 const {               
                     swingTConst ,                
