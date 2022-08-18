@@ -70,44 +70,85 @@ const {
 
 
        
-const XTreeble = (
-   function ({
-      children : payload,
-      //
-      freqArgument, 
-      freqArgumentInterpretation,
-      gainValArgument,
-      gainValArgumentInterpretation,
-   } : (
+const {
+   XTreeble,
+   XLowpass, 
+   
+} = (() => {
+   type Props1 = (
       { children: React.ReactElement ; }
       &
       Pick<ComponentProps<typeof CBiquadFilterModulated> , "freqArgument" | "freqArgumentInterpretation" >
       &
       Pick<ComponentProps<typeof CBiquadFilterModulated> , "gainValArgument" | "gainValArgumentInterpretation" >
-   ) ) {
-      const gm = (
-         (gainValArgument && gainValArgumentInterpretation) ? 
-         ({ gainValArgument, gainValArgumentInterpretation } as const ) 
-         : {} 
-      ) ;
-      return (
-         <CBiquadFilterModulated
-         type="highshelf"
-         freqArgumentInterpretation={freqArgumentInterpretation }
-         freqArgument={freqArgument}
-         {...gm }
-         >
-         <CBiquadFilterModulated
-         type="highpass"
-         freqArgumentInterpretation={freqArgumentInterpretation }
-         freqArgument={freqArgument}
-         >
-            { payload }
-         </CBiquadFilterModulated>
-         </CBiquadFilterModulated>
-      ) ;
-   }
-) ;
+   ) ;
+   return {
+      XTreeble : (
+         function ({
+            children : payload,
+            //
+            freqArgument, 
+            freqArgumentInterpretation,
+            gainValArgument,
+            gainValArgumentInterpretation,
+         } : Props1 ) {
+            const gm = (
+               (gainValArgument && gainValArgumentInterpretation) ? 
+               ({ gainValArgument, gainValArgumentInterpretation } as const ) 
+               : {} 
+            ) ;
+            return (
+               <CBiquadFilterModulated
+               type="highshelf"
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               {...gm }
+               >
+               <CBiquadFilterModulated
+               type="highpass"
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               >
+                  { payload }
+               </CBiquadFilterModulated>
+               </CBiquadFilterModulated>
+            ) ;
+         }
+      ) , 
+      XLowpass : (
+         function ({
+            children : payload,
+            //
+            freqArgument, 
+            freqArgumentInterpretation,
+            gainValArgument,
+            gainValArgumentInterpretation,
+         } : Props1 ) {
+            const gm = (
+               (gainValArgument && gainValArgumentInterpretation) ? 
+               ({ gainValArgument, gainValArgumentInterpretation } as const ) 
+               : {} 
+            ) ;
+            return (
+               <CBiquadFilterModulated
+               type="lowshelf"
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               {...gm }
+               >
+               <CBiquadFilterModulated
+               type="lowpass"
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               >
+                  { payload }
+               </CBiquadFilterModulated>
+               </CBiquadFilterModulated>
+            ) ;
+         }
+      ) , 
+   } ;
+})() ;
 const HouseMusicShortBrkDemo = () => {
 
    const dv : 1 | 2 = 2 ;
@@ -266,7 +307,15 @@ const HouseMusicShortBrkDemo = () => {
        <WithNSecondsFadeInBF>
            {true && bassDrumLoopGraph}
 
+           <CBiquadFilterModulated
+           type="lowshelf"
+           freqArgumentInterpretation="timedomain-normalised" 
+           freqArgument={<CConstantValue value={110 / 44100 } /> } 
+           gainValArgumentInterpretation="timedomain-normalised"
+           gainValArgument={<CConstantValue value={2 ** 1.25 } /> }
+           >
            { bassLineGraph }
+           </CBiquadFilterModulated>
            
            <XTreeble 
            freqArgumentInterpretation="timedomain-normalised" 
