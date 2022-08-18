@@ -13,13 +13,12 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
 import { Consm as NdRefConsm  } from "./useAudioGraphImplCurrentDestNdRefCtx";           
-import {                
-    CHalfSecndBeep1 , CPersistingBeep , CWhiteNoise ,    
-    CAmpModulated, CAmpModulated0 , CBiquadFilterModulated ,  CFreqDmAnalyF , 
-    CConstantValue ,  CFnValue1 , 
-    CAmpSlideDown ,              
-} from "./useAudioGraphImplFComponents"; 
-import { CWaveTable1 } from "./useAudioGraphImplFComponents";
+import { 
+    CConstantValue, 
+    CFnValue as CFnValue1,
+} from "./useAudioGraphImplFMathComponentsSupport1";
+import { CWaveTable1 } from "./useAudioGraphImplFComponentsBasicWaveTable";
+import { CAmpModulated as CAmpModulated0 } from "./useAudioGraphImplCurrentDestNdRefCtxC";
 import { 
     WithAutoUnmount as WithAutoUnmount0 ,    
     WithAutoStopmount as WithAutoStopmount0 ,  
