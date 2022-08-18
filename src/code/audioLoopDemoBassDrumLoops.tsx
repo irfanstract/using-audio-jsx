@@ -157,7 +157,7 @@ const HouseMusicShortBrkDemo = () => {
       </>
    );
    const bassLineGraph = (
-      <>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> }>
       <CWaveTable1
       detuneInterpretation="timedomain-normalised"
       detune={(
@@ -207,7 +207,7 @@ const HouseMusicShortBrkDemo = () => {
          type="triangle"
          />
       </CAmpModulated0>
-      </>
+      </CAmpModulated0>
    );
    return (  
        <WithSlowdown 
