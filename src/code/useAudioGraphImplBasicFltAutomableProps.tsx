@@ -46,7 +46,7 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
  * use this method to properly evaluate the `freqCtrl` argument(s). `^_^`
  */
 const freqCtrlRelatedPropsParse = (
-    function (...[FMP] : [Partial<FreqArgsProps > ]) {
+    function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > ]) {
         ; 
         const { //
             freqArgument: freqArgGraphSpecified ,                            
