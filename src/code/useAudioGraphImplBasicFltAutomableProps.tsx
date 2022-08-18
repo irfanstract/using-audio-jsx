@@ -33,6 +33,11 @@ import { CConstantValue } from "./useAudioGraphImplFMathComponentsSupport1";
 
 
 
+/**    
+ * don't use this; different usage(s) will necessitate different defaults.
+ * 
+ * @deprecated
+ */
 const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
     ABandpassFreqArgInputRangeMode.EFFECTIVE_INTENSITY_NORMALISED  
 ) ;           
