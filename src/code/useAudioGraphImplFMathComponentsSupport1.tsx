@@ -369,8 +369,8 @@ const {
                     } ;   
                 }
             ) ;      
-            function useCFVRenderImpl({ propsC, currentTimeE } : (
-                { currentTimeE: number ; propsC: Props ; }
+            function useCFVRenderImpl({ propsC } : (
+                { propsC: Props ; }
             ) ) {                        
                 const {
                     scanPeriodMillis ,  
@@ -407,8 +407,8 @@ const {
                 ) ;
                 function useCScannedImpl(): { e: React.ReactElement ; } {          
                     const e = (        
-                        useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
-                            nd0         
+                        useWithCurrentACtxCurrentT(({ feedPt: nd0, currentTime: currentTimeE }) =>  (
+                            (nd0 && (typeof currentTimeE === "number") )         
                             ?                   
                             <CBC>      
                             { function useE() {       
@@ -627,6 +627,13 @@ const {
                                         // TODO       
                                         return (                        
                                             <>        
+                                            { (
+                                                <p>
+                                                    Current Ctx T : 
+                                                    <NUMERIC maxPrecision={3 } >{ currentTimeE }</NUMERIC>
+                                                    (changes: { useDepsChgCount({}, [currentTimeE ]) } )
+                                                </p>    
+                                            ) && null }
                                             <pre>     
                                                 { (
                                                     JSON.stringify({  }, null, 2 )
@@ -657,13 +664,6 @@ const {
                 const dbg = (   
                     <div>
                     { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
-                    { (
-                        <p>
-                            Current Ctx T : 
-                            <NUMERIC maxPrecision={3 } >{ currentTimeE }</NUMERIC>
-                            (changes: { useDepsChgCount({}, [currentTimeE ]) } )
-                        </p>    
-                    ) && null }
                     </div>  
                 ) ;          
                 return (        
@@ -683,19 +683,7 @@ const {
                         }, [] ) ;                   
                     }              
                     return (
-                        useWithCurrentACtxCurrentT(({ currentTime: currentTimeE }) => (
-                            (typeof currentTimeE === "number")
-                            ?
-                            <CBC>
-                            { function useCFVRender() {
-                                return (
-                                    useCFVRenderImpl({ propsC, currentTimeE })
-                                ) ;
-                            } }
-                            </CBC>
-                            :
-                            (<></> )
-                            ) )
+                        useCFVRenderImpl({ propsC, })
                     ) ;
                 }
             )  ;  
