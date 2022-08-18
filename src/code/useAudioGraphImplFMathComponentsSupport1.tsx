@@ -427,6 +427,13 @@ const {
                             ?                   
                             <CBC>      
                             { function useE() {       
+                                /**    
+                                 * the amount of time
+                                 * each mount(ing) shall fire within ahead of actual payload-specified time
+                                 * */ 
+                                const headTime: number = (
+                                    0.001
+                                ) ;
                                 const {
                                     ctxT ,     
                                     ctxTFloored     ,        
@@ -434,7 +441,7 @@ const {
             
                                 } = useCScanTs(nd0, { currentTimeE: currentTimeE } ) ;       
                                 const actualScanKey : number = (
-                                    Math.floor(ctxTFloored / scanFrq )  
+                                    Math.floor(Math.floor(ctxT + headTime ) / scanFrq )  
                                 ) ;     
                                 const remountDeps1 = (       
                                     [actualScanKey, lComputeAtT ]  as const     
@@ -489,7 +496,7 @@ const {
                                                 dest: nd0  ,       
                                                     
                                                 unmountTransitiveLenSeconds: (
-                                                    (0.2) * scanPeriod   
+                                                    headTime + ((0.2) * scanPeriod )  
                                                 ) ,  
                                             })              
                                         ) ;
