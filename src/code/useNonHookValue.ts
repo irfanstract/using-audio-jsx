@@ -136,7 +136,7 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
                     setVl(newValue ) ;
                 }
             ), timeoutMillis, { catchupPolicy })
-        ) , deps ); 
+        ) , React.useDeferredValue(deps ) ); 
         // TODO
         const forceRefresh = (
             () => {}
