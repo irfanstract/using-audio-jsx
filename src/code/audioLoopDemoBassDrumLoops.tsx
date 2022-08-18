@@ -299,10 +299,6 @@ const HouseMusicShortBrkDemo = () => {
       </CAmpModulated0>
    );
    return (  
-       <WithSlowdown 
-       /**  this filtering is here to debug the one timing issues. */
-       value={2 ** 0 } 
-       >
        <WithSlowdown value={2 ** -1 }>
        <WithNSecondsFadeInBF>
            {true && bassDrumLoopGraph}
@@ -329,7 +325,6 @@ const HouseMusicShortBrkDemo = () => {
            { null && <CAmbientNoise /> }
            
        </WithNSecondsFadeInBF>
-       </WithSlowdown>
        </WithSlowdown>
    ) ;
 } ;
