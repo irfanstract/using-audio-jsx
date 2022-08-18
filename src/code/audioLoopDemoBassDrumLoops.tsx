@@ -210,8 +210,11 @@ const HouseMusicShortBrkDemo = () => {
                   if (t % 8 < 2.5 ) {
                      return 1 ;
                   }
-                  if (t % 8 < 4.5 ) {
+                  if (t % 8 < 4 ) {
                      return 3 ;
+                  }
+                  if (t % 8 < 4.5 ) {
+                     return -12 + (3 + 2 ) ;
                   }
                   if (t % 8 < 5.25 ) { 
                      return 3 + 2 ;
@@ -283,18 +286,55 @@ const HouseMusicShortBrkDemo = () => {
          type="sine"
          />
       </CAmpModulated0>
-      <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
+      <CAmpModulated0 value={<CConstantValue value={2 ** -6} /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
          detune={(
             <>
             <CConstantValue value={-3 } />
-            <CConstantValue value={2 + (7 / 12 ) } />
+            <CConstantValue value={2 } />
             { tnLn } 
             </>
          ) }
          type="triangle"
          />
+      </CAmpModulated0>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
+               <CWaveTable1
+               detuneInterpretation="timedomain-normalised"
+               detune={(
+                  <>
+                  <CConstantValue value={-3 } />
+                  <CConstantValue value={2 + (7 / 12 ) } />
+                  { tnLn } 
+                  </>
+               ) }
+               type="triangle"
+               />
+               <CWaveTable1
+               detuneInterpretation="timedomain-normalised"
+               detune={(
+                  <>
+                  <CConstantValue value={-3 } />
+                  <CConstantValue value={(2 + 1 ) + (7 / 12 ) } />
+                  { tnLn } 
+                  </>
+               ) }
+               type="triangle"
+               />
+      </CAmpModulated0>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -5 } /> } >
+               <CWaveTable1
+               detuneInterpretation="timedomain-normalised"
+               detune={(
+                  <>
+                  <CConstantValue value={-3 } />
+                  <CConstantValue value={(2 + 1 ) + (4 / 12 ) } />
+                  { tnLn } 
+                  </>
+               ) }
+               type="triangle"
+               />
       </CAmpModulated0>
       </CAmpModulated0>
    );
@@ -315,9 +355,9 @@ const HouseMusicShortBrkDemo = () => {
            
            <XTreeble 
            freqArgumentInterpretation="timedomain-normalised" 
-           freqArgument={<CConstantValue value={220 / 44100 } /> } 
+           freqArgument={<CConstantValue value={110 / 44100 } /> } 
            gainValArgumentInterpretation="timedomain-normalised"
-           gainValArgument={<CConstantValue value={2 ** 3 } /> }
+           gainValArgument={<CConstantValue value={2 ** 5 } /> }
            >
            { treebleGraph }
            </XTreeble>
