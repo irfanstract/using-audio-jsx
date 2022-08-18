@@ -402,6 +402,9 @@ const {
                 const { 
                     remountDebugBeep = false ,     
                 } = {} as { remountDebugBeep ?: boolean ; } ;  
+                const tScanMappingDomainRoundPrec : "no-rounding" | (1 | 2 | 3 ) = (
+                    "no-rounding"
+                ) ;
                 function useCScannedImpl(): { e: React.ReactElement ; } {          
                     const e = (        
                         useWithCurrentSideTapPtRef(({ feedPt: nd0 }) =>  (
@@ -428,47 +431,9 @@ const {
                                 const remountDeps1 = (       
                                     [actualScanKey, lComputeAtT ]  as const     
                                 ) ;  
-                                ; 
-                                ;      
-                                ;     
-                                /**     
-                                 * re-render(s) had been like brute-force trial-and-error, so  
-                                 * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
-                                 */
-                                return React.useMemo(() => (
-                                    <CBC > 
-                                    { function useCE1() {  
+                                const useRelevantAutoRemount = (
+                                    function () { 
                                         ;
-                                        const graph = (        
-                                            React.useMemo(() => (                        
-                                                tScan1             
-                                                .map(v => (v + -delayInSeconds ) )        
-                                                .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
-                                                    const t2 = (        
-                                                        // +t1.toFixed(1 )    
-                                                        t1  
-                                                    ) ;            
-                                                    ;                              
-                                                    const {    
-                                                        vl ,            
-                                                    } = (         
-                                                        lComputeAtT(( 
-                                                            // TODO restore to 't2'   
-                                                            // t2       
-                                                            t2  
-                                                        ) )          
-                                                    ) ;          
-                                                    return {                 
-                                                        t: t2 ,          
-                                                        vl: vl ,                     
-                                                    } ;          
-                                                })     
-                                                .toArray()          
-                                            ) , remountDeps1 )
-                                        ) ;                                    
-                                        ;     
-                                        ;
-                                        ;                           
                                         // TODO     
                                         const nd10 = (  
                                             (                              
@@ -503,6 +468,59 @@ const {
                                             useHalfSecondBeep(   
                                                 nd11, { t: beepT }) ;         
                                         }             
+                                        return {
+                                            nd10, 
+                                        } ;
+                                    }
+                                ) ;
+                                ; 
+                                ;      
+                                ;     
+                                /**     
+                                 * re-render(s) had been like brute-force trial-and-error, so  
+                                 * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
+                                 */
+                                return React.useMemo(() => (
+                                    <CBC > 
+                                    { function useCE1() {  
+                                        ;
+                                        const graph = (        
+                                            React.useMemo(() => (                        
+                                                tScan1             
+                                                .map(v => (v + -delayInSeconds ) )        
+                                                .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
+                                                    /**    
+                                                     * the argument to the following mapping/scanning thru {@link lComputeAtT }
+                                                     */
+                                                    const t2 = (         
+                                                        (typeof tScanMappingDomainRoundPrec === "number" ) ?
+                                                        +t1.toFixed(tScanMappingDomainRoundPrec )
+                                                        : t1 
+                                                    ) ;            
+                                                    ;                              
+                                                    const {    
+                                                        vl ,            
+                                                    } = (         
+                                                        lComputeAtT((     
+                                                            t2
+                                                        ) )          
+                                                    ) ;          
+                                                    return {                 
+                                                        t: t2 ,          
+                                                        vl: vl ,                     
+                                                    } ;          
+                                                })     
+                                                .toArray()          
+                                            ) , remountDeps1 )
+                                        ) ;                                    
+                                        ;     
+                                        ;
+                                        ;                           
+                                        const {
+                                            nd10, 
+                                        } = (
+                                            useRelevantAutoRemount()
+                                        ) ;
                                         const nd1 = (             
                                             React.useMemo(():(
                                                 (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
