@@ -112,44 +112,43 @@ const HouseMusicShortBrkDemo = () => {
       <CConstantValue value={-((11 / 12 ) ) } />
       <CFnValue1 
       value={({ ctxT: t }): number => {
-         const t1 = t % 8 ;
          // TODO
          return (
-            ((t: number ) => { 
+            (( ) => {
                {
-                  if (t < 1 ) {
+                  if (t % 8 < 1 ) {
                      return 0 ;
                   }
-                  if (t < 1.25 ) {
+                  if (t % 8 < 1.25 ) {
                      return 0 ;
                   }
-                  if (t < 1.5 ) {
+                  if (t % 8 < 1.5 ) {
                      return -2 ;
                   }
-                  if (t < 1.75 ) {
+                  if (t % 8 < 1.75 ) {
                      return 0 ;
                   }
-                  if (t < 2.5 ) {
+                  if (t % 8 < 2.5 ) {
                      return 1 ;
                   }
-                  if (t < 4.5 ) {
+                  if (t % 8 < 4.5 ) {
                      return 3 ;
                   }
-                  if (t < 5.25 ) { 
+                  if (t % 8 < 5.25 ) { 
                      return 3 + 2 ;
                   }
-                  if (t < 5.75 ) { 
+                  if (t % 8 < 5.75 ) { 
                      return 3 ;
                   }
-                  if (t < 6.5 ) { 
+                  if (t % 8 < 6.5 ) { 
                      return -2 ;
                   }
-                  if (t < 7.25 ) { 
+                  if (t % 8 < 7.25 ) { 
                      return 0 ;
                   }
                   return -2 ;
                }
-            })(t1 )
+            })(  )
             /
             12
          );
