@@ -153,7 +153,7 @@ export const AudioLoopDemoApp = (function () {
 
                                 <WithSlowdown 
                                 // debugging the timing issues
-                                value={2 ** 0.5} 
+                                value={2 ** 1.25} 
                                 >
                                 { true && c1 }    
                                 </WithSlowdown>              
