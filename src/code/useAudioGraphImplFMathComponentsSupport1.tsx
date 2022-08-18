@@ -641,6 +641,13 @@ const {
                 const dbg = (   
                     <div>
                     { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                    { (
+                        <p>
+                            Current Ctx T : 
+                            <NUMERIC maxPrecision={3 } >{ currentTimeE }</NUMERIC>
+                            (changes: { useDepsChgCount({}, [currentTimeE ]) } )
+                        </p>    
+                    ) && null }
                     </div>  
                 ) ;          
                 return (        
