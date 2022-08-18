@@ -43,52 +43,92 @@ const automativeInputRangeDefaultMode : ABandpassFreqArgInputRangeMode = (
 ) ;           
   
 /**    
- * use this method to properly evaluate the `freqCtrl` argument(s). `^_^`
+ * use these methods to properly evaluate the `freqCtrl` argument(s). `^_^`
  */
-const freqCtrlRelatedPropsParse = (
-    function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > ]) {
-        ; 
-        const { //
-            freqArgument: freqArgGraphSpecified ,                            
-                        
-        } = FMP ; //  
-        const {
-            freqArgumentInterpretation , 
-            freqArgument: freqArgGraph0 , 
-        } = ((): (
-            {}
-            & 
-            Required<(
-                FreqArgsProps
-            )>
-        ) => {
-            if (freqArgGraphSpecified ) {
-                return {
-                    freqArgument: freqArgGraphSpecified , 
-                    freqArgumentInterpretation: (
-                        FMP.freqArgumentInterpretation
-                        ||
-                        "resulting-magn-normalised"
-                    )
-                } ;
-            } else {
-                return {
-                    freqArgument: (
-                        <CConstantValue value={1 } />
-                    ) , 
-                    freqArgumentInterpretation: "timedomain-normalised", 
-                }
-            }
+const {
+    cCtrlPropsParse,
+    freqCtrlRelatedPropsParse , 
+} = (() => {
+    const FL = (
+        function (...[
+            freqArgGraphSpecified, 
+            freqArgumentInterpretationSpecified,
+            { defaultGraph } ,
+        ] : [
+            value: FreqArgsProps["freqArgument"] | undefined ,
+            valueINterpreta: FreqArgsProps["freqArgumentInterpretation"] | undefined ,
+            properties: { 
+                defaultGraph: React.ReactElement ; 
+            } ,
+        ]) {
             ;
-        })() ;
-        ;
-        return {
-            freqArgGraphSpecified ,
-            freqArgumentInterpretation ,
-            freqArgGraph0 ,
-        } ;
-    }
-) ;
+            const {
+                freqArgumentInterpretation ,
+                freqArgument: freqArgGraph0 ,
+            } = ((): (
+                {}
+                &
+                Required<(
+                    FreqArgsProps
+                )>
+            ) => {
+                if (freqArgGraphSpecified ) {
+                    return {
+                        freqArgument: freqArgGraphSpecified ,
+                        freqArgumentInterpretation: (
+                            freqArgumentInterpretationSpecified
+                            ||
+                            "resulting-magn-normalised"
+                        )
+                    } ;
+                } else {
+                    return {
+                        freqArgument: (
+                            defaultGraph
+                        ) ,
+                        freqArgumentInterpretation: "timedomain-normalised",
+                    }
+                }
+                ;
+            })() ;
+            ;
+            return {
+                mainGraphSpecified: freqArgGraphSpecified ,
+                argumentInterpretation: freqArgumentInterpretation ,
+                mainGraphUsed0: freqArgGraph0 ,
+            } ;
+        }
+    );
+    return {
+        cCtrlPropsParse: FL ,
+        freqCtrlRelatedPropsParse: (
+            function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > ]) {
+                ; 
+                const { //
+                    freqArgument: freqArgGraphSpecified ,     
+                    freqArgumentInterpretation: freqArgumentInterpretationSpecified,                       
+                                
+                } = FMP ; //  
+                ;
+                const {
+                    argumentInterpretation: freqArgumentInterpretation,
+                    mainGraphUsed0: freqArgGraph0,
+                } = (
+                    FL(freqArgGraphSpecified, freqArgumentInterpretationSpecified, {
+                        defaultGraph: (
+                            <CConstantValue value={1 } />
+                        ) ,
+                    } )
+                ) ;
+                return {
+                    freqArgGraphSpecified ,
+                    freqArgumentInterpretation ,
+                    freqArgGraph0 ,
+                } ;
+            }
+        ) ,
+    } ;
+})() ;
 
 const SingleParamTerminalElementCProps = {} ; // TS-1205     
 type SingleParamTerminalElementCProps = ( 
