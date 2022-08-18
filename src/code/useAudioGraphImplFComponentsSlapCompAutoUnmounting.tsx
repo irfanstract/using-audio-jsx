@@ -16,8 +16,10 @@ import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";
 import { Consm as NdRefConsm , WithGivenDest, useWithCurrentSideTapPtRef } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import { 
     CConstantValue, 
-    CFnValue as CFnValue1,
 } from "./useAudioGraphImplFMathComponentsSupport1";
+import { 
+    CFnValueFromRelativeT as CFnValue1,         
+} from "./useAudioGraphImplFMathComponentsSupport11";
 import { CWaveTable1 } from "./useAudioGraphImplFComponentsBasicWaveTable";
 import { CAmpModulated as CAmpModulated0 } from "./useAudioGraphImplCurrentDestNdRefCtxC";
 import { 
