@@ -168,17 +168,45 @@ const HouseMusicShortBrkDemo = () => {
       ) }
       type="triangle"
       />
-      <CWaveTable1
-      detuneInterpretation="timedomain-normalised"
-      detune={(
-         <>
-         <CConstantValue value={-3 } />
-         <CConstantValue value={1 + (7 / 12 ) } />
-         { tnLn } 
-         </>
-      ) }
-      type="sine"
-      />
+      <CAmpModulated0 value={<CConstantValue value={2 ** -0.5 } /> } >
+         <CWaveTable1
+         detuneInterpretation="timedomain-normalised"
+         detune={(
+            <>
+            <CConstantValue value={-3 } />
+            <CConstantValue value={1 + (7 / 12 ) } />
+            { tnLn } 
+            </>
+         ) }
+         type="sine"
+         />
+      </CAmpModulated0>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -2} /> } >
+         <CWaveTable1
+         detuneInterpretation="timedomain-normalised"
+         detune={(
+            <>
+            <CConstantValue value={-3 } />
+            <CConstantValue value={2 + (4 / 12 ) } />
+            { tnLn } 
+            </>
+         ) }
+         type="sine"
+         />
+      </CAmpModulated0>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
+         <CWaveTable1
+         detuneInterpretation="timedomain-normalised"
+         detune={(
+            <>
+            <CConstantValue value={-3 } />
+            <CConstantValue value={2 + (7 / 12 ) } />
+            { tnLn } 
+            </>
+         ) }
+         type="triangle"
+         />
+      </CAmpModulated0>
       </>
    );
    return (  
