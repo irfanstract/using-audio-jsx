@@ -148,8 +148,16 @@ export const AudioLoopDemoApp = (function () {
                         <Prv1 value={c } >          
                             <div key={key }>   
                             <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
+
                                 { null && <CurrentCtxTInfoDisplay /> }  
-                                { true && c1 }                       
+
+                                <WithSlowdown 
+                                // debugging the timing issues
+                                value={2 ** 0.5} 
+                                >
+                                { true && c1 }    
+                                </WithSlowdown>              
+
                             </CAmpModulated0>
                             </div>                   
                         </Prv1>   
