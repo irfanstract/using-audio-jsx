@@ -273,25 +273,14 @@ const CurrentCtxTInfoDisplay = (
     function () {
         return (
             // TODO     
-            useWithCurrentSideTapPtRef(({ feedPt }) => (    
-                feedPt 
+            useWithCurrentSideTapPtRef(({ feedPt, currentTime: ctxTime }) => (    
+                (feedPt && (typeof ctxTime === "number") ) 
                 ?         
                 <CBC>
                 { function useC() {                     
                     const { isWindowOnFocus } = (
                         useWindowActivityStatus() 
                     ) ;         
-                    const ctxTime = (  
-                        React.useDeferredValue((
-                            useRealTimeQueryInterval1(
-                                (): typeof feedPt.context.currentTime => feedPt.context.currentTime , 
-                                (
-                                    isWindowOnFocus
-                                    &&
-                                    (feedPt && (feedPt.context.state === "running" ) )
-                                ) ? 100 : (3 * 1000 )  )
-                        ))
-                    ) ;    
                     return (   
                         <p>            
                         Global ACtx Time =      
