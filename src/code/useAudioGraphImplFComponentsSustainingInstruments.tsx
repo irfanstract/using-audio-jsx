@@ -49,9 +49,6 @@ const {
     WithDelay ,           
     LoopingWithPeriod ,        
 } = tCtxs ;
-const WithAutoUnmount = (
-    WithAutoUnmount0              
-);    
 
 const standardSnareDrumInstrumentAmp : number = 2 ** -2 ;
 
