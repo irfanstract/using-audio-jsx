@@ -426,7 +426,16 @@ const {
             
                                 } = useCScanTs(nd0, { currentTimeE: currentTimeE } ) ;       
                                 const actualScanKey : number = (
-                                    Math.floor(Math.floor(ctxT + headTime ) / scanFrq )  
+                                    Math.floor((
+                                        (() => {
+                                            const t0 = ctxT ;
+                                            const t1 = t0 + headTime ;
+                                            const t2 = t1 * scanFrq ;
+                                            return (
+                                                t2
+                                            ) ;
+                                        })()
+                                    ) )  
                                 ) ;     
                                 const remountDeps1 = (       
                                     [actualScanKey, lComputeAtT ]  as const     
