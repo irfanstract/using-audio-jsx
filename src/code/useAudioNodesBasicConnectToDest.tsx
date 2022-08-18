@@ -168,7 +168,7 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
                             )),   
                             timeout  / 2)  
                     );                   
-                    setTimeout(() => nd1.disconnect(), (3 * timeout ) * 1000 ) ;            
+                    setTimeout(() => nd1.disconnect(), Math.max(1, 3 * timeout ) * 1000 ) ;            
                 } ;                
             }                  
         }
