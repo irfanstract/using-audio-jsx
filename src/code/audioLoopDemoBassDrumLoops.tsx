@@ -137,11 +137,17 @@ const HouseMusicShortBrkDemo = () => {
                   if (t % 8 < 5.25 ) { 
                      return 3 + 2 ;
                   }
-                  if (t % 8 < 5.75 ) { 
+                  if (t % 8 < 5.5 ) { 
                      return 3 ;
+                  }
+                  if (t % 8 < 5.75 ) { 
+                     return 0 ;
                   }
                   if (t % 8 < 6.5 ) { 
                      return -2 ;
+                  }
+                  if (t % 8 < 7 ) { 
+                     return 0 ;
                   }
                   if (t % 8 < 7.25 ) { 
                      return 0 ;
@@ -157,7 +163,7 @@ const HouseMusicShortBrkDemo = () => {
       </>
    );
    const bassLineGraph = (
-      <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> }>
+      <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> }>
       <CWaveTable1
       detuneInterpretation="timedomain-normalised"
       detune={(
