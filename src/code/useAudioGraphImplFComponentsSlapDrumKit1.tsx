@@ -162,7 +162,13 @@ const snKit = (() => {
     const applicableScanPeriodMillisFromTCoef = (
         function (...[tCoef1] : [number] ) {
             return (
-                (Math.max(1, tCoef1 ) * (2 ** -5 ) ) * 1000  
+                IterableOps.clamp((
+                    Math.max(1, tCoef1 ) 
+                    * 
+                    (2 ** -5 )
+                ) , 0.01, 0.9 ) 
+                * 
+                1000  
             ) ;    
         }      
     );    
