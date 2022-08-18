@@ -55,7 +55,7 @@ const {
             freqArgumentInterpretationSpecified,
             { defaultGraph } ,
         ] : [
-            value: FreqArgsProps["freqArgument"] | undefined ,
+            value: React.ReactElement | null | undefined ,
             valueINterpreta: FreqArgsProps["freqArgumentInterpretation"] | undefined ,
             properties: { 
                 defaultGraph: React.ReactElement ; 
@@ -129,6 +129,22 @@ const {
         ) ,
     } ;
 })() ;
+const graphAfterNrmInterpretativeModeC = (
+    function (props: ReturnType<typeof cCtrlPropsParse > ) {
+        const {
+            argumentInterpretation: gainValArgumentInterpretation,
+            mainGraphUsed0: gainValueGraph0,
+        } = (
+            props
+        ) ;
+        return (
+            graphAfterNrmInterpretativeMode({ 
+                mode1 : gainValArgumentInterpretation  ,
+
+            } , <>{ gainValueGraph0 }</> )       
+        ) ;
+    }
+) ;
 
 const SingleParamTerminalElementCProps = {} ; // TS-1205     
 type SingleParamTerminalElementCProps = ( 
@@ -137,24 +153,20 @@ type SingleParamTerminalElementCProps = (
     ) , "value">     
     &    
     Required<(  
-        React.PropsWithChildren<{ }>
+        { children: React.ReactElement ; }
     )>           
 ) ;   
 const evSingleArgumentTerminalNodeCPropsParse = (    
     function (mainProps : SingleParamTerminalElementCProps ) { 
-        const {          
-            children: gainValueGraph0 = null ,     
-            valueInterpretation: gainValArgumentInterpretation = (  
-                automativeInputRangeDefaultMode 
-            ) ,                     
-                           
-        } = mainProps ;        
         ;          
         const gainValArgument1: React.ReactElement = (
-            graphAfterNrmInterpretativeMode({ 
-                mode1 : gainValArgumentInterpretation  ,
-
-            } , <>{ gainValueGraph0 }</> )       
+            graphAfterNrmInterpretativeModeC((
+                cCtrlPropsParse((
+                    mainProps.children
+                ), mainProps.valueInterpretation, {
+                    defaultGraph: <></> ,
+                } )
+            ))  
         ) ;                               
         ;    
         return {  
