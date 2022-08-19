@@ -89,34 +89,31 @@ const useRefreshByInterval1 = (
         // periofMillis: number ,    
         _1 : true ,        
         periodMillis: number ,                    
-        properties ?: {
+        properties ?: (
+            {
 
-            /**   
-             * React has two variations of `useEffect`, it's `useEffect` itself as well as `useLayoutEffect` .  
-             * in general `useEffect` is strongly preferred for high-level (sub)modules, but  
-             * `useEffect` is prone to timing distortion and therefore in timing-sensitive apps `useLayoutEffect` shall be used instead.
-             * 
-             * there's also `useInsertionEffect`, but 
-             * it can't be used for `dispatch(...)` or `setState(...)` and hence not applicable. 
-             * 
-             * *this argument shall never change for the Component lifetime as React does not support succh change*.   
-             */
-            LE ?: (           
-                keyof Pick<typeof React, "useLayoutEffect" | "useEffect">         
-            ) ; 
-
-            /**    
-             * this specifies how leftbehindness(es) shall be handled.
-             * {@link usingInterval}.
-             */
-            catchupPolicy ?: (
+                /**   
+                 * React has two variations of `useEffect`, it's `useEffect` itself as well as `useLayoutEffect` .  
+                 * in general `useEffect` is strongly preferred for high-level (sub)modules, but  
+                 * `useEffect` is prone to timing distortion and therefore in timing-sensitive apps `useLayoutEffect` shall be used instead.
+                 * 
+                 * there's also `useInsertionEffect`, but 
+                 * it can't be used for `dispatch(...)` or `setState(...)` and hence not applicable. 
+                 * 
+                 * *this argument shall never change for the Component lifetime as React does not support succh change*.   
+                 */
+                LE ?: (           
+                    keyof Pick<typeof React, "useLayoutEffect" | "useEffect">         
+                ) ; 
+    
+            }
+            &
+            Partial<(
                 NonNullable<(
-                    NonNullable<(
-                        Parameters<typeof usingInterval >[2]
-                    )>["catchupPolicy"]
+                    Parameters<typeof usingInterval >[2]
                 )>
-            ) ;
-        } ,
+            ) >
+        ) ,
     ]) => {    
         /**   
          * extract some variables
