@@ -149,6 +149,11 @@ const {
       ) , 
    } ;
 })() ;
+const isAtSecondHalf = (
+   (t: number) => (
+      Math.floor(t * 2 ) % 2
+   )
+) ;
 const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => {
 
    const dv : 1 | 2 = 2 ;
@@ -428,51 +433,41 @@ const MercerTchamiMusicDemoIntro = (
       ), "mode">
    )) {
       const bPeriod = 0.5 ;
-      const activativeStatusForT = (
-         ({ ctxT: t0 } : (
-            Parameters<(
-               (
-                  ComponentProps<typeof CFnValue1>
-               )["value"] 
-            )>[0]
-         )) => {
-            return (
-               Math.max((() => { 
-                  const t = t0 / bPeriod ;
-                  return (
-                     Math.floor(t * 2 ) % 2
-                  ) ;
-               })() , (
-                  (32 <= t0 ) ?
-                  1 : 0
-               ))
-            ) ;
-         } 
-      ) ;
+      const baseFreq1 = 32 ;
       return (
          <>
          <CBiquadFilterModulated
          type="lowpass"
          freqArgumentInterpretation="timedomain-normalised"
          freqArgument={(
+            <>
             <CFnValue1 
             value={({ ctxT: t0 }) => {
-               const baseFreq = 33 ;
-               const ctrlV = (
-                  IterableOps.clamp(t0 / 16, 0, 1 )
-               );
-               const vle = (
-                  (
-                     activativeStatusForT({ ctxT: t0 }) 
-                     ?
-                     ((2 ** (ctrlV * Math.log2(10000 / baseFreq ) ) ) * baseFreq) 
-                     : 
-                     baseFreq
-                  ) / 48000
-               ) ; 
-               return vle ;
+               const t = t0 / bPeriod ;
+               return (
+                  (64 <= t)
+                  ?
+                  1 
+                  : 
+                  IterableOps.clamp((
+                     (
+                        (2 ** (
+                           IterableOps.clamp((
+                              isAtSecondHalf(t ) ?
+                              ( (t / 64 ) )
+                              : ( ((t - 32 ) / 32 ) )
+                           ), 0, 1 ) * Math.log2(48000 / baseFreq1 )  
+                        ) ) 
+                        * 
+                        baseFreq1
+                     ) 
+                     / 
+                     48000 
+                  ), 0, 1 )
+               ) ;
             } }
             />
+            </>
          ) }
          >
          <MercerTchamiMusicDemo1 mode={2 } {...props1} />
