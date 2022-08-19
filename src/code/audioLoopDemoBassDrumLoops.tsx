@@ -151,6 +151,9 @@ const {
 })() ;
 const HouseMusicShortBrkDemo = () => {
 
+   const [ac, setAc ] = (
+      React.useState<0 | 2 | 7 >(0 )
+   ) ;
    const dv : 1 | 2 = 2 ;
    const bassDrumLoopGraph = (
        <MetronomeCheckAndExpandingElem
@@ -286,7 +289,7 @@ const HouseMusicShortBrkDemo = () => {
          type="sine"
          />
       </CAmpModulated0>
-      <CAmpModulated0 value={<CConstantValue value={2 ** -6} /> } >
+      <CAmpModulated0 value={<CConstantValue value={2 ** -5} /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
          detune={(
@@ -311,44 +314,60 @@ const HouseMusicShortBrkDemo = () => {
                ) }
                type="triangle"
                />
-               <CWaveTable1
-               detuneInterpretation="timedomain-normalised"
-               detune={(
-                  <>
-                  <CConstantValue value={-3 } />
-                  <CConstantValue value={(2 + 1 ) + (7 / 12 ) } />
-                  { tnLn } 
-                  </>
-               ) }
-               type="triangle"
-               />
       </CAmpModulated0>
-      <CAmpModulated0 value={<CConstantValue value={2 ** -5 } /> } >
-               <CWaveTable1
-               detuneInterpretation="timedomain-normalised"
-               detune={(
-                  <>
-                  <CConstantValue value={-3 } />
-                  <CConstantValue value={(2 + 1 ) + (4 / 12 ) } />
-                  { tnLn } 
-                  </>
-               ) }
-               type="triangle"
-               />
-      </CAmpModulated0>
-      <CAmpModulated0 value={<CConstantValue value={2 ** -7 } /> } >
-               <CWaveTable1
-               detuneInterpretation="timedomain-normalised"
-               detune={(
-                  <>
-                  <CConstantValue value={-3 } />
-                  <CConstantValue value={(2 + 1 + 1 ) + (4 / 12 ) } />
-                  { tnLn } 
-                  </>
-               ) }
-               type="triangle"
-               />
-      </CAmpModulated0>
+      {(
+         (2 <= ac )
+         ?
+         <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
+                  <CWaveTable1
+                  detuneInterpretation="timedomain-normalised"
+                  detune={(
+                     <>
+                     <CConstantValue value={-3 } />
+                     <CConstantValue value={(2 + 1 ) + (7 / 12 ) } />
+                     { tnLn } 
+                     </>
+                  ) }
+                  type="triangle"
+                  />
+         </CAmpModulated0>
+         :
+         <></>
+      )}
+      {(
+         (7 <= ac ) 
+         ?
+         <>
+         <CAmpModulated0 value={<CConstantValue value={2 ** -5 } /> } >
+                  <CWaveTable1
+                  detuneInterpretation="timedomain-normalised"
+                  detune={(
+                     <>
+                     <CConstantValue value={-3 } />
+                     <CConstantValue value={(2 + 1 ) + (4 / 12 ) } />
+                     { tnLn } 
+                     </>
+                  ) }
+                  type="triangle"
+                  />
+         </CAmpModulated0>
+         <CAmpModulated0 value={<CConstantValue value={2 ** -7 } /> } >
+                  <CWaveTable1
+                  detuneInterpretation="timedomain-normalised"
+                  detune={(
+                     <>
+                     <CConstantValue value={-3 } />
+                     <CConstantValue value={(2 + 1 + 1 ) + (4 / 12 ) } />
+                     { tnLn } 
+                     </>
+                  ) }
+                  type="triangle"
+                  />
+         </CAmpModulated0>
+         </>
+         :
+         <></>
+      )}
       </CAmpModulated0>
    );
    return (  
