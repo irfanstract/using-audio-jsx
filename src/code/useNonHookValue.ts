@@ -2,15 +2,6 @@
  * concerned with the React-friendly usage of real-time-changing values     
  */
 // import util from "util" ;
-// try {
-//     const em1 = { v: 3 } as const ;
-//     const em2 : {} = em1 ;
-//     const em3 : { v ?: () => 5 } = em2 ;
-//     const em31 = ("v" in em3 ) && (() => { const e = (em3.v ) ; return e && e() ; } )() ;
-//     console.info({ em1, em2, em3, em31 }) ;     
-// } catch (e ) { 
-//     console.info(e ) ;    
-// }
 import { BoundedIdentityFunction, } from "./generalUse11";
 import React, { 
     useState, useReducer,      
@@ -29,6 +20,15 @@ import {
  
 } from "./usingIntervalRefresh";      
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
+try {
+    const em1 = { v: 3 } as const ;
+    const em2 : {} = em1 ;
+    const em3 : { v ?: () => 5 } = em2 ;
+    const em31 = ("v" in em3 ) && (() => { const e = (em3.v ) ; return e && e() ; } )() ;
+    console.info({ em1, em2, em3, em31 }) ;     
+} catch (e ) { 
+    console.info(e ) ;    
+}
 
 
   
