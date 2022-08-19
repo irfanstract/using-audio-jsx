@@ -26,7 +26,6 @@ type EitherBothSetOrBothUnset<A extends {} > = (
 ) ;
 const EitherBothSetOrBothUnset = {} ; // TS-1205
 
-const XWithInterpretation = {} ; // TS-1205
 /**    
  * W3C's `AudioNode`s spec makes `AudioNode`s *time-domain*. however,
  * being *time-domain* is not always the desired config, with some desiring being *time-freq-domain*.
@@ -52,7 +51,8 @@ type XWithInterpretation<Key extends string, E > = (
         )
     )>
 ) ;             
-const FreqArgsProps = {} ;   // TS-1205
+const XWithInterpretation = {} ; // TS-1205
+// const FreqArgsProps = {} ;   // TS-1205
 /**   
  * {@link XWithInterpretation}.
  * {@link OscillatorNode}, {@link BiquadFilterNode}.
@@ -71,7 +71,8 @@ type FreqArgsProps = (
         // }   
     )
 ) ;             
-const DetuningProps = {} ; // TS-1205
+const FreqArgsProps = {} ;   // TS-1205
+// const DetuningProps = {}
 /**   
  * {@link XWithInterpretation}.
  * {@link OscillatorNode}, {@link BiquadFilterNode}.
@@ -79,7 +80,8 @@ const DetuningProps = {} ; // TS-1205
 type DetuningProps = (
     XWithInterpretation<"detune", React.ReactElement >          
 ) ;         
-const GainValArgsProps = {} ; // TS-1205
+const DetuningProps = {} ; // TS-1205
+// const GainValArgsProps = {} ; // TS-1205
 /**
  * {@link XWithInterpretation}.
  * {@link GainNode}, {@link BiquadFilterNode}.
@@ -87,7 +89,8 @@ const GainValArgsProps = {} ; // TS-1205
 type GainValArgsProps<E = React.ReactElement > = (            
     XWithInterpretation<"gainValArgument", E >        
 ) ;                           
-const GainValArgsProps1 = {} ; // TS-1205                
+const GainValArgsProps = {} ; // TS-1205
+// const GainValArgsProps1 = {} ; // TS-1205       
 /**    
  * {@link XWithInterpretation}.
  * {@link GainNode}, {@link BiquadFilterNode}.
@@ -104,13 +107,15 @@ type GainValArgsProps1 = (
         )>            
     ) | GainValArgsProps<React.ReactElement> )       
 ) ;          
-const QFactualProps = {} ; // TS-1205
+const GainValArgsProps1 = {} ; // TS-1205                
+// const QFactualProps = {} ; // TS-1205
 /**   
  * {@link BiquadFilterNode}
  */
 type QFactualProps = (
     XWithInterpretation<"qFactual", React.ReactElement >      
 ) ;   
+const QFactualProps = {} ; // TS-1205
 
 
 
