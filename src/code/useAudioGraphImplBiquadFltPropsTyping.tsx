@@ -27,6 +27,14 @@ type EitherBothSetOrBothUnset<A extends {} > = (
 const EitherBothSetOrBothUnset = {} ; // TS-1205
 
 const XWithInterpretation = {} ; // TS-1205
+/**    
+ * W3C's `AudioNode`s spec makes `AudioNode`s *time-domain*. however,
+ * being *time-domain* is not always the desired config, with some desiring being *time-freq-domain*.
+ * 
+ * for now, 
+ * it's important that, when-and-only-when a graph is explicitly specified, 
+ * the interpretation be also explicitly specified.
+ */
 type XWithInterpretation<Key extends string, E > = (
     EitherBothSetOrBothUnset<(
         {            
@@ -45,6 +53,10 @@ type XWithInterpretation<Key extends string, E > = (
     )>
 ) ;             
 const FreqArgsProps = {} ;   // TS-1205
+/**   
+ * {@link XWithInterpretation}.
+ * {@link OscillatorNode}, {@link BiquadFilterNode}.
+ */
 type FreqArgsProps = (
     // XWithInterpretation<"freqArgument", React.ReactElement >   
     (
@@ -60,14 +72,26 @@ type FreqArgsProps = (
     )
 ) ;             
 const DetuningProps = {} ; // TS-1205
+/**   
+ * {@link XWithInterpretation}.
+ * {@link OscillatorNode}, {@link BiquadFilterNode}.
+ */
 type DetuningProps = (
     XWithInterpretation<"detune", React.ReactElement >          
 ) ;         
 const GainValArgsProps = {} ; // TS-1205
+/**
+ * {@link XWithInterpretation}.
+ * {@link GainNode}, {@link BiquadFilterNode}.
+ */
 type GainValArgsProps<E = React.ReactElement > = (            
     XWithInterpretation<"gainValArgument", E >        
 ) ;                           
 const GainValArgsProps1 = {} ; // TS-1205                
+/**    
+ * {@link XWithInterpretation}.
+ * {@link GainNode}, {@link BiquadFilterNode}.
+ * */          
 type GainValArgsProps1 = (     
     /**      
      * either
@@ -81,6 +105,9 @@ type GainValArgsProps1 = (
     ) | GainValArgsProps<React.ReactElement> )       
 ) ;          
 const QFactualProps = {} ; // TS-1205
+/**   
+ * {@link BiquadFilterNode}
+ */
 type QFactualProps = (
     XWithInterpretation<"qFactual", React.ReactElement >      
 ) ;   
