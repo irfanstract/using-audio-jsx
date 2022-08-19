@@ -37,7 +37,8 @@ import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv } from "./useAudioGr
                 
                      
                                                
-type NCtxValue = (                                              
+const AFeedableAndTappableNCc = {} ; // TS-1205
+type AFeedableAndTappableNCc = (                                              
     {         
         [k in keyof (
             Pick<AFeedableAndTappableNca, "sideTapPt">    
@@ -48,7 +49,9 @@ type NCtxValue = (
 );                  
 
 type NCtxV1 = (
-    NCtxValue & { currentTime : null | number ; }
+    AFeedableAndTappableNCc 
+    & 
+    { currentTime : null | number ; }
 );
 const {     
     Prv1 ,    
@@ -58,7 +61,7 @@ const {
     ctx0 ,            
      
 } = ((): {    
-    Prv1: React.FC<React.ProviderProps<NCtxValue>>;     
+    Prv1: React.FC<React.ProviderProps<AFeedableAndTappableNCc>>;     
     Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
     useCurrentDestNd0 : (
         null | (       
@@ -66,7 +69,7 @@ const {
         )        
     ) ;        
  
-    ctx0: () => Promise<React.Context<NCtxValue>> ;  
+    ctx0: () => Promise<React.Context<AFeedableAndTappableNCc>> ;  
       
      
 } => {                
@@ -78,7 +81,7 @@ const {
      const ctx0 = (                                     
         IterableOps.once(async () => {     
             const c0 = (                 
-                React.createContext<NCtxValue>(await getACtxMtWithoutAnyFilter1() )
+                React.createContext<AFeedableAndTappableNCc>(await getACtxMtWithoutAnyFilter1() )
             ) ;                   
             c0.displayName = (
                 `ACtxtualDesinationRefCtx`      
@@ -114,7 +117,7 @@ const {
             XPrv ,  
         } = {
             XPrv : IterableOps.identity<(
-                React.FC<React.ProviderProps<NCtxValue > >
+                React.FC<React.ProviderProps<AFeedableAndTappableNCc > >
             ) >(function ({ value, children: payload }  ) {
                 const PrvImpl = c0.Provider ;
                 const parentValue = (
@@ -169,7 +172,7 @@ const {
         } ;           
     }
 })() ;                                
-const useWithCurrentSideTapPtRef1: (
+const useWithCurrentCtxValue: (
     (a: (v: Parameters<ComponentProps<typeof Consm >["children"] >[0] ) => React.ReactElement )
     =>             
     React.ReactElement               
@@ -195,7 +198,7 @@ const WithGivenDest = (() => {
         IterableOps.identity<(         
             React.FC<(       
                 React.ProviderProps<(   
-                    (NonNullable<NCtxValue> )["feedPt"]         
+                    (NonNullable<AFeedableAndTappableNCc> )["feedPt"]         
                 )>       
             ) >
         )>(function WithGivenDestC({ value: newDest, children }) {        
@@ -227,6 +230,10 @@ const WithGivenDest = (() => {
         })
     ) ;  
 })() ;   
+/**     
+ * 
+ * @deprecated
+ */
 const useADestNdRefCtx10 = (
     () => (
         useAsyncMemo({  
@@ -235,6 +242,10 @@ const useADestNdRefCtx10 = (
         } , [ctx0 ] )      
     )  
 );                 
+/**     
+ * 
+ * @deprecated
+ */
 const useADestNdRefCtx1 = (
     () => { 
         ;
@@ -265,8 +276,11 @@ const useADestNdRefCtx1 = (
         } ;
     }
 ) ;     
+/**    
+ * 
+ */
 const useWithCurrentSideTapPtRef: (
-    (a: (v: NCtxValue ) => React.ReactElement )
+    (a: (v: AFeedableAndTappableNCc ) => React.ReactElement )
     =>             
     React.ReactElement               
 ) = (
@@ -283,11 +297,11 @@ const useWithCurrentSideTapPtRef: (
         ) ;    
     })
     :
-    useWithCurrentSideTapPtRef1
+    useWithCurrentCtxValue
 ) ;
 
 const useWithCurrentACtxCurrentT = (
-    useWithCurrentSideTapPtRef1
+    useWithCurrentCtxValue
 ) ;
 const CurrentCtxTInfoDisplay = (
     function () {
@@ -304,7 +318,7 @@ const CurrentCtxTInfoDisplay = (
                     return (   
                         <p>            
                         Global ACtx Time =      
-                        <NUMERIC>{ +ctxTime.toFixed(3) }</NUMERIC>.  
+                        <NUMERIC maxPrecision={3 }>{ ctxTime }</NUMERIC>.  
                         if it's laggy then the workload is too heavy.
                         </p> 
                     ) ;
