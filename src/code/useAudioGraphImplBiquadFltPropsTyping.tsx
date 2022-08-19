@@ -52,6 +52,7 @@ type XWithInterpretation<Key extends string, E > = (
     )>
 ) ;             
 const XWithInterpretation = {} ; // TS-1205
+
 /**   
  * {@link XWithInterpretation}.
  * {@link OscillatorNode}, {@link BiquadFilterNode}.
@@ -79,9 +80,10 @@ type DetuningProps = (
     XWithInterpretation<"detune", React.ReactElement >          
 ) ;         
 const DetuningProps = {} ; // TS-1205
+
 /**
  * {@link XWithInterpretation}.
- * {@link GainNode}, {@link BiquadFilterNode}.
+ * {@link GainNode}, {@link ConstantSourceNode}, {@link BiquadFilterNode}.
  */
 type GainValArgsProps<E = React.ReactElement > = (            
     XWithInterpretation<"gainValArgument", E >        
@@ -89,7 +91,7 @@ type GainValArgsProps<E = React.ReactElement > = (
 const GainValArgsProps = {} ; // TS-1205
 /**    
  * {@link XWithInterpretation}.
- * {@link GainNode}, {@link BiquadFilterNode}.
+ * {@link GainNode}, {@link ConstantSourceNode}, {@link BiquadFilterNode}.
  * */          
 type GainValArgsProps1 = (     
     /**      
@@ -104,6 +106,7 @@ type GainValArgsProps1 = (
     ) | GainValArgsProps<React.ReactElement> )       
 ) ;          
 const GainValArgsProps1 = {} ; // TS-1205                
+
 /**   
  * {@link BiquadFilterNode}
  */
