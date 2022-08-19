@@ -6,14 +6,13 @@ import {
     BoundedIdentityFunction,        
     // PERIODIC ,              
 } from "./generalUse11" ;      
-class DbgException extends TypeError {}                                                         
+// class DbgException extends TypeError {}                                                         
 import React, {                   
     useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
 } from "react";   
 import {                          
 } from "./commonElements"; 
 import { usingTimeout } from "./usingTimeoutOrInterval";        
-;
 
 
 
