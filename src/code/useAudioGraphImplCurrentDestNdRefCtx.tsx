@@ -279,7 +279,7 @@ const useWithCurrentSideTapPtRef: (
         return (
             React.useMemo(() => (
                 ch0({ feedPt, sideTapPt } )
-            ), [feedPt, sideTapPt] )
+            ), [React.useDeferredValue(ch0 ), feedPt, sideTapPt] )
         ) ;    
     })
     :
