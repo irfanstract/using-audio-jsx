@@ -25,18 +25,40 @@ import {
  * @returns the cleanup functor      
 */       
 const usingTimeout = (      
-    (...[NEXT , periodInMillis ] : [
-        NEXT: () => void,   
-        periodInMillis: number ,    
+    (...[callback , periodInMillis ] : [
+        callback : (
+            () => void
+        ),   
+        periodInMillis: (
+            number
+        ) ,    
     ] ): ReturnType<React.EffectCallback> => {
-        const timeoutSchdRef = (
-            setTimeout(() => NEXT() , periodInMillis )         
-        ) ;        
-        return () => {
-            clearTimeout((    
-                timeoutSchdRef            
-            )) ;      
-        } ;
+        /**    
+         * run {@link setTimeout},
+         * {@link clearTimeout keep note of the returned *ID* }, and
+         * return the relevant `React.EffectCallback.CleanUp`.
+         */
+        {
+            /**    
+             * {@link setTimeout}.
+             */
+            const timeoutSchdRef = (
+                setTimeout(() => (
+                    callback()
+                ) , periodInMillis )         
+            ) ;        
+            /**   
+             * exit from this {@link React.EffectCallback}.
+             */
+            return () => {
+                /**   
+                 * {@link clearTimeout}.
+                 */
+                clearTimeout((    
+                    timeoutSchdRef            
+                )) ;      
+            } ;
+        }
     }                                         
 ) ;                              
 export { usingTimeout } ;     
@@ -55,8 +77,15 @@ const usingInterval = (
             catchupPolicy: "MAINTAIN_FIXED_PACE" ,   
         } as const ,      
     ] : [        
-        callback : (() => true ) | (() => void ), 
-        periodMillis: NonNullable<Parameters<typeof setTimeout >[1] >  ,                     
+        callback : (
+            (() => true ) 
+            | (() => void )
+        ), 
+        periodMillis: (
+            NonNullable<(
+                Parameters<typeof setTimeout >
+            )[1] > 
+        ) ,                     
         properties ?: (        
             {      
                 /**    
@@ -313,8 +342,14 @@ const useMillisecondsMemo: (
 function useWarnOnChange <A>(...[f , options = {} ] : [
     A ,         
     { 
-        name ?: string ; 
-        severity ?: keyof Pick<Console, "log" | "info" | "warn" | "error"> ; 
+        name ?: (
+            string
+        ) ; 
+        severity ?: (
+            keyof (
+                Pick<Console, "debug" | "log" | "info" | "warn" | "error">
+            )
+        ) ; 
     } ?  ,         
 ]) {  
     ;    
