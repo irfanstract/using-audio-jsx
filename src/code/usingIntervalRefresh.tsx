@@ -22,11 +22,12 @@ enum ModularIncrementativeSignificance {
 }
 /**    
  * `period` must be *larger-than-zero* yet can be non-integral.
+ * 
  * the value will roll back as it reaches `period`; 
  * if there were excess, `rollbackTimeRemainder` defines handling of the remainder.
  */
 const useModularIncrementation = (
-    function ({ period : modN , rollbackTimeRemainder = ModularIncrementativeSignificance.KEEP } : { 
+    function (props : { 
         /**   
          * *the upper-bound*
          */
@@ -36,8 +37,17 @@ const useModularIncrementation = (
          */
         rollbackTimeRemainder ?: ModularIncrementativeSignificance ;
     }) {        
+        const { 
+            period : modN , 
+            rollbackTimeRemainder = (
+                ModularIncrementativeSignificance.KEEP
+            ) ,
+        } = props ;
+         
         if (!(0 < modN )) {
-            throw TypeError(`invalid period ${modN }, it does not larger than zero.`) ;  
+            throw (
+                TypeError(`invalid period ${modN }, it does not larger than zero.`)
+            ) ;  
         } else {
             return (
                 useReducer((v: number) => (
@@ -59,8 +69,14 @@ const useModularIncrementation = (
 /**   
  * this `useYyy` 
  * provides support for (en)forcing {@link React.FC *component-level*} {@link React.useReducer *refresh*}.
+ * 
  * this method 
  * should only be used as last resort when no other alternatives like `useRealTimeQueryInterval` were applicable.
+ * - {@link React.DependencyList}
+ * - {@link React.useMemo } and {@link React.useCallback }.
+ * - {@link React.useLayoutEffect} and {@link React.useEffect }.
+ *   also {@link React.useInsertionEffect}.
+ * - `useRealTimeQueryInterval`.
  */
 const useCanForceRefresh = (            
     (...[{ modN = 0x100 } = { } ] : [
