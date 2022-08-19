@@ -24,6 +24,9 @@ export type {
 
 
 
+/**   
+ * the {@link React.Context}'s return-type
+ */
 type ContextReturnType<C extends (        
     Readonly<(
         Record<keyof Pick<React.Context<null>, "Provider" | "Consumer"> , unknown >          
