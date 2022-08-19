@@ -16,18 +16,48 @@ import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterva
 
 
 
+/**    
+ * `period` must be *larger-than-zero* yet can be non-integral.
+ * the value will roll back as it reaches `period`; 
+ * if there were excess, `rTR` defines handling of the remainder.
+ */
 const useModularIncrementation = (
-    function ({ period : modN } : { period : number ; }) {        
+    function ({ period : modN , rollbackTimeRemainder = "keep" } : { 
+        /**   
+         * *the upper-bound*
+         */
+        period : number ;
+        /**   
+         * handling for *excess*
+         */
+        rollbackTimeRemainder ?: "drop" | "keep" ;
+    }) {        
         if (!(0 < modN )) {
             throw TypeError(`invalid period ${modN }, it does not larger than zero.`) ;  
         } else {
             return (
-                useReducer((v: number) => ((v + 1 ) % modN ) , 0 )  
+                useReducer((v: number) => (
+                    (rollbackTimeRemainder === "drop") 
+                    ?
+                    ((v: number) => (
+                        modN <= v 
+                        ? 
+                        0 : v 
+                    ))(v + 1 )
+                    : 
+                    ((v + 1 ) % modN )
+                ) , 0 )  
             ) ;      
         }  
     }
 ) ;   
 
+/**   
+ * this `useYyy` 
+ * provides support for (en)forcing {@link React.FC *component-level*} {@link React.useReducer *refresh*}.
+ * this method 
+ * should only be used as last resort when no other alternatives like `useRealTimeQueryInterval` were applicable.
+ */
 const useCanForceRefresh = (            
     (...[{ modN = 0x100 } = { } ] : [
         properties ?: { modN ?: number } ,    
@@ -49,6 +79,9 @@ const useCanForceRefresh = (
     }       
 ) ;    
 
+/**    
+ * interval-separated loop of {@link useCanForceRefresh *component-level* *refresh* }.
+ */
 const useRefreshByInterval1 = (      
     (...args1 : [                                      
         // _ignored1: true ,      
@@ -122,6 +155,9 @@ const useRefreshByInterval1 = (
         ) ;    
     }            
 ) ;                               
+/**    
+ * {@link useRefreshByInterval1 }.
+ */
 const useRefreshByInterval = (      
     (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
         useRefreshByInterval1(...a ) ;                    
