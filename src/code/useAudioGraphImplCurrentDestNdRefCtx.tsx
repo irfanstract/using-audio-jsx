@@ -269,11 +269,21 @@ const useWithCurrentSideTapPtRef: (
     (a: (v: NCtxValue ) => React.ReactElement )
     =>             
     React.ReactElement               
-) = (callback ) => (
-    // TODO make optimisation
-    useWithCurrentSideTapPtRef1(({ feedPt, sideTapPt }) => (
-        callback({ feedPt, sideTapPt })
-    ) )
+) = (
+    useCurrentDestNd0 ?
+    (function useCurrentDest1 (ch0 ) {
+        const {
+            feedPt,
+            sideTapPt,
+        } = useCurrentDestNd0() ;
+        return (
+            React.useMemo(() => (
+                ch0({ feedPt, sideTapPt } )
+            ), [feedPt, sideTapPt] )
+        ) ;    
+    })
+    :
+    useWithCurrentSideTapPtRef1
 ) ;
 
 const useWithCurrentACtxCurrentT = (
