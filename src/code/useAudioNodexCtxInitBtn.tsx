@@ -44,7 +44,7 @@ import {
  *          
 */    
 const useAudioCtxWithInitBtn = (         
-    ({ aCtx: aCtxGiven = null , shallAutoStart = 1 , suspendOnWindowBlur = false } : Readonly<(
+    (mainProps : Readonly<(
         {          
             aCtx ?: null ;     
                 
@@ -61,6 +61,8 @@ const useAudioCtxWithInitBtn = (
             }  
         )>
     )> = {} ) => {                     
+        const { aCtx: aCtxGiven = null , shallAutoStart = 1 , suspendOnWindowBlur = false } = mainProps ;
+        ;
         const {                         
             INIT,                
             s ,              
