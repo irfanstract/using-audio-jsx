@@ -273,7 +273,7 @@ const CurrentCtxTInfoDisplay = (
     function () {
         return (
             // TODO     
-            useWithCurrentSideTapPtRef(({ feedPt, currentTime: ctxTime }) => (    
+            useWithCurrentACtxCurrentT(({ feedPt, currentTime: ctxTime }) => (    
                 (feedPt && (typeof ctxTime === "number") ) 
                 ?         
                 <CBC>

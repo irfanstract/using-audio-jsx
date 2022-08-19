@@ -15,6 +15,7 @@ import {
 
     useWithCurrentSideTapPtRef ,   
     Consm as WithCtxtualOut , 
+    useWithCurrentACtxCurrentT, 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";   
 import { usePersistingBeep, YyyUsable } from "./useAudioNodesBasicFlt1";   
@@ -133,7 +134,7 @@ const CTXTUALOUTPUTUSAGE_CBC = (
         function ({ children: useC11 , }) {
             ;       
             return (
-                useWithCurrentSideTapPtRef(a => (
+                useWithCurrentACtxCurrentT(a => (
                     <CBC>{ () => useC11(a ) }</CBC>     
                 ))                
             );                
