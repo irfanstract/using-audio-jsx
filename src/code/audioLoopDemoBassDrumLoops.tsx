@@ -149,7 +149,7 @@ const {
       ) , 
    } ;
 })() ;
-const HouseMusicShortBrkDemo = () => {
+const MercerTchamiMusicDemo = () => {
 
    const [ac, setAc ] = (
       React.useState<0 | 2 | 7 >(0 )
@@ -400,6 +400,11 @@ const HouseMusicShortBrkDemo = () => {
        </WithSlowdown>
    ) ;
 } ;
+const HouseMusicShortBrkDemo = (
+   () => (
+      <MercerTchamiMusicDemo />
+   )
+) ;
 
 
 
