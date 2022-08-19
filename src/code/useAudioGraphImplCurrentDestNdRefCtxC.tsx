@@ -156,9 +156,6 @@ const {
         XList = "ul"  ,            
 
     } = config1 ;
-    type CtxtualOutUsageProps = (    
-        AGCtxtualOutUsageProps
-    ) ;       
     function newCPropsRenderComponent <CProps>({ 
         dbgBox1 ,      
         useC1P ,             
@@ -166,7 +163,7 @@ const {
         {         
             dbgBox1 : React.ReactElement ;       
             useC1P : (
-                (mainProps : CProps, nd0 : CtxtualOutUsageProps["feedPt"] )
+                (mainProps : CProps, nd0 : AGCtxtualOutUsageProps["feedPt"] )
                 => { c1 : React.ReactElement ; }
             ) ;   
         }
@@ -179,7 +176,7 @@ const {
             ) >(function CFilteredC(mainProps ) {     
                 const useC11 = (     
                     function ({ feedPt: nd0 } : (     
-                        CtxtualOutUsageProps    
+                        AGCtxtualOutUsageProps    
                     ) ): React.ReactElement {                                  
                         ;    
                         const dBB = useDeferredTrue() ;           
@@ -295,7 +292,7 @@ const {
                         const useC11 = (       
                             function (...[{ feedPt: nd0 }] : [  
                                 (        
-                                    CtxtualOutUsageProps                    
+                                    AGCtxtualOutUsageProps                    
                                 ) ,        
                             ] ): React.ReactElement {         
                                 const nd1 = (                        
@@ -346,7 +343,7 @@ const {
                     ) >(function CWithAmpAutom ({ value: ctrlChildren, children }) {    
                         const useC11 = (   
                             function ({ feedPt: nd0 } : (   
-                                CtxtualOutUsageProps            
+                                AGCtxtualOutUsageProps            
                             ) ): React.ReactElement {                            
                                 ;                    
                                 const dBB = useDeferredTrue() ;                    
@@ -597,7 +594,7 @@ const {
                                 // TODO
                                 const useC11 = (    
                                     function ({ feedPt: nd0 } : (       
-                                        CtxtualOutUsageProps                
+                                        AGCtxtualOutUsageProps                
                                     ) ): React.ReactElement {                                
                                         ;           
                                         const dBB = useDeferredTrue() ;                   
@@ -664,7 +661,7 @@ const {
                             const dbgBox1 = <></> ;  
                             const useC11 = ( 
                                 function ({ feedPt: nd0 } : (       
-                                    CtxtualOutUsageProps               
+                                    AGCtxtualOutUsageProps               
                                 ) ): React.ReactElement {
                                     const c = (  
                                         nd0?.context      
