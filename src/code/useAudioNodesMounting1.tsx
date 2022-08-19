@@ -40,6 +40,12 @@ enum GDCM {
      */
     DISCONNECT_IN_USINGACNNCTM ,      
 } ;      
+/**    
+ * this 
+ * is to specify 
+ * in which (one) of the following methods 
+ * the *unmount-time* `aNode.disconnect()` call(s) shall reside within.
+ */
 let globalADisconnectMode :(   
     GDCM  
 ) = (  
@@ -141,6 +147,7 @@ export {
      
 
 namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
+    const unused = {} ; // TS-1205
     export type Args<
         Dests1 ,             
         D1  ,        
@@ -352,6 +359,10 @@ const useParamNodeWithGiven = (
         return gRef1 ;  
     }  
 );     
+/**    
+ * {@link useSingularSrcDestConnect} and {@link useATapNode}.
+ * can be run within {@link React.useInsertionEffect } callback.
+ */
 const usingANodeCnnctM = (     
     (...[gRef, dests, options = {} ] : [       
         src  : AudioSourceNode,    
@@ -402,7 +413,7 @@ const usingANodeCnnctM = (
  * to consume output, like querying the current `state` form `useState` or `useReducer` , 
  * use the first {@link AudioNode} .  
  * to write into, like `setState` or `dispatch`, 
- * use the second {@link AudioNode}
+ * use the second {@link AudioNode}.
 */   
 const useATapNode = (() => {                                
     type CND = (
@@ -448,7 +459,7 @@ const useATapNode = (() => {
         }
     ) ;   
 })() ;      
-export type {
+export {
     ToUseYyNodeWithGivenFadeoutTimeConstant1 ,  
 } ;
 export { 
