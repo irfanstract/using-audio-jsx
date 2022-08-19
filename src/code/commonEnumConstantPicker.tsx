@@ -31,7 +31,7 @@ function useEnumConstantPicker<Vr0 extends number >(...[{ initialValue, static: 
            }
        ) , initialValue )  
    ) ;                    
-   const btns = (             
+   const allOptionsAsBtns = (             
        allOptions            
        .map((value ) => {             
            return (     
@@ -44,10 +44,31 @@ function useEnumConstantPicker<Vr0 extends number >(...[{ initialValue, static: 
        })   
    ) ;         
    return {
+        /**   
+         * the presently value
+         * 
+         * @deprecated
+         */
        vl ,  
-       setVl ,           
+       /**   
+        * the presently value
+        */
+       presentlyValue: vl ,
+       /**    
+        * all of the options
+        */
        allOptions ,      
-       btns ,    
+       /**    
+        * 
+        */
+       setVl ,           
+       /**   
+        * {@link allOptionsAsBtns}
+        * 
+        * @deprecated
+        */
+       btns: allOptionsAsBtns ,    
+       allOptionsAsBtns,
    } ;
 }   
 
