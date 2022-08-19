@@ -55,6 +55,9 @@ import "./useAudioGraphImplFComponentsSty.css"     ;
 
  
 
+/**   
+ * infinite-duration, full-amplitude oscillator/wavetable.
+ */
 const CWaveTable1 = (  
    modulatedWaveTableUsageWrapC(audioFltAtAbsTNodes.useOinModulatedWaveTable )
 ) ;
