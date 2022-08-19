@@ -18,7 +18,9 @@ import {
 
 
 /**  
- * for {@link useEffect} or {@link useLayoutEffect }
+ * this method provides 
+ * implementation for delayed exec/dispatch within `useYyyEffect` callback code.
+ * {@link React.useLayoutEffect } or, if precision is unnecessary, {@link React.useEffect} .
  * 
  * @returns the cleanup functor      
 */       
@@ -39,7 +41,9 @@ const usingTimeout = (
 ) ;                              
 export { usingTimeout } ;     
 /**  
- * for {@link useEffect} or {@link useLayoutEffect }    
+ * this method provides 
+ * implementation for interval-separated repetitive exec/dispatch within `useYyyEffect` callback code.
+ * {@link React.useLayoutEffect } or, if precision is unnecessary, {@link React.useEffect} .
  *          
  * @returns the cleanup functor          
 */                      
@@ -144,6 +148,9 @@ const usingInterval = (
     }         
 ) ;
 export { usingInterval } ;   
+/**    
+ * 
+ */
 const useIntervalDeferredValue = (
     function <A>(...[{ tMillis }  , v0 ] : [
         { tMillis: number } , 
@@ -163,9 +170,8 @@ const useIntervalDeferredValue = (
         */     
         useEffect(() => {
             return (
-                usingInterval(() => {
+                usingInterval((): void => {
                     setV2(r1.current ) ;
-                    return true ;    
                 } , tMillis )
             ) ;
         }, [r1 ] );
@@ -207,6 +213,10 @@ const noAnimationFrameSupport = (
         }                              
     ))
 ) ;
+/**     
+ * {@link requestAnimationFrame}.
+ * only available in HTML5 ctx, and unavailable in *server-side* ctx.
+ */
 function useAnimationFrameRefreshEffect(                                    
     callback: FrameRequestCallback ,                
     deps: React.DependencyList ,      
@@ -257,7 +267,7 @@ function useAnimationFrameRefreshEffect(
     )) ;        
 }             
 /**       
- * memoisation only for a fraction of a second  
+ * memoisation only for a fraction of a second.
 */
 const useMillisecondsMemo: (
     <A> (f: () => A ) => A
@@ -295,6 +305,11 @@ const useMillisecondsMemo: (
         ) || f() ;                                                                     
     }           
 ) ;            
+/**    
+ * this is to warn changes to `deps`.  
+ * certain `useYyy`s is designed for invariant arguments for component lifetime
+ * (for example, {@link React.useImperativeHandle} ).
+ */
 function useWarnOnChange <A>(...[f , options = {} ] : [
     A ,         
     { 
