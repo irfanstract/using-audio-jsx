@@ -55,12 +55,14 @@ type AudioSourceNode = (
         | "numberOfInputs" | "numberOfOutputs"  
     >          
 ) ;
+const AudioSourceNode = {} ; // TS-1205
 /**    
  * acceptable argument to {@link AudioNode.connect } - {@link AudioNode } or {@link AudioParam } 
 */
 type AudioSinkNode = (   
     AudioNode | AudioParam        
 ) ;     
+const AudioSinkNode = {} ; // TS-1205
 
  
 
@@ -73,7 +75,8 @@ type AudioSinkNode = (
 
 
 type XAudioNode = AudioNode ;
-export type {
+const XAudioNode = {} ; // TS-1205
+export {
     AudioSourceNode ,   
     AudioSinkNode ,    
     XAudioNode as AudioNode , 
