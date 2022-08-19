@@ -80,7 +80,8 @@ const useCanForceRefresh = (
 ) ;    
 
 /**    
- * interval-separated loop of {@link useCanForceRefresh *component-level* *refresh* }.
+ * this invokes 
+ * periodic {@link useCanForceRefresh refresh} with given *milliseconds of interval* and *characteristics*.
  */
 const useRefreshByInterval1 = (      
     (...args1 : [                                      
@@ -104,6 +105,10 @@ const useRefreshByInterval1 = (
                 keyof Pick<typeof React, "useLayoutEffect" | "useEffect">         
             ) ; 
 
+            /**    
+             * this specifies how leftbehindness(es) shall be handled.
+             * {@link usingInterval}.
+             */
             catchupPolicy ?: (
                 NonNullable<(
                     NonNullable<(
@@ -113,25 +118,44 @@ const useRefreshByInterval1 = (
             ) ;
         } ,
     ]) => {    
+        /**   
+         * extract some variables
+         */
         const [      
             ,                   
             requestedPeriodMillis ,             
             args1P = {} ,      
         ] = args1 ;       
+        /**   
+         * extract some variables,
+         * with defaults based on previously-obtained variables.
+         */
         const { 
             LE = (2500 < requestedPeriodMillis ) ? "useEffect" : "useLayoutEffect"  , 
             catchupPolicy ,
         } = args1P ; 
         ;         
+        /**  
+         * this will be the primary way to invoke *component-level* *refresh*.
+         */
         const {    
             forceRefresh ,       
             c ,                                       
         } = (                                   
             useCanForceRefresh()                 
         ) ;        
+        /**    
+         * the `intervalMillis` will be an element of `dependencies`, but
+         * rapid changes to it will disrupt proper execution.
+         * switch to this {@link useDeferredValue }-emitted value instead.
+         */
         const accceptedPeriodMillis = (
             useDeferredValue(requestedPeriodMillis)    
         ) ;       
+        /**   
+         * the core part -
+         * a `useYyyEffect` call in turn invoking {@link usingInterval}!
+         */
         React[LE ](() => {   
             return (    
                 usingInterval(() => {         
@@ -149,7 +173,11 @@ const useRefreshByInterval1 = (
             LE ,   
             periodMillis : requestedPeriodMillis ,    
         } ;              
+        /** 
+         * {@link useDebugValue }
+         */
         useDebugValue(r1 ) ;          
+        // return
         return(     
             r1  
         ) ;    
