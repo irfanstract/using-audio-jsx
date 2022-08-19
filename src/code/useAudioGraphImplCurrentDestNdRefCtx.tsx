@@ -169,7 +169,7 @@ const {
         } ;           
     }
 })() ;                                
-const useWithCurrentSideTapPtRef: (
+const useWithCurrentSideTapPtRef1: (
     (a: (v: Parameters<ComponentProps<typeof Consm >["children"] >[0] ) => React.ReactElement )
     =>             
     React.ReactElement               
@@ -265,9 +265,19 @@ const useADestNdRefCtx1 = (
         } ;
     }
 ) ;     
+const useWithCurrentSideTapPtRef: (
+    (a: (v: NCtxValue ) => React.ReactElement )
+    =>             
+    React.ReactElement               
+) = (callback ) => (
+    // TODO make optimisation
+    useWithCurrentSideTapPtRef1(({ feedPt, sideTapPt }) => (
+        callback({ feedPt, sideTapPt })
+    ) )
+) ;
 
 const useWithCurrentACtxCurrentT = (
-    useWithCurrentSideTapPtRef
+    useWithCurrentSideTapPtRef1
 ) ;
 const CurrentCtxTInfoDisplay = (
     function () {
