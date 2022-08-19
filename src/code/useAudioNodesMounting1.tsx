@@ -303,6 +303,9 @@ const useInitUnconnectedYyyNodeFor = (
         return { gRef , } ;
     }
 ) ;       
+/**    
+ * ensure that `src` have exactly one output which be `dest`.
+ */
 const useSingularSrcDestConnect = (                          
     function useReconnectSingleSrcSingleDest(...[gRef1, dest, ...etc ] : [   
         src: AudioSourceNode | null ,       
