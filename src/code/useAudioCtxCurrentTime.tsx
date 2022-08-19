@@ -101,7 +101,11 @@ const useAudioCtxCurrentTime1 = (
                 ...refreshIntervalProperties , 
             } , (
                 (      
-                    ((c && c.state === "running") ? periodMillis : 1500 )    
+                    Math.max((
+                        (c && c.state === "running") 
+                        ? 
+                        10 : 2500
+                    ), periodMillis )    
                 )  
             ) )
         ) ;
