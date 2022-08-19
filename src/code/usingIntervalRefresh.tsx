@@ -16,13 +16,17 @@ import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterva
 
 
 
+enum ModularIncrementativeSignificance {
+    KEEP = "keep",
+    DROP = "drop",
+}
 /**    
  * `period` must be *larger-than-zero* yet can be non-integral.
  * the value will roll back as it reaches `period`; 
  * if there were excess, `rollbackTimeRemainder` defines handling of the remainder.
  */
 const useModularIncrementation = (
-    function ({ period : modN , rollbackTimeRemainder = "keep" } : { 
+    function ({ period : modN , rollbackTimeRemainder = ModularIncrementativeSignificance.KEEP } : { 
         /**   
          * *the upper-bound*
          */
@@ -30,14 +34,14 @@ const useModularIncrementation = (
         /**   
          * handling for *excess*
          */
-        rollbackTimeRemainder ?: "drop" | "keep" ;
+        rollbackTimeRemainder ?: ModularIncrementativeSignificance ;
     }) {        
         if (!(0 < modN )) {
             throw TypeError(`invalid period ${modN }, it does not larger than zero.`) ;  
         } else {
             return (
                 useReducer((v: number) => (
-                    (rollbackTimeRemainder === "drop") 
+                    (rollbackTimeRemainder === ModularIncrementativeSignificance.DROP ) 
                     ?
                     ((v: number) => (
                         modN <= v 
@@ -126,6 +130,9 @@ const useRefreshByInterval1 = (
         /**   
          * extract some variables,
          * with defaults based on previously-obtained variables.
+         * 
+         * {@link React.useLayoutEffect} is preferred over {@link React.useEffect},
+         * except if {@link requestedPeriodMillis } were large enough.
          */
         const { 
             LE = (2500 < requestedPeriodMillis ) ? "useEffect" : "useLayoutEffect"  , 
@@ -133,7 +140,8 @@ const useRefreshByInterval1 = (
         } = args1P ; 
         ;         
         /**  
-         * this will be the primary way to invoke *component-level* *refresh*.
+         * this will be 
+         * the primary way to invoke *component-level* *refresh*.
          */
         const {    
             forceRefresh ,       
@@ -144,13 +152,13 @@ const useRefreshByInterval1 = (
         /**    
          * the `intervalMillis` will be an element of `dependencies`, but
          * rapid changes to it will disrupt proper execution.
-         * switch to this {@link useDeferredValue }-emitted value instead.
+         * must switch to this {@link useDeferredValue }-emitted value instead.
          */
         const accceptedPeriodMillis = (
             useDeferredValue(requestedPeriodMillis)    
         ) ;       
         /**   
-         * the core part -
+         * the core part --
          * a `useYyyEffect` call in turn invoking {@link usingInterval}!
          */
         React[LE ](() => {   
@@ -171,7 +179,7 @@ const useRefreshByInterval1 = (
             periodMillis : requestedPeriodMillis ,    
         } ;              
         /** 
-         * {@link useDebugValue }
+         * {@link useDebugValue }.
          */
         useDebugValue(r1 ) ;          
         // return
@@ -201,6 +209,7 @@ const useRefreshByInterval = (
 
 
 export {
+    ModularIncrementativeSignificance ,
     useModularIncrementation , 
   
     useCanForceRefresh ,  
