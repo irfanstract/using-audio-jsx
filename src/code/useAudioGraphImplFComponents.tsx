@@ -69,7 +69,7 @@ import "./useAudioGraphImplFComponentsSty.css"     ;
   
 
 /**    
- * {@link CPersistingBeep0 }. 
+ * infinite-length beep(ing). 
  * 
  * alternative:    
  * - {@link CWaveTable1 }, which supports meta-rendering      
@@ -82,7 +82,9 @@ const {
     WithSlowdown ,   
            
 } = tCtxs ;                  
-//    
+/**   
+ * 
+ */
 const CFreqDmAnalyFSpecial = (
     function ({ children : graph0 } : (
         React.PropsWithChildren<{}>  
@@ -109,9 +111,10 @@ const CFreqDmAnalyFSpecial = (
     } 
 ) ;                     
 /**   
+ * time-and-frequency domain *amp*.
  * the interpretation will 
  * modulate `gain` to be `the effective/actual magnitude` 
- * (hence an added {@link CFreqDmAnalyF analytical} step )
+ * (hence an added {@link CFreqDmAnalyF analytical} step ).
  */
 const CAmpModulated1 = (    
     IterableOps.identity<(
@@ -137,6 +140,9 @@ const CAmpModulated1 = (
         }    
     ))
 ) ;  
+/**   
+ * 
+ */
 const CAmpModulated: (
     typeof CAmpModulated1 
 ) = (  
