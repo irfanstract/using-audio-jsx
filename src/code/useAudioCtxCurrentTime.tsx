@@ -144,11 +144,13 @@ const useAudioCtxCurrentTime = (
     }
 );
 /**      
+ * {@link useState allocates separate `state<number>`}, and 
+ * a function to (programmatically) update its value to be the given {@link BaseAudioContext.currentTime}.
+ * 
+ * this `useYyy` is primarily for call by/from high-level, demonstrative apps.
  *     
- * @deprecated  
- * use {@link useAudioCtxCurrentTime } instead        
 */
-const useCanAudioCtxUpdateCurrentT = (
+const useStateWithProgrammaticUpdateToBeAudioCtxCurrentT = (
     (c: BaseAudioContext | null ) => {
         const [t, setT ] = (
             useState<number>(-1 )        
@@ -171,8 +173,23 @@ const useCanAudioCtxUpdateCurrentT = (
         return [t, update] as const ;
     }
 ) ;     
+/**      
+ * {@link useState allocates separate `state<number>`}, and 
+ * a function to (programmatically) update its value to be the given {@link BaseAudioContext.currentTime}.
+ * {@link useStateWithProgrammaticUpdateToBeAudioCtxCurrentT}.
+ * 
+ * this `useYyy` constitutes misnomer.
+ * this `useYyy` is primarily for call by/from high-level, demonstrative apps.
+ *     
+ * @deprecated  
+ * use {@link useStateWithProgrammaticUpdateToBeAudioCtxCurrentT } instead        
+*/
+const useCanAudioCtxUpdateCurrentT = (
+    useStateWithProgrammaticUpdateToBeAudioCtxCurrentT
+);
 export {
     useAudioCtxCurrentTime , 
     useAudioCtxCurrentTime1,
+    useStateWithProgrammaticUpdateToBeAudioCtxCurrentT,
     useCanAudioCtxUpdateCurrentT ,      
 } ;
