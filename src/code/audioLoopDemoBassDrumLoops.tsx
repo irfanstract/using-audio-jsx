@@ -456,14 +456,14 @@ const MercerTchamiMusicDemoIntro = (
          freqArgumentInterpretation="timedomain-normalised"
          freqArgument={(
             <CFnValue1 
-            value={({ ctxT }) => {
+            value={({ ctxT: t0 }) => {
                const baseFreq = 33 ;
                const ctrlV = (
-                  IterableOps.clamp(ctxT / 16, 0, 1 )
+                  IterableOps.clamp(t0 / 16, 0, 1 )
                );
                const vle = (
                   (
-                     activativeStatusForT({ ctxT }) 
+                     activativeStatusForT({ ctxT: t0 }) 
                      ?
                      ((2 ** (ctrlV * Math.log2(10000 / baseFreq ) ) ) * baseFreq) 
                      : 
