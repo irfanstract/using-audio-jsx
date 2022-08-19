@@ -19,7 +19,7 @@ import { usingInterval, useIntervalDeferredValue } from "./usingTimeoutOrInterva
 /**    
  * `period` must be *larger-than-zero* yet can be non-integral.
  * the value will roll back as it reaches `period`; 
- * if there were excess, `rTR` defines handling of the remainder.
+ * if there were excess, `rollbackTimeRemainder` defines handling of the remainder.
  */
 const useModularIncrementation = (
     function ({ period : modN , rollbackTimeRemainder = "keep" } : { 
