@@ -30,6 +30,9 @@ import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
  * {@link globalADisconnectMode }
  */
 enum GDCM {  
+    /**   
+     * *neither*.
+     */
     NONE ,   
     /**    
      * this advocates that it should be within {@link useInitUnconnectedYyyNodeFor }.    
@@ -43,7 +46,7 @@ enum GDCM {
 /**    
  * this 
  * is to specify 
- * in which (one) of the following methods 
+ * in which (one) of the following methods (see {@link GDCM } )
  * the *unmount-time* `aNode.disconnect()` call(s) shall reside within.
  */
 let globalADisconnectMode :(   
@@ -362,6 +365,10 @@ const useParamNodeWithGiven = (
 /**    
  * {@link useSingularSrcDestConnect} and {@link useATapNode}.
  * can be run within {@link React.useInsertionEffect } callback.
+ * 
+ * this method will 
+ * 1) {@link AudioNode.disconnect `src.disconnect()` }
+ * 2) `src.connect(...)` for every `AUdioSinkNode` in the list  `dests`. 
  */
 const usingANodeCnnctM = (     
     (...[gRef, dests, options = {} ] : [       
