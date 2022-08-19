@@ -42,7 +42,7 @@ const usingTimeout = (
 export { usingTimeout } ;     
 /**  
  * this method provides 
- * implementation for interval-separated repetitive exec/dispatch within `useYyyEffect` callback code.
+ * {@link setInterval}-like functionality for `useYyyEffect` callback.
  * {@link React.useLayoutEffect } or, if precision is unnecessary, {@link React.useEffect} .
  *          
  * @returns the cleanup functor          
@@ -59,9 +59,9 @@ const usingInterval = (
         periodMillis: NonNullable<Parameters<typeof setTimeout >[1] >  ,                     
         properties ?: (        
             {      
-                /**         
-                 * specifies how delays shall be handled
-                 * */               
+                /**    
+                 * this specifies how leftbehindness(es) shall be handled.
+                 */
                 catchupPolicy : IntervalUsageAcceptableCatchupPolicy ;           
             } &                             
             Partial<{                      
