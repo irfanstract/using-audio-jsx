@@ -108,67 +108,6 @@ import "./useAudioGraphImplCu.css";
        
 ;        
 const dBBC = dBBC0 ;
-const UPM_SUPPORT = (
-    function () {
-        ;
-        const {   
-            TIMEDOMAIN_NORMALISED , 
-            EFFECTIVE_INTENSITY_NORMALISED: RESULTING_MAGN_NORMALISED ,   
-    
-        } = ABandpassFreqArgInputRangeMode ;     
-        const {            
-            usePModulating ,                               
-        } = (
-            audioFltAtAbsTNodes           
-        ) ;                 
-        return {
-            TIMEDOMAIN_NORMALISED , 
-            RESULTING_MAGN_NORMALISED ,        
-
-            usePModulating ,         
-        } ;
-    }
-) ;      
-// const DbbOrHovered = (   
-//     function ({ dBB, children: c1 } : React.PropsWithChildren<{ dBB : boolean ; }> ) {
-//         const [asHovered, markAsHovered] = (
-//             useOneWayCheckBox()        
-//         ) ;    
-//         return (   
-//             <div            
-//             style={{ background: `rgba(0, 0, 0, 0.01 )` }}
-//             onMouseMove={markAsHovered } 
-//             onPointerMove={markAsHovered}                    
-//             >         
-//                 <div
-//                 style={{ visibility: (dBB || asHovered ) ? undefined : "hidden" }}   
-//                 >
-//                 { c1 }       
-//                 </div> 
-//             </div>                   
-//         ) ;
-//     }
-// );   
-// const dBBC = (() => {
-//     return (  
-//         function (...[dBB , { dbgBox1, c1 }] : [ 
-//             boolean,
-//             { dbgBox1 : React.ReactElement ; c1: React.ReactElement ; } ,     
-//         ]) {
-//             ;
-//             return (                
-//                 <XDC>      
-                         
-//                 { dBB ? dbgBox1 : <></> }    
-//                 <DbbOrHovered dBB={dBB } >
-//                 { c1 }
-//                 </DbbOrHovered>                   
-//                 </XDC >      
-//             ) ;                      
-//         }
-//     ) ;  
-// })();         
-const {} = {} ;
 /**      
  * wrapper, for {@link useGainModulatedPt }    
  * - {@link CAmpSlideDownAtAbsoluteT }
