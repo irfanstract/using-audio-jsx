@@ -33,6 +33,9 @@ import {
  
           
          
+/**     
+ * the sample-rate of the {@link BaseAudioContext}.
+ */
 const ctxFrameRateOf = (
     function (c: BaseAudioContext ): typeof c.sampleRate {
         return (
