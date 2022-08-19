@@ -16,7 +16,7 @@ import { ComponentProps } from "./commonElements";
 // import { 
 //     useMountDelay ,      
 // } from "./useComponentDebug" ;         
-import {} from "./useAudioNodesBasicS" ;
+import {} from "./useAudioNodesBasicTypeDefs" ;
 
 
 import { AUDIONODEDEMOKIT_T1BEEPAGAIN } from "./useAudioNodexCtxInitAndBeepBtns";   

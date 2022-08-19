@@ -13,7 +13,7 @@ import { useAsyncMemo } from "./useAsyncMemo";
 // import { true16 } from "./useAudioNodesBasicsRegularlyDrumLooping";          
 
 
-import { AudioSourceNode } from "./useAudioNodesBasicS";      
+import { AudioSourceNode } from "./useAudioNodesBasicTypeDefs";      
 import { newAudioCtxAsync } from "./useAudioNodexCtxInitAndBeepNca"; 
 
 

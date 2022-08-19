@@ -12,7 +12,7 @@ import React, {
 
 
 import { useATapNode } from "./useAudioNodesMounting1";       
-import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicS";  
+import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicTypeDefs";  
    
 
 

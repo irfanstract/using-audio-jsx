@@ -15,7 +15,7 @@ import { usingTimeout } from "./usingTimeoutOrInterval";
 
 
 
-import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicS";    
+import { AudioSourceNode, AudioSinkNode } from "./useAudioNodesBasicTypeDefs";    
 import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";      
 
 
