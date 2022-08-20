@@ -362,6 +362,9 @@ const useParamNodeWithGiven = (
         useParamNodeWithGiven1({ ctx: c } , dest )
     )
 ) ;
+/**    
+ * with given {@link AudioParam} as *dest*.
+ */
 const useParamNodeWithGiven1 = (
     function (...mainArgs : [
         ctxOptions : {
