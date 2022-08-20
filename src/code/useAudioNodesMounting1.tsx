@@ -308,37 +308,67 @@ const useInitUnconnectedYyyNodeFor = (
     }
 ) ;       
 /**    
- * automaticcaly *connect* and later (on *unmount*) *disconnect* ; 
  * ensure that `src` have exactly one output which be `dest`.
  */
 const useSingularSrcDestConnect = (                          
-    function useReconnectSingleSrcSingleDest(...[gRef1, dest, ...etc ] : [   
+    function useReconnectSingleSrcSingleDest(...[gRef1, dest, ...otherArgs ] : [   
         src: AudioSourceNode | null ,       
         dest: AudioSinkNode | null ,   
         ...etc : (
-            [Parameters<typeof usingANodeCnnctM>] extends [readonly [  unknown,  unknown, ...( infer Args)] ] 
+            [(
+                Parameters<typeof usingANodeCnnctM>
+            )] extends [readonly [  unknown,  unknown, ...( infer Args)] ] 
             ?
-            Args  : never             
+            Args  
+            : never             
         ),                                 
     ] ) {                                                 
         ;        
+        /**   
+         * the core part --
+         * `useYyyEffect` for {@link usingANodeCnnctM } !
+         */
         React.useInsertionEffect(() => {     
             /**             
              * only if both are *non-null*        
              */
             if (dest && gRef1) {            
                 return (
-                    usingANodeCnnctM(gRef1, [dest ] as const, ...etc )
+                    usingANodeCnnctM(gRef1, [dest ] as const, ...otherArgs )
                 ) ;                                                                    
             };                                           
         }, [dest, gRef1] );    
     }  
 );            
+/**     
+ * specialised logging.
+ * */     
 const PN_LOG = (
     (...a: any[] ) => console.log(...a )       
 ) ; 
+/**  
+ * {@link useParamNodeWithGiven1 }
+ * 
+ * @deprecated
+ * use the equivalent one, since
+ * this one's *signature* is *semantically flawed*.
+ */
 const useParamNodeWithGiven = (
-    function (dest: AudioParam | null, c: BaseAudioContext | null ) {
+    (dest: AudioParam | null, c: BaseAudioContext | null ) => (
+        useParamNodeWithGiven1({ ctx: c } , dest )
+    )
+) ;
+const useParamNodeWithGiven1 = (
+    function (...mainArgs : [
+        ctxOptions : {
+            ctx: BaseAudioContext | null ;
+        },
+        dest: AudioParam | null,
+        linkOptions1 ?: {
+            cncStatChgDebugMode ?: 0 | 1 ;
+        } ,
+    ]) {
+        const [{ ctx: c  }, dest , { cncStatChgDebugMode: cncDebug = 0 } = {} ] = mainArgs ;
         const {
             gRef: gRef1 , 
         } = (function useINC() {  
@@ -358,7 +388,6 @@ const useParamNodeWithGiven = (
                 useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
             ) ;
         })() ;          
-        const cncDebug : 0 | 1 = 0 ;
         {        
             ;    
             React[AUDIONODES_USEEFFECT](() => { cncDebug &&  PN_LOG("=========") ; } , []);
@@ -397,8 +426,8 @@ const usingANodeCnnctM = (
                 }
                 ;    
                 /**   
-                 * 1) `disconnect` 
-                 * 2) *(re)connect* to *node*s in the list  
+                 * 1) `disconnect` , except if {@link dbg } evaluates to `2`
+                 * 2) *(re)connect* to *node*s in the list {@link dests } 
                  *  
                  * */  
                 {
@@ -486,6 +515,7 @@ export {
     useInitUnconnectedYyyNodeFor ,     
     useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
     useInitAndConnectYyyNodeFor ,    
+    useParamNodeWithGiven1,
     useParamNodeWithGiven , 
 
     useATapNode , 
