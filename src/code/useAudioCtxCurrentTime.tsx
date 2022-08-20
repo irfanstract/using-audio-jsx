@@ -18,10 +18,27 @@ import { isWindowActive, useWindowActivityStatus } from "./useWindowFocusState";
 
 
 
+/**    
+ * this `useYyy`
+ * is supposed to return 
+ * the {@link BaseAudioContext.currentTime } 
+ * {@link useRealTimeQueryInterval1 updated every `interval`}.
+ * .
+ */
 const useAudioCtxCurrentTime1 = (  
     (...[c, { periodMillis }, refreshIntervalProperties] : [
         BaseAudioContext | undefined | null ,
         {
+            /**    
+             * this specifies *the refresh interval*, in milliseconds.
+             * 
+             * presently 
+             * there's no known unambiguous way to (automatically) select the right *interval*
+             * (apart from obvious need to throttle it if `c.state !== "running"` ), 
+             * so 
+             * you must have it explicitly given, 
+             * possibly a value from externally-defined inference utility.
+             */
             periodMillis : number ;  
         },
         Required<(
@@ -32,6 +49,11 @@ const useAudioCtxCurrentTime1 = (
             useWindowActivityStatus()        
         ) ;    
 
+        /**   
+         * the core part --
+         * {@link useRealTimeQueryInterval1} 
+         * for (after null-check ) {@link c.currentTime}!
+         */
         const vl = (    
             useRealTimeQueryInterval1({
                 f: () => (    
@@ -42,6 +64,10 @@ const useAudioCtxCurrentTime1 = (
                 ...refreshIntervalProperties , 
             } , (
                 (      
+                    /**   
+                     * period millis, 
+                     * with throttling in case of 'not running'
+                     */
                     Math.max((
                         (c && c.state === "running") 
                         ? 
@@ -59,8 +85,9 @@ const useAudioCtxCurrentTime1 = (
     }
 ) ;
 /**   
- * switch to the mangled variant ; 
- * this non-mangled variant does not allow precisive config.
+ * {@link useAudioCtxCurrentTime1 }.
+ * you should switch to the mangled variant ; 
+ * this non-mangled variant does not provide means to make important config(s) like `period` etc.
  * 
  * @deprecated
  */
