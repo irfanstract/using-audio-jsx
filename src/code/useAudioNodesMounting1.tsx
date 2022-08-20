@@ -72,11 +72,15 @@ const usingGainNode1 = (
 /**       
  * returns     
  * an independently-allocated Node connected into `dest` (if-and-only-if non-null ) . 
+ * CAVEATS !
  *  
+ * note that, whenever the existing Node unmounts and becomes substituted with new one,
+ * settings made on the previously Node ref will not be visible in the new one, so
+ * callers become responsible for (manual) reconfig.
  * do not call `connect` and `disconnect`; 
  * the calls will be made automatically as necessary ;     
  * we can't {@link Omit } any method(s) since 
- * that'll prevent usability as `connect` and `disconnect` arg        
+ * that'll prevent usability as `connect` and `disconnect` arg.
  *                 
  * NEEDS AMENDMENT. 
  * the naming  
