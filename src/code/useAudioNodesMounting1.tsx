@@ -291,7 +291,11 @@ const useInitUnconnectedYyyNodeFor = (
                         setTimeout(() => {
                             gainNode1.disconnect() ;           
                         }, (          
-                            ((gainNode1 instanceof GainNode && gainNode1.gain.value !== 0 ) ? 0.5 : 0 ) 
+                            (
+                                // if it were a GainNode ...
+                                (gainNode1 instanceof GainNode && gainNode1.gain.value !== 0 ) ? 
+                                0.5 : 0 
+                            ) 
                             * 
                             1000
                         ) ) ;    
@@ -304,6 +308,7 @@ const useInitUnconnectedYyyNodeFor = (
     }
 ) ;       
 /**    
+ * automaticcaly *connect* and later (on *unmount*) *disconnect* ; 
  * ensure that `src` have exactly one output which be `dest`.
  */
 const useSingularSrcDestConnect = (                          
@@ -319,7 +324,7 @@ const useSingularSrcDestConnect = (
         ;        
         React.useInsertionEffect(() => {     
             /**             
-             * only if both are present        
+             * only if both are *non-null*        
              */
             if (dest && gRef1) {            
                 return (
@@ -377,7 +382,7 @@ const usingANodeCnnctM = (
     (...[gRef, dests, options = {} ] : [       
         src  : AudioSourceNode,    
         dests: readonly (AudioNode | AudioParam )[] ,      
-        a ?: {
+        config ?: {
             dbg ?: false | 1 | 2 ;   
         } ,          
     ] ) => {            
@@ -392,7 +397,8 @@ const usingANodeCnnctM = (
                 }
                 ;    
                 /**   
-                 * disconnect, and then reconnect  
+                 * 1) `disconnect` 
+                 * 2) *(re)connect* to *node*s in the list  
                  *  
                  * */  
                 {
@@ -406,6 +412,10 @@ const usingANodeCnnctM = (
                         gainNode1.connect(dest ) ;                     
                     }     
                 }       
+                /**   
+                 * return,
+                 * with an `EffectCallback.CleanUpFn`
+                 */
                 return () => {        
                     if (globalADisconnectMode === GDCM.DISCONNECT_IN_USINGACNNCTM ) {
                         ;   
