@@ -89,7 +89,7 @@ const usingGainNode1 = (
 type USEYYYNODER<R extends {} > = (         
     (...args : [          
         dest: AudioNode | null ,       
-        properties: number | { 
+        propertiesOrTConstantValue: number | { 
             timeConstant1 ?: number ; 
 
             /**   
@@ -115,57 +115,60 @@ const USEYYYNODER = {} ; // TS-1205
  * extracted as necessary 
  * to support possible future extension trivially.      
  */     
-const UABN_ARGPARSE = ( 
-    (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ): (
-        Required<(
-            (object & Exclude<(
-                (
-                    Required<(
-                        Parameters<USEYYYNODER<{}> >
-                    )>
-                )[1 ]
-            ), number > )    
-        )>
-        &
-        { 
-            /**     
-             * this will exactly be the `dest` argument
-             */
-            nd0: AudioNode | null ;
-        }   
-    ) => {             
-        const {              
-            timeConstant1 = 0.5 ,      
-
-            rerunCtorEveryDestChg = false ,       
-            renewInstanceDeps: ctorRerunDeps = [] as const , 
-         
-        } = ((): (object & Exclude<Parameters<USEYYYNODER<{}> >[1 ], number > ) => {
-            if (typeof timeConstant10 === "number" ) {
-                return {
-                    timeConstant1: timeConstant10 ,          
-                } ;      
-            }       
-            if (typeof timeConstant10 === "object" ) {
-                const { timeConstant1: v , rerunCtorEveryDestChg } = timeConstant10;
-                return {   
-                    timeConstant1: v ,     
-                    rerunCtorEveryDestChg ,           
-                } ;               
-            }     
-            return {    
-            } ;                       
-        })() ;           
-        return {
-            timeConstant1 , 
-  
-            nd0 ,  
-                         
-            rerunCtorEveryDestChg ,       
-            renewInstanceDeps: ctorRerunDeps ,               
-        } ;       
-    }
-) ;      
+const UABN_ARGPARSE = (() => {
+    type PropertiesOriginal = (
+        (
+            Required<(
+                Parameters<USEYYYNODER<{}> >
+            )>
+        )[1 ]
+    ) ;
+    return ( 
+        (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ): (
+            Required<(
+                (object & Exclude<PropertiesOriginal, number > )    
+            )>
+            &
+            { 
+                /**     
+                 * this will exactly be the `dest` argument
+                 */
+                nd0: AudioNode | null ;
+            }   
+        ) => {             
+            const {              
+                timeConstant1 = 0.5 ,      
+    
+                rerunCtorEveryDestChg = false ,       
+                renewInstanceDeps: ctorRerunDeps = [] as const , 
+             
+            } = ((): (object & Exclude<PropertiesOriginal, number > ) => {
+                if (typeof timeConstant10 === "number" ) {
+                    return {
+                        timeConstant1: timeConstant10 ,          
+                    } ;      
+                }       
+                if (typeof timeConstant10 === "object" ) {
+                    const { timeConstant1: v , rerunCtorEveryDestChg } = timeConstant10;
+                    return {   
+                        timeConstant1: v ,     
+                        rerunCtorEveryDestChg ,           
+                    } ;               
+                }     
+                return {    
+                } ;                       
+            })() ;           
+            return {
+                timeConstant1 , 
+      
+                nd0 ,  
+                             
+                rerunCtorEveryDestChg ,       
+                renewInstanceDeps: ctorRerunDeps ,               
+            } ;       
+        }
+    ) ;
+})() ;      
 export {     
     UABN_ARGPARSE ,  
     USEYYYNODER ,     
