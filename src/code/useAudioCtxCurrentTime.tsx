@@ -27,7 +27,7 @@ import { isWindowActive, useWindowActivityStatus } from "./useWindowFocusState";
  */
 const useAudioCtxCurrentTime1 = (  
     (...[c, { periodMillis }, refreshIntervalProperties] : [
-        BaseAudioContext | undefined | null ,
+        BaseAudioContext | null | undefined ,
         {
             /**    
              * this specifies *the refresh interval*, in milliseconds.
@@ -41,9 +41,11 @@ const useAudioCtxCurrentTime1 = (
              */
             periodMillis : number ;  
         },
-        Required<(
-            Parameters<typeof useRefreshByInterval >
-        )>[2] ,
+        (
+            Required<(
+                Parameters<typeof useRefreshByInterval >
+            )>
+        )[2] ,
     ] ) => {    
         const { isWindowOnFocus } = (         
             useWindowActivityStatus()        
@@ -92,7 +94,7 @@ const useAudioCtxCurrentTime1 = (
  * @deprecated
  */
 const useAudioCtxCurrentTime = (  
-    (c: BaseAudioContext | undefined | null ) => {
+    (c: BaseAudioContext | null | undefined ) => {
         const vl = (
             useAudioCtxCurrentTime1(c , {
                 periodMillis : (
@@ -155,6 +157,15 @@ const useStateWithProgrammaticUpdateToBeAudioCtxCurrentT = (
 const useCanAudioCtxUpdateCurrentT = (
     useStateWithProgrammaticUpdateToBeAudioCtxCurrentT
 );
+
+
+
+
+
+
+
+
+
 export {
     useAudioCtxCurrentTime , 
     useAudioCtxCurrentTime1,
