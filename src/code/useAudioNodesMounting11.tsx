@@ -279,9 +279,13 @@ const AUDIOCTXWHITENOISEBUFFER = (
     (newObjectToValueMappingMemoised    )(function (c: BaseAudioContext ): AudioBuffer {
         console.info(TypeError("AUDIOCTXWHITENOISEBUFFER - initialising") );
         const b1 = (                 
-            c.createBuffer(1, 48000, 48000)
+            c.createBuffer(1, c.sampleRate, c.sampleRate )
         ) ;
-        b1.copyToChannel(fillWithWhiteNoise(b1.getChannelData(0 ) ), 0 ) ;         
+        b1.copyToChannel((
+            fillWithWhiteNoise((
+                b1.getChannelData(0 )
+            ) )
+        ), 0 ) ;         
         return (
             b1 
         ) ;  
@@ -328,6 +332,10 @@ const useWhiteNoiseNodeWithGivenProps: (
         ) ;
     }
 ) ;              
+/**     
+ * an {@link AudioNode } which 
+ * produces silence even whilever having some sound-producing input(s).
+ */
 const useNullSinkNode = (
     (dest : AudioNode | null ) : ((AudioNode | AudioParam) & Pick<AudioNode, "context"> ) | null => (
         useMemo(() => (dest?.context.createGain() || null ) , [dest] )        
