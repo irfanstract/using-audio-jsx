@@ -92,7 +92,17 @@ type USEYYYNODER<R extends {} > = (
         properties: number | { 
             timeConstant1 ?: number ; 
 
+            /**   
+             * setting this to `true` 
+             * is supposed to 
+             * associate every change in `dest` argument with {@link Reflect.construct renewal of returned `AudioNode` instance}.
+             */
             rerunCtorEveryDestChg ?: false ;        
+            /**   
+             * if *defined*,
+             * every change in this {@link React.DependencyList }
+             * is supposed to be responded with {@link Reflect.construct renewal of returned `AudioNode` instance}
+             */
             renewInstanceDeps ?: React.DependencyList ;                
         } ,      
     ])        
@@ -108,10 +118,21 @@ const USEYYYNODER = {} ; // TS-1205
 const UABN_ARGPARSE = ( 
     (...[nd0, timeConstant10 = {} ] : Parameters<USEYYYNODER<{}> > ): (
         Required<(
-            (object & Exclude<Parameters<USEYYYNODER<{}> >[1 ], number > )    
+            (object & Exclude<(
+                (
+                    Required<(
+                        Parameters<USEYYYNODER<{}> >
+                    )>
+                )[1 ]
+            ), number > )    
         )>
         &
-        { nd0: AudioNode | null ; }   
+        { 
+            /**     
+             * this will exactly be the `dest` argument
+             */
+            nd0: AudioNode | null ;
+        }   
     ) => {             
         const {              
             timeConstant1 = 0.5 ,      
@@ -372,6 +393,9 @@ const useParamNodeWithGiven1 = (
         },
         dest: AudioParam | null,
         linkOptions1 ?: {
+            /**   
+             * connectivity status chg debug mode.
+             */
             cncStatChgDebugMode ?: 0 | 1 ;
         } ,
     ]) {
@@ -380,24 +404,22 @@ const useParamNodeWithGiven1 = (
             gRef: gRef1 , 
         } = (function useINC() {  
             ;                
-            type YyNode = AudioNode ;
-            type Dst1 = AudioNode ;
             const dest = c?.destination || null ; 
-            const onUnmount = (
-                () => {} 
-            );
-            const OeGainNode1: (ctx: BaseAudioContext, dest: Dst1 ) => AudioNode = (      
-                (c, _1) => (
-                    c.createGain()       
-                )
-            ) ;            
             return (     
-                useInitUnconnectedYyyNodeFor<YyNode, Dst1 >(dest, {}, OeGainNode1, { onUnmount })
+                useInitUnconnectedYyyNodeFor<AudioNode, AudioNode >(
+                    dest, 
+                    {}, 
+                    (c) => c.createGain(), 
+                    { onUnmount: () => {} })
             ) ;
         })() ;          
         {        
             ;    
-            React[AUDIONODES_USEEFFECT](() => { cncDebug &&  PN_LOG("=========") ; } , []);
+            React[AUDIONODES_USEEFFECT](() => (
+                void (
+                    cncDebug &&  PN_LOG("=========")
+                )
+            ) , []);
             useSingularSrcDestConnect(gRef1 , dest, (
                 { dbg: cncDebug ? 1 : 2 } as const
             ) ) ;         
