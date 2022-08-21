@@ -130,29 +130,8 @@ const renderConstantParamSrcElas1 = (
         );   
     }
 ) ;      
-// const useATimeDomainVisWithDeps = (
-//     function (...[nd10 , deps ]     )
-// ) ;  
-const CFNVI0 = (() => {
-    /**   
-     * 
-     * @see  
-     * import  :  
-     * {@link useRealTimeQueryInterval1 }
-     */    
-    const useRealTimeQueryInterval1X = (
-        useRealTimeQueryInterval1       
-    );          
-    return { 
-        renderConstantParamSrcElas1 ,       
-        useRealTimeQueryInterval1X ,     
-    } ;          
-})() ;            
       
      
-const cFnValueCompImplSupport1 = (
-    CFNVI0  
-) ;
 /**    
  * either 
  * a) an `object` defining `value: number`
