@@ -104,35 +104,36 @@ import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";
 ;
 
       
+;
+/**   
+ * 
+ * @see  
+ * import  :  
+ * {@link useConstantParamSrcElasD}         
+ * {@link CTXTUALOUTPUTUSAGE_CBC }
+ */   
+const renderConstantParamSrcElas1 = (
+    function (...args : (
+        [Parameters<typeof useConstantParamSrcElasD> ] extends [readonly [unknown, ...(infer Args1 ) ] ]
+        ?
+        Args1
+        : never      
+    ) ) {        
+        return (              
+            <CTXTUALOUTPUTUSAGE_CBC>    
+                {  function useC11({ feedPt : nd0 }) {     
+                        useConstantParamSrcElasD(   
+                            nd0, ...args ) ;    
+                        return <></> ;  
+                    }  }     
+            </CTXTUALOUTPUTUSAGE_CBC>              
+        );   
+    }
+) ;      
 // const useATimeDomainVisWithDeps = (
 //     function (...[nd10 , deps ]     )
 // ) ;  
 const CFNVI0 = (() => {
-    /**   
-     * 
-     * @see  
-     * import  :  
-     * {@link useConstantParamSrcElasD}         
-     * {@link CTXTUALOUTPUTUSAGE_CBC }
-     */   
-    const renderConstantParamSrcElas1 = (
-        function (...args : (
-            [Parameters<typeof useConstantParamSrcElasD> ] extends [readonly [unknown, ...(infer Args1 ) ] ]
-            ?
-            Args1
-            : never      
-        ) ) {        
-            return (              
-                <CTXTUALOUTPUTUSAGE_CBC>    
-                    {  function useC11({ feedPt : nd0 }) {     
-                            useConstantParamSrcElasD(   
-                                nd0, ...args ) ;    
-                            return <></> ;  
-                        }  }     
-                </CTXTUALOUTPUTUSAGE_CBC>              
-            );   
-        }
-    ) ;      
     /**   
      * 
      * @see  
@@ -152,6 +153,59 @@ const CFNVI0 = (() => {
 const cFnValueCompImplSupport1 = (
     CFNVI0  
 ) ;
+/**    
+ * either 
+ * a) an `object` defining `value: number`
+ * b) merely the value of `value` itself
+ */
+type CFnValuePayloadReturn = (
+    number | { value : number ; }
+) ;
+type CFnValuePropsPre = (      
+    {     
+        // CORE LOGIC    
+        compute : (     
+            (...args : [{ ctxT : number ; }] )   
+            => 
+            CFnValuePayloadReturn
+        ) ;        
+
+        // IMPLEMENTATIVE ARTIFACT CONTROL   
+        delayInSeconds ?: number ;   
+        scanPeriodMillis : number ;           
+    }           
+);
+type CConstantValueProps = (            
+    NonNullable<(
+        Parameters<typeof renderConstantParamSrcElas1 >[0 ]
+    )>          
+    &
+    { unmountDebug ?: boolean ; }
+) ;
+type CFnValueProps = (
+    {          
+        value : (              
+            Required<(  
+                CFnValuePropsPre
+            )>["compute"]  
+        ) ;            
+        /**   
+         * `setTargetAtTime` and `setValueCurveAtTime` both can't easily be reconfigured.  
+         * instead, the engine is supposed to do reconfig periodically, but    
+         * this will mean that the autom will not be able to easily respond to higher-level changes, 
+         * hence {@link React.useEffect `deps` as in `useEffect` }.    
+         *    */            
+        codeDeps ?: React.DependencyList ;  
+        /**   
+         * this is because `AudioParam`s are *polylineal* while *function*s are *continuous*.
+        */
+        scanPeriodMillis ?: (                
+            Required<(  
+                CFnValuePropsPre
+            )>["scanPeriodMillis"]       
+        )  ;                
+    }              
+);
 //
 const {     
     CConstantValue ,   
@@ -177,59 +231,6 @@ const {
     } = (  
         cFnValueCompImplSupport1
     ) ;            
-    /**    
-     * either 
-     * a) an `object` defining `value: number`
-     * b) merely the value of `value` itself
-     */
-    type CFnValuePayloadReturn = (
-        number | { value : number ; }
-    ) ;
-    type CFnValuePropsPre = (      
-        {     
-            // CORE LOGIC    
-            compute : (     
-                (...args : [{ ctxT : number ; }] )   
-                => 
-                CFnValuePayloadReturn
-            ) ;        
-
-            // IMPLEMENTATIVE ARTIFACT CONTROL   
-            delayInSeconds ?: number ;   
-            scanPeriodMillis : number ;           
-        }           
-    );
-    type CConstantValueProps = (            
-        NonNullable<(
-            Parameters<typeof renderConstantParamSrcElas1 >[0 ]
-        )>          
-        &
-        { unmountDebug ?: boolean ; }
-    ) ;
-    type CFnValueProps = (
-        {          
-            value : (              
-                Required<(  
-                    CFnValuePropsPre
-                )>["compute"]  
-            ) ;            
-            /**   
-             * `setTargetAtTime` and `setValueCurveAtTime` both can't easily be reconfigured.  
-             * instead, the engine is supposed to do reconfig periodically, but    
-             * this will mean that the autom will not be able to easily respond to higher-level changes, 
-             * hence {@link React.useEffect `deps` as in `useEffect` }.    
-             *    */            
-            codeDeps ?: React.DependencyList ;  
-            /**   
-             * this is because `AudioParam`s are *polylineal* while *function*s are *continuous*.
-            */
-            scanPeriodMillis ?: (                
-                Required<(  
-                    CFnValuePropsPre
-                )>["scanPeriodMillis"]       
-            )  ;                
-        }              
-    );
     return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : CConstantValueProps ) {                   
