@@ -19,7 +19,7 @@ import { K } from "./commonElements";
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
 import { CAmpModulated as CAmpModulatedTimeDomain } from "./useAudioGraphImplFromUseYyyNodes1";       
 import { CPersistingBeep as CPersistingBeep0 } from "./useAudioGraphImplFromUseYyyNodes1";
-import { CFnValue as CFnValueAtAbsoluteT } from "./useAudioGraphImplFMathComponentsSupport1";
+import { CFnValueAtAbsoluteT as CFnValueAtAbsoluteT } from "./useAudioGraphImplFMathComponentsSupport1";
 import {
    Consm as WithCurrentDestNdRef , 
    useWithCurrentSideTapPtRef , 
