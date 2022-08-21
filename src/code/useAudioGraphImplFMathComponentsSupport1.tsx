@@ -219,18 +219,6 @@ const {
     const useXDeferredTrue = (
         () => useDeferredTrue({ UE: "useLayoutEffect" }) 
     ) ;
-    /**                
-     *          
-     * @see  
-     * import  :          
-     * {@link cFnValueCompImplSupport1 }       
-     */            
-    const {  
-        renderConstantParamSrcElas1 ,     
-        useRealTimeQueryInterval1X ,  
-    } = (  
-        cFnValueCompImplSupport1
-    ) ;            
     return {     
         CConstantValue : (     
             function CConstantValueC ( props1 : CConstantValueProps ) {                   
