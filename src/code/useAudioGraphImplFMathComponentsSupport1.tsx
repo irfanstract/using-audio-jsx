@@ -177,13 +177,21 @@ const {
     } = (  
         cFnValueCompImplSupport1
     ) ;            
-    type CFnVIProps = (      
+    /**    
+     * either 
+     * a) an `object` defining `value: number`
+     * b) merely the value of `value` itself
+     */
+    type CFnValuePayloadReturn = (
+        number | { value : number ; }
+    ) ;
+    type CFnValuePropsPre = (      
         {     
             // CORE LOGIC    
             compute : (     
                 (...args : [{ ctxT : number ; }] )   
                 => 
-                (number | { value : number ; } )   
+                CFnValuePayloadReturn
             ) ;        
 
             // IMPLEMENTATIVE ARTIFACT CONTROL   
@@ -202,7 +210,7 @@ const {
         {          
             value : (              
                 Required<(  
-                    CFnVIProps
+                    CFnValuePropsPre
                 )>["compute"]  
             ) ;            
             /**   
@@ -217,7 +225,7 @@ const {
             */
             scanPeriodMillis ?: (                
                 Required<(  
-                    CFnVIProps
+                    CFnValuePropsPre
                 )>["scanPeriodMillis"]       
             )  ;                
         }              
