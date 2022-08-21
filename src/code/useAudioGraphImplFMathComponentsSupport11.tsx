@@ -19,7 +19,7 @@ import { K } from "./commonElements";
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
 import { CAmpModulated as CAmpModulatedTimeDomain } from "./useAudioGraphImplFromUseYyyNodes1";       
 import { CPersistingBeep as CPersistingBeep0 } from "./useAudioGraphImplFromUseYyyNodes1";
-import { CFnValueAtAbsoluteT as CFnValueAtAbsoluteT } from "./useAudioGraphImplFMathComponentsSupport1";
+import { CFnValueByAbsoluteT as CFnValueByAbsoluteT } from "./useAudioGraphImplFMathComponentsSupport1";
 import {
    Consm as WithCurrentDestNdRef , 
    useWithCurrentSideTapPtRef , 
@@ -56,7 +56,7 @@ const {
    ) ;       
    return {  
        CFnValue1 : (
-           function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueAtAbsoluteT >[0 ] ) {
+           function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueByAbsoluteT >[0 ] ) {
                const {
                    codeDeps: higherLevelCodeDeps = [] ,  
                    ...
@@ -87,7 +87,7 @@ const {
                                    { renderSrcCodeView() }     
                                </span>       ,                     
                            ] }                               
-                           <CFnValueAtAbsoluteT       
+                           <CFnValueByAbsoluteT       
                            value={({ ctxT: ctxTAbsolutely }) => {  
                                const ctxTRelativelyAfterScaled = (
                                    ctxTAbsolutely - originPtAbsoluteT  
@@ -120,6 +120,6 @@ const {
 
 
 export {
-   CFnValueAtAbsoluteT , 
+   CFnValueByAbsoluteT as CFnValueAtAbsoluteT , 
    CFnValue1 as CFnValueByRelativeT ,  
 } ;

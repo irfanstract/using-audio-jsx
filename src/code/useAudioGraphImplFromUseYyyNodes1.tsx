@@ -79,7 +79,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
 import { 
 
     CConstantValue , 
-    CFnValueAtAbsoluteT ,     
+    CFnValueByAbsoluteT ,     
               
 } from "./useAudioGraphImplFMathComponentsSupport1";    
 import {    
@@ -765,7 +765,7 @@ export {
  
     CConstantValueModulated ,   
     CConstantValue ,  
-    CFnValueAtAbsoluteT as CFnValue ,      
+    CFnValueByAbsoluteT as CFnValue ,      
     CHalfSecndBeepAtAbsoluteT as CHalfSecndBeepAtAbsoluteT ,   
     CPersistingBeep ,     
     

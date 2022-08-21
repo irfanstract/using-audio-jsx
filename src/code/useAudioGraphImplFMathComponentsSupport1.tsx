@@ -683,6 +683,6 @@ export {
 
     CConstantValue , 
     CConstantValueProps ,
-    CFnValue as CFnValueAtAbsoluteT ,    
+    CFnValue as CFnValueByAbsoluteT ,    
     CFnValueProps ,
 } ;  

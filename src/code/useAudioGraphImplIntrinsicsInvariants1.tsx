@@ -79,7 +79,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
 import { 
 
     CConstantValue , 
-    CFnValueAtAbsoluteT ,     
+    CFnValueByAbsoluteT ,     
               
 } from "./useAudioGraphImplFMathComponentsSupport1";    
 import {    
