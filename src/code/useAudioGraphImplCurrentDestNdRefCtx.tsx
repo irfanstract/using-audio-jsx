@@ -358,6 +358,9 @@ const CurrentCtxTInfoDisplay = (
                    
                 
 export {
+    AFeedableAndTappableNca,
+    AFeedableAndTappableNCc,
+
     ModifyingCompPayloadDiv as WGD_DIV ,  
 
     CurrentCtxTInfoDisplay ,   
