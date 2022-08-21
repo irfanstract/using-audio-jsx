@@ -34,6 +34,7 @@ import {
 
    Consm as WithCtxtualOut ,     
    useWithCurrentSideTapPtRef , 
+   useWithCurrentACtxCurrentT, 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";   
 
@@ -70,78 +71,22 @@ const {
          // Pick<BaseAudioContext,   "sampleRate" | "audioWorklet" | "addEventListener" | "removeEventListener">
       )>
    ) ;
-   const WithScn = (
-      ({ children: payload, c } : { c: BaseAudioContext ; } & PayloadRelatedProps ) => {  
-         const windowActive = (
-            useWindowActivityStatus()
-         ) ;
-         /**   
-          * intervally refreshed.     
-          */
-         const {
-            currentTime: tVal , 
-         } = (
-            useRealTimeQueryInterval1({
-               f : () => c ,
-               deps : [] , 
-               LE: "useLayoutEffect" ,
-            } , (
-               // TODO  
-               (
-                  windowActive ?  
-                  0.062
-                  : 2.5
-               ) * 1000
-            ))
-         ) ;
-         const { Provider: P } = ctx ;
-         return (
-            <P value={tVal }>
-               { payload({ currentTime: tVal , }) }
-            </P>
-         ) ;
-      }
-   ) ;
    return {
       WithCtxtualDestCtxTInfo1 : (
-         function WithCtxtualDestCtxTInfo1C({ children: payload , WithCtxtualOut1 = WithCtxtualOut } : (
+         function WithCtxtualDestCtxTInfo1C({ children: payload } : (
             PayloadRelatedProps
-            &
-            { WithCtxtualOut1 ?: React.FC<ComponentProps<typeof WithCtxtualOut > > ; }
          ) ) {
-            const v0 = (
-               React.useContext(ctx )
+            return (
+               useWithCurrentACtxCurrentT(({ currentTime }) => (
+                  <>
+                  { (
+                     (typeof currentTime === "number" )
+                     &&
+                     payload({ currentTime })
+                  ) }
+                  </>
+               ) )
             ) ;
-            switch (typeof v0 ) {
-               case "number" :
-                  return (
-                     payload({ currentTime: v0 , })
-                  ) ;
-                  break ;  
-               case "boolean" :
-                  if (v0 === false ) {
-                     return (
-                        <WithCtxtualOut1 >  
-                        { ({ feedPt: nd }) => (
-                           nd ? 
-                           (
-                              <WithScn c={nd.context} > 
-                              { payload }
-                              </WithScn>
-                           )
-                           : null
-                        ) }
-                        </WithCtxtualOut1 >
-                     ) ;
-                  }
-                  return <></> ;
-                  break ;  
-               default :
-                  return (
-                     <p> (failed) </p>
-                  ) ;
-                  break ;  
-            }
          }
       ) , 
    };
