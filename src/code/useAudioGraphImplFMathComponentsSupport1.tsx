@@ -161,6 +161,7 @@ type CConstantValueProps = (
     &
     { unmountDebug ?: boolean ; }
 ) ;
+const CConstantValueProps = {} ; // TS-1205
 type CFnValueProps = (
     {          
         value : (              
@@ -185,6 +186,7 @@ type CFnValueProps = (
         )  ;                
     }              
 );
+const CFnValueProps = {} ; // TS-1205
 //
 const {     
     CConstantValue ,   
