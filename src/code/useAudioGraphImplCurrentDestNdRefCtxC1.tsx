@@ -16,6 +16,7 @@ import {
     useWithCurrentSideTapPtRef ,   
     Consm as WithCtxtualOut , 
     useWithCurrentACtxCurrentT, 
+    AFeedableAndTappableNCc, 
 
 } from "./useAudioGraphImplCurrentDestNdRefCtx";   
 import { usePersistingBeep, YyyUsable } from "./useAudioNodesBasicFlt1";   
@@ -117,7 +118,7 @@ const AGCtxtualOutUsageProps = {} ; // TS-1205
 type AGCtxtualOutUsageProps = (  
     Parameters<(                            
         Required<(     
-            ComponentProps<typeof WithCtxtualOut >  
+            React.ConsumerProps<AFeedableAndTappableNCc >
         )>["children"]         
     )>[0 ]      
 ) ;          
@@ -134,7 +135,7 @@ const CTXTUALOUTPUTUSAGE_CBC = (
         function ({ children: useC11 , }) {
             ;       
             return (
-                useWithCurrentACtxCurrentT(a => (
+                useWithCurrentSideTapPtRef(a => (
                     <CBC>{ () => useC11(a ) }</CBC>     
                 ))                
             );                
