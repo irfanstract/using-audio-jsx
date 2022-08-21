@@ -11,7 +11,7 @@ import { K, ComponentProps, ContextReturnType } from "./commonElements";
            
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
-import { CFnValueFromRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";
+import { CFnValueByRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";
 import { CBiquadFilterModulated } from "./useAudioGraphImplFromUseYyyNodes1";              
 
                

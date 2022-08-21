@@ -121,5 +121,5 @@ const {
 
 export {
    CFnValueAtAbsoluteT , 
-   CFnValue1 as CFnValueFromRelativeT ,  
+   CFnValue1 as CFnValueByRelativeT ,  
 } ;

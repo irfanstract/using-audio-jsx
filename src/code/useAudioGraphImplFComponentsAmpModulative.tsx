@@ -18,7 +18,7 @@ import { K } from "./commonElements";
 // domain-imports        
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";   
 import { CAmpSlideDownAtAbsoluteT } from "./useAudioGraphImplFromUseYyyNodes1";
-import { CFnValueFromRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
+import { CFnValueByRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
 import {
    Consm as WithCurrentDestNdRef , 
    useWithCurrentSideTapPtRef , 

@@ -33,7 +33,7 @@ import {
    modulatedWaveTableUsageWrapC ,      
  
 } from "./useAudioGraphImplFromUseYyyNodes1";            
-import { CFnValueFromRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
+import { CFnValueByRelativeT as CFnValue1 } from "./useAudioGraphImplFMathComponentsSupport11";    
 import { CAmpSlideDown } from "./useAudioGraphImplFComponentsAmpModulative";
 import {
    Consm as WithCurrentDestNdRef , 
