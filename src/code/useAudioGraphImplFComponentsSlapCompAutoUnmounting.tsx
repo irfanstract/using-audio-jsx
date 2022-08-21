@@ -21,7 +21,7 @@ import {
     CFnValueFromRelativeT as CFnValue1,         
 } from "./useAudioGraphImplFMathComponentsSupport11";
 import { CWaveTable1 } from "./useAudioGraphImplFComponentsBasicWaveTable";
-import { CAmpModulated as CAmpModulated0 } from "./useAudioGraphImplCurrentDestNdRefCtxC";
+import { CAmpModulated as CAmpModulated0 } from "./useAudioGraphImplFromUseYyyNodes1";
 import { 
     useGainNodeWithGivenFadeoutTimeConstant1 ,   
 } from "./useAudioNodesMounting11";    

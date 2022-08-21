@@ -10,8 +10,8 @@ import { CBC } from "./useStateInCallback";
 import { 
    CAmpModulated as CAmpModulatedTimeDomain, 
    
-} from "./useAudioGraphImplCurrentDestNdRefCtxC";
-import { WithGivenDest } from "./useAudioGraphImplCurrentDestNdRefCtxC";
+} from "./useAudioGraphImplFromUseYyyNodes1";
+import { WithGivenDest } from "./useAudioGraphImplFromUseYyyNodes1";
 import { useWithCurrentSideTapPtRef } from "./useAudioGraphImplCurrentDestNdRefCtx";
 import { 
    useDyamicsCompressingNodeWithGivenFadeoutTimeConstant1,

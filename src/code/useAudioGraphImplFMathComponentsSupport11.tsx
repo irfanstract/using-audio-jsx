@@ -17,8 +17,8 @@ import { K } from "./commonElements";
 
 // domain-imports        
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
-import { CAmpModulated as CAmpModulatedTimeDomain } from "./useAudioGraphImplCurrentDestNdRefCtxC";       
-import { CPersistingBeep as CPersistingBeep0 } from "./useAudioGraphImplCurrentDestNdRefCtxC";
+import { CAmpModulated as CAmpModulatedTimeDomain } from "./useAudioGraphImplFromUseYyyNodes1";       
+import { CPersistingBeep as CPersistingBeep0 } from "./useAudioGraphImplFromUseYyyNodes1";
 import { CFnValue as CFnValueAtAbsoluteT } from "./useAudioGraphImplFMathComponentsSupport1";
 import {
    Consm as WithCurrentDestNdRef , 
