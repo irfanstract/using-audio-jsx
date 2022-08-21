@@ -32,7 +32,7 @@ import { CSnareDrumFluidly1 } from "./useAudioGraphImplFComponentsSlapDrumKit1";
 
 
 
-const CContinousHiHatFluidly = (
+const CBriefHiHatFluidly = (
    () => (
       <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
             <CSnareDrumFluidly1 />
@@ -43,5 +43,5 @@ const CContinousHiHatFluidly = (
 
 
 export {
-   CContinousHiHatFluidly as CBriefHiHatFluidly ,
+   CBriefHiHatFluidly as CBriefHiHatFluidly ,
 } ;
