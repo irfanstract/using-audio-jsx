@@ -22,6 +22,7 @@ import { newAudioCtxAsync } from "./useAudioNodexCtxInitAndBeepNca";
 
 
 
+const AFeedableAndTappableNca = {} ; // TS--1205
 type AFeedableAndTappableNca = {                     
 
     /**        
@@ -127,6 +128,6 @@ export {
     aCtxMt0 as getACtxMtWithoutAnyFilter1 ,   
     useACtxMtWithoutAnyFilter1 , 
 } ;
-export type {
+export {
     AFeedableAndTappableNca , 
 } ;
