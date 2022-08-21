@@ -682,5 +682,7 @@ const {
 export {
 
     CConstantValue , 
+    CConstantValueProps ,
     CFnValue ,    
+    CFnValueProps ,
 } ;  
