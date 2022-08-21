@@ -19,8 +19,10 @@ root.render(
  */
 if (1) {
   setTimeout(() => {
-    (window.location).reload() ;
-  } , 15 * 60 * 1000 ) ;
+    setTimeout(() => {
+      (window.location).reload() ;
+    }, 60 * 1000 ) ;
+  } , 30 * 60 * 1000 ) ;
 };
 
 // If you want to start measuring performance in your app, pass a function
