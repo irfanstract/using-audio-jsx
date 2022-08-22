@@ -21,13 +21,13 @@ import React, {
 
 const EventEmSubArgs = {} ; // TS-1205     
 type EventEmSubArgs<A1 extends readonly [        
-    Parameters<EventTarget["addEventListener"] >[0] | Parameters<EventEmitter["on"] >[0] , 
-    EventListenerOrEventListenerObject | Function | null , 
-    ...unknown[] ,          
+    selector: Parameters<EventTarget["addEventListener"] >[0] | Parameters<EventEmitter["on"] >[0] , 
+    callback: EventListenerOrEventListenerObject | Function | null , 
+    ...otherArgs: unknown[] ,          
 ] > = readonly [                               
-    A1[0],             
-    A1[1]  ,                                                    
-    React.DependencyList | undefined ,                                                                                           
+    selector: A1[0],             
+    callback: A1[1]  ,                                                    
+    callbackDependencies: React.DependencyList | undefined ,                                                                                           
 ] ;                        
 
 
