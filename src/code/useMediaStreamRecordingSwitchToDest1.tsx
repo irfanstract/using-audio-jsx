@@ -46,6 +46,17 @@ interface SceneEndDataEvt {
    error: (readonly XErrorEvt[] ) ; 
 } ;
 const SceneEndDataEvt = {} ;
+const blobConcat = (
+   function (...[sqV] : [src: Blob[] ]): null | Blob {
+      if (sqV.length ) {
+         return (
+            new Blob(sqV, { type: sqV[0].type })
+         ) ;
+      } else {
+         return null ;
+      }
+   }
+) ;
 const mediaRecordingDataCollect = (
    function (...[src, { outputSizeLimit } , onSwitch ] : [
       /**    
@@ -92,13 +103,9 @@ const mediaRecordingDataCollect = (
                   ((): null | Blob => {
                      // TODO
                      const sqV = [...blobSeqBuffer ] ;
-                     if (sqV.length ) {
-                        return (
-                           new Blob(sqV, { type: sqV[0].type })
-                        ) ;
-                     } else {
-                        return null ;
-                     }
+                     return (
+                        blobConcat(sqV )
+                     ) ;
                   })()
                ) ;
                onSwitch({ data: allData , successful: false, error: [...errorSeq ] }) ; 
