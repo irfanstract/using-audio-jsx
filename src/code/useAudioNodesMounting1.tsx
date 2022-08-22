@@ -256,12 +256,9 @@ const useInitAndConnectYyyNodeFor: (
         properties3  ,       
         
     ] : [       
-        (Dst1 ) | null,  
-        {  
-            timeConstant1: number ;  
-        },          
-        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode , 
-        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, unknown, YyNode >[3 ] ,   
+        ...(
+            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, object & Dst1, YyNode >
+        ),
                 
     ]) {          
         /**    
