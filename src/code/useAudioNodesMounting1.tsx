@@ -292,12 +292,9 @@ const useInitUnconnectedYyyNodeFor = (
         { onUnmount, renewInstanceDeps = [] }  ,                   
           
     ] : [        
-        (Dst1 ) | null,                    
-        {  },                
-        (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,    
-        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, (
-            ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions
-        ), YyNode >[3 ] ,   
+        ...(
+            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, {}, YyNode >
+        ),
                
     ]) {  
         const [gRef, setGRef ] = (                                               
