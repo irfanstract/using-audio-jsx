@@ -1,7 +1,7 @@
 
 
 // import util from "util" ;
-import { BoundedIdentityFunction, } from "./generalUse11";
+import { BoundedIdentityFunction, IterableOps, } from "./generalUse11";
 import React, { 
    // Callbacks
    Dispatch,
@@ -51,8 +51,29 @@ type BlobCSeqollectiveMutativeOps = {
    clear: DispatchWithoutAction ; 
 
 } ;
+const useBlobConcatDeferring = (
+   function (...[{}, { type, data: blobs }] : [{}, { data: readonly Blob[] ; type: string ; } ] ): Blob {
+      return (  
+         React.useDeferredValue<() => Blob >((
+            IterableOps.once((): Blob => ( 
+               new Blob([...blobs ], { type: type })
+            ))
+         ))
+         // actually run the returned functor
+         ()
+      ) ;
+   }
+) ;
 const useBlobConcatState = (
-   function (): [
+   function (...[{ sizeLimit }] : [
+      {
+         /**   
+          * {@link sizeLimit} shall be specified appropriately to prevent process crash ;
+          * if {@link sizeLimit} is not feasible, explicitly set it to `Number.MAX_VALUE`.
+          */
+         sizeLimit: number ;
+      } ,
+   ] ): [
       state: { 
          /**   
           * the collective state.
@@ -87,9 +108,33 @@ const useBlobConcatState = (
       ;
       if (firstBlob) {
          const type = firstBlob.type ;
+         const precomutedTotalSize = (
+            IterableOps.sum((
+               blobs
+               .map(b => b.size )
+            ))
+         );
+         if ((
+            sizeLimit
+            <
+            precomutedTotalSize
+         )) {
+            throw TypeError((
+               `pre-calc detected a total size violation : ${precomutedTotalSize }`
+            )) ;
+         }
          const overallBlob = ( 
             new Blob([...blobs ], { type: type })
          ) ;
+         if ((
+            sizeLimit
+            <
+            overallBlob.size
+         )) {
+            throw TypeError((
+               `resulting Blob violated the size limit : size ${overallBlob.size }, type ${type } `
+            )) ;
+         }
          return [{ overallBlob, type }, ops ] ;
       } else {
          return [{ overallBlob: null, type: null }, ops ] ;
@@ -114,6 +159,7 @@ const useBlobConcatState1 = (
 
 
 export {
+   useBlobConcatDeferring,
    useBlobConcatState1,
    useBlobConcatState,
 } ;
