@@ -65,14 +65,20 @@ const mediaRecordingDataCollect = (
                new Array<XErrorEvt >()
             ) ;
             ;
-            const listener = (e: BlobEvent ): void => {
+            const dataListener = (e: BlobEvent ): void => {
                // TODO
                blobSeqBuffer.push(e.data ) ;
             } ;
-            src.addEventListener("dataavailable", listener ) ;
+            const errorEvtListener = (e: MediaRecorderErrorEvent ): void => {
+               // TODO
+               errorSeq.push(e.error ) ;
+            } ;
+            src.addEventListener("dataavailable", dataListener ) ;
+            src.addEventListener("error", errorEvtListener ) ;
             ;
             return () => {
-               src.removeEventListener("dataavailable", listener ) ;
+               src.removeEventListener("dataavailable", dataListener ) ;
+               src.removeEventListener("error", errorEvtListener ) ;
                const allData = (
                   ((): null | Blob => {
                      // TODO
@@ -86,7 +92,7 @@ const mediaRecordingDataCollect = (
                      }
                   })()
                ) ;
-               onSwitch({ data: allData , successful: false, error: [] }) ; 
+               onSwitch({ data: allData , successful: false, error: [...errorSeq ] }) ; 
             }
          }
       } , [src ] ) ;
