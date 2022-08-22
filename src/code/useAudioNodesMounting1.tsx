@@ -184,18 +184,18 @@ namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
         D1  ,        
         YyNode extends AudioNode ,                     
     > = [               
-        Dests1,       
+        dests: Dests1,       
            
-        { 
+        highLevelOptions: { 
             /**  
              * {@link AudioParam.setTargetAtTime }
             */               
             timeConstant1: number ;
         },                   
 
-        (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
+        constructImpl: (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
 
-        {                  
+        constructOptions: {                  
             /**                      
              * this method           
              * can be used to make fade-out AudioParam automation(s) (avoid `disconnect()`ing it ; such call will eventually happen automatically !) .  
@@ -231,7 +231,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, AudioNode, YyNode > )    
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, Dests1, YyNode > )    
     => 
     (YyNode | null )                                            
 ) ;   
