@@ -61,13 +61,36 @@ const useEventEmitter = (
 ) ;        
             
 // TODO
-const usePagePreUnloadEvt = (   
-    function () { 
-        useEventTarget<Window>(window, "beforeunload" , (evt) => {
-            ;                   
-        }, [] ) ;  
-    }      
-) ;  
+const {
+    usePagePreUnloadEvt,
+} = (() => {
+    type PagePreUnloadEvtUsageArgs = [
+        ctx: {}, 
+        callback: (ctx: BeforeUnloadEvent) => unknown, 
+        callbackDependencies: React.DependencyList ,
+    ] ;
+    return {
+        usePagePreUnloadEvt: (   
+            function (...[{}, callback, callbackDependencies] : PagePreUnloadEvtUsageArgs ) { 
+                useInsertionEffect(() => {
+                    /**   
+                     * the actually-used callback argument to the `addEventListener` call.
+                     */
+                    const submittedFn1 = (
+                        callback
+                    );
+                    return (
+                        window.addEventListener("beforeunload", submittedFn1 )
+                        ,
+                        () : void => {
+                            window.removeEventListener("beforeunload", submittedFn1 );
+                        }
+                    );
+                }, callbackDependencies ) ;
+            }      
+        ),
+    }
+})() /* */ ;  
   
 
 
