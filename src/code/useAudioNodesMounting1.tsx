@@ -232,7 +232,11 @@ type ToUseYyNodeWithGivenInitProperties1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenInitProperties1.Args<Dests1, ToUseYyNodeWithGivenInitProperties1.HighLevelOptions, YyNode > )    
+    ] : (
+        ToUseYyNodeWithGivenInitProperties1.Args<Dests1, (
+            ToUseYyNodeWithGivenInitProperties1.HighLevelOptions
+        ), YyNode >
+    ) )    
     => 
     (YyNode | null )                                            
 ) ;   
@@ -258,7 +262,9 @@ const useInitAndConnectYyyNodeFor: (
         
     ] : [       
         ...(
-            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, ToUseYyNodeWithGivenInitProperties1.HighLevelOptions, YyNode >
+            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, (
+                ToUseYyNodeWithGivenInitProperties1.HighLevelOptions
+            ), YyNode >
         ),
                 
     ]) {          
@@ -293,7 +299,9 @@ const useInitUnconnectedYyyNodeFor = (
           
     ] : [        
         ...(
-            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, {}, YyNode >
+            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, (
+                {}
+            ), YyNode >
         ),
                
     ]) {  
