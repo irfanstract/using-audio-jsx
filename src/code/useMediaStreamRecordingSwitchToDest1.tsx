@@ -48,10 +48,19 @@ interface SceneEndDataEvt {
 const SceneEndDataEvt = {} ;
 const mediaRecordingDataCollect = (
    function (...[src, { outputSizeLimit } , onSwitch ] : [
+      /**    
+       * if this is `null`, then no *encoding process* will take place.
+       */
       src: null | MediaRecorder, 
       options: {
+         /**    
+          * this define the upper bound for the resulting `Blob` `size`
+          */
          outputSizeLimit: number ;
       } ,
+      /**   
+       * to be run when(ever) `src` changes
+       */
       onSwitch : React.Dispatch<SceneEndDataEvt > ,
    ]) {
       // TODO
