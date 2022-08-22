@@ -1,7 +1,7 @@
 
 
 // import util from "util" ;
-import { BoundedIdentityFunction, } from "./generalUse11";
+import { BoundedIdentityFunction, IterableOps, } from "./generalUse11";
 import React, { 
    // Callbacks
    Dispatch,
@@ -107,32 +107,39 @@ const useMediaRecordingDataCollect = (
             } ;
             src.addEventListener("dataavailable", dataListener ) ;
             src.addEventListener("error", errorEvtListener ) ;
+            const onShallRemoveListeners = (
+               IterableOps.once((
+                  function (): void {
+                     src.removeEventListener("dataavailable", dataListener ) ;
+                     src.removeEventListener("error", errorEvtListener ) ;
+                     src.removeEventListener("stop", onShallRemoveListeners ) ;
+                     const allData = (
+                        // ((): null | Blob => { } )
+                        blobConcat([...blobSeqBuffer ] )
+      
+                        //
+                        //
+                        //
+                        //
+                        //
+                        //
+                        // THE DIFF PROBLEM  (^^ ____ ^^)
+                        //
+                        //
+                        //
+                        // ( {} )()
+                     ) ;
+                     onSwitch({ 
+                        successful: false, 
+                        data: allData , 
+                        error: [...errorSeq ] ,
+                     }) ; 
+                  }
+               ))
+            ) ;
             ;
-            return () => {
-               src.removeEventListener("dataavailable", dataListener ) ;
-               src.removeEventListener("error", errorEvtListener ) ;
-               const allData = (
-                  // ((): null | Blob => { } )
-                  blobConcat([...blobSeqBuffer ] )
-
-                  //
-                  //
-                  //
-                  //
-                  //
-                  //
-                  // THE DIFF PROBLEM  (^^ ____ ^^)
-                  //
-                  //
-                  //
-                  // ( {} )()
-               ) ;
-               onSwitch({ 
-                  successful: false, 
-                  data: allData , 
-                  error: [...errorSeq ] ,
-               }) ; 
-            }
+            src.addEventListener("stop", onShallRemoveListeners ) ;
+            return onShallRemoveListeners ;
          }
       } , [src ] ) ;
       ; 
