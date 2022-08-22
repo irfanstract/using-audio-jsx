@@ -100,15 +100,26 @@ const mediaRecordingDataCollect = (
                src.removeEventListener("dataavailable", dataListener ) ;
                src.removeEventListener("error", errorEvtListener ) ;
                const allData = (
-                  ((): null | Blob => {
-                     // TODO
-                     const sqV = [...blobSeqBuffer ] ;
-                     return (
-                        blobConcat(sqV )
-                     ) ;
-                  })()
+                  // ((): null | Blob => { } )
+                  blobConcat([...blobSeqBuffer ] )
+
+                  //
+                  //
+                  //
+                  //
+                  //
+                  //
+                  // THE DIFF PROBLEM  (^^ ____ ^^)
+                  //
+                  //
+                  //
+                  // ( {} )()
                ) ;
-               onSwitch({ data: allData , successful: false, error: [...errorSeq ] }) ; 
+               onSwitch({ 
+                  successful: false, 
+                  data: allData , 
+                  error: [...errorSeq ] ,
+               }) ; 
             }
          }
       } , [src ] ) ;
