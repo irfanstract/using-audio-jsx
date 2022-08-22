@@ -58,22 +58,34 @@ const blobConcat = (
    }
 ) ;
 const mediaRecordingDataCollect = (
-   function (...[src, { outputSizeLimit } , onSwitch ] : [
-      /**    
-       * if this is `null`, then no *encoding process* will take place.
-       */
-      src: null | MediaRecorder, 
-      options: {
-         /**    
-          * this define the upper bound for the resulting `Blob` `size`
-          */
-         outputSizeLimit: number ;
-      } ,
-      /**   
-       * to be run when(ever) `src` changes
-       */
-      onSwitch : React.Dispatch<SceneEndDataEvt > ,
-   ]) {
+   function (...[src, { outputSizeLimit } , onSwitch ] : (
+      Parameters<(
+         (
+            /**    
+             * if this is `null`, then 
+             * no *encoding process* will take place.
+             * is this is {@link MediaRecorder }, then 
+             * *recording process* will run as expected.
+             */
+            src: null | MediaRecorder, 
+
+            /**    
+             */
+            options: {
+               /**    
+                * this define the upper bound for the resulting `Blob` `size`
+                */
+               outputSizeLimit: number ;
+            } ,
+
+            /**   
+             * to be run when(ever) `src` changes
+             */
+            onSessionEnd : React.Dispatch<SceneEndDataEvt > ,
+            
+         ) => void
+      )>
+   )) {
       // TODO
       useLayoutEffect(() => { 
          if (src ) {
