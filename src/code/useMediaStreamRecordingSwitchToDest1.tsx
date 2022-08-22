@@ -28,6 +28,7 @@ import {
     useRefreshByInterval ,  
  
 } from "./usingIntervalRefresh";      
+import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 
@@ -37,82 +38,66 @@ import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 
 
 
-// TODO
-const useMediaStreamRecEffect = (() => {
-   type XErrorEvt = DOMException ;
-   type SceneEndDataEvt = { data: null | Blob ; error: readonly XErrorEvt[] ; } ;
-   const useErrorEvtLog = (
-      () => {
-         ;
-         const [errorEvts, { permute: setErrorEEvts, push: addErrorEvt }] = (
-            useSeqState<(readonly XErrorEvt[] )[number] >([])
-         ) ;
-         return {
-            errorEvts , 
-            setErrorEEvts,
-            addErrorEvt,
-         } ;
-      }
-   ) ;
-   return (
-      function useMediaStreamRecEffectE(...[src, { resultingBlobSizeLimit, onSceneEnded: onSceneEnded }, deps] : [
-         MediaStream | null ,
-         ( { 
-            resultingBlobSizeLimit: number ;
-            onSceneEnded: React.Dispatch<SceneEndDataEvt > ; 
-         } ),
-         React.DependencyList,
-      ] ) {
-         const {
-            errorEvts , 
-            setErrorEEvts,
-            addErrorEvt,
-         } = useErrorEvtLog() ;
-         const [buffered, bufferOps ] = (
-            useBlobConcatState1({ sizeLimit: resultingBlobSizeLimit })
-         ) ;
-         const onCleanupNeed = (
-            function (): void {
-               ;
-               setErrorEEvts(() => [] ) ;
-               bufferOps.clear() ;
-            }
-         ) ;
-         const onSceneRecDataAllDone = (
-            (): void => {
-               onSceneEnded({ data: buffered, error: errorEvts })  ;
-               onCleanupNeed() ;
-            }
-         ) ;
-         useLayoutEffect(() => {
-            if (src ) {
-               ;
+type XErrorEvt = DOMException ;
+const XErrorEvt = {} ;
+type SceneEndDataEvt = { 
+   data: null | Blob ; 
+   successful : boolean ;
+   error: (readonly XErrorEvt[] ) ; 
+} ;
+const SceneEndDataEvt = {} ;
+const mediaRecordingDataCollect = (
+   function (...[src, { outputSizeLimit } , onSwitch ] : [
+      src: null | MediaRecorder, 
+      options: {
+         outputSizeLimit: number ;
+      } ,
+      onSwitch : React.Dispatch<SceneEndDataEvt > ,
+   ]) {
+      // TODO
+      useLayoutEffect(() => { 
+         if (src ) {
+            ;
+            const blobSeqBuffer = (
+               new Array<Blob>()
+            ) ;
+            const errorSeq = (
+               new Array<XErrorEvt >()
+            ) ;
+            ;
+            const listener = (e: BlobEvent ): void => {
                // TODO
-               {
-                  ;
-                  const rec = (
+               blobSeqBuffer.push(e.data ) ;
+            } ;
+            src.addEventListener("dataavailable", listener ) ;
+            ;
+            return () => {
+               src.removeEventListener("dataavailable", listener ) ;
+               const allData = (
+                  ((): null | Blob => {
                      // TODO
-                     new MediaRecorder(src, {} )
-                  ) ;
-                  rec.addEventListener("error", ({ error: e }) => {
-                     addErrorEvt(e ) ;
-                  }) ;
-                  rec.addEventListener("dataavailable", ({ data }) => {
-                     ;// TODO
-                  } ) ;
-                  rec.addEventListener("stop", ({ }) => {
-                     onSceneRecDataAllDone() ;
-                     ;// TODO
-                  } ) ;
-                  rec.start() ;
-                  return () => {
-                     rec.stop() ;
-                  } ;
-               }
+                     const sqV = [...blobSeqBuffer ] ;
+                     if (sqV.length ) {
+                        return (
+                           new Blob(sqV, { type: sqV[0].type })
+                        ) ;
+                     } else {
+                        return null ;
+                     }
+                  })()
+               ) ;
+               onSwitch({ data: allData , successful: false, error: [] }) ; 
             }
-         } , [src, ...deps ] );
-         ;
-         // TODO
-      }
-   ) ;
-})() ;
+         }
+      } , [src ] ) ;
+      ; 
+   }
+)  ;
+
+
+
+
+
+export {
+   mediaRecordingDataCollect ,
+} ;
