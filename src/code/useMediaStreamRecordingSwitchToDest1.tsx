@@ -40,7 +40,7 @@ import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 
 type XErrorEvt = DOMException ;
 const XErrorEvt = {} ;
-type SceneEndDataEvt = { 
+interface SceneEndDataEvt { 
    data: null | Blob ; 
    successful : boolean ;
    error: (readonly XErrorEvt[] ) ; 
