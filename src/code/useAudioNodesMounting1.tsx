@@ -179,21 +179,22 @@ export {
 
 namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
     const unused = {} ; // TS-1205
+    export type HighLevelOptions = { 
+        /**  
+         * {@link AudioParam.setTargetAtTime }
+        */               
+        timeConstant1: number ;
+    } ;
     export type Args<
         Dests1 ,             
-        D1  ,        
+        D1 extends object ,        
         YyNode extends AudioNode ,                     
     > = [               
         dests: Dests1,       
            
-        highLevelOptions: { 
-            /**  
-             * {@link AudioParam.setTargetAtTime }
-            */               
-            timeConstant1: number ;
-        },                   
+        highLevelOptions: D1,                   
 
-        constructImpl: (ctx: BaseAudioContext, dest: (D1 & object) ) => YyNode , 
+        constructImpl: (ctx: BaseAudioContext, dest: (Dests1 & object) ) => YyNode , 
 
         constructOptions: {                  
             /**                      
@@ -231,7 +232,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, object & Dests1, YyNode > )    
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions, YyNode > )    
     => 
     (YyNode | null )                                            
 ) ;   
@@ -257,7 +258,7 @@ const useInitAndConnectYyyNodeFor: (
         
     ] : [       
         ...(
-            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, object & Dst1, YyNode >
+            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions, YyNode >
         ),
                 
     ]) {          
@@ -294,7 +295,9 @@ const useInitUnconnectedYyyNodeFor = (
         (Dst1 ) | null,                    
         {  },                
         (ctx: BaseAudioContext, dest: Dst1 ) => YyNode ,    
-        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, unknown, YyNode >[3 ] ,   
+        ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<unknown, (
+            ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions
+        ), YyNode >[3 ] ,   
                
     ]) {  
         const [gRef, setGRef ] = (                                               
