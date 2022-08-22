@@ -177,7 +177,7 @@ export {
 
      
 
-namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
+namespace ToUseYyNodeWithGivenInitProperties1 {
     const unused = {} ; // TS-1205
     export type HighLevelOptions = { 
         /**  
@@ -232,12 +232,12 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions, YyNode > )    
+    ] : ToUseYyNodeWithGivenInitProperties1.Args<Dests1, ToUseYyNodeWithGivenInitProperties1.HighLevelOptions, YyNode > )    
     => 
     (YyNode | null )                                            
 ) ;   
 /**  
- * {@link ToUseYyNodeWithGivenFadeoutTimeConstant1 }  . 
+ * {@link ToUseYyNodeWithGivenInitProperties1 }  . 
  * 
  * this `useYyy` will    
  * 1) allocate independent {@link AudioNode} for the Component's lifetime, 
@@ -258,7 +258,7 @@ const useInitAndConnectYyyNodeFor: (
         
     ] : [       
         ...(
-            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, ToUseYyNodeWithGivenFadeoutTimeConstant1.HighLevelOptions, YyNode >
+            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, ToUseYyNodeWithGivenInitProperties1.HighLevelOptions, YyNode >
         ),
                 
     ]) {          
@@ -293,7 +293,7 @@ const useInitUnconnectedYyyNodeFor = (
           
     ] : [        
         ...(
-            ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dst1 | null, {}, YyNode >
+            ToUseYyNodeWithGivenInitProperties1.Args<Dst1 | null, {}, YyNode >
         ),
                
     ]) {  
@@ -537,7 +537,7 @@ const useATapNode = (() => {
     ) ;   
 })() ;      
 export {
-    ToUseYyNodeWithGivenFadeoutTimeConstant1 ,  
+    ToUseYyNodeWithGivenInitProperties1 as ToUseYyNodeWithGivenFadeoutTimeConstant1 ,  
 } ;
 export { 
     useInitUnconnectedYyyNodeFor ,     
