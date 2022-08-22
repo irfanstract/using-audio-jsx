@@ -218,7 +218,6 @@ namespace ToUseYyNodeWithGivenFadeoutTimeConstant1 {
 */                                    
 type ToUseYyNodeWithGivenFadeoutTimeConstant1<
     Dests1 = AudioNode | null ,       
-    D1 = AudioNode | null ,                         
 > = (    
     /**  
      * @param dest        if `null`, this node will be(come) inactive       
@@ -232,7 +231,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, D1, YyNode > )    
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, AudioNode, YyNode > )    
     => 
     (YyNode | null )                                            
 ) ;   
