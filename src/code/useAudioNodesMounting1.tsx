@@ -217,7 +217,7 @@ namespace ToUseYyNodeWithGivenInitProperties1 {
 }      
 /**             
 */                                    
-type ToUseYyNodeWithGivenFadeoutTimeConstant1<
+type ToUseYyNodeWithGivenInitProperties1<
     Dests1 = AudioNode | null ,       
 > = (    
     /**  
@@ -247,7 +247,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
  * @param OeGainNode1 instantiation of {@link YyNode }
 */        
 const useInitAndConnectYyyNodeFor: (      
-    ToUseYyNodeWithGivenFadeoutTimeConstant1
+    ToUseYyNodeWithGivenInitProperties1
         
 ) = (
     function <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode  > (...[
