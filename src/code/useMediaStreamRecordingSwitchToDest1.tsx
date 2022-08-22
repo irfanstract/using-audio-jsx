@@ -57,8 +57,8 @@ const blobConcat = (
       }
    }
 ) ;
-const mediaRecordingDataCollect = (
-   function (...[src, { outputSizeLimit } , onSwitch ] : (
+const useMediaRecordingDataCollect = (
+   function useMediaRecordingDataCollectImpl(...[src, { outputSizeLimit } , onSwitch ] : (
       Parameters<(
          (
             /**    
@@ -144,5 +144,5 @@ const mediaRecordingDataCollect = (
 
 
 export {
-   mediaRecordingDataCollect ,
+   useMediaRecordingDataCollect ,
 } ;
