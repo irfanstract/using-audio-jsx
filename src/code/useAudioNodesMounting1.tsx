@@ -231,7 +231,7 @@ type ToUseYyNodeWithGivenFadeoutTimeConstant1<
         OeGainNode1 ,           
         { onUnmount } ,                   
        
-    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, Dests1, YyNode > )    
+    ] : ToUseYyNodeWithGivenFadeoutTimeConstant1.Args<Dests1, object & Dests1, YyNode > )    
     => 
     (YyNode | null )                                            
 ) ;   
