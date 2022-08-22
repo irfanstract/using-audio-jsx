@@ -4,7 +4,7 @@
 import { IterableOps } from "./generalUse11";
 import EventEmitter from "events";      
 import React, { 
-    useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
+    useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef, useInsertionEffect ,
 } from "react";     
     
 
@@ -29,7 +29,7 @@ const useEventListener = (
     function <A extends EventTarget >(a: A , ...[evtNm, cb, deps ]: (
         EventEmSubArgs<Parameters<A["addEventListener"] > >
     ) ) {
-        useLayoutEffect(() => {        
+        useInsertionEffect(() => {        
             a.addEventListener(evtNm, cb, ) ;                                      
             return () => {         
                 a.removeEventListener(evtNm, cb ) ;                                 
@@ -45,7 +45,7 @@ const useEventEmitter = (
     function <A extends EventEmitter >(a: A , ...[evtNm, cb, deps ]: (
         EventEmSubArgs<Parameters<A["on"] > >
     ) ) {    
-        useLayoutEffect(() => {   
+        useInsertionEffect(() => {   
             a.on(evtNm, cb, ) ;               
             return () => {                   
                 a.off(evtNm, cb ) ;                         
