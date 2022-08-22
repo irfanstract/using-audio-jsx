@@ -22,7 +22,7 @@ import { fillWithWhiteNoise } from "./audioBufferFWhiteNoise";
 
 import {   USEYYYNODER, UABN_ARGPARSE, } from "./useAudioNodesMounting1";       
 import { 
-    ToUseYyNodeWithGivenFadeoutTimeConstant1,  
+    ToUseYyNodeWithGivenInitProperties1,  
     useYyNodeWithGivenFadeoutTimeConstant1,   
     useParamNodeWithGiven,    
              

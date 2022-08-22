@@ -537,7 +537,7 @@ const useATapNode = (() => {
     ) ;   
 })() ;      
 export {
-    ToUseYyNodeWithGivenInitProperties1 as ToUseYyNodeWithGivenFadeoutTimeConstant1 ,  
+    ToUseYyNodeWithGivenInitProperties1 as ToUseYyNodeWithGivenInitProperties1 ,  
 } ;
 export { 
     useInitUnconnectedYyyNodeFor ,     
