@@ -105,8 +105,6 @@ const useMediaRecordingDataCollect = (
                // TODO
                errorSeq.push(e.error ) ;
             } ;
-            src.addEventListener("dataavailable", dataListener ) ;
-            src.addEventListener("error", errorEvtListener ) ;
             const onShallRemoveListeners = (
                IterableOps.once((
                   function (): void {
@@ -138,6 +136,8 @@ const useMediaRecordingDataCollect = (
                ))
             ) ;
             ;
+            src.addEventListener("dataavailable", dataListener ) ;
+            src.addEventListener("error", errorEvtListener ) ;
             src.addEventListener("stop", onShallRemoveListeners ) ;
             return onShallRemoveListeners ;
          }
