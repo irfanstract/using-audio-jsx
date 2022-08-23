@@ -255,9 +255,7 @@ const useMediaStreamRec = (() => {
                usingInterval(() => (
                   requestData()
                ) , (
-                  IterableOps.clamp((
-                     rPeriodMillis
-                  ) , 4000, Number.MAX_SAFE_INTEGER )
+                  640
                ) , {
                   catchupPolicy: "MAINTAIN_FIXED_PACE" ,
                } )
