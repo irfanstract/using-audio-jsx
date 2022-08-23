@@ -174,10 +174,11 @@ const useMediaStreamRecSR = (
          ), [s] )
       ) ;
       ;
-      return {
+      const ops = {
          s , 
          requestData ,
       } ;
+      return ((): [typeof s, typeof ops] => [s, ops] )() ;
    }
 ) ;
 const useMediaStreamRec = (() => {
@@ -205,10 +206,12 @@ const useMediaStreamRec = (() => {
          const {
             mediaEncOptions,
          } = p[0] ;
-         const {
-            s , 
-            requestData ,
-         } = (
+         const [
+            s, 
+            { 
+               requestData ,
+            }, 
+         ] = (
             useMediaStreamRecSR({ src, mediaEncOptions, autoStart: true })
          ) ; 
          const sR = (
