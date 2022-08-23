@@ -323,8 +323,8 @@ thead > tr > td {
     backdrop-filter: blur(0.35em) ;     
 }
 video, image {
-    width: 16em;
-    height: 16em ;
+    width: calc(min(50vw, 50vh ) );
+    height: calc(min(50vw, 50vh ) ) ;
     background: black;
 }
 *::-webkit-scrollbar-thumb {
