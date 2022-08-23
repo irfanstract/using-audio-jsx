@@ -40,11 +40,9 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
-const MediaStreamRecDemo11 = (
-   function MediaStreamRecDemoC() {
-      const src = (
-         useMediaReadStreamDemo()
-      ) ;
+const useXReceBlobSeq = (
+   function useXRecBlobLiveImpl(src : null | MediaStream ) {
+      ;
       const [v, setV ] = (
          useState<null | Blob>(null )
       ) ;
@@ -64,6 +62,18 @@ const MediaStreamRecDemo11 = (
             console.warn(e) 
          )) ;
       }) ;
+      ;
+      return v ;
+   }
+) ;
+const MediaStreamRecDemo11 = (
+   function MediaStreamRecDemoC() {
+      const src = (
+         useMediaReadStreamDemo()
+      ) ;
+      const v = (
+         useXReceBlobSeq(src )
+      ) ;
       const vUrl = (
          useMemo(() => (
             v ?
