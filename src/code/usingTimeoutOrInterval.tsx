@@ -176,7 +176,27 @@ const usingInterval = (
         } ;
     }         
 ) ;
-export { usingInterval } ;   
+const useIntervalEffect = (
+    function (...[callback, periodMillis, properties, deps ] : (
+        [
+            callback:  Parameters<typeof usingInterval>[0],
+            periodMillis: Parameters<typeof usingInterval>[1],
+            properties: NonNullable<(
+                Parameters<typeof usingInterval>[2]
+            )>,
+            deps: React.DependencyList,
+        ]
+    ) ) {
+        React.useLayoutEffect(() => {
+            return (
+                usingInterval(
+                    callback, 
+                    periodMillis, properties )
+            ) ;
+        }, deps ) ;
+    }
+) ;
+export { usingInterval, useIntervalEffect } ;   
 /**    
  * 
  */
