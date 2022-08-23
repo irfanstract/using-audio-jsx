@@ -91,5 +91,6 @@ const {
 
 
 export {
+   useWindowLocationHref,
    useWindowLocationChgEffect ,
 } ;
