@@ -215,6 +215,14 @@ const useRefreshByInterval = (
         return JSON ;    
     }    
 ) ;      
+const useIncrementByInterval = (      
+    (...a: Parameters<typeof useRefreshByInterval1 > ): ({} & {} ) => { 
+        const {
+            c ,
+        } = useRefreshByInterval1(...a ) ;                    
+        return c ;    
+    }    
+) ;
  
 
 
@@ -234,4 +242,5 @@ export {
 
     useRefreshByInterval1 , 
     useRefreshByInterval , 
+    useIncrementByInterval ,
 } ;
