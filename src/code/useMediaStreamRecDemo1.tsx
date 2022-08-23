@@ -43,21 +43,23 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 const useObjectURL = (
    function (...[v] : [null | Blob ] ) {
       ;
-      const vUrl = (
-         useMemo(() => (
+      const [vUrl1, setVURl ] = (
+         useState<string>("" )
+      ) ;
+      React.useLayoutEffect(() => {
+         const vUrl = (
             v ?
             URL.createObjectURL(v )
             : ""
-         ) , [v] )
-      ) ;
-      React.useLayoutEffect(() => {
+         ) ;
+         setVURl(() => vUrl ) ;
          return () => {
             URL.revokeObjectURL(vUrl) ;
          } ;
       }, [v]);
       ;
       return (
-         vUrl
+         vUrl1
       ) ;
    }
 ) ;
