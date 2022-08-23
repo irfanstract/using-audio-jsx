@@ -145,18 +145,27 @@ const useMediaRecordingDataCollect = (
       ; 
    }
 )  ;
+type MEO = {
+   /**   
+    * this will be 
+    * passed/specified 
+    * when running {@link MediaRecorder} constructor.
+    */
+   mediaEncOptions ?: MediaRecorderOptions ; //
+   /**   
+    * when(ever) this `deps` changes,
+    * `rec` will *re-start*.
+    */
+   reinitDeps ?: React.DependencyList ; //
+} ;
 const useMediaStreamRecSR = (
    function (...[{ src, mediaEncOptions, reinitDeps = [], autoStart }] : [
       {
          src : null | MediaStream ;
-         mediaEncOptions : undefined | MediaRecorderOptions ;
-         /**   
-          * when(ever) this `deps` changes,
-          * `rec` will *re-start*.
-          */
-         reinitDeps ?: React.DependencyList ;
          autoStart : boolean ;
       }
+      &
+      MEO
    ]) {
       ;
       const s = (
@@ -197,17 +206,7 @@ const useMediaStreamRec = (() => {
             ?
             [
                Options0 & {
-                  /**   
-                   * this will be 
-                   * passed/specified when running {@link MediaRecorder} constructor.
-                   */
-                  mediaEncOptions ?: MediaRecorderOptions ;
-                  /**   
-                   * when(ever) this `deps` changes,
-                   * `rec` will *re-start*.
-                   */
-                  reinitDeps ?: React.DependencyList ;
-               } , 
+               } & MEO , 
                ...Args ,
             ]
             : never
