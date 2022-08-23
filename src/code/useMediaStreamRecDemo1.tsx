@@ -129,16 +129,23 @@ const MediaStreamRecDemo11 = (
 const MediaStreamRecDemo1 = (
    () => {
       const [ON, enable ] = (
-         useReducer(() => true, false )
+         useReducer((...[  ,v1 ] : [boolean, boolean]) => v1 , false )
       ) ;
       return (
          ON 
          ?
-         <MediaStreamRecDemo11 />
+         <div style={{ display: "flex", flexDirection: "column" }}>
+            <p>
+            <button type="button" role={"switch" } onClick={() => enable(false ) } >
+               Close 
+            </button>
+            </p>
+            <MediaStreamRecDemo11 />
+         </div>
          :
          (
             <p>
-            <button type="button" role={"switch" } onClick={() => enable() } >
+            <button type="button" role={"switch" } onClick={() => enable(true ) } >
                Start 
             </button>
             </p>
