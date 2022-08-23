@@ -76,6 +76,11 @@ const BlobStateVideoPlayer = (
             : ""
          ) , [v] )
       ) ;
+      React.useLayoutEffect(() => {
+         return () => {
+            URL.revokeObjectURL(vUrl) ;
+         } ;
+      }, [v]);
       return (
          <div>
             <video 
