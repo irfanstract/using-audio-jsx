@@ -40,6 +40,27 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
+const useObjectURL = (
+   function (...[v] : [null | Blob ] ) {
+      ;
+      const vUrl = (
+         useMemo(() => (
+            v ?
+            URL.createObjectURL(v )
+            : ""
+         ) , [v] )
+      ) ;
+      React.useLayoutEffect(() => {
+         return () => {
+            URL.revokeObjectURL(vUrl) ;
+         } ;
+      }, [v]);
+      ;
+      return (
+         vUrl
+      ) ;
+   }
+) ;
 const useXReceBlobSeq = (
    function useXRecBlobLiveImpl(src : null | MediaStream ) {
       ;
@@ -70,17 +91,8 @@ const BlobStateVideoPlayer = (
    function ({ value: v } : { value: null | Blob ; } ) {
       ;
       const vUrl = (
-         useMemo(() => (
-            v ?
-            URL.createObjectURL(v )
-            : ""
-         ) , [v] )
+         useObjectURL(v )
       ) ;
-      React.useLayoutEffect(() => {
-         return () => {
-            URL.revokeObjectURL(vUrl) ;
-         } ;
-      }, [v]);
       return (
          <div>
             <video 
