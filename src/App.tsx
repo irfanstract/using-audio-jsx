@@ -8,6 +8,7 @@ import { AppWrapper1 } from './code/useAppWrapper1';
 import logo from './logo.svg';   
 // App Code Imports   
 import { AudioLoopDemoApp } from './code/audioLoopDemo';  
+import { MediaStreamRecDemo1 } from './code/useMediaStreamRecDemo1';
    
 // CSS imports         
 import './App.css';   
@@ -57,7 +58,7 @@ function LoadingScreenApp() {
 export default (    
   function AppApp() {                  
     return ( 
-      AppWrapper1(AudioLoopDemoApp )()              
+      AppWrapper1(MediaStreamRecDemo1 )()              
     ) ;
   }    
 );
