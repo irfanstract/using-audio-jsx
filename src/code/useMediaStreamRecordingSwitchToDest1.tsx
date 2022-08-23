@@ -145,6 +145,91 @@ const useMediaRecordingDataCollect = (
       ; 
    }
 )  ;
+const useMediaStreamRecSR = (
+   function (...[{ src, mediaEncOptions, autoStart }] : [
+      {
+         src : null | MediaStream ;
+         mediaEncOptions : undefined | MediaRecorderOptions ;
+         autoStart : boolean ;
+      }
+   ]) {
+      ;
+      const s = (
+         React.useMemo(() => (
+            src ?
+            new MediaRecorder(src, mediaEncOptions )
+            : null
+         ) , [src ] )
+      ) ;
+      if (s && autoStart) {
+         s.start() ;
+      }
+      const requestData = (
+         React.useCallback((
+            (): void => (
+               s && s.requestData()
+               , 
+               void 0 
+            )
+         ), [s] )
+      ) ;
+      ;
+      return {
+         s , 
+         requestData ,
+      } ;
+   }
+) ;
+const useMediaStreamRec = (() => {
+   return (
+      function useMediaStreamRecordingImpl(...[src, ...p ] : [
+         null | MediaStream,
+         ...(
+            [(
+               Parameters<typeof useMediaRecordingDataCollect > 
+            )] extends [readonly [infer Src, infer Options0 , ...(infer Args )] ]
+            ?
+            [
+               Options0 & {
+                  /**   
+                   * this will be 
+                   * passed/specified when running {@link MediaRecorder} constructor.
+                   */
+                  mediaEncOptions ?: MediaRecorderOptions ;
+               } , 
+               ...Args ,
+            ]
+            : never
+         ) ,
+      ] ) {
+         const {
+            mediaEncOptions,
+         } = p[0] ;
+         const {
+            s , 
+            requestData ,
+         } = (
+            useMediaStreamRecSR({ src, mediaEncOptions, autoStart: true })
+         ) ; 
+         const sR = (
+            useMediaRecordingDataCollect(s, ...p )
+         ) ;
+         React.useEffect(() => {
+            return (
+               usingInterval(() => (
+                  requestData()
+               ) , (
+                  // TODO
+                  3 * 1000
+               ) , {
+                  catchupPolicy: "MAINTAIN_FIXED_PACE" ,
+               } )
+            ) ;
+         }, [s ] ) ;
+         // TODO
+      }
+   ) ;
+})() ;
 
 
 
@@ -152,4 +237,5 @@ const useMediaRecordingDataCollect = (
 
 export {
    useMediaRecordingDataCollect ,
+   useMediaStreamRec ,
 } ;
