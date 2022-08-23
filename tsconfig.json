@@ -23,7 +23,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": false,
   },
   "ts-node": {
     "compilerOptions": {}
