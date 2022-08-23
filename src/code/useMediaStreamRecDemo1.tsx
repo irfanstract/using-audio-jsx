@@ -40,7 +40,7 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
-const MediaStreamRecDemo1 = (
+const MediaStreamRecDemo11 = (
    function MediaStreamRecDemoC() {
       const src = (
          useMediaReadStreamDemo()
@@ -50,23 +50,65 @@ const MediaStreamRecDemo1 = (
       ) ;
       useMediaStreamRec(src, {
          outputSizeLimit: 100 * 1E6 ,
-         rPeriodMillis: 16 * 1000 ,
-      }, ({ data }) => {
-         setV(() => data ) ;
+         rPeriodMillis: 6 * 1000 ,
+      }, ({ data, error }) => {
+         const ERRO = (
+            IterableOps.once(() => (
+               console.warn("errors:")
+            ))
+         ) ;
+         setV((data0 ) => data || data0 ) ;
+         error.forEach((e) => (
+            ERRO()
+            ,
+            console.warn(e) 
+         )) ;
       }) ;
       const vUrl = (
-         v ?
-         URL.createObjectURL(v )
-         : ""
+         useMemo(() => (
+            v ?
+            URL.createObjectURL(v )
+            : ""
+         ) , [v] )
       ) ;
       return (
          <div>
             <p> <i> Streaming Video </i> </p>
+            <div>
+            <div
+            style={{ display: "flex", flexDirection: "column", height: "8em", overflow: "hidden" }}
+            >
             <video 
-            controls
+            autoPlay
             src={vUrl }
+            style={{ background: "black" }}
             />
+            </div>
+            <pre style={{ overflow: "hidden" }}>
+               { vUrl }
+            </pre>
+            </div>
          </div>
+      ) ;
+   }
+) ;
+const MediaStreamRecDemo1 = (
+   () => {
+      const [ON, enable ] = (
+         useReducer(() => true, false )
+      ) ;
+      return (
+         ON 
+         ?
+         <MediaStreamRecDemo11 />
+         :
+         (
+            <p>
+            <button type="button" role={"switch" } onClick={() => enable() } >
+               Start 
+            </button>
+            </p>
+         ) 
       ) ;
    }
 ) ;
