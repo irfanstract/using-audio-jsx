@@ -78,18 +78,13 @@ const BlobStateVideoPlayer = (
       ) ;
       return (
          <div>
-            <div
-            >
             <video 
             autoPlay
             src={vUrl }
             />
-            </div>
             <pre style={{ overflow: "hidden" }}>
                { vUrl }
             </pre>
-            <div>
-            </div>
          </div>
       ) ;
    }
