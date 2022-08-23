@@ -66,14 +66,9 @@ const useXReceBlobSeq = (
       return v ;
    }
 ) ;
-const MediaStreamRecDemo11 = (
-   function MediaStreamRecDemoC() {
-      const src = (
-         useMediaReadStreamDemo()
-      ) ;
-      const v = (
-         useXReceBlobSeq(src )
-      ) ;
+const BlobStateVideoPlayer = (
+   function ({ value: v } : { value: null | Blob ; } ) {
+      ;
       const vUrl = (
          useMemo(() => (
             v ?
@@ -83,8 +78,6 @@ const MediaStreamRecDemo11 = (
       ) ;
       return (
          <div>
-            <p> <i> Streaming Video </i> </p>
-            <div>
             <div
             >
             <video 
@@ -95,8 +88,27 @@ const MediaStreamRecDemo11 = (
             <pre style={{ overflow: "hidden" }}>
                { vUrl }
             </pre>
+            <div>
             </div>
          </div>
+      ) ;
+   }
+) ;
+const MediaStreamRecDemo11 = (
+   function MediaStreamRecDemoC() {
+      const src = (
+         useMediaReadStreamDemo()
+      ) ;
+      const v = (
+         useXReceBlobSeq(src )
+      ) ;
+      return (
+         <div>
+            <p> <i> Streaming Video </i> </p>
+            <BlobStateVideoPlayer 
+            value={v }
+            />
+         </div> //
       ) ;
    }
 ) ;
