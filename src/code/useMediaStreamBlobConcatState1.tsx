@@ -64,8 +64,8 @@ const useBlobConcatDeferring = (
       ) ;
    }
 ) ;
-const useBlobConcatState = (
-   function (...[{ sizeLimit }] : [
+const useBlobConcatState = (() => {
+   type Args = [
       {
          /**   
           * {@link sizeLimit} shall be specified appropriately to prevent process crash ;
@@ -73,74 +73,88 @@ const useBlobConcatState = (
           */
          sizeLimit: number ;
       } ,
-   ] ): [
-      state: { 
-         /**   
-          * the collective state.
-          */
-         overallBlob: Blob | null ; 
-
-         /**   
-          * this' supposed to the `type` ; 
-          * this will be `null` unless there's one in the list.
-          */
-         type: string | null ; 
-      }, 
-      amend: BlobCSeqollectiveMutativeOps ,
-   ] {
-      const [blobs, setBlobSeq ] = (
-         useState<readonly Blob[] >([])
-      ) ;
-      const appendBlob = (
-         function (appeand: Blob): void {
-            setBlobSeq((sq0 ) => [...sq0, appeand ] );
-         }
-      ) ;
-      const clear = (
-         (): void => (
-            setBlobSeq(() => [] )
-         )
-      ) ;
-      const firstBlob: Blob | null = (
-         blobs[0 ]
-      ) ;
-      const ops = { appendBlob, clear } ;
-      ;
-      if (firstBlob) {
-         const type = firstBlob.type ;
-         const precomutedTotalSize = (
-            IterableOps.sum((
-               blobs
-               .map(b => b.size )
-            ))
-         );
-         if ((
-            sizeLimit
-            <
-            precomutedTotalSize
-         )) {
-            throw TypeError((
-               `pre-calc detected a total size violation : ${precomutedTotalSize }`
-            )) ;
-         }
-         const overallBlob = ( 
-            new Blob([...blobs ], { type: type })
+   ] ;
+   type RetunValue = (
+      [
+         state: { 
+            /**   
+             * the collective state.
+             */
+            overallBlob: Blob | null ; 
+   
+            /**   
+             * this' supposed to the `type` ; 
+             * this will be `null` unless there's one in the list.
+             */
+            type: string | null ; 
+         }, 
+         amend: BlobCSeqollectiveMutativeOps ,
+      ]
+   );
+   return (
+      function useBlobConcatStateImpl(...[{ sizeLimit }] : Args ): RetunValue {
+         const [blobs, setBlobSeq ] = (
+            useState<readonly Blob[] >([])
          ) ;
-         if ((
-            sizeLimit
-            <
-            overallBlob.size
-         )) {
-            throw TypeError((
-               `resulting Blob violated the size limit : size ${overallBlob.size }, type ${type } `
-            )) ;
-         }
-         return [{ overallBlob, type }, ops ] ;
-      } else {
-         return [{ overallBlob: null, type: null }, ops ] ;
+         const appendBlob = (
+            function (appeand: Blob): void {
+               setBlobSeq((sq0 ) => [...sq0, appeand ] );
+            }
+         ) ;
+         const clear = (
+            (): void => (
+               setBlobSeq(() => [] )
+            )
+         ) ;
+         const ops = { appendBlob, clear } ;
+         ;
+         return (
+            // TODO
+            React.useMemo(() => (
+               ((): RetunValue => {
+                  ;
+                  const firstBlob: Blob | null = (
+                     blobs[0 ]
+                  ) ;
+                  if (firstBlob) {
+                     const type = firstBlob.type ;
+                     const precomutedTotalSize = (
+                        IterableOps.sum((
+                           blobs
+                           .map(b => b.size )
+                        ))
+                     );
+                     if ((
+                        sizeLimit
+                        <
+                        precomutedTotalSize
+                     )) {
+                        throw TypeError((
+                           `pre-calc detected a total size violation : ${precomutedTotalSize }`
+                        )) ;
+                     }
+                     const overallBlob = ( 
+                        new Blob([...blobs ], { type: type })
+                     ) ;
+                     if ((
+                        sizeLimit
+                        <
+                        overallBlob.size
+                     )) {
+                        throw TypeError((
+                           `resulting Blob violated the size limit : size ${overallBlob.size }, type ${type } `
+                        )) ;
+                     }
+                     return [{ overallBlob, type }, ops ] ;
+                  } else {
+                     return [{ overallBlob: null, type: null }, ops ] ;
+                  }
+               })()
+            ) , [blobs ] )
+         ) ;
       }
-   }
-) ;
+   ) ;
+})() ;
 const useBlobConcatState1 = (
    function (...p: Parameters<typeof useBlobConcatState> ): [
       state: ReturnType<typeof useBlobConcatState>[0]["overallBlob"] , 
