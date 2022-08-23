@@ -25,7 +25,8 @@ import {
     useCanForceRefresh , 
 
     useRefreshByInterval1 ,  
-    useRefreshByInterval ,  
+    useRefreshByInterval, 
+    useIncrementByInterval,  
  
 } from "./usingIntervalRefresh";      
 import { useEventTarget } from "./usingTimeoutOrInterval";
@@ -175,9 +176,18 @@ const useMediaStreamRecSR = (
             : null
          ) , [src, ...reinitDeps ] )
       ) ;
-      if (s && autoStart) {
-         s.start() ;
-      }
+      React.useEffect(() => {
+         if (s) {
+            (
+               autoStart
+               &&
+               (s.state === "inactive" && s.start() )
+            ) ;
+            return () => {
+               s.stop() ;
+            } ;
+         }
+      } , [s ] )
       const requestData = (
          React.useCallback((
             (): void => (
@@ -223,8 +233,12 @@ const useMediaStreamRec = (() => {
             mediaEncOptions,
          } = p[0] ;
          const {
-            reinitDeps = [],
+            reinitDeps: reinitDeps0 = [],
          } = p[0] ;
+         const reinitDeps = [
+            useIncrementByInterval(true, rPeriodMillis ) ,
+            ...reinitDeps0 ,
+         ] ;
          const [
             s, 
             { 
@@ -241,7 +255,9 @@ const useMediaStreamRec = (() => {
                usingInterval(() => (
                   requestData()
                ) , (
-                  rPeriodMillis
+                  IterableOps.clamp((
+                     rPeriodMillis
+                  ) , 4000, Number.MAX_SAFE_INTEGER )
                ) , {
                   catchupPolicy: "MAINTAIN_FIXED_PACE" ,
                } )
