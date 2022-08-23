@@ -146,10 +146,15 @@ const useMediaRecordingDataCollect = (
    }
 )  ;
 const useMediaStreamRecSR = (
-   function (...[{ src, mediaEncOptions, autoStart }] : [
+   function (...[{ src, mediaEncOptions, reinitDeps = [], autoStart }] : [
       {
          src : null | MediaStream ;
          mediaEncOptions : undefined | MediaRecorderOptions ;
+         /**   
+          * when(ever) this `deps` changes,
+          * `rec` will *re-start*.
+          */
+         reinitDeps ?: React.DependencyList ;
          autoStart : boolean ;
       }
    ]) {
@@ -159,7 +164,7 @@ const useMediaStreamRecSR = (
             src ?
             new MediaRecorder(src, mediaEncOptions )
             : null
-         ) , [src ] )
+         ) , [src, ...reinitDeps ] )
       ) ;
       if (s && autoStart) {
          s.start() ;
@@ -197,6 +202,11 @@ const useMediaStreamRec = (() => {
                    * passed/specified when running {@link MediaRecorder} constructor.
                    */
                   mediaEncOptions ?: MediaRecorderOptions ;
+                  /**   
+                   * when(ever) this `deps` changes,
+                   * `rec` will *re-start*.
+                   */
+                  reinitDeps ?: React.DependencyList ;
                } , 
                ...Args ,
             ]
@@ -206,13 +216,16 @@ const useMediaStreamRec = (() => {
          const {
             mediaEncOptions,
          } = p[0] ;
+         const {
+            reinitDeps = [],
+         } = p[0] ;
          const [
             s, 
             { 
                requestData ,
             }, 
          ] = (
-            useMediaStreamRecSR({ src, mediaEncOptions, autoStart: true })
+            useMediaStreamRecSR({ src, mediaEncOptions, reinitDeps, autoStart: true })
          ) ; 
          const sR = (
             useMediaRecordingDataCollect(s, ...p )
