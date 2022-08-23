@@ -9,6 +9,7 @@ import logo from './logo.svg';
 // App Code Imports   
 import { AudioLoopDemoApp } from './code/audioLoopDemo';  
 import { MediaStreamRecDemo1 } from './code/useMediaStreamRecDemo1';
+import AllDemoes from './code/allDemos';
    
 // CSS imports         
 import './App.css';   
@@ -58,7 +59,7 @@ function LoadingScreenApp() {
 export default (    
   function AppApp() {                  
     return ( 
-      AppWrapper1(MediaStreamRecDemo1 )()              
+      AppWrapper1(AllDemoes )()              
     ) ;
   }    
 );
