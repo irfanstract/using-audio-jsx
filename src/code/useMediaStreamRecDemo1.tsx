@@ -76,12 +76,10 @@ const MediaStreamRecDemo11 = (
             <p> <i> Streaming Video </i> </p>
             <div>
             <div
-            style={{ display: "flex", flexDirection: "column", height: "8em", overflow: "hidden" }}
             >
             <video 
             autoPlay
             src={vUrl }
-            style={{ background: "black" }}
             />
             </div>
             <pre style={{ overflow: "hidden" }}>
