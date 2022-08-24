@@ -50,7 +50,7 @@ const useXReceBlobSeq = (
       ) ;
       useMediaStreamRec(src, {
          outputSizeLimit: 100 * 1E6 ,
-         rPeriodMillis: 4 * 1000 ,
+         rPeriodMillis: 2 * 1000 ,
       }, ({ data, error }) => {
          const ERRO = (
             IterableOps.once(() => (
