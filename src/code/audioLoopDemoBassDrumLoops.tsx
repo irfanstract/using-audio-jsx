@@ -470,7 +470,7 @@ const MercerTchamiMusicDemoIntro = (
             </>
          ) }
          >
-         <MercerTchamiMusicDemo1 mode={2 } {...props1} />
+         <MercerTchamiMusicDemo1 mode={0 } {...props1} />
          </CBiquadFilterModulated> 
          </>
       ) ;
