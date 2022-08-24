@@ -13,6 +13,7 @@ import {
 } from "./timeoutOrIntervalPolicy";       
 import { usingInterval } from "./usingTimeoutOrInterval";
 import { useRealTimeQueryInterval1 } from "./useNonHookValue";
+import { useRealTimeQueryIntervalSS } from "./usingTimeoutOrIntervalScannedValueSS";
 
 
 
@@ -23,32 +24,6 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
 
 
 // TODO
-const useRealTimeQueryIntervalSS = (
-   function <V>(...[f, ...intervalPolicy ] : [
-      impl: () => V ,
-      ...intervalPolicy: (
-         [(
-            Parameters<typeof usingInterval>
-         )] extends [readonly [infer F, ...(infer Args )] ]
-         ?
-         Args
-         : never
-      ) ,
-   ] ) {
-      const [v, setV] = (
-         React.useState<V >((
-            f()
-         ))
-      ) ;
-      React.useLayoutEffect(() => (
-         usingInterval(() => {
-            const value = f() ;
-            setV(() => value ) ;
-         } , ...intervalPolicy )
-      ), [] );
-      return v ;
-   }
-) ;
 const useWindowLocationHref = (
    function () {
       return (
