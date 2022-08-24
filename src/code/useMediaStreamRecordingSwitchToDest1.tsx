@@ -208,20 +208,22 @@ const useMediaStreamRecSR = (
 const useMediaStreamRec = (() => {
    return (
       function useMediaStreamRecordingImpl(...[src, ...p ] : [
-         null | MediaStream,
-         ...(
+         src: null | MediaStream,
+         ...args1: (
             [(
                Parameters<typeof useMediaRecordingDataCollect > 
             )] extends [readonly [infer Src, infer Options0 , ...(infer Args )] ]
             ?
             [
-               Options0 & {
-                  /**    
-                   * period of the `requestData` calls
-                   */
-                  rPeriodMillis : number ;
-               } & MEO , 
-               ...Args ,
+               config: (
+                  Options0 & {
+                     /**    
+                      * period of the `requestData` calls
+                      */
+                     rPeriodMillis : number ;
+                  } & MEO
+               ) , 
+               ...extras: Args ,
             ]
             : never
          ) ,
