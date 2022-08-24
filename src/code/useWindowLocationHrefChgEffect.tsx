@@ -23,7 +23,7 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
 
 
 // TODO
-const useRefreshFetch = (
+const useRealTimeQueryIntervalSS = (
    function <V>(...[f, ...intervalPolicy ] : [
       impl: () => V ,
       ...intervalPolicy: (
@@ -52,7 +52,7 @@ const useRefreshFetch = (
 const useWindowLocationHref = (
    function () {
       return (
-         useRefreshFetch<typeof window.location.href>(() => (
+         useRealTimeQueryIntervalSS<typeof window.location.href>(() => (
             window.location.href
          ) , 150 )
       ) ;
