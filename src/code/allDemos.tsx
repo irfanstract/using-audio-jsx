@@ -34,6 +34,7 @@ import {
 import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import { useWindowLocationHref } from "./useWindowLocationHrefChgEffect";
+import { useCtxtualRoutingState } from "./useWindowLocationHrefBasedRouting1";
 import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
@@ -55,35 +56,46 @@ import { MediaStreamRecDemo1 } from "./useMediaStreamRecDemo1";
 
 const AllDemoes = (
    function () {
-      const windowHref = (
-         useWindowLocationHref()
+      const {
+         presentlyChoice: wh1 ,
+         renderChoiceLink ,
+         windowHref ,
+      } = (
+         useCtxtualRoutingState()
       ) ;
-      const wh1 = (
-         (
-            windowHref
-            .match(/\#(.*)$/)?.[1 ]
-            ||
-            ""
-         )
-      ) ;
-      if (wh1 === "AudioLoopDemo") {
+      const e = ((): React.ReactElement => {
+         ;
+         if (wh1 === "AudioLoopDemo") {
+            return (
+               <AudioLoopDemoApp />
+            ) ;
+         } ;
+         if (wh1 === "MediaStreamRecDemo") {
+            return (
+               <MediaStreamRecDemo1 />
+            ) ;
+         } ;
          return (
-            <AudioLoopDemoApp />
+            <div>
+               {(
+                  renderChoiceLink({ value: "AudioLoopDemo" }, (
+                     <> AudioLoopDemo </>
+                  ))
+               ) }
+               {(
+                  renderChoiceLink({ value: "MediaStreamRecDemo" }, (
+                     <> Media Stream Rec Demo </>
+                  ))
+               ) }
+            </div>
          ) ;
-      } ;
-      if (wh1 === "MediaStreamRecDemo") {
-         return (
-            <MediaStreamRecDemo1 />
-         ) ;
-      } ;
+      })() ;
       return (
          <div>
-            <a href="#AudioLoopDemo">
-               Audio Loop Demo 
-            </a>
-            <a href="#MediaStreamRecDemo">
-               Media Stream Rec Demo
-            </a>
+            <p>  
+               <code>{ windowHref }</code>
+            </p>
+            { e }
          </div>
       ) ;
    }
