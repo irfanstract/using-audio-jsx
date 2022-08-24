@@ -31,6 +31,7 @@ import {
 import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
+import { useObjectURL } from "./useEmbedSrcObjectUrl";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
@@ -40,29 +41,6 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
-const useObjectURL = (
-   function (...[v] : [null | Blob ] ) {
-      ;
-      const [vUrl1, setVURl ] = (
-         useState<string>("" )
-      ) ;
-      React.useLayoutEffect(() => {
-         const vUrl = (
-            v ?
-            URL.createObjectURL(v )
-            : ""
-         ) ;
-         setVURl(() => vUrl ) ;
-         return () => {
-            URL.revokeObjectURL(vUrl) ;
-         } ;
-      }, [v]);
-      ;
-      return (
-         vUrl1
-      ) ;
-   }
-) ;
 const useXReceBlobSeq = (
    function useXRecBlobLiveImpl(src : null | MediaStream ) {
       ;
