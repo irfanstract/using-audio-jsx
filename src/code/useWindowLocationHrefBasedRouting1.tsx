@@ -65,7 +65,7 @@ const useCtxtualRoutingState = (
                { value: string ; }
             ) ,
             React.ReactElement ,
-         ] ) {
+         ] ): React.ReactElement {
             return (
                <a href={`#${whichOne }` } >
                   { payload }
@@ -74,10 +74,15 @@ const useCtxtualRoutingState = (
          }
       ) ;
       ;
-      return {
+      const props1 = {
          presentlyChoice , 
          renderChoiceLink ,
       } ;
+      return (
+         (() : ({ windowHref ?: string ; } & typeof props1) => (
+            { windowHref, ...props1 }
+         ) )()
+      ) ;
    }
 ) ;
 
