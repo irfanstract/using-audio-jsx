@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noUncheckedIndexedAccess": false,
     "skipLibCheck": true,
     "lib": [
       "dom",
@@ -23,7 +24,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noUncheckedIndexedAccess": false,
   },
   "ts-node": {
     "compilerOptions": {}
