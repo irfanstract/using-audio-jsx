@@ -76,6 +76,7 @@ type RealTimeQueryIntervalUsageArgs<A> = [
     ) , 
     timeoutMillis: number  ,       
 ] ;        
+const RealTimeQueryIntervalUsageArgs = {} ; // TS-1205
 /**    
  * 
  */
