@@ -19,6 +19,7 @@ import {
     useRefreshByInterval ,  
  
 } from "./usingIntervalRefresh";      
+import { useRealTimeQueryIntervalSS } from "./usingTimeoutOrIntervalScannedValueSS";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 try {
     const em1 = { v: 3 } as const ;
@@ -401,6 +402,7 @@ export {
     useRefreshByInterval ,           
     useRefreshByInterval1 ,   
 
+    useRealTimeQueryIntervalSS,
     useRealTimeQueryInterval ,           
     useRealTimeQueryInterval1 ,     
     useIntervalDeferredValue as useIntervalDeferredValue1 ,  
