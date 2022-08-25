@@ -53,3 +53,6 @@ body {
 input[type=number] {
    text-align: end ;
 }       
+aside {
+   zoom: 80% ;
+}
