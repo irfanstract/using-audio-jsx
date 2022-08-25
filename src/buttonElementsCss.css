@@ -152,7 +152,7 @@ input[type=button]::before,
    display: inline-block;
    font-style: oblique ;
    background: black;
-   color: white;
+   color: var(--MHOVERED-COLOR );
    font-size: 75% ;
    border-radius: 0.25em ;
    padding: 0.25em ;
@@ -183,7 +183,7 @@ a[href]::after {
    content: "[page]";
    font-style: oblique ;
    background: black;
-   color: white;
+   color: var(--MHOVERED-COLOR );
    font-size: 75% ;
    border-radius: 0.25em ;
    padding: 0.25em ;
@@ -196,8 +196,8 @@ a[href]:focus-within::after ,
 button:hover::before ,
 button:focus-within::before ,
 #---e {
-   background: white;
-   color: rgb(128, 192, 255 );
+   color: black;
+   background: var(--MHOVERED-COLOR );
 } 
 
 
