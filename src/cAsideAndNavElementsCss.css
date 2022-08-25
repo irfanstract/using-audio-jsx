@@ -9,11 +9,31 @@
 
 
 aside {
-   background: rgba(0, 0, 0, 0.5 );
+   display: block;
+   position: relative;
+   border-style: solid;
+   padding: 0.5em;
+}
+aside::before {
+   position: absolute;
+   content: " ";
+   pointer-events: none;
+   top: 0 ;
+   left: 0 ;
+   right: 0 ;
+   bottom: 0 ;
+   backdrop-filter: saturate(var(--ASIDE-COVERCOLOR ) ) brightness(var(--ASIDE-COVERBRIGH ) ) ;
+   z-index: 3 ;
+}
+aside { 
+   background: rgba(0, 0, 0, 0.25 );
+   --ASIDE-COVERBRIGH : 0.7 ;
+   --ASIDE-COVERCOLOR : 0.3 ;
 }
 aside:focus-within,
 aside:hover {
-   background: rgba(0, 0, 0, 0.25 );
+   --ASIDE-COVERBRIGH : 1.0 ;
+   --ASIDE-COVERCOLOR : 1.0 ;
 }
 aside:hover { 
 }
@@ -23,5 +43,4 @@ aside:hover {
 
 
 nav {
-   border-style: solid;
 }
