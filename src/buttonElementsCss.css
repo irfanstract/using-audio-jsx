@@ -9,12 +9,14 @@
 
 
 
+a,
 a.button,    
 button, 
 input[type=button],
 #----e {
     cursor: pointer;                   
 }
+a:disabled ,
 a.button:disabled , 
 button:disabled,      
 input[type=button]:disabled ,
