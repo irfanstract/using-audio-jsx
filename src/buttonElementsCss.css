@@ -23,6 +23,7 @@ input[type=button]:disabled ,
 #----e { 
     filter: contrast(0.1) brightness(1.8) ;
     cursor: default !important;    
+    pointer-events: none;
 }
 
 
