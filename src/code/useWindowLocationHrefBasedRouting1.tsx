@@ -70,7 +70,7 @@ const useCtxtualRoutingState = (
             React.ReactElement ,
          ] ): React.ReactElement {
             return (
-               <a href={`#${toWhichOne }` } >
+               <a href={(toWhichOne === presentlyChoice ) ? undefined : `#${toWhichOne }` } >
                   { payload }
                </a>
             ) ;
