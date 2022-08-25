@@ -87,7 +87,7 @@ a.button,
 button, 
 input[type=button],
 #----e { 
-   background: rgb(192, 0, 0 );  
+   background: rgb(192, 48, 0 );  
    color: white; 
    padding: 0.35em;
    margin: 0 ; 
@@ -115,7 +115,7 @@ a[href] {
 a.button , 
 button , 
 #----e { 
-   --MHOVERED-COLOR : red ;
+   --MHOVERED-COLOR : /* red */ rgb(255, 64, 0 ) ;
 }
 a[href]:hover, 
 a[href]:focus-within , 
@@ -137,11 +137,13 @@ button:focus-within ,
 } /* */
 @keyframes MHOVERED {
    from { 
+      color: darkgray ;
    }
    66% { 
       color: var(--MHOVERED-COLOR ) ;
    }
    to {
+      color: darkgray ;
    }
 }
 a.button::before ,    
