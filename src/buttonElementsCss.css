@@ -109,6 +109,14 @@ a::after, a::before,
     display: inline-block;
     width: 0.5em ;
 }
+a[href] {
+   --MHOVERED-COLOR : rgb(0, 192, 255 ) ;
+}
+a.button , 
+button , 
+#----e { 
+   --MHOVERED-COLOR : red ;
+}
 a[href]:hover, 
 a[href]:focus-within , 
 #---e { 
@@ -116,7 +124,6 @@ a[href]:focus-within ,
    background: white;
    color: black;
    animation: 1.25s infinite normal both MHOVERED ;
-   --MHOVERED-COLOR : rgb(0, 192, 255 ) ;
 }
 a.button:hover ,
 a.button:focus-within ,
@@ -126,7 +133,6 @@ button:focus-within ,
    background: white;
    color: black;
    animation: 1.25s infinite normal both MHOVERED ;
-   --MHOVERED-COLOR : red ;
    font-size: 125% ;
 } /* */
 @keyframes MHOVERED {
