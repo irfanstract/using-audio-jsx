@@ -99,6 +99,7 @@ const AllDemoes = (
       })() ;
       return (
          <div>
+            <aside>
             <nav>
                <p>  
                   <code>{ windowHref }</code>
@@ -110,6 +111,7 @@ const AllDemoes = (
                   ))
                ) }
             </nav>
+            </aside>
             { e }
          </div>
       ) ;
