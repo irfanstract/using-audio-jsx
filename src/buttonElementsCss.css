@@ -9,7 +9,7 @@
 
 
 
-a,
+a[href],
 a.button,    
 button, 
 input[type=button],
@@ -109,8 +109,8 @@ a::after, a::before,
     display: inline-block;
     width: 0.5em ;
 }
-a:hover, 
-a:focus-within , 
+a[href]:hover, 
+a[href]:focus-within , 
 #---e { 
    text-decoration-color: transparent;
    background: white;
