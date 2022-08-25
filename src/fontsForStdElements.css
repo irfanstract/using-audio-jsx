@@ -29,12 +29,7 @@ a.button,
 button, 
 input[type=button],
 #----e {      
-    font-variant: small-caps;
-    /* font-variant: unicase;   
-    font-variant: all-small-caps;          
-    font-variant: all-petite-caps;   */
-    font-variant: all-small-caps;      
-    /* font-variant: unicase;        */
+    font-variant: inherit;
 }         
 div {
     font-size: 98% ;
