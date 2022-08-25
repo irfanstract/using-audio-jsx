@@ -137,10 +137,6 @@ const AllDemoes = (
             </li>
          </ul>
       ) ;
-      const fileInput1 = (
-         // useFileListInputState1({ multiple: true })[1]
-         <FileSelectDialogueExample />
-      ) ;
       const e = ((): React.ReactElement => {
          ;
          if (wh1 === "AudioLoopDemo") {
@@ -154,6 +150,9 @@ const AllDemoes = (
             ) ;
          } ;
          if (wh1 === "FileDialogDemo") {
+            const fileInput1 = (
+               <FileSelectDialogueExample />
+            ) ;
             return (
                fileInput1
             ) ;
