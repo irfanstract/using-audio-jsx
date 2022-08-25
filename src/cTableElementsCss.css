@@ -1,0 +1,52 @@
+
+
+
+
+
+
+
+
+
+
+
+thead:hover {               
+   background-color: transparent;    
+   color: white;                     
+}       
+
+
+
+
+
+tr::before {
+   content: "◾";
+   width: 1em;
+   display: inline-block;
+}    
+td { 
+   padding: 0.25em 0.75em 0.5em 0 ;
+}  
+td { 
+   border: 0.05em solid currentcolor ; 
+   vertical-align: text-top ;
+   min-width: 1.5em ;
+} 
+table { border-collapse: collapse ; } 
+thead {
+   position: sticky ;    
+   top: 0 ;     
+   backdrop-filter: blur(0.05em) ;       
+   /* pointer-events: none;       */    
+   backdrop-filter: blur(0.35em) ;                     
+   opacity: 1.0 ; 
+}
+thead:hover {
+   position: relative ;                   
+   opacity: 0.5 ;
+}       
+thead > tr > td {
+   position: sticky;
+   left: 0 ;
+   right: 0 ;
+   backdrop-filter: blur(0.35em) ;     
+}
