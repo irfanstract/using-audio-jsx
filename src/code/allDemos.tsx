@@ -63,6 +63,24 @@ const AllDemoes = (
       } = (
          useCtxtualRoutingState()
       ) ;
+      const navList = (
+         <ul>
+            <li>
+               {(
+                  renderChoiceLink({ value: "AudioLoopDemo" }, (
+                     <> AudioLoopDemo </>
+                  ))
+               ) }
+            </li>
+            <li>
+               {(
+                  renderChoiceLink({ value: "MediaStreamRecDemo" }, (
+                     <> Media Stream Rec Demo </>
+                  ))
+               ) }
+            </li>
+         </ul>
+      ) ;
       const e = ((): React.ReactElement => {
          ;
          if (wh1 === "AudioLoopDemo") {
@@ -76,25 +94,22 @@ const AllDemoes = (
             ) ;
          } ;
          return (
-            <div>
-               {(
-                  renderChoiceLink({ value: "AudioLoopDemo" }, (
-                     <> AudioLoopDemo </>
-                  ))
-               ) }
-               {(
-                  renderChoiceLink({ value: "MediaStreamRecDemo" }, (
-                     <> Media Stream Rec Demo </>
-                  ))
-               ) }
-            </div>
+            navList
          ) ;
       })() ;
       return (
          <div>
-            <p>  
-               <code>{ windowHref }</code>
-            </p>
+            <nav>
+               <p>  
+                  <code>{ windowHref }</code>
+               </p>
+               { navList }
+               {(
+                  renderChoiceLink({ value: "" }, (
+                     <> Main </>
+                  ))
+               ) }
+            </nav>
             { e }
          </div>
       ) ;
