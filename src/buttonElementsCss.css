@@ -1,0 +1,113 @@
+
+
+
+
+
+
+
+
+
+
+
+a.button,    
+button, 
+input[type=button],
+#----e {
+    cursor: pointer;                   
+}
+a.button:disabled , 
+button:disabled,      
+input[type=button]:disabled ,
+#----e { 
+    filter: contrast(0.1) brightness(1.8) ;
+    cursor: default !important;    
+}
+
+
+
+a.button { 
+}
+
+
+
+a, button {
+   --BC: transparent ;
+}  
+a {
+   border-top-color: var(--BC) !important; 
+}
+button {
+   border-color:  var(--BC) !important ;  
+}
+a.button:disabled , 
+button:disabled,       
+input[type=button]:disabled ,
+#----e { 
+   --BC: transparent !important ;                  
+}    
+a:hover,              
+a:focus-within ,       
+button:hover, 
+button:focus-within , 
+#---e {
+   /* border-top-color: beige !important ;      */
+   --BC: beige ;              
+}     
+a[href] {      
+   /*  
+     these elements by default override these properties .   
+     override again to enforce 'ingerit' 
+   */
+   color: inherit;
+}         
+a { 
+   border: 0.05em dotted transparent ;
+   border-block-end-width: 0.25em ;
+   border-radius: 0.1em ;      
+}  
+a.button, 
+button, 
+input[type=button],
+#----e {
+   border: 0.05em solid transparent ;
+   border-block-end-width: 0.25em ;
+   border-radius: 0.1em ;      
+}
+a.button { 
+   border-top-style: solid; 
+   border-block-start-style: solid; 
+}                     
+a { 
+   background: transparent;  
+   padding: 0.35em;
+}  
+a.button,    
+button, 
+input[type=button],
+#----e { 
+   background: gray;  
+   color: white; 
+   padding: 0.35em;
+   margin: 0 ; 
+}                 
+
+
+
+a.button,    
+button, 
+input[type=button],
+#----e {  
+    position: relative;     
+    box-sizing: content-box; 
+    text-decoration: none ;
+}    
+a::after, a::before,
+#---e { 
+    content: " ";
+    display: inline-block;
+    width: 0.5em ;
+}
+a:hover, 
+a:focus-within , 
+#---e { 
+}
