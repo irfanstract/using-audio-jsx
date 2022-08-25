@@ -39,10 +39,20 @@
 /* 
   the 'selection'      
 */
+@keyframes SSB {
+    from {
+        background: rgb(0, 128, 255)  ; 
+    }
+    to {
+        background: rgb(0, 240, 255)  ; 
+    }
+}
 ::selection {
     cursor: nesw-resize !important ; 
-    background: rgb(0, 128, 255) !important; 
+    background: rgb(0, 128, 255) ; 
     color: white !important ;
+    border: 0.1em solid white !important ;
+    animation: 2s infinite alternate running SSB ;
 }  
   
           
