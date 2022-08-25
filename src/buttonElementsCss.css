@@ -125,6 +125,7 @@ button:focus-within ,
    color: black;
    animation: 1.25s infinite normal both MHOVERED ;
    --MHOVERED-COLOR : red ;
+   font-size: 125% ;
 } /* */
 @keyframes MHOVERED {
    from { 
