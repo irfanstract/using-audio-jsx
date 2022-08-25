@@ -13,9 +13,9 @@ body, button, input,
     font-family: 'Source Sans', 'Open Sans', 'Segoe UI', Tahoma, Verdana, system, sans-serif ;
     line-height: 1.5em ;
     /* font-variant: unicase;            */
-    font-variant: all-caps ;      
+    /* font-variant: all-caps ;      
     font-variant: all-small-caps;      
-    font-variant: all-petite-caps ;      
+    font-variant: all-petite-caps ;       */
     /* font-variant: titling-caps ;       */
 }
 pre, code {
