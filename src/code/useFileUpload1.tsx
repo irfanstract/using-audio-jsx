@@ -67,9 +67,11 @@ const useFileListInputState = (
             <label htmlFor={fileInputNativeId }>
                File(s):
             </label>
+            <aside>
             <button type="button" onClick={() => setFileList(() => [] ) } >
                Reset 
             </button>
+            </aside>
             <input 
             id={fileInputNativeId }
             type="file"
