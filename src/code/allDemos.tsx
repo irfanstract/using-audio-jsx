@@ -38,6 +38,7 @@ import { useCtxtualRoutingState } from "./useWindowLocationHrefBasedRouting1";
 import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
+import { useFileListInputState } from "./useFileUpload1";
 
 
 
@@ -81,6 +82,10 @@ const AllDemoes = (
             </li>
          </ul>
       ) ;
+      const fileInput1 = (
+         useFileListInputState({ multiple: true })
+         [1 ]
+      ) ;
       const e = ((): React.ReactElement => {
          ;
          if (wh1 === "AudioLoopDemo") {
@@ -94,7 +99,14 @@ const AllDemoes = (
             ) ;
          } ;
          return (
-            navList
+            <div>
+               <div>
+               { navList }
+               </div>
+               <div>
+                  { fileInput1 }
+               </div>
+            </div>
          ) ;
       })() ;
       return (
