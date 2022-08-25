@@ -112,7 +112,16 @@ a::after, a::before,
 a:hover, 
 a:focus-within , 
 #---e { 
+   text-decoration-color: transparent;
+   background: white;
+   color: black;
 }
+button:hover ,
+button:focus-within ,
+#---e { 
+   background: white;
+   color: black;
+} /* */
 
 
 
