@@ -63,14 +63,14 @@ const useCtxtualRoutingState = (
          )
       ) ;
       const renderChoiceLink = (
-         function (...[{ value: whichOne } , payload ] : [
+         function (...[{ value: toWhichOne } , payload ] : [
             (
                { value: string ; }
             ) ,
             React.ReactElement ,
          ] ): React.ReactElement {
             return (
-               <a href={`#${whichOne }` } >
+               <a href={`#${toWhichOne }` } >
                   { payload }
                </a>
             ) ;
