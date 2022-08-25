@@ -115,13 +115,26 @@ a[href]:focus-within ,
    text-decoration-color: transparent;
    background: white;
    color: black;
+   animation: 1.25s infinite normal both MHOVERED ;
+   --MHOVERED-COLOR : rgb(0, 192, 255 ) ;
 }
 button:hover ,
 button:focus-within ,
 #---e { 
    background: white;
    color: black;
+   animation: 1.25s infinite normal both MHOVERED ;
+   --MHOVERED-COLOR : red ;
 } /* */
+@keyframes MHOVERED {
+   from { 
+   }
+   66% { 
+      color: var(--MHOVERED-COLOR ) ;
+   }
+   to {
+   }
+}
 a.button::before ,    
 button::before , 
 input[type=button]::before,
