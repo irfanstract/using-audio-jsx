@@ -21,7 +21,7 @@ a.button:disabled ,
 button:disabled,      
 input[type=button]:disabled ,
 #----e { 
-    filter: contrast(0.1) brightness(1.8) ;
+    filter: contrast(0.1) saturate(0.1) brightness(1.8) ;
     cursor: default !important;    
     pointer-events: none;
 }
