@@ -6,9 +6,12 @@
 
 
 
+ul {
+   padding-inline-start: 1em ;
+}
 * > li::marker {
    /* */
-   color: blue;
+   opacity: 0.5 ;
    text-align: end ;
 }
 * > li {
@@ -17,7 +20,6 @@
    margin-block-end: 0.5em ;
 }
 ul {
-   padding-inline-start: 1em ;
    list-style-type: circle;
 }
 ul > li::marker {
