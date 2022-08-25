@@ -22,6 +22,7 @@ import React, {
    useState, useReducer, 
    useRef, 
 } from "react";          
+import { K } from "./commonElements";
 import { useSeqState } from "./useSeqState";
 import { usingInterval, useIntervalDeferredValue, useAnimationFrameRefreshEffect } from "./usingTimeoutOrInterval"; 
 import { 
@@ -44,6 +45,7 @@ import { useFileListInputState } from "./useFileUpload1";
 
 import { AudioLoopDemoApp } from "./audioLoopDemo";
 import { MediaStreamRecDemo1 } from "./useMediaStreamRecDemo1";
+import { BasicEmbedObjectPreview } from "./useFilePreview1";
 
 
 
@@ -55,6 +57,44 @@ import { MediaStreamRecDemo1 } from "./useMediaStreamRecDemo1";
 
 
 
+const useFileListInputState1 = (
+   function (...a : Parameters<typeof useFileListInputState> ) {
+      const [v, input1 ] = (
+         useFileListInputState(...a )
+      ) ;
+      const prv = (
+         <div>
+            { input1 }
+            <div style={{ background: "black", color: "white" }}>
+               <ul>
+               {(
+                  v
+                  .map((f: File , i ) => (
+                     <K key={f.name || i }>
+                        <li>
+                        <BasicEmbedObjectPreview 
+                        value={f }
+                        />
+                        <p>
+                           <code>
+                              { f.name }
+                           </code>
+                        </p>
+                        </li>
+                     </K>
+                  ))
+               )}
+               </ul>
+            <p> === </p>
+            </div>
+         </div>
+      ) ;
+      return [
+         v ,
+         prv ,
+      ] as const ;
+   }
+) ;
 const AllDemoes = (
    function () {
       const {
@@ -83,7 +123,7 @@ const AllDemoes = (
          </ul>
       ) ;
       const fileInput1 = (
-         useFileListInputState({ multiple: true })
+         useFileListInputState1({ multiple: true })
          [1 ]
       ) ;
       const e = ((): React.ReactElement => {
