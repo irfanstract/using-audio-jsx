@@ -1,0 +1,42 @@
+
+
+
+
+
+
+
+
+h1,h2,h3,h4,h5,h6, 
+/* p,  */
+/* span, strong, em, */
+/* blockquote, */ pre, code , i, u, 
+td, 
+#----e {
+    -webkit-user-select: all;  
+    user-select: all;          
+}
+input:read-only, input[readonly] {
+    -webkit-user-select: all ;
+    user-select: all ;
+}
+input[type=range] {
+    -webkit-user-select: none;   
+    user-select: none;
+}
+a.button, 
+button, 
+input[type=button],
+#----e { 
+    -webkit-user-select: none;     
+    user-select: none ;
+}
+a.button:disabled , 
+button:disabled,  
+input[type=button]:disabled ,    
+#----e {  
+    -webkit-user-select: none !important ;   
+    user-select: none !important ;
+}  
+
+
+
