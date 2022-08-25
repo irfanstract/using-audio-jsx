@@ -118,6 +118,8 @@ a[href]:focus-within ,
    animation: 1.25s infinite normal both MHOVERED ;
    --MHOVERED-COLOR : rgb(0, 192, 255 ) ;
 }
+a.button:hover ,
+a.button:focus-within ,
 button:hover ,
 button:focus-within ,
 #---e { 
