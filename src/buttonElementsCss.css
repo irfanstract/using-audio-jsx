@@ -122,6 +122,59 @@ button:focus-within ,
    background: white;
    color: black;
 } /* */
+a.button::before ,    
+button::before , 
+input[type=button]::before,
+#----e {  
+   content: var(--AC-LABEL ) ;
+   display: inline-block;
+   font-style: oblique ;
+   background: black;
+   color: white;
+   font-size: 75% ;
+   border-radius: 0.25em ;
+   padding: 0.25em ;
+   margin-inline-start: 0.5em ;
+   margin-inline-end: 0.5em ;
+   animation: all 0.5s ease-out;
+}    
+a.button ,
+button ,
+input[type=button] ,
+#----e {
+   --AC-LABEL: "[action]" ;
+} 
+a.button[type=submit] ,
+button[type=submit] ,
+input[type=submit ] ,
+#-----e { 
+   --AC-LABEL: "[" attr(type ) "]" ;
+} 
+a.button[role] ,
+button[role] ,
+input[type=button][role ] ,
+#-----e { 
+   --AC-LABEL: "[" attr(role) "]" ;
+} 
+a[href]::after {
+   width: unset ;
+   content: "[page]";
+   font-style: oblique ;
+   background: black;
+   color: white;
+   font-size: 75% ;
+   border-radius: 0.25em ;
+   padding: 0.25em ;
+   margin-inline-start: 0.5em ;
+   margin-inline-end: 0.5em ;
+   animation: all 0.5s ease-out;
+} 
+a[href]:hover::after ,
+button:hover::before ,
+#---e {
+   background: white;
+   color: rgb(128, 192, 255 );
+} 
 
 
 
