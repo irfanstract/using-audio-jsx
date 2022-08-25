@@ -87,7 +87,7 @@ a.button,
 button, 
 input[type=button],
 #----e { 
-   background: gray;  
+   background: rgb(192, 0, 0 );  
    color: white; 
    padding: 0.35em;
    margin: 0 ; 
