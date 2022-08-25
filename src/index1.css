@@ -131,6 +131,9 @@ input[type=button]:disabled ,
   note that, for border-style,     
   the right place will be in the 'DISPLAYS, LAYOUTS, POSITIONS' below
 */
+aside {
+    background: rgba(0, 0, 0, 0.5 );
+}
 a {
     border-top-color: var(--BC) !important; 
 }
