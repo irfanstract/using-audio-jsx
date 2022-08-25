@@ -1,0 +1,88 @@
+
+
+
+
+
+
+
+
+pre ,                           
+code.long-enough ,     
+#----e {           
+    background-color: transparent;    
+}      
+code.numeric {
+   color: blue;
+}
+
+pre ,                
+code.long-enough ,
+#----e {       
+   border-color: transparent;      
+}
+code {  
+   border-color: gray;  
+   border-bottom-color: currentColor; 
+}           
+code:hover, 
+code:focus-within,    
+pre:hover ,
+pre:focus-within ,  
+#---e {
+   border-top-color: beige;
+}          
+pre , 
+code.long-enough ,  
+code.numeric ,     
+#----e { 
+   border-width: 0.05em ;                       
+}     
+code, code.long-enough, pre { 
+   border-width: 0.1em ;   
+   border-radius: 0.25em ;
+   border-color: currentColor ;  
+}
+pre , 
+code.long-enough ,  
+code.numeric ,          
+#----e {
+   border-style: solid;    
+   /* border-style: none;            */
+}               
+
+
+code {
+   white-space: pre ;
+   max-width: 100% ;  
+}
+code.long-enough ,
+#----e {                
+    display: inline-block;
+    box-sizing: border-box;
+    min-height: calc(3 * 2em );
+    max-width: 100% ;  
+    overflow-x: auto ;     
+}
+code.numeric {     
+    display: inline-block;     
+    width: 4em ;     
+    text-align: end;      
+    padding: 0 0.25em ;                    
+    overflow-x: hidden;
+}
+pre {      
+    display: block; 
+    box-sizing: border-box;
+    min-height: calc(5 * 2em );
+    max-width: 100% ; 
+    overflow-x: auto ;
+    white-space: pre ;
+}     
+
+
+
+
+
+
+
+
