@@ -54,3 +54,7 @@ code, a, button, input,
 body {
     font-size: 2.3vh ;
 }
+/* _ */
+input[type=number] {
+   text-align: end ;
+}       

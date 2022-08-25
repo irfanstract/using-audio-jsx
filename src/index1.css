@@ -14,10 +14,6 @@
 /*        
   the white-space handling
 */
-/* _ */
-input[type=number] {
-    text-align: end ;
-}       
 /* 
  'cursor', 'filter'
 */
