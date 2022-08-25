@@ -57,9 +57,6 @@ body {
 /*   
   (re) define the 'padding'
 */
-td { 
-    padding: 0.25em 0.75em 0.5em 0 ;
-}  
 /*        
   the white-space handling
 */
@@ -69,7 +66,6 @@ code {
 /* _ */
 input[type=number] {
     text-align: end ;
-    width: 6em ;
 }       
 /* 
  'cursor', 'filter'
@@ -134,15 +130,15 @@ input[type=button]:disabled ,
 aside {
     background: rgba(0, 0, 0, 0.5 );
 }
+a, button {
+    --BC: transparent ;
+}  
 a {
     border-top-color: var(--BC) !important; 
 }
 button {
     border-color:  var(--BC) !important ;  
 }
-a, button {
-    --BC: transparent ;
-}  
 a.button:disabled , 
 button:disabled,       
 input[type=button]:disabled ,
@@ -164,6 +160,11 @@ a[href] {
     */
     color: inherit;
 }         
+a { 
+    border: 0.05em dotted transparent ;
+    border-block-end-width: 0.25em ;
+    border-radius: 0.1em ;      
+}  
 a.button, 
 button, 
 input[type=button],
@@ -222,6 +223,10 @@ code.numeric ,
     border-style: solid;    
     /* border-style: none;            */
 }               
+a { 
+    background: transparent;  
+    padding: 0.35em;
+}  
 a.button,    
 button, 
 input[type=button],
@@ -254,6 +259,9 @@ input[type=button],
 nav {
     border-style: solid;
 }
+input[type=number] {
+    width: 6em ;
+}       
 code.long-enough ,
 #----e {                
     display: inline-block;
@@ -301,6 +309,9 @@ tr::before {
     width: 1em;
     display: inline-block;
 }    
+td { 
+    padding: 0.25em 0.75em 0.5em 0 ;
+}  
 td { 
     border: 0.05em solid currentcolor ; 
     vertical-align: text-top ;
