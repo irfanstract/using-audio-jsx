@@ -51,10 +51,12 @@ const BasicEmbedObjectPreview = (
       ) ;
       if (contentType.match(/^image\//) ) {
          return (
+            <a target={"_blank"} href={valueUrl }>
             <img 
             src={valueUrl }
             style={style1 } 
             />
+            </a>
          ) ;
       }
       if (contentType.match(/^(audio|video)\//) ) {
