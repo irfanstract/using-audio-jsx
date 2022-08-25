@@ -7,6 +7,7 @@
 
 /* inherited properties relating to font-family choice */     
 body, button, input, 
+input[type=file]::-webkit-file-upload-button,
 #----e {              
     font-weight: bold ;
     font-family: 'Source Sans', 'Open Sans', 'Segoe UI', Tahoma, Verdana, sans-serif ;
@@ -28,6 +29,7 @@ a[href] {
 a.button, 
 button, 
 input[type=button],
+input[type=file]::-webkit-file-upload-button,
 #----e {      
     font-variant: inherit;
 }         
