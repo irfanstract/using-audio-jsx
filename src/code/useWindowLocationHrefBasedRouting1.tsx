@@ -44,6 +44,9 @@ import { useWindowLocationHref } from "./useWindowLocationHrefChgEffect";
 
 
 
+/**   
+ * use this facility to implement routing in your SPA (Single-Page App ).
+ */
 const useCtxtualRoutingState = (
    // TODO
    function () {
@@ -75,11 +78,28 @@ const useCtxtualRoutingState = (
       ) ;
       ;
       const props1 = {
+         /**   
+          * both {@link presentlyChoice } and {@link renderChoiceLink }
+          * are two associated means.
+          */
          presentlyChoice , 
+         /**   
+          * both {@link presentlyChoice } and {@link renderChoiceLink }
+          * are two associated means.
+          */
          renderChoiceLink ,
       } ;
       return (
-         (() : ({ windowHref ?: string ; } & typeof props1) => (
+         (() : (
+            { 
+               /**   
+                * this conditionally reflects info `window.location.href`.
+                */
+               windowHref ?: string ; 
+            } 
+            & 
+            typeof props1
+         ) => (
             { windowHref, ...props1 }
          ) )()
       ) ;
