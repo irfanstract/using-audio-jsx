@@ -67,7 +67,7 @@ const useFileListInputState = (
             <label htmlFor={fileInputNativeId }>
                File(s):
             </label>
-            <aside>
+            <aside style={{ display: "flex", flexDirection: "column" }}>
             <button type="button" onClick={() => setFileList(() => [] ) } >
                Reset 
             </button>
