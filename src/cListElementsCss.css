@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+* > li::marker {
+   /* */
+   color: blue;
+   text-align: end ;
+}
+* > li {
+   border: 0.05em solid transparent ;
+   margin-block-start: 0.5em ;
+   margin-block-end: 0.5em ;
+}
+ul {
+   padding-inline-start: 1em ;
+   list-style-type: circle;
+}
+ul > li::marker {
+   /* */ 
+}
+ul > li {
+}
+
+
+
+
+
+
+
