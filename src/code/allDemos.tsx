@@ -95,6 +95,14 @@ const useFileListInputState1 = (
       ] as const ;
    }
 ) ;
+const FileSelectDialogueExample = (
+   function (): React.ReactElement {
+      return (
+         useFileListInputState1({ multiple: true })
+         [1 ]
+      ) ;
+   }
+) ;
 const AllDemoes = (
    function () {
       const {
@@ -130,8 +138,8 @@ const AllDemoes = (
          </ul>
       ) ;
       const fileInput1 = (
-         useFileListInputState1({ multiple: true })
-         [1 ]
+         // useFileListInputState1({ multiple: true })[1]
+         <FileSelectDialogueExample />
       ) ;
       const e = ((): React.ReactElement => {
          ;
