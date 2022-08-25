@@ -120,6 +120,13 @@ const AllDemoes = (
                   ))
                ) }
             </li>
+            <li>
+               {(
+                  renderChoiceLink({ value: "FileDialogDemo" }, (
+                     <> File Open Dialogue Demo </>
+                  ))
+               ) }
+            </li>
          </ul>
       ) ;
       const fileInput1 = (
@@ -138,13 +145,15 @@ const AllDemoes = (
                <MediaStreamRecDemo1 />
             ) ;
          } ;
+         if (wh1 === "FileDialogDemo") {
+            return (
+               fileInput1
+            ) ;
+         } ;
          return (
             <div>
                <div>
                { navList }
-               </div>
-               <div>
-                  { fileInput1 }
                </div>
             </div>
          ) ;
