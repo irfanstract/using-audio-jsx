@@ -1,5 +1,6 @@
 
 @import "./codeElementsCss.css" ;
+@import "./fontsForStdElements.css" ;
 @import "./userSelectability.css" ;
 
 
@@ -7,55 +8,6 @@
 
 
 /* FONTS AND COLOURS  */
-/* inherited properties relating to font-family choice */     
-body, button, input, 
-#----e {              
-    font-weight: bold ;
-    font-family: 'Source Sans', 'Open Sans', 'Segoe UI', Tahoma, Verdana, sans-serif ;
-    font-family: 'Source Sans', 'Open Sans', 'Segoe UI', Tahoma, Verdana, system, sans-serif ;
-    line-height: 1.5em ;
-    /* font-variant: unicase;            */
-    font-variant: all-caps ;      
-    font-variant: all-small-caps;      
-    font-variant: all-petite-caps ;      
-    /* font-variant: titling-caps ;       */
-}
-pre, code {
-    font-family: Consolas, Monaco, Inconsolata, monospace; 
-    font-variant: normal ;       
-}   
-a[href] {
-    /* font-style: italic; */
-}
-a.button, 
-button, 
-input[type=button],
-#----e {      
-    font-variant: small-caps;
-    /* font-variant: unicase;   
-    font-variant: all-small-caps;          
-    font-variant: all-petite-caps;   */
-    font-variant: all-small-caps;      
-    /* font-variant: unicase;        */
-}         
-div {
-    font-size: 98% ;
-}
-/*  
-  these elements by default override these properties .   
-  override again to enforce 'ingerit' 
-*/
-code, a, button, input,      
-#----e {
-    font-size: 100% ;      
-    text-align: inherit;        
-}       
-/*  
-  define the font-size for the root element 
-*/
-body {
-    font-size: 2.3vh ;
-}
 /*   
   (re) define the 'padding'
 */
