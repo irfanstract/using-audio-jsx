@@ -38,6 +38,14 @@ import { useObjectURL } from "./useEmbedSrcObjectUrl";
 
 
 
+/**    
+ * *the selected files* would be returned.
+ * note that, in some platforms,
+ * {@link React.DOMAttributes.onInput the associated dialogue-box's "cancel" button will clear it };
+ * it's therefore 
+ * the calling-module's responsibility 
+ * to check {@link HTMLInputElement.files `(const selectedFiles = ee.files ) && selectedFiles && selectedFiles.length`}.
+ */
 const selectedFilesIn = (
    function (...[ee] : [HTMLInputElement] ): null | readonly File[] {
       const files0 = (
