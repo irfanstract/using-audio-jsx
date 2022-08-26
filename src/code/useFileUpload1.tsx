@@ -78,33 +78,30 @@ const useFileListInputState = (
          useState<readonly File[] >([] )
       ) ;
       const mainInpuElem = (
-         (function useMainInputElemImpl1() {
-            const [ee, setEe ] = (
-               useState<null | HTMLInputElement >(null )
-            ) ;
+         (() => {
             const onInput = (
                (evt: React.FormEvent<HTMLInputElement>): void => {
-                  if (ee) {
-                     const selectedFiles = (
-                        selectedFilesIn(ee )
-                     ) ;
-                     (
-                        selectedFiles
-                        &&
-                        /**   
-                         * "cancel" will 
-                         * cause {@link HTMLInputElement.files } to subsequently evaluate to `null` or `[]`
-                         */
-                        selectedFiles.length
-                        &&
-                        setFileList(() => (selectedFiles || [] ) )
-                     ) ;
-                  }
+                  const ee = (
+                     evt.currentTarget
+                  ) ;
+                  const selectedFiles = (
+                     selectedFilesIn(ee )
+                  ) ;
+                  (
+                     selectedFiles
+                     &&
+                     /**   
+                      * "cancel" will 
+                      * cause {@link HTMLInputElement.files } to subsequently evaluate to `null` or `[]`
+                      */
+                     selectedFiles.length
+                     &&
+                     setFileList(() => (selectedFiles || [] ) )
+                  ) ;
                } 
             ) ;
             return (
                <input 
-               ref={setEe }
                id={fileInputNativeId }
                type="file"
                multiple={multipleSelectiveMode }
