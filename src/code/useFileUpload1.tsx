@@ -67,21 +67,30 @@ const selectedFilesIn = (
       ) ;
    }
 ) ;
-const useFileListInputState = (
+const useFileListStateDirect = (
+   () => (
+      useState<readonly File[] >([] )
+   )
+) ;
+const useFileListInputStateB = (
    function (...[{ multiple: multipleSelectiveMode }] : [
       { multiple : boolean ; }
-   ]): [readonly File[], React.ReactElement ] {
+   ]) {
+      /**    
+       * this `id` will be used to implement `<label>`ing;
+       * returned from {@link React.useId } .
+       */
       const fileInputNativeId = (
          React.useId() + "-FILE"
       ) ;
       const [fileList, setFileList ] = (
-         useState<readonly File[] >([] )
+         useFileListStateDirect()
       ) ;
-      const mainInpuElem = (
+      const coreFileInputElem = (
          (() => {
             const onInput = (
                (evt: React.FormEvent<HTMLInputElement>): void => {
-                  const ee = (
+                  const ee: EventTarget & HTMLInputElement = (
                      evt.currentTarget
                   ) ;
                   const selectedFiles = (
@@ -96,7 +105,10 @@ const useFileListInputState = (
                       */
                      selectedFiles.length
                      &&
-                     setFileList(() => (selectedFiles || [] ) )
+                     setFileList(() => (
+                        selectedFiles 
+                        || [] 
+                     ) )
                   ) ;
                } 
             ) ;
@@ -115,20 +127,53 @@ const useFileListInputState = (
             Reset 
          </button>
       ) ;
-      const fileDialogue = (
+      const allOps = {
+         fileInputNativeId ,
+         fileList ,
+         setFileList ,
+         coreFileInputElem ,
+         resetBtn ,
+      } ;
+      return [
+         fileList ,
+         allOps ,
+      ] as [selectedFiles: readonly File[], ops: typeof allOps ] ;
+   }
+) ;
+const useFileListInputState = (
+   function (...args : (
+      Parameters<(
+         typeof useFileListInputStateB
+      )>
+   )): [
+      selectedFileList: readonly File[], 
+      overallFileInput: React.ReactElement ,
+   ] {
+      const [
+         fileList ,
+         {
+            fileInputNativeId ,
+            coreFileInputElem ,
+            resetBtn ,
+         } ,
+      ] = (
+         useFileListInputStateB(...args )
+      ) ;
+      const overallFileInput = (
          <p style={{ display: "flex", flexDirection: "column" }}>
             <label htmlFor={fileInputNativeId }>
-               File(s):
+               Upload Files :
             </label>
+            <br />
             <aside style={{ display: "flex", flexDirection: "column" }}>
             { resetBtn }
             </aside>
-            { mainInpuElem }
+            { coreFileInputElem }
          </p>
       ) ;
       return [
          fileList ,
-         fileDialogue ,
+         overallFileInput ,
       ] ;
    }
 ) ;
@@ -139,5 +184,6 @@ const useFileListInputState = (
 
 export {
    selectedFilesIn ,
+   useFileListInputStateB ,
    useFileListInputState ,
 } ;
