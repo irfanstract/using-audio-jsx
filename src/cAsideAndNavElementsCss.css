@@ -22,7 +22,11 @@ aside::before {
    left: 0 ;
    right: 0 ;
    bottom: 0 ;
-   backdrop-filter: saturate(var(--ASIDE-COVERCOLOR ) ) brightness(var(--ASIDE-COVERBRIGH ) ) blur(var(--ASIDE-COVERBLURR ) ) ;
+   backdrop-filter: 
+      saturate(var(--ASIDE-COVERCOLOR ) ) 
+      brightness(var(--ASIDE-COVERBRIGH ) ) 
+      blur(var(--ASIDE-COVERBLURR ) ) 
+   ;
    z-index: 3 ;
 }
 aside { 
