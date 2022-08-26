@@ -88,6 +88,7 @@ a {
 a.button,    
 button, 
 input[type=button],
+input[type=file],
 #----e { 
    background: rgb(192, 48, 0 );  
    color: white; 
@@ -117,6 +118,7 @@ a[href] {
 a.button , 
 button , 
 input[type=file]::-webkit-file-upload-button,
+input[type=file],
 #----e { 
    --MHOVERED-COLOR : /* red */ rgb(255, 64, 0 ) ;
 }
@@ -132,6 +134,8 @@ a.button:hover ,
 a.button:focus-within ,
 button:hover ,
 button:focus-within ,
+input[type=file]:hover ,
+input[type=file]:focus-within ,
 #---e { 
    background: white;
    color: black;
