@@ -37,6 +37,52 @@ a.button {
 
 
 
+a { 
+   background: transparent;  
+   padding: 0.35em;
+}  
+a.button,    
+button, 
+input[type=button],
+input[type=file]::-webkit-file-upload-button ,
+#----e { 
+   background: rgb(192, 48, 0 );  
+   color: white; 
+   padding: 0.35em;
+   margin: 0 ; 
+}                 
+input[type=file] {
+   background: black ;
+   color: rgb(128, 128, 255 ) ;
+}
+/* border-styling */
+a[href] {      
+   /*  
+     these elements by default override these properties .   
+     override again to enforce 'ingerit' 
+   */
+   color: inherit;
+}         
+a { 
+   border: 0.05em dotted transparent ;
+   border-block-end-width: 0.25em ;
+   border-radius: 0.1em ;      
+}  
+a.button, 
+button, 
+input[type=button],
+#----e {
+   border: 0.05em solid transparent ;
+   border-block-end-width: 0.25em ;
+   border-radius: 0.375em ;      
+}
+a.button { 
+   border-top-style: solid; 
+   border-block-start-style: solid; 
+}                     
+input[type=file]::-webkit-file-upload-button {
+   border-radius: 0.25em ;
+}
 a, button {
    --BC: transparent ;
 }  
@@ -60,44 +106,6 @@ button:focus-within ,
    /* border-top-color: beige !important ;      */
    --BC: beige ;              
 }     
-a[href] {      
-   /*  
-     these elements by default override these properties .   
-     override again to enforce 'ingerit' 
-   */
-   color: inherit;
-}         
-a { 
-   border: 0.05em dotted transparent ;
-   border-block-end-width: 0.25em ;
-   border-radius: 0.1em ;      
-}  
-a.button, 
-button, 
-input[type=button],
-#----e {
-   border: 0.05em solid transparent ;
-   border-block-end-width: 0.25em ;
-   border-radius: 0.1em ;      
-}
-a.button { 
-   border-top-style: solid; 
-   border-block-start-style: solid; 
-}                     
-a { 
-   background: transparent;  
-   padding: 0.35em;
-}  
-a.button,    
-button, 
-input[type=button],
-input[type=file],
-#----e { 
-   background: rgb(192, 48, 0 );  
-   color: white; 
-   padding: 0.35em;
-   margin: 0 ; 
-}                 
 
 
 
