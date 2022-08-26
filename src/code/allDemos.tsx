@@ -40,6 +40,10 @@ import { useBlobConcatState1 } from "./useMediaStreamBlobConcatState1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 import { useFileListInputState } from "./useFileUpload1";
+import {
+   useFileListInputState1 , 
+   FileSelectDialogueExample ,
+} from "./useFileUpload11";
 
 
 
@@ -57,52 +61,6 @@ import { BasicEmbedObjectPreview } from "./useFilePreview1";
 
 
 
-const useFileListInputState1 = (
-   function (...a : Parameters<typeof useFileListInputState> ) {
-      const [v, input1 ] = (
-         useFileListInputState(...a )
-      ) ;
-      const prv = (
-         <div style={{ backgroundColor: "lightgray", color: "black" }}>
-            { input1 }
-            <div style={{ background: "black", color: "white" }}>
-               <ul>
-               {(
-                  v
-                  .map((f: File , i ) => (
-                     <K key={f.name || i }>
-                        <li>
-                        <BasicEmbedObjectPreview 
-                        value={f }
-                        />
-                        <p>
-                           <code>
-                              { f.name }
-                           </code>
-                        </p>
-                        </li>
-                     </K>
-                  ))
-               )}
-               </ul>
-            <p> === </p>
-            </div>
-         </div>
-      ) ;
-      return [
-         v ,
-         prv ,
-      ] as const ;
-   }
-) ;
-const FileSelectDialogueExample = (
-   function (): React.ReactElement {
-      return (
-         useFileListInputState1({ multiple: true })
-         [1 ]
-      ) ;
-   }
-) ;
 const AllDemoes = (
    function () {
       const {
