@@ -33,7 +33,7 @@ aside {
    background: rgba(0, 0, 0, 0.25 );
    --ASIDE-COVERBLURR : 0.05em ;
    --ASIDE-COVERBRIGH : 0.7 ;
-   --ASIDE-COVERCOLOR : 0.3 ;
+   --ASIDE-COVERCOLOR : 0.08 ;
 }
 aside:focus-within,
 aside:hover {
