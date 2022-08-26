@@ -95,6 +95,13 @@
 
     box-shadow: 0 0 0.25em 4em rgba(0, 0, 0, 0.5 ) ;
 }  
+p {
+    padding-inline-start: 0.25em ;
+    margin-inline-start: -0.25em ;
+    box-sizing: content-box ;
+    border-inline-start: 0.025em dotted currentColor ;
+    max-width: 40em ;
+}
 input[type=number] {
     width: 6em ;
 }       
