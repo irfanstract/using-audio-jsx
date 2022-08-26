@@ -53,7 +53,7 @@ input[type=file]::-webkit-file-upload-button ,
 }                 
 input[type=file] {
    background: black ;
-   color: rgb(128, 128, 255 ) ;
+   color: rgb(128, 128, 160 ) ;
 }
 /* border-styling */
 a[href] {      
@@ -131,7 +131,7 @@ button ,
 input[type=file]::-webkit-file-upload-button,
 input[type=file],
 #----e { 
-   --MHOVERED-COLOR : /* red */ rgb(255, 64, 0 ) ;
+   --MHOVERED-COLOR : /* red */ rgb(255, 64, 128 ) ;
 }
 a[href]:hover, 
 a[href]:focus-within , 
@@ -145,20 +145,45 @@ a.button:hover ,
 a.button:focus-within ,
 button:hover ,
 button:focus-within ,
-input[type=file]:hover ,
-input[type=file]:focus-within ,
 #---e { 
-   background: yellow;
+   background: rgb(255, 255, 128 );
    color: black;
    animation: 1.25s infinite normal both MHOVERED ;
    font-size: 125% ;
+   padding: 0.5em ;
+   margin: -0.5em ;
+} /* */
+input[type=file]:hover ,
+input[type=file]:focus-within ,
+#---e { 
+   background: rgb(0, 192, 255 );
+   color: black;
+   animation: 1.25s infinite normal both MHOVERED ;
+} /* */
+input[type=file]:hover::-webkit-file-upload-button ,
+input[type=file]:focus-within::-webkit-file-upload-button ,
+#---e { 
+   background: black ;
+   color: white; 
 } /* */
 @keyframes MHOVERED {
    from { 
       color: darkgray ;
    }
-   66% { 
+   20% { 
+      color: darkgray ;
+   }
+   25% { 
+      color: black ;
+   }
+   30% { 
       color: var(--MHOVERED-COLOR ) ;
+   }
+   40% { 
+      color: var(--MHOVERED-COLOR ) ;
+   }
+   50% {
+      color: darkgray ;
    }
    to {
       color: darkgray ;
