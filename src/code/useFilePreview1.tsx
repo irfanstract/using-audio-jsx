@@ -46,12 +46,22 @@ const BasicEmbedObjectPreview = (
       const contentType: string = (
          value.type
       ) ;
+      const {
+         name: fileName ,
+      } = ((): { name?: string ; } => (
+         value instanceof File ?
+         value
+         : { }
+      ) )() ;
       const style1 = (
          { width: "12em", height: "12em", background: "black" } as React.CSSProperties
       ) ;
+      const utfTitle: string = (
+         ["File" , fileName || "(unnamed)" ].join(" -- \n")
+      ) ;
       if (contentType.match(/^image\//) ) {
          return (
-            <a target={"_blank"} href={valueUrl }>
+            <a /* target */ title={utfTitle } target={"_blank"} href={valueUrl }>
             <img 
             src={valueUrl }
             style={style1 } 
@@ -62,6 +72,7 @@ const BasicEmbedObjectPreview = (
       if (contentType.match(/^(audio|video)\//) ) {
          return (
             <video  
+            title={utfTitle }
             src={valueUrl }
             controls
             style={style1 } 
@@ -70,6 +81,7 @@ const BasicEmbedObjectPreview = (
       }
       return (
          <embed 
+         title={utfTitle }
          src={valueUrl }
          type={contentType }
          style={style1 } 
