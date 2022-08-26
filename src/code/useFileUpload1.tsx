@@ -39,9 +39,23 @@ import { useObjectURL } from "./useEmbedSrcObjectUrl";
 
 
 const selectedFilesIn = (
-   function (...[ee] : [HTMLInputElement] ): readonly File[] {
+   function (...[ee] : [HTMLInputElement] ): null | readonly File[] {
+      const files0 = (
+         ee.files
+      ) ;
+      const files01 = (
+         files0 
+         && 
+         /**   
+          * "cancel" will 
+          * cause {@link HTMLInputElement.files } to subsequently evaluate to `null` or `[]`.
+          */
+         files0.length 
+      ) ;
       return (
-         Array.from(ee.files || [] )
+         files01 ?
+         Array.from(files0 )
+         : null
       ) ;
    }
 ) ;
@@ -58,30 +72,53 @@ const useFileListInputState = (
       const [fileList, setFileList ] = (
          useState<readonly File[] >([] )
       ) ;
+      const mainInpuElem = (
+         (() => {
+            const onInput = (
+               (evt: React.FormEvent<HTMLInputElement>): void => {
+                  const ee = (
+                     evt.currentTarget
+                  ) ;
+                  const selectedFiles = (
+                     selectedFilesIn(ee )
+                  ) ;
+                  (
+                     selectedFiles
+                     &&
+                     /**   
+                      * "cancel" will 
+                      * cause {@link HTMLInputElement.files } to subsequently evaluate to `null` or `[]`
+                      */
+                     selectedFiles.length
+                     &&
+                     setFileList(() => (selectedFiles || [] ) )
+                  ) ;
+               } 
+            ) ;
+            return (
+               <input 
+               id={fileInputNativeId }
+               type="file"
+               multiple={multipleSelectiveMode }
+               onInput={onInput }
+               />
+            ) ;
+         })()
+      ) ;
+      const resetBtn = (
+         <button type="button" onClick={() => setFileList(() => [] ) } >
+            Reset 
+         </button>
+      ) ;
       const fileDialogue = (
          <p style={{ display: "flex", flexDirection: "column" }}>
             <label htmlFor={fileInputNativeId }>
                File(s):
             </label>
             <aside style={{ display: "flex", flexDirection: "column" }}>
-            <button type="button" onClick={() => setFileList(() => [] ) } >
-               Reset 
-            </button>
+            { resetBtn }
             </aside>
-            <input 
-            id={fileInputNativeId }
-            type="file"
-            multiple={multipleSelectiveMode }
-            onInput={(evt): void => {
-               const ee = (
-                  evt.currentTarget
-               ) ;
-               const files = (
-                  selectedFilesIn(ee )
-               ) ;
-               setFileList(() => (files || [] ) ) ;
-            } }
-            />
+            { mainInpuElem }
          </p>
       ) ;
       return [
