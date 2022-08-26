@@ -70,7 +70,18 @@ const useCtxtualRoutingState = (
             React.ReactElement ,
          ] ): React.ReactElement {
             return (
-               <a href={(toWhichOne === presentlyChoice ) ? undefined : `#${toWhichOne }` } >
+               <a 
+               href={`#${toWhichOne }` } 
+               style={{ 
+                  // prevents pointer-based interaction 
+                  // yet
+                  // does not prevent normal keyboard-tab navigation
+                  pointerEvents: (
+                     ( toWhichOne === presentlyChoice ) ? 
+                     "none" : undefined
+                  ) ,
+               }}
+               >
                   { payload }
                </a>
             ) ;
