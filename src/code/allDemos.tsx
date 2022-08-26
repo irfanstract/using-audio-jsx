@@ -63,7 +63,7 @@ const useFileListInputState1 = (
          useFileListInputState(...a )
       ) ;
       const prv = (
-         <div>
+         <div style={{ backgroundColor: "lightgray", color: "black" }}>
             { input1 }
             <div style={{ background: "black", color: "white" }}>
                <ul>
