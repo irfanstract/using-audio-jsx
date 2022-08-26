@@ -196,6 +196,12 @@ a[href]::after {
    margin-inline-end: 0.5em ;
    animation: all 0.5s ease-out;
 } 
+a[href]:not(:hover) ,
+a.button:not(:hover) ,
+button:not(:hover) ,
+#----e {
+   animation-iteration-count: 2 ;
+}
 a[href]:hover::after ,
 a[href]:focus-within::after ,
 button:hover::before ,
