@@ -65,10 +65,10 @@ const BasicEmbedObjectPreview = (
             title={utfTitle }
             target={"_blank"} 
             href={valueUrl }>
-            <img 
-            src={valueUrl }
-            style={style1 } 
-            />
+               <img 
+               src={valueUrl }
+               style={style1 } 
+               />
             </a>
          ) ;
       }
