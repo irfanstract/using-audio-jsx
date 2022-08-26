@@ -63,11 +63,8 @@ const useFileListInputState = (
    function (...[{ multiple: multipleSelectiveMode }] : [
       { multiple : boolean ; }
    ]): [readonly File[], React.ReactElement ] {
-      const ident = (
-         React.useId()
-      ) ;
       const fileInputNativeId = (
-         ident + "-FILE"
+         React.useId() + "-FILE"
       ) ;
       const [fileList, setFileList ] = (
          useState<readonly File[] >([] )
