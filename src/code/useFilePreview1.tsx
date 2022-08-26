@@ -61,7 +61,10 @@ const BasicEmbedObjectPreview = (
       ) ;
       if (contentType.match(/^image\//) ) {
          return (
-            <a /* target */ title={utfTitle } target={"_blank"} href={valueUrl }>
+            <a 
+            title={utfTitle }
+            target={"_blank"} 
+            href={valueUrl }>
             <img 
             src={valueUrl }
             style={style1 } 
