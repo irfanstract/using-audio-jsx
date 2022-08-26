@@ -22,16 +22,18 @@ aside::before {
    left: 0 ;
    right: 0 ;
    bottom: 0 ;
-   backdrop-filter: saturate(var(--ASIDE-COVERCOLOR ) ) brightness(var(--ASIDE-COVERBRIGH ) ) ;
+   backdrop-filter: saturate(var(--ASIDE-COVERCOLOR ) ) brightness(var(--ASIDE-COVERBRIGH ) ) blur(var(--ASIDE-COVERBLURR ) ) ;
    z-index: 3 ;
 }
 aside { 
    background: rgba(0, 0, 0, 0.25 );
+   --ASIDE-COVERBLURR : 0.05em ;
    --ASIDE-COVERBRIGH : 0.7 ;
    --ASIDE-COVERCOLOR : 0.3 ;
 }
 aside:focus-within,
 aside:hover {
+   --ASIDE-COVERBLURR : 0 ;
    --ASIDE-COVERBRIGH : 1.0 ;
    --ASIDE-COVERCOLOR : 1.0 ;
 }
