@@ -133,5 +133,6 @@ const useFileListInputState = (
 
 
 export {
+   selectedFilesIn ,
    useFileListInputState ,
 } ;
