@@ -21,6 +21,9 @@ a:disabled ,
 a.button:disabled , 
 button:disabled,      
 input[type=button]:disabled ,
+input:disabled ,
+select:disabled ,
+*:disabled ,
 #----e { 
     filter: contrast(0.1) saturate(0.1) brightness(1.8) ;
     cursor: default !important;    
