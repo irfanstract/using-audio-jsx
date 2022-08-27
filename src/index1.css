@@ -87,9 +87,9 @@
     background: 100vw/100vh url("./code/Screenshot\ 2022-08-26\ 184905.png") ;
 }
 #root {
-    background: rgba(0, 0, 0, 0.5 ) ;
+    background: rgba(255, 255, 255, 1 ) ;
     backdrop-filter: blur(0.5em ) ;
-    color: white ;
+    color: black ;
     margin: 0 ;
     padding-inline-end: 0 ;
     box-sizing: content-box ;
