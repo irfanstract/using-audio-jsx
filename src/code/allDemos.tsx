@@ -95,7 +95,7 @@ const AllDemoes = (
          useCtxtualRoutingState()
       ) ;
       const navList = (
-         <ul>
+         <ul className="navbar">
             <li>
                {(
                   renderChoiceLink({ value: "AudioLoopDemo" }, (
