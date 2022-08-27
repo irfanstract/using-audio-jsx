@@ -61,7 +61,7 @@ const useFileListInputState1 = (
             <div style={{ backgroundColor: "lightgray", color: "black" }}>
                { input1 }
             </div>
-            <div>
+            <div style={{ minHeight: "12em" }}>
                <ul>
                {(
                   v
