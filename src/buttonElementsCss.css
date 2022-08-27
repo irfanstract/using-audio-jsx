@@ -39,7 +39,8 @@ a.button {
 
 a { 
    background: transparent;  
-   padding: 0.35em;
+   padding: 0.25em;
+   margin: -0.25em;
 }  
 a.button,    
 button, 
