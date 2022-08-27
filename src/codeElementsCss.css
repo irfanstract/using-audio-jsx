@@ -84,7 +84,7 @@ p, blockquote {
    margin-inline-start: -0.25em ;
    box-sizing: content-box ;
    border-inline-start: 0.025em dotted currentColor ;
-   padding-inline-end: calc(max(0em, 100% - 40em /* */ ) ) ;
+   margin-inline-end: calc(max(0em, 100% - 40em /* */ ) ) ;
 }
 blockquote {
    padding-inline-start: 1.5em ;
