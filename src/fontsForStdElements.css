@@ -18,6 +18,7 @@ input[type=file]::-webkit-file-upload-button,
     font-variant: all-small-caps;      
     font-variant: all-petite-caps ;       */
     /* font-variant: titling-caps ;       */
+    letter-spacing: 0.05em ;
 }
 pre, code {
     font-family: Consolas, Monaco, Inconsolata, monospace; 
