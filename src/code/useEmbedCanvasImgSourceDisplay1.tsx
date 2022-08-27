@@ -94,4 +94,5 @@ const NativeImageSourceDisplay1 = (
 
 export {
    NativeImageSourceDisplay1 ,
+   useNativeImageSourceBlit1 ,
 } ;
