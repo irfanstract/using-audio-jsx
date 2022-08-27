@@ -142,7 +142,7 @@ a[href]:focus-within ,
    text-decoration-color: transparent;
    background: white;
    color: black;
-   animation: 1.25s infinite normal both MHOVERED ;
+   animation: 0.5s infinite normal both MHOVERED ;
 }
 a.button:hover ,
 a.button:focus-within ,
@@ -151,7 +151,7 @@ button:focus-within ,
 #---e { 
    background: rgb(255, 255, 128 );
    color: black;
-   animation: 1.25s infinite normal both MHOVERED ;
+   animation: 0.5s infinite normal both MHOVERED ;
    font-size: 125% ;
    padding: 0.5em ;
    margin: -0.5em ;
@@ -161,7 +161,7 @@ input[type=file]:focus-within ,
 #---e { 
    background: rgb(0, 192, 255 );
    color: black;
-   animation: 1.25s infinite normal both MHOVERED ;
+   animation: 0.5s infinite normal both MHOVERED ;
 } /* */
 input[type=file]:hover::-webkit-file-upload-button ,
 input[type=file]:focus-within::-webkit-file-upload-button ,
