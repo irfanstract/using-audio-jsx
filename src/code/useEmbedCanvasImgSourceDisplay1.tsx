@@ -37,15 +37,16 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
 
 
 
+type CanvasImageSourceX = (
+   CanvasImageSource 
+   & 
+   Record<"width" | "height", number > 
+) ;
 // TODO
 const NativeImageSourceDisplay1 = (
    function ({ src, validityDeps, ...props1 } : (
       { 
-         src: (
-            CanvasImageSource 
-            & 
-            Record<"width" | "height", number > 
-         ) ; 
+         src: CanvasImageSourceX ; 
          validityDeps: React.DependencyList ; 
       }
       &
