@@ -102,7 +102,7 @@ p {
     margin-inline-start: -0.25em ;
     box-sizing: content-box ;
     border-inline-start: 0.025em dotted currentColor ;
-    max-width: 40em ;
+    padding-inline-end: calc(100% - 40em ) ;
 }
 input[type=number] {
     width: 6em ;
