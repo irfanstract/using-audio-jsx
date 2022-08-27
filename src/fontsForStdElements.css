@@ -23,6 +23,7 @@ input[type=file]::-webkit-file-upload-button,
 pre, code {
     font-family: Consolas, Monaco, Inconsolata, monospace; 
     font-variant: normal ;       
+    letter-spacing: 0em ;
 }   
 a[href] {
     /* font-style: italic; */
