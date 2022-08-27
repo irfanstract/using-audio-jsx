@@ -42,16 +42,11 @@ type CanvasImageSourceX = (
    & 
    Record<"width" | "height", number > 
 ) ;
-// TODO
-const NativeImageSourceDisplay1 = (
-   function ({ src, validityDeps, ...props1 } : (
-      { 
-         src: CanvasImageSourceX ; 
-         validityDeps: React.DependencyList ; 
-      }
-      &
-      JSX.IntrinsicElements["canvas"]
-   ) ): React.ReactElement {
+const useNativeImageSourceBlit1 = (
+   function (...[src, validityDeps] : [
+      src: CanvasImageSourceX, 
+      validityDeps: React.DependencyList ,
+   ]) : [{}, React.Dispatch<null | HTMLCanvasElement> ] {
       const [cH, setCHandle] = (
          useState<null | HTMLCanvasElement >(null )
       ) ;
@@ -65,6 +60,26 @@ const NativeImageSourceDisplay1 = (
             cCH.drawImage(src , 0, 0 ) ;
          }
       } , validityDeps ) ;
+      ;
+      return [
+         {} ,
+         setCHandle ,
+      ] ;
+   }
+) ;
+// TODO
+const NativeImageSourceDisplay1 = (
+   function ({ src, validityDeps, ...props1 } : (
+      { 
+         src: CanvasImageSourceX ; 
+         validityDeps: React.DependencyList ; 
+      }
+      &
+      JSX.IntrinsicElements["canvas"]
+   ) ): React.ReactElement {
+      const [{}, setCHandle ] = (
+         useNativeImageSourceBlit1(src, validityDeps )
+      ) ;
       return (
          <canvas 
          ref={setCHandle }
