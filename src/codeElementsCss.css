@@ -86,6 +86,13 @@ p, blockquote {
    border-inline-start: 0.025em dotted currentColor ;
    padding-inline-end: calc(100% - 40em ) ;
 }
+blockquote {
+   padding-inline-start: 1.5em ;
+   margin-inline-start: 0.25em ;
+   border-inline-start: 0.2em solid currentColor ;
+   zoom: 90% ;
+   background: rgb(0, 0, 0, 0.1875 ) ;
+}
 
 
 
