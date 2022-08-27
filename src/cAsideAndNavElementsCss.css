@@ -8,6 +8,8 @@
 
 
 
+section, aside {
+}
 aside {
    display: block;
    position: relative;
