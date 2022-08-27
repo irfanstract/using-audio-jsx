@@ -17,6 +17,10 @@ ul, ol {
    background: black;
    color: white;
 }
+ul.navbar {
+   list-style-type: none ;
+   padding-inline-start: 0 ;
+}
 * > li::marker {
    /* */
    opacity: 0.5 ;
