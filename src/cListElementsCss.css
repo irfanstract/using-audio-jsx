@@ -8,6 +8,7 @@
 
 ul, ol {
    padding-inline-start: 1em ;
+   zoom: 95% ;
    border-inline-start: 0.05em dotted currentColor ;
 }
 * > li::marker {
