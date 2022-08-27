@@ -79,7 +79,7 @@ pre {
     white-space: pre ;
 }     
 /* PARAGRAPH */
-p {
+p, blockquote {
    padding-inline-start: 0.25em ;
    margin-inline-start: -0.25em ;
    box-sizing: content-box ;
