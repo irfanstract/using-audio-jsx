@@ -98,6 +98,15 @@
 
 }  
 /* here was a 'p' rule */
+p:hover, 
+p:focus-within, 
+blockquote:hover, 
+blockquote:focus-within, 
+pre:hover, 
+pre:focus-within, 
+#----e {
+    color: rgb(0, 128, 255 ) ;
+}
 input[type=number] {
     width: 6em ;
 }       
