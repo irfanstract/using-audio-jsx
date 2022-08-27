@@ -161,7 +161,7 @@ const useFileListInputState = (
       ) ;
       const overallFileInput = (
          <p style={{ display: "flex", flexDirection: "column" }}>
-            <label htmlFor={fileInputNativeId }>
+            <label htmlFor={fileInputNativeId } style={{ display: "inline-block", height: "2em" }}>
                Upload Files :
             </label>
             <br />
