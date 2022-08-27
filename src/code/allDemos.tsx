@@ -61,6 +61,30 @@ import { BasicEmbedObjectPreview } from "./useFilePreview1";
 
 
 
+const paragraphOverflowDemo = (() => {
+   const p1 = (
+      <p>
+         The <code>box-shadow</code> property <br />
+         enables you to cast a drop shadow from the frame of almost any element. <br />
+         If a <code>border-radius</code> is specified on the element with a box shadow, <br />
+         the box shadow takes on the same rounded corners. <br />
+         The z-ordering of multiple box shadows <br />
+         is the same as multiple text shadows (the first specified shadow is on top). <br />
+      </p>
+   ) ;
+   return (
+      <section>
+      <div style={{ letterSpacing: "0.1em" }}>
+      <a target={"_blank"} href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow">
+         MDN <q>Box Shadow</q>
+      </a>
+      { p1 }
+      { p1 }
+      { p1 }
+      </div>
+      </section>
+   ) ;
+})() ;
 const AllDemoes = (
    function () {
       const {
