@@ -46,7 +46,10 @@ const tAndVlSqExpand = (
             Immutable.Seq(evtSq )   
             .last()!           
         ) ;
-        const { t: firstEvtT , vl: vl0 } = evtSq[0] ;    
+        const { t: firstEvtT , vl: vl0 } = (
+            // TODO
+            evtSq[0]!
+        ) ;    
         const duration = (
             lastEvtT - firstEvtT  
         ) ;      
