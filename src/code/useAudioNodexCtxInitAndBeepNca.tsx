@@ -167,7 +167,7 @@ const {
                         ) ;                      
                         if (withDbg ) {                          
                             ((dest: Element, addend: Node ) => (
-                                dest.insertBefore(addend, dest.childNodes[0] )
+                                dest.insertBefore(addend, dest.childNodes[0] || null  )
                             ) )(document.body , newDivElem ) ;    
                         }
                         (                     

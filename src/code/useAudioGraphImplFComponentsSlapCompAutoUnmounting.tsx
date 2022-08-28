@@ -97,7 +97,7 @@ const {
                     *
                     Math.max(8, v )
                 ) )   
-            ) ;     
+            ) as [number, number] ;     
             const {       
                 passageStateBy ,     
             } = (   
