@@ -154,15 +154,31 @@ const isAtSecondHalf = (
       Math.floor(t * 2 ) % 2
    )
 ) ;
-const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => {
-
-   const dv : 1 | 2 = 2 ;
+const BassDrumLoopDv = (
+   function ({
+      subhalvesN: dv = 1 ,
+      renderRange ,
+   } : (
+      {
+         subhalvesN ?: number ;
+      } 
+      &
+      {
+         renderRange ?: (
+            Required<(
+               ComponentProps<(
+                  typeof MetronomeAndResponseGraph
+               )>
+            )>["renderRange"]
+         ) ;
+      }
+   ) ) {
    const bassDrumLoopGraph = (
       <MetronomeAndResponseGraph
       preFT={2 }
       postFT={3 }
       value={{ tickTockPeriod: 0.5 / dv }}
-      renderRange={{ n: 4 * 4 * 8 * dv }}
+      renderRange={{ n: 4 * 4 * 8 * dv , ...renderRange }}
       >
       { ({ t }) => (
          <>
@@ -190,6 +206,17 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          </>
       ) }
       </MetronomeAndResponseGraph>
+   ) ;
+   return bassDrumLoopGraph ;
+   }
+) ;
+const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => {
+
+   const dv : 1 | 2 = 2 ;
+   const bassDrumLoopGraph = (
+      <BassDrumLoopDv 
+      subhalvesN={dv }
+      />
    ) ;
    const tnLn = (
       <>
