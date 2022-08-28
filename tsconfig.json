@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": true, // naturally
     "skipLibCheck": true,
     "lib": [
       "dom",
@@ -20,9 +20,9 @@
       "esnext"
     ],
     "allowJs": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true, // stricity
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": true, // 'react-scripts'
     "noEmit": true,
   },
   "ts-node": {
