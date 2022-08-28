@@ -82,70 +82,48 @@ const {
       &
       Pick<ComponentProps<typeof CBiquadFilterModulated> , "gainValArgument" | "gainValArgumentInterpretation" >
    ) ;
+   function impl1(...[[fltType11, fltType12 ] ] : [
+      ["highshelf", "highpass" ] | ["lowshelf" , "lowpass"] ,
+   ] ) {
+      return (
+         function XLowpassOrTreebleImpl({
+            children : payload,
+            //
+            freqArgument, 
+            freqArgumentInterpretation,
+            gainValArgument,
+            gainValArgumentInterpretation,
+         } : Props1 ) {
+            const gm = (
+               (gainValArgument && gainValArgumentInterpretation) ? 
+               ({ gainValArgument, gainValArgumentInterpretation } as const ) 
+               : {} 
+            ) ;
+            return (
+               <CBiquadFilterModulated
+               type={fltType11 }
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               {...gm }
+               >
+               <CBiquadFilterModulated
+               type={fltType12 }
+               freqArgumentInterpretation={freqArgumentInterpretation }
+               freqArgument={freqArgument}
+               >
+                  { payload }
+               </CBiquadFilterModulated>
+               </CBiquadFilterModulated>
+            ) ;
+         }
+      )  ;
+   } //
    return {
       XTreeble : (
-         function ({
-            children : payload,
-            //
-            freqArgument, 
-            freqArgumentInterpretation,
-            gainValArgument,
-            gainValArgumentInterpretation,
-         } : Props1 ) {
-            const gm = (
-               (gainValArgument && gainValArgumentInterpretation) ? 
-               ({ gainValArgument, gainValArgumentInterpretation } as const ) 
-               : {} 
-            ) ;
-            return (
-               <CBiquadFilterModulated
-               type="highshelf"
-               freqArgumentInterpretation={freqArgumentInterpretation }
-               freqArgument={freqArgument}
-               {...gm }
-               >
-               <CBiquadFilterModulated
-               type="highpass"
-               freqArgumentInterpretation={freqArgumentInterpretation }
-               freqArgument={freqArgument}
-               >
-                  { payload }
-               </CBiquadFilterModulated>
-               </CBiquadFilterModulated>
-            ) ;
-         }
+         impl1(["highshelf", "highpass"] )
       ) , 
       XLowpass : (
-         function ({
-            children : payload,
-            //
-            freqArgument, 
-            freqArgumentInterpretation,
-            gainValArgument,
-            gainValArgumentInterpretation,
-         } : Props1 ) {
-            const gm = (
-               (gainValArgument && gainValArgumentInterpretation) ? 
-               ({ gainValArgument, gainValArgumentInterpretation } as const ) 
-               : {} 
-            ) ;
-            return (
-               <CBiquadFilterModulated
-               type="lowshelf"
-               freqArgumentInterpretation={freqArgumentInterpretation }
-               freqArgument={freqArgument}
-               {...gm }
-               >
-               <CBiquadFilterModulated
-               type="lowpass"
-               freqArgumentInterpretation={freqArgumentInterpretation }
-               freqArgument={freqArgument}
-               >
-                  { payload }
-               </CBiquadFilterModulated>
-               </CBiquadFilterModulated>
-            ) ;
-         }
+         impl1(["lowshelf", "lowpass"] )
       ) , 
    } ;
 })() ;
