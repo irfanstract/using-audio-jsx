@@ -126,6 +126,14 @@ const {
         ) ,   
     } ;
 })() ;     
+const WithSpeedF = (
+    // TODO
+    ({ value, children, ...props } : ComponentProps<typeof WithSlowdown > ) => (
+        <WithSlowdown value={1 / value } {...props } >
+            { children }
+        </WithSlowdown>
+    )
+) ;
 const WithCurrentTInfo = (
     currentTInfCtx.Consumer  
 ) ;         
@@ -368,4 +376,5 @@ export {
     LoopingWithPeriod ,   
     LwpPayloadCallback ,       
     WithSlowdown ,
+    WithSpeedF ,
 } ;           
