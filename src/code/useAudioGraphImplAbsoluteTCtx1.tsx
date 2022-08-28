@@ -7,7 +7,7 @@ import {
     avTrackConcatShallPropagate ,   
 } from "./timelineConcatClippingMode";    
 import React from "react";               
-import { K, arrayIndexedOrderedList } from "./commonElements";          
+import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from "./commonElements";    
         
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
