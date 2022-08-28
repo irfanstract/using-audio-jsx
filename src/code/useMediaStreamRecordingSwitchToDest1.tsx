@@ -50,9 +50,18 @@ const SceneEndDataEvt = {} ;
 const blobConcat = (
    function (...[sqV] : [src: Blob[] ]): null | Blob {
       if (sqV.length ) {
-         return (
-            new Blob(sqV, { type: sqV[0].type })
+         const sqFirstV = (
+            sqV[0 ]
+            || 
+            null
          ) ;
+         if (sqFirstV ) {
+            return (
+               new Blob(sqV, { type: sqFirstV.type })
+            ) ;
+         } else {
+            return null ;
+         }
       } else {
          return null ;
       }
