@@ -164,47 +164,66 @@ const useDescendantCurrentTDiffing = (
         } ;
     }
 ) ;
+type LoopingComponentPropsWithPeriod = (   
+    /**  domain properties   */   
+    {             
+
+        /**       
+         * the markup children will be the *repeand*.        
+         */  
+        children : (   
+            React.ReactNode  
+            | 
+            LwpPayloadCallback
+        ) ;
+
+        /**    
+         * this is (supposed) to define the domain properties (excluding `children`).
+         */
+        value: {      
+            period: number ;                                                
+            initialOffset ?: number ;         
+            // clippingMode ?: AudioTrackConcatClippingMode ;          
+        } ;                     
+
+    }    
+    &    
+    /**   display properties  */        
+    {      
+       
+        /**     
+         * this parameterisation 
+         * was intended to allow conditionally disabling *visualisation* in attempt to debug performance problems.
+         * 
+         * @deprecated
+         */
+        visual ?: false | true ;     
+        /**    
+         * this is 
+         * to control the number of looping to be-or-remain *mounted* at-once 
+         * (because there had been no other good algo to predict/approximate it).
+         * */      
+        renderRange : (
+            Readonly<{ 
+                /**  `i`s  */
+                n: number ;  
+                /**  `i`  */
+                start ?: number ; 
+            }>    
+        ) ;                        
+        // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
+         
+    }             
+) ;
 /**    
+ * this *component* is to implement looping with relative `t`.
+ * 
  * {@link LwpPayloadCallback }. 
  * */               
 const LoopingWithPeriod = (
     IterableOps.identity<(                 
         React.FC<(                                      
-            (   
-                /**  domain properties   */   
-                {             
- 
-                    /**       
-                     * the markup children will be the *repeand*.        
-                     */  
-                    children : (   
-                        React.ReactNode  
-                        | 
-                        LwpPayloadCallback
-                    ) ;
-        
-                    value: {      
-                        period: number ;                                                
-                        initialOffset ?: number ;         
-                        // clippingMode ?: AudioTrackConcatClippingMode ;          
-                    } ;                     
-           
-                }    
-                &    
-                /**   display properties  */        
-                {      
-                   
-                    visual ?: false | true ;     
-                    /**    
-                     *  controls the number of looping to display   
-                     * */      
-                    renderRange : (
-                        Readonly<{ n: number ; start ?: number ; }>    
-                    ) ;                        
-                    // autoUnmountMode ?: AudioTrackConcatClippingMode ;      
-                     
-                }             
-            )             
+            LoopingComponentPropsWithPeriod
         )>                  
     )>((                             
         function SimpleLoopingWithPeriodC ({      
