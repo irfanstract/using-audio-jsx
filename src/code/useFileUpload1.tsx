@@ -125,7 +125,7 @@ const useFileListInputStateB = (
       ) ;
       const resetBtn = (
          <button type="button" onClick={() => setFileList(() => [] ) } >
-            Reset 
+            Unshow All Files 
          </button>
       ) ;
       const allOps = {
