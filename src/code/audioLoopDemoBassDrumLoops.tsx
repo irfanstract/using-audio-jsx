@@ -161,7 +161,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
        <MetronomeAndResponseGraph
        preFT={2 }
        postFT={3 }
-       value={{ tickTockPeriod: 0.5 }}
+       value={{ tickTockPeriod: 0.5 / dv }}
        renderRange={{ n: 4 * 4 * 8 * dv }}
        >
        { ({ t }) => (
