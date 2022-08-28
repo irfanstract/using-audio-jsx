@@ -43,7 +43,7 @@ import {
     WithNSecondsFadeInBF ,     
 
 } from "./audioLoopDemoSpecimens1";
-import { HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumLoops"; 
+import { BassDrumLoopDv, HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumLoops"; 
 import '../App.css';        
 
     
