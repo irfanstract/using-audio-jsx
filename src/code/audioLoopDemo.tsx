@@ -120,7 +120,9 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (
-                <HouseMusicShortBrkDemo />
+                <WithSlowdown value={2 ** -1 } >
+                    <BassDrumLoopDv />
+                </WithSlowdown>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             return (       
