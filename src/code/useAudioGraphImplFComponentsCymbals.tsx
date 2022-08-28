@@ -25,11 +25,16 @@ import { CSnareDrumFluidly1 } from "./useAudioGraphImplFComponentsSlapDrumKit1";
 
 
 const CBriefHiHatFluidly = (
-   () => (
+   () => {
+      const period = 0.5 ;
+      return (
+      <CAmpModulated0 value={<CFnValueByRelativeT value={({ ctxT: t }) => (t <= period ? 1 : 0 ) } /> } >
       <CAmpModulated0 value={<CConstantValue value={2 ** -2 } /> } >
-            <CSnareDrumFluidly1 />
+            <CWhiteNoise value={{ volume: 1 }} />
       </CAmpModulated0> 
-   )
+      </CAmpModulated0>
+      ) ;
+   }
 );
 
 
