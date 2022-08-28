@@ -203,9 +203,12 @@ type MetronomePayloadCallback = (
  * instead,    
  * it's preferable to mount a *metronome*, listen for each change in `t` (by default every `0.5 sec` ), and 
  * selectively fire an instrument depending on the `t`. 
+ * `t` in call-time `ctx` shall be *interpreted relatively*.
  * 
  * for performance reasons, it might be necessary to make the return-type `null` ; 
  * see {@link LwpPayloadCallback}.  
+ * 
+ * `t` in call-time `ctx` is (meant) to be *interpreted relatively*.
  */ 
 const MetronomeAndResponseGraph = (
    function (properties11 : ( 
