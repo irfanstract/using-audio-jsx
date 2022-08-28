@@ -46,25 +46,53 @@ const useNativeImageSourceBlit1 = (
    function (...[src, validityDeps] : [
       src: CanvasImageSourceX, 
       validityDeps: React.DependencyList ,
-   ]) : [{}, React.Dispatch<null | HTMLCanvasElement> ] {
-      const [cH, setCHandle] = (
+   ]) {
+      const [destHandle0, setCHandle] = (
          useState<null | HTMLCanvasElement >(null )
       ) ;
-      const cCH: null | CanvasRenderingContext2D = (
-         cH ?
-         cH.getContext("2d")!
-         : null
+      const destHandle = (
+         // [destHandle0, useDeferredValue(destHandle0) ]
+         // .filter((v): v is HTMLCanvasElement => !!v )
+         // [0 ]
+         destHandle0
       ) ;
-      useInsertionEffect((): void => {
-         if (cCH ) {
-            cCH.drawImage(src , 0, 0 ) ;
+      const destDrawCtxHandle: null | CanvasRenderingContext2D = (
+         useMemo(() => (
+            destHandle ?
+            destHandle.getContext("2d")!
+            : null
+         ), [destHandle ] )
+      ) ;
+      const forceRefresh = (
+         useCallback((
+            function (): void {
+               if (destDrawCtxHandle ) {
+                  (
+                     destDrawCtxHandle
+                     .drawImage(src , 0, 0 )
+                  ) ;
+               }
+            }
+         ) , [destDrawCtxHandle, src ] )
+      ) ;
+      useInsertionEffect((
+         (): void => {
+            forceRefresh() ;
          }
-      } , validityDeps ) ;
+      ) , validityDeps ) ;
+      const exportableOps = {
+         forceRefresh ,
+      } ;
       ;
-      return [
-         {} ,
-         setCHandle ,
-      ] ;
+      return ((): [
+         ops: typeof exportableOps , 
+         refAssign: React.Dispatch<null | HTMLCanvasElement> ,
+      ] => (
+         [
+            exportableOps ,
+            setCHandle ,
+         ]
+      ))() ;
    }
 ) ;
 // TODO
