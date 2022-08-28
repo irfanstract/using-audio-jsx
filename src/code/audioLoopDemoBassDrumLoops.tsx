@@ -158,38 +158,38 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
 
    const dv : 1 | 2 = 2 ;
    const bassDrumLoopGraph = (
-       <MetronomeAndResponseGraph
-       preFT={2 }
-       postFT={3 }
-       value={{ tickTockPeriod: 0.5 / dv }}
-       renderRange={{ n: 4 * 4 * 8 * dv }}
-       >
-       { ({ t }) => (
-           <>
-           
-           { (
-               (
-                   (t % 1 ) === 0
-                   &&
-                   ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
-               ) ?
-               <CBassDrumKickFluidly1 /> 
-               :  null
-           )}
+      <MetronomeAndResponseGraph
+      preFT={2 }
+      postFT={3 }
+      value={{ tickTockPeriod: 0.5 / dv }}
+      renderRange={{ n: 4 * 4 * 8 * dv }}
+      >
+      { ({ t }) => (
+         <>
+         
+         { (
+            (
+                  (t % 1 ) === 0
+                  &&
+                  ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
+            ) ?
+            <CBassDrumKickFluidly1 /> 
+            :  null
+         )}
 
-           { (
-               ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
-           ) }
+         { (
+            ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
+         ) }
 
-           { (
-               (((t * 2 ) % 2 ) === 1 ) ? 
-               <CBriefHiHatFluidly />
-               : null
-           ) }
+         { (
+            (((t * 2 ) % 2 ) === 1 ) ? 
+            <CBriefHiHatFluidly />
+            : null
+         ) }
 
-           </>
-       ) }
-       </MetronomeAndResponseGraph>
+         </>
+      ) }
+      </MetronomeAndResponseGraph>
    ) ;
    const tnLn = (
       <>
