@@ -115,6 +115,8 @@ const useBlobConcatState = (() => {
                   ;
                   const firstBlob: Blob | null = (
                      blobs[0 ]
+                     ||
+                     null 
                   ) ;
                   if (firstBlob) {
                      const type = firstBlob.type ;
