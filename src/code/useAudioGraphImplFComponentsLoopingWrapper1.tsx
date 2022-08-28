@@ -170,7 +170,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
  * this Component renders a loop(ing) (every `t` *seconds* ) of children.  
  *             
  * {@link LoopingWithPeriod } is simple in usage. however, 
- * it's recommended to switch to {@link MetronomeCheckAndExpandingElem} instead.  
+ * it's recommended to switch to {@link MetronomeAndResponseGraph} instead.  
  *   
  * for performance reasons, it might be necessary to make the return-type `null` ; 
  * see {@link LwpPayloadCallback}.   
@@ -207,7 +207,7 @@ type MetronomePayloadCallback = (
  * for performance reasons, it might be necessary to make the return-type `null` ; 
  * see {@link LwpPayloadCallback}.  
  */ 
-const MetronomeCheckAndExpandingElem = (
+const MetronomeAndResponseGraph = (
    function (properties11 : ( 
       { 
          /**    
@@ -373,6 +373,6 @@ export {
    LoopingWithPeriodAndAutoUnmounting , 
    LoopingWithPeriod ,         
    LwpPayloadCallback ,   
-   MetronomeCheckAndExpandingElem ,  
+   MetronomeAndResponseGraph ,  
    MetronomePayloadCallback , 
 } ;   

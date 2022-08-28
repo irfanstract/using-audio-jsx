@@ -32,7 +32,7 @@ import {
     
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 
-    MetronomeCheckAndExpandingElem , 
+    MetronomeAndResponseGraph , 
     
 } from "./audioLoopDemoComponents1"; 
 import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";

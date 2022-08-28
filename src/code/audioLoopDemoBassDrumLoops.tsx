@@ -32,7 +32,7 @@ import {
     
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 
-    MetronomeCheckAndExpandingElem , 
+    MetronomeAndResponseGraph , 
     
 } from "./audioLoopDemoComponents1"; 
 import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";
@@ -158,7 +158,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
 
    const dv : 1 | 2 = 2 ;
    const bassDrumLoopGraph = (
-       <MetronomeCheckAndExpandingElem
+       <MetronomeAndResponseGraph
        preFT={2 }
        postFT={3 }
        value={{ tickTockPeriod: 0.5 }}
@@ -189,7 +189,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
 
            </>
        ) }
-       </MetronomeCheckAndExpandingElem>
+       </MetronomeAndResponseGraph>
    ) ;
    const tnLn = (
       <>

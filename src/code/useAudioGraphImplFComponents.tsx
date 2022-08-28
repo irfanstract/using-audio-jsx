@@ -49,7 +49,7 @@ import {
     LoopingWithPeriod , 
     LoopingWithPeriodAndAutoUnmounting , 
     LoopingWithPeriodSimple , 
-    MetronomeCheckAndExpandingElem ,  
+    MetronomeAndResponseGraph ,  
      
 } from "./useAudioGraphImplFComponentsLoopingWrapper1";
 import { CWhiteNoise } from "./useAudioGraphImplFComponentsWhiteNoise";

@@ -31,7 +31,7 @@ import {
 
     // TIME-DILATING FILTERS, INCLUDING LOOPING  
     LoopingWithPeriod ,   
-    MetronomeCheckAndExpandingElem ,
+    MetronomeAndResponseGraph ,
 
 } from "./useAudioGraphImplFComponents";                    
 import {         

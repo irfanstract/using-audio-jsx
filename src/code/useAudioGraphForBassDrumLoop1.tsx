@@ -11,7 +11,7 @@ import { K, ComponentProps, ContextReturnType } from "./commonElements";
            
 // domain-imports           
 import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";    
-import { MetronomeCheckAndExpandingElem } from "./useAudioGraphImplFComponentsLoopingWrapper1";
+import { MetronomeAndResponseGraph } from "./useAudioGraphImplFComponentsLoopingWrapper1";
 import { CBassDrumKickFluidly1 } from "./useAudioGraphImplFComponentsSlapDrumKit1";           
 import {         
 } from "./useAudioGraphImplFComponentsSlapDrumKit1" ;
@@ -42,18 +42,18 @@ const CBassDrumLoop = (() => {
          ) ; 
          metronomeProps ?: (
             Omit<(
-               ComponentProps<typeof MetronomeCheckAndExpandingElem >
+               ComponentProps<typeof MetronomeAndResponseGraph >
             ), "children">
          ) ;
       }) {      
          return (       
-            <MetronomeCheckAndExpandingElem
+            <MetronomeAndResponseGraph
             {...{ preFT: 2, postFT: 3, ...metronomeProps, } }
             >  
                { ({ }) => (                   
                   <BD {...instrumentProps } />       
                ) }
-            </MetronomeCheckAndExpandingElem>
+            </MetronomeAndResponseGraph>
          ) ;
       }
    ) ;  
