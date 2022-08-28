@@ -154,11 +154,25 @@ const useFileListInputState = (
          fileList ,
          {
             fileInputNativeId ,
-            coreFileInputElem ,
+            coreFileInputElem: coreFileInputElem0 ,
             resetBtn ,
          } ,
       ] = (
          useFileListInputStateB(...args )
+      ) ;
+      const coreFileInputElem = (
+         <K 
+         key={(
+            fileList
+            .map((e: File ): string => (
+               [e.name, e.type, e.size ]
+               .join("/")
+            ) )
+            .join(";")
+         ) } 
+         >
+         { coreFileInputElem0 }
+         </K>
       ) ;
       const overallFileInput = (
          <p style={{ display: "flex", flexDirection: "column" }}>
