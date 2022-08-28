@@ -11,6 +11,14 @@ ul, ol {
    zoom: 95% ;
    border-inline-start: 0.05em dotted currentColor ;
 }
+ul:hover ,
+ol:hover ,
+ul:focus-within ,
+ol:focus-within ,
+#----e {
+   border-inline-start-color: rgb(255, 192, 0 ) ;
+   border-width: 0.2em ;
+}
 .navbar {
    display: flex ;
    flex-direction: row ;
