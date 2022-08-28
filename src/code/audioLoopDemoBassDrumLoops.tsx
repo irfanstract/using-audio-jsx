@@ -515,5 +515,6 @@ const HouseMusicShortBrkDemo = (
 
 
 export {
+   BassDrumLoopDv ,
    HouseMusicShortBrkDemo ,
 } ;
