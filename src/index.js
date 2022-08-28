@@ -21,7 +21,7 @@ if (1) {
   setTimeout(() => {
     setTimeout(() => {
       (window.location).reload() ;
-    }, 60 * 1000 ) ;
+    }, 15 * 1000 ) ;
   } , 15 * 60 * 1000 ) ;
 };
 
