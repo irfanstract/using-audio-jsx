@@ -123,6 +123,13 @@ export const AudioLoopDemoApp = (function () {
             const c1  = (
                 <WithSlowdown value={2 ** -1 } >
                     <BassDrumLoopDv />
+                    <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
+                        <CBassLineByTimeDomainArgs 
+                        freqArgument={(
+                            <CConstantValue value={55 / 440 } />
+                        )}
+                        />
+                    </CAmpModulated0>
                 </WithSlowdown>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
