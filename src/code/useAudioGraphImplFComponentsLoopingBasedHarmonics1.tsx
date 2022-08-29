@@ -129,10 +129,19 @@ const CmInHarmonics : (
                      mGainValues[i ]
                      || 0
                   ) ;
+                  const infoPanel = (
+                     <p> 
+                        Harmonic ; 
+                        <code className="long-enough">
+                        { JSON.stringify({ ...ctx , gainFac } , null, 2 ) }   
+                        </code> 
+                     </p>
+                  ) ;
                   return (
                      <div 
                      key={ctx.detuneOctaves as number } 
                      >
+                     { null && infoPanel }
                      <CAmpModulatedTimeDomain 
                      value={(
                         <CConstantValue value={Math.max(2E-30, gainFac ) } />
