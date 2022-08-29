@@ -283,6 +283,7 @@ const passageStateBy1 = (
 export  {
     tCtxs ,       
 
+    PreFTAndPostFTProps ,
     withAutoUnmount ,    
     WithAutoUnmount ,    
     WithAutoStopmount , 
