@@ -84,8 +84,10 @@ const CBassLineByTimeDomainArgs: (
          value={[
             SupportedFShiftAmtInterpretation.OCTAVE_SHIFT , 
             [
-               [0, { gain: 2 **  0 }] , 
-               [1, { gain: 2 ** -2 }] ,
+               [0, { gain: 2 **  0.0 }] as const , 
+               [1, { gain: 2 ** -1.5 }] as const ,
+               [2, { gain: 2 ** -3.0 }] as const ,
+               [3, { gain: 2 ** -4.0 }] as const ,
             ] ,
          ] as Harmonics } 
          >
