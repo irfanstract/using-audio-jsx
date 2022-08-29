@@ -8,6 +8,7 @@
  * . 
  * `config-overrides.js` specific to `react-app-rewired`
 */
+// @ts-nocheck
 "use strict" ; 
 
 
