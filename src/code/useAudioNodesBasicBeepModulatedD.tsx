@@ -82,7 +82,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
     return (                  
         function useWVT(...[nd0 , mainOptions11 = {} ] : [
             dest : AudioNode | null ,               
-            etc ?: {                
+            properties ?: {                
                 /**    
                  * 
                  */
@@ -100,8 +100,13 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                  *  */      
                 freqArgumentNormalValue ?: number ;    
                 /**    
+                 * ill-defined.
+                 * 
+                 * to be interpreted absolutely regardless of {@link freqArgumentNormalValue}.
+                 * 
                  * @deprecated    
-                 * you probably meant {@link freqArgumentNormalValue  }
+                 * problematic as explained above.
+                 * you probably meant {@link freqArgumentNormalValue  }.
                  */      
                 freqArgumentInitialValue ?: number ;    
             } ,         
