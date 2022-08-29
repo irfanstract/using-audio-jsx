@@ -93,8 +93,7 @@ const CmInHarmonics : (
       }
    )>
 ) = (() => {
-   return (
-      function ({ value, children: payload }) {
+   function hSpecExpand(...[value] : [HarmonicsSpec ] ) {
          const [mFInterpr , mValues10 ] = value ;
          const mFreqShiftValuesRaw = (
             mValues10
@@ -104,6 +103,21 @@ const CmInHarmonics : (
             mValues10
             .map(([fS , { gain }]) => gain )
          ) ;
+         return {
+            mFInterpr ,
+            mFreqShiftValuesRaw ,
+            mGainValues ,
+         } ;
+   } ;
+   return (
+      function ({ value, children: payload }) {
+         const {
+            mFInterpr ,
+            mFreqShiftValuesRaw ,
+            mGainValues ,
+         } = (
+            hSpecExpand(value )
+         ) ; //
          const e = (
             useDeferredRecompute(() => (
                translateFShiftR([
