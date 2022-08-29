@@ -55,6 +55,11 @@ import { CmInHarmonics } from "./useAudioGraphImplFComponentsLoopingBasedHarmoni
 
     
 ;
+type Harmonics = (
+   Required<(
+      ComponentProps<typeof CmInHarmonics >
+   )>["value"]
+) ;
 // TODO
 const CBassLineByTimeDomainArgs: (
    React.FC<(
@@ -71,11 +76,6 @@ const CBassLineByTimeDomainArgs: (
          <></>
       ) ,
    } ) {
-      type Harmonics = (
-         Required<(
-            ComponentProps<typeof CmInHarmonics >
-         )>["value"]
-      ) ;
       return (
          <CAmpModulated0  
          value={<CConstantValue value={2 ** -1 } /> }
