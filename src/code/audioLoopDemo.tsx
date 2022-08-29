@@ -44,6 +44,7 @@ import {
 
 } from "./audioLoopDemoSpecimens1";
 import { BassDrumLoopDv, HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumLoops"; 
+import { CBassLineByTimeDomainArgs } from "./audioLoopDemoSpecimens1";
 import '../App.css';        
 
     
