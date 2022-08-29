@@ -99,16 +99,6 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                  * how much for input of `1.0`     
                  *  */      
                 freqArgumentNormalValue ?: number ;    
-                /**    
-                 * ill-defined.
-                 * 
-                 * to be interpreted absolutely regardless of {@link freqArgumentNormalValue}.
-                 * 
-                 * @deprecated    
-                 * problematic as explained above.
-                 * you probably meant {@link freqArgumentNormalValue  }.
-                 */      
-                freqArgumentInitialValue ?: number ;    
             } ,         
         ] ) {                                  
             const {  
@@ -117,12 +107,11 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                 detuneScale1 = (12 * 100 ) ,          
 
                 freqArgumentNormalValue = 440 ,      
-                freqArgumentInitialValue : freqArgumentInitialValue = ( 
-                    // TODO    
-                    3          
-                ) ,       
 
             } = mainOptions11 ;    
+            const freqCtrlAbsoluteIntrinsicValue: number = (
+                1E-10
+            ) ;
             const nd1 = (    
                 useOscilltorNodeF(nd0, 0.5 )   
             ) ;                  
@@ -149,7 +138,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                      */ 
                     nd1.frequency.setValueAtTime(( 
                         // TODO         
-                        freqArgumentInitialValue  
+                        freqCtrlAbsoluteIntrinsicValue
                     ), 0 ) 
                 ) ;             
             } , [nd1 ]) ;                  
@@ -190,7 +179,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                         freqArgumentNormalValue        
                     ) , {             
                         // TODO        
-                        destNdIntrinsicValue: freqArgumentInitialValue  ,   
+                        destNdIntrinsicValue: freqCtrlAbsoluteIntrinsicValue  ,   
 
                         // TODO 
                         postInitDisconnectiveDebug : false , 
