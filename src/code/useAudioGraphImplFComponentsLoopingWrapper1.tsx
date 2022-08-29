@@ -235,9 +235,13 @@ const MetronomeAndResponseGraph = (
                ComponentProps<typeof LoopingWithPeriodAndAutoUnmounting >
             )>["renderRange"]
          ) ;       
-         preFT ?: number ;
-         postFT ?: number ;
       }        
+      &
+      Partial<(
+         Required<(
+            PreFTAndPostFTProps
+         )>
+      )>  
    )) {                  
       const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
          properties11    
