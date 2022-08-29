@@ -76,6 +76,7 @@ const CBassLineByTimeDomainArgs: (
          <></>
       ) ,
    } ) {
+      const type1 : Extract<OscillatorType, "sine" | "triangle"> = "sine" ;
       return (
          <CAmpModulated0  
          value={<CConstantValue value={2 ** -1 } /> }
@@ -94,6 +95,7 @@ const CBassLineByTimeDomainArgs: (
          { ({ detuneOctaves }) => (
             <K >
             <CWaveTable1 
+            type={type1 }
             //
             freqArgumentInterpretation="timedomain-normalised"
             freqArgument={freqArgument }
