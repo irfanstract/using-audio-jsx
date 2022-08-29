@@ -65,7 +65,7 @@ const CBassLineByTimeDomainArgs: (
 ) = (
    function ({
       freqArgument = (
-         <CConstantValue value={220 / 48000 } />
+         <CConstantValue value={220 / 440 } />
       ) ,
       detune = (
          <></>
