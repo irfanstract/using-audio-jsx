@@ -3,6 +3,7 @@ import {
    interpolateBetweenTwo ,   
 } from "./polynomialsC";       
 import { Iterable, IterableOps } from "./generalUse11";
+import { SupportedFShiftAmtInterpretation } from "./audioFreqShiftInterpretation1";
 import React, { useReducer, useState } from "react";   
 import {    useEnumConstantPicker } from "./commonElements";     
 import { K, ComponentProps, ContextReturnType } from "./commonElements";    
@@ -39,6 +40,7 @@ import {
 import { CBassDrumLoop } from "./useAudioGraphForBassDrumLoop1";
 import { WithNSecondsFadeInBF } from "./useAudioGraphWithSmoothFadeIn";
 import { CAmbientNoise } from "./useAudioGraphImplFComponentsOpenAreaEffects";
+import { CmInHarmonics } from "./useAudioGraphImplFComponentsLoopingBasedHarmonics1";  
 
                
          
@@ -53,6 +55,63 @@ import { CAmbientNoise } from "./useAudioGraphImplFComponentsOpenAreaEffects";
 
     
 ;
+// TODO
+const CBassLineByTimeDomainArgs: (
+   React.FC<(
+      Pick<(
+         ComponentProps<typeof CWaveTable1>
+      ) , "freqArgument" | "detune">
+   )>
+) = (
+   function ({
+      freqArgument = (
+         <CConstantValue value={220 / 48000 } />
+      ) ,
+      detune = (
+         <></>
+      ) ,
+   } ) {
+      type Harmonics = (
+         Required<(
+            ComponentProps<typeof CmInHarmonics >
+         )>["value"]
+      ) ;
+      return (
+         <CAmpModulated0  
+         value={<CConstantValue value={2 ** -1 } /> }
+         >
+         <CmInHarmonics 
+         value={[
+            SupportedFShiftAmtInterpretation.OCTAVE_SHIFT , 
+            [
+               [0, { gain: 2 **  0 }] , 
+               [1, { gain: 2 ** -2 }] ,
+            ] ,
+         ] as Harmonics } 
+         >
+         { ({ detuneOctaves }) => (
+            <K >
+            <CWaveTable1 
+            //
+            freqArgumentInterpretation="timedomain-normalised"
+            freqArgument={freqArgument }
+            //
+            detuneInterpretation="timedomain-normalised"
+            detune={(
+               <K>
+                  { detune }
+                  <CConstantValue value={detuneOctaves } />
+               </K>
+            ) }
+            //
+            />
+            </K >
+         ) }
+         </CmInHarmonics>
+         </CAmpModulated0>
+      ) ;
+   }
+) ;
 
 
 
@@ -61,6 +120,7 @@ import { CAmbientNoise } from "./useAudioGraphImplFComponentsOpenAreaEffects";
 
 export * from "./useAudioGraphImplFComponents" ;
 export { 
+   CBassLineByTimeDomainArgs ,
    CBassDrumLoop ,  
    WithNSecondsFadeInBF , 
    CAmbientNoise ,
