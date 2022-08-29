@@ -130,7 +130,7 @@ const CmInHarmonics : (
                      || 0
                   ) ;
                   return (
-                     <K 
+                     <div 
                      key={ctx.detuneOctaves as number } 
                      >
                      <CAmpModulatedTimeDomain 
@@ -140,7 +140,7 @@ const CmInHarmonics : (
                      >
                         { payload(ctx ) }
                      </CAmpModulatedTimeDomain>
-                     </K >
+                     </div >
                   ) ;
                } )
             ) )
