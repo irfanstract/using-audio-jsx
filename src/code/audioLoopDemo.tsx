@@ -126,8 +126,11 @@ export const AudioLoopDemoApp = (function () {
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
                         <CBassLineByTimeDomainArgs 
                         freqArgument={(
-                            <CConstantValue value={55 / 440 } />
+                            <CConstantValue value={27.5 / 440 } />
                         )}
+                        detune={(
+                            <CConstantValue value={3 / 12 } />
+                        )} //
                         />
                     </CAmpModulated0>
                 </WithSlowdown>
