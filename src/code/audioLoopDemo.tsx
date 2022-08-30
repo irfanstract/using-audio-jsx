@@ -121,7 +121,8 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (
-                <WithSlowdown value={2 ** -1.00 } >
+                <WithSlowdown value={1 / (68 / 60 ) } >
+                <WithSlowdown value={2 ** -1 } >
                     <BassDrumLoopDv />
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
                         <CBassLineByTimeDomainArgs 
@@ -133,6 +134,7 @@ export const AudioLoopDemoApp = (function () {
                         )} //
                         />
                     </CAmpModulated0>
+                </WithSlowdown>
                 </WithSlowdown>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
