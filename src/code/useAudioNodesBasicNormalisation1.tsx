@@ -67,7 +67,7 @@ const {
      */
     function useCheckNoDoubleInit(nd1 : object | null ) {
         ;   
-        React[AUDIONODES_USEEFFECT](() => {      
+        React["useInsertionEffect"](() => {      
             if (nd1 && doubleInitCheckEnabled ) {              
                 if (!(((nd1 as any ).AUDIOBASICNORMALISATIONIMPL += "+" ) === "undefined+" ) ) {
                     console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
