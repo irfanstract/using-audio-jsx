@@ -454,6 +454,7 @@ const HouseMusicShortBrkDemo = (
 
 export {
    BassDrumLoopDv ,
+   BootlegMusicDv ,
    MercerTchamiMusicDemo1 ,
    MercerTchamiMusicDemoIntro ,
    HouseMusicShortBrkDemo ,
