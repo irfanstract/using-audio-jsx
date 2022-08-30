@@ -243,17 +243,17 @@ const {
              */  
             {         
                 ;                     
-                React[AUDIONODES_USEEFFECT](() => {
+                React[AUDIONODES_USE_AUDIONODEEFFECT](() => {
                     if (postInitDisconnectiveDebug === true ) {      
                         (dest instanceof AudioNode ) && dest.disconnect() ;          
                     }       
                 }, [dest ]) ;   
-                React[AUDIONODES_USEEFFECT](() => {
+                React[AUDIONODES_USE_AUDIONODEEFFECT](() => {
                     if (postInitDisconnectiveDebug === 2 ) {      
                         gnBeforeMul1 && gnBeforeMul1.disconnect() ;    
                     }       
                 }, [gnBeforeMul1 ]) ;                 
-                React[AUDIONODES_USEEFFECT](() => {  
+                React[AUDIONODES_USE_AUDIONODEEFFECT](() => {  
                     if (postInitDisconnectiveDebug === 3 ) {        
                         if (gnBeforeMul1 && gnAfterMul ) {
                             gnBeforeMul1.disconnect() ;              
@@ -264,7 +264,7 @@ const {
                         }        
                     }       
                 }, [gnBeforeMul1 && gnAfterMul ]) ;            
-                React[AUDIONODES_USEEFFECT](() => {
+                React[AUDIONODES_USE_AUDIONODEEFFECT](() => {
                     if (postInitDisconnectiveDebug === 4 ) {      
                         gnBeforeMulX && gnBeforeMulX.disconnect() ;    
                     }       
