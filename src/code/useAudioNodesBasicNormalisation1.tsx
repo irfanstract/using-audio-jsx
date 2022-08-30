@@ -15,6 +15,9 @@ import {
 import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";    
 import { useFixedGain } from "./useAudioNodesBasicFixedGain";   
 import { useParamModulation } from "./useAudioNodesParamAutomative1";      
+import { //
+    useDestParamBoundsCorrective as useXDestParamBoundsCorrective ,
+} from "./useAudioNodesParamAutomativeIntrinsicValBoundsCorrective1";
 import { 
     useBiquadFilterNodeWithGivenFadeoutTimeConstant1,
     useConstantParamSrcNodeWithGivenFadeoutTimeConstant1,
@@ -115,42 +118,6 @@ const {
             } ;
         }              
     ) ;  
-    const useXDestParamBoundsCorrective = (
-        function (...[{ ctx: aCtx } , gnAfterMul, { absoluteRequestedIntrinsicValue } ] : [
-            { ctx: null | BaseAudioContext ; } ,
-            null | AudioParam ,
-            {
-                absoluteRequestedIntrinsicValue : "default" | number ;
-            } ,
-        ] ) {
-            ;
-            const destParamBoundsCompensativeNd = (
-                useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
-                    useParamModulation(gnAfterMul , aCtx )
-                ) , 0.5 )
-            ) ;
-            React[AUDIONODES_USE_AUDIONODEEFFECT ](() => {
-                if (destParamBoundsCompensativeNd && gnAfterMul ) {
-                    (typeof absoluteRequestedIntrinsicValue === "number") && (
-                        destParamBoundsCompensativeNd.offset
-                        // TODO
-                        .setTargetAtTime((
-                            -(
-                                Math.max(0, (
-                                    gnAfterMul.minValue - absoluteRequestedIntrinsicValue
-                                ))
-                            )
-                            +
-                            Math.max(0, (
-                                absoluteRequestedIntrinsicValue - gnAfterMul.maxValue
-                            ))
-                        ), 0, 0.25 )
-                    ) ;
-                }
-            } , [destParamBoundsCompensativeNd, gnAfterMul] ) ;
-            ;
-        }
-    ) ;
     const useNormalisedArgumentativeChnlGna = (
         function <YyNode1 extends {} >(...[              
             dest, which1, f ,   
