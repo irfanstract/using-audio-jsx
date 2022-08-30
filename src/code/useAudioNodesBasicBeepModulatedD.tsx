@@ -145,15 +145,6 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
             // debugging
             {
                 ;
-                // TODO remove this debugging line-of-code           
-                React[AUDIONODES_USEEFFECT](() => {      
-                    if (0 ) {
-                          ;
-                          if (nd1 instanceof AudioNode ) {  
-                              nd1.disconnect() ;       
-                          } ;     
-                    }         
-                }, [nd1 ] ) ;             
                 //      
                 React[AUDIONODES_USEEFFECT](() => {      
                     if (nd1 ) {   
