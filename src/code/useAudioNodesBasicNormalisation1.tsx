@@ -152,11 +152,20 @@ const {
             ) ;
             React[AUDIONODES_USEEFFECT ](() => {
                 if (fixupNd && gnAfterMul ) {
-                    (
+                    (typeof destNdIntrinsicValue === "number") && (
                         fixupNd.offset
-                        .setValueAtTime(-(
-                            IterableOps.clamp(0, gnAfterMul.minValue, gnAfterMul.maxValue )
-                        ), 0 )
+                        // TODO
+                        .setTargetAtTime((
+                            -(
+                                Math.max(0, (
+                                    gnAfterMul.minValue - destNdIntrinsicValue
+                                ))
+                            )
+                            +
+                            Math.max(0, (
+                                destNdIntrinsicValue - gnAfterMul.maxValue
+                            ))
+                        ), 0, 0.25 )
                     ) ;
                 }
             } , [fixupNd, gnAfterMul] ) ;
