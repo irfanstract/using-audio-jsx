@@ -382,7 +382,7 @@ const snKit = (() => {
             )) {                 
                 const {      
                     minimumFreq = (          
-                        110
+                        77
                     ) ,                       
                 } = mainProps ;    
                 const {  
