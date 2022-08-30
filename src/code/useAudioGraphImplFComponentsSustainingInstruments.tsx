@@ -63,9 +63,17 @@ const CContinuousSnareDrumSound = (
               !dbg1 ? freqArgumSupposedGraph : <CConstantValue value={2 ** -1 } /> 
           )}              
           >    
+          <CBiquadFilterModulated   
+          type="lowpass"    
+          freqArgumentInterpretation="timedomain-normalised"     
+          freqArgument={(
+              <CConstantValue value={2200 / 48000 } />
+          )}              
+          >
               <CWhiteNoise 
               value={{ volume: standardSnareDrumInstrumentAmp }} 
               />
+          </CBiquadFilterModulated>
           </CBiquadFilterModulated> 
       )  ;
   }
