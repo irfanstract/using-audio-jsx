@@ -92,6 +92,31 @@ const {
       ) , 
    } ;
 })() ;
+const XTwoStepBandpass: (
+   React.FC<(
+      {
+         lowdropStepProps: (
+            Exclude<(
+               ComponentProps<typeof XLowpass>
+            ), "children">
+         ) ;
+         highstopStepProps: (
+            Exclude<(
+               ComponentProps<typeof XTreeble>
+            ), "children">
+         ) ;
+         children: React.ReactElement ;
+      }
+   )>
+) = (
+   ({ lowdropStepProps, highstopStepProps, children: payload }) => (
+      <XTreeble {...lowdropStepProps} >
+      <XLowpass {...highstopStepProps} >
+         { payload }
+      </XLowpass>
+      </XTreeble>
+   )
+) ;
 
 
 
@@ -100,4 +125,5 @@ const {
 export {
    XTreeble ,
    XLowpass ,
+   XTwoStepBandpass ,
 } ;
