@@ -67,12 +67,18 @@ const CContinuousSnareDrumSound = (
           type="lowpass"    
           freqArgumentInterpretation="timedomain-normalised"     
           freqArgument={(
-              <CConstantValue value={2200 / 48000 } />
+              <CConstantValue value={110 / 48000 } />
           )}              
+          >
+          <CAmpModulated0
+          value={(
+            <CConstantValue value={2 ** 3 } />
+          )} //
           >
               <CWhiteNoise 
               value={{ volume: standardSnareDrumInstrumentAmp }} 
               />
+          </CAmpModulated0>
           </CBiquadFilterModulated>
           </CBiquadFilterModulated> 
       )  ;
