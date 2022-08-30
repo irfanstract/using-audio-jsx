@@ -115,6 +115,42 @@ const {
             } ;
         }              
     ) ;  
+    const useXDestParamBoundsCorrective = (
+        function (...[{ ctx: aCtx } , gnAfterMul, { absoluteRequestedIntrinsicValue } ] : [
+            { ctx: null | BaseAudioContext ; } ,
+            null | AudioParam ,
+            {
+                absoluteRequestedIntrinsicValue : "default" | number ;
+            } ,
+        ] ) {
+            ;
+            const destParamBoundsCompensativeNd = (
+                useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
+                    useParamModulation(gnAfterMul , aCtx )
+                ) , 0.5 )
+            ) ;
+            React[AUDIONODES_USEEFFECT ](() => {
+                if (destParamBoundsCompensativeNd && gnAfterMul ) {
+                    (typeof absoluteRequestedIntrinsicValue === "number") && (
+                        destParamBoundsCompensativeNd.offset
+                        // TODO
+                        .setTargetAtTime((
+                            -(
+                                Math.max(0, (
+                                    gnAfterMul.minValue - absoluteRequestedIntrinsicValue
+                                ))
+                            )
+                            +
+                            Math.max(0, (
+                                absoluteRequestedIntrinsicValue - gnAfterMul.maxValue
+                            ))
+                        ), 0, 0.25 )
+                    ) ;
+                }
+            } , [destParamBoundsCompensativeNd, gnAfterMul] ) ;
+            ;
+        }
+    ) ;
     const useNormalisedArgumentativeChnlGna = (
         function <YyNode1 extends {} >(...[              
             dest, which1, f ,   
@@ -151,30 +187,10 @@ const {
             /**   
              * intrinsic value
              *  */   
-            const destParamBoundsCompensativeNd = (
-                useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
-                    useParamModulation(gnAfterMul , aCtx )
-                ) , 0.5 )
+            (
+                useXDestParamBoundsCorrective
+                ({ ctx: aCtx } , gnAfterMul, { absoluteRequestedIntrinsicValue } )
             ) ;
-            React[AUDIONODES_USEEFFECT ](() => {
-                if (destParamBoundsCompensativeNd && gnAfterMul ) {
-                    (typeof absoluteRequestedIntrinsicValue === "number") && (
-                        destParamBoundsCompensativeNd.offset
-                        // TODO
-                        .setTargetAtTime((
-                            -(
-                                Math.max(0, (
-                                    gnAfterMul.minValue - absoluteRequestedIntrinsicValue
-                                ))
-                            )
-                            +
-                            Math.max(0, (
-                                absoluteRequestedIntrinsicValue - gnAfterMul.maxValue
-                            ))
-                        ), 0, 0.25 )
-                    ) ;
-                }
-            } , [destParamBoundsCompensativeNd, gnAfterMul] ) ;
             React[AUDIONODES_USE_AUDIONODEEFFECT](() => { 
                 if (gnAfterMul ) {
                     ;    
