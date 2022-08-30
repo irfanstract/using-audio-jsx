@@ -177,15 +177,21 @@ const snKit = (() => {
             number ,        
             { scanPeriodMillis: number ; } ,   
         ]) {         
+            const PDT : number = (
+                (2 ** -3 )
+            ) ;
             return (        
                 <CFnValue1         
                 value={               
-                    ({ ctxT: t }) => { 
+                    ({ ctxT: t0 }) => {
+                        const t = (
+                            -PDT + t0
+                        ) ; 
                         const p = (         
                             t / expectedTLen1    
                         ) ;          
                         return (      
-                            (-(2 ** -3 ) <= t ) ? (   
+                            (-PDT <= t ) ? (   
                                 (  
                                     clampWithinZeroAndOne(1 + -p ,  )   
                                 ) * (      
@@ -325,7 +331,7 @@ const snKit = (() => {
                         -1 * Math.log2(minimumFreq / conventionalFreq )   
                     ) ;  
                     const freqArgumSupposedGraph = (
-                        <WithDelay value={-0.11 } >
+                        <WithDelay value={-0 } >
                         {(
                             applicableDecliningNormalisedToneFreqGraph1((
                                 interpolateBetweenTwo({ c0: 2.3, c1: 3.2 , t: tCoef1 })
