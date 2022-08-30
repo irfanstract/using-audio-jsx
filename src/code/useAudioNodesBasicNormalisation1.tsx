@@ -115,7 +115,7 @@ const {
             } ;
         }              
     ) ;  
-    const GNA = (
+    const useNormalisedArgumentativeChnlGna = (
         function <YyNode1 extends {} >(...[              
             dest, which1, f ,   
             { 
@@ -279,7 +279,7 @@ const {
                 cFArgsParse(dest, f0 )  
             ) ;        
             const cd = (
-                GNA<(
+                useNormalisedArgumentativeChnlGna<(
                     Pick<NonNullable<typeof dest > , "Q" | "frequency" | "gain">
                 )>(dest, type1, f )
             ) ;
@@ -291,7 +291,7 @@ const {
             useBiquadFltNdFreqArgumentChnl1   
         ) ,      
         useNormalisedArgumentativeChnl1 : (
-            GNA  
+            useNormalisedArgumentativeChnlGna  
         ) ,     
         useNormalisedArgumentativeChnl : (      
             function (...[dest, props ] : (
