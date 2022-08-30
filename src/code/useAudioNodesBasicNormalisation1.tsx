@@ -145,6 +145,21 @@ const {
             /**   
              * intrinsic value
              *  */   
+            const fixupNd = (
+                useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
+                    useParamModulation(gnAfterMul , dest?.context || null )
+                ) , 0.5 )
+            ) ;
+            React[AUDIONODES_USEEFFECT ](() => {
+                if (fixupNd && gnAfterMul ) {
+                    (
+                        fixupNd.offset
+                        .setValueAtTime(-(
+                            IterableOps.clamp(0, gnAfterMul.minValue, gnAfterMul.maxValue )
+                        ), 0 )
+                    ) ;
+                }
+            } , [fixupNd, gnAfterMul] ) ;
             React[AUDIONODES_USE_AUDIONODEEFFECT](() => { 
                 if (gnAfterMul ) {
                     ;    
