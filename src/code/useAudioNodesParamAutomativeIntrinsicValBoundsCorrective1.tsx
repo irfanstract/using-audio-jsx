@@ -34,12 +34,18 @@ import {
          
         
 type DestParamIntrinsicsUsageArgs = [
-   { ctx: null | BaseAudioContext ; } ,
-   null | AudioParam ,
-   {
+   ctx: { ctx: null | BaseAudioContext ; } ,
+   dest: null | AudioParam ,
+   props: {
       absoluteRequestedIntrinsicValue : "default" | number ;
    } ,
+   config ?: {} ,
 ] ;
+/**    
+ * plays a (complementary) constant (usually *nonzero*) signal value,
+ * as a workaround to the {@link AudioParam}'s {@link AudioParam.minValue *bounds*} and
+ * to maintain {@link DestParamIntrinsicsUsageArgs the requested value }.
+ */
 const useDestParamBoundsCorrective = (
    function (...[{ ctx: aCtx } , gnAfterMul, { absoluteRequestedIntrinsicValue } ] : (
       DestParamIntrinsicsUsageArgs
