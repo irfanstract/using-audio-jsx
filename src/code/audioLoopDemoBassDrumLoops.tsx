@@ -80,7 +80,7 @@ const isAtSecondHalf = (
       Math.floor(t * 2 ) % 2
    )
 ) ;
-const BassDrumLoopDv = (
+const BootlegMusicDv = (
    function ({
       subhalvesN: dv = 1 ,
       renderRange ,
@@ -144,6 +144,9 @@ const BassDrumLoopDv = (
    ) ;
    return bassDrumLoopGraph ;
    }
+) ;
+const BassDrumLoopDv = (
+   BootlegMusicDv
 ) ;
 const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => {
 
