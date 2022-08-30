@@ -35,11 +35,11 @@ import {
         
 type DestParamIntrinsicsUsageArgs = [
    ctx: { ctx: null | BaseAudioContext ; } ,
-   dest: null | AudioParam ,
-   props: {
+   mainDest: null | AudioParam ,
+   semanticConfig: {
       absoluteRequestedIntrinsicValue : "default" | number ;
    } ,
-   config ?: {} ,
+   technicalConfig ?: {} ,
 ] ;
 /**    
  * plays a (complementary) constant (usually *nonzero*) signal value,
