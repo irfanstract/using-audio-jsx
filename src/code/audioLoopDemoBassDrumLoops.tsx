@@ -30,6 +30,7 @@ import {
     CBassDrumKickFluidly1 ,
     CSnareDrumFluidly1 , 
     
+    CAmpModulatedTimeDomain ,
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 
     MetronomeAndResponseGraph , 
