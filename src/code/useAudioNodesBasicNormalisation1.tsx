@@ -129,7 +129,7 @@ const {
                     useParamModulation(gnAfterMul , aCtx )
                 ) , 0.5 )
             ) ;
-            React[AUDIONODES_USEEFFECT ](() => {
+            React[AUDIONODES_USE_AUDIONODEEFFECT ](() => {
                 if (destParamBoundsCompensativeNd && gnAfterMul ) {
                     (typeof absoluteRequestedIntrinsicValue === "number") && (
                         destParamBoundsCompensativeNd.offset
