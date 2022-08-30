@@ -328,7 +328,7 @@ const {
                     } = (         
                         scanChunkFrequency    
                     ) ;      
-                    const delayInSeconds = 0.07 ;    
+                    const delayInSeconds = 0.02 ;    
                     ;                                              
                     ;                              
                     return {         
