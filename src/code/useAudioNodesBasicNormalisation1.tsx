@@ -117,8 +117,11 @@ const {
     ) ;  
     const GNA = (
         function <YyNode1 extends {} >(...[              
-            dest, type1, f ,   
-            { destNdIntrinsicValue: destNdIntrinsicValue = "default" as "default", postInitDisconnectiveDebug = false } = {}  ,  
+            dest, which1, f ,   
+            { 
+                destNdIntrinsicValue: absoluteRequestedIntrinsicValue = "default" as "default", 
+                postInitDisconnectiveDebug = false ,
+            } = {}  ,  
         ] : (   
             [       
                 dest : (Pick<AudioNode, "context"> & Record<keyof YyNode1, AudioParam > ) | null, 
@@ -136,49 +139,52 @@ const {
                 } ,
             ]                         
         ) ) {                 
+            const aCtx : null | BaseAudioContext = (
+                dest?.context || null
+            ) ;
             const gnAfterMul: (              
                 null | AudioParam  
             ) = (                   
-                dest?.[type1] || null                   
+                dest?.[which1] || null                   
             ) ;        
             useCheckNoDoubleInit(gnAfterMul ) ;          
             /**   
              * intrinsic value
              *  */   
-            const fixupNd = (
+            const destParamBoundsCompensativeNd = (
                 useConstantParamSrcNodeWithGivenFadeoutTimeConstant1((
-                    useParamModulation(gnAfterMul , dest?.context || null )
+                    useParamModulation(gnAfterMul , aCtx )
                 ) , 0.5 )
             ) ;
             React[AUDIONODES_USEEFFECT ](() => {
-                if (fixupNd && gnAfterMul ) {
-                    (typeof destNdIntrinsicValue === "number") && (
-                        fixupNd.offset
+                if (destParamBoundsCompensativeNd && gnAfterMul ) {
+                    (typeof absoluteRequestedIntrinsicValue === "number") && (
+                        destParamBoundsCompensativeNd.offset
                         // TODO
                         .setTargetAtTime((
                             -(
                                 Math.max(0, (
-                                    gnAfterMul.minValue - destNdIntrinsicValue
+                                    gnAfterMul.minValue - absoluteRequestedIntrinsicValue
                                 ))
                             )
                             +
                             Math.max(0, (
-                                destNdIntrinsicValue - gnAfterMul.maxValue
+                                absoluteRequestedIntrinsicValue - gnAfterMul.maxValue
                             ))
                         ), 0, 0.25 )
                     ) ;
                 }
-            } , [fixupNd, gnAfterMul] ) ;
+            } , [destParamBoundsCompensativeNd, gnAfterMul] ) ;
             React[AUDIONODES_USE_AUDIONODEEFFECT](() => { 
                 if (gnAfterMul ) {
                     ;    
-                    if (typeof destNdIntrinsicValue === "number" ) { 
+                    if (typeof absoluteRequestedIntrinsicValue === "number" ) { 
                         (
                             function implAssigningInitialValue(a: AudioParam, v: number) {
                                 // a.value = v ;   
                                 a.setValueAtTime(v, 0 ) ;   
                             }
-                        )(gnAfterMul, destNdIntrinsicValue);
+                        )(gnAfterMul, absoluteRequestedIntrinsicValue);
                     }                      
                 }                               
                 ;                 
@@ -194,7 +200,7 @@ const {
                         /**          
                          * {@link gnAfterMul } (an AudioParam) as an AudioNode  
                          */
-                        useParamModulation(gnAfterMul, dest?.context || null )                  
+                        useParamModulation(gnAfterMul, aCtx )                  
                     ) ;     
                     useCheckNoDoubleInit(ndx ) ;  
                     return (                      
