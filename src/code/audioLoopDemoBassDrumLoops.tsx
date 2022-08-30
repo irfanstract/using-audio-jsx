@@ -134,7 +134,7 @@ const BassDrumLoopDv = (
 
          { (
             (((t * 2 ) % 2 ) === 1 ) ? 
-            <CBriefHiHatFluidly />
+            <CBriefHiHatFluidly duration={0.5 } />
             : null
          ) }
 
