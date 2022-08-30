@@ -73,6 +73,17 @@ const useConstantParamSrcElas : (
         ) ;       
     }       
 ) ;      
+const useTimeDomainConstantValueShift : (
+    (...a: Parameters<typeof useConstantParamSrcElas> ) 
+    =>
+    ReturnType<typeof useGainElas > 
+)  = (
+    // TODO
+    (...[nd0, ...pp0 ] ) => {
+        useConstantParamSrcElas(nd0, ...pp0 ) ;
+        return nd0 ;
+    }
+) ;
 const useConstantParamSrcElasD = (    
     (...[nd0, ...pp0 ] : GEPI_ARGS) => {
         ;                 
@@ -225,6 +236,7 @@ export {
     useGainElasD , 
     useConstantParamSrcElas ,   
     useConstantParamSrcElasD ,   
+    useTimeDomainConstantValueShift ,
     useWaveTableNdElas ,            
 
     useElasUsageOnMount , 
