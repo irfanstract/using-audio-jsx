@@ -122,6 +122,15 @@ const BassDrumLoopDv = (
          { (
             ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
          ) }
+         { (
+            (0 <= ([5.5, 6 ] as number[] ).indexOf(t % 8 ) ) ? (
+               <WithDelay value={0.25 } >
+                  <CAmpModulatedTimeDomain value={<CConstantValue value={2 ** -1 } /> } >
+                     <CSnareDrumFluidly1 />
+                  </CAmpModulatedTimeDomain>
+               </WithDelay>
+            ) : null
+         ) }
 
          { (
             (((t * 2 ) % 2 ) === 1 ) ? 
