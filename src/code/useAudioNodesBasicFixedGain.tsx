@@ -233,6 +233,7 @@ export {
     // Yyy
     
     useFixedGain ,             
+    useTimeDomainConstantValueShift ,
 
     useWhiteNoise ,    
         
