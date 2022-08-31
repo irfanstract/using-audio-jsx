@@ -87,8 +87,8 @@ const isAtModulo : (
       0 <= c2.indexOf(v % md1 )
    )
 ) ;
-const BootlegMusicDv : (
-   React.FC<(
+type CMetronomeDvDirectedBandplayProps = (
+   (
       {
          subhalvesN ?: number ;
       } 
@@ -102,6 +102,11 @@ const BootlegMusicDv : (
             )>["renderRange"]
          ) ;
       }
+   )
+) ; 
+const BootlegMusicDv : (
+   React.FC<(
+      CMetronomeDvDirectedBandplayProps
    )>
 ) = (
    function ({
