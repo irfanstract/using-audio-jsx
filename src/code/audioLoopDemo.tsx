@@ -58,6 +58,9 @@ const {
     WithDelay ,     
     WithSlowdown,
     LoopingWithPeriod , 
+
+    AsGVis ,
+    WithSpecifiedGVisTarget ,
 } = tCtxs ;
 
     
