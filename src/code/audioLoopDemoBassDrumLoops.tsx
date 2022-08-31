@@ -104,6 +104,28 @@ type CMetronomeDirectedDvBandplayProps = (
       }
    )
 ) ; 
+const CFourSecondsBassDrop = (
+   ({ coreFreq = 55 } : { coreFreq ?: number ; } ) => (
+      <CAmpModulated0
+      value={(
+         <K>
+            <CFnValue1 value={({ ctxT: t }) => (0 <= t ? (2 ** (1 + (t * -0.5 ) ) ) : 0 ) } />
+         </K>
+      )}
+      >
+         <CWaveTable1 
+         freqArgumentInterpretation="timedomain-normalised"
+         freqArgument={(
+            <CConstantValue value={ coreFreq / 440 } /> 
+         )}
+         detuneInterpretation="timedomain-normalised"
+         detune={(
+            <CFnValue1 value={({ ctxT: t }) => (6 + (t * -4 ) ) / 12 } />
+         )}
+         />
+      </CAmpModulated0>
+   )
+) ;
 const BootlegMusicDv : (
    React.FC<(
       CMetronomeDirectedDvBandplayProps
@@ -135,6 +157,11 @@ const BootlegMusicDv : (
             <CBassDrumKickFluidly1 /> 
             :  null
          )}
+         { (
+            isAtModulo(t, 4 * 8 , [28 ] ) ? 
+            <CFourSecondsBassDrop />
+            : null
+         ) }
 
          { (
             ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
