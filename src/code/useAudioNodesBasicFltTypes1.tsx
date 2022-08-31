@@ -27,9 +27,11 @@ import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1";
 type YyyUsageDest = (             
     AudioNode | null 
 ) ;                              
+const YyyUsageDest = {} ;
 type YyyUsable<P extends NonNullable<unknown> , R = { } > = (        
     (dest: YyyUsageDest, properties: P ) => R       
 ) ;
+const YyyUsable = {} ;
 
 
 
@@ -53,7 +55,7 @@ type YyyUsable<P extends NonNullable<unknown> , R = { } > = (
 
 
 
-export type {
+export { // see also TS-1205
     YyyUsageDest , 
     YyyUsable , 
 } ;
