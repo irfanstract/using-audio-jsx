@@ -48,17 +48,6 @@ input[type=button],
 input[type=file]::-webkit-file-upload-button ,
 #----e { 
    background: rgb(160, 64, 0 );  
-   background: rgb(64, 64, 64 ) ;
-   background: 
-   black 
-   linear-gradient(180deg, 
-     rgba(153,  92, 51, 0.75 )  5%, 
-     rgba(153,  92, 51, 0.75 ) 20%, 
-     rgba(153,  92, 51, 0.80 ) 45%, 
-     rgba(153,  92, 51, 0.80 ) 55%, 
-     rgba(153,  92, 51, 0.75 ) 80%,
-     rgba(153,  92, 51, 0.75 ) 95%)
-   ;  
    color: white; 
    padding: 0.35em;
    margin: 0.15em ; 
