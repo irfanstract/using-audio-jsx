@@ -16,6 +16,9 @@ section, aside {
    margin-inline-start: -0.6em ;
    margin-inline-end: -0.5em ;
    padding-block-start: 0 ;
+   border-width: 0.2em ;
+   padding-block-end: 2.95em ;
+   border-block-end-width: 3.0em ;
 }
 aside {
 }
