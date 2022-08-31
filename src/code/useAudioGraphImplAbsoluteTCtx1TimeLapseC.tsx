@@ -49,8 +49,30 @@ const {
    
 } => {
    const eCtx = (
-       React.createContext<null | SVGElement >(null )
+       React.createContext<null | (
+         (payload : Parameters<typeof renderPortalImpl >[0]["payload"] & object ) 
+         =>
+         (React.ReactPortal | React.ReactElement )
+      )>(null )
    ) ;
+   function renderPortalImpl({
+      payload: [tInf, payload ] ,
+      target ,
+   } : { 
+      payload: [ReturnType<typeof useCurrentTInf> , React.ReactElement | React.ReactElement[] ] ; 
+      target: SVGElement ;
+   } ) {
+      ;
+      const { t, tScale } = tInf ;
+      ;
+      return (
+         ReactDOM.createPortal((
+            <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
+            { payload }
+            </g >
+         ) , target )
+      ) ;
+   }
    const AsGVis0 = (
       function ({ children: payload } : { children: (React.ReactElement) | React.ReactElement[] ; }) {
          const target = (
@@ -59,24 +81,37 @@ const {
          const tInf = (
             useCurrentTInf()
          ) ;
-         const { t, tScale } = tInf ;
          return (
             target ?
             <  >
-            { (
-                  ReactDOM.createPortal((
-                     <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
-                     { payload }
-                     </g >
-                  ) , target )
-            ) }
+            { target([tInf, payload] ) }
             </ >
             : <></>
          ) ;
       }
    ) ;
    const WithSpecifiedGVisTarget0 = (
-       eCtx.Provider
+      function ({ value: target, children: payload } : (
+         React.ProviderProps<null | SVGElement >
+      ) ) {
+         const C1 = (
+            eCtx.Provider
+         ) ;
+         const r : ContextReturnType<typeof eCtx > & object = (
+            ([tInf, payload]) => (
+               target ?
+               <  >
+               { renderPortalImpl({ payload: [tInf, payload], target }) }
+               </ >
+               : <></>
+            )
+         ) ;
+         return (
+            <C1 value={r } >
+               { payload }
+            </C1>
+         ) ;
+      }
    ) ;
    return {
        AsGVis: AsGVis0 ,
