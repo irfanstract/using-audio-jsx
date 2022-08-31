@@ -108,14 +108,16 @@ const onlyIfAllAreNonNull = (
  * the return type will be {@link Immutable.Seq } rather than {@link Immutable.List } ; 
  * this is necessary to defer computation without extra syntax.   
  */  
-const periodicNumericSequence = (
+const periodicNumericSequence : (
     (properties : (           
         Readonly<{       
             firstPeriodStartT : number ;   
             period : number ;                              
             endT ?: number ;             
         } >  
-    ) ) => {         
+    ) ) => Immutable.Seq.Indexed<number >
+) = (
+    (properties ) => {         
         const { 
             period , 
             firstPeriodStartT ,      
