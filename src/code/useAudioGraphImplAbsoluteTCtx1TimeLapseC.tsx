@@ -41,7 +41,17 @@ const {
    AsGVis ,
    WithSpecifiedGVisTarget ,
    
-} = (() => {
+} = (() : {
+   AsGVis : (
+      React.FC<{ children: (React.ReactElement) | React.ReactElement[] ; }>
+   ) ;
+   WithSpecifiedGVisTarget: (
+      React.FC<(
+         React.ProviderProps<null | SVGElement >
+      )>
+   ) ,
+   
+} => {
    const eCtx = (
        React.createContext<null | SVGElement >(null )
    ) ;
