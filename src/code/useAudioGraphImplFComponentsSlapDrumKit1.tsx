@@ -11,7 +11,15 @@ import { useRealTimeQueryInterval1 } from "./useNonHookValue";
  
          
 // domain-imports           
-import * as tCtxs from "./useAudioGraphImplAbsoluteTCtx1";      
+import {       
+    currentTCtx , 
+    currentTScaleCtx ,        
+    currentTInfCtx ,    
+  
+    CurrentTDisplay , 
+    WithDelay ,           
+    LoopingWithPeriod ,        
+} from "./useAudioGraphImplAbsoluteTCtx1";      
 import { Consm as NdRefConsm  } from "./useAudioGraphImplCurrentDestNdRefCtx";           
 import { 
     CConstantValue, 
@@ -43,15 +51,6 @@ const clampWithinZeroAndOne = (
 ) ;  
 const { max, min, } = Math ;     
        
-const {       
-    currentTCtx , 
-    currentTScaleCtx ,        
-    currentTInfCtx ,    
-  
-    CurrentTDisplay , 
-    WithDelay ,           
-    LoopingWithPeriod ,        
-} = tCtxs ;
 // const WithAutoUnmount = (() => {
 //     const AbsoluteScheduledTCons = (
 //         currentTInfCtx.Consumer   
@@ -470,11 +469,11 @@ const {
                     ComponentProps1 ,      
                 ] ) {  
                     const TC = (       
-                        tCtxs.currentTInfCtx   
+                        currentTInfCtx   
                         .Consumer               
                     ) ;       
                     const TOff = (    
-                        tCtxs.WithDelay  
+                        WithDelay  
                     ) ;                
                     const {        
                         shallRemountForEachKeystroke: remount , 
