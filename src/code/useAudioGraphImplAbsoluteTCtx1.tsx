@@ -177,7 +177,7 @@ type LoopingComponentPropsWithPeriod = (
     {             
 
         /**       
-         * the markup children will be the *repeand*.        
+         * the payload will be the *repeand*.        
          */  
         children : (   
             React.ReactNode  
