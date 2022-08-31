@@ -6,10 +6,12 @@ const { memoize } =   IterableOps ;
 
    
 type ArgsElement = (string | number | boolean | null) ;
+const ArgsElement = {} ; // TS-1205
 /**                 
  * type-safe representation of `Unix.Args`
 */
 type Args = Argus ;    
+const Args = {} ; // TS-1205
 /**                 
  * `toString()`-safe representation of `Unix.Args`
 */
@@ -81,7 +83,7 @@ export {
     argus ,  
     // ArgsElement , 
 } ;
-export type {    
+export {    
     Args,
     // Argus,               
     // argus ,  
@@ -117,13 +119,14 @@ export { argsAsString, argsElementNeedsEscaping } ;
 
 
   
+const AcceptablePathComponent = {} ; // TS-1205
 /**  
  * {@link pathByComponents }
 */
 type AcceptablePathComponent = (
     string | number | boolean | null     
 ) ;
-export type { AcceptablePathComponent } ;
+export { AcceptablePathComponent } ;
 const pathByComponents = (
     function UrlComponentConcatAsString(
         { leadChar, separator, closingChar, } : {
