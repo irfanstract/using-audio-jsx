@@ -18,6 +18,7 @@ const intervalUsageCatchupPolicyEmitErrorOnce = (
 type IntervalUsageAcceptableCatchupPolicy = (
     (0 | false ) | "MAINTAIN_FIXED_COMPLETION_RATE" | "MAINTAIN_FIXED_PACE"        
 ) ;       
+const IntervalUsageAcceptableCatchupPolicy = {} ; // TS-1205
 
 
 
@@ -30,6 +31,6 @@ type IntervalUsageAcceptableCatchupPolicy = (
 export {
     intervalUsageCatchupPolicyEmitErrorOnce ,    
 } ;
-export type {
+export {
     IntervalUsageAcceptableCatchupPolicy , 
 } ;
