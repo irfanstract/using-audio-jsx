@@ -2,10 +2,6 @@
 // utility imports     
 import Immutable from "immutable";    
 import { IterableOps } from "./generalUse11";  
-import { 
-    AudioTrackConcatClippingMode , 
-    avTrackConcatShallPropagate ,   
-} from "./timelineConcatClippingMode";    
 import React from "react";               
 import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from "./commonElements";    
         
