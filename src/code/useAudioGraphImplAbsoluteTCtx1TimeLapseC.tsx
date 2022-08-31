@@ -46,7 +46,7 @@ const {
        React.createContext<null | SVGElement >(null )
    ) ;
    const AsGVis0 = (
-      function ({ children: payload } : { children: React.ReactElement[] ; }) {
+      function ({ children: payload } : { children: (React.ReactElement) | React.ReactElement[] ; }) {
          const target = (
             React.useContext(eCtx )
          ) ;
