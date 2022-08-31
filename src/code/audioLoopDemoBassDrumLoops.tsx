@@ -80,6 +80,13 @@ const isAtSecondHalf = (
       Math.floor(t * 2 ) % 2
    )
 ) ;
+const isAtModulo : (
+   (...args : [number, number, readonly number[] ] ) => boolean
+) = (
+   (v, md1, c2 ) => (
+      0 <= c2.indexOf(v % md1 )
+   )
+) ;
 const BootlegMusicDv = (
    function ({
       subhalvesN: dv = 1 ,
@@ -113,7 +120,7 @@ const BootlegMusicDv = (
             (
                   (t % 1 ) === 0
                   &&
-                  ([28, 29, 30, 31 ] as number[] ).indexOf(t % (4 * 8 ) ) === -1 
+                  !isAtModulo(t, 4 * 8 , [28, 29, 30, 31 ] )
             ) ?
             <CBassDrumKickFluidly1 /> 
             :  null
@@ -123,7 +130,7 @@ const BootlegMusicDv = (
             ((t % 2 ) === 1 ) ? <CSnareDrumFluidly1 /> : null
          ) }
          { (
-            (0 <= ([5.5, 6 ] as number[] ).indexOf(t % 8 ) ) ? (
+            isAtModulo(t, 8, [5.5, 6 ] ) ? (
                <WithDelay value={0.25 } >
                   <CAmpModulatedTimeDomain value={<CConstantValue value={2 ** -1 } /> } >
                      <CSnareDrumFluidly1 />
