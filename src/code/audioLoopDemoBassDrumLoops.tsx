@@ -108,6 +108,15 @@ type CMetronomeDirectedDvBandplayProps = (
 ) ; 
 const CFourSecondsBassDrop = (
    ({ coreFreq = 55 } : { coreFreq ?: number ; } ) => (
+      <>
+      <AsGVis>
+         <rect 
+         width={4 }
+         height={2 }
+         style={{ fill: "blue" } }
+         />
+         <></>
+      </AsGVis>
       <CAmpModulated0
       value={(
          <K>
@@ -126,6 +135,7 @@ const CFourSecondsBassDrop = (
          )}
          />
       </CAmpModulated0>
+      </>
    )
 ) ;
 const BootlegMusicDv : (
