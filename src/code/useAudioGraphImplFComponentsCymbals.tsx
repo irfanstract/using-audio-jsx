@@ -30,9 +30,11 @@ const CBriefHiHatFluidly = (
       <CAmpModulated0 value={<CConstantValue value={2 ** -3.6 } /> } >
       <CAmpModulated0 value={<CFnValueByRelativeT value={({ ctxT: t }) => ((0 <= t && t <= period) ? 1 : 0 ) } /> } >
          <CBiquadFilterModulated
-         type="highpass"
+         type="highshelf"
          freqArgumentInterpretation="timedomain-normalised"
-         freqArgument={<CConstantValue value={55 / 48000 } /> }
+         freqArgument={<CConstantValue value={110 / 48000 } /> }
+         gainValArgumentInterpretation="timedomain-normalised"
+         gainValArgument={<CConstantValue value={2 ** 2 } />}
          >
          <CBiquadFilterModulated
          type="lowpass"
