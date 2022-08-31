@@ -17,6 +17,7 @@ type LinearRegressiveModel = {
     f : number ;         
     t : number ;          
 } ;
+const LinearRegressiveModel = {} ; // TS-1205
     
 ;
 /**   
@@ -38,6 +39,6 @@ function interpolateBetweenTwo({ c1, c0 , t } : Pick<LinearRegressiveModel, "c1"
 export {
     interpolateBetweenTwo ,    
 } ;
-export type {
+export {
     LinearRegressiveModel ,  
 }
