@@ -392,7 +392,7 @@ const snKit = (() => {
         
                     ampModulGraph ,     
                      
-                } = slapDrumImplExpetctedTCoefProps(mainProps ) ;
+                } = slapDrumImplExpetctedTCoefProps({ tCoef1: 2 ** -4, ...mainProps } ) ;
                 const {  
                     autoUnmount = true ,     
                     dbg: dbg1 = false ,    
