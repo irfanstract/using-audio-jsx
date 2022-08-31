@@ -107,11 +107,14 @@ type CMetronomeDirectedDvBandplayProps = (
 const BootlegMusicDv : (
    React.FC<(
       CMetronomeDirectedDvBandplayProps
+      &
+      { hihatXnMode ?: 1 | 2 ; }
    )>
 ) = (
    function ({
       subhalvesN: dv = 1 ,
       renderRange ,
+      hihatXnMode: xn = 2 ,
    } ) {
    const bassDrumLoopGraph = (
       <MetronomeAndResponseGraph
@@ -146,11 +149,11 @@ const BootlegMusicDv : (
             ) : null
          ) }
 
-         { ((xn: 1 | 2 ) => (
+         { /* => */ (
             isAtModulo(t, 1, [...Immutable.Range(0.5, 1, 0.5 / xn ) ] ) ? 
             <CBriefHiHatFluidly duration={0.25 / xn } />
             : null
-         ))(2 ) }
+         ) }
 
          </>
       ) }
