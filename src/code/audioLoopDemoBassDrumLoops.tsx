@@ -1,5 +1,5 @@
 
-import { IterableOps } from "./generalUse11";
+import { IterableOps, Immutable } from "./generalUse11";
 import React, { useReducer, useState } from "react";   
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { 
