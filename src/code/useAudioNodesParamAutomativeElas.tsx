@@ -29,6 +29,7 @@ type GEParam = {
     swingTConstant ?: number ;          
     scheduledT ?: number | "presently" ;
 }      ;  
+const GEParam = {} ; // TS-1205
 /**    
  * `c: (nd: Nd1) => AudioParam ` shall never change
  */   
@@ -246,6 +247,6 @@ export {
     useGainELasParamImpl ,    
     useUnexpectedZeroingBackCheck , 
 } ;     
-export type {
+export {
     GEParam , 
 } ;     
