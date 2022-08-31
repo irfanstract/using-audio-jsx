@@ -139,11 +139,11 @@ const BootlegMusicDv = (
             ) : null
          ) }
 
-         { (
-            (((t * 2 ) % 2 ) === 1 ) ? 
-            <CBriefHiHatFluidly duration={0.5 } />
+         { ((xn: 1 | 2 ) => (
+            isAtModulo(t, 1, [...Immutable.Range(0.5, 1, 0.5 / xn ) ] ) ? 
+            <CBriefHiHatFluidly duration={0.25 / xn } />
             : null
-         ) }
+         ))(2 ) }
 
          </>
       ) }
