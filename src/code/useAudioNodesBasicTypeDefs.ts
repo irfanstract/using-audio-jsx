@@ -16,10 +16,12 @@ type ANNN<A extends (AudioNode | null )> = (
     [A] extends [AudioNode] 
     ? AudioNode : null       
 ) ;       
+const ANNN = {} ; // TS--1205
 type ACNN<A extends (CP | null ), CP, CR> = (
     [A] extends [CP] 
     ? CR : null
 ) ;  
+const ACNN = {} ; // TS--1205
 
     
 /**      
@@ -81,7 +83,7 @@ export {
     AudioSinkNode ,    
     XAudioNode as AudioNode , 
 } ;
-export type {
+export {
     ANNN ,   
     ACNN ,    
 } ;       
