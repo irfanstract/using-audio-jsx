@@ -12,6 +12,20 @@ import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from ".
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
+import {
+    currentTCtx ,                              
+    currentTScaleCtx ,              
+    currentTInfCtx ,                          
+    useCurrentTInf ,          
+    
+    WithDelay ,
+    WithSlowdown ,
+    WithSpeedF ,
+
+    CurrentTDisplay ,
+    WithCurrentTInfo ,
+
+} from "./useAudioGraphImplAbsoluteTCtx1C" ;   
 
    
                    
@@ -23,120 +37,6 @@ function useConditionalDeference1(e : React.ReactElement, perios : number ) {
     const e0 = React.useDeferredValue(e ) ;
     return (3 <= perios ) ? e0 : e  ;
 }     
-// import newInstance from "./audioLoopDemoScheduledTCtxConstructor" ;      
-const {       
-    currentTCtx ,                              
-    currentTScaleCtx ,              
-    currentTInfCtx ,                          
-    useCurrentTInf ,          
-                     
-}  =newInstance() ;        
-function CurrentTDisplay() {      
-    const { t, tScale } = (
-        useCurrentTInf()        
-    ) ;                     
-    return (       
-        <div>   
-            <p> <i> Absolute/Canonical Timing </i> information </p>  
-            <table>          
-            <tbody>        
-                    
-            <tr>              
-                <td> <code>t</code> </td>  
-                <td> <code>{t }</code>      </td>  
-            </tr>            
-            <tr>           
-                <td>  <code>t-scale</code> </td>  
-                <td> <code>{tScale }</code>      </td>  
-            </tr>         
-            </tbody>
-            </table>    
-        </div>   
-    ) ;      
-}              
-/**               
- * applies `delay` ;    
- * this will be `relatively`, 
- * in face of {@link currentTScaleCtx presence of `current t-scale` }
- */    
-const {
-    WithDelay ,  
-    WithSlowdown ,  
-    
-} = (() => {
-    return {
-        WithDelay: (
-            function WithRelativeDelay({ children: payload, value: addendBeforeScaling }: (
-                { value: number ; children: React.ReactElement | React.ReactElement[] ; }   
-            ) ) {
-                ;   
-                const tInf = (  
-                    useCurrentTInf()           
-                ) ;
-                /**   
-                 * tale caution of 'current t-scale'
-                 */
-                return (() => {      
-                    const { t: parentTVal, tScale } = (   
-                        tInf 
-                    ) ;    
-                    const v = (
-                        parentTVal 
-                        + 
-                        (addendBeforeScaling * tScale )
-                    );
-                    return (      
-                        <currentTCtx.Provider 
-                        value={v } 
-                        >
-                            <ModifyingCompPayloadDiv>
-                            { payload || null }
-                            </ModifyingCompPayloadDiv>              
-                        </currentTCtx.Provider> 
-                    ) ;     
-                })() ;
-            }     
-        ) ,   
-        WithSlowdown : (
-            function WithSlowdown1({ children: payload, value: specifiedFct }: (
-                { value: number ; children: React.ReactElement | React.ReactElement[] ; }   
-            ) ) {
-                ;   
-                const tInf = (  
-                    useCurrentTInf()           
-                ) ;
-                /**   
-                 * tale caution of 'current t-scale'
-                 */
-                return (() => {      
-                    const { t: parentTVal, tScale: parentTSclVal } = (   
-                        tInf 
-                    ) ;     
-                    return (      
-                        <currentTScaleCtx.Provider 
-                        value={specifiedFct * parentTSclVal } 
-                        >
-                            <ModifyingCompPayloadDiv>
-                            { payload || null }
-                            </ModifyingCompPayloadDiv>              
-                        </currentTScaleCtx.Provider> 
-                    ) ;     
-                })() ;
-            }     
-        ) ,   
-    } ;
-})() ;     
-const WithSpeedF = (
-    // TODO
-    ({ value, children, ...props } : ComponentProps<typeof WithSlowdown > ) => (
-        <WithSlowdown value={1 / value } {...props } >
-            { children }
-        </WithSlowdown>
-    )
-) ;
-const WithCurrentTInfo = (
-    currentTInfCtx.Consumer  
-) ;         
 const useDescendantCurrentTDiffing = (    
     function () {
         const {   
