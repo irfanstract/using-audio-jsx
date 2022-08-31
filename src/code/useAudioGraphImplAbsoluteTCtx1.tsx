@@ -98,7 +98,7 @@ const {
             }     
         ) ,   
         WithSlowdown : (
-            function WithRelativeDelay({ children: c, value: specifiedFct }: (
+            function WithSlowdown1({ children: c, value: specifiedFct }: (
                 React.PropsWithChildren<{ value: number ; }>      
             ) ) {
                 ;   
