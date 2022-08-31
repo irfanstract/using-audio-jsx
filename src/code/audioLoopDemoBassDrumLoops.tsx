@@ -497,6 +497,7 @@ const HouseMusicShortBrkDemo = (
 
 
 export {
+   CFourSecondsBassDrop ,
    BassDrumLoopDv ,
    BootlegMusicDv ,
    MercerTchamiMusicDemo1 ,
