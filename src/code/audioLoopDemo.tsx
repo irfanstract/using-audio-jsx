@@ -123,7 +123,7 @@ export const AudioLoopDemoApp = (function () {
             const c1  = (
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
-                    <BassDrumLoopDv />
+                    <BassDrumLoopDv subhalvesN={2 } />
                 </WithSlowdown>
                 </WithSlowdown>
             ) ;       
