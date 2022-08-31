@@ -66,8 +66,8 @@ const {
 } = (() => {
     return {
         WithDelay: (
-            function WithRelativeDelay({ children: c, value: addend }: (
-                React.PropsWithChildren<{ value: number ; }>      
+            function WithRelativeDelay({ children: payload, value: addendBeforeScaling }: (
+                { value: number ; children: React.ReactElement | React.ReactElement[] ; }   
             ) ) {
                 ;   
                 const tInf = (  
@@ -83,14 +83,14 @@ const {
                     const v = (
                         parentTVal 
                         + 
-                        (addend * tScale )
+                        (addendBeforeScaling * tScale )
                     );
                     return (      
                         <currentTCtx.Provider 
                         value={v } 
                         >
                             <ModifyingCompPayloadDiv>
-                            { c || null }
+                            { payload || null }
                             </ModifyingCompPayloadDiv>              
                         </currentTCtx.Provider> 
                     ) ;     
@@ -98,8 +98,8 @@ const {
             }     
         ) ,   
         WithSlowdown : (
-            function WithSlowdown1({ children: c, value: specifiedFct }: (
-                React.PropsWithChildren<{ value: number ; }>      
+            function WithSlowdown1({ children: payload, value: specifiedFct }: (
+                { value: number ; children: React.ReactElement | React.ReactElement[] ; }   
             ) ) {
                 ;   
                 const tInf = (  
@@ -117,7 +117,7 @@ const {
                         value={specifiedFct * parentTSclVal } 
                         >
                             <ModifyingCompPayloadDiv>
-                            { c || null }
+                            { payload || null }
                             </ModifyingCompPayloadDiv>              
                         </currentTScaleCtx.Provider> 
                     ) ;     
