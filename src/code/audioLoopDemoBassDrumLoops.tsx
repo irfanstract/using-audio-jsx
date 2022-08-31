@@ -87,11 +87,8 @@ const isAtModulo : (
       0 <= c2.indexOf(v % md1 )
    )
 ) ;
-const BootlegMusicDv = (
-   function ({
-      subhalvesN: dv = 1 ,
-      renderRange ,
-   } : (
+const BootlegMusicDv : (
+   React.FC<(
       {
          subhalvesN ?: number ;
       } 
@@ -105,7 +102,12 @@ const BootlegMusicDv = (
             )>["renderRange"]
          ) ;
       }
-   ) ) {
+   )>
+) = (
+   function ({
+      subhalvesN: dv = 1 ,
+      renderRange ,
+   } ) {
    const bassDrumLoopGraph = (
       <MetronomeAndResponseGraph
       preFT={2 }
