@@ -126,12 +126,24 @@ export const AudioLoopDemoApp = (function () {
                     <WithCurrentDestNdRef>
                         { ({ currentTime: aCtxT }) => (
                             <g 
-                            transform={(
-                                [
-                                    `scale(24, 16 )` ,
-                                    `translate(${-((typeof aCtxT === "number") ? aCtxT : tT ) } , 0 )` ,
-                                ].join(" ")
-                            )}
+                            /**   
+                             * string-concatenation on SVG JSX
+                             * should be substituted with combination between CSS *custom properties* and *transforms*
+                             * to maintain performance `XD`
+                             */
+                            style={{
+                                transform: (
+                                    [
+                                        `scale(24, 16 )` ,
+                                        `translate(calc(var(--COMPONENTLOCALLY-DATA-ACTX-T ) * -1px ) , 0px )` ,
+                                    ].join(" ")
+                                ) ,
+                                ...({
+                                    "--COMPONENTLOCALLY-DATA-ACTX-T" : (
+                                        (typeof aCtxT === "number") ? aCtxT : tT 
+                                    ) ,
+                                }) ,
+                            }}
                             >
                                 <g ref={setGVisTarget } />
                             </g>
