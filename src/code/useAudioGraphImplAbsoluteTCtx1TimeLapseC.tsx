@@ -86,22 +86,22 @@ const {
       payload: [{} , object & React.ReactNode ] ; 
       target: SVGElement ;
    } ) {
-   return (
-      <WithCurrentTInfo>
-      { (tInf ) => {
-      ;
-      const { t, tScale } = tInf ;
-      ;
       return (
-         ReactDOM.createPortal((
-            <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
-            { payload }
-            </g >
-         ) , target )
+         <WithCurrentTInfo>
+            { (tInf ) => {
+               ;
+               const { t, tScale } = tInf ;
+               ;
+               return (
+                  ReactDOM.createPortal((
+                     <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
+                     { payload }
+                     </g >
+                  ) , target )
+               ) ;
+            } }
+         </WithCurrentTInfo>
       ) ;
-      } }
-      </WithCurrentTInfo>
-   ) ;
    }
    const CImplRenderPortalWithLowAnimPriority = (
       (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
