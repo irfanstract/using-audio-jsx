@@ -298,6 +298,19 @@ const snKit = (() => {
             } as const ;
         }
     ) ;
+    const sVisMarkingGraph = (
+        <g>
+            <path 
+            d={`M 0 0 L 0 1 L ${0.5 } 1 z `}
+            fill="black"
+            />
+        </g>
+    ) ;
+    const sVisAttach = (
+        <AsGVis>
+            { sVisMarkingGraph }
+        </AsGVis>
+    ) ;
     return {  
         CPitchdownBassDrumKickFluidly1 : (      
             function (mainProps : (    
@@ -345,6 +358,7 @@ const snKit = (() => {
                             ampModulGraph        
                         }                   
                         >                                                            
+                            { sVisAttach }
                             <CWaveTable1                           
                             detuneInterpretation="timedomain-normalised"  
                             detune={(
@@ -406,6 +420,7 @@ const snKit = (() => {
                             ampModulGraph        
                         }                           
                         >                       
+                            { sVisAttach }
                             <CContinuousSnareDrumSound 
                             {...{ dbg1, minimumFreq }}
                             />
