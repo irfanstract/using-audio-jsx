@@ -110,11 +110,16 @@ const CFourSecondsBassDrop = (
    ({ coreFreq = 55 } : { coreFreq ?: number ; } ) => (
       <>
       <AsGVis>
+         <g>
+         <title>
+            N-Second Bass Drop
+         </title>
          <rect 
          width={4 }
          height={2 }
          style={{ fill: "blue" } }
          />
+         </g>
          <></>
       </AsGVis>
       <CAmpModulated0
