@@ -80,12 +80,15 @@ const {
    ) ;
    type RCB = (ContextReturnType<typeof eCtx > & object ) ;
    function renderPortalImpl({
-      payload: [tInf, payload ] ,
+      payload: [{}, payload ] ,
       target ,
    } : { 
-      payload: [ReturnType<typeof useCurrentTInf> , object & React.ReactNode ] ; 
+      payload: [{} , object & React.ReactNode ] ; 
       target: SVGElement ;
    } ) {
+   return (
+      <WithCurrentTInfo>
+      { (tInf ) => {
       ;
       const { t, tScale } = tInf ;
       ;
@@ -96,6 +99,9 @@ const {
             </g >
          ) , target )
       ) ;
+      } }
+      </WithCurrentTInfo>
+   ) ;
    }
    const CImplRenderPortalWithLowAnimPriority = (
       (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
@@ -111,13 +117,10 @@ const {
          const target = (
             React.useContext(eCtx )
          ) ;
-         const tInf = (
-            useCurrentTInf()
-         ) ;
          return (
             target ?
             <  >
-            { target([tInf, payload] ) }
+            { target([{}, payload] ) }
             </ >
             : <></>
          ) ;
@@ -132,9 +135,9 @@ const {
          ) ;
          const r = (
             React.useMemo(() : RCB => (
-               ([tInf, payload]) => (
+               ([xInf, payload]) => (
                   target ?
-                  <CImplRenderPortalWithLowAnimPriority {...{ payload: [tInf, payload], target }} />
+                  <CImplRenderPortalWithLowAnimPriority {...{ payload: [xInf, payload], target }} />
                   : <></>
                )
             ) , [target, ] )
@@ -160,10 +163,10 @@ const {
          ) ;
          const r = (
             React.useMemo((): RCB => (
-               ([tInf, payload]) => (
+               ([xInf, payload]) => (
                   target ?
                   <  >
-                  { target([tInf, flt1(<K>{ payload }</K> ) ]) }
+                  { target([xInf, flt1(<K>{ payload }</K> ) ]) }
                   </ >
                   : <></>
                )
