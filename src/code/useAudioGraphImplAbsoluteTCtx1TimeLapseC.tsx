@@ -45,7 +45,7 @@ const {
     * effective *horizontal direction* and display-scale (`XScale*YScale`) `1 * 2` .
     */
    AsGVis : (
-      React.FC<{ children: (React.ReactElement) | React.ReactElement[] ; }>
+      React.FC<{ children: object & React.ReactNode ; }>
    ) ;
    /**    
     * this *component* 
@@ -81,7 +81,7 @@ const {
       payload: [tInf, payload ] ,
       target ,
    } : { 
-      payload: [ReturnType<typeof useCurrentTInf> , React.ReactElement | React.ReactElement[] ] ; 
+      payload: [ReturnType<typeof useCurrentTInf> , object & React.ReactNode ] ; 
       target: SVGElement ;
    } ) {
       ;
@@ -96,7 +96,7 @@ const {
       ) ;
    }
    const AsGVis0 = (
-      function ({ children: payload } : { children: (React.ReactElement) | React.ReactElement[] ; }) {
+      function ({ children: payload } : { children: object & React.ReactNode ; }) {
          const target = (
             React.useContext(eCtx )
          ) ;
