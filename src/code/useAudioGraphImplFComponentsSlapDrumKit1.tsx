@@ -298,14 +298,28 @@ const snKit = (() => {
             } as const ;
         }
     ) ;
-    const sVisMarkingGraph = (
+    const sVisMarkingGraph /* */ = (() => {
+        const width: number = 0.5 ;
+        const height: number = 1 ;
+        return /* const sVisMarkingGraph = */ (
         <g>
+            <g style={{ pointerEvents: "none" }} >
             <path 
-            d={`M 0 0 L 0 1 L ${0.5 } 1 z `}
+            d={`M 0 0 L 0 ${height } L ${width } ${height } z `}
             fill="black"
             />
+            </g >
+            <rect 
+                width={ width }
+                height={ height }
+                style={{ fill: "transparent" }}
+            />
+            <title>
+                Slap Drum
+            </title>
         </g>
-    ) ;
+        ) ;
+    })() ;
     const sVisAttach = (
         <AsGVis>
             { sVisMarkingGraph }
