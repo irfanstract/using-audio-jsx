@@ -7,6 +7,7 @@ import {
     avTrackConcatShallPropagate ,   
 } from "./timelineConcatClippingMode";    
 import React from "react";               
+import { useDeferredRecompute } from "./usingDeferredRecompute";
 import ReactDOM from "react-dom" ;
 import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from "./commonElements";    
         
