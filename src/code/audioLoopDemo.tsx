@@ -102,6 +102,62 @@ const useASetCurrentT = (
 export const AudioLoopDemoApp = (function () {    
     const key = String(Math.random() ) ;
     console.log({ key } , ...[2 ] ); 
+    const WithAuInstrumentsVisualisation = (
+        function ({ children: c1 } : (
+            { children: object & React.ReactElement ; }
+        ) ) {
+            ;
+            const tT = 0 ;
+            const [gVisTarget, setGVisTarget] = (
+                React.useState<null | SVGElement >(null )
+            ) ;
+            ;
+            const instrumentsVisualiView = (
+                <svg 
+                viewBox="0 0 512 16" 
+                preserveAspectRatio={"none" } 
+                style={{ height: "3em", width: "98%", background: "yellow" }}
+                >
+                    <WithCurrentDestNdRef>
+                        { ({ currentTime: aCtxT }) => (
+                            <g 
+                            transform={(
+                                [
+                                    `scale(24, 16 )` ,
+                                    `translate(${-((typeof aCtxT === "number") ? aCtxT : tT ) } , 0 )` ,
+                                ].join(" ")
+                            )}
+                            >
+                                <g ref={setGVisTarget } />
+                            </g>
+                        ) }
+                    </WithCurrentDestNdRef>
+                </svg>
+            ) ;
+            ;
+            return (
+                <WithSpecifiedGVisTarget value={gVisTarget} >
+                    <div key={key }>   
+                    <K>
+                        { instrumentsVisualiView }
+                    </K>
+                    <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
+
+                        { null && <CurrentCtxTInfoDisplay /> }  
+
+                        <WithSlowdown 
+                        // debugging the timing issues
+                        value={2 ** 0.2 } 
+                        >
+                        { true && c1 }    
+                        </WithSlowdown>              
+
+                    </CAmpModulated0>
+                    </div>                 
+                </WithSpecifiedGVisTarget>  
+            ) ;
+        }
+    ) ;
     return (       
         function App () {             
             const _1 = (   
@@ -132,6 +188,11 @@ export const AudioLoopDemoApp = (function () {
                 </WithSlowdown>
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
+            const mainADemoScreen = (
+                <WithAuInstrumentsVisualisation >
+                    { c1 }
+                </WithAuInstrumentsVisualisation>
+            ) ;
             return (       
                 <div className="App" >        
                     <p>       
@@ -155,20 +216,7 @@ export const AudioLoopDemoApp = (function () {
                         <WithACtx>   
                         { (c ) => ( 
                         <Prv1 value={c } >          
-                            <div key={key }>   
-                            <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
-
-                                { null && <CurrentCtxTInfoDisplay /> }  
-
-                                <WithSlowdown 
-                                // debugging the timing issues
-                                value={2 ** 0.2 } 
-                                >
-                                { true && c1 }    
-                                </WithSlowdown>              
-
-                            </CAmpModulated0>
-                            </div>                   
+                            { mainADemoScreen }
                         </Prv1>   
                         ) }       
                         </WithACtx>
