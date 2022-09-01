@@ -77,6 +77,7 @@ const {
          (React.ReactPortal | React.ReactElement )
       )>(null )
    ) ;
+   type RCB = (ContextReturnType<typeof eCtx > & object ) ;
    function renderPortalImpl({
       payload: [tInf, payload ] ,
       target ,
@@ -119,14 +120,16 @@ const {
          const C1 = (
             eCtx.Provider
          ) ;
-         const r : ContextReturnType<typeof eCtx > & object = (
-            ([tInf, payload]) => (
-               target ?
-               <  >
-               { renderPortalImpl({ payload: [tInf, payload], target }) }
-               </ >
-               : <></>
-            )
+         const r = (
+            React.useMemo(() : RCB => (
+               ([tInf, payload]) => (
+                  target ?
+                  <  >
+                  { renderPortalImpl({ payload: [tInf, payload], target }) }
+                  </ >
+                  : <></>
+               )
+            ) , [target, ] )
          ) ;
          return (
             <C1 value={r } >
@@ -147,14 +150,16 @@ const {
          const C1 = (
             eCtx.Provider
          ) ;
-         const r : ContextReturnType<typeof eCtx > & object = (
-            ([tInf, payload]) => (
-               target ?
-               <  >
-               { target([tInf, flt1(<K>{ payload }</K> ) ]) }
-               </ >
-               : <></>
-            )
+         const r = (
+            React.useMemo((): RCB => (
+               ([tInf, payload]) => (
+                  target ?
+                  <  >
+                  { target([tInf, flt1(<K>{ payload }</K> ) ]) }
+                  </ >
+                  : <></>
+               )
+            ) , React.useDeferredValue([target, flt1 ]) )
          ) ;
          return (
             <C1 value={r } >
