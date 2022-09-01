@@ -97,11 +97,13 @@ const {
          ) , target )
       ) ;
    }
-   const CImplRenderPortal = (
+   const CImplRenderPortalWithLowAnimPriority = (
       (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
-         <>
-         { renderPortalImpl(props ) }
-         </>
+         useDeferredRecompute(() => (
+            <>
+            { renderPortalImpl(props ) }
+            </>
+         ))
       )
    ) ;
    const AsGVis0 = (
@@ -132,9 +134,7 @@ const {
             React.useMemo(() : RCB => (
                ([tInf, payload]) => (
                   target ?
-                  <  >
-                  { renderPortalImpl({ payload: [tInf, payload], target }) }
-                  </ >
+                  <CImplRenderPortalWithLowAnimPriority {...{ payload: [tInf, payload], target }} />
                   : <></>
                )
             ) , [target, ] )
