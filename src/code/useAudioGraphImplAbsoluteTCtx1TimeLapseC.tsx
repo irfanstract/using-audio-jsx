@@ -46,6 +46,12 @@ const {
          React.ProviderProps<null | SVGElement >
       )>
    ) ,
+   // TODO
+   WithSpecifiedGVisGFlt ?: (
+      React.FC<(
+         React.ProviderProps<(src : React.ReactElement) => React.ReactElement >
+      )>
+   ) ;
    
 } => {
    const eCtx = (
