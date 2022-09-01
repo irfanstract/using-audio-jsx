@@ -113,6 +113,11 @@ export const AudioLoopDemoApp = (function () {
             ) ;
             ;
             const instrumentsVisualiView = (
+                <div 
+                title={(
+                    `Graphical visualisation of the simulated instruments in time-lapse.`
+                )} 
+                >
                 <svg 
                 viewBox="0 0 512 16" 
                 preserveAspectRatio={"none" } 
@@ -133,6 +138,7 @@ export const AudioLoopDemoApp = (function () {
                         ) }
                     </WithCurrentDestNdRef>
                 </svg>
+                </div>
             ) ;
             ;
             return (
