@@ -96,7 +96,22 @@ const {
                return (
                   ReactDOM.createPortal((
                      <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
+                     <WithCurrentDestNdRef>
+                     { ({ currentTime: aCtxT }) => (
+                     (typeof aCtxT === "number" ) ? 
+                     <g 
+                     style={{ 
+                        filter: (
+                           (t <= aCtxT ) ? 
+                           undefined : `opacity(0.5) saturate(0)` 
+                        ) ,
+                     } } 
+                     >
                      { payload }
+                     </g>
+                     : null
+                     ) }
+                     </WithCurrentDestNdRef>
                      </g >
                   ) , target )
                ) ;
