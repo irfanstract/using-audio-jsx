@@ -96,6 +96,13 @@ const {
          ) , target )
       ) ;
    }
+   const CImplRenderPortal = (
+      (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
+         <>
+         { renderPortalImpl(props ) }
+         </>
+      )
+   ) ;
    const AsGVis0 = (
       function ({ children: payload } : { children: object & React.ReactNode ; }) {
          const target = (
