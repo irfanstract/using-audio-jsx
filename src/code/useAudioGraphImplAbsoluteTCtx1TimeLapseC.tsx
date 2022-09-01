@@ -36,6 +36,7 @@ import {
 const {
    AsGVis ,
    WithSpecifiedGVisTarget ,
+   WithSpecifiedGVisGFlt ,
    
 } = (() : {
    AsGVis : (
@@ -47,7 +48,7 @@ const {
       )>
    ) ,
    // TODO
-   WithSpecifiedGVisGFlt ?: (
+   WithSpecifiedGVisGFlt : (
       React.FC<(
          React.ProviderProps<(src : React.ReactElement) => React.ReactElement >
       )>
@@ -119,10 +120,41 @@ const {
          ) ;
       }
    ) ;
+   const WithSpecifiedGVisFlt0 = (
+      function ({ value: flt1, children: payload } : (
+         (
+            React.ProviderProps<(src : React.ReactElement) => React.ReactElement >
+         )
+      ) ) {
+         const target = (
+            React.useContext(eCtx )
+         ) ;
+         const C1 = (
+            eCtx.Provider
+         ) ;
+         const r : ContextReturnType<typeof eCtx > & object = (
+            ([tInf, payload]) => (
+               target ?
+               <  >
+               { target([tInf, flt1(<K>{ payload }</K> ) ]) }
+               </ >
+               : <></>
+            )
+         ) ;
+         return (
+            <C1 value={r } >
+               { payload }
+            </C1>
+         ) ;
+      }
+   ) ;
    return {
       AsGVis: AsGVis0 ,
       WithSpecifiedGVisTarget: (
          WithSpecifiedGVisTarget0
+      ) ,
+      WithSpecifiedGVisGFlt: (
+         WithSpecifiedGVisFlt0
       ) ,
    } ;
 })() ;
@@ -133,4 +165,5 @@ const {
 export {
    AsGVis ,
    WithSpecifiedGVisTarget ,
+   WithSpecifiedGVisGFlt ,
 } ;
