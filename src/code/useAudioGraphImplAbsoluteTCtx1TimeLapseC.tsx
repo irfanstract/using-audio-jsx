@@ -39,14 +39,29 @@ const {
    WithSpecifiedGVisGFlt ,
    
 } = (() : {
+   /**    
+    * this *component* will 
+    * attach a plot with 
+    * effective *horizontal direction* and display-scale (`XScale*YScale`) `1 * 2` .
+    */
    AsGVis : (
       React.FC<{ children: (React.ReactElement) | React.ReactElement[] ; }>
    ) ;
+   /**    
+    * this *component* 
+    * shall (re)direct all attachments implied by {@link AsGVis } into given {@link SVGElement}.
+    * 
+    * @deprecated
+    */
    WithSpecifiedGVisTarget: (
       React.FC<(
          React.ProviderProps<null | SVGElement >
       )>
    ) ,
+   /**   
+    * use this *boundary* 
+    * to apply *isometric filtering* (eg `saturate`, `gray`, `brightness`, `blur`, but not `scale` ) onto the plotting.
+    */
    // TODO
    WithSpecifiedGVisGFlt : (
       React.FC<(
