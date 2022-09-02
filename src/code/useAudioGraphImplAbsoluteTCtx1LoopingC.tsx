@@ -105,7 +105,9 @@ const LoopingWithPeriod = (
          // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
          visual = false ,                   
 
-      } ) {       
+      } : (
+         LoopingComponentPropsWithPeriod
+      ) ) {       
          const {              
             period : vPeriod ,      
             initialOffset : vInitialOffset = 0 ,        
