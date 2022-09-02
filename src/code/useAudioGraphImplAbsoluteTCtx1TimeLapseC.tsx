@@ -87,8 +87,8 @@ const {
    ) ;
    type RCB = (ContextReturnType<typeof eCtx > & object ) ;
    const renderPortalImpl = (() => {
-   return (
-   function renderPortalImpl({
+   const CXPortalImpl = (
+   function ({
       payload: [{}, payload ] ,
       target ,
    } : { 
@@ -143,6 +143,11 @@ const {
          </WithCurrentTInfo>
       ) ;
    }
+   ) ;
+   return ( 
+      (...[a]: Parameters<typeof CXPortalImpl > ) => (
+         <CXPortalImpl {...a } />
+      )
    ) ;
    })() ;
    const CImplRenderPortalWithLowAnimPriority = (
