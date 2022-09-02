@@ -84,6 +84,8 @@ const {
       )>(null )
    ) ;
    type RCB = (ContextReturnType<typeof eCtx > & object ) ;
+   const renderPortalImpl = (() => {
+   return (
    function renderPortalImpl({
       payload: [{}, payload ] ,
       target ,
@@ -93,20 +95,18 @@ const {
    } ) {
       return (
          <WithCurrentTInfo>
-            { (tInf ) => {
+            { (expectedTInf ) => {
                ;
-               const { t, tScale } = tInf ;
-               ;
-               return (
-                  ReactDOM.createPortal((
-                     <g transform={`translate(${t}, 0 ) scale(${tScale} , 1 )` } >
+               const { t: expectedT, tScale: expectedTScale } = expectedTInf ;
+               const afterExpectedVsActualTPassageStateGrayoutFilter = (
+                  (payload: object & React.ReactNode ) => (
                      <WithCurrentDestNdRef>
                      { ({ currentTime: aCtxT }) => (
                      (typeof aCtxT === "number" ) ? 
                      <g 
                      style={{ 
                         filter: (
-                           (t <= aCtxT ) ? 
+                           (expectedT <= aCtxT ) ? 
                            undefined : `opacity(0.5) saturate(0)` 
                         ) ,
                      } } 
@@ -116,13 +116,33 @@ const {
                      : null
                      ) }
                      </WithCurrentDestNdRef>
-                     </g >
-                  ) , target )
+                  )
                ) ;
+               ;
+               const p = (
+                  <RDeferredRefreshPortal dest={target } >
+                  <g 
+                  style={{
+                     transform: (
+                        `translate(calc(var(--T ) * 1px ) , 0 ) scale(var(--T-SCL ) , 1 )`
+                     ) ,
+                     ...{
+                        "--T": expectedT ,  
+                        "--T-SCL": expectedTScale ,
+                     } , 
+                  }}
+                  >
+                  { afterExpectedVsActualTPassageStateGrayoutFilter(payload ) }
+                  </g >
+                  </RDeferredRefreshPortal>
+               ) ;
+               return p ;
             } }
          </WithCurrentTInfo>
       ) ;
    }
+   ) ;
+   })() ;
    const CImplRenderPortalWithLowAnimPriority = (
       (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
          useDeferredRecompute(() => (
