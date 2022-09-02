@@ -193,6 +193,33 @@ export const AudioLoopDemoApp = (function () {
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
                     <BassDrumLoopDv subhalvesN={2 } />
+                    <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
+                    <CWaveTable1 
+                    freqArgumentInterpretation="timedomain-normalised"
+                    freqArgument={(
+                        <CConstantValue value={55 / 440 } />
+                    )}
+                    detuneInterpretation="timedomain-normalised"
+                    detune={(
+                        <CFnValue1 
+                        value={({ ctxT: t }) => (
+                            ((): number => { 
+                                const tMod8 = t % 8 ;
+                                if (0.0 <= tMod8 && tMod8 < 0.5 ) {
+                                    return 7 ;
+                                }
+                                if (0.5 <= tMod8 && tMod8 < 1.0 ) {
+                                    return 3 ;
+                                }
+                                return 0 ;
+                            })()
+                            / 12
+                        ) }
+                        />
+                    )}
+                    type="triangle"
+                    />
+                    </CAmpModulated0>
                 </WithSlowdown>
                 </WithSlowdown>
             ) ;       
