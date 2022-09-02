@@ -95,15 +95,21 @@ const {
       payload: [{} , object & React.ReactNode ] ; 
       target: SVGElement ;
    } ) {
+      const { currentTime: aCtxT } = (
+         useCurrentDestNd0()
+      ) ;
+      const expectedTInf = (
+         useCurrentTInf()
+      ) ;
+      const { t: expectedT, tScale: expectedTScale } = expectedTInf ;
       return (
-         <WithCurrentTInfo>
-            { (expectedTInf ) => {
+         React.useMemo((): React.ReactElement => (
+            ( (/* expectedTInf */ ) => {
                ;
-               const { t: expectedT, tScale: expectedTScale } = expectedTInf ;
                const afterExpectedVsActualTPassageStateGrayoutFilter = (
                   (payload: object & React.ReactNode ) => (
-                     <WithCurrentDestNdRef>
-                     { ({ currentTime: aCtxT }) => (
+                     <>
+                     { (
                      (typeof aCtxT === "number" ) ? 
                      <g 
                      style={{ 
@@ -117,7 +123,7 @@ const {
                      </g>
                      : null
                      ) }
-                     </WithCurrentDestNdRef>
+                     </>
                   )
                ) ;
                ;
@@ -139,8 +145,8 @@ const {
                   </RDeferredRefreshPortal>
                ) ;
                return p ;
-            } }
-         </WithCurrentTInfo>
+            } )()
+         ) , [aCtxT && Math.floor(aCtxT / 2 ) , expectedT, expectedTScale ] )
       ) ;
    }
    ) ;
