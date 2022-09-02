@@ -103,7 +103,7 @@ const LoopingWithPeriod = (
 
          renderRange ,   
          // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
-         visual = true ,                   
+         visual = false ,                   
 
       } ) {       
          const {              
