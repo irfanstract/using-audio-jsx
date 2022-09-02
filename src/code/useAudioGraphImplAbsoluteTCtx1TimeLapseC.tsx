@@ -10,6 +10,10 @@ import React from "react";
 import { useDeferredRecompute } from "./usingDeferredRecompute";
 import ReactDOM from "react-dom" ;
 import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from "./commonElements";    
+import { 
+   RDeferredRefreshPortal ,
+   RDeferredAppearancePortal ,
+} from "./usingPortalElement";
         
 // domain imports, and CSS imports
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
