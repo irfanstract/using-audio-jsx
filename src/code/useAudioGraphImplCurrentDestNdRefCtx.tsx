@@ -368,6 +368,7 @@ export {
     Consm ,        
     useWithCurrentSideTapPtRef ,       
     useADestNdRefCtx1 ,                
+    useCurrentDestNd0 ,
         
     Prv1 , 
     WithGivenDest , 
