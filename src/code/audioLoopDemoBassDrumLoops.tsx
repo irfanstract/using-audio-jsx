@@ -42,6 +42,7 @@ import {
 } from "./useAudioGraphImplFComponentsBandpassForTwoSteps";
 import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";
 import * as BBVR from "./audioLoopDemoSpecimens";  
+import { CFourSecondsBassDrop } from "./audioLoopDemoBassDrops";
 import {
     CBassDrumLoop , 
     CAmbientNoise , 
@@ -106,43 +107,6 @@ type CMetronomeDirectedDvBandplayProps = (
       }
    )
 ) ; 
-const CFourSecondsBassDrop = (
-   ({ coreFreq = 55 } : { coreFreq ?: number ; } ) => (
-      <>
-      <AsGVis>
-         <g>
-         <title>
-            N-Second Bass Drop
-         </title>
-         <rect 
-         width={4 }
-         height={2 }
-         style={{ fill: "blue" } }
-         />
-         </g>
-         <></>
-      </AsGVis>
-      <CAmpModulated0
-      value={(
-         <K>
-            <CFnValue1 value={({ ctxT: t }) => (0 <= t ? (2 ** (1 + (t * -0.5 ) ) ) : 0 ) } />
-         </K>
-      )}
-      >
-         <CWaveTable1 
-         freqArgumentInterpretation="timedomain-normalised"
-         freqArgument={(
-            <CConstantValue value={ coreFreq / 440 } /> 
-         )}
-         detuneInterpretation="timedomain-normalised"
-         detune={(
-            <CFnValue1 value={({ ctxT: t }) => (6 + (t * -4 ) ) / 12 } />
-         )}
-         />
-      </CAmpModulated0>
-      </>
-   )
-) ;
 const BootlegMusicDv : (
    React.FC<(
       CMetronomeDirectedDvBandplayProps
