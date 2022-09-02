@@ -236,6 +236,12 @@ type WaveTableNodeProps = (
                 OscillatorType | PeriodicWave   
             ), "custom">
         ) ;       
+        /**   
+         * emitted-value scalarly corresponding to input-value `1.0`.
+         * default -- `440`  .
+         */
+        freqArgumentNormalValue?: number | undefined;
+        detuneSemitoneCentsNormalVal?: number | undefined ;
     }   
     &          
     EitherBothSetOrBothUnset<FreqArgsProps>
@@ -274,6 +280,9 @@ const waveTableCPropsShallParse = ((...args2 : [
                 detuneInterpretation = (  
                     ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED   
                 ) ,                            
+
+                freqArgumentNormalValue = 440 ,
+                detuneSemitoneCentsNormalVal = 12 * 100 ,
                   
                 type : wvTable1 ,   
            
@@ -299,6 +308,8 @@ const waveTableCPropsShallParse = ((...args2 : [
             ) ;                 
             ;                     
             return {  
+                freqArgumentNormalValue ,
+                detuneSemitoneCentsNormalVal ,
                 freqArgGraph1 ,        
                 detuneGraph1 , 
                 ...(() : { type ?: NonNullable<WaveTableNodeProps["type"] > ; } => (
