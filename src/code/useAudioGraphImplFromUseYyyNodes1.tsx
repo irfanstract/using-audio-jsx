@@ -587,6 +587,8 @@ const {
                            freqArgGraph1,
                            detuneGraph1,
                            type: wvTableNme,
+                           freqArgumentNormalValue ,
+                           detuneSemitoneCentsNormalVal ,
 
                         } = waveTableCPropsShallParse(mainProps);
                         // TODO
@@ -602,6 +604,8 @@ const {
                               } = (
                                     useC1(nd0, { 
                                        waveTable: wvTableNme ,
+                                       freqArgumentNormalValue ,
+                                       detuneScale1: detuneSemitoneCentsNormalVal ,
                                     })
                                  );
                               const c1 = (
