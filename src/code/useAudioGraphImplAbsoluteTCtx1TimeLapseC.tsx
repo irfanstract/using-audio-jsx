@@ -162,13 +162,69 @@ const {
    ) ;
    })() ;
    const CImplRenderPortalWithLowAnimPriority = (
-      (props : Parameters<typeof renderPortalImpl>[0 ] ) => (
-         useDeferredRecompute(() => (
-            <>
-            { renderPortalImpl(props ) }
-            </>
-         ))
-      )
+      (props : Parameters<typeof renderPortalImpl>[0 ] ) => {
+         const ml: number = 4 ;
+         const scanTs = (
+            Immutable.Range(-2, 2E5, ml )
+         ) ;
+         const {
+            currentTime: aCtxTime ,
+         } = (
+            useCurrentDestNd0()
+         ) ;
+         /**    
+          * the {@link aCtxTime } when this *component* was mounted.
+          * this will generally not necessarily be the actual, user-noticeable pop-up time.
+          */
+         const mount0T = (
+            React.useMemo((): number => (
+               aCtxTime 
+               || 0 
+            ) , [!!aCtxTime ] )
+         ) ;
+         /**   
+          * the {@link aCtxTime } at which the actual (user-noticeable ) pop-up shall take place at.
+          * not necessarily {@link mount0T }.
+          */
+         const popupT = (
+            React.useMemo(() => (
+               mount0T && 
+               (scanTs.find((scnT: number) => (mount0T <= (scnT + ml ) ) )! + 0 )
+            ) , [typeof mount0T ] )
+         ) ;
+         return (
+            React.useMemo<null | React.ReactElement>(() => {
+               if ( (popupT && aCtxTime ) ) {
+                  if (popupT <= aCtxTime ) { 
+                     const payload0 = props.payload[1] ;
+                     const payload1 = (
+                        <g>
+                        <title>
+                           {JSON.stringify({ mount0T, popupT, aCtxTime }) }
+                        </title>
+                        <g>
+                           { payload0 }
+                        </g>
+                        <rect 
+                        width={0.333 }
+                        height={0.2 }
+                        fill={"blue" }
+                        />
+                        </g>
+                     ) ;
+                     return (
+                        <>
+                        { renderPortalImpl({ target: props.target, payload: [props.payload[0], payload1 ] } ) }
+                        </>
+                     ) ;
+                  }
+               }
+               return (
+                  null
+               ) ;
+            } , [aCtxTime && Math.floor(aCtxTime ) ] )
+         ) ;
+      }
    ) ;
    const AsGVis0 = (
       function ({ children: payload } : { children: object & React.ReactNode ; }) {
