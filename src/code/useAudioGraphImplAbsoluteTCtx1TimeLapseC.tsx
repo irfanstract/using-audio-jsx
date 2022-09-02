@@ -128,6 +128,11 @@ const {
                ) ;
                ;
                const p = (
+                  /**   
+                   * mounting {@link React.createPortal }s can impose significant overhead.
+                   * for this reason,
+                   * it's strongly recommended to use a {@link React.useDeferredValue deferring } indirection like this.
+                   */
                   <RDeferredRefreshPortal dest={target } >
                   <g 
                   style={{
