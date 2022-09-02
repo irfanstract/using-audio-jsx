@@ -159,18 +159,9 @@ export const AudioLoopDemoApp = (function () {
                     <K>
                         { instrumentsVisualiView }
                     </K>
-                    <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
-
-                        { null && <CurrentCtxTInfoDisplay /> }  
-
-                        <WithSlowdown 
-                        // debugging the timing issues
-                        value={2 ** 0.2 } 
-                        >
+                    <K>
                         { true && c1 }    
-                        </WithSlowdown>              
-
-                    </CAmpModulated0>
+                    </K>
                     </div>                 
                 </WithSpecifiedGVisTarget>  
             ) ;
@@ -208,7 +199,18 @@ export const AudioLoopDemoApp = (function () {
             const { WithACtx } = useADestNdRefCtx1() ;         
             const mainADemoScreen = (
                 <WithAuInstrumentsVisualisation >
+                <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
+
+                    { null && <CurrentCtxTInfoDisplay /> }  
+
+                    <WithSlowdown 
+                    // debugging the timing issues
+                    value={2 ** 0.2 } 
+                    >
                     { c1 }
+                    </WithSlowdown>              
+
+                </CAmpModulated0>
                 </WithAuInstrumentsVisualisation>
             ) ;
             return (       
