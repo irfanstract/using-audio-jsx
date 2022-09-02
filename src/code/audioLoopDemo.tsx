@@ -226,7 +226,6 @@ export const AudioLoopDemoApp = (function () {
                     </p>        
                     <TP value={+(tT + 0 ).toFixed(3 ) } >
                                   
-                    <p> what </p>          
                     { (WithACtx && (        
                         <WithACtx>   
                         { (c ) => ( 
