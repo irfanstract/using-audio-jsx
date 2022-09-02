@@ -104,9 +104,19 @@ const LoopingWithPeriod = (
          renderRange ,   
          // autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ,       
          visual = false ,                   
+         renderingRangePreStartRangeLiBehaviour = "omit" ,
 
       } : (
          LoopingComponentPropsWithPeriod
+         &
+         { 
+            /**   
+             * for presentative purpose,
+             * *out-of-range* `i`s should be left in as empty items (ie with *ordinal* yet without *content* ).  
+             * however, this implied significant (runtime) overhead, hindering usability.
+             */
+            renderingRangePreStartRangeLiBehaviour ?: "omit" | "include" ;
+         }
       ) ) {       
          const {              
             period : vPeriod ,      
@@ -177,12 +187,30 @@ const LoopingWithPeriod = (
                         }   
                         return null ;     
                      })           
+                     .flatMap((v): ([] | [typeof v ]) => (
+                        (!!v || (renderingRangePreStartRangeLiBehaviour === "include" ) ) ?
+                        [v]
+                        : []
+                     ) )
+                     .toList()
                ) ;  
             }
          )() ;        
+         const statisticsR = (
+            <p> 
+               Render Indices : 
+               {JSON.stringify(renderRange ) } ;
+               <br />
+               Rendered Arity :
+               { itemsRendered.filter(v => !!v ).size } non-null 
+               (with { itemsRendered.filter(v => !v ).size } null(s) )
+               of { itemsRendered.size } ;
+            </p>
+         ) ;
          return (        
             <div>              
                <p> a loop </p>          
+               { statisticsR }
                <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
                      <LoopingCompContentDiv   >    
                      { arrayIndexedOrderedList(itemsRendered.toArray()  )   } 
