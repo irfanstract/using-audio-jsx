@@ -198,7 +198,11 @@ export const AudioLoopDemoApp = (function () {
             ) ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             const mainADemoScreen = (
-                <WithAuInstrumentsVisualisation >
+                /**
+                 * {@link WithAuInstrumentsVisualisation } would be nice.
+                 * left it out for now due to performance problems.
+                 */
+                <K /* WithAuInstrumentsVisualisation */ >
                 <CAmpModulated0 value={<CConstantValue value={2 ** -3} />} > 
 
                     { null && <CurrentCtxTInfoDisplay /> }  
@@ -211,7 +215,7 @@ export const AudioLoopDemoApp = (function () {
                     </WithSlowdown>              
 
                 </CAmpModulated0>
-                </WithAuInstrumentsVisualisation>
+                </K>
             ) ;
             return (       
                 <div className="App" >        
