@@ -60,7 +60,9 @@ const RDeferredRefreshPortal: (
    function ({ dest, key, children: payload } ) {
       return (
          React.useDeferredValue((
-            ReactDOM.createPortal(payload, dest, key )
+            <RDeferredAppearancePortal {...{ dest, key }} >
+               { payload }
+            </RDeferredAppearancePortal>
          ))
       ) ;
    }
