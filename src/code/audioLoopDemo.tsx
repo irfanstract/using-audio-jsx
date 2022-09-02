@@ -216,9 +216,6 @@ export const AudioLoopDemoApp = (function () {
                     <p>       
                         <span>   
                                 
-                        <s >     
-                        Gettting some App Problems ?
-                        </s> 
                         <span>
                             needs it play one more time ?         
                         </span>
