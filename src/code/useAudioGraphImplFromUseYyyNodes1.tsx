@@ -600,7 +600,9 @@ const {
                                  frequency: freqArgDest1,
                                  detune: detuneCtrlDest1, // TODO                                   
                               } = (
-                                    useC1(nd0, { waveTable: wvTableNme })
+                                    useC1(nd0, { 
+                                       waveTable: wvTableNme ,
+                                    })
                                  );
                               const c1 = (
                                  // TODO      
