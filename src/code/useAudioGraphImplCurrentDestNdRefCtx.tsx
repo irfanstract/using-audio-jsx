@@ -64,7 +64,7 @@ const {
     Prv1: React.FC<React.ProviderProps<AFeedableAndTappableNCc>>;     
     Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
     useCurrentDestNd0 : (
-        null | (       
+        (       
             () => NCtxV1  
         )        
     ) ;        
