@@ -640,12 +640,30 @@ const {
                                     } }
                                     </CBC >
                                 ) , remountDeps1 ) ;               
+                                const eRemountDepsCountCbcDebug = (
+                                    React.useMemo(() => (
+                                        <CBC>
+                                        { function useCbcd() {
+                                            return (
+                                                <section>
+                                                <code>
+                                                eRemountDepsCountCbcDebug
+                                                </code>
+                                                { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }
+                                                </section>
+                                            ) ;
+                                        } }
+                                        </CBC>
+                                    ) , remountDeps1 )
+                                ) ;
                                 return (
                                     <section>
                                     <code>
                                     useCScannedImpl with a ctx current t
                                     </code>
+                                    { eRemountDepsCountCbcDebug }
                                     { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                                    { useCurrentCtxTDebugPanel() && null }
                                     { emAfterRemountDeps }
                                     </section>
                                 ) ;
