@@ -87,7 +87,7 @@ const {
             ;
             return {
                 mainGraphSpecified: freqArgGraphSpecified ,
-                argumentInterpretation: freqArgumentInterpretation ,
+                interpretativeModeUsed: freqArgumentInterpretation ,
                 mainGraphUsed0: freqArgGraph0 ,
             } ;
         }
@@ -104,7 +104,7 @@ const {
                 } = FMP ; //  
                 ;
                 const {
-                    argumentInterpretation: interpretativeModeUsed,
+                    interpretativeModeUsed: interpretativeModeUsed,
                     mainGraphUsed0,
                 } = (
                     FL(mainGraphSpecified, interpretativeModeSpecified, {
@@ -125,7 +125,7 @@ const {
 const graphAfterNrmInterpretativeModeC = (
     function (props: ReturnType<typeof cCtrlPropsParse > ) {
         const {
-            argumentInterpretation: gainValArgumentInterpretation,
+            interpretativeModeUsed: gainValArgumentInterpretation,
             mainGraphUsed0: gainValueGraph0,
         } = (
             props
