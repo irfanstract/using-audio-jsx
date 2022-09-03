@@ -74,6 +74,40 @@ function linearSlidingStateAtT(...[
         (p * (anEndValue - startV ) )
     ) ;
 } 
+const periodicCheckSliding1 = (
+    function* (...[
+        t ,
+        {
+            checkPer ,
+            startT ,
+            anEndT ,
+            endT ,
+            startValue ,
+            anEndValue ,
+        } ,
+    ] : [
+        t: number ,
+        config: (
+            {
+                checkPer : number ;
+
+                startT : number ; 
+                anEndT : number ;
+                endT : number ;
+
+                startValue : number ; 
+                anEndValue : number ;
+            }
+        ) ,
+    ]) { 
+        ;
+        if (startT <= (t % checkPer ) && (t % checkPer ) < endT ) {
+            yield (
+                linearSlidingStateAtT
+            )(t % checkPer , { startT, anEndT, startValue, anEndValue }  ) ;
+        }
+    }
+) ;
 const {
     currentTCtx , 
     currentTScaleCtx ,         
@@ -229,16 +263,77 @@ export const AudioLoopDemoApp = (function () {
                         <CFnValue1 
                         value={({ ctxT: t }) => (
                             ((): number => { 
-                                if (28.0 <= (t % 32 ) && (t % 32 ) < 32.0 ) {
-                                    return (
-                                        linearSlidingStateAtT
-                                    )(t % 32 , { startT: 28, anEndT: 30, startValue: -4, anEndValue: -5 }  ) ;
+                                { 
+                                    const checkPer = 32 ;
+                                    ;
+                                    const startT = 28 ;
+                                    const anEndT = 30 ;
+                                    const endT = 32 ;
+                                    const startValue = -2 * 2 ;
+                                    const anEndValue = startValue + -1 ;
+                                    ;
+                                    for (const value of (
+                                        periodicCheckSliding1(t, {
+                                            checkPer ,
+                                            startT ,
+                                            anEndT ,
+                                            endT ,
+                                            startValue ,
+                                            anEndValue ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
                                 }
-                                if (0.0 <= (t % 8 ) && (t % 8 ) < 0.5 ) {
-                                    return 7 ;
+                                { 
+                                    const checkPer = 8 ;
+                                    ;
+                                    const startT = 0 ;
+                                    const anEndT = 0.25 ;
+                                    const endT = 0.5 ;
+                                    const startValue = 0 ;
+                                    const anEndValue = 3 + (2 * 2 ) ;
+                                    ;
+                                    for (const value of (
+                                        periodicCheckSliding1(t, {
+                                            checkPer ,
+                                            startT ,
+                                            anEndT ,
+                                            endT ,
+                                            startValue ,
+                                            anEndValue ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
                                 }
-                                if (0.5 <= (t % 8 ) && (t % 8 ) < 1.0 ) {
-                                    return 3 ;
+                                { 
+                                    const checkPer = 8 ;
+                                    ;
+                                    const startT = 0.5 ;
+                                    const anEndT = 0.75 ;
+                                    const endT = 1 ;
+                                    const startValue = 3 + (2 * 2 ) ;
+                                    const anEndValue = 3 ;
+                                    ;
+                                    for (const value of (
+                                        periodicCheckSliding1(t, {
+                                            checkPer ,
+                                            startT ,
+                                            anEndT ,
+                                            endT ,
+                                            startValue ,
+                                            anEndValue ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
                                 }
                                 return 0 ;
                             })()
