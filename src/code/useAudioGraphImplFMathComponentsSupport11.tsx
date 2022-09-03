@@ -45,7 +45,7 @@ const {
 
             
 const {
-   CFnValue1 ,  
+   CFnValueByRelativeT ,  
  
 } = (function () {     
    /**   
@@ -55,7 +55,7 @@ const {
        tCtxs.currentTInfCtx.Consumer
    ) ;       
    return {  
-       CFnValue1 : (
+       CFnValueByRelativeT : (
            function ({ value: compute, ...otherProps0 } : Parameters<typeof CFnValueByAbsoluteT >[0 ] ) {
                const {
                    codeDeps: higherLevelCodeDeps = [] ,  
@@ -121,5 +121,5 @@ const {
 
 export {
    CFnValueByAbsoluteT as CFnValueAtAbsoluteT , 
-   CFnValue1 as CFnValueByRelativeT ,  
+   CFnValueByRelativeT as CFnValueByRelativeT ,  
 } ;
