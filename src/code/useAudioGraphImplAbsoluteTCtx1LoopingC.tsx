@@ -198,13 +198,17 @@ const LoopingWithPeriod = (
          )() ;        
          const statisticsR = (
             <p> 
-               Render Indices : 
-               {JSON.stringify(renderRange ) } ;
+               <span>
+                  Render Indices : 
+                  {JSON.stringify(renderRange ) } ;
+               </span>
                <br />
-               Rendered Arity :
-               { itemsRendered.filter(v => !!v ).size } non-null 
-               (with { itemsRendered.filter(v => !v ).size } null(s) )
-               of { itemsRendered.size } ;
+               <span>
+                  Rendered Arity :
+                  { itemsRendered.filter(v => !!v ).size } non-null 
+                  (with { itemsRendered.filter(v => !v ).size } null(s) )
+                  of { itemsRendered.size } ;
+               </span>
             </p>
          ) ;
          return (        
