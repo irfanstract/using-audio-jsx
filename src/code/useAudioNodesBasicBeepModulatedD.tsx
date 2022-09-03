@@ -80,9 +80,9 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
         ) ;       
     };
     return (                  
-        function useWVT(...[nd0 , mainOptions11 = {} ] : [
+        function useWVT(...[nd0 , mainOptions11 ] : [
             dest : AudioNode | null ,               
-            properties ?: {                
+            properties : {                
                 /**    
                  * 
                  */
