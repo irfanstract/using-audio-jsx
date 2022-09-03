@@ -101,6 +101,7 @@ const CBassLineByTimeDomainArgs: (
             freqArgument={freqArgument }
             //
             detuneInterpretation="timedomain-normalised"
+            detuneSemitoneCentsNormalVal={12 * 100 }
             detune={(
                <K>
                   { detune }
