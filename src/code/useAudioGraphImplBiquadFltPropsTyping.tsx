@@ -80,7 +80,7 @@ type DetuningProps = (
     {
         detuneInterpretation: ABandpassFreqArgInputRangeMode ;
         detune : React.ReactElement ;
-        detuneSemitoneCentsNormalVal?: number | undefined ;
+        detuneSemitoneCentsNormalVal: number | undefined ;
     }
 ) ;         
 const DetuningProps = {} ; // TS-1205
