@@ -75,7 +75,7 @@ function linearSlidingStateAtT(...[
     ) ;
 } 
 const periodicCheckSliding1 = (
-    function* (...[
+    function (...[
         t ,
         {
             checkPer ,
@@ -99,13 +99,16 @@ const periodicCheckSliding1 = (
                 anEndValue : number ;
             }
         ) ,
-    ]) { 
+    ]) : ([number] | [] ) { 
         ;
         if (startT <= (t % checkPer ) && (t % checkPer ) < endT ) {
-            yield (
+            return [
+            (
                 linearSlidingStateAtT
-            )(t % checkPer , { startT, anEndT, startValue, anEndValue }  ) ;
+            )(t % checkPer , { startT, anEndT, startValue, anEndValue }  ) ,
+            ] ;
         }
+        return [] ;
     }
 ) ;
 const {
