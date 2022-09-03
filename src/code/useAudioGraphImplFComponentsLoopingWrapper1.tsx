@@ -357,7 +357,7 @@ const MetronomeAndResponseGraph = (
       ) ;
       return (
          // TODO 
-         <div style={{ display: "none" }} >
+         <div style={{ display: undefined }} >
          { true && mainRendered }
          </div>
       )  ;
