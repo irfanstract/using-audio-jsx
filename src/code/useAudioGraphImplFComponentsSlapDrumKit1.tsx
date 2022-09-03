@@ -375,6 +375,7 @@ const snKit = (() => {
                             { sVisAttach }
                             <CWaveTable1                           
                             detuneInterpretation="timedomain-normalised"  
+                            detuneSemitoneCentsNormalVal={12 * 100 }
                             detune={(
                                 !dbg1 ? <></> : <CConstantValue value={-3 / 12 } /> 
                             )}
