@@ -50,6 +50,30 @@ import '../App.css';
 
     
 
+function linearSlidingStateAtT(...[
+    t , 
+    { startT, anEndT, startValue: startV, anEndValue } ,
+] : [
+    t: number ,
+    config: {
+        startT : number ; 
+        anEndT : number ;
+        startValue : number ;
+        anEndValue : number ;
+    } ,
+] ): number {
+    const p = (
+        IterableOps.clamp((
+            (t - startT ) 
+            / (anEndT - startT )
+        ) , 0, 1 )
+    ) ;
+    return (
+        startV 
+        + 
+        (p * (anEndValue - startV ) )
+    ) ;
+} 
 const {
     currentTCtx , 
     currentTScaleCtx ,         
@@ -207,30 +231,7 @@ export const AudioLoopDemoApp = (function () {
                             ((): number => { 
                                 if (28.0 <= (t % 32 ) && (t % 32 ) < 32.0 ) {
                                     return (
-                                        function linearSlidingStateAtT(...[
-                                            t , 
-                                            { startT, anEndT, startValue: startV, anEndValue } ,
-                                        ] : [
-                                            t: number ,
-                                            config: {
-                                                startT : number ; 
-                                                anEndT : number ;
-                                                startValue : number ;
-                                                anEndValue : number ;
-                                            } ,
-                                        ] ): number {
-                                            const p = (
-                                                IterableOps.clamp((
-                                                    (t - startT ) 
-                                                    / (anEndT - startT )
-                                                ) , 0, 1 )
-                                            ) ;
-                                            return (
-                                                startV 
-                                                + 
-                                                (p * (anEndValue - startV ) )
-                                            ) ;
-                                        } 
+                                        linearSlidingStateAtT
                                     )(t % 32 , { startT: 28, anEndT: 30, startValue: -4, anEndValue: -5 }  ) ;
                                 }
                                 if (0.0 <= (t % 8 ) && (t % 8 ) < 0.5 ) {
