@@ -239,6 +239,7 @@ const biquadFltCPropsParse = (
 
 const WaveTableNodeProps = {} as const ; // `--isolated-modules` TS-1205 
 type WaveTableNodeProps = (              
+    (
     {                 
         /**    
          * the waveform.
@@ -254,6 +255,7 @@ type WaveTableNodeProps = (
          */
         freqArgumentNormalValue?: number | undefined;
     }   
+    )
     &          
     EitherBothSetOrBothUnset<FreqArgsProps>
     &       
