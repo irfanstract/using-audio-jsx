@@ -468,6 +468,15 @@ const {
                                 ; 
                                 ;      
                                 ;     
+                                const useCurrentCtxTDebugPanel = (
+                                    () => (
+                                        <p>
+                                            Current Ctx T : 
+                                            <NUMERIC maxPrecision={3 } >{ currentTimeE }</NUMERIC>
+                                            (changes: { useDepsChgCount({}, [currentTimeE ]) } )
+                                        </p>    
+                                    )
+                                ) ;
                                 /**     
                                  * re-render(s) had been like brute-force trial-and-error, so  
                                  * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
@@ -615,11 +624,7 @@ const {
                                                 <NUMERIC>{ useDepsChgCount({}, remountDeps1) }</NUMERIC>
                                             </p>     
                                             { (
-                                                <p>
-                                                    Current Ctx T : 
-                                                    <NUMERIC maxPrecision={3 } >{ currentTimeE }</NUMERIC>
-                                                    (changes: { useDepsChgCount({}, [currentTimeE ]) } )
-                                                </p>    
+                                                useCurrentCtxTDebugPanel()
                                             ) && null }
                                             <pre>     
                                                 { (
