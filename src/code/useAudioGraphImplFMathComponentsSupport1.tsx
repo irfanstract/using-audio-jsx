@@ -472,7 +472,7 @@ const {
                                  * re-render(s) had been like brute-force trial-and-error, so  
                                  * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
                                  */
-                                return React.useMemo(() => (
+                                const emAfterRemountDeps = React.useMemo(() => (
                                     <CBC > 
                                     { function useCE1() {  
                                         ;
@@ -632,6 +632,11 @@ const {
                                     } }
                                     </CBC >
                                 ) , remountDeps1 ) ;               
+                                return (
+                                    <div>
+                                    { emAfterRemountDeps }
+                                    </div>
+                                ) ;
                             }    }                
                             </CBC>          
                             :              
