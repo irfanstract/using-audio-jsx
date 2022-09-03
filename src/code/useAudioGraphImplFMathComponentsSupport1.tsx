@@ -617,7 +617,10 @@ const {
                                         );       
                                         // TODO       
                                         return (                        
-                                            <>        
+                                            <section>        
+                                            <code>
+                                                end-level effector
+                                            </code>
                                             { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
                                             <p>
                                                 <code>remountDeps</code> chg count :
@@ -632,7 +635,7 @@ const {
                                                 ) }   
                                             </pre>                    
                                             { useDbgArray101() }
-                                            </>       
+                                            </section>       
                                         ) ;                               
                                     } }
                                     </CBC >
