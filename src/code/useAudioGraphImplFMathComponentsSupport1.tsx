@@ -254,14 +254,6 @@ const {
                         scanPeriodMillis = 32  ,      
                         codeDeps = [] ,                
                     } = propsC;    
-                    function usePeriodicCtxTScan1  (...[nd0, { ctxT } ] : [ AudioNode,  { ctxT: number ; }] ) {
-                        const usedPausedStatePeriodSeconds = (
-                            React.useMemo(() => (1.8 + (Math.random() * 2.2 ) ) , [] )
-                        ) ;   
-                        return (        
-                            { ctxT: ctxT }       
-                        ) ;
-                    }  
                     function useCScanTs(...[nd0, properties1 ] : [
                         AudioNode, 
                         {
@@ -285,9 +277,7 @@ const {
                         ;
                         const {       
                             ctxT ,           
-                        } = (             
-                            usePeriodicCtxTScan1(nd0 , { ctxT: currentTimeE } )   
-                        );         
+                        } = { ctxT: currentTimeE } ;         
                         const ctxTFloored = (               
                             Math.floor(ctxT )               
                         ) ;                       
@@ -352,7 +342,6 @@ const {
                         scanChunkFrequency ,       
                         codeDeps ,   
       
-                        usePeriodicCtxTScan1 ,  
                         useCScanTs , 
                         /**  
                          * this woul be one returned from {@link React.useCallback `useCallback`} and therefore
@@ -374,7 +363,6 @@ const {
                     scanChunkFrequency ,   
                     codeDeps ,   
 
-                    usePeriodicCtxTScan1 ,       
                     useCScanTs , 
                     /**  
                      * this woul be one returned from {@link React.useCallback `useCallback`} and therefore
@@ -607,7 +595,6 @@ const {
                                                         scanChunkFrequency ,   
                                                         codeDeps ,                    
                                 
-                                                        usePeriodicCtxTScan1 ,       
                                                         useCScanTs ,       
                                                         lComputeAtT ,  
                                                         
