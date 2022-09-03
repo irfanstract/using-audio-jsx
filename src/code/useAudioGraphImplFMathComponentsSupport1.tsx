@@ -705,6 +705,37 @@ const {
         })()
     } ;   
 })() ;     
+const CAbsoluteTValueSeq = (
+    function ({ value: args0, deps: deps0 } : { 
+        value: Parameters<typeof fromTSeqComputedValueInterpolated > ;
+        deps ?: React.DependencyList ;
+    }) {
+        const deferredRandom1 = (
+            useRealTimeQueryInterval1<number>(() => (
+                Math.random()
+            ) , 0.5 * 1000 )
+        ) ;
+        const deps1 : React.DependencyList = (
+            deps0 || [deferredRandom1 ]
+        ) ;
+        const {
+            valueAtT: valueAtAbsoluteT ,
+        } = (
+            React.useMemo(() => (
+                fromTSeqComputedValueInterpolated(...args0 )
+            ) , [deps1 ] )
+        ) ;
+        return (
+            <CFnValue 
+            value={({ ctxT }) => (
+                valueAtAbsoluteT(ctxT ) 
+                || 0
+            ) } 
+            codeDeps={deps1} 
+            />
+        ) ;
+    }
+) ;
  
   
 
@@ -719,4 +750,5 @@ export {
     CConstantValueProps ,
     CFnValue as CFnValueByAbsoluteT ,    
     CFnValueProps ,
+    CAbsoluteTValueSeq ,
 } ;  
