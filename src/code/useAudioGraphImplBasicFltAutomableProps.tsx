@@ -47,11 +47,12 @@ const {
         function (...[
             freqArgGraphSpecified, 
             freqArgumentInterpretationSpecified,
-            { defaultGraph, } ,
+            { defaultGraph, valueNormale: normalValue0, } ,
         ] : [
             value: React.ReactElement | null | undefined ,
             valueINterpreta: FreqArgsProps["freqArgumentInterpretation"] | undefined ,
             properties: { 
+                valueNormale: number ;
                 defaultGraph: React.ReactElement ; 
             } ,
         ]) {
@@ -87,6 +88,7 @@ const {
             })() ;
             ;
             return {
+                normalValue : normalValue0 ,
                 mainGraphSpecified: freqArgGraphSpecified ,
                 interpretativeModeUsed: freqArgumentInterpretation ,
                 mainGraphUsed0: freqArgGraph0 ,
@@ -109,6 +111,7 @@ const {
                     mainGraphUsed0,
                 } = (
                     FL(mainGraphSpecified, interpretativeModeSpecified, {
+                        valueNormale: 440 ,
                         defaultGraph: (
                             <CConstantValue value={1 } />
                         ) ,
@@ -158,6 +161,7 @@ const evSingleArgumentTerminalNodeCPropsParse = (
                 cCtrlPropsParse((
                     mainProps.children
                 ), mainProps.valueInterpretation, {
+                    valueNormale: 1 ,
                     defaultGraph: <></> ,
                 } )
             ))  
@@ -214,6 +218,7 @@ const biquadFltCPropsParse = (
                 cCtrlPropsParse((
                     mainProps.gainValArgument
                 ), mainProps.gainValArgumentInterpretation, {
+                    valueNormale: 1 ,
                     defaultGraph: <></> ,
                 } )
             ))  
