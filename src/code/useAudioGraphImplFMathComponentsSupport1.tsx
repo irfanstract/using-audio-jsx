@@ -610,6 +610,10 @@ const {
                                         return (                        
                                             <>        
                                             { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                                            <p>
+                                                <code>remountDeps</code> chg count :
+                                                <NUMERIC>{ useDepsChgCount({}, remountDeps1) }</NUMERIC>
+                                            </p>     
                                             { (
                                                 <p>
                                                     Current Ctx T : 
