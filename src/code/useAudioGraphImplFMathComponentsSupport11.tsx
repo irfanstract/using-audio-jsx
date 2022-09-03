@@ -47,6 +47,7 @@ const {
             
 const {
    CFnValueByRelativeT ,  
+   CRelativeTValueSeq ,
  
 } = (function () {     
    /**   
@@ -111,6 +112,27 @@ const {
                ) ;          
            }    
        ) ,     
+       CRelativeTValueSeq: (
+            function ({ value: [seq, valueAtAbsoluteT ], ...otherProps } : ComponentProps<typeof CAbsoluteTValueSeq> ) {
+                const currentTCtxV = (
+                    tCtxs.useCurrentTInf()
+                ) ;
+                const valueAtRelativeT = (
+                    (tArg: number ) => (
+                        valueAtAbsoluteT((
+                            currentTCtxV.t
+                            + tArg
+                        ))
+                    )
+                ) ;
+                return (
+                    <CAbsoluteTValueSeq 
+                    value={[seq, valueAtRelativeT ]}
+                    {...otherProps }
+                    />
+                ) ;
+            }
+       ) ,
    } ;
 })() ;         
 
@@ -123,4 +145,6 @@ const {
 export {
    CFnValueByAbsoluteT as CFnValueAtAbsoluteT , 
    CFnValueByRelativeT as CFnValueByRelativeT ,  
+   CAbsoluteTValueSeq ,
+   CRelativeTValueSeq ,
 } ;
