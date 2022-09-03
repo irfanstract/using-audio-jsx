@@ -249,12 +249,8 @@ type WaveTableNodeProps = (
                 OscillatorType | PeriodicWave   
             ), "custom">
         ) ;       
-        /**   
-         * emitted-value scalarly corresponding to input-value `1.0`.
-         * default -- `440`  .
-         */
-        freqArgumentNormalValue?: number | undefined;
     }   
+    & FreqArgsPropsExt 
     )
     &          
     EitherBothSetOrBothUnset<FreqArgsProps>
@@ -294,13 +290,13 @@ const waveTableCPropsShallParse = ((...args2 : [
                     ABandpassFreqArgInputRangeMode.TIMEDOMAIN_NORMALISED   
                 ) ,                            
 
-                freqArgumentNormalValue = 440 ,
                 detuneSemitoneCentsNormalVal = 12 * 100 ,
                   
                 type : wvTable1 ,   
            
             } = FMP ;     
             const { //
+                freqArgNormalValue: freqArgumentNormalValue ,
                 freqArgGraphSpecified ,
                 freqArgumentInterpretation , 
                 freqArgGraph0 ,
