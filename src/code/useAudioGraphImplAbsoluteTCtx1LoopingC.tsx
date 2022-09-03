@@ -200,7 +200,9 @@ const LoopingWithPeriod = (
             <p> 
                <span>
                   Render Indices : 
-                  {JSON.stringify(renderRange ) } ;
+                  <code>
+                  { JSON.stringify(renderRange ) } 
+                  </code> ;
                </span>
                <br />
                <span>
