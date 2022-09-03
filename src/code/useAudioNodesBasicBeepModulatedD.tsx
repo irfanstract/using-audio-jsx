@@ -98,7 +98,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                  * specifies,   
                  * the multiplying value (usually `440`) for input of `1.0`     
                  *  */      
-                freqArgumentNormalValue ?: number ;    
+                freqArgumentNormalValue : number ;    
             } ,         
         ] ) {                                  
             const {  
