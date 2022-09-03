@@ -73,7 +73,15 @@ const CFourSecondsBassDrop = (
       <CAmpModulated0
       value={(
          <K>
-            <CFnValue1 value={({ ctxT: t }) => (0 <= t ? (2 ** (1 + (t * -0.5 ) ) ) : 0 ) } />
+            <CFnValue1 
+            value={({ ctxT: t }) => (
+               0 <= t ? 
+               (2 ** (
+                  1 + (t * -0.5 )
+               ) ) 
+               : 0 
+            ) } 
+            />
          </K>
       )}
       >
