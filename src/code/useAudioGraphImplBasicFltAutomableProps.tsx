@@ -231,6 +231,9 @@ const biquadFltCPropsParse = (
 const WaveTableNodeProps = {} as const ; // `--isolated-modules` TS-1205 
 type WaveTableNodeProps = (              
     {                 
+        /**    
+         * the waveform.
+         */
         type ?: (   
             Exclude<(
                 OscillatorType | PeriodicWave   
