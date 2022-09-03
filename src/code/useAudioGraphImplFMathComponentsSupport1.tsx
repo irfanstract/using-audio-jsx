@@ -264,7 +264,14 @@ const {
                     }  
                     function useCScanTs(...[nd0, properties1 ] : [
                         AudioNode, 
-                        { sp ?: number ; currentTimeE : number ; } ,      
+                        {
+                            sp ?: number ;
+                            /**    
+                             * this would define 
+                             * {@link BaseAudioContext.currentTime *the value which all code shall held `currentDestCtx.currentTime` as presently evaluating to* }.
+                             */
+                            currentTimeE : number ; 
+                        } ,      
                     ]) { 
                         const {                
                             sp: sp0 = 2 ** -2 ,      
