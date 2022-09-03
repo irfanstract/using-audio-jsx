@@ -98,25 +98,25 @@ const {
             function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > ]) {
                 ; 
                 const { //
-                    freqArgument: freqArgGraphSpecified ,     
-                    freqArgumentInterpretation: freqArgumentInterpretationSpecified,                       
+                    freqArgument: mainGraphSpecified ,     
+                    freqArgumentInterpretation: interpretativeModeSpecified,                       
                                 
                 } = FMP ; //  
                 ;
                 const {
-                    argumentInterpretation: freqArgumentInterpretation,
-                    mainGraphUsed0: freqArgGraph0,
+                    argumentInterpretation: interpretativeModeUsed,
+                    mainGraphUsed0,
                 } = (
-                    FL(freqArgGraphSpecified, freqArgumentInterpretationSpecified, {
+                    FL(mainGraphSpecified, interpretativeModeSpecified, {
                         defaultGraph: (
                             <CConstantValue value={1 } />
                         ) ,
                     } )
                 ) ;
                 return {
-                    freqArgGraphSpecified ,
-                    freqArgumentInterpretation ,
-                    freqArgGraph0 ,
+                    freqArgGraphSpecified: mainGraphSpecified ,
+                    freqArgumentInterpretation: interpretativeModeUsed ,
+                    freqArgGraph0: mainGraphUsed0 ,
                 } ;
             }
         ) ,
