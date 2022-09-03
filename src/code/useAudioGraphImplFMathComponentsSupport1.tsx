@@ -265,6 +265,10 @@ const {
                     function useCScanTs(...[nd0, properties1 ] : [
                         AudioNode, 
                         {
+                            /**   
+                             * presently we have no idea exactly what we intended this for.
+                             * it looks like this was to define the amt (*seconds*) each batch/chunk shall span/cover.
+                             */
                             sp ?: number ;
                             /**    
                              * this would define 
