@@ -15,10 +15,10 @@ import {
     useNumericDigest ,   
     useLogScaleNumericDigest ,    
 } from "./useNonHookValue";     
+import { useDeferredTrue } from "./useAudioGraphImplUseDeferredBoolean";          
  
      
 import { CFreqDmAnalyF1 } from "./useAudioNodesFreqDmAnalysisC";   
-import { useDeferredTrue } from "./useAudioGraphImplUseDeferredBoolean";           
 
 
 
