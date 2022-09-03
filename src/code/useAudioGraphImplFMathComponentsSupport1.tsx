@@ -102,6 +102,37 @@ import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";
   
      
 ;
+// TODO
+const fromTSeqComputedValueInterpolated = (
+    function (...[ts, valueAtT ]: [
+        readonly number[] | Immutable.Seq.Indexed<number> ,
+        (t: number) => number ,
+    ] ) {
+        const ts1 = [...ts, Number.POSITIVE_INFINITY ] ;
+        return {
+            valueAtT : (
+                (requestedT : number ) => (
+                    (
+                        Immutable.Range(0, [...ts ].length, 1 )
+                        .toSeq()
+                        .map((i: number ): [t0: number, t1: number] => [ts1[i]!, ts1[i + 1 ]! ] )
+                        .flatMap(([t0, t1 ]): ([valueAtRequestedT: number] | [] ) => {
+                            if (t0 <= requestedT && requestedT <= t1 ) {
+                                const v0 = valueAtT(t0 ) ;
+                                const v1 = valueAtT(t1 ) ;
+                                const p = (requestedT - t0 ) / (t1 - t0 ) ;
+                                return [v0 + (p * (v1 - v0 ) ) ] ;
+                            }
+                            return [] ;
+                        } ) 
+                        .first()
+                        // TODO
+                    )
+                )
+            ) ,
+        } ;
+    }
+) ;
 
       
 ;
