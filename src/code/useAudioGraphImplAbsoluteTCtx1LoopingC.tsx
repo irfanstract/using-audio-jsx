@@ -208,7 +208,11 @@ const LoopingWithPeriod = (
                <span>
                   Rendered Arity :
                   { itemsRendered.filter(v => !!v ).size } non-null 
-                  (with { itemsRendered.filter(v => !v ).size } null(s) )
+                  { (!(renderingRangePreStartRangeLiBehaviour === "omit" ) ) && (
+                     <>
+                     (with { itemsRendered.filter(v => !v ).size } null(s) )
+                     </>
+                  ) }
                   of { itemsRendered.size } ;
                </span>
             </p>
