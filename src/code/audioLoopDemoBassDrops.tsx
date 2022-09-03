@@ -83,6 +83,7 @@ const CFourSecondsBassDrop = (
             <CConstantValue value={ coreFreq / 440 } /> 
          )}
          detuneInterpretation="timedomain-normalised"
+         detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
             <CFnValue1 value={({ ctxT: t }) => (6 + (t * -4 ) ) / 12 } />
          )}
