@@ -98,7 +98,15 @@ const {
     return {
         cCtrlPropsParse: FL ,
         freqCtrlRelatedPropsParse: (
-            function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > & FreqArgsPropsExt ]) {
+            function (...[FMP] : [
+                (
+                    EitherBothSetOrBothUnset<(
+                        FreqArgsProps 
+                    ) >
+                    & 
+                    FreqArgsPropsExt
+                ) ,
+            ]) {
                 ; 
                 const { //
                     freqArgumentNormalValue: normalValue0 = 440 ,
@@ -113,7 +121,7 @@ const {
                     mainGraphUsed0,
                 } = (
                     FL(mainGraphSpecified, interpretativeModeSpecified, {
-                        valueNormale: /* 440 */ normalValue0 ,
+                        valueNormale: normalValue0 ,
                         defaultGraph: (
                             <CConstantValue value={1 } />
                         ) ,
