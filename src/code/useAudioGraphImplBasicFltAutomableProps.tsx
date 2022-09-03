@@ -47,7 +47,7 @@ const {
         function (...[
             freqArgGraphSpecified, 
             freqArgumentInterpretationSpecified,
-            { defaultGraph } ,
+            { defaultGraph, } ,
         ] : [
             value: React.ReactElement | null | undefined ,
             valueINterpreta: FreqArgsProps["freqArgumentInterpretation"] | undefined ,
