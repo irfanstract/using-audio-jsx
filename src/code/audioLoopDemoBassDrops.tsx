@@ -85,7 +85,13 @@ const CFourSecondsBassDrop = (
          detuneInterpretation="timedomain-normalised"
          detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
-            <CFnValue1 value={({ ctxT: t }) => (6 + (t * -4 ) ) / 12 } />
+            <CFnValue1 
+            value={({ ctxT: t }) => (
+               // CAVEAT ; working with 'semitones', hence the 'division' at the end
+               (6 + (t * -4 ) ) 
+               / 12
+            ) } 
+            />
          )}
          />
       </CAmpModulated0>
