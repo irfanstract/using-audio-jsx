@@ -200,6 +200,7 @@ export const AudioLoopDemoApp = (function () {
                         <CConstantValue value={55 / 440 } />
                     )}
                     detuneInterpretation="timedomain-normalised"
+                    detuneSemitoneCentsNormalVal={12 * 100 }
                     detune={(
                         <CFnValue1 
                         value={({ ctxT: t }) => (
