@@ -72,6 +72,18 @@ type FreqArgsProps = (
     )
 ) ;             
 const FreqArgsProps = {} ;   // TS-1205
+;
+/** 
+ * temporary addition.
+ */
+type FreqArgsPropsExt = {
+    /**   
+     * emitted-value scalarly corresponding to input-value `1.0`.
+     * default -- `440`  .
+     */
+    freqArgumentNormalValue ?: number ;
+} ;
+const FreqArgsPropsExt = {} ;
 /**   
  * {@link XWithInterpretation}.
  * {@link OscillatorNode}, {@link BiquadFilterNode}.
@@ -135,6 +147,7 @@ export {
     XWithInterpretation ,  
 
     FreqArgsProps , 
+    FreqArgsPropsExt ,
     DetuningProps , 
     GainValArgsProps ,
     GainValArgsProps1 ,   
