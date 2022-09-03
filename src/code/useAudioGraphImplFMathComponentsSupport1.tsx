@@ -63,7 +63,7 @@ import { useAParamModulativeNode } from "./useAudioNodesParamAutomative1";
 import {          
     useUnexpectedZeroingBackCheck ,      
 } from "./useAudioNodesParamAutomativeElas";   
-import eSupport from "./useAudioNodesParamAutomativeExecET";
+import AudioNodesParamAutomativeExecET from "./useAudioNodesParamAutomativeExecET";
 import {       
     WithGivenDest ,  
     Prv1 ,           
@@ -393,7 +393,7 @@ const {
                     SETTARGETATTIME , 
                     SETVALUECURVE_AT_TIME ,      
         
-                } = eSupport({}    ) ;               
+                } = AudioNodesParamAutomativeExecET({}    ) ;               
                 const { 
                     remountDebugBeep = false ,     
                 } = {} as { remountDebugBeep ?: boolean ; } ;  
