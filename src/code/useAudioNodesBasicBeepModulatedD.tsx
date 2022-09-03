@@ -92,7 +92,7 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                  * specifies,   
                  * how much ({@link OscillatorNode *hundredth-of-semitone(s)* }) implied by input `1.0` increment  
                  *  */                   
-                detuneScale1 ?: number ;          
+                detuneScale1 : number ;          
                       
                 /**        
                  * specifies,   
