@@ -98,26 +98,29 @@ const {
     return {
         cCtrlPropsParse: FL ,
         freqCtrlRelatedPropsParse: (
-            function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > ]) {
+            function (...[FMP] : [EitherBothSetOrBothUnset<FreqArgsProps > & FreqArgsPropsExt ]) {
                 ; 
                 const { //
+                    freqArgumentNormalValue: normalValue0 = 440 ,
                     freqArgument: mainGraphSpecified ,     
                     freqArgumentInterpretation: interpretativeModeSpecified,                       
                                 
                 } = FMP ; //  
                 ;
                 const {
+                    normalValue: normalValue1 ,
                     interpretativeModeUsed: interpretativeModeUsed,
                     mainGraphUsed0,
                 } = (
                     FL(mainGraphSpecified, interpretativeModeSpecified, {
-                        valueNormale: 440 ,
+                        valueNormale: /* 440 */ normalValue0 ,
                         defaultGraph: (
                             <CConstantValue value={1 } />
                         ) ,
                     } )
                 ) ;
                 return {
+                    freqArgNormalValue: normalValue1 ,
                     freqArgGraphSpecified: mainGraphSpecified ,
                     freqArgumentInterpretation: interpretativeModeUsed ,
                     freqArgGraph0: mainGraphUsed0 ,
