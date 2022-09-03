@@ -205,11 +205,10 @@ export const AudioLoopDemoApp = (function () {
                         <CFnValue1 
                         value={({ ctxT: t }) => (
                             ((): number => { 
-                                const tMod8 = t % 8 ;
-                                if (0.0 <= tMod8 && tMod8 < 0.5 ) {
+                                if (0.0 <= (t % 8 ) && (t % 8 ) < 0.5 ) {
                                     return 7 ;
                                 }
-                                if (0.5 <= tMod8 && tMod8 < 1.0 ) {
+                                if (0.5 <= (t % 8 ) && (t % 8 ) < 1.0 ) {
                                     return 3 ;
                                 }
                                 return 0 ;
