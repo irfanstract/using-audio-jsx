@@ -198,4 +198,8 @@ export {
     CFnValue1 ,     
     CWhiteNoise ,       
 } ;                        
+export {
+    CFnValueByRelativeT ,
+    CRelativeTValueSeq ,
+} from "./useAudioGraphImplFMathComponentsSupport11";          
 export * from "./useAudioGraphImplFComponentsSlapDrumKit1";                      
