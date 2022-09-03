@@ -243,6 +243,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
       <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> }>
       <CWaveTable1
       detuneInterpretation="timedomain-normalised"
+      detuneSemitoneCentsNormalVal={12 * 100 }
       detune={(
          <>
          <CConstantValue value={-3 } />
@@ -253,6 +254,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
       />
       <CWaveTable1
       detuneInterpretation="timedomain-normalised"
+      detuneSemitoneCentsNormalVal={12 * 100 }
       detune={(
          <>
          <CConstantValue value={-3 } />
@@ -269,6 +271,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
       <CAmpModulated0 value={<CConstantValue value={2 ** -0.5 } /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
+         detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
             <>
             <CConstantValue value={-3 } />
@@ -282,6 +285,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
       <CAmpModulated0 value={<CConstantValue value={2 ** -2} /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
+         detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
             <>
             <CConstantValue value={-3 } />
@@ -295,6 +299,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
       <CAmpModulated0 value={<CConstantValue value={2 ** -5} /> } >
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
+         detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
             <>
             <CConstantValue value={-3 } />
@@ -306,6 +311,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          />
          <CWaveTable1
          detuneInterpretation="timedomain-normalised"
+         detuneSemitoneCentsNormalVal={12 * 100 }
          detune={(
             <>
             <CConstantValue value={-3 } />
@@ -323,6 +329,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
                   <CWaveTable1
                   detuneInterpretation="timedomain-normalised"
+                  detuneSemitoneCentsNormalVal={12 * 100 }
                   detune={(
                      <>
                      <CConstantValue value={-3 } />
@@ -336,6 +343,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          <CAmpModulated0 value={<CConstantValue value={2 ** -4} /> } >
                   <CWaveTable1
                   detuneInterpretation="timedomain-normalised"
+                  detuneSemitoneCentsNormalVal={12 * 100 }
                   detune={(
                      <>
                      <CConstantValue value={-3 } />
@@ -357,6 +365,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          <CAmpModulated0 value={<CConstantValue value={2 ** -5 } /> } >
                   <CWaveTable1
                   detuneInterpretation="timedomain-normalised"
+                  detuneSemitoneCentsNormalVal={12 * 100 }
                   detune={(
                      <>
                      <CConstantValue value={-3 } />
@@ -370,6 +379,7 @@ const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => 
          <CAmpModulated0 value={<CConstantValue value={2 ** -7 } /> } >
                   <CWaveTable1
                   detuneInterpretation="timedomain-normalised"
+                  detuneSemitoneCentsNormalVal={12 * 100 }
                   detune={(
                      <>
                      <CConstantValue value={-3 } />
