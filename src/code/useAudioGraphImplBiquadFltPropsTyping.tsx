@@ -77,7 +77,11 @@ const FreqArgsProps = {} ;   // TS-1205
  * {@link OscillatorNode}, {@link BiquadFilterNode}.
  */
 type DetuningProps = (
-    XWithInterpretation<"detune", React.ReactElement >          
+    {
+        detuneInterpretation: ABandpassFreqArgInputRangeMode ;
+        detune : React.ReactElement ;
+        detuneSemitoneCentsNormalVal?: number | undefined ;
+    }
 ) ;         
 const DetuningProps = {} ; // TS-1205
 

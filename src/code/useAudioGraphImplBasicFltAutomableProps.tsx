@@ -241,7 +241,6 @@ type WaveTableNodeProps = (
          * default -- `440`  .
          */
         freqArgumentNormalValue?: number | undefined;
-        detuneSemitoneCentsNormalVal?: number | undefined ;
     }   
     &          
     EitherBothSetOrBothUnset<FreqArgsProps>
