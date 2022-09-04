@@ -250,7 +250,8 @@ export const AudioLoopDemoApp = (function () {
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = (
+            const c1  = (() => {
+                return (
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
                     <BassDrumLoopDv subhalvesN={2 } />
@@ -349,7 +350,8 @@ export const AudioLoopDemoApp = (function () {
                     </CAmpModulated0>
                 </WithSlowdown>
                 </WithSlowdown>
-            ) ;       
+                ) ;
+            })() ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             const mainADemoScreen = (
                 /**
