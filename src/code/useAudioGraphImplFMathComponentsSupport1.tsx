@@ -390,12 +390,12 @@ const {
                     "no-rounding"
                 ) ;
                 function useCScannedImpl(): { e: React.ReactElement ; } {          
+                    const { feedPt: nd0, currentTime: currentTimeE } = (
+                        useCurrentDestNdRefAndCtxT()
+                    ) ;
                     const e = (        
-                        useWithCurrentACtxCurrentT((...[{ feedPt: nd0, currentTime: currentTimeE }] : (
-                            Parameters<(
-                                [Parameters<typeof useWithCurrentACtxCurrentT >] extends [readonly [infer Callback0, ...(infer NextArgs )] ] ?
-                                Callback0 : never
-                            ) >
+                        React.useMemo((...[] : (
+                            []
                         ) ) =>  (
                             (nd0 && (typeof currentTimeE === "number") )         
                             ?                   
@@ -681,7 +681,7 @@ const {
                             </CBC>          
                             :              
                             <></>         
-                        ))
+                        ), [nd0, React.useDeferredValue(currentTimeE && Math.floor(currentTimeE * 3 ) ) ])
                     ) ;   
                     return {            
                         e ,  
