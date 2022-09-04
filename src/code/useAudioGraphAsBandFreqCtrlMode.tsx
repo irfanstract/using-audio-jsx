@@ -217,12 +217,21 @@ const graphAfterNrmInterpretativeMode = (
                 null
             ) || <></>                
         ) ;      
+        return (() => {
+        const CC = wgdDivCtx.Consumer ;
         return (
             <> 
+                <CC>
+                { (v: boolean) => (
+                v && (
                 <p> after interpretative mode <code>{ interpretativeMde }</code> </p>
+                )
+                ) }
+                </CC>
                 { comp }
             </>
         ) ;
+        })() ;
     }
 ) ;   
 

@@ -224,7 +224,9 @@ const LoopingWithPeriod = (
                { statisticsR }
                <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
                      <LoopingCompContentDiv   >    
+                     <wgdDivCtx.Provider value={false} >
                      { arrayIndexedOrderedList(itemsRendered.toArray()  )   } 
+                     </wgdDivCtx.Provider>
                      </LoopingCompContentDiv >       
                </div>
             </div>   
