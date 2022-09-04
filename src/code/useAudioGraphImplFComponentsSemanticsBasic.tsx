@@ -37,6 +37,17 @@ const WGD_DIV : (
         ) ;
     }
 ) ;             
+const wgdDivCtx0 = (
+    React.createContext<boolean >(true )
+) ;
+/**   
+ * EXPERIMENTAL.
+ * 
+ * @deprecated
+ */
+const wgdDivCtx = (
+    wgdDivCtx0 
+) ;
 /**             
  * initially intended to serve as semantic container for the `<ol>` within implementation of `LoopingWithPeriod`, 
  * with block-start border styling and automatic scrolling and, 
@@ -92,6 +103,7 @@ const LWP_DIV : (
 
 export {  
     WGD_DIV as ModifyingCompPayloadDiv ,   
+    wgdDivCtx ,
     LWP_DIV as LoopingCompContentDiv ,       
     XDC ,  
 } ;

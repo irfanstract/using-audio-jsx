@@ -14,6 +14,7 @@ import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from ".
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
+import { wgdDivCtx ,  } from "./useAudioGraphImplFComponentsSemanticsBasic";  
 import {
    currentTCtx ,                              
    currentTScaleCtx ,              
