@@ -172,14 +172,17 @@ const {
         } ;           
     }
 })() ;                                
+const useCurrentDestNdRefAndCtxT = (
+    useCurrentDestNd0
+) ; 
 const useWithCurrentCtxValue: (
     (a: (v: Parameters<ComponentProps<typeof Consm >["children"] >[0] ) => React.ReactElement )
     =>             
     React.ReactElement               
 ) = (          
-    useCurrentDestNd0 ?        
+    useCurrentDestNdRefAndCtxT ?        
     (function useCurrentDest1 (ch0 ) {   
-        const inf = useCurrentDestNd0() ;   
+        const inf = useCurrentDestNdRefAndCtxT() ;   
         return ch0(inf ) ;    
     })       
     :            
@@ -284,12 +287,12 @@ const useWithCurrentSideTapPtRef: (
     =>             
     React.ReactElement               
 ) = (
-    useCurrentDestNd0 ?
+    useCurrentDestNdRefAndCtxT ?
     (function useCurrentDest1 (ch0 ) {
         const {
             feedPt,
             sideTapPt,
-        } = useCurrentDestNd0() ;
+        } = useCurrentDestNdRefAndCtxT() ;
         return (
             React.useMemo(() => (
                 ch0({ feedPt, sideTapPt } )
@@ -368,7 +371,7 @@ export {
     Consm ,        
     useWithCurrentSideTapPtRef ,       
     useADestNdRefCtx1 ,                
-    useCurrentDestNd0 ,
+    useCurrentDestNdRefAndCtxT ,
         
     Prv1 , 
     WithGivenDest , 

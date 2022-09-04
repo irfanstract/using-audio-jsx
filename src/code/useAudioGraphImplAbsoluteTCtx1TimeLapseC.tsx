@@ -33,7 +33,7 @@ import {
 
 } from "./useAudioGraphImplAbsoluteTCtx1C" ;   
 import { Consm as WithCurrentDestNdRef } from "./useAudioGraphImplCurrentDestNdRefCtx";
-import { useCurrentDestNd0 } from "./useAudioGraphImplCurrentDestNdRefCtx";
+import { useCurrentDestNdRefAndCtxT } from "./useAudioGraphImplCurrentDestNdRefCtx";
 
    
                    
@@ -96,7 +96,7 @@ const {
       target: SVGElement ;
    } ) {
       const { currentTime: aCtxT } = (
-         useCurrentDestNd0()
+         useCurrentDestNdRefAndCtxT()
       ) ;
       const expectedTInf = (
          useCurrentTInf()
@@ -170,7 +170,7 @@ const {
          const {
             currentTime: aCtxTime ,
          } = (
-            useCurrentDestNd0()
+            useCurrentDestNdRefAndCtxT()
          ) ;
          /**    
           * the {@link aCtxTime } when this *component* was mounted.
