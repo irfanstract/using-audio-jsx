@@ -251,10 +251,7 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (() => {
-                return (
-                <WithSlowdown value={1 / (68 / 60 ) } >
-                <WithSlowdown value={2 ** -1 } >
-                    <BassDrumLoopDv subhalvesN={2 } />
+                const bassLine = (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
                     <CWaveTable1 
                     freqArgumentInterpretation="timedomain-normalised"
@@ -348,6 +345,12 @@ export const AudioLoopDemoApp = (function () {
                     type="triangle"
                     />
                     </CAmpModulated0>
+                ) ;
+                return (
+                <WithSlowdown value={1 / (68 / 60 ) } >
+                <WithSlowdown value={2 ** -1 } >
+                    <BassDrumLoopDv subhalvesN={2 } />
+                    { bassLine }
                 </WithSlowdown>
                 </WithSlowdown>
                 ) ;
