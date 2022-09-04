@@ -202,4 +202,5 @@ export {
     CFnValueByRelativeT ,
     CRelativeTValueSeq ,
 } from "./useAudioGraphImplFMathComponentsSupport11";          
+export * from "./useAudioGraphImplFComponentsLoopingBasedHarmonics1";        
 export * from "./useAudioGraphImplFComponentsSlapDrumKit1";                      
