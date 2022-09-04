@@ -390,7 +390,12 @@ const {
                 ) ;
                 function useCScannedImpl(): { e: React.ReactElement ; } {          
                     const e = (        
-                        useWithCurrentACtxCurrentT(({ feedPt: nd0, currentTime: currentTimeE }) =>  (
+                        useWithCurrentACtxCurrentT((...[{ feedPt: nd0, currentTime: currentTimeE }] : (
+                            Parameters<(
+                                [Parameters<typeof useWithCurrentACtxCurrentT >] extends [readonly [infer Callback0, ...(infer NextArgs )] ] ?
+                                Callback0 : never
+                            ) >
+                        ) ) =>  (
                             (nd0 && (typeof currentTimeE === "number") )         
                             ?                   
                             <CBC>      
@@ -621,19 +626,23 @@ const {
                                             <code>
                                                 end-level effector
                                             </code>
-                                            { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                                            { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) && null }       
+                                            { (
                                             <p>
                                                 <code>remountDeps</code> chg count :
                                                 <NUMERIC>{ useDepsChgCount({}, remountDeps1) }</NUMERIC>
                                             </p>     
+                                            ) && null }
                                             { (
                                                 useCurrentCtxTDebugPanel()
                                             ) && null }
+                                            { (
                                             <pre>     
                                                 { (
                                                     JSON.stringify({  }, null, 2 )
                                                 ) }   
                                             </pre>                    
+                                            ) && null }
                                             { useDbgArray101() }
                                             </section>       
                                         ) ;                               
@@ -661,8 +670,8 @@ const {
                                     <code>
                                     useCScannedImpl with a ctx current t
                                     </code>
-                                    { eRemountDepsCountCbcDebug }
-                                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) && null }       
+                                    { eRemountDepsCountCbcDebug && null }
                                     { useCurrentCtxTDebugPanel() && null }
                                     { emAfterRemountDeps }
                                     </section>
@@ -685,7 +694,7 @@ const {
                 ;                 
                 const dbg = (   
                     <div>
-                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) }       
+                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) && null }       
                     </div>  
                 ) ;          
                 return (        
