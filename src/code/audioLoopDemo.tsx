@@ -33,6 +33,7 @@ import {
     
     CAmpModulated , CBiquadFilterModulated ,  CFreqDmAnalyF ,  CConstantValue , CAmpModulated0 ,    
 
+    CmInHarmonics ,
     MetronomeAndResponseGraph , 
     
 } from "./audioLoopDemoComponents1"; 
