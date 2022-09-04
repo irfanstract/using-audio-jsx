@@ -255,6 +255,8 @@ export const AudioLoopDemoApp = (function () {
             const c1  = (() => {
                 const bassLine = (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
+                    <CmInHarmonics value={[SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, [[0, { gain: 2 ** -0.5 }] , [-1, { gain: 2 ** -0.5 }] ] ]} >
+                    { ({ detuneOctaves }) => (
                     <CWaveTable1 
                     freqArgumentInterpretation="timedomain-normalised"
                     freqArgument={(
@@ -263,6 +265,8 @@ export const AudioLoopDemoApp = (function () {
                     detuneInterpretation="timedomain-normalised"
                     detuneSemitoneCentsNormalVal={12 * 100 }
                     detune={(
+                        <K>
+                        <CConstantValue value={detuneOctaves } />
                         <CFnValue1 
                         value={({ ctxT: t }) => (
                             ((): number => { 
@@ -343,9 +347,12 @@ export const AudioLoopDemoApp = (function () {
                             / 12
                         ) }
                         />
+                        </K>
                     )}
                     type="triangle"
                     />
+                    ) }
+                    </CmInHarmonics>
                     </CAmpModulated0>
                 ) ;
                 return (
