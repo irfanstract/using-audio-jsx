@@ -167,6 +167,7 @@ const LoopingWithPeriod = (
                      )                 
                )      ;
                return (      
+                  useItemsRenderedImplPossiblyDeferredValue(() => (
                      iSeqExpandedTInf
                      .map(function (prps1 , itemI ): ReturnType<LwpPayloadCallback > {   
                         if (prps1) {
@@ -208,6 +209,7 @@ const LoopingWithPeriod = (
                         : []
                      ) )
                      .toList()
+                  ) )
                ) ;  
             }
          )() ;        
