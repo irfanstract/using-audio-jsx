@@ -324,7 +324,7 @@ const MetronomeAndResponseGraph = (
                   ) }
             
                   >       
-                     { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }) => { 
+                     { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
                         ;
                         const actualCtxTReoundedDownToTens = (
                            Iterable.Range(-10, actualCtxT, 10 ).last(0 ) 
