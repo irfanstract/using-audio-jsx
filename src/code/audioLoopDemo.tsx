@@ -58,7 +58,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
     function (...[
         t ,
         {
-            checkPer ,
+            period: checkPer ,
         } ,
         {
             startT ,
@@ -71,7 +71,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
         t: number ,
         config0: (
             {
-                checkPer : number ;
+                period : number ;
             }
         ) ,
         config1: (
@@ -204,7 +204,7 @@ export const AudioLoopDemoApp = (function () {
                                     ;
                                     for (const value of (
                                         cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
-                                            checkPer ,
+                                            period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
@@ -229,7 +229,7 @@ export const AudioLoopDemoApp = (function () {
                                     ;
                                     for (const value of (
                                         cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
-                                            checkPer ,
+                                            period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
@@ -254,7 +254,7 @@ export const AudioLoopDemoApp = (function () {
                                     ;
                                     for (const value of (
                                         cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
-                                            checkPer ,
+                                            period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
