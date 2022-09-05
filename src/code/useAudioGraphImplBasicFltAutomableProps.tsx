@@ -190,7 +190,7 @@ type BiquadFltCProps = (
     React.PropsWithChildren<(    
     (
         {   
-            type : BiquadFilterType ;                
+            type : Exclude<BiquadFilterType, "lowpass" | "highpass"> ;                
         }      
         &    
         FreqArgsProps  
@@ -198,6 +198,20 @@ type BiquadFltCProps = (
         FreqArgsPropsExt
         &  
         GainValArgsProps1               
+    )
+    |
+    (
+        {   
+            type : "lowpass" | "highpass" ;                
+        }      
+        &    
+        FreqArgsProps  
+        & //
+        FreqArgsPropsExt
+        &
+        Partial<(
+            Record<keyof GainValArgsProps1 , never >
+        )>
     )
     )>
 ) ;               
