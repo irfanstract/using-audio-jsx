@@ -87,7 +87,11 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
         ) ,
     ]) : ([number] | [] ) { 
         ;
-        if (startT <= (t % checkPer ) && (t % checkPer ) < endT ) {
+        if ((
+            startT <= (t % checkPer ) 
+            && 
+            (t % checkPer ) < endT 
+        )) {
             return [
             (
                 linearSlidingStateAtT
