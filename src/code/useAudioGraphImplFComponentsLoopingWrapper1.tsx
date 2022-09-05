@@ -130,14 +130,16 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      30000 : (period + 0.5)
                );             
                const item11 = (   
+                  ((itemRenderCtx: Parameters<LwpPayloadCallback >[0] ) => (   
                   (typeof item === "function") ?      
                        (() => {            
                         const item110 = (
-                           item({ perInstanceRelativeT, componentLevelAbsoluteT })           
+                           item(itemRenderCtx)           
                         );
                         return item110  ;   
                        })()
                      : (<>{ item }</> )  
+                  ))({ perInstanceRelativeT, componentLevelAbsoluteT })
                ) ;
                // return (                         
                //    withAutoUnmount((
