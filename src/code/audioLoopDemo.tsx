@@ -54,11 +54,13 @@ import '../App.css';
 
     
 
-const periodicCheckSliding1 = (
+const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
     function (...[
         t ,
         {
             checkPer ,
+        } ,
+        {
             startT ,
             anEndT ,
             endT ,
@@ -67,9 +69,13 @@ const periodicCheckSliding1 = (
         } ,
     ] : [
         t: number ,
-        config: (
+        config0: (
             {
                 checkPer : number ;
+            }
+        ) ,
+        config1: (
+            {
 
                 startT : number ; 
                 anEndT : number ;
@@ -193,8 +199,9 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndValue = startValue + -1 ;
                                     ;
                                     for (const value of (
-                                        periodicCheckSliding1(t, {
+                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
                                             checkPer ,
+                                        }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
@@ -217,8 +224,9 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndValue = 3 + (2 * 2 ) ;
                                     ;
                                     for (const value of (
-                                        periodicCheckSliding1(t, {
+                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
                                             checkPer ,
+                                        }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
@@ -241,8 +249,9 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndValue = 3 ;
                                     ;
                                     for (const value of (
-                                        periodicCheckSliding1(t, {
+                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
                                             checkPer ,
+                                        }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
