@@ -255,7 +255,7 @@ const MetronomeAndResponseGraph = (
          throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
       } ;                
       if (!(0.05 < tickTockPeriod ) ) {     
-         return (<></>) ;
+         // return (<></>) ;
       } ;      
       const {
          preFT: mtPreFT = 2 , 
