@@ -234,6 +234,11 @@ const LoopingWithPeriod = (
                </span>
             </p>
          ) ;
+         const itemsRenderedAsListElem = (
+            useItemsRenderedImplPossiblyDeferredValue(() => (
+               arrayIndexedOrderedList(itemsRendered.toArray() )
+            ) )
+         ) ;
          return (        
             <div>              
                <p> a loop </p>          
@@ -241,7 +246,7 @@ const LoopingWithPeriod = (
                <div style={{ display: (visual === false ) ? "none" : "unset" }} >  
                      <LoopingCompContentDiv   >    
                      <wgdDivCtx.Provider value={false} >
-                     { arrayIndexedOrderedList(itemsRendered.toArray()  )   } 
+                     { itemsRenderedAsListElem } 
                      </wgdDivCtx.Provider>
                      </LoopingCompContentDiv >       
                </div>
