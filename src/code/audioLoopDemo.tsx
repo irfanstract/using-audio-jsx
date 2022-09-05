@@ -2,7 +2,7 @@
 import { IterableOps } from "./generalUse11";
 import { linearSlidingStateAtT } from "./timeDomainClosedGradientSampling1";
 import { SupportedFShiftAmtInterpretation } from "./audioFreqShiftInterpretation1";
-import { periodicTRestrictedLinearlyApproachedValueAtT1 } from "./audioMonoWavetableSamplingAtT";
+import { periodicTRestrictedLinearlyApproachedValueAtT1 } from "./audioTDomainPeriodicPlotSamplingAtT";
 import React, { useReducer, useState } from "react";   
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { 
