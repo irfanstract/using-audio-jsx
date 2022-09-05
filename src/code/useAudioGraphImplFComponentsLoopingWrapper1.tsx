@@ -213,7 +213,7 @@ type MetronomeGraphingCallback = (
  * `t` in call-time `ctx` is (meant) to be *interpreted relatively*.
  */ 
 const MetronomeAndResponseGraph = (
-   function (properties11 : ( 
+   function MetronomeAndResponseGraphB(properties11 : ( 
       { 
          /**    
           * the payload
@@ -243,7 +243,7 @@ const MetronomeAndResponseGraph = (
             PreFTAndPostFTProps
          )>
       )>  
-   )) {                  
+   )): React.ReactElement {                  
       const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
          properties11    
       ) ;    
