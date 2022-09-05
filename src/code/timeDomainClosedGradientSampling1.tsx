@@ -40,7 +40,7 @@ function closedGradientTraceStateAtT(...[
  * exactly {@link closedGradientTraceStateAtT }.
  * 
  * @deprecated
- * "sliding" has alternative *meaning*s.
+ * "linear sliding" has alternative *meaning*s.
  */
 const linearSlidingStateAtT = (
    closedGradientTraceStateAtT
