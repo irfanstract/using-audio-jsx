@@ -514,6 +514,7 @@ const {
                            ;
                            const {
                               flType,
+                              freqArgNormalValue ,
                               freqArgGraph1,
                               gainValArgument1,
 
@@ -521,7 +522,7 @@ const {
                            } = (
                                  // TODO
                                  React.useDeferredValue((
-                                    propsParse(mainProps)
+                                    propsParse({ freqArgumentNormalValue: 48000, ...mainProps })
                                  ))
                               );
                            const {
@@ -532,7 +533,7 @@ const {
                                  useC1(nd0, flType, {
                                     // TODO
                                     normalFreq: (
-                                       48000 
+                                       freqArgNormalValue 
                                     ) ,
                                  })
                               );
