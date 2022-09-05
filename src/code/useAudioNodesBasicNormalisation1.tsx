@@ -90,7 +90,7 @@ const {
              * specifying this prop, 
              * is a way to customise the norm range (defaulting to `c.sampleRate` )
              */
-            f ?: number ;        
+            f : number ;        
         }                 
     ) ;  
     /**   
