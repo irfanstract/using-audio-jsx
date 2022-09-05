@@ -218,7 +218,7 @@ export const AudioLoopDemoApp = (function () {
             ;
             return (
                 <WithSpecifiedGVisTarget value={gVisTarget} >
-                    <div key={key }>   
+                    <div>   
                     <K>
                         { instrumentsVisualiView }
                     </K>
