@@ -1,2 +1,0 @@
-
-export * from "./audioTDomainPeriodicPlotSamplingAtT1" ;
