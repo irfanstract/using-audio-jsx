@@ -100,7 +100,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          const { value: { period } } = props1;
          const getOverflowDeservesVisibility = (
             (p: 0 | 1) => (
-               avTrackConcatShallPropagate(clippingMode, 0)
+               avTrackConcatShallPropagate(clippingMode, p)
                ||
                OmitOrPropagate.OMIT 
             )
