@@ -529,7 +529,12 @@ const {
                               mFrequencyValue: freqArgCtrlDest1,
                               mGainValue: gainCtrlDest1,
                            } = (
-                                 useC1(nd0, flType)
+                                 useC1(nd0, flType, {
+                                    // TODO
+                                    normalFreq: (
+                                       48000 
+                                    ) ,
+                                 })
                               );
                            const c1 = (
                               // TODO         
