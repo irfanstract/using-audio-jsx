@@ -239,7 +239,16 @@ export const AudioLoopDemoApp = (function () {
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
                     <BassDrumLoopDv subhalvesN={2 } />
+                    <CBiquadFilterModulated
+                    type="highpass"
+                    freqArgumentNormalValue={48000 }
+                    freqArgumentInterpretation="timedomain-normalised"
+                    freqArgument={(
+                        <CConstantValue value={27.5 / 44100 } />
+                    )}
+                    >
                     { bassLine }
+                    </CBiquadFilterModulated>
                 </WithSlowdown>
                 </WithSlowdown>
                 ) ;
