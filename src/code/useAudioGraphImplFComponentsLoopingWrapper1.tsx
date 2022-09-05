@@ -251,7 +251,7 @@ const MetronomeAndResponseGraph = (
          throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
       } ;                
       if (!(0.05 < tickTockPeriod ) ) {     
-         throw TypeError(`such a low 'tickTockPeriod' is unacceptable.`) ; 
+         return (<></>) ;
       } ;      
       const {
          preFT: mtPreFT = 2 , 
