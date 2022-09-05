@@ -193,6 +193,8 @@ type BiquadFltCProps = (
         }      
         &    
         FreqArgsProps  
+        & //
+        FreqArgsPropsExt
         &  
         /**      
          * either
