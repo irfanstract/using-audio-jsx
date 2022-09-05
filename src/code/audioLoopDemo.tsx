@@ -60,13 +60,7 @@ const periodicTRestrictedLinearlyApproachedValueAtT1 = (
         {
             period: checkPer ,
         } ,
-        {
-            startT ,
-            anEndT ,
-            endT ,
-            startValue ,
-            finalValue ,
-        } ,
+        props ,
     ] : [
         t: number ,
         config0: (
@@ -86,6 +80,13 @@ const periodicTRestrictedLinearlyApproachedValueAtT1 = (
             }
         ) ,
     ]) : ([number] | [] ) { 
+        const {
+            startT ,
+            anEndT ,
+            endT ,
+            startValue ,
+            finalValue ,
+        } = props ;
         ;
         if (0 <= t ) {
         if ((
