@@ -105,6 +105,10 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                OmitOrPropagate.OMIT 
             )
          );
+         if (clippingMode === AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ) {
+            // TODO return the exclusively-mounting version
+            ;
+         }
          const itemAfterAutoUnmounting: (PeerChildrenPropType & Function) = (
             function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
                const premountTime = (
