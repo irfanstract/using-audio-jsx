@@ -88,9 +88,9 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
     ]) : ([number] | [] ) { 
         ;
         if ((
-            startT <= (t % checkPer ) 
+            Math.max(0, startT ) <= (t % checkPer ) 
             && 
-            (t % checkPer ) < endT 
+            (t % checkPer ) < (startT <= endT ? endT : (checkPer + endT ) ) 
         )) {
             return [
             (
