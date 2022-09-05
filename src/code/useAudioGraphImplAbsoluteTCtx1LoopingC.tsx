@@ -128,6 +128,16 @@ const LoopingWithPeriod = (
             start: renderRangeStart = 0 ,        
             n : renderRangeN ,   
          } = renderRange ;             
+         /**    
+          * to avoid potential expense in the rendering,
+          * an indirection involving {@link useDeferredRecompute} will be important
+          * (at expense of under-responsivity, which, however, will not be significant for typical usage patterns, however ).
+          * this will be
+          * either {@link useDeferredRecompute } or plain `to directly run given fnc`.
+          */
+         const useItemsRenderedImplPossiblyDeferredValue : (
+            <R>(f: () => R) => R
+         ) = useDeferredRecompute ;
          const itemsRendered = (            
             function useIR() {             
                const {
