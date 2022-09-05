@@ -184,11 +184,11 @@ const LoopingWithPeriod: (
    LoopingWithPeriodAndAutoUnmounting
 ) ;      
             
-const MetronomePayloadCallback = {} ; // TS-1205
+const MetronomeGraphingCallback = {} ; // TS-1205
 /**    
  * `t` will be relative to the resulting M. 
  */
-type MetronomePayloadCallback = (
+type MetronomeGraphingCallback = (
    ( 
       (ctx: { t: number ; } )  
       =>  
@@ -218,7 +218,7 @@ const MetronomeAndResponseGraph = (
           * the payload
           */
          children : ( 
-            MetronomePayloadCallback  
+            MetronomeGraphingCallback  
          ) ;         
          /**        
           * the engine constraints
@@ -382,5 +382,5 @@ export {
    LoopingWithPeriod ,         
    LwpPayloadCallback ,   
    MetronomeAndResponseGraph ,  
-   MetronomePayloadCallback , 
+   MetronomeGraphingCallback , 
 } ;   
