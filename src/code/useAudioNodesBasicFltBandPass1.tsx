@@ -43,10 +43,17 @@ import {
  * it's the calling-code responsibility for that      
  */ 
 const useBqFltPtModulated = (           
-    function (...[nd0, tpe1] : [
+    function (...[nd0, tpe1, propsNfSpecified1 ] : [
         AudioNode | null , 
         BiquadFilterType ,
+        {
+            normalFreq : number ;
+        } ,
     ] ) {
+        const {
+            normalFreq: normalFreqSpecified ,
+        } = propsNfSpecified1 ;
+        ;
         const nd1 = (
             useBiquadFilterNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
         ) ;       
@@ -56,7 +63,7 @@ const useBqFltPtModulated = (
         } , [nd1, tpe1 ]);        
         const mf1 = (       
             useBiquadFltNdFreqArgumentChnl       
-        )(nd1 , { type: "frequency" }  ) ;
+        )(nd1 , { type: "frequency" , f: normalFreqSpecified }  ) ;
         return {                
             main : (nd1 || null ) as (AudioNode | null ) ,               
             mGainValue : (   
