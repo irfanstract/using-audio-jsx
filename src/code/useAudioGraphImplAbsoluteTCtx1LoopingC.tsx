@@ -145,7 +145,7 @@ const LoopingWithPeriod = (
                } = ( 
                      useCurrentTInf() 
                ) ;
-               return (      
+               const iSeqExpandedTInf = (      
                      (
                         React.useMemo(() => (   
                            Immutable.Range(0 , renderRangeStart + renderRangeN )  
@@ -165,6 +165,9 @@ const LoopingWithPeriod = (
                            ) )                                 
                         ) , [renderRangeStart, renderRangeN, vInitialOffset, vPeriod  ])   
                      )                 
+               )      ;
+               return (      
+                     iSeqExpandedTInf
                      .map(function (prps1 , itemI ): ReturnType<LwpPayloadCallback > {   
                         if (prps1) {
                            const { t: itemT } = prps1 ; 
