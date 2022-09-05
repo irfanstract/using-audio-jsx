@@ -213,6 +213,7 @@ const biquadFltCPropsParse = (
 
         } = mainProps ;    
         const { //
+            freqArgNormalValue ,
             freqArgGraphSpecified ,
             freqArgumentInterpretation , 
             freqArgGraph0 ,
@@ -238,6 +239,7 @@ const biquadFltCPropsParse = (
         ;             
         return {  
             flType ,  
+            freqArgNormalValue ,
             freqArgGraph1 , 
             gainValArgument1 ,   
 
