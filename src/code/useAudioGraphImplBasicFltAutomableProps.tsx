@@ -188,6 +188,7 @@ const evSingleArgumentTerminalNodeCPropsParse = (
 const BiquadFltCProps = {} as const ; // `--isolated-modules` - TS-1205 
 type BiquadFltCProps = (
     React.PropsWithChildren<(    
+    (
         {   
             type : BiquadFilterType ;                
         }      
@@ -197,6 +198,7 @@ type BiquadFltCProps = (
         FreqArgsPropsExt
         &  
         GainValArgsProps1               
+    )
     )>
 ) ;               
 const biquadFltCPropsParse = (            
