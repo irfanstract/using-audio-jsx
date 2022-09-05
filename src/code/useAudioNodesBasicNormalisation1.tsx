@@ -119,6 +119,46 @@ const {
             } ;
         }              
     ) ;  
+    const cfArgsParseFArgNormalValueSpecOmissionErrorWarn = (
+        (() => {
+            ;
+            const pre = (
+                Immutable.Range(0, 7 )
+                .map(() => (
+                    IterableOps.throttle(({ inferredValue } : { inferredValue : number ; }  ): void => {
+                        console.error((
+                            TypeError((
+                                [
+                                    `the 'f' value was left 'undefined' ; please fix your code to (explicitly) specify it .` ,
+                                    `inferred value : ${inferredValue } `
+                                ]
+                                .join("\n")
+                            ))
+                        )) ;
+                    } , (
+                        // 5 minutes
+                        5 * 60 
+                        * 
+                        1000
+                    ) , { leading: true } )
+                ))
+                .toArray()
+            ) ;
+            return (() => {
+                const gn = (function * () {
+                    for (;;) {
+                        for (const f of pre ) {
+                            yield f ;
+                        }
+                    }
+                } )() ;
+                return (...a: Parameters<(typeof pre )[number] & object > ) => (
+                    gn.next().value
+                    (...a )
+                ) ;
+            })() ;
+        })()
+    ) ;
     const useNormalisedArgumentativeChnlGna = (
         function <YyNode1 extends {} >(...[              
             dest, which1, f ,   
@@ -262,6 +302,10 @@ const {
             } = (
                 cFArgsParse(dest, f0 )  
             ) ;        
+            (
+                (typeof f0 === "number" )
+                ||cfArgsParseFArgNormalValueSpecOmissionErrorWarn({ inferredValue: f })
+            ) ;
             const cd = (
                 useNormalisedArgumentativeChnlGna<(
                     Pick<NonNullable<typeof dest > , "Q" | "frequency" | "gain">
