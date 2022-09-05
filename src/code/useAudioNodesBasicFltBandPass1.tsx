@@ -43,7 +43,10 @@ import {
  * it's the calling-code responsibility for that      
  */ 
 const useBqFltPtModulated = (           
-    function (nd0: AudioNode | null , tpe1: BiquadFilterType ) {
+    function (...[nd0, tpe1] : [
+        AudioNode | null , 
+        BiquadFilterType ,
+    ] ) {
         const nd1 = (
             useBiquadFilterNodeWithGivenFadeoutTimeConstant1(nd0, 0.5 )   
         ) ;       
