@@ -82,6 +82,21 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
            ComponentProps<typeof LoopingWithPeriodSimple >["children"]
        )
    ) ;                  
+   const payloadEval = (
+      (...[item, itemRenderCtx] : [
+         PeerComponentPayload ,
+         Parameters<LwpPayloadCallback >[0] ,
+      ] ): ReturnType<LwpPayloadCallback > => (   
+         (typeof item === "function") ?      
+            (() => {            
+               const item110 = (
+                  item(itemRenderCtx)           
+               );
+               return item110  ;   
+            })()
+            : (<>{ item }</> )  
+      )
+   ) ;
    return (    
       function LoopingWithPeriodC(props10: (
          ComponentProps<typeof LoopingWithPeriodSimple>
@@ -131,14 +146,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                );             
                const item11 = (   
                   ((itemRenderCtx: Parameters<LwpPayloadCallback >[0] ) => (   
-                  (typeof item === "function") ?      
-                       (() => {            
-                        const item110 = (
-                           item(itemRenderCtx)           
-                        );
-                        return item110  ;   
-                       })()
-                     : (<>{ item }</> )  
+                  payloadEval(item, itemRenderCtx )
                   ))({ perInstanceRelativeT, componentLevelAbsoluteT })
                ) ;
                // return (                         
