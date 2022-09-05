@@ -72,20 +72,30 @@ const periodicTRestrictedLinearlyApproachedValueAtT1 = (
             {
 
                 startT : number ; 
-                anEndT : number ;
+                anEndT ?: number ;
                 endT : number ;
 
-                startValue : number ; 
+                startValue ?: number ; 
                 finalValue : number ;
             }
         ) ,
     ]) : ([number] | [] ) { 
         const {
             startT ,
-            anEndT ,
             endT ,
-            startValue ,
             finalValue ,
+        } = props ;
+        const {
+            anEndT = (
+                startT
+                +
+                (0.25 * (endT - startT ) )
+            ) ,
+        } = props ;
+        const {
+            startValue = (
+                finalValue
+            ) ,
         } = props ;
         ;
         if (0 <= t ) {
