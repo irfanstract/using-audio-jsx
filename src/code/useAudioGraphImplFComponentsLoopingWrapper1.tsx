@@ -77,7 +77,7 @@ const {
    
                        
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
-   type PeerChildrenPropType = (                            
+   type PeerComponentPayload = (                            
        (
            ComponentProps<typeof LoopingWithPeriodSimple >["children"]
        )
@@ -109,7 +109,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
             // TODO return the exclusively-mounting version
             ;
          }
-         const itemAfterAutoUnmounting: (PeerChildrenPropType & Function) = (
+         const itemAfterAutoUnmounting: (PeerComponentPayload & Function) = (
             function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
                const premountTime = (
                   (
