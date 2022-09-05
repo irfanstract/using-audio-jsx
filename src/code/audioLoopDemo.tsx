@@ -54,7 +54,7 @@ import '../App.css';
 
     
 
-const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
+const periodicTRestrictedLinearlyApproachedValueAtT1 = (
     function (...[
         t ,
         {
@@ -65,7 +65,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
             anEndT ,
             endT ,
             startValue ,
-            anEndValue ,
+            finalValue ,
         } ,
     ] : [
         t: number ,
@@ -82,7 +82,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
                 endT : number ;
 
                 startValue : number ; 
-                anEndValue : number ;
+                finalValue : number ;
             }
         ) ,
     ]) : ([number] | [] ) { 
@@ -96,7 +96,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
             return [
             (
                 linearSlidingStateAtT
-            )(t % checkPer , { startT, anEndT: anEndT, startValue, anEndValue: anEndValue }  ) ,
+            )(t % checkPer , { startT, anEndT: anEndT, startValue, anEndValue: finalValue }  ) ,
             ] ;
         }
         }
@@ -202,17 +202,17 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndT = 30 ;
                                     const endT = 32 ;
                                     const startValue = -2 * 2 ;
-                                    const anEndValue = startValue + -1 ;
+                                    const finalValue = startValue + -1 ;
                                     ;
                                     for (const value of (
-                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
                                             period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
                                             startValue ,
-                                            anEndValue ,
+                                            finalValue ,
                                         } )
                                     ) ) { 
                                         return (
@@ -227,17 +227,17 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndT = 0.25 ;
                                     const endT = 0.5 ;
                                     const startValue = 0 ;
-                                    const anEndValue = 3 + (2 * 2 ) ;
+                                    const finalValue = 3 + (2 * 2 ) ;
                                     ;
                                     for (const value of (
-                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
                                             period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
                                             startValue ,
-                                            anEndValue ,
+                                            finalValue ,
                                         } )
                                     ) ) { 
                                         return (
@@ -252,17 +252,17 @@ export const AudioLoopDemoApp = (function () {
                                     const anEndT = 0.75 ;
                                     const endT = 1 ;
                                     const startValue = 3 + (2 * 2 ) ;
-                                    const anEndValue = 3 ;
+                                    const finalValue = 3 ;
                                     ;
                                     for (const value of (
-                                        cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1(t, {
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
                                             period: checkPer ,
                                         }, {
                                             startT ,
                                             anEndT ,
                                             endT ,
                                             startValue ,
-                                            anEndValue ,
+                                            finalValue ,
                                         } )
                                     ) ) { 
                                         return (
