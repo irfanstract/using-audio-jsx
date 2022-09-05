@@ -196,11 +196,6 @@ type BiquadFltCProps = (
         & //
         FreqArgsPropsExt
         &  
-        /**      
-         * either
-         * a) both shall be left out or *set to `undefined`*, 
-         * b) both shall be specified non-null
-         */     
         GainValArgsProps1               
     )>
 ) ;               
