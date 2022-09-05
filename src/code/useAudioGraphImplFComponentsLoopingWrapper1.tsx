@@ -87,12 +87,12 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          ComponentProps<typeof LoopingWithPeriodSimple>
          &
          {
-            autoUnmountMode?: AudioTrackConcatClippingMode;
+            clippingMode?: AudioTrackConcatClippingMode;
          }
       )) {
          const {
             children: item,
-            autoUnmountMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED,
+            clippingMode = AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED,
             ... 
             props1      
 
@@ -100,7 +100,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          const { value: { period } } = props1;
          const getOverflowDeservesVisibility = (
             (p: 0 | 1) => (
-               avTrackConcatShallPropagate(autoUnmountMode, 0)
+               avTrackConcatShallPropagate(clippingMode, 0)
                ||
                OmitOrPropagate.OMIT 
             )
@@ -320,7 +320,7 @@ const MetronomeAndResponseGraph = (
                   /**      
                    * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
                   */
-                  autoUnmountMode={(
+                  clippingMode={(
                      AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
                   ) }
             
