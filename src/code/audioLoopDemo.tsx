@@ -2,6 +2,7 @@
 import { IterableOps } from "./generalUse11";
 import { linearSlidingStateAtT } from "./timeDomainClosedGradientSampling1";
 import { SupportedFShiftAmtInterpretation } from "./audioFreqShiftInterpretation1";
+import { periodicTRestrictedLinearlyApproachedValueAtT1 } from "./audioMonoWavetableSamplingAtT";
 import React, { useReducer, useState } from "react";   
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { 
@@ -54,66 +55,6 @@ import '../App.css';
 
     
 
-const periodicTRestrictedLinearlyApproachedValueAtT1 = (
-    function (...[
-        t ,
-        {
-            period: checkPer ,
-        } ,
-        props ,
-    ] : [
-        t: number ,
-        config0: (
-            {
-                period : number ;
-            }
-        ) ,
-        config1: (
-            {
-
-                startT : number ; 
-                anEndT ?: number ;
-                endT : number ;
-
-                startValue ?: number ; 
-                finalValue : number ;
-            }
-        ) ,
-    ]) : ([number] | [] ) { 
-        const {
-            startT ,
-            endT ,
-            finalValue ,
-        } = props ;
-        const {
-            anEndT = (
-                startT
-                +
-                (0.25 * (endT - startT ) )
-            ) ,
-        } = props ;
-        const {
-            startValue = (
-                finalValue
-            ) ,
-        } = props ;
-        ;
-        if (0 <= t ) {
-        if ((
-            Math.max(0, startT ) <= (t % checkPer ) 
-            && 
-            (t % checkPer ) < (startT <= endT ? endT : (checkPer + endT ) ) 
-        )) {
-            return [
-            (
-                linearSlidingStateAtT
-            )(t % checkPer , { startT, anEndT: anEndT, startValue, anEndValue: finalValue }  ) ,
-            ] ;
-        }
-        }
-        return [] ;
-    }
-) ;
 const {
     currentTCtx , 
     currentTScaleCtx ,         
