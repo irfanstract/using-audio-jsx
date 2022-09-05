@@ -87,6 +87,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
         ) ,
     ]) : ([number] | [] ) { 
         ;
+        if (0 <= t ) {
         if ((
             Math.max(0, startT ) <= (t % checkPer ) 
             && 
@@ -97,6 +98,7 @@ const cFnvPeriodicTRestrictedLinearlyApproachedKeyValueAtT1 = (
                 linearSlidingStateAtT
             )(t % checkPer , { startT, anEndT, startValue, anEndValue }  ) ,
             ] ;
+        }
         }
         return [] ;
     }
