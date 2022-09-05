@@ -1,5 +1,6 @@
 
 import { IterableOps } from "./generalUse11";
+import { linearSlidingStateAtT } from "./timeDomainClosedGradientSampling1";
 import { SupportedFShiftAmtInterpretation } from "./audioFreqShiftInterpretation1";
 import React, { useReducer, useState } from "react";   
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
@@ -53,30 +54,6 @@ import '../App.css';
 
     
 
-function linearSlidingStateAtT(...[
-    t , 
-    { startT, anEndT, startValue: startV, anEndValue } ,
-] : [
-    t: number ,
-    config: {
-        startT : number ; 
-        anEndT : number ;
-        startValue : number ;
-        anEndValue : number ;
-    } ,
-] ): number {
-    const p = (
-        IterableOps.clamp((
-            (t - startT ) 
-            / (anEndT - startT )
-        ) , 0, 1 )
-    ) ;
-    return (
-        startV 
-        + 
-        (p * (anEndValue - startV ) )
-    ) ;
-} 
 const periodicCheckSliding1 = (
     function (...[
         t ,
