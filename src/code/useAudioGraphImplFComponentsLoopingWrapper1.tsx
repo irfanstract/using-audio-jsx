@@ -362,7 +362,7 @@ const MetronomeAndResponseGraph = (
                               (
                                  (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (actualCtxTReoundedDownToTens ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (Iterable.Range(-10, actualCtxT, 3.5 ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
