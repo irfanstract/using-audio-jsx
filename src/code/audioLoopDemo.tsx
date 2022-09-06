@@ -115,17 +115,10 @@ export const AudioLoopDemoApp = (function () {
             const quantityReductiveDbgMode = (
                 (() : boolean => false )()
             ) ;
-            /**    
-             * {@link tCtxs.currentTCtx.Provider }
-             */
-            const {
-                Provider: TP ,     
-            } = (
-                tCtxs.currentTCtx             
-            ) ;                        
-            const {  
-                Consumer: TCP ,    
-            } = tCtxs.currentTInfCtx ;
+            const { //
+                TCP ,
+                TP ,
+            } = TPTC ;
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
@@ -304,3 +297,22 @@ export const AudioLoopDemoApp = (function () {
         }  
     ) ;
 })() ;           
+const TPTC = (() => {
+    ;
+    /**    
+     * {@link tCtxs.currentTCtx.Provider }
+     */
+    const {
+        Provider: TP ,     
+    } = (
+        tCtxs.currentTCtx             
+    ) ;                        
+    const {  
+        Consumer: TCP ,    
+    } = tCtxs.currentTInfCtx ;
+    ;
+    return {
+        TCP ,
+        TP ,
+    } ;
+})() ;
