@@ -124,7 +124,7 @@ const BootlegMusicDv : (
       preFT={2 }
       postFT={3 }
       value={{ tickTockPeriod: 0.5 / dv }}
-      renderRange={{ n: 4 * 4 * 8 * dv , ...renderRange }}
+      renderRange={renderRange }
       >
       { ({ t }) => (
          <>
