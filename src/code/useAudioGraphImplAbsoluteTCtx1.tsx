@@ -41,7 +41,7 @@ function useConditionalDeference1(e : React.ReactElement, perios : number ) {
     const e0 = React.useDeferredValue(e ) ;
     return (3 <= perios ) ? e0 : e  ;
 }     
-const useDescendantCurrentTDiffing = (    
+const useCurrentTDiffing = (    
     function () {
         const {   
             t: componentLevelT ,               
@@ -91,7 +91,7 @@ export {
     currentTInfCtx ,    
     useCurrentTInf ,    
     WithCurrentTInfo ,   
-    useDescendantCurrentTDiffing ,      
+    useCurrentTDiffing ,      
 
     CurrentTDisplay , 
     WithDelay , 
