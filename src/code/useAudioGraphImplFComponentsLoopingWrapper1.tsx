@@ -318,6 +318,7 @@ const MetronomeAndResponseGraph = (
                ;
                const {
                   tScale: tCtxTScaleVl , 
+                  t: absoluteScheduledTE ,
                } = (
                   tCtxs.useCurrentTInf()
                ) ;
