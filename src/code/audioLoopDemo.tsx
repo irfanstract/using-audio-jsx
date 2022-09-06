@@ -118,6 +118,8 @@ export const AudioLoopDemoApp = (function () {
             const { //
                 TCP ,
                 TP ,
+                withADestCtxTCompletionStatCtx ,
+                WithADestCtxTCompletionStatCtx ,
             } = TPTC ;
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
