@@ -292,23 +292,24 @@ const MetronomeAndResponseGraph = (
          ) , 0 )
       ) ;                          
       const mainRendered = (
-         <WithCurrentDestNdRef>  
-         { ({ feedPt: nd0 }) => (        
+      (function useMainRenderedImpl() {
+         const {
+            feedPt : nd0 ,
+            currentTime: actualCtxT0 ,
+         } = (
+            useCurrentDestNdRefAndCtxT()
+         ) ;
+         const actualCtxT = (
+            React.useMemo(() => (
+               (typeof actualCtxT0 === "number" ) ?
+               actualCtxT0
+               : false
+            ) , [actualCtxT0 && Math.floor(actualCtxT0 * 4 ) ] )
+         ) ;
+         return (
             <CBC>
-            { function useE () {  
-               const actualCtxT = (
-                  useRealTimeQueryInterval1({
-                     f: () => (
-                        nd0 ?  
-                        nd0.context.currentTime
-                        : false    
-                     ) , 
-                     deps: [nd0 ] ,   
-                  } , (
-                     // TODO 
-                     1100
-                  ) )    
-               ) ;
+            { function useEF() {
+               ;
                const {
                   tScale: tCtxTScaleVl , 
                } = (
@@ -369,8 +370,8 @@ const MetronomeAndResponseGraph = (
                ) ; 
             } }
             </CBC>
-         ) }
-         </WithCurrentDestNdRef> 
+         ) ;
+      } )()
       ) ;
       return (
          // TODO 
