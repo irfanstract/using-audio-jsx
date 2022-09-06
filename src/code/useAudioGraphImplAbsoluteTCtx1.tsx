@@ -43,11 +43,8 @@ function useConditionalDeference1(e : React.ReactElement, perios : number ) {
 }     
 const useCurrentTDiffing = (    
     function () {
-        const {   
-            t: componentLevelT ,               
-            tScale: componentLevelTScale ,        
-        } = useCurrentTInf() ;         
-        const renderWithInfo = (  
+        const primaryLevelValues = useCurrentTInf() ;         
+        const renderWithFinalValues = (  
             function (...[cb] : [
                 (ctx: { xTDiff : number ; xTScaleValueMultiplitude : number ; } ) => React.ReactElement ,  
             ] ) {   
@@ -56,10 +53,10 @@ const useCurrentTDiffing = (
                         { ({ t: descendantTVal, tScale: descendantTSclVal }) => (
                             cb({  
                                 xTDiff: (              
-                                    descendantTVal - componentLevelT
+                                    descendantTVal - primaryLevelValues.t
                                 ) ,      
                                 xTScaleValueMultiplitude : (
-                                    descendantTSclVal / componentLevelTScale
+                                    descendantTSclVal / primaryLevelValues.tScale
                                 ) , 
                             })
                         ) }
@@ -68,10 +65,9 @@ const useCurrentTDiffing = (
             }
         ) ;  
         return {
-            componentLevelT , 
-            componentLevelTScale , 
+            primaryLevelValues , 
 
-            renderWithInfo , 
+            renderWithFinalValues , 
 
         } ;
     }
