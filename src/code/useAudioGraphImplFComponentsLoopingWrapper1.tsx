@@ -273,17 +273,7 @@ const MetronomeAndResponseGraph = (
          preFT: mtPreFT = 2 , 
          postFT: mtPostFT = 3 ,
       } = properties11 ;
-      const {  
-         renderRange = {       
-            n: (    
-               // TODO
-               Math.round((
-                  (0x40 / tickTockPeriod) 
-               ))         
-            ) ,      
-         } ,  
- 
-      } = properties11 ;
+      ;
       const [lastRenderT1, tryAdvanceLastRenderT1] = (     
          React.useReducer((v0: number, v1: number) => (
             ((v0 + 20 ) <= v1 ) ?
@@ -291,6 +281,22 @@ const MetronomeAndResponseGraph = (
             : v0       
          ) , 0 )
       ) ;                          
+      const {  //
+         renderRange = {       //
+            n: (    //
+               // TODO
+               Math.round((
+                  (0x40 / tickTockPeriod) 
+               ))         
+            ) ,      
+            start: ( //
+               Math.floor((
+                  lastRenderT1 / tickTockPeriod
+               ))
+            ) ,
+         } ,  //
+ 
+      } = properties11 ; //
       const mainRendered = (
       (function useMainRenderedImpl() {
          const {
@@ -331,7 +337,7 @@ const MetronomeAndResponseGraph = (
                      // TODO make this configurable
                      period: tickTockPeriod ,            
                                  
-                     initialOffset: lastRenderT1 , 
+                     initialOffset: 0 , 
                   }}                                    
                   renderRange={renderRange }   
                   /**      
