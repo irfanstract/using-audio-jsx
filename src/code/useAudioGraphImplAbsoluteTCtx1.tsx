@@ -76,6 +76,21 @@ const useCurrentTDiffing = (
         } ;
     }
 ) ;
+const WithCurrentTDiffing = (
+    function ({ children: payload } : { 
+        children : (
+            (ctx: ReturnType<typeof useCurrentTDiffing>) 
+            => React.ReactElement
+        ) ;
+    } ): React.ReactElement {
+        const ctx = (
+            useCurrentTDiffing()
+        ) ;
+        return (
+            payload(ctx )
+        ) ;
+    }
+) ;
                       
             
 
@@ -92,6 +107,7 @@ export {
     useCurrentTInf ,    
     WithCurrentTInfo ,   
     useCurrentTDiffing ,      
+    WithCurrentTDiffing ,
 
     CurrentTDisplay , 
     WithDelay , 
