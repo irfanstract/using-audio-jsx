@@ -233,17 +233,57 @@ export const AudioLoopDemoApp = (function () {
                 return (
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
+                <WithADestCtxTCompletionStatCtx>
+                { ({ withADestCtxCompletionStat }) => (
+                <>
+                { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
+                    (tPassed < 64 ) ?
                     <BassDrumLoopDv subhalvesN={2 } />
-                    <CBiquadFilterModulated
-                    type="highpass"
-                    freqArgumentNormalValue={48000 }
-                    freqArgumentInterpretation="timedomain-normalised"
-                    freqArgument={(
-                        <CConstantValue value={27.5 / 44100 } />
-                    )}
-                    >
-                    { bassLine }
-                    </CBiquadFilterModulated>
+                    : <div />
+                ) ) }
+                { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
+                    (
+                    (payload: React.ReactElement ): React.ReactElement => {
+                        const bfProps : (
+                            Omit<(
+                                ComponentProps<typeof CBiquadFilterModulated>
+                                &
+                                (
+                                    { type : "highpass" | "lowpass" ; }
+                                )
+                            ) , "children">
+                        ) = (
+                            !(64 <= tPassed ) ?
+                            {
+                                type: "highpass" ,
+                                freqArgumentNormalValue: 48000 ,
+                                freqArgumentInterpretation: "timedomain-normalised" ,
+                                freqArgument: (
+                                    <CConstantValue value={27.5 / 44100 } />
+                                ) ,
+                            }
+                            : {
+                                type: "lowpass" ,
+                                freqArgumentNormalValue: 48000 ,
+                                freqArgumentInterpretation: "timedomain-normalised" ,
+                                freqArgument: (
+                                    <CConstantValue value={43000 / 44100 } />
+                                ) ,
+                            }
+                        ) ;
+                        return (
+                            <CBiquadFilterModulated
+                            {...bfProps }
+                            >
+                            { payload }
+                            </CBiquadFilterModulated>
+                        ) ;
+                    }
+                    )(bassLine )
+                ) ) }
+                </>
+                ) }
+                </WithADestCtxTCompletionStatCtx>
                 </WithSlowdown>
                 </WithSlowdown>
                 ) ;
