@@ -338,7 +338,7 @@ const MetronomeAndResponseGraph = (
                      // TODO make this configurable
                      period: tickTockPeriod ,            
                                  
-                     initialOffset: 0 , 
+                     initialOffset: lastRenderT1 , 
                   }}                                    
                   renderRange={renderRange }   
                   /**      
