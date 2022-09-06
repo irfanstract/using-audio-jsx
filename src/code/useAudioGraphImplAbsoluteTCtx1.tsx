@@ -46,7 +46,13 @@ const useCurrentTDiffing = (
         const primaryLevelValues = useCurrentTInf() ;         
         const renderWithFinalValues = (  
             function (...[cb] : [
-                (ctx: { xAbsoluteTDiff : number ; xTScaleValueMultiplitude : number ; } ) => React.ReactElement ,  
+                (
+                    (ctx: { 
+                        xAbsoluteTDiff : number ; 
+                        xTScaleValueMultiplitude : number ; 
+                    } ) 
+                    => React.ReactElement
+                ) ,  
             ] ) {   
                 return (
                     <WithCurrentTInfo>     
