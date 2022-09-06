@@ -124,6 +124,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
             // TODO return the exclusively-mounting version
             ;
          }
+         {
          const itemAfterAutoUnmounting: (PeerComponentPayload & Function) = (
             function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
                const premountTime = (
@@ -179,6 +180,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                {itemAfterAutoUnmounting}
             </LoopingWithPeriodSimple>
          );
+         }
       }     
    ) ;  
 })() ;        
