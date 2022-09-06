@@ -347,15 +347,22 @@ const MetronomeAndResponseGraph = (
                         const actualCtxTReoundedDownToTens = (
                            Iterable.Range(-10, actualCtxT, 10 ).last(0 ) 
                         );
+                        /**      
+                         * estimation of 
+                         * the {@link BaseAudioContext.currentTime `aDestCtx.currentTime` } for the current *item*.
+                         */
+                        const CURRENTITEM_VATX1 = (
+                           CVATX + (t * tCtxTScaleVl )
+                        ) ;
                         const e0 = (   
                            givenChildren({ t })          
                         );    
                         const e = (             
                            e0 && (            
                               (
-                                 ((CVATX + (t * tCtxTScaleVl ) ) + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
+                                 (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (actualCtxTReoundedDownToTens ) <= ((CVATX + (t * tCtxTScaleVl) ) + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (actualCtxTReoundedDownToTens ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
