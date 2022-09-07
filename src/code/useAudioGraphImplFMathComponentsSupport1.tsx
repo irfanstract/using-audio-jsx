@@ -399,7 +399,7 @@ const {
                         ) ) =>  (
                             (nd0 && (typeof currentTimeE === "number") )         
                             ?                   
-                            <CBC>      
+                            <CBC name="ToUseCScanTs">      
                             { function useE() {       
                                 /**    
                                  * the amount of time
@@ -488,7 +488,7 @@ const {
                                  * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
                                  */
                                 const emAfterRemountDeps = React.useMemo(() => (
-                                    <CBC > 
+                                    <CBC name="EmAfterRemountDeps" > 
                                     { function useCE1() {  
                                         ;
                                         const graph = (        
@@ -652,7 +652,7 @@ const {
                                 ) , remountDeps1 ) ;               
                                 const eRemountDepsCountCbcDebug = (
                                     React.useMemo(() => (
-                                        <CBC>
+                                        <CBC name="eRemountDepsCountCbcDebug">
                                         { function useCbcd() {
                                             return (
                                                 <section>
