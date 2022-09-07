@@ -95,7 +95,7 @@ const TPTC = (() => {
                            (...[payload1 ] : (
                               [InnerRenderer ]
                            )) => (
-                           <CBC>
+                           <CBC name="WithADestCtxCompletionStat_CCS">
                            { function useCCS() {
                               ;
                               const { 
