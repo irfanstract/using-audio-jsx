@@ -82,6 +82,15 @@ type LWpamPayloadMountSpanProperties = (
       mountDuration : number ;
    }
 ) ;
+class LWpamPayloadMountSpanProperties1 implements LWpamPayloadMountSpanProperties {
+   constructor(
+      public premountTime : number ,
+      public mountDuration : number ,
+   ) {}
+   toString(): string {
+      return JSON.stringify(this) ;
+   }
+} ;
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
    type PeerComponentPayload = (                            
        (
@@ -108,7 +117,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          ComponentProps<typeof LoopingWithPeriodSimple>
          &
          {
-            clippingMode?: AudioTrackConcatClippingMode;
+            clippingMode?: AudioTrackConcatClippingMode | LWpamPayloadMountSpanProperties1;
          }
       )) {
          const {
@@ -130,6 +139,10 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                   premountTime ,
                   mountDuration ,
                } = ((): LWpamPayloadMountSpanProperties => {
+               if (clippingMode instanceof LWpamPayloadMountSpanProperties1 ) {
+                  return clippingMode ;
+               } 
+               {
                const getOverflowDeservesVisibility = (
                   (p: 0 | 1) => (
                      avTrackConcatShallPropagate(clippingMode, p)
@@ -157,6 +170,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      30000 : (period + 0.5)
                ),//;             
                } ; 
+               }
                } )() ; 
                const item11 = (   
                   ((itemRenderCtx: Parameters<LwpPayloadCallback >[0] ) => (   
