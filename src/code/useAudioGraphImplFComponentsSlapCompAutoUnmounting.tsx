@@ -82,7 +82,8 @@ const {
             => 
             React.ReactElement                          
         ) ,           
-    ] ) => (  
+    ] ) => {
+        const Cm = (  
         function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0 } : ( 
             Props    
         ) ) {   
@@ -107,7 +108,7 @@ const {
                 useWithCurrentACtxCurrentT(({ currentTime: ctxT }) => (        
                     (typeof ctxT === "number")
                     ?  
-                    <CBC>{ function useC1() {    
+                    <CBC name={"CBC_SLAPC_" + f.name } >{ function useC1() {    
                         const {       
                             passageState: passageState ,          
                             hasPassedT: hasPassedT ,  
@@ -140,7 +141,12 @@ const {
                 ) )   
             ) ;      
         }     
-    ) ;         
+        ) ;         
+        (Cm as React.FC<{}> ).displayName = (
+            f.name + "_Comp"
+        ) ;
+        return Cm ;
+    } ;         
     const withAutoUnmountImpl = (   
         function (...[passageState, expectedChildren ] : [             
             PassageState ,    
