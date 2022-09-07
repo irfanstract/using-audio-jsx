@@ -136,7 +136,7 @@ const {
                          * `react-eslint/react-hooks`
                          */
                         const v1 = (
-                            useAudioCtxCurrentTime1(value.feedPt?.context || null , { periodMillis: 62.5 }, {} )
+                            useAudioCtxCurrentTime1(value.feedPt?.context || null , { periodMillis: 225.0 }, {} )
                             ||
                             null
                         ) ;
