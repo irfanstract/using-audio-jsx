@@ -113,13 +113,6 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
 
          } = props10;
          const { value: { period } } = props1;
-         const getOverflowDeservesVisibility = (
-            (p: 0 | 1) => (
-               avTrackConcatShallPropagate(clippingMode, p)
-               ||
-               OmitOrPropagate.OMIT 
-            )
-         );
          if (clippingMode === AudioTrackConcatClippingMode.BOTH_ENDS_DROPPED ) {
             // TODO return the exclusively-mounting version
             ;
@@ -127,6 +120,13 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          {
          const itemAfterAutoUnmounting: (PeerComponentPayload & Function) = (
             function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
+               const getOverflowDeservesVisibility = (
+                  (p: 0 | 1) => (
+                     avTrackConcatShallPropagate(clippingMode, p)
+                     ||
+                     OmitOrPropagate.OMIT 
+                  )
+               ); //
                const premountTime = (
                   (
                      getOverflowDeservesVisibility(0)
