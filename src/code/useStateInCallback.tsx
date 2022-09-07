@@ -53,6 +53,7 @@ const CBC = (
              * 
              */
             children : () => React.ReactElement ;  
+            name ?: string ;
         }>
      )>         ((   
          1
