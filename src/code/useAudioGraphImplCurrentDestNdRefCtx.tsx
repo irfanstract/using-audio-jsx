@@ -103,7 +103,7 @@ const {
             XCons : (
                 IterableOps.identity<(
                     React.FC<React.ConsumerProps<NCtxV1 > >
-                )>(function ({ children: payload }) {
+                )>(function CCurrentDestNdRefUsage1({ children: payload }) {
                     const ConsmImpl = c0.Consumer ;
                     return (
                         <ConsmImpl>
@@ -118,7 +118,7 @@ const {
         } = {
             XPrv : IterableOps.identity<(
                 React.FC<React.ProviderProps<AFeedableAndTappableNCc > >
-            ) >(function ({ value, children: payload }  ) {
+            ) >(function CCurrentDestNdRefPrv1({ value, children: payload }  ) {
                 const PrvImpl = c0.Provider ;
                 const parentValue = (
                     React.useContext(c0 )
