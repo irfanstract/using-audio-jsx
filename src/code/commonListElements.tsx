@@ -70,6 +70,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                    : 
                    ((e === null ) ? null : <></> )
                ))     
+               .filter((e: React.ReactElement | null) => !!e ) 
                .toArray()
            ) }
        </ol>        
