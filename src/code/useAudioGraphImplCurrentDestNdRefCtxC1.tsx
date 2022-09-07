@@ -57,7 +57,7 @@ const {
                             useWithCurrentSideTapPtRef(function ({ feedPt: nd0 }) {
                                 ;     
                                 return ( 
-                                    <CBC>{ function use1() { 
+                                    <CBC name={"C_" + useYyy.name }>{ function use1() { 
                                         ;               
                                         // return value                                       
                                         const _2: void = (                 
@@ -89,7 +89,7 @@ const {
                     IterableOps.identity<C >(function CAUsageWrapNonterminal ({ value, children }) {    
                         return ( 
                             useWithCurrentSideTapPtRef(({ feedPt: nd0 }) => (    
-                                <CBC>
+                                <CBC name={"C_" + useYyy.name }>
                                 { function use1() { 
                                     ;                  
                                     // return value                                                
