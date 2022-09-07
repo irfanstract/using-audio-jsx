@@ -110,7 +110,7 @@ const CmInHarmonics : (
          } ;
    } ;
    return (
-      function ({ value, children: payload }) {
+      function CmInHarmonicsC({ value, children: payload }) {
          const {
             mFInterpr ,
             mFreqShiftValuesRaw ,
