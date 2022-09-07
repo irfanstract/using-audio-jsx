@@ -76,6 +76,12 @@ const {
   
    
                        
+type LWpamPayloadMountSpanProperties = (
+   {
+      premountTime : number ;
+      mountDuration : number ;
+   }
+) ;
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
    type PeerComponentPayload = (                            
        (
@@ -123,10 +129,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                const {
                   premountTime ,
                   mountDuration ,
-               } = ((): {
-                  premountTime : number ;
-                  mountDuration : number ;
-               } => {
+               } = ((): LWpamPayloadMountSpanProperties => {
                const getOverflowDeservesVisibility = (
                   (p: 0 | 1) => (
                      avTrackConcatShallPropagate(clippingMode, p)
