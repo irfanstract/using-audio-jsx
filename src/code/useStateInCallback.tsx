@@ -58,13 +58,15 @@ const CBC = (
      )>         ((   
          1
          ?
-        function CBC({ children : useXYyy }  ) {        
+        function CBC({ children : useXYyy, name }  ) {        
             const C = (       
                 /**        
                  * this needs ad-hoc separate Component.  
                  * this separation is necessary to keep playing well with React DevTools.  
                  */
                 React.useCallback(( 
+                    (() => {
+                    const f = ( 
                     function XYyyUsage ({ children: useXYyy } : ComponentProps<typeof CBC > ) {    
                         ;       
                         const e = (           
@@ -76,6 +78,14 @@ const CBC = (
                         ) ;        
                         return e ;          
                     }
+                    ) ;
+                    name && (
+                        (f as React.FC<{}>).displayName = name
+                    ) ;
+                    return (
+                        f
+                    ) ;
+                    })()
                 ) , [] )  
             ) ; 
             return (
