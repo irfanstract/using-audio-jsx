@@ -161,7 +161,7 @@ const {
     return {            
         withAutoUnmount: withAutoUnmountImpl , 
         WithAutoUnmount : (       
-            wrapC1(function ({ passageState, expectedChildren }) { 
+            wrapC1(function MWithAutoUnmount({ passageState, expectedChildren }) { 
                 const rendered1 = (
                     withAutoUnmountImpl(
                         passageState, 
@@ -175,7 +175,7 @@ const {
             })  
         ) ,       
         WithAutoStopmount: (
-            wrapC1(function ({ passageState, expectedChildren }) {
+            wrapC1(function MWithAutoStopmount({ passageState, expectedChildren }) {
                 return (    
                     <CAmpModulated0            
                     value={ (      
@@ -189,7 +189,7 @@ const {
             })  
         ),
         WithAutoStopmountExtra : (
-            wrapC1(function ({ passageState, expectedChildren }) {    
+            wrapC1(function MWithAutoStopmountExtra({ passageState, expectedChildren }) {    
                 return (       
                     useWithCurrentSideTapPtRef(({ feedPt: givenDestNd }) => (     
                         <>            
