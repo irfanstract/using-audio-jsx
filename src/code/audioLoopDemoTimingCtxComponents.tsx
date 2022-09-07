@@ -104,8 +104,7 @@ const TPTC = (() => {
                                   * in general the `tScale` here can be different.
                                   */
                                  tScale: tScale, 
-                              } = tCtxs.useCurrentTInf() ; // ) => (
-                              // <WithCurrentDestNdRef>  
+                              } = tCtxs.useCurrentTInf() ; 
                               const { currentTime: absolT1 } = (
                                  useCurrentDestNdRefAndCtxT()
                               ) ;
