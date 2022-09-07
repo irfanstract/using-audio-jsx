@@ -124,13 +124,15 @@ type AGCtxtualOutUsageProps = (
 ) ;          
 const CTXTUALOUTPUTUSAGE_CBC = (    
     IterableOps.identity<( 
-        React.FC<{ 
+        React.FC<(
+        { 
             children : (
                 {
                     useC11 : (props: AGCtxtualOutUsageProps ) => React.ReactElement ;
                 }["useC11"]
             ) ;         
-        }>  
+        }
+        )>  
     )>((    
         function ({ children: useC11 , }) {
             ;       
