@@ -94,17 +94,22 @@ const TPTC = (() => {
                            (...[payload1 ] : (
                               [InnerRenderer ]
                            )) => (
-                              <TCP>
-                              { ({ 
+                           <CBC>
+                           { function useCCS() {
+                              ;
+                              const { 
                                  /**   
                                   * again,
                                   * cannot use `tScale` from the outer `ctx`, as
                                   * in general the `tScale` here can be different.
                                   */
                                  tScale: tScale, 
-                              }) => (
-                              <WithCurrentDestNdRef>  
-                              { ({ currentTime: absolT1 }) => (
+                              } = tCtxs.useCurrentTInf() ; // ) => (
+                              // <WithCurrentDestNdRef>  
+                              const { currentTime: absolT1 } = (
+                                 useCurrentDestNdRefAndCtxT()
+                              ) ;
+                              return (
                                  (typeof absolT1 === "number") ?
                                  ((): React.ReactElement => {
                                        const relativeTDiff = (
@@ -120,10 +125,9 @@ const TPTC = (() => {
                                        ) ;
                                  })()
                                  : <></>
-                              ) }
-                              </WithCurrentDestNdRef>
-                              ) }
-                              </TCP>
+                              ) ;
+                           } }
+                           </CBC>
                            )
                      ) ;
                      return (
