@@ -315,7 +315,7 @@ const MetronomeAndResponseGraph = (
                      ) ,      
                      start: ( 
                         Math.floor((
-                           lastRenderT1 / tickTockPeriod
+                           (lastRenderT1 + -1.5 ) / tickTockPeriod
                         ))
                      ) ,
                   } ,  
