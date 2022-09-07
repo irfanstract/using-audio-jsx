@@ -126,18 +126,17 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (() => {
-                const bassLine = (
+                const bassLine = (() => {
+                ;
+                return (
+                    <WithADestCtxTCompletionStatCtx>
+                    { ({ withADestCtxCompletionStat }) => (
+                    withADestCtxCompletionStat(({ relativeTDiff }) => (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
                     <CmInHarmonics value={[SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, [[0, { gain: 2 ** -0.5 }] , [-1, { gain: 2 ** -0.5 }] ] ]} >
-                    { ({ detuneOctaves }) => (
-                    <CWaveTable1 
-                    freqArgumentInterpretation="timedomain-normalised"
-                    freqArgument={(
-                        <CConstantValue value={55 / 440 } />
-                    )}
-                    detuneInterpretation="timedomain-normalised"
-                    detuneSemitoneCentsNormalVal={12 * 100 }
-                    detune={(
+                    { ({ detuneOctaves }) => {
+                    ;
+                    const detune = (
                         <K>
                         <CConstantValue value={detuneOctaves } />
                         <CFnValue1 
@@ -224,13 +223,29 @@ export const AudioLoopDemoApp = (function () {
                         ) }
                         />
                         </K>
+                    ) ;
+                    return (
+                    <CWaveTable1 
+                    freqArgumentInterpretation="timedomain-normalised"
+                    freqArgument={(
+                        <CConstantValue value={55 / 440 } />
+                    )}
+                    detuneInterpretation="timedomain-normalised"
+                    detuneSemitoneCentsNormalVal={12 * 100 }
+                    detune={(
+                        detune
                     )}
                     type="triangle"
                     />
-                    ) }
+                    ) ;
+                    } }
                     </CmInHarmonics>
                     </CAmpModulated0>
+                    ) )
+                    ) }
+                    </WithADestCtxTCompletionStatCtx>
                 ) ;
+                })() ;
                 return (
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
