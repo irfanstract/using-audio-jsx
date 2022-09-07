@@ -134,11 +134,11 @@ const CTXTUALOUTPUTUSAGE_CBC = (
         }
         )>  
     )>((    
-        function ({ children: useC11 , }) {
+        function ({ children: useC11 , ...otherProps }) {
             ;       
             return (
                 useWithCurrentSideTapPtRef(a => (
-                    <CBC>
+                    <CBC {...otherProps}>
                         { function useC111() { return useC11(a ) ; } }
                     </CBC>     
                 ))                
