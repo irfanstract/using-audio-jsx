@@ -26,7 +26,7 @@ import { isWindowActive, useWindowActivityStatus } from "./useWindowFocusState";
  * .
  */
 const useAudioCtxCurrentTime1 = (  
-    (...[c, { periodMillis }, refreshIntervalProperties] : [
+    (...[c, { periodMillis: requestedPeriodMillis }, refreshIntervalProperties] : [
         BaseAudioContext | null | undefined ,
         {
             /**    
@@ -74,7 +74,7 @@ const useAudioCtxCurrentTime1 = (
                         (c && c.state === "running") 
                         ? 
                         10 : 2500
-                    ), periodMillis )    
+                    ), requestedPeriodMillis )    
                 )  
             ) )
         ) ;
