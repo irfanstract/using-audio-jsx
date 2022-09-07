@@ -138,7 +138,9 @@ const CTXTUALOUTPUTUSAGE_CBC = (
             ;       
             return (
                 useWithCurrentSideTapPtRef(a => (
-                    <CBC>{ () => useC11(a ) }</CBC>     
+                    <CBC>
+                        { function useC111() { return useC11(a ) ; } }
+                    </CBC>     
                 ))                
             );                
         }   
