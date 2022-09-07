@@ -55,7 +55,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
    return (               
        <ol className="CLE_KEYEDLIST ">   
            { (                       
-               itemsRendered
+               Immutable.Seq(itemsRendered )
                .map((e, i) => (
                    (!(e === undefined || (e === null ) ) ) ?    
                    (
@@ -70,6 +70,7 @@ function arrayIndexedOrderedList(...[itemsRendered ] : [
                    : 
                    ((e === null ) ? null : <></> )
                ))     
+               .toArray()
            ) }
        </ol>        
    ) ;
