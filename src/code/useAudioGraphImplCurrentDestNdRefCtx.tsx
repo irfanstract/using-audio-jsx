@@ -209,7 +209,7 @@ const WithGivenDest = (() => {
                 useWithCurrentSideTapPtRef(({ sideTapPt }) => (
                     <ModifyingCompPayloadDiv              
                     >                    
-                    <CBC>{ function useC1() {   
+                    <CBC name="WithGivenDestC_CtxPrv">{ function useC1() {   
                         return (                                 
                             <Prv1 
                             // https://reactjs.org/docs/context.html#caveats 
@@ -313,7 +313,7 @@ const CurrentCtxTInfoDisplay = (
             useWithCurrentACtxCurrentT(({ feedPt, currentTime: ctxTime }) => (    
                 (feedPt && (typeof ctxTime === "number") ) 
                 ?         
-                <CBC>
+                <CBC name="CurrentCtxTInfoDisplay_Hks">
                 { function useC() {                     
                     const { isWindowOnFocus } = (
                         useWindowActivityStatus() 
