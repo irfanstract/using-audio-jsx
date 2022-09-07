@@ -4,6 +4,7 @@ import { linearSlidingStateAtT } from "./timeDomainClosedGradientSampling1";
 import { SupportedFShiftAmtInterpretation } from "./audioFreqShiftInterpretation1";
 import { periodicTRestrictedLinearlyApproachedValueAtT1 } from "./audioTDomainPeriodicPlotSamplingAtT1";
 import React, { useReducer, useState } from "react";   
+import { useDeferredRecompute } from "./usingDeferredRecompute";
 import { K, ComponentProps, ContextReturnType } from "./commonElements";      
 import { CBC } from "./useStateInCallback";
 import { 
