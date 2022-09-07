@@ -132,6 +132,10 @@ const CTXTUALOUTPUTUSAGE_CBC = (
                 }["useC11"]
             ) ;         
         }
+        &
+        Omit<(
+            ComponentProps<typeof CBC >
+        ), "children">
         )>  
     )>((    
         function ({ children: useC11 , ...otherProps }) {
