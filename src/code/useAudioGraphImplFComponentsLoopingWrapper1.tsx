@@ -120,6 +120,13 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
          {
          const itemAfterAutoUnmounting: (PeerComponentPayload & Function) = (
             function ({ perInstanceRelativeT, componentLevelAbsoluteT }) {
+               const {
+                  premountTime ,
+                  mountDuration ,
+               } = ((): {
+                  premountTime : number ;
+                  mountDuration : number ;
+               } => {
                const getOverflowDeservesVisibility = (
                   (p: 0 | 1) => (
                      avTrackConcatShallPropagate(clippingMode, p)
@@ -127,7 +134,8 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      OmitOrPropagate.OMIT 
                   )
                ); //
-               const premountTime = (
+               return {
+               premountTime : (
                   (
                      getOverflowDeservesVisibility(0)
                      ===
@@ -135,8 +143,8 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                   ) ?
                      // TODO                         
                      100 : 1
-               );
-               const mountDuration = (     
+               ),//;
+               mountDuration : (     
                   (
                      getOverflowDeservesVisibility(1)
                      ===
@@ -144,7 +152,9 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                   ) ?
                      // value should be at-least `preFT` 
                      30000 : (period + 0.5)
-               );             
+               ),//;             
+               } ; 
+               } )() ; 
                const item11 = (   
                   ((itemRenderCtx: Parameters<LwpPayloadCallback >[0] ) => (   
                   payloadEval(item, itemRenderCtx )
