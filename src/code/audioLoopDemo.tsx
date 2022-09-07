@@ -133,7 +133,15 @@ export const AudioLoopDemoApp = (function () {
                     { ({ withADestCtxCompletionStat }) => (
                     withADestCtxCompletionStat(({ relativeTDiff }) => (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
-                    <CmInHarmonics value={[SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, [[0, { gain: 2 ** -0.5 }] , [-1, { gain: 2 ** -0.5 }] ] ]} >
+                    <CmInHarmonics 
+                    value={[
+                        SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, 
+                        [
+                            [0, { gain: 2 ** -0.5 }] , 
+                            [-1, { gain: (128 <= relativeTDiff ) ? (2 ** -0.5 ) : 0 }] ,
+                        ], 
+                    ]} 
+                    >
                     { ({ detuneOctaves }) => {
                     ;
                     const detune = (
@@ -253,7 +261,7 @@ export const AudioLoopDemoApp = (function () {
                 { ({ withADestCtxCompletionStat }) => (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
-                    (tPassed < 64 ) ?
+                    (tPassed < 127.5 ) ?
                     <BassDrumLoopDv subhalvesN={2 } />
                     : <div />
                 ) ) }
@@ -291,7 +299,20 @@ export const AudioLoopDemoApp = (function () {
                             <CBiquadFilterModulated
                             {...bfProps }
                             >
+                            <CAmpModulated0  
+                            value={(
+                                <CFnValue1 
+                                value={({ ctxT: t }) => (
+                                    2 ** (
+                                        (t % 8 ) <= 1.5 || 0.5 <= (t % 1 ) ? 
+                                        0 : -4 
+                                    ) 
+                                ) } 
+                                />
+                            )}
+                            >
                             { payload }
+                            </CAmpModulated0>
                             </CBiquadFilterModulated>
                         ) ;
                     }
