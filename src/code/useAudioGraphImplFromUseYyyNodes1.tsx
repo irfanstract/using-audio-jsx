@@ -154,6 +154,9 @@ const {
       XList = "ul",
 
    } = config1;
+   const useDeferredTrue : () => boolean = (
+      () => true
+   ) ;
    function newCPropsRenderComponent<CProps>({
       dbgBox1,
       useC1P,
