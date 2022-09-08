@@ -116,10 +116,44 @@ const {
         const {
             XPrv ,  
         } = {
-            XPrv : IterableOps.identity<(
-                React.FC<React.ProviderProps<AFeedableAndTappableNCc > >
-            ) >(function CCurrentDestNdRefPrv1({ value, children: payload }  ) {
+            XPrv : (() => {
+                ;  
+                type Props = (
+                    React.ProviderProps<AFeedableAndTappableNCc > 
+                ) ;
                 const PrvImpl = c0.Provider ;
+                const useConditionalTRefresh = (
+                    function () {
+                        ;
+                    }
+                ) ;
+                const PrvI = (
+                    ({
+                        value ,
+                        currentTimeValue: requestedCtxCurrentTime ,
+                        children: payload ,
+                    } : { 
+                        value: NonNullable<Props["value"]> ; 
+                        currentTimeValue: number ; 
+                        children: Props["children"] ;
+                    } ) => (
+                        <PrvImpl 
+                        value={(
+                            React.useMemo((): ContextReturnType<typeof c0 > => (
+                                { 
+                                    ...value, 
+                                    currentTime: requestedCtxCurrentTime ,
+                                }
+                            ) , [value, requestedCtxCurrentTime ] ) 
+                        ) }
+                        >
+                            { ( 
+                                payload
+                            ) }
+                        </PrvImpl>
+                    )
+                ) ;
+                function CCurrentDestNdRefPrv1({ value, children: payload } : Props ): React.ReactElement {
                 const parentValue = (
                     React.useContext(c0 )
                 );
@@ -147,22 +181,40 @@ const {
                         ) ;
                     }
                 )();
-                const value1 = (
-                    React.useMemo((): ContextReturnType<typeof c0 > => (
-                        { 
-                            ...value, 
-                            currentTime: requestedCtxCurrentTime ,
-                        }
-                    ) , [value, requestedCtxCurrentTime ] ) 
-                );
                 return (
-                    <PrvImpl value={value1 }>
-                        { ( 
-                            payload
-                        ) }
-                    </PrvImpl>
+                    requestedCtxCurrentTime 
+                    && 
+                    <PrvI value={value} currentTimeValue={requestedCtxCurrentTime } >
+                        { payload }
+                    </PrvI>
+                    || 
+                    <></>
                 ) ;
-            } ) , 
+                } 
+                return (
+                function CCurrentDestNdRefPrvOptimising({ value, children: payload } : Props ): React.ReactElement {
+                const parentValue = (
+                    React.useContext(c0 )
+                );
+                const parentTValue = (
+                    parentValue.currentTime
+                ) ;
+                return (
+                    (typeof parentTValue === "number" ) ?
+                    (
+                        <PrvI value={value} currentTimeValue={parentTValue } >
+                            { payload }
+                        </PrvI>
+                    )
+                    : (
+                        <CCurrentDestNdRefPrv1 value={value} >
+                            { payload }
+                        </CCurrentDestNdRefPrv1>
+                    )
+                ) ;
+                }
+                ) ;
+            })() , 
         }  ;
         return {
             Prv1 : XPrv ,         
