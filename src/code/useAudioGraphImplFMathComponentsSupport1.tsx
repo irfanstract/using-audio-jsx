@@ -381,8 +381,10 @@ const {
         
                     SETTARGETATTIME , 
                     SETVALUECURVE_AT_TIME ,      
-        
-                } = AudioNodesParamAutomativeExecET({}    ) ;               
+
+                    // added 
+
+                } = AudioNodesParamAutomativeExecETSpc(    ) ;               
                 const { 
                     remountDebugBeep = false ,     
                 } = {} as { remountDebugBeep ?: boolean ; } ;  
@@ -722,6 +724,30 @@ const {
         })()
     } ;   
 })() ;     
+const AudioNodesParamAutomativeExecETSpc = (
+    () => { 
+        const {               
+            swingTConst ,                
+            timingArgMode ,          
+
+            SETTARGETATTIME , 
+            SETVALUECURVE_AT_TIME ,      
+
+        } = AudioNodesParamAutomativeExecET({}    ) ;               
+        ;
+        ;
+        return {
+            swingTConst ,                
+            timingArgMode ,          
+
+            SETTARGETATTIME , 
+            SETVALUECURVE_AT_TIME ,      
+
+            // added 
+
+        } ;
+    }
+) ;
 const CAbsoluteTValueSeq = (
     function ({ value: args0, deps: deps0 } : { 
         value: Parameters<typeof fromTSeqComputedValueInterpolated > ;
