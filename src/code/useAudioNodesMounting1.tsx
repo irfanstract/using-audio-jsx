@@ -13,6 +13,7 @@ import { useWarnOnChange } from "./usingTimeoutOrInterval";
 // domain omportd         
 import { AudioSinkNode, AudioSourceNode } from "./useAudioNodesBasicTypeDefs";         
 import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1"; 
+import { AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";
 
 
 
