@@ -126,11 +126,13 @@ export const AudioLoopDemoApp = (function () {
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
             const c1  = (() => {
-                const bassLine = (() => {
-                ;
                 return (
-                    <WithADestCtxTCompletionStatCtx>
-                    { ({ withADestCtxCompletionStat }) => (
+                <WithSlowdown value={1 / (68 / 60 ) } >
+                <WithSlowdown value={2 ** -1 } >
+                <WithADestCtxTCompletionStatCtx>
+                { ({ withADestCtxCompletionStat }) => {
+                ;
+                const bassLine = (
                     withADestCtxCompletionStat(({ relativeTDiff }) => (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
                     <CmInHarmonics 
@@ -250,15 +252,7 @@ export const AudioLoopDemoApp = (function () {
                     </CmInHarmonics>
                     </CAmpModulated0>
                     ) )
-                    ) }
-                    </WithADestCtxTCompletionStatCtx>
                 ) ;
-                })() ;
-                return (
-                <WithSlowdown value={1 / (68 / 60 ) } >
-                <WithSlowdown value={2 ** -1 } >
-                <WithADestCtxTCompletionStatCtx>
-                { ({ withADestCtxCompletionStat }) => {
                 return (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
