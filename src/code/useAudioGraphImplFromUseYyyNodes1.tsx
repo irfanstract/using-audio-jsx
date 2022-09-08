@@ -157,6 +157,7 @@ const {
    function newCPropsRenderComponent<CProps>({
       dbgBox1,
       useC1P,
+      cbcName ,
    }: (
          {
             dbgBox1: React.ReactElement;
@@ -164,6 +165,7 @@ const {
                (mainProps: CProps, nd0: AGCtxtualOutUsageProps["feedPt"])
                   => { c1: React.ReactElement; }
             );
+            cbcName : string ;
          }
       )) {
       return (
@@ -188,7 +190,7 @@ const {
                }
             );
             return (
-               <CTXTUALOUTPUTUSAGE_CBC>
+               <CTXTUALOUTPUTUSAGE_CBC name={"CBC_" + cbcName }>
                   {useC11}
                </CTXTUALOUTPUTUSAGE_CBC>
             );
@@ -309,7 +311,7 @@ const {
                      }
                   );
                   return (
-                     <CTXTUALOUTPUTUSAGE_CBC>
+                     <CTXTUALOUTPUTUSAGE_CBC name={"CBC_" + CWithAmpSlideDown.name } >
                         {useC11}
                      </CTXTUALOUTPUTUSAGE_CBC>
                   );
@@ -376,7 +378,7 @@ const {
                      }
                   );
                   return (
-                     <CTXTUALOUTPUTUSAGE_CBC>
+                     <CTXTUALOUTPUTUSAGE_CBC name={"CBC_" + CWithAmpAutom.name }>
                         {useC11}
                      </CTXTUALOUTPUTUSAGE_CBC>
                   );
@@ -436,6 +438,8 @@ const {
                   return (
                      newCPropsRenderComponent
                   )<Parameters<typeof propsParse>[0]>({
+
+                     cbcName: "modulatedCOnstantSrcNdUsageWrapC" ,
 
                      dbgBox1,
 
@@ -504,6 +508,8 @@ const {
                   return (
                      newCPropsRenderComponent
                   )<Parameters<typeof propsParse>[0]>({
+
+                     cbcName: "modulatedBiquadFltUsageWrapC" ,
 
                      dbgBox1,
 
@@ -645,7 +651,7 @@ const {
                            }
                         );
                         return (
-                           <CTXTUALOUTPUTUSAGE_CBC>
+                           <CTXTUALOUTPUTUSAGE_CBC name="CBC_modulatedWaveTableUsageWrapC" >
                               {useC11}
                            </CTXTUALOUTPUTUSAGE_CBC>
                         );
@@ -694,7 +700,7 @@ const {
                      );
                      ;
                      return (
-                        <CTXTUALOUTPUTUSAGE_CBC>
+                        <CTXTUALOUTPUTUSAGE_CBC name="CBC_CParamAutomative">
                            {useC11}
                         </CTXTUALOUTPUTUSAGE_CBC>
                      );
