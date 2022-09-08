@@ -449,27 +449,6 @@ const {
                                                 ) ,  
                                             })              
                                         ) ;
-                                        // TODO remove this LOC ; this is only for debugging   
-                                        {
-                                            const beepT = (
-                                                React.useMemo(() => (        
-                                                    (nd10 && remountDebugBeep )   
-                                                    ?    
-                                                    (nd10.context.currentTime ) 
-                                                    : 
-                                                    ((1 + Math.random() ) *  5E5  )     
-                                                ) , [nd10 ] )           
-                                            ) ;  
-                                            ;                              
-                                            const nd11 = (           
-                                                useFixedGain(nd10, (            
-                                                    // 2 ** -4        
-                                                    2 ** -32      
-                                                ) )                 
-                                            ) ;     
-                                            useHalfSecondBeep(   
-                                                nd11, { t: beepT }) ;         
-                                        }             
                                         return {
                                             nd10, 
                                         } ;
