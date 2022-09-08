@@ -433,7 +433,7 @@ const {
                                 const remountDeps1 = (       
                                     [actualScanKey, lComputeAtT ]  as const     
                                 ) ;  
-                                const useRelevantAutoRemount = (
+                                const useRelevantAutoRemountedNode = (
                                     function () { 
                                         ;
                                         // TODO     
@@ -530,7 +530,7 @@ const {
                                         const {
                                             nd10, 
                                         } = (
-                                            useRelevantAutoRemount()
+                                            useRelevantAutoRemountedNode()
                                         ) ;
                                         const nd1 = (             
                                             useSimplePolylineSourceNode(nd10, graph )
