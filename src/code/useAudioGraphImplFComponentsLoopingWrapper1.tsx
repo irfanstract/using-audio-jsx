@@ -328,7 +328,7 @@ const MetronomeAndResponseGraph = (
                ) ;
                const lastRenderT1 = (
                   (typeof actualCtxT === "number") ?
-                  Iterable.Range(0, actualCtxT - absoluteScheduledTE , 5 )
+                  Iterable.Range(0, actualCtxT - absoluteScheduledTE , 10 )
                   .last(0 )
                   : 3E5
                ) ;                       
