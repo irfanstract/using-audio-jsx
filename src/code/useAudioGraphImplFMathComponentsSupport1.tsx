@@ -124,7 +124,7 @@ const renderConstantParamSrcElas1 = (
         : never      
     ) ) {        
         return (              
-            <CTXTUALOUTPUTUSAGE_CBC>    
+            <CTXTUALOUTPUTUSAGE_CBC name={"CBC_ConstantParamSrcElas1"}>    
                 {  function useC11({ feedPt : nd0 }) {     
                         useConstantParamSrcElasD(   
                             nd0, ...args ) ;    
