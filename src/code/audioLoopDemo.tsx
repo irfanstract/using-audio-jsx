@@ -258,7 +258,8 @@ export const AudioLoopDemoApp = (function () {
                 <WithSlowdown value={1 / (68 / 60 ) } >
                 <WithSlowdown value={2 ** -1 } >
                 <WithADestCtxTCompletionStatCtx>
-                { ({ withADestCtxCompletionStat }) => (
+                { ({ withADestCtxCompletionStat }) => {
+                return (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
                     (tPassed < 127.5 ) ?
@@ -319,7 +320,8 @@ export const AudioLoopDemoApp = (function () {
                     )(bassLine )
                 ) ) }
                 </>
-                ) }
+                ) ;
+                } }
                 </WithADestCtxTCompletionStatCtx>
                 </WithSlowdown>
                 </WithSlowdown>
