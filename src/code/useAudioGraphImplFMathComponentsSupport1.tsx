@@ -384,6 +384,8 @@ const {
 
                     // added 
 
+                    useSimplePolylineSourceNode ,
+        
                 } = AudioNodesParamAutomativeExecETSpc(    ) ;               
                 const { 
                     remountDebugBeep = false ,     
@@ -531,31 +533,7 @@ const {
                                             useRelevantAutoRemount()
                                         ) ;
                                         const nd1 = (             
-                                            React.useMemo(():(
-                                                (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
-                                                | null     
-                                            ) => {                  
-                                                if (nd10) {             
-                                                    const cnd11 = (
-                                                        nd10.context.createConstantSource()        
-                                                    ) ;     
-                                                    cnd11.connect(nd10 ) ;     
-                                                    {        
-                                                        ;              
-                                                        (graph[0] ) && (                    
-                                                            cnd11.offset
-                                                            .setValueAtTime((graph[0] ).vl , 0 )     
-                                                        );   
-                                                        SETVALUECURVE_AT_TIME(cnd11, (      
-                                                            graph       
-                                                        ) , a => a.offset )    ;      
-                                                    }
-                                                    cnd11.start() ;         
-                                                    return cnd11;    
-                                                } else {
-                                                    return null ;         
-                                                }  
-                                            } , [nd10 ] )              
+                                            useSimplePolylineSourceNode(nd10, graph )
                                         ) ;            
                                         ;
                                         ;     
@@ -735,6 +713,40 @@ const AudioNodesParamAutomativeExecETSpc = (
 
         } = AudioNodesParamAutomativeExecET({}    ) ;               
         ;
+        const useSimplePolylineSourceNode = (
+            function (...[nd10, graph ] : [
+                null | AudioNode , 
+                Parameters<typeof SETVALUECURVE_AT_TIME >[1 ] ,
+            ] ): null | object {
+                return (             
+                    React.useMemo(():(
+                        (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
+                        | null     
+                    ) => {                  
+                        if (nd10) {             
+                            const cnd11 = (
+                                nd10.context.createConstantSource()        
+                            ) ;     
+                            cnd11.connect(nd10 ) ;     
+                            {        
+                                ;              
+                                (graph[0] ) && (                    
+                                    cnd11.offset
+                                    .setValueAtTime((graph[0] ).vl , 0 )     
+                                );   
+                                SETVALUECURVE_AT_TIME(cnd11, (      
+                                    graph       
+                                ) , a => a.offset )    ;      
+                            }
+                            cnd11.start() ;         
+                            return cnd11;    
+                        } else {
+                            return null ;         
+                        }  
+                    } , [nd10 ] )              
+                ) ;
+            }
+        ) ;
         ;
         return {
             swingTConst ,                
@@ -744,6 +756,8 @@ const AudioNodesParamAutomativeExecETSpc = (
             SETVALUECURVE_AT_TIME ,      
 
             // added 
+
+            useSimplePolylineSourceNode ,
 
         } ;
     }
