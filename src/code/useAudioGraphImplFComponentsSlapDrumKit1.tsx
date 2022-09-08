@@ -214,7 +214,7 @@ const snKit = (() => {
             ] ,
             renderConfig : { scanPeriodMillis: number ; } ,    
         ]) {           
-            return <CBC>{ function use1() {
+            return <CBC name="CBC_ApplicableDecliningNormalisedToneFreqGraph1">{ function use1() {
                 const key = (
                     React.useMemo(() => (
                         // TODO
