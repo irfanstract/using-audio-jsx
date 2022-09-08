@@ -317,7 +317,7 @@ const MetronomeAndResponseGraph = (
             ) , [actualCtxT0 && Math.floor(actualCtxT0 * 4 ) ] )
          ) ;
          return (
-            <CBC>
+            <CBC name="MetronomeAndResponseGraph_UseEF">
             { function useEF() {
                ;
                const {
