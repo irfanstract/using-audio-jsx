@@ -158,7 +158,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      OmitOrPropagate.PROPAGATE
                   ) ?
                      // TODO                         
-                     100 : 1
+                     5 : 1
                ),//;
                mountDuration : (     
                   (
@@ -167,7 +167,7 @@ const LoopingWithPeriodAndAutoUnmounting = (() => {
                      OmitOrPropagate.PROPAGATE
                   ) ?
                      // value should be at-least `preFT` 
-                     30000 : (period + 0.5)
+                     16 : (period + 0.5)
                ),//;             
                } ; 
                }
@@ -395,7 +395,7 @@ const MetronomeAndResponseGraph = (
                               (
                                  (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (Iterable.Range(-10, actualCtxT, 3.5 ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (Iterable.Range(-10, actualCtxT, 10 ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
