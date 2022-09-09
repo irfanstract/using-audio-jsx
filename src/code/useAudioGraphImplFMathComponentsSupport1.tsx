@@ -384,7 +384,7 @@ const {
 
                     // added 
 
-                    useSimplePolylineSourceNode ,
+                    useSimplePolylineSource ,
         
                 } = AudioNodesParamAutomativeExecETSpc(    ) ;               
                 const { 
@@ -512,7 +512,7 @@ const {
                                             useRelevantAutoRemountedNode()
                                         ) ;
                                         const nd1 = (             
-                                            useSimplePolylineSourceNode(nd10, graph )
+                                            useSimplePolylineSource(nd10, graph )
                                         ) ;            
                                         ;
                                         ;     
@@ -692,7 +692,7 @@ const AudioNodesParamAutomativeExecETSpc = (
 
         } = AudioNodesParamAutomativeExecET({}    ) ;               
         ;
-        const useSimplePolylineSourceNode = (
+        const useSimplePolylineSource = (
             function (...[nd10, graph ] : [
                 null | AudioNode , 
                 Parameters<typeof SETVALUECURVE_AT_TIME >[1 ] ,
@@ -736,7 +736,7 @@ const AudioNodesParamAutomativeExecETSpc = (
 
             // added 
 
-            useSimplePolylineSourceNode ,
+            useSimplePolylineSource ,
 
         } ;
     }
