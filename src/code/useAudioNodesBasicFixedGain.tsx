@@ -132,34 +132,6 @@ const {
     }      
     return {       
         useGainModulatedPt : (
-            // function useM1ModulatedPt(...[nd0] : Args ) {                
-            //     /**                  
-            //      * - {@link intrinsicValue } :
-            //      *    see alse {@link AudioNode.connect }, info about {@link AudioParam}s 
-            //      */     
-            //     const {    
-            //         key ,         
-            //         pName ,     
-            //         useYyNode1 ,          
-            //         intrinsicValue ,      
-            //     } = {  
-            //         key : "gain" ,    
-            //         pName : "ampCtrl" ,   
-            //         useYyNode1 : useGainNodeWithGivenFadeoutTimeConstant1 ,     
-            //         intrinsicValue : 0 ,         
-            //     } as const ;                   
-            //     const nd1 = (
-            //         useYyNode1(nd0, 0.5 )      
-            //     ) ;           
-            //     React[AUDIONODES_USEEFFECT](() => {      
-            //         nd1 && (nd1[key].value = intrinsicValue ) ;       
-            //     } , [nd1 ]) ;    
-            //     ;    
-            //     return {       
-            //         main : (nd1 as (AudioNode | null ) ) || null ,            
-            //         [pName] : nd1?.[key] || null ,  
-            //     } as const ;    
-            // }               
             (
                 kUseM1ModulatedPt((
                     {   
