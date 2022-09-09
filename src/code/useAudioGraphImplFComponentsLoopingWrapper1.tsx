@@ -301,6 +301,9 @@ const MetronomeAndResponseGraph = (
          postFT: mtPostFT = 3 ,
       } = properties11 ;
       ;
+      const renderRangeSnapSize: number = (
+         10
+      ) ;
       const mainRendered = (
       (function useMainRenderedImpl() {
          const {
@@ -328,7 +331,7 @@ const MetronomeAndResponseGraph = (
                ) ;
                const lastRenderT1 = (
                   (typeof actualCtxT === "number") ?
-                  Iterable.Range(0, actualCtxT - absoluteScheduledTE , 10 )
+                  Iterable.Range(0, actualCtxT - absoluteScheduledTE , renderRangeSnapSize )
                   .last(0 )
                   : 3E5
                ) ;                       
@@ -395,7 +398,7 @@ const MetronomeAndResponseGraph = (
                               (
                                  (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
                                  && 
-                                 (Iterable.Range(-10, actualCtxT, 10 ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (Iterable.Range(-renderRangeSnapSize, actualCtxT, renderRangeSnapSize ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
                               )    
                               ?             
                               e0  
