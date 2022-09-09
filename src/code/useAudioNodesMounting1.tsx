@@ -563,6 +563,7 @@ export {
     ToUseYyNodeWithGivenInitProperties1 as ToUseYyNodeWithGivenInitProperties1 ,  
 } ;
 export { 
+    useInitUnconnectedGainNodeLwt ,
     useInitUnconnectedYyyNodeFor ,     
     useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
     useInitAndConnectYyyNodeFor ,    
