@@ -135,129 +135,29 @@ export const AudioLoopDemoApp = (function () {
                 const bassLine = (
                     withADestCtxCompletionStat(({ relativeTDiff }) => (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
-                    <CmInHarmonics 
-                    value={[
-                        SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, 
-                        [
-                            [0, { gain: 2 ** -0.5 }] , 
-                            [-1, { gain: (128 <= relativeTDiff ) ? (2 ** -0.5 ) : 0 }] ,
-                        ], 
-                    ]} 
-                    >
-                    { ({ detuneOctaves }) => {
-                    ;
-                    const detune = (
-                        <K>
-                        <CConstantValue value={detuneOctaves } />
-                        <CFnValue1 
-                        value={({ ctxT: t }) => (
-                            ((): number => { 
-                                { 
-                                    const checkPer = 32 ;
-                                    ;
-                                    const startT = 28 ;
-                                    const anEndT = 30 ;
-                                    const endT = 32 ;
-                                    const startValue = -2 * 2 ;
-                                    const finalValue = startValue + -1 ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: checkPer ,
-                                        }, {
-                                            startT ,
-                                            anEndT ,
-                                            endT ,
-                                            startValue ,
-                                            finalValue ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                { 
-                                    const checkPer = 8 ;
-                                    ;
-                                    const startT = 0 ;
-                                    const anEndT = 0.25 ;
-                                    const endT = 0.5 ;
-                                    const startValue = 0 ;
-                                    const finalValue = 3 + (2 * 2 ) ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: checkPer ,
-                                        }, {
-                                            startT ,
-                                            anEndT ,
-                                            endT ,
-                                            startValue ,
-                                            finalValue ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                { 
-                                    const checkPer = 8 ;
-                                    ;
-                                    const startT = 0.5 ;
-                                    const anEndT = 0.75 ;
-                                    const endT = 1 ;
-                                    const startValue = 3 + (2 * 2 ) ;
-                                    const finalValue = 3 ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: checkPer ,
-                                        }, {
-                                            startT ,
-                                            anEndT ,
-                                            endT ,
-                                            startValue ,
-                                            finalValue ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                return 0 ;
-                            })()
-                            / 12
-                        ) }
-                        />
-                        </K>
-                    ) ;
-                    return (
-                    <CWaveTable1 
-                    freqArgumentInterpretation="timedomain-normalised"
-                    freqArgument={(
-                        <CConstantValue value={55 / 440 } />
-                    )}
-                    detuneInterpretation="timedomain-normalised"
-                    detuneSemitoneCentsNormalVal={12 * 100 }
-                    detune={(
-                        detune
-                    )}
-                    type="triangle"
-                    />
-                    ) ;
-                    } }
-                    </CmInHarmonics>
                     </CAmpModulated0>
                     ) )
                 ) ;
                 return (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
-                    (tPassed < 127.5 ) ?
+                    (tPassed < 63.5 ) ?
+                    <K>
+                    <CBiquadFilterModulated
+                    type="lowpass"
+                    freqArgumentInterpretation="timedomain-normalised" //
+                    freqArgument={(
+                        <CConstantValue 
+                        value={(
+                            2 ** 
+                            (IterableOps.clamp(-2 + (tPassed / 16 ) , -1, 0 ) * 12 )
+                        )} 
+                        />
+                    )}
+                    > 
                     <BassDrumLoopDv subhalvesN={2 } />
+                    </CBiquadFilterModulated>
+                    </K>
                     : <div />
                 ) ) }
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
