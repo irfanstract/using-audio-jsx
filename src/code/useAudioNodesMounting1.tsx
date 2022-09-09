@@ -532,12 +532,12 @@ const useATapNode = (() => {
             const {        
                 gRef: gMainRef ,          
             } = (     
-                useInitUnconnectedYyyNodeFor<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
+                useInitUnconnectedGainNodeLwt({ ctx: dest?.context || null , })
             ) ;                     
             const {                               
                 gRef: gTapRef ,                
             } = (     
-                useInitUnconnectedYyyNodeFor<GainNode>(dest, {}, (c, d) => c.createGain()  , { onUnmount: Object })
+                useInitUnconnectedGainNodeLwt({ ctx: dest?.context || null , })
             ) ;        
             (() => {                                                             
                 ;
