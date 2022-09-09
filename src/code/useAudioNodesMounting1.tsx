@@ -1,5 +1,6 @@
 import {   
     IterableOps ,      
+    Immutable ,
     memoize,                   
     BoundedIdentityFunction,    
 } from "./generalUse11" ; 
