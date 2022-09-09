@@ -567,6 +567,7 @@ export {
     useInitUnconnectedYyyNodeFor ,     
     useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
     useInitAndConnectYyyNodeFor ,    
+    useSingularSrcDestConnect ,
     useParamNodeWithGiven1,
     useParamNodeWithGiven , 
 
