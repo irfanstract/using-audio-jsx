@@ -413,13 +413,15 @@ const useParamNodeWithGiven1 = (
             gRef: gRef1 , 
         } = (function useINC() {  
             ;                
-            const dest = c?.destination || null ; 
+            const gRef = (
+                React.useMemo(() => (
+                    c?.createGain() || null
+                ) , [c] )
+            ) ; 
             return (     
-                useInitUnconnectedYyyNodeFor<AudioNode, AudioNode >(
-                    dest, 
-                    {}, 
-                    (c) => c.createGain(), 
-                    { onUnmount: () => {} })
+                {
+                    gRef ,
+                }
             ) ;
         })() ;          
         {        
