@@ -73,9 +73,11 @@ const {
         ;   
         React["useInsertionEffect"](() => {      
             if (nd1 && doubleInitCheckEnabled ) {              
+                if (0 ) {
                 if (!(((nd1 as any ).AUDIOBASICNORMALISATIONIMPL += "+" ) === "undefined+" ) ) {
                     console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
                 }    
+                }
             }                    
         }, [nd1 ] ) ;    
     }     
