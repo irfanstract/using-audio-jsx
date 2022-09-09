@@ -341,6 +341,29 @@ const useInitUnconnectedYyyNodeFor = (
         return { gRef , } ;
     }
 ) ;       
+// 
+/**    
+ * specialisation for {@link GainNode } without any parameter other than `ctx`.
+ * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
+ * thus *lightweight* without causing *re-render*s.
+ */
+const useInitUnconnectedGainNodeLwt = (
+    function (...[{ ctx: c , }] : [
+        { ctx : null | BaseAudioContext ; } ,
+    ] ) : { gRef : null | GainNode ; } {  
+        ;                
+        const gRef = (
+            React.useMemo(() => (
+                c?.createGain() || null
+            ) , [c] )
+        ) ; 
+        return (     
+            {
+                gRef ,
+            }
+        ) ;
+    }
+) ;
 /**    
  * ensure that `src` have exactly one output which be `dest`.
  */
@@ -411,19 +434,7 @@ const useParamNodeWithGiven1 = (
         const [{ ctx: c  }, dest , { cncStatChgDebugMode: cncDebug = 0 } = {} ] = mainArgs ;
         const {
             gRef: gRef1 , 
-        } = (function useINC() {  
-            ;                
-            const gRef = (
-                React.useMemo(() => (
-                    c?.createGain() || null
-                ) , [c] )
-            ) ; 
-            return (     
-                {
-                    gRef ,
-                }
-            ) ;
-        })() ;          
+        } = useInitUnconnectedGainNodeLwt({ ctx: c , }) ;          
         {        
             ;    
             React[AUDIONODES_USEEFFECT](() => (
