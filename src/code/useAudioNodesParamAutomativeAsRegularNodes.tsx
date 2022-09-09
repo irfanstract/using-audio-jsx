@@ -29,6 +29,7 @@ function useCheckNoDoubleInit(nd1 : object | null ) {
     ;   
     React.useLayoutEffect(() => {      
         if (nd1 && doubleInitCheckEnabled ) {              
+            if (0 ) {
             if ( (      
                 (String(undefined) + "+").length 
                 < 
@@ -41,6 +42,7 @@ function useCheckNoDoubleInit(nd1 : object | null ) {
                     return null ;
                 });        
             }         
+            }
         }                        
     }, [nd1 ] ) ;    
 }        
