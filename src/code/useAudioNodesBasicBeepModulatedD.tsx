@@ -148,9 +148,11 @@ import { WaveTableNodeProps } from "./useAudioGraphImplBasicFltAutomableProps";
                 //      
                 React[AUDIONODES_USEEFFECT](() => {      
                     if (nd1 ) {   
+                        if (0) {
                         if (!(((nd1 as any ).BASICBEEPMODULATIONXNOREPEA += "+" ) === "undefined+" ) ) {
                             console.error(TypeError(`double initialisation detected` ) , { nd1 }) ;;
                         }    
+                        }
                     }                 
                 }, [nd1 ] ) ;       
             }   
