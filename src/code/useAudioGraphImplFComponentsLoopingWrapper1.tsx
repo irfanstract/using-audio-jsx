@@ -340,7 +340,23 @@ const MetronomeAndResponseGraph = (
                      n: (   
                         // TODO
                         Math.round((
-                           (0x40 / tickTockPeriod) 
+                           // multiples of that, bounded to reasonable upper-bound
+                           Iterable.Range(0, (
+                              2E5
+                           ), renderRangeSnapSize )
+                           // prevent 'zero'
+                           .filter(v => (0 < v ) )
+                           /**   
+                            * restrict to 
+                            * `PositivestAmong(4, (amount of ticks over 18 seconds ) ) `
+                            */
+                           .filter(v => (
+                              Math.max(4, (18 / tickTockPeriod) )
+                              <= 
+                              v 
+                           ) ) 
+                           // the first value, or (...)
+                           .first(renderRangeSnapSize )
                         ))         
                      ) ,      
                      start: ( 
