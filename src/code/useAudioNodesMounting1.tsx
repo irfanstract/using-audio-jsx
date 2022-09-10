@@ -357,11 +357,15 @@ const useInitUnconnectedYyyNodeFor = (
  * thus *lightweight* without causing *re-render*s.
  */
 const useInitUnconnectedYyyNodeCtxFncLwt = (
-    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy] : [
+    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy, sematicProps = {}] : [
         { ctx : null | BAudioContext ; } ,
         // the factory impl 
         (...ctx: [BAudioContext, {}? ] ) => YyyNode ,
+        // semantic constraints
+        {
+        } ? ,
     ] ) : { gRef : null | YyyNode ; } {  
+        const {} = sematicProps ;
         ;                
         const gRef = (
             React.useMemo(() => {
