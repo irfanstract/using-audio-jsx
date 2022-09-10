@@ -283,6 +283,11 @@ const useInitAndConnectYyyNodeFor: (
         return gRef1 ;                                
     }            
 );         
+const THROW_UIU_WORNOUT_NODE_ERROR = (
+    IterableOps.throttle((msg: string) => {
+        throw TypeError(msg ) ;
+    } , 12 * 1000 )
+) ;
 /**                   
  * {@link useInitAndConnectYyyNodeFor } without the `useCnnectAndDiscnnct(...)` .
  *                 
