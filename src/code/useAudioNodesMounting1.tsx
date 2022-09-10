@@ -352,24 +352,43 @@ const useInitUnconnectedYyyNodeFor = (
 ) ;       
 // 
 /**    
- * specialisation for {@link GainNode } without any parameter other than `ctx`.
+ * specialisation for {@link YyyNode } without any parameter other than `ctx`.
  * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
  * thus *lightweight* without causing *re-render*s.
  */
-const useInitUnconnectedGainNodeLwt = (
-    function (...[{ ctx: c , }] : [
-        { ctx : null | BaseAudioContext ; } ,
-    ] ) : { gRef : null | GainNode ; } {  
+const useInitUnconnectedYyyNodeCtxFncLwt = (
+    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy] : [
+        { ctx : null | BAudioContext ; } ,
+        // the factory impl 
+        (...ctx: [BAudioContext, {}? ] ) => YyyNode ,
+    ] ) : { gRef : null | YyyNode ; } {  
         ;                
         const gRef = (
             React.useMemo(() => (
-                c?.createGain() || null
+                (c && newYyy(c ) ) || null
             ) , [c] )
         ) ; 
         return (     
             {
                 gRef ,
             }
+        ) ;
+    }
+) ;
+// 
+/**    
+ * specialisation for {@link GainNode } without any parameter other than `ctx`.
+ * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
+ * thus *lightweight* without causing *re-render*s.
+ */
+const useInitUnconnectedGainNodeLwt = (
+    function (...[ctxOptions ] : [
+        { ctx : null | BaseAudioContext ; } ,
+    ] ) : { gRef : null | GainNode ; } {  
+        ;                
+        return (
+            useInitUnconnectedYyyNodeCtxFncLwt
+            (ctxOptions , (ctx: BaseAudioContext) => ctx.createGain() )
         ) ;
     }
 ) ;
@@ -572,6 +591,7 @@ export {
     ToUseYyNodeWithGivenInitProperties1 as ToUseYyNodeWithGivenInitProperties1 ,  
 } ;
 export { 
+    useInitUnconnectedYyyNodeCtxFncLwt ,
     useInitUnconnectedGainNodeLwt ,
     useInitUnconnectedYyyNodeFor ,     
     useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
