@@ -46,7 +46,7 @@ type WavetablePlotCProps = (
    }
 ) ;
 const WavetablePlotCProps = {} ;
-const OscillatorNodePlotSvgGElementC: (
+const WavetableBbPlotSvgGElementC: (
    React.FC<(
       WavetablePlotCProps
       & { style ?: React.CSSProperties ; }
@@ -85,7 +85,7 @@ const OscillatorNodePlotSvgGElementC: (
       return null ;
    }
 ) ;
-const OscillatorNodePlotSvgC: (
+const WavetableBbPlotSvgC: (
    React.FC<(
       WavetablePlotCProps
       & { style ?: React.CSSProperties ; }
@@ -99,7 +99,7 @@ const OscillatorNodePlotSvgC: (
          samplingDomainSpan
       ) ;
       const modelRendered = (
-         <OscillatorNodePlotSvgGElementC 
+         <WavetableBbPlotSvgGElementC 
          {...props }
          />
       ) ;
@@ -134,6 +134,6 @@ const OscillatorNodePlotSvgC: (
 export {
    WavetableNameC ,
    WavetablePlotCProps ,
-   OscillatorNodePlotSvgGElementC ,
-   OscillatorNodePlotSvgC ,
+   WavetableBbPlotSvgGElementC ,
+   WavetableBbPlotSvgC ,
 } ;
