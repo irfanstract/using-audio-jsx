@@ -352,7 +352,7 @@ const useInitUnconnectedYyyNodeFor = (
 ) ;       
 // 
 /**    
- * specialisation for {@link YyyNode } without any parameter other than `ctx`.
+ * specialisation for {@link YyyNode }.
  * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
  * thus *lightweight* without causing *re-render*s.
  */
@@ -423,7 +423,7 @@ return (
 })() ;
 // 
 /**    
- * specialisation for {@link GainNode } without any parameter other than `ctx`.
+ * specialisation for {@link GainNode }.
  * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
  * thus *lightweight* without causing *re-render*s.
  */
