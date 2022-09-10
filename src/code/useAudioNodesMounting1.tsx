@@ -363,9 +363,11 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
         (...ctx: [BAudioContext, {}? ] ) => YyyNode ,
         // semantic constraints
         {
+            autoStart ?: false | "auto" | true ;
         } ? ,
     ] ) : { gRef : null | YyyNode ; } {  
         const {
+            autoStart = "auto" ,
         } = sematicProps ;
         ;                
         const gRef = (
@@ -375,6 +377,16 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
                     const nd1 = (
                         newYyy(c )
                     ) ;
+                    // may imply auto-start depending on 'options'
+                    if (autoStart) {
+                        (
+                            (nd1 instanceof AudioScheduledSourceNode ) 
+                            &&
+                            (autoStart === true || !(nd1 instanceof AudioBuffer ) )
+                            &&
+                            nd1.start()
+                        ) ;
+                    } ;
                     // return with it
                     return (
                         nd1
