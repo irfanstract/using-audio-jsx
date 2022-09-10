@@ -172,6 +172,8 @@ function useDepsRemount(...[{ deps: deps0, dest: nd0, unmountTransitiveLenSecond
                      * `setTimeout`-indirected {@link AudioNode.disconnect `disconnect`}, as demonstrated here,
                      * would in-theory interfere with subsequent *already-reconnected state*. however,
                      * making the `disconnect` call *synchronous* appears to significantly cause *clicks*.
+                     * 
+                     * @todo
                      */
                     setTimeout(() => nd1.disconnect(), Math.max(1, 3 * timeout ) * 1000 ) ;            
                 } ;                
