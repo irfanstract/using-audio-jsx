@@ -364,9 +364,19 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
     ] ) : { gRef : null | YyyNode ; } {  
         ;                
         const gRef = (
-            React.useMemo(() => (
-                (c && newYyy(c ) ) || null
-            ) , [c] )
+            React.useMemo(() => {
+                if (c) {
+                    //
+                    const nd1 = (
+                        newYyy(c )
+                    ) ;
+                    // return with it
+                    return (
+                        nd1
+                    ) ;
+                }
+                return null ;
+            } , [c] )
         ) ; 
         return (     
             {
