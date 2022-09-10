@@ -400,7 +400,7 @@ return (
                         (
                             (nd1 instanceof AudioScheduledSourceNode ) 
                             &&
-                            (autoStart === true || !(nd1 instanceof AudioBuffer ) )
+                            (autoStart === true || !(nd1 instanceof AudioBufferSourceNode ) )
                             &&
                             nd1.start()
                         ) ;
