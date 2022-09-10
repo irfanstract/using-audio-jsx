@@ -371,7 +371,11 @@ return (
             [YyyNode] extends [AudioScheduledSourceNode | null ] ?
             [
                 (
-                    WithAutostartConstraints<false | "auto" | true >
+                    WithAutostartConstraints<false | (
+                        [YyyNode] extends [(OscillatorNode | ConstantSourceNode | AudioBufferSourceNode ) | null ] ?
+                        never
+                        : "auto"
+                    ) | true >
                 ) ,
             ]
             : 
