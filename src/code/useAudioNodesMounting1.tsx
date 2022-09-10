@@ -340,6 +340,10 @@ const useInitUnconnectedYyyNodeFor = (
         ;                         
         return { gRef , } ;
     }
+    /**   
+     * there were attempts to turn this into `useMemo`-based trick, but
+     * the result were *slience* or *all-clicks*
+     */
 ) ;       
 // 
 /**    
