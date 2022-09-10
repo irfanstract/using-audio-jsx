@@ -365,7 +365,8 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
         {
         } ? ,
     ] ) : { gRef : null | YyyNode ; } {  
-        const {} = sematicProps ;
+        const {
+        } = sematicProps ;
         ;                
         const gRef = (
             React.useMemo(() => {
