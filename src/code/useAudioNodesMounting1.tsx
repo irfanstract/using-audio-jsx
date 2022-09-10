@@ -358,15 +358,31 @@ const useInitUnconnectedYyyNodeFor = (
  */
 const useInitUnconnectedYyyNodeCtxFncLwt = /* chg */ (() => {
 ;
+type WithAutostartConstraints<V> = (
+    { autoStart : V ; }
+) ;
 return (
-    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy, sematicProps] : [
+    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy, sematicProps = {}] : [
         { ctx : null | BAudioContext ; } ,
         // the factory impl 
         (...ctx: [BAudioContext, {}? ] ) => YyyNode ,
         // semantic constraints
-        {
-            autoStart ?: false | "auto" | true ;
-        } ,
+        ...(
+            [YyyNode] extends [AudioScheduledSourceNode | null ] ?
+            [
+                (
+                    WithAutostartConstraints<false | "auto" | true >
+                ) ,
+            ]
+            : 
+            [
+                (
+                    Partial<(
+                    WithAutostartConstraints<never>
+                    )>
+                ) ? ,
+            ]
+        ) ,
     ] ) : { gRef : null | YyyNode ; } {  
         const {
             autoStart = "auto" ,
