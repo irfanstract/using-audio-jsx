@@ -364,7 +364,7 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
         // semantic constraints
         {
             autoStart ?: false | "auto" | true ;
-        } ? ,
+        } ,
     ] ) : { gRef : null | YyyNode ; } {  
         const {
             autoStart = "auto" ,
@@ -415,7 +415,7 @@ const useInitUnconnectedGainNodeLwt = (
         ;                
         return (
             useInitUnconnectedYyyNodeCtxFncLwt
-            (ctxOptions , (ctx: BaseAudioContext) => ctx.createGain() )
+            (ctxOptions , (ctx: BaseAudioContext) => ctx.createGain() , {} )
         ) ;
     }
 ) ;
