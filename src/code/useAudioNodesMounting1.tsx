@@ -293,7 +293,7 @@ const useInitAndConnectYyyNodeFor: (
  * @param OeGainNode1 this `new` `YyNode`   
 */     
 const useInitUnconnectedYyyNodeFor = (    
-    function useC <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
+    function useInitUnconnectedYyyNodeForImpl <YyNode extends AudioNode , Dst1 extends AudioSinkNode & Pick<AudioNode, "context"> = AudioNode > (  ...[
         dest ,  
         {   } ,         
         OeGainNode1  ,          
