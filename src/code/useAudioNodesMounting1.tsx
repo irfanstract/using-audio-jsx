@@ -356,7 +356,9 @@ const useInitUnconnectedYyyNodeFor = (
  * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
  * thus *lightweight* without causing *re-render*s.
  */
-const useInitUnconnectedYyyNodeCtxFncLwt = (
+const useInitUnconnectedYyyNodeCtxFncLwt = /* chg */ (() => {
+;
+return (
     function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy, sematicProps] : [
         { ctx : null | BAudioContext ; } ,
         // the factory impl 
@@ -402,6 +404,7 @@ const useInitUnconnectedYyyNodeCtxFncLwt = (
         ) ;
     }
 ) ;
+})() ;
 // 
 /**    
  * specialisation for {@link GainNode } without any parameter other than `ctx`.
