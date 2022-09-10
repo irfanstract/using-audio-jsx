@@ -173,6 +173,11 @@ const useWaveTableNdElas : (
 ) ;                    
 /**   
  * only occur as in `useLayoutEffect` with `deps` being `[] as const` (empty array)
+ * 
+ * simulates 
+ * a *state-change* intended for use in 
+ * simulating an initially *control sliding* effects like 
+ * *initial pitch-slide*, *fade-in*, *poofing sound*, *bass drop*, *snare-drum sound*, etc.
  */
 const useElasUsageOnMount = (() => {   
     return (  
