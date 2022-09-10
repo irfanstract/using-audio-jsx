@@ -135,6 +135,104 @@ export const AudioLoopDemoApp = (function () {
                 const bassLine = (
                     withADestCtxCompletionStat(({ relativeTDiff }) => (
                     <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
+                    <CmInHarmonics 
+                    value={[
+                        SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, 
+                        [
+                            [0, { gain: 2 ** -0.5 }] , 
+                            [-1, { gain: (true) ? (2 ** -0.5 ) : 0 }] ,
+                        ], 
+                    ]} 
+                    >
+                    { ({ detuneOctaves }) => {
+                    ;
+                    const detune = (
+                        <K>
+                        <CConstantValue value={detuneOctaves } />
+                        <CFnValue1 
+                        value={({ ctxT: t }) => (
+                            ((): number => { 
+                                { 
+                                    ;
+                                    const startValue = -2 * 2 ;
+                                    ;
+                                    for (const value of (
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
+                                            period: 32 ,
+                                        }, {
+                                            startT: 28 ,
+                                            endT: 32 ,
+                                            anEndT: 30 ,
+                                            startValue: startValue ,
+                                            finalValue: startValue + -1 ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
+                                }
+                                { 
+                                    ;
+                                    ;
+                                    for (const value of (
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
+                                            period: 8 ,
+                                        }, {
+                                            startT: 0 ,
+                                            endT: 0.5 ,
+                                            anEndT: 0.25 ,
+                                            finalValue: 3 + (2 * 2 ) ,
+                                            startValue: 0 ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
+                                }
+                                { 
+                                    ;
+                                    ;
+                                    for (const value of (
+                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
+                                            period: 8 ,
+                                        }, {
+                                            startT: 0.5 ,
+                                            endT: 1 ,
+                                            anEndT: 0.75 ,
+                                            finalValue: 3 ,
+                                            startValue: 3 + (2 * 2 ) ,
+                                        } )
+                                    ) ) { 
+                                        return (
+                                            value
+                                        ) ;
+                                    }
+                                }
+                                return 0 ;
+                            })()
+                            / 12
+                        ) }
+                        />
+                        </K>
+                    ) ;
+                    return (
+                    <CWaveTable1 
+                    freqArgumentInterpretation="timedomain-normalised"
+                    freqArgument={(
+                        <CConstantValue value={55 / 440 } />
+                    )}
+                    detuneInterpretation="timedomain-normalised"
+                    detuneSemitoneCentsNormalVal={12 * 100 }
+                    detune={(
+                        detune
+                    )}
+                    type="triangle"
+                    />
+                    ) ;
+                    } }
+                    </CmInHarmonics>
                     </CAmpModulated0>
                     ) )
                 ) ;
