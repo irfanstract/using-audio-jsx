@@ -37,7 +37,6 @@ const useAuTapOutputFreqDmAnalysis = (
                         nd0.context
                         .createAnalyser()          
                     ) ;        
-                    nd0.connect(nd1 ) ;       
                     return nd1 ;                                             
                 } else {
                     return null ;
@@ -45,18 +44,8 @@ const useAuTapOutputFreqDmAnalysis = (
             } , [nd0 ] )     
         ) ;           
         /**   
-         * NOTE ABOUT THE `deps` .  
-         * we intentionally omit {@link nd0 } from `deps`,      
-         * due to how this shall work    
          *  */    
-        React.useLayoutEffect((): ReturnType<React.EffectCallback> => {
-            if (nd0 && nd11 ) {
-                return () => {
-                    nd0.disconnect(nd11) ;     
-                } ;   
-            } ;
-            // eslint-disable-next-line   react-hooks/exhaustive-deps     
-        } , [nd11 ] ) ;  
+        useSingularSrcDestConnect(nd0, nd11 ) ;  
         ;     
         return (
             nd11   
