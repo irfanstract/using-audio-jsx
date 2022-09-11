@@ -40,6 +40,17 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
+/**    
+ * this `useYyy`
+ * 1) will return 
+ *    either `null` or 
+ *    a {@link Blob } playing-back the last-three-second from/of it 
+ * 2) will cause 
+ *    {@link React.useLayoutEffect *periodic refresh* } 
+ *    accompanied by *update* in the return-value
+ * 3) is meant for use with `InterlaceBlobSeqMediaPlayer`
+ * 
+ */
 const useMediaStrmPollNextAsBlob = (
    function useXRecBlobLiveImpl(src : null | MediaStream ) {
       ;
