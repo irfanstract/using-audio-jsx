@@ -155,6 +155,9 @@ const useMediaRecordingDataCollect = (
       ; 
    }
 )  ;
+/**    
+ * defines `mediaEncOptions` etc.
+ */
 type MEO = {
    /**   
     * this will be 
