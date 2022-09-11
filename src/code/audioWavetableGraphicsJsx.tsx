@@ -12,6 +12,7 @@ import {
    
 } from "./audioWavetablePlotting";
 import React from "react";
+import "./WavetablePlotSvgCss.css";
 
 
 
