@@ -45,7 +45,7 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
  * 1) is meant for use with `InterlaceBlobSeqMediaPlayer`
  * 1) will return 
  *    either `null` or 
- *    a {@link Blob } playing-back the last-three-second from/of it 
+ *    a ({@link URL.createObjectURL *playable* }) {@link Blob } playing-back the last-three-second from/of it 
  * 2) will cause 
  *    {@link React.useLayoutEffect *periodic refresh* } 
  *    accompanied by *update* in the return-value
@@ -63,7 +63,7 @@ const useMediaStreamAsInterlaceAsBlob : (
  * this `useYyy`
  * 1) will return 
  *    either `null` or 
- *    a {@link Blob } playing-back the last-three-second from/of it 
+ *    a ({@link URL.createObjectURL *playable* }) {@link Blob } playing-back the last-three-second from/of it 
  * 2) will cause 
  *    {@link React.useLayoutEffect *periodic refresh* } 
  *    accompanied by *update* in the return-value
