@@ -670,7 +670,7 @@ const {
                                        </li>
                                        {freqArgDest1 && (
                                           <li key="freq" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE">
-                                             Freq :
+                                             <i>f</i> :
                                              <WithGivenDest value={freqArgDest1}>
                                                 {POD(freqArgGraph1, "W")}
                                              </WithGivenDest>
@@ -678,7 +678,7 @@ const {
                                        )}
                                        {detuneCtrlDest1 && (
                                           <li key="detune" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE" >
-                                             Detune :
+                                             <i>detune</i> :
                                              <WithGivenDest value={detuneCtrlDest1}>
                                                 {POD(detuneGraph1, "W")}
                                              </WithGivenDest>
