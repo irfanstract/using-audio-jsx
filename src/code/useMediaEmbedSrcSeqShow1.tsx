@@ -29,6 +29,7 @@ import {
  
 } from "./usingIntervalRefresh";      
 import { useEventTarget } from "./usingTimeoutOrInterval";
+import { useClassInstanceHashFnc, } from "./usingObjectIdentityHashFnc1";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import {  } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
