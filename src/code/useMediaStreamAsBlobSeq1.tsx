@@ -55,8 +55,8 @@ const useMediaStreamAsInterlaceAsBlob : (
    (src: null | MediaStream ) 
    => (null | Blob )
 ) = (
-   (...args ) => (
-      useMediaStrmPollNextAsBlob(...args )
+   (src ) => (
+      useMediaStrmPollNextAsBlob(src )
    )
 ) ;
 /**    
