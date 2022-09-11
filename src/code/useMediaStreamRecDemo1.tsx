@@ -30,12 +30,26 @@ import {
 } from "./usingIntervalRefresh";      
 import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
-import {  } from "./useMediaStreamBlobConcatState1";
+import { usePushAndTruncateStateToLastN, } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
 import { useMediaStrmPollNextAsBlob } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
+function useLastNonNullNHistSequencing<A extends (object | true | symbol )>(...[{ nLimit: n, }, v,] : [
+   { nLimit: number ; } ,
+   null | A ,
+] ) {
+   const [sqRetained, sqPush] = (
+      usePushAndTruncateStateToLastN<A >(n , { initially: [] } )
+   ) ;
+   useEffect(() => {
+      v && sqPush(v ) ;
+   } , [v ] ) ;
+   return {
+      sqRetained: sqRetained ,
+   } ;
+}
 
 
 
