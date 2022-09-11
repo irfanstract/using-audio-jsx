@@ -94,13 +94,13 @@ const MediaStreamRecDemo1 = (
       return (
          ON 
          ?
-         <div style={{ display: "flex", flexDirection: "column" }}>
+         <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+            <MediaStreamRecDemo11 />
             <p>
             <button type="button" role={"switch" } onClick={() => enable(false ) } >
                Close 
             </button>
             </p>
-            <MediaStreamRecDemo11 />
          </div>
          :
          (
