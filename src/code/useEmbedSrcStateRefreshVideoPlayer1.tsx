@@ -46,6 +46,10 @@ const InterlaceBlobSeqVideoPlayer = (
          useObjectURL(v )
       ) ;
       return (
+      /**    
+       * `<video>`s are rather *heavyweight*.
+       */
+      React.useDeferredValue((
          <div>
             <video 
             autoPlay
@@ -55,6 +59,7 @@ const InterlaceBlobSeqVideoPlayer = (
                { vUrl }
             </pre>
          </div>
+      ))
       ) ;
    }
 ) ;
