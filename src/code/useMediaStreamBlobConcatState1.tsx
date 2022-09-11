@@ -168,6 +168,39 @@ const useBlobConcatState1 = (
       return [overallBlob, ops ] ;
    }
 ) ;
+/**    
+ * this method shall be here
+ * for the needs to *truncate to last n*.
+ */
+const usePushAndTruncateStateToLastN = (
+   function <V, PushV = V>(...[n , { initially, filter } ] : [
+      number ,
+      (
+         { 
+            initially : readonly V[] ; 
+         }
+         &
+         {
+            filter ?: (
+               // (v: PushV) => v is (PushV & V  )
+               undefined
+            ) ;
+         }
+      ) ,
+   ]) {
+      return (
+         useReducer((v0: V[] , v1: V ): V[] => (
+            Immutable.Seq((
+               [...v0, ...(
+                  [v1 ]
+               ) ] 
+            ))
+            .takeLast(n )
+            .toArray()
+         ) , [...initially ] )
+      ) ;
+   }
+) ;
 
 
 
@@ -178,4 +211,5 @@ export {
    useBlobConcatDeferring,
    useBlobConcatState1,
    useBlobConcatState,
+   usePushAndTruncateStateToLastN ,
 } ;
