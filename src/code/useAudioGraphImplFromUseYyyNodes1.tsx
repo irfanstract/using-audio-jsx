@@ -552,6 +552,7 @@ const {
                               );
                            const c1 = (
                               // TODO         
+                              <div>
                               <XList >
                                  {freqArgCtrlDest1 && (
                                     <li key="freq" className="UAGICU_INFOBOX_BIQUADFLTCOMP_FREQUEORDETUNE" >
@@ -577,6 +578,7 @@ const {
                                     </WithGivenDest>
                                  </li>
                               </XList >
+                              </div>
                            );
                            return {
                               c1,
