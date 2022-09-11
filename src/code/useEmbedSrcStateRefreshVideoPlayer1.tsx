@@ -39,7 +39,7 @@ import { useObjectURL } from "./useEmbedSrcObjectUrl";
 
 
 
-const BlobStateVideoPlayer = (
+const InterlaceBlobSeqVideoPlayer = (
    function ({ value: v } : { value: null | Blob ; } ) {
       ;
       const vUrl = (
@@ -63,5 +63,5 @@ const BlobStateVideoPlayer = (
 
 
 export {
-   BlobStateVideoPlayer ,
+   InterlaceBlobSeqVideoPlayer ,
 } ;

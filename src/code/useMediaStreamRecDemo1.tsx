@@ -32,7 +32,7 @@ import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import {  } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
-import { BlobStateVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
+import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
@@ -79,7 +79,7 @@ const MediaStreamRecDemo11 = (
       return (
          <div>
             <p> <i> Streaming Video </i> </p>
-            <BlobStateVideoPlayer 
+            <InterlaceBlobSeqVideoPlayer 
             value={v }
             />
          </div> //
