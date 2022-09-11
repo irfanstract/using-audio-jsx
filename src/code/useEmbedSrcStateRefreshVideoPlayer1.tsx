@@ -39,6 +39,10 @@ import { useObjectURL } from "./useEmbedSrcObjectUrl";
 
 
 
+/**   
+ * for use with `useMediaStrmPollNextAsBlob` - 
+ * pass the return-value as this *component*'s `value` when applying.
+ */
 const InterlaceBlobSeqVideoPlayer = (
    function ({ value: v } : { value: null | Blob ; } ) {
       ;
