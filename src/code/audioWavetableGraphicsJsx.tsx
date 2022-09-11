@@ -90,32 +90,54 @@ const WavetableBbPlotSvgGElementC: (
    )>
 ) = (
    ({ model, samplingDomainSpan, style: elementStyle }) => {
-      const e = (
-         wavetableNameAsUnitPhasePrj
-      )(model.shape ) ;
-      if (e) {
-         const pathD0 = (
-            Immutable.Range(0, samplingDomainSpan, 1 / (4 * 5) )
-            .map((t) => (
-               { t, v: e(t ) , }
-            ) )
-         ) ;
+      const { eSampled } = (
+         wavetablePlot(model , { samplingDomainSpan } )
+      ) ; //
+      if (eSampled) {
+         // const pathD0 = 
+         //
+         //
+         //
+         //
+         ;
          const pathD = (
-            [
-               ...(
-                  pathD0
-                  .map(({ t, v }, i: number ) => (
-                     `${(i === 0 ) ? "M" : "L" } ${t} ${v}`
-                  ) )
-               ) ,
-               // no 'z' !
-               "z" ,
-            ]
-            .join(" ")
+            polylineAsPathD((
+               Immutable.Seq([
+                  ...eSampled ,
+                  ...(
+                     eSampled
+                     .reverse()
+                     .map(({ x, y }) => ({ x: x + 0.1, y }) ) 
+                  ) ,
+               ])
+            ) )
          ) ;
          return (
             <g style={{ fill: "gray", ...elementStyle }} >
-               <path d={pathD } />
+               <g>
+                  <title>
+                     the wave-shape :
+                     { String(model.shape ) }
+                  </title>
+                  <g style={{ filter: ` ` }} >
+                     <path d={pathD } style={{ strokeWidth: "0.1px" }} />
+                  </g>
+               </g>
+               { (() => {
+                  const length = 1000 ;
+                  const hoverRad = 0.1 ;
+                  return (
+                     <g>
+                        <title>
+                           '0'-line/meridian
+                        </title>
+                        <rect y={-hoverRad } height={hoverRad + hoverRad } width={length } style={{ fill: "rgba(0, 0, 0, 0.01)" }} />
+                        <g style={{ pointerEvents: "none" }}>
+                           <rect height={0.025 } width={length } style={{ fill: "yellow" }} />
+                        </g>
+                     </g>
+                  ) ;
+               })() }
             </g>
          ) ;
       }
