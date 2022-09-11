@@ -632,6 +632,19 @@ const {
                                  <K key={defkey}>
                                     <p> DEFKEY: {defkey} </p>
                                     <XList>
+                                       <li key="type" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE">
+                                          <div title="the name of the wave-shape, and a time-domain plot of it.">
+                                             <i>wave shape</i> :
+                                             <figure>
+                                             { wvTableNme && (
+                                                <WavetableBbPlotSvgC 
+                                                samplingDomainSpan={10 * (1 / 440 ) }
+                                                model={{ f: 220, shape: wvTableNme } }
+                                                />
+                                             ) }
+                                             </figure>
+                                          </div>
+                                       </li>
                                        {freqArgDest1 && (
                                           <li key="freq" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE">
                                              Freq :
