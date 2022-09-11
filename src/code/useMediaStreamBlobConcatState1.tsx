@@ -189,7 +189,7 @@ const usePushAndTruncateStateToLastN = (
       )> ) ,
    ]) {
       return (
-         useReducer((v0: V[] , v1: V ): V[] => (
+         useReducer((...[v0, v1]: [V[] , V ]): V[] => (
             Immutable.Seq((
                [...v0, ...(
                   [v1 ]
