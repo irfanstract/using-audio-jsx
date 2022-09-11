@@ -12,6 +12,10 @@ import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";
 import { 
     useOneWayCheckBox , 
 } from "./useCompletion";   
+import { 
+   WavetableBbPlotSvgC ,
+   WavetableNameC ,
+} from "./audioWavetableGraphicsJsx";
           
 // 
 import {  
