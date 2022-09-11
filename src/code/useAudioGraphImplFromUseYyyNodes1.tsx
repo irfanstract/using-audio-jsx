@@ -563,6 +563,18 @@ const {
                                  </strong>
                               </p>
                               <XList >
+                                 <li key="type" className="UAGICU_INFOBOX_BIQUADFLTCOMP_MAIN">
+                                    <div title="which mode.">
+                                       <i>mode</i> :
+                                       &nbsp;
+                                       { flType && (
+                                          // 'code' and 'i' would both each be appropriate, for now.
+                                          <code>
+                                             { flType }
+                                          </code>
+                                       ) }
+                                    </div>
+                                 </li>
                                  {freqArgCtrlDest1 && (
                                     <li key="freq" className="UAGICU_INFOBOX_BIQUADFLTCOMP_FREQUEORDETUNE" >
                                        Freq Ctrl Mode :
