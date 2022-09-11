@@ -168,6 +168,7 @@ const WavetableBbPlotSvgC: (
                <WavetableNameC value={props.model.shape } />
             </p>
             <svg
+            className="WavetablePlotComponent "
             viewBox={`0 -1 ${viewboxLen} 2` }
             preserveAspectRatio="none"
             style={{
