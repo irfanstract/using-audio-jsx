@@ -32,6 +32,7 @@ import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import {  } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
+import { useXReceInterlaceBlobSeq } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
@@ -42,32 +43,6 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
-const useXReceInterlaceBlobSeq = (
-   function useXRecBlobLiveImpl(src : null | MediaStream ) {
-      ;
-      const [v, setV ] = (
-         useState<null | Blob>(null )
-      ) ;
-      useMediaStreamRec(src, {
-         outputSizeLimit: 100 * 1E6 ,
-         rPeriodMillis: 2 * 1000 ,
-      }, ({ data, error }) => {
-         const ERRO = (
-            IterableOps.once(() => (
-               console.warn("errors:")
-            ))
-         ) ;
-         setV((data0 ) => data || data0 ) ;
-         error.forEach((e) => (
-            ERRO()
-            ,
-            console.warn(e) 
-         )) ;
-      }) ;
-      ;
-      return v ;
-   }
-) ;
 const MediaStreamRecDemo11 = (
    function MediaStreamRecDemoC() {
       const src = (
