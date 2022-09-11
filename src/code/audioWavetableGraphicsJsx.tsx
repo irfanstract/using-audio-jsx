@@ -3,6 +3,7 @@ import {
    IterableOps ,
    Immutable ,
 } from "./generalUse11";
+import { polylineAsPathD, polylineToPathD, } from "./polylineSvg";
 import { 
    WavetableProperties ,
    
