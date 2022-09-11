@@ -101,7 +101,17 @@ const dBBC = (() => {
             return (                
                 <XDC>      
                          
+                <aside 
+                title={
+                    [
+                        "technical details. " ,
+                        "an actual reflection of the actual implementation; merely to spot something wrong." ,
+                        "unlikely useful for users. " ,
+                    ].join("\n")
+                }
+                >
                 { (dBB) ? dbgBox1 : <></> }    
+                </aside>
                 <DbbOrHovered dBB={dBB } >
                 { c1 }
                 </DbbOrHovered>                   
