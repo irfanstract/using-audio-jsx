@@ -71,7 +71,7 @@ const useMediaStreamAsInterlaceAsBlob : (
  * 
  */
 const useMediaStrmPollNextAsBlob = (
-   function useXRecBlobLiveImpl(src : null | MediaStream ) {
+   function useXRecBlobLiveImpl(...[src] : [src : null | MediaStream ] ) {
       ;
       const [v, setV ] = (
          useState<null | Blob>(null )
