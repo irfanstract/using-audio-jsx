@@ -40,7 +40,7 @@ import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
 
 
 
-const useXReceInterlaceBlobSeq = (
+const useMediaStrmPollNextAsBlob = (
    function useXRecBlobLiveImpl(src : null | MediaStream ) {
       ;
       const [v, setV ] = (
@@ -71,5 +71,5 @@ const useXReceInterlaceBlobSeq = (
 
 
 export {
-   useXReceInterlaceBlobSeq ,
+   useMediaStrmPollNextAsBlob ,
 } ;

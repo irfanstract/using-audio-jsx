@@ -32,7 +32,7 @@ import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import {  } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
-import { useXReceInterlaceBlobSeq } from "./useMediaStreamAsBlobSeq1";
+import { useMediaStrmPollNextAsBlob } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
@@ -49,7 +49,7 @@ const MediaStreamRecDemo11 = (
          useMediaReadStreamDemo()
       ) ;
       const v = (
-         useXReceInterlaceBlobSeq(src )
+         useMediaStrmPollNextAsBlob(src )
       ) ;
       return (
          <div>
