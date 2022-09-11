@@ -175,7 +175,7 @@ const useBlobConcatState1 = (
 const usePushAndTruncateStateToLastN = (
    function <V, PushV = V>(...[n , { initially, filter } ] : [
       number ,
-      (
+      ...(OptionsCouldBeOmittedAltogether<(
          { 
             initially : readonly V[] ; 
          }
@@ -186,7 +186,7 @@ const usePushAndTruncateStateToLastN = (
                undefined
             ) ;
          }
-      ) ,
+      )> ) ,
    ]) {
       return (
          useReducer((v0: V[] , v1: V ): V[] => (
