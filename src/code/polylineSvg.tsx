@@ -15,6 +15,14 @@ import {
 
 
 /**    
+ * this is for use in SVGs.
+ * this will format a *sequence* of `{x, y}`s into `<path>` `d` *attr*.
+ * 
+ * ```
+ * <path d="M 0 0 L 32 0 L 32 24 z" />
+ * <path d="M 0 0 L 32 0 L 32 24 z" />
+ * ```
+ * 
  * to avoid potentially unecessary *memory usage*,
  * uses of `Array` shall be substituted/replaced with {@link Immutable.Seq }.
  * 
