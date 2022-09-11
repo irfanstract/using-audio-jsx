@@ -33,6 +33,41 @@ const WavetableNameC: (
       ) ;
    }
 ) ;
+function wavetablePlot(...[{ shape, f, } , { samplingDomainSpan, } ] : [
+   model: (
+      NonNullable<(
+         WavetablePlotCProps["model"]
+      )>
+   )  ,
+   displayProperties : {
+      samplingDomainSpan: (
+         NonNullable<(
+            WavetablePlotCProps["samplingDomainSpan"]
+         )>
+      ) ;
+   } ,
+]) {
+   ;
+   const fnc = (
+      wavetableNameAsUnitPhasePrj
+   )(shape ) ;
+   const fncSampled = (
+      fnc ?
+      (
+         Immutable.Range(0, samplingDomainSpan, 1 / (f * (4 * 5 ) ) )
+         .map((t) => (
+            { t, v: fnc(t * f ) , }
+         ) )
+         .map(({ t, v }, i: number ) => (
+            { x: t, y: v, }
+         ) )
+      )
+      : null
+   ) ;
+   return {
+      eSampled: fncSampled ,
+   } ;
+}
 
 
 
