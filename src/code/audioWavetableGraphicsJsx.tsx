@@ -172,7 +172,6 @@ const WavetableBbPlotSvgC: (
             viewBox={`0 -1 ${viewboxLen} 2` }
             preserveAspectRatio="none"
             style={{
-               background: "black" ,
                ...elementStyle ,
             }}
             >
