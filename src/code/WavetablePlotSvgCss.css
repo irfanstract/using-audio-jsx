@@ -1,0 +1,13 @@
+
+
+
+
+.WavetablePlotComponent {
+   background: var(--WavetablePlotBackground) ;
+   --WavetablePlotBackground: black ;
+   --WavetablePlotForeground: white ;
+
+   height: 5em ;
+   display: block ;
+   width: 100%;
+}
