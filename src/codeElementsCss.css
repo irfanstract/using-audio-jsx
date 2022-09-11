@@ -79,7 +79,7 @@ pre {
     white-space: pre ;
 }     
 /* PARAGRAPH */
-p, blockquote {
+p, blockquote, figure {
    padding-inline-start: 0.25em ;
    margin-inline-start: -0.25em ;
    box-sizing: content-box ;
@@ -87,7 +87,7 @@ p, blockquote {
    margin-inline-end: calc(max(0em, 100% - 40em /* */ ) ) ;
    border-inline-end: 0.05em dotted currentColor ;
 }
-blockquote {
+blockquote, figure {
    padding-inline-start: 1.5em ;
    margin-inline-start: 0.25em ;
    border-inline-start: 0.2em solid currentColor ;
