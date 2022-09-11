@@ -553,6 +553,15 @@ const {
                            const c1 = (
                               // TODO         
                               <div>
+                              <p>
+                                 <strong>
+                                 <i>biquad filtering</i>
+                                 &nbsp;
+                                 <span>
+                                 (mode: <i>{ flType }</i> )
+                                 </span>
+                                 </strong>
+                              </p>
                               <XList >
                                  {freqArgCtrlDest1 && (
                                     <li key="freq" className="UAGICU_INFOBOX_BIQUADFLTCOMP_FREQUEORDETUNE" >
