@@ -1,7 +1,7 @@
 
 
 // import util from "util" ;
-import { BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11";
+import { BoundedIdentityFunction, IterableOps, Immutable, OptionsCouldBeOmittedAltogether, } from "./generalUse11";
 import React, { 
    // Callbacks
    Dispatch,
