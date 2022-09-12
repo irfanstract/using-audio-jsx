@@ -214,7 +214,7 @@ const useMediaStreamRecSR = (
             return () => {
             } ;
          }
-      } , [s ] )
+      } , [s ] ) ;
       const requestData = (
          React.useCallback((
             (): void => (
