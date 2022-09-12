@@ -171,6 +171,21 @@ type MEO = {
     */
    reinitDeps ?: React.DependencyList ; //
 } ;
+function useMediaRecAutoStop<A extends { stop(): void ; } >(...[s] : [
+   null | A ,
+] ): void {
+   const oldSRef = (
+      React.useRef<null | A >(null )
+   ) ;
+   const oldS = (
+      oldSRef
+      .current
+   ) ;
+   if (s !== oldS ) {
+      (oldS && oldS.stop() ) ;
+   } 
+   oldSRef.current = oldS ;
+}
 const useMediaStreamRecSR = (
    function (...[{ src, mediaEncOptions, reinitDeps = [], autoStart }] : [
       {
