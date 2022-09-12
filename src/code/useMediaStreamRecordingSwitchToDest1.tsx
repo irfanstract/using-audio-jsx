@@ -203,6 +203,7 @@ const useMediaStreamRecSR = (
             : null
          ) , [src, ...reinitDeps ] )
       ) ;
+      useMediaRecAutoStop(s ) ;
       React.useEffect(() => {
          if (s) {
             (
@@ -211,7 +212,6 @@ const useMediaStreamRecSR = (
                (s.state === "inactive" && s.start() )
             ) ;
             return () => {
-               s.stop() ;
             } ;
          }
       } , [s ] )
