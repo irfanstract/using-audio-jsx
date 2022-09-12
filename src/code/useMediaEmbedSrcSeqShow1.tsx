@@ -96,6 +96,49 @@ const BlobSeqDisplay = (
       ) ;
    }
 ) ;
+const KeyframeSeqCK = (
+   (...[{ children: payload, } , ] : [
+      {
+         children : (
+            readonly (
+               readonly [{ key: React.Key ; } , React.ReactElement | null ] 
+            )[]
+         ) ;
+      } ,
+   ] ) => {
+      ;
+      return (
+            <ol 
+            style={{ 
+               display: "flex", 
+               flexDirection: "row", 
+               listStyleType: "none", 
+               padding: "none" ,
+            }}
+            >
+            { (
+               payload
+               .map(([{ key }, div1 ], ) => (
+                  <li 
+                  key={key } 
+                  style={{ 
+                     width: "10em", 
+                     height: "16em", 
+                     display: "flex" ,
+                     border: "0.05em solid cyan", 
+                     borderRadius: "0.125em", 
+                     margin: "0.125em",
+                     background: "transparent",
+                  }} 
+                  >
+                     { div1 }
+                  </li>
+               ) )
+            ) }
+            </ol>
+      ) ;
+   }
+) ;
 
 
 
