@@ -213,7 +213,11 @@ const useMediaStreamRecSR = (
             (
                autoStart
                &&
-               (s.state === "inactive" && s.start() )
+               (
+                  s.state === "inactive" ? 
+                  s.start() 
+                  : console.debug(`Start() would throw because 's' is (already) RUNNING`) 
+               )
             ) ;
             return () => {
             } ;
