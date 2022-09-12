@@ -87,10 +87,12 @@ const MediaStreamRecDemo11 : (
    React.FC<{}>
 ) = (() => {
    const useSrcRec: (
-      (src: null | MediaStream ) 
+      (src: null | MediaStream , options: {
+         restartPeriodMillis : number ;
+      } ) 
       => { recorded : null | Blob ; }
    ) = (
-      function (src ) {
+      function (src , { restartPeriodMillis , } ) {
          ;
          const [recorded, setRecdV] = (
             useState<null | Blob>(null )
@@ -99,7 +101,7 @@ const MediaStreamRecDemo11 : (
             // TODO
             useMediaStreamRec(src , {
                outputSizeLimit: 200 * 1024 * 1024 ,
-               restartPeriodMillis: 15 * 1000 ,
+               restartPeriodMillis: restartPeriodMillis ,
                reinitDeps: [src ] ,
                onProgress: (
                   ({ data: updatedAggregate }) => {
@@ -155,7 +157,7 @@ const MediaStreamRecDemo11 : (
          ) ;
          const {
             recorded ,
-         } = useSrcRec(src ) ;
+         } = useSrcRec(src , { restartPeriodMillis: 15 * 1000, } ) ;
          const SRC_DCC = (
             useDepsChgCount({}, [src] )
          ) ;
