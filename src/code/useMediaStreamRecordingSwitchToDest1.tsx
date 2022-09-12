@@ -289,6 +289,9 @@ const useMediaStreamRec = (() => {
                       */
                      rPeriodMillis : number ;
                   } & MEO
+                  & {
+                     refreshPeriod ?: number ;
+                  }
                ) , 
                ...extras: Args ,
             ]
@@ -297,6 +300,11 @@ const useMediaStreamRec = (() => {
       ] ) {
          const { //
             rPeriodMillis ,
+         } = p[0] ;
+         const { 
+            refreshPeriod: xRequestDataCallPeriod = (
+               IterableOps.clamp(rPeriodMillis / 4 , 500, 2.6 * 1000 )
+            ) ,
          } = p[0] ;
          const {
             mediaEncOptions,
@@ -324,7 +332,7 @@ const useMediaStreamRec = (() => {
                usingInterval(() => (
                   requestData()
                ) , (
-                  640
+                  xRequestDataCallPeriod
                ) , {
                   catchupPolicy: "MAINTAIN_FIXED_PACE" ,
                } )
