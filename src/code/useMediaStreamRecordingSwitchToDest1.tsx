@@ -180,17 +180,19 @@ function useMediaRecAutoStop<A extends MediaRecorder >(...[s] : [
    const oldSRef = (
       React.useRef<null | A >(null )
    ) ;
-   const oldS = (
-      oldSRef
-      .current
-   ) ;
-   if (s !== oldS ) {
-      (oldS && (
-         (oldS.state !== "inactive")
-         &&
-         oldS.stop()
-      ) ) ;
-   } 
+   {
+      const oldS = (
+         oldSRef
+         .current
+      ) ;
+      if (s !== oldS ) {
+         (oldS && (
+            (oldS.state !== "inactive")
+            &&
+            oldS.stop()
+         ) ) ;
+      } 
+   }
    oldSRef.current = s ;
 }
 const useMediaStreamRecSR = (
