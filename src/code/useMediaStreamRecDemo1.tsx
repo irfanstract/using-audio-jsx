@@ -58,7 +58,7 @@ function useLastNonNullNHistSequencing<A extends (object | true | symbol )>(...[
 
 
 
-const MediaStreamRecDemo11 = (
+const MediaStreamInterlaceBlobbingDemo11 = (
    function MediaStreamRecDemoC() {
       const src = (
          useMediaReadStreamDemo()
@@ -83,6 +83,97 @@ const MediaStreamRecDemo11 = (
       ) ;
    }
 ) ;
+const MediaStreamRecDemo11 : (
+   React.FC<{}>
+) = (() => {
+   const useSrcRec: (
+      (src: null | MediaStream ) 
+      => { recorded : null | Blob ; }
+   ) = (
+      function (src ) {
+         ;
+         const [recorded, setRecdV] = (
+            useState<null | Blob>(null )
+         ) ;
+         const srcRecProcH = (
+            // TODO
+            useMediaStreamRec(src , {
+               outputSizeLimit: 200 * 1024 * 1024 ,
+               rPeriodMillis: 15 * 1000 ,
+               reinitDeps: [src ] ,
+               onProgress: (
+                  ({ data: updatedAggregate }) => {
+                     setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
+                  }
+               ) ,
+            } , (
+               ({ data: updatedAggregate }) => {
+                  setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
+               }
+            ) )
+         ) ;
+         ;
+         return {
+            recorded ,
+         } ;
+      }
+   ) ;
+   const DownloadBtn: (
+      React.FC<(
+         Omit<JSX.IntrinsicElements["a"] , "href" >
+         & { href : Blob ; }
+      )>
+   ) = (
+      ({ href: payload, style: appGivenStyle, ...props }) => {
+         const url = (
+            useObjectURL(payload )
+         ) ;
+         return (
+            <div>
+               <video 
+               src={url }
+               style={{ height: "7em", width: "7em", }}
+               />
+               <a
+               href={url } 
+               style={{
+                  minWidth: "7em" ,
+                  ...appGivenStyle ,
+               }}
+               {...props }
+               >
+                  (A FILE )
+               </a>
+            </div>
+         ) ;
+      }
+   ) ;
+   return (
+      function MediaStreamRecDemoImpl() {
+         const src = (
+            useMediaReadStreamDemo()
+         ) ;
+         const {
+            recorded ,
+         } = useSrcRec(src ) ;
+         const SRC_DCC = (
+            useDepsChgCount({}, [src] )
+         ) ;
+         const RECORDED_DCC = (
+            useDepsChgCount({}, [recorded] )
+         ) ;
+         return useDeferredValue((
+            <div>
+               { recorded && <DownloadBtn href={recorded } /> }
+               <pre>
+                  DEBUG :
+                  { JSON.stringify({ SRC_DCC, RECORDED_DCC, }, null, 2 ) }
+               </pre>
+            </div>
+         )) ;
+      }
+   ) ;
+})() ;
 const MediaStreamRecDemo1 = (
    () => {
       const [ON, enable ] = (
