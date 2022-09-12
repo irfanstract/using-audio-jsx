@@ -122,7 +122,7 @@ const MediaStreamRecDemo11 : (
             useMediaReadStreamDemo()
          ) ;
          const {
-            recorded ,
+            fullLengthRecorded: recorded ,
          } = useMediaStreamAsFullLengthBlob(src , { restartPeriodMillis: 15 * 1000, } ) ;
          const SRC_DCC = (
             useDepsChgCount({}, [src] )
@@ -146,11 +146,11 @@ const useMediaStreamAsFullLengthBlob: (
    (src: null | MediaStream , options: {
       restartPeriodMillis : number ;
    } ) 
-   => { recorded : null | Blob ; }
+   => { fullLengthRecorded : null | Blob ; }
 ) = (
    function (src , { restartPeriodMillis , } ) {
       ;
-      const [recorded, setRecdV] = (
+      const [fullLengthRecorded, setRecdV] = (
          useState<null | Blob>(null )
       ) ;
       const srcRecProcH = (
@@ -172,7 +172,7 @@ const useMediaStreamAsFullLengthBlob: (
       ) ;
       ;
       return {
-         recorded ,
+         fullLengthRecorded ,
       } ;
    }
 ) ;
