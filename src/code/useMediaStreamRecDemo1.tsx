@@ -63,14 +63,14 @@ const MediaStreamRecDemo11 = (
       const src = (
          useMediaReadStreamDemo()
       ) ;
-      const v = (
+      const presentlyPeek = (
          useMediaStrmPollNextAsBlob(src )
       ) ;
       return (
          <div>
             <p> <i> Streaming Video </i> </p>
             <InterlaceBlobSeqVideoPlayer 
-            value={v }
+            value={presentlyPeek }
             />
          </div> //
       ) ;
