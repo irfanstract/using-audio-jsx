@@ -63,6 +63,7 @@ const BlobSeqDisplay = (
                Video Clip Sequence
             </p>
 
+            <div style={{ fontSize: "60%", }} >
             <ol 
             style={{ 
                display: "flex", 
@@ -89,6 +90,7 @@ const BlobSeqDisplay = (
                ) )
             ) }
             </ol>
+            </div>
             
          </div>
       ) ;
