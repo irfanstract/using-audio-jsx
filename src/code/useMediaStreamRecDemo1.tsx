@@ -99,7 +99,7 @@ const MediaStreamRecDemo11 : (
             // TODO
             useMediaStreamRec(src , {
                outputSizeLimit: 200 * 1024 * 1024 ,
-               rPeriodMillis: 15 * 1000 ,
+               restartPeriodMillis: 15 * 1000 ,
                reinitDeps: [src ] ,
                onProgress: (
                   ({ data: updatedAggregate }) => {

@@ -287,7 +287,7 @@ const useMediaStreamRec = (() => {
                      /**    
                       * period every which the rec will re-start
                       */
-                     rPeriodMillis : number ;
+                     restartPeriodMillis : number ;
                   } & MEO
                   & {
                      refreshPeriod ?: number ;
@@ -299,11 +299,11 @@ const useMediaStreamRec = (() => {
          ) ,
       ] ) {
          const { //
-            rPeriodMillis ,
+            restartPeriodMillis ,
          } = p[0] ;
          const { 
             refreshPeriod: xRequestDataCallPeriod = (
-               IterableOps.clamp(rPeriodMillis / 4 , 500, 2.6 * 1000 )
+               IterableOps.clamp(restartPeriodMillis / 4 , 500, 2.6 * 1000 )
             ) ,
          } = p[0] ;
          const {
@@ -313,7 +313,7 @@ const useMediaStreamRec = (() => {
             reinitDeps: reinitDeps0 = [],
          } = p[0] ;
          const reinitDeps = [
-            useIncrementByInterval(true, rPeriodMillis ) ,
+            useIncrementByInterval(true, restartPeriodMillis ) ,
             ...reinitDeps0 ,
          ] ;
          const [
