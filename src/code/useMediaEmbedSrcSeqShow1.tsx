@@ -42,8 +42,8 @@ import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlaye
 
 
 const BlobSeqDisplay = (
-   function ({ value: seq } : (
-      { value : readonly Blob[] ; }
+   function ({ value: seq, type = "files" } : (
+      { value : readonly Blob[] ; type ?: "files" | "av-by-keyframes" ; }
    )) {
       const idForBlob: (
          // either consistently return number or consistently return string.
