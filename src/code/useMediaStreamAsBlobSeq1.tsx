@@ -71,14 +71,15 @@ const useMediaStreamAsInterlaceAsBlob : (
  * 
  */
 const useMediaStrmPollNextAsBlob = (
-   function useXRecBlobLiveImpl(...[src] : [
+   function useXRecBlobLiveImpl(...[src, options0] : [
       src : null | MediaStream ,
+      options ?: Parameters<typeof useMediaStreamRec >[1] & object , // TODO
    ] ) {
       ;
       const [v, setV ] = (
          useState<null | Blob>(null )
       ) ;
-      useMediaStreamRec(src, {
+      useMediaStreamRec(src, options0 || {
          outputSizeLimit: 100 * 1E6 ,
          rPeriodMillis: 2 * 1000 ,
       }, ({ data, error }) => {
