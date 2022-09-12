@@ -1,0 +1,81 @@
+import {  
+   // Unix , 
+   IterableOps ,      
+   // util ,  
+   memoize,     
+   BoundedIdentityFunction,   
+   // PERIODIC ,         
+} from "./generalUse11" ;  
+import { newObjectToValueMappingMemoised } from "./useObjectToValueMappingMemoised1"; 
+import React, { 
+   useState, useReducer, useLayoutEffect, useEffect, useCallback, useMemo, useContext, useDeferredValue, useRef ,
+} from "react";
+// import { ReactCompatibleJson } from "./commonElements"; 
+// import { usingTimeout } from "./usingTimeoutOrInterval";  
+// import {            
+//     useMountDelay ,             
+// } from "./useComponentDebug" ;
+// import { useJsonStringifyInPerformanceSensitive } from "./useJsonStringify";  
+import { fillWithWhiteNoise } from "./audioBufferFWhiteNoise"; 
+
+
+
+import { AudioSourceNode, } from "./useAudioNodesBasicTypeDefs";
+import {   USEYYYNODER, UABN_ARGPARSE, } from "./useAudioNodesMounting1";       
+import { 
+   ToUseYyNodeWithGivenInitProperties1,  
+   useYyNodeWithGivenFadeoutTimeConstant1,   
+   useParamNodeWithGiven,    
+   useSingularSrcDestConnect ,
+            
+} from "./useAudioNodesMounting1";  
+import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";
+      
+  
+
+
+
+
+
+
+
+
+
+/**   
+ * {@link React.useState the returned `AudioDestNode` will be same instance until the enclosing *component* *unmount* } .
+ * 
+ */
+const useMediaStreamFromAudioNode: (
+   (src: null | AudioSourceNode )
+   => (null | MediaStreamAudioDestinationNode )
+) = (
+   function (src ) {
+      const c = (
+         src?.context
+         || null   
+      ) ;
+      const mds = (
+         React.useMemo(() => (
+            (c instanceof AudioContext) ?
+            c.createMediaStreamDestination()
+            : null
+         ) , [c] )
+      ) ;
+      useSingularSrcDestConnect(src, mds ) ;
+      return (
+         mds
+      ) ;
+   }
+) ;
+namespace useMediaStreamFromAudioNode {} // TS-2503
+import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
+
+
+
+
+
+  
+export {
+   useMediaStreamFromAudioNode ,
+   useAudioNodesAsMediaStream ,
+} ;
