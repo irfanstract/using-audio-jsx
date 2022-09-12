@@ -128,9 +128,38 @@ const MediaStreamRecDemo11 : (
          const src = (
             useMediaReadStreamDemo()
          ) ;
+         const restartPeriodMillis = 15 * 1000 ;
+         return (
+            <MediaStreamRecC 
+            src={src }
+            restartPeriodMillis={restartPeriodMillis }
+            />
+         ) ;
+      }
+   ) ;
+})() ;
+/**   
+ * keep in mind that 
+ * by {@link React.Key unmounting this Component } 
+ * your app will lose the rec previously retained so far.
+ */
+const MediaStreamRecC: (
+   React.FC<(
+      // the property won't need to be 'optional' since 
+      { src : MediaStream ; restartPeriodMillis ?: number ; }
+   )>
+) = (
+      function ({ 
+         src, 
+         restartPeriodMillis = (
+            // TODO
+            15 * 60 * 1000
+         ) , 
+      }) {
+         ;
          const {
             fullLengthRecorded: recorded ,
-         } = useMediaStreamAsFullLengthBlob(src , { restartPeriodMillis: 15 * 1000, } ) ;
+         } = useMediaStreamAsFullLengthBlob(src , { restartPeriodMillis: restartPeriodMillis, } ) ;
          const SRC_DCC = (
             useDepsChgCount({}, [src] )
          ) ;
@@ -158,8 +187,7 @@ const MediaStreamRecDemo11 : (
             </div>
          )) ;
       }
-   ) ;
-})() ;
+) ;
 const useMediaStreamAsFullLengthBlob: (
    (src: null | MediaStream , options: {
       restartPeriodMillis : number ;
