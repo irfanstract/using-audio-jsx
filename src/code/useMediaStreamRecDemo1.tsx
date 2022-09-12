@@ -139,7 +139,18 @@ const MediaStreamRecDemo11 : (
          ) ;
          return useDeferredValue((
             <div>
-               { recorded && <DownloadBtn href={recorded } /> }
+               { recorded && (() => {
+                  const dlName = (
+                     `recorded_media_blue_${ recorded.size }.mp4`
+                  ) ;
+                  return (
+                     <DownloadBtn 
+                     title={dlName }
+                     href={recorded } 
+                     dlName={dlName }
+                     />
+                  ) ;
+               })() }
                <pre>
                   DEBUG :
                   { JSON.stringify({ SRC_DCC, RECORDED_DCC, }, null, 2 ) }
