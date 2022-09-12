@@ -275,5 +275,7 @@ const {
 export {
    MediaStreamRecDemo1,
    MediaStreamRecDemo11,
+   MediaStreamRecC1 ,
+   MediaStreamRecC ,
    useMediaStreamAsFullLengthBlob ,
 } ;
