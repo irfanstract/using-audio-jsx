@@ -209,4 +209,5 @@ const MediaStreamRecDemo1 = (
 
 export {
    MediaStreamRecDemo1,
+   useMediaStreamAsFullLengthBlob ,
 } ;
