@@ -285,7 +285,7 @@ const useMediaStreamRec = (() => {
                config: (
                   Options0 & {
                      /**    
-                      * period of the `requestData` calls
+                      * period every which the rec will re-start
                       */
                      rPeriodMillis : number ;
                   } & MEO
