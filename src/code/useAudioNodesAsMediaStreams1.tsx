@@ -68,6 +68,7 @@ const useMediaStreamFromAudioNode: (
    }
 ) ;
 namespace useMediaStreamFromAudioNode {} // TS-2503
+// eslint-disable-next-line import/first
 import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
 
 
