@@ -110,6 +110,23 @@ const useMediaRecordingDataCollect = (
             const errorSeq = (
                new Array<XErrorEvt >()
             ) ;
+            /**   
+             * returns a *dict* as *ctx* for either of the *callback*s.
+             */
+            const summarize = (
+               (): Parameters<typeof onSwitch >[0] & object => {
+                  const allData = ( //
+                     // ((): null | Blob => { } )
+                     blobConcat([...blobSeqBuffer ] )
+   
+                  ) ;
+                  return { 
+                     successful: false, 
+                     data: allData , 
+                     error: [...errorSeq ] ,
+                  } ;
+               } 
+            ) ;
             ;
             const dataListener = (e: BlobEvent ): void => {
                // TODO
@@ -125,27 +142,9 @@ const useMediaRecordingDataCollect = (
                      src.removeEventListener("dataavailable", dataListener ) ;
                      src.removeEventListener("error", errorEvtListener ) ;
                      src.removeEventListener("stop", onShallRemoveListeners ) ;
-                     const allData = (
-                        // ((): null | Blob => { } )
-                        blobConcat([...blobSeqBuffer ] )
-      
-                        //
-                        //
-                        //
-                        //
-                        //
-                        //
-                        // THE DIFF PROBLEM  (^^ ____ ^^)
-                        //
-                        //
-                        //
-                        // ( {} )()
-                     ) ;
-                     onSwitch({ 
-                        successful: false, 
-                        data: allData , 
-                        error: [...errorSeq ] ,
-                     }) ; 
+                     onSwitch((
+                        summarize()
+                     ) ) ; 
                   }
                ))
             ) ;
