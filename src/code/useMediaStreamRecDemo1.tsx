@@ -84,16 +84,13 @@ const MediaStreamInterlaceBlobbingDemo11 = (
       ) ;
    }
 ) ;
-const MediaStreamRecDemo11 : (
-   React.FC<{}>
-) = (() => {
-   const DownloadBtn: (
+const DownloadBtn: (
       React.FC<(
-         Omit<JSX.IntrinsicElements["a"] , "href" >
-         & { href : Blob ; }
+         Omit<JSX.IntrinsicElements["span"] , "ref" | "onClick" >
+         & { href : Blob ; dlName : string ; }
       )>
-   ) = (
-      ({ href: payload, style: appGivenStyle, ...props }) => {
+) = (
+      ({ href: payload, dlName, style: appGivenStyle, ...props }) => {
          const url = (
             useObjectURL(payload )
          ) ;
@@ -103,20 +100,29 @@ const MediaStreamRecDemo11 : (
                src={url }
                style={{ height: "7em", width: "7em", }}
                />
-               <a
-               href={url } 
+               <button
+               onClick={() => {
+                  blobConfirmUsrSave(payload , {
+                     intendedFileNameIncludingExt : (
+                        dlName
+                     ) ,
+                  } ) ;
+               } } 
                style={{
                   minWidth: "7em" ,
                   ...appGivenStyle ,
                }}
                {...props }
                >
-                  (A FILE )
-               </a>
+                  Download
+               </button>
             </div>
          ) ;
       }
-   ) ;
+) ;
+const MediaStreamRecDemo11 : (
+   React.FC<{}>
+) = (() => {
    return (
       function MediaStreamRecDemoImpl() {
          const src = (
