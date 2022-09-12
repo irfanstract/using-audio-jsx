@@ -310,4 +310,5 @@ const useMediaStreamRec = (() => {
 export {
    useMediaRecordingDataCollect ,
    useMediaStreamRec ,
+   SceneEndDataEvt ,
 } ;
