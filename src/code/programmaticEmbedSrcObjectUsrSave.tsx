@@ -11,7 +11,7 @@ import { BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11
 /**   
  * this shall cause a *download* to initiate.
  */
-const blobConfirmSave = (() => {
+const blobConfirmUsrSave = (() => {
    type IFE_EXT<A> = { intendedFileNameIncludingExt : A ; } ;
    type FE_EXT<A> = { fileNameExt : A ; } ;
    type XArgs = [
@@ -101,5 +101,5 @@ const blobConfirmSave = (() => {
 
 
 export {
-   blobConfirmSave ,
+   blobConfirmUsrSave ,
 } ;
