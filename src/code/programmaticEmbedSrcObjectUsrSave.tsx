@@ -12,8 +12,8 @@ import { BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11
  * this shall cause a *download* to initiate.
  */
 const blobConfirmUsrSave = (() => {
-   type IFE_EXT<A> = { intendedFileNameIncludingExt : A ; } ;
-   type FE_EXT<A> = { fileNameExt : A ; } ;
+   type IDefineTheFileNameIncludingExt<A> = { intendedFileNameIncludingExt : A ; } ;
+   type IDefineTheFileNameExtOnly<A> = { fileNameExt : A ; } ;
    type XArgs = [
       (
          /**   
@@ -24,9 +24,9 @@ const blobConfirmUsrSave = (() => {
       ) , 
       (
          (
-            (IFE_EXT<string> & Partial<FE_EXT<never> > )
+            (IDefineTheFileNameIncludingExt<string> & Partial<IDefineTheFileNameExtOnly<never> > )
             |
-            (FE_EXT<string> & Partial<IFE_EXT<never> > )
+            (IDefineTheFileNameExtOnly<string> & Partial<IDefineTheFileNameIncludingExt<never> > )
          )
          &
          {
