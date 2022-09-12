@@ -60,6 +60,8 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
  *   ))
  *  ) ;
  * }
+ * 
+ * @deprecated
  */
 const useObjectURL = (
    function (...[v] : [null | Blob ] ): string {
