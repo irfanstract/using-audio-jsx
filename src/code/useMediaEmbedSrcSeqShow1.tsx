@@ -75,7 +75,7 @@ const BlobSeqDisplay = (
                seq
                .map((v, i: number ) => (
                   <li 
-                  key={i} 
+                  key={idForBlob(v)} 
                   style={{ 
                      width: "6em", 
                      height: "6em", 
