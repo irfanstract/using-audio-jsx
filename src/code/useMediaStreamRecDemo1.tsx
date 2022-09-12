@@ -66,6 +66,13 @@ const MediaStreamRecDemo11 = (
       const presentlyPeek = (
          useMediaStrmPollNextAsBlob(src )
       ) ;
+      const {
+         sqRetained: lastNPeeks ,
+      } = (
+         (
+            useLastNonNullNHistSequencing
+         )<Blob >({ nLimit: 0x8, }, presentlyPeek, )
+      ) ;
       return (
          <div>
             <p> <i> Streaming Video </i> </p>
