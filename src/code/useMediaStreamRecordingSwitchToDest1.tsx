@@ -68,7 +68,11 @@ const blobConcat = (
    }
 ) ;
 const useMediaRecordingDataCollect = (
-   function useMediaRecordingDataCollectImpl(...[src, { outputSizeLimit } , onSwitch ] : (
+   function useMediaRecordingDataCollectImpl(...[
+      src,
+      { outputSizeLimit, } , 
+      onSwitch ,
+   ] : (
       Parameters<(
          (
             /**    
