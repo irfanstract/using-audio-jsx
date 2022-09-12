@@ -70,7 +70,7 @@ const blobConcat = (
 const useMediaRecordingDataCollect = (
    function useMediaRecordingDataCollectImpl(...[
       src,
-      { outputSizeLimit, } , 
+      { outputSizeLimit, onProgress, } , 
       onSwitch ,
    ] : (
       Parameters<(
@@ -90,6 +90,11 @@ const useMediaRecordingDataCollect = (
                 * this define the upper bound for the resulting `Blob` `size`
                 */
                outputSizeLimit: number ;
+               /**   
+                * optional.
+                * to be run on each progress.
+                */
+               onProgress ?: React.Dispatch<SceneEndDataEvt > ;
             } ,
 
             /**   
@@ -131,10 +136,32 @@ const useMediaRecordingDataCollect = (
             const dataListener = (e: BlobEvent ): void => {
                // TODO
                blobSeqBuffer.push(e.data ) ;
+               /**   
+                * if-and-only-if {@link onProgress } is *non-null*, 
+                * run it with eventually collected info.
+                * otherwise, 
+                * avoid running {@link summarize }, due to the implied overhead .
+                */
+               onProgress && (
+                  onProgress((
+                     summarize()
+                  ))
+               ) ;
             } ;
             const errorEvtListener = (e: MediaRecorderErrorEvent ): void => {
                // TODO
                errorSeq.push(e.error ) ;
+               /**   
+                * if-and-only-if {@link onProgress } is *non-null*, 
+                * run it with eventually collected info.
+                * otherwise, 
+                * avoid running {@link summarize }, due to the implied overhead .
+                */
+               onProgress && (
+                  onProgress((
+                     summarize()
+                  ))
+               ) ;
             } ;
             const onShallRemoveListeners = (
                IterableOps.once((
