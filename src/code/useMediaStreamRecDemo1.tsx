@@ -222,8 +222,11 @@ const useMediaStreamAsFullLengthBlob: (
       } ;
    }
 ) ;
-const MediaStreamRecDemo1 = (
-   () => {
+const {
+   MediaStreamRecDemo1 ,
+   MediaStreamRecC1 ,
+} = (() => {
+   function useRenderWithOnOff(...[payload ] : [React.ReactElement] ): React.ReactElement {
       const [ON, enable ] = (
          useReducer((...[  ,v1 ] : [boolean, boolean]) => v1 , false )
       ) ;
@@ -231,7 +234,7 @@ const MediaStreamRecDemo1 = (
          ON 
          ?
          <div style={{ display: "flex", flexDirection: "column-reverse" }}>
-            <MediaStreamRecDemo11 />
+            { payload }
             <p>
             <button type="button" role={"switch" } onClick={() => enable(false ) } >
                Close 
@@ -248,7 +251,23 @@ const MediaStreamRecDemo1 = (
          ) 
       ) ;
    }
-) ;
+   return {
+      MediaStreamRecDemo1 : (
+         () => (
+            useRenderWithOnOff((
+               <MediaStreamRecDemo11 />
+            ))
+         )
+      ) ,
+      MediaStreamRecC1 : (
+         (...[props ] : Parameters<typeof MediaStreamRecC> ) => (
+            useRenderWithOnOff((
+               <MediaStreamRecC {...props} />
+            ))
+         )
+      ) ,
+   } ;
+})() ;
 
 
 
