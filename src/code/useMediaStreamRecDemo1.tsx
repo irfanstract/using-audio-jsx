@@ -86,40 +86,6 @@ const MediaStreamInterlaceBlobbingDemo11 = (
 const MediaStreamRecDemo11 : (
    React.FC<{}>
 ) = (() => {
-   const useSrcRec: (
-      (src: null | MediaStream , options: {
-         restartPeriodMillis : number ;
-      } ) 
-      => { recorded : null | Blob ; }
-   ) = (
-      function (src , { restartPeriodMillis , } ) {
-         ;
-         const [recorded, setRecdV] = (
-            useState<null | Blob>(null )
-         ) ;
-         const srcRecProcH = (
-            // TODO
-            useMediaStreamRec(src , {
-               outputSizeLimit: 200 * 1024 * 1024 ,
-               restartPeriodMillis: restartPeriodMillis ,
-               reinitDeps: [src ] ,
-               onProgress: (
-                  ({ data: updatedAggregate }) => {
-                     setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
-                  }
-               ) ,
-            } , (
-               ({ data: updatedAggregate }) => {
-                  setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
-               }
-            ) )
-         ) ;
-         ;
-         return {
-            recorded ,
-         } ;
-      }
-   ) ;
    const DownloadBtn: (
       React.FC<(
          Omit<JSX.IntrinsicElements["a"] , "href" >
@@ -157,7 +123,7 @@ const MediaStreamRecDemo11 : (
          ) ;
          const {
             recorded ,
-         } = useSrcRec(src , { restartPeriodMillis: 15 * 1000, } ) ;
+         } = useMediaStreamAsFullLengthBlob(src , { restartPeriodMillis: 15 * 1000, } ) ;
          const SRC_DCC = (
             useDepsChgCount({}, [src] )
          ) ;
@@ -176,6 +142,40 @@ const MediaStreamRecDemo11 : (
       }
    ) ;
 })() ;
+const useMediaStreamAsFullLengthBlob: (
+   (src: null | MediaStream , options: {
+      restartPeriodMillis : number ;
+   } ) 
+   => { recorded : null | Blob ; }
+) = (
+   function (src , { restartPeriodMillis , } ) {
+      ;
+      const [recorded, setRecdV] = (
+         useState<null | Blob>(null )
+      ) ;
+      const srcRecProcH = (
+         // TODO
+         useMediaStreamRec(src , {
+            outputSizeLimit: 200 * 1024 * 1024 ,
+            restartPeriodMillis: restartPeriodMillis ,
+            reinitDeps: [src ] ,
+            onProgress: (
+               ({ data: updatedAggregate }) => {
+                  setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
+               }
+            ) ,
+         } , (
+            ({ data: updatedAggregate }) => {
+               setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
+            }
+         ) )
+      ) ;
+      ;
+      return {
+         recorded ,
+      } ;
+   }
+) ;
 const MediaStreamRecDemo1 = (
    () => {
       const [ON, enable ] = (
