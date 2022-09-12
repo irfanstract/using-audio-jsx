@@ -58,9 +58,11 @@ const BlobSeqDisplay = (
       ) ;
       return (
          <div style={{ overflowInline: "auto" }}>
+
             <p>
                Video Clip Sequence
             </p>
+
             <ol 
             style={{ 
                display: "flex", 
@@ -72,7 +74,13 @@ const BlobSeqDisplay = (
             { (
                seq
                .map((v, i: number ) => (
-                  <li key={i} style={{ width: "6em", height: "6em", }} >
+                  <li 
+                  key={i} 
+                  style={{ 
+                     width: "6em", 
+                     height: "6em", 
+                  }} 
+                  >
                      <code>{ (v instanceof File ) ? v.name : null }/{ v.type }/{ v.size }</code>
                      <InterlaceBlobSeqVideoPlayer 
                      value={v }
@@ -81,6 +89,7 @@ const BlobSeqDisplay = (
                ) )
             ) }
             </ol>
+            
          </div>
       ) ;
    }
