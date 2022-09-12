@@ -45,6 +45,17 @@ const BlobSeqDisplay = (
    function ({ value: seq } : (
       { value : readonly Blob[] ; }
    )) {
+      const idForBlob: (
+         // either consistently return number or consistently return string.
+         // so not simply "(: Blob) => (number | string)" . :D
+         (
+            ((src: Blob ) => number )
+            |
+            ((src: Blob ) => string )
+         )
+      ) = (
+         useClassInstanceHashFnc<Blob>()
+      ) ;
       return (
          <div style={{ overflowInline: "auto" }}>
             <p>
