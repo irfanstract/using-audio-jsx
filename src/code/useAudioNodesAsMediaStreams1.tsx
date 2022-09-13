@@ -41,6 +41,20 @@ import { AUDIONODES_USEEFFECT, AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudio
 
 
 
+const logNonMsdAudioCtxSubclass = (
+   IterableOps.throttle((c: BaseAudioContext ): void => {
+      console["error"](
+         TypeError((
+            [
+               `'ctx' is non-null, but  ` ,
+               `'it's not instanceof 'AudioContext' (it is instead ${c }).` ,
+               `MSD(s) (MediaStreamDestination) are only supported for 'AudioContext', ` ,
+               `not plain 'BaseAudioCtx'.` ,
+            ].join("\n")
+         ))
+      ) ;
+   } , 1 * 60 * 1000 , { leading: true, } )
+) ;
 /**   
  * {@link React.useState the returned `AudioDestNode` will be same instance until the enclosing *component* *unmount* } .
  * 
