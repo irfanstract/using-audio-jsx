@@ -35,7 +35,6 @@ import {
 
 
 
-namespace AmtOfSecondsC {} 
 const AmtOfSecondsC: (
    React.FC<{ value : number ; }>
 ) = (
@@ -87,6 +86,7 @@ const AmtOfSecondsC: (
       }
    )
 ) ;
+namespace AmtOfSecondsC {} 
 
 
 
