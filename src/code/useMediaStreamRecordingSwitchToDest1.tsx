@@ -231,7 +231,7 @@ const useMediaStreamRecSR = (
       &
       MEO
    ]) {
-      const { src, mediaEncOptions, reinitDeps = [], autoStart } = props ;
+      const { src, mediaEncOptions, reinitDeps = [], autoStart, } = props ;
       ;
       const s = (
          React.useMemo(() => (
