@@ -64,32 +64,64 @@ const BlobSeqDisplay = (
             </p>
 
             <div style={{ fontSize: "60%", }} >
-            <ol 
-            style={{ 
-               display: "flex", 
-               flexDirection: "row", 
-               listStyleType: "none", 
-               padding: "none" ,
-            }}
-            >
-            { (
+            { (() => {
+            ;
+            const itemsR = (
                seq
-               .map((v, i: number ) => (
-                  <li 
-                  key={idForBlob(v)} 
-                  style={{ 
-                     width: "6em", 
-                     height: "6em", 
-                  }} 
-                  >
-                     <code>{ (v instanceof File ) ? v.name : null }/{ v.type }/{ v.size }</code>
+               .map((v, i: number ): (
+                  (
+                     Required<(
+                        Parameters<typeof KeyframeSeqCK >[0 ]
+                     )>["children"] 
+                  )[number]
+               ) => {
+               ;
+               const key = (
+                  idForBlob(v)
+               ) ;
+               const div1 = (
+                  <div>
+                  <div style={{ display: "flex", }}>
                      <InterlaceBlobSeqVideoPlayer 
                      value={v }
                      />
-                  </li>
-               ) )
-            ) }
-            </ol>
+                  </div>
+                  <div>
+                  <div style={{ overflow: "hidden", }}>
+                     <code>
+                     { (v instanceof File ) ? v.name : null }/{ v.type }/{ v.size }
+                     </code>
+                  </div>
+                  <p>
+                     BLOB ID : { key } ;
+                  </p>
+                  </div>
+                  </div>
+               ) ;
+               return [{ key }, div1 ] ;
+               })
+            ) ;
+            if (type === "av-by-keyframes") {
+               ;
+               return (
+                  <KeyframeSeqCK>
+                  { itemsR }
+                  </KeyframeSeqCK>
+               ) ;
+            }
+            return (
+               <ol>
+               { (
+                  itemsR
+                  .map(([{ key }, e ]) => (
+                     <li key={key } >
+                        { e }
+                     </li>
+                  ) )
+               ) }
+               </ol>
+            ) ;
+            } )() }
             </div>
             
          </div>
