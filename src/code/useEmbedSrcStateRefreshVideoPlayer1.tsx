@@ -54,12 +54,37 @@ const InterlaceBlobSeqVideoPlayer = (
        * `<video>`s are rather *heavyweight*.
        */
       React.useDeferredValue((
-         <div>
+         <div 
+         style={{ 
+            display: "flex",   
+            flexDirection: "column", 
+            alignItems: "stretch" ,
+            overflow: "hidden",
+            
+            border: "0.05em solid red",
+            position: "relative",
+            padding: "0.1em",
+            boxSizing: "border-box" ,
+            borderRadius: "1.5em", // check layout bug
+            
+         }} 
+         >
             <video 
             autoPlay
             src={vUrl }
+            style={{ 
+               minWidth: "2em" ,
+               minHeight: "2em" ,
+               borderRadius: "0.25em", // check layout bug
+               flex: "1 1 75% ",
+               
+               width: "unset", 
+               height: "unset", 
+               maxWidth: "calc(min(50vh, 50vw ) )" , 
+               maxHeight: "calc(min(50vh, 50vw ) )", 
+            }}
             />
-            <pre style={{ overflow: "hidden" }}>
+            <pre style={{ flex: "1 1 25%", overflow: "auto" }}>
                { vUrl }
             </pre>
          </div>
