@@ -161,6 +161,7 @@ const KeyframeSeqCK = (
                      borderRadius: "0.125em", 
                      margin: "0.125em",
                      background: "transparent",
+                     flexDirection: "column",
                   }} 
                   >
                      { div1 }
