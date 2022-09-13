@@ -188,6 +188,16 @@ const MediaStreamRecC: (
          )) ;
          return (
             <div>
+               <p>
+                  <strong >
+                  a recording is in progress
+                  </strong>
+               </p>
+               <p>
+                  <b /** not only *strong*; must also *bring attention* */ >
+                  Length Limit : { +(restartPeriodMillis / 1000 ).toFixed(1 ) }
+                  </b>
+               </p>
                { downloadsSection }
                <pre>
                   DEBUG :
