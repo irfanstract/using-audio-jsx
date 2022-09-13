@@ -69,11 +69,17 @@ const useMediaStreamFromAudioNode: (
          || null   
       ) ;
       const mds = (
-         React.useMemo(() => (
-            (c instanceof AudioContext) ?
-            c.createMediaStreamDestination()
-            : null
-         ) , [c] )
+         React.useMemo(() => {
+            if (c) {
+               if (c instanceof AudioContext ) {
+                  return (
+                     c.createMediaStreamDestination()
+                  ) ;
+               }
+               logNonMsdAudioCtxSubclass(c ) ;
+            }
+            return null ;
+         } , [c] )
       ) ;
       useSingularSrcDestConnect(src, mds ) ;
       return (
