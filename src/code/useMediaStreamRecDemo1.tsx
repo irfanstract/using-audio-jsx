@@ -297,4 +297,5 @@ export {
    MediaStreamRecC1 ,
    MediaStreamRecC ,
    useMediaStreamAsFullLengthBlob ,
+   MediaStreamInterlaceBlobbingDemo11 ,
 } ;
