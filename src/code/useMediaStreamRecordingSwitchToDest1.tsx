@@ -105,11 +105,13 @@ const useMediaRecordingDataCollect = (
          ) => void
       )>
    )) {
-      const NEXT_BES = (
-         function NextDSeqAndErrorSeqInstances(): {
+      const NEXT_BES : (
+         () => {
             blobSeqBuffer: Array<Blob> ;
             errorSeq: Array<XErrorEvt> ;
-         } {
+         }
+      ) = (
+         function NextDSeqAndErrorSeqInstances() {
             const blobSeqBuffer = (
                new Array<Blob>() //
             ) ; 
