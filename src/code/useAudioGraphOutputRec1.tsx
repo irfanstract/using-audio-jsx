@@ -52,6 +52,11 @@ const {
   
 
 
+/**   
+ * keep in mind that 
+ * by {@link React.Key unmounting this Component } 
+ * your app will lose the rec previously retained so far.
+ */
 const WithCtxtualATapRecording : (
    React.FC<{}>
 ) = (
