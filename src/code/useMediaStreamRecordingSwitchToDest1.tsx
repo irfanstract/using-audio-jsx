@@ -111,6 +111,7 @@ const useMediaRecordingDataCollect = (
             errorSeq: Array<XErrorEvt> ;
          }
       ) = (
+      React.useCallback((
          function NextDSeqAndErrorSeqInstances() {
             const blobSeqBuffer = (
                new Array<Blob>() //
@@ -123,6 +124,7 @@ const useMediaRecordingDataCollect = (
                errorSeq ,
             } ;
          }
+      ) , [] )
       ) ;
       // TODO
       useLayoutEffect(() => { 
