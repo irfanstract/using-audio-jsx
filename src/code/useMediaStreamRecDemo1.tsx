@@ -80,6 +80,10 @@ const MediaStreamInterlaceBlobbingDemo11 = (
             <InterlaceBlobSeqVideoPlayer 
             value={presentlyPeek }
             />
+            <BlobSeqDisplay 
+            value={lastNPeeks } 
+            type="av-by-keyframes" 
+            />
          </div> //
       ) ;
    }
