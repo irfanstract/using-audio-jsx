@@ -105,16 +105,33 @@ const useMediaRecordingDataCollect = (
          ) => void
       )>
    )) {
+      const NEXT_BES = (
+         function NextDSeqAndErrorSeqInstances(): {
+            blobSeqBuffer: Array<Blob> ;
+            errorSeq: Array<XErrorEvt> ;
+         } {
+            const blobSeqBuffer = (
+               new Array<Blob>() //
+            ) ; 
+            const errorSeq = (
+               new Array<XErrorEvt >() //
+            ) ;
+            return {
+               blobSeqBuffer ,
+               errorSeq ,
+            } ;
+         }
+      ) ;
       // TODO
       useLayoutEffect(() => { 
          if (src ) {
             ;
-            const blobSeqBuffer = (
-               new Array<Blob>()
-            ) ;
-            const errorSeq = (
-               new Array<XErrorEvt >()
-            ) ;
+            const {
+               blobSeqBuffer , // = ( new Array<Blob>() ) ;
+               errorSeq , // = ( new Array<XErrorEvt >() ) ;
+            } = (
+               NEXT_BES( ) 
+            ) /* example */  ; 
             /**   
              * returns a *dict* as *ctx* for either of the *callback*s.
              */
