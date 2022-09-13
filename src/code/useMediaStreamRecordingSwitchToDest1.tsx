@@ -107,26 +107,26 @@ const useMediaRecordingDataCollect = (
    )) {
       /**   
        * whether 
-       * `blobSeqBuffer` will be the same `Array` for the *calling component* *lifetime*, 
+       * `payloadBuffer` will be the same `Array` for the *calling component* *lifetime*, 
        * or not,  
        * will depend on *the config*.
        */
       const nextErrorBufAndPayloadBufInstance : (
          () => {
-            blobSeqBuffer: Array<Blob> ;
+            payloadBuffer: Array<Blob> ;
             errorSeq: Array<XErrorEvt> ;
          }
       ) = (
       React.useCallback((
          function NextDSeqAndErrorSeqInstances() {
-            const blobSeqBuffer = (
+            const payloadBuffer = (
                new Array<Blob>() //
             ) ; 
             const errorSeq = (
                new Array<XErrorEvt >() //
             ) ;
             return {
-               blobSeqBuffer ,
+               payloadBuffer ,
                errorSeq ,
             } ;
          }
@@ -137,7 +137,7 @@ const useMediaRecordingDataCollect = (
          if (src ) {
             ;
             const {
-               blobSeqBuffer , // = ( new Array<Blob>() ) ;
+               payloadBuffer , // = ( new Array<Blob>() ) ;
                errorSeq , // = ( new Array<XErrorEvt >() ) ;
             } = (
                nextErrorBufAndPayloadBufInstance( ) 
@@ -149,7 +149,7 @@ const useMediaRecordingDataCollect = (
                (): Parameters<typeof onSwitch >[0] & object => {
                   const allData = ( //
                      // ((): null | Blob => { } )
-                     blobConcat([...blobSeqBuffer ] )
+                     blobConcat([...payloadBuffer ] )
    
                   ) ;
                   return { 
@@ -162,7 +162,7 @@ const useMediaRecordingDataCollect = (
             ;
             const dataListener = (e: BlobEvent ): void => {
                // TODO
-               blobSeqBuffer.push(e.data ) ;
+               payloadBuffer.push(e.data ) ;
                /**   
                 * if-and-only-if {@link onProgress } is *non-null*, 
                 * run it with eventually collected info.
