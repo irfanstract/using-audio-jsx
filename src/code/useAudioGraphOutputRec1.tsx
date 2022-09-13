@@ -71,7 +71,7 @@ const WithCtxtualATapRecording : (
                   dNd ?
                   <MediaStreamRecC1 
                   src={dNd.stream }
-                  restartPeriodMillis={3 * 60 * 1000 }
+                  restartPeriodMillis={13 * 60 * 1000 }
                   />
                   : <></>
             ) ;
