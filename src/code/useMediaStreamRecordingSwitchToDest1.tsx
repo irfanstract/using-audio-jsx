@@ -223,7 +223,7 @@ function useMediaRecAutoStop<A extends MediaRecorder >(...[s] : [
    oldSRef.current = s ;
 }
 const useMediaStreamRecSR = (
-   function (...[{ src, mediaEncOptions, reinitDeps = [], autoStart }] : [
+   function (...[props] : [
       {
          src : null | MediaStream ;
          autoStart : boolean ;
@@ -231,6 +231,7 @@ const useMediaStreamRecSR = (
       &
       MEO
    ]) {
+      const { src, mediaEncOptions, reinitDeps = [], autoStart } = props ;
       ;
       const s = (
          React.useMemo(() => (
