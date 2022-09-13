@@ -111,7 +111,7 @@ const useMediaRecordingDataCollect = (
        * or not,  
        * will depend on *the config*.
        */
-      const NEXT_BES : (
+      const nextErrorBufAndPayloadBufInstance : (
          () => {
             blobSeqBuffer: Array<Blob> ;
             errorSeq: Array<XErrorEvt> ;
@@ -140,7 +140,7 @@ const useMediaRecordingDataCollect = (
                blobSeqBuffer , // = ( new Array<Blob>() ) ;
                errorSeq , // = ( new Array<XErrorEvt >() ) ;
             } = (
-               NEXT_BES( ) 
+               nextErrorBufAndPayloadBufInstance( ) 
             ) /* example */  ; 
             /**   
              * returns a *dict* as *ctx* for either of the *callback*s.
