@@ -12,7 +12,7 @@ import {
 
 } from "./timeoutOrIntervalPolicy";       
 import { usingInterval } from "./usingTimeoutOrInterval";
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";
 import { useRealTimeQueryIntervalSS } from "./usingTimeoutOrIntervalScannedValueSS";
 
 
