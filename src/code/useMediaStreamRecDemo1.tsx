@@ -170,7 +170,7 @@ const MediaStreamRecC: (
          const RECORDED_DCC = (
             useDepsChgCount({}, [recorded] )
          ) ;
-         return useDeferredValue((
+         const downloadsSection = useDeferredValue((
             <div>
                { recorded && (() => {
                   const dlName = (
@@ -184,12 +184,17 @@ const MediaStreamRecC: (
                      />
                   ) ;
                })() }
+            </div>
+         )) ;
+         return (
+            <div>
+               { downloadsSection }
                <pre>
                   DEBUG :
                   { JSON.stringify({ SRC_DCC, RECORDED_DCC, }, null, 2 ) }
                </pre>
             </div>
-         )) ;
+         ) ;
       }
 ) ;
 const useMediaStreamAsFullLengthBlob: (
