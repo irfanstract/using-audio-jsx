@@ -7,7 +7,7 @@ import React, { useReducer, useState } from "react";
 import { K } from "./commonElements";               
 import { NUMERIC } from "./commonCodeSnippetAndNumericDisplay";          
 import { CBC } from "./useStateInCallback";      
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";  
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";  
                
  
       

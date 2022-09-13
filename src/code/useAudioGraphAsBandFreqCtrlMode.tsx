@@ -14,7 +14,7 @@ import {
     useRealTimeQueryInterval ,    
     useNumericDigest ,   
     useLogScaleNumericDigest ,    
-} from "./useNonHookValue";     
+} from "./usingNonHooksValues";     
 import { useDeferredTrue } from "./useAudioGraphImplUseDeferredBoolean";          
  
      

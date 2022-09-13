@@ -14,7 +14,7 @@ import React, { useReducer, useState } from "react";
 import { ComponentProps } from "./commonElementsTypes";
 import { K } from "./commonElements";         
 import { CBC } from "./useStateInCallback";  
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";   
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";   
 
           
 

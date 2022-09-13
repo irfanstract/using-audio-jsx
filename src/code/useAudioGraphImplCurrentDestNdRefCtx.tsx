@@ -6,7 +6,7 @@ import React, { useMemo } from "react";
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
 import { K, NUMERIC } from "./commonElements";               
 import { useAsyncMemo } from "./useAsyncMemo";      
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";     
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";     
 import { CBC } from "./useStateInCallback";      
 import {
     PWrp ,    

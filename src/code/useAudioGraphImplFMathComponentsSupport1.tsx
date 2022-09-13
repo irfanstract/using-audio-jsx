@@ -18,7 +18,7 @@ import {
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
 import { K, asVoidElement, NUMERIC, useDebugDispatcher, } from "./commonElements";             
 import { CBC } from "./useStateInCallback";      
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";             
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";             
 import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
 import { 
     useOneWayCheckBox ,      

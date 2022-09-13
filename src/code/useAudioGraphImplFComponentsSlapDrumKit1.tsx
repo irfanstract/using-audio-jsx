@@ -6,7 +6,7 @@ import { IterableOps } from "./generalUse11";
 import React, { useReducer, useState } from "react";   
 import { K , NUMERIC } from "./commonElements";               
 import { CBC } from "./useStateInCallback";      
-import { useRealTimeQueryInterval1 } from "./useNonHookValue";  
+import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";  
                
  
          
