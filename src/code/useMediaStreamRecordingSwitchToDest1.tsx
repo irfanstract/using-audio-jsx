@@ -105,6 +105,12 @@ const useMediaRecordingDataCollect = (
          ) => void
       )>
    )) {
+      /**   
+       * whether 
+       * `blobSeqBuffer` will be the same `Array` for the *calling component* *lifetime*, 
+       * or not,  
+       * will depend on *the config*.
+       */
       const NEXT_BES : (
          () => {
             blobSeqBuffer: Array<Blob> ;
