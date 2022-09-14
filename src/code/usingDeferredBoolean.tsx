@@ -11,6 +11,16 @@ import { K, arrayIndexedOrderedList } from "./commonElements";
 
 
 
+/**     
+ * *initially this will return `false`*. however,
+ * *after some delay characteristic of {@link React.useEffect} and {@link React.useDeferredValue}*
+ * (eg a-few milliseconds), 
+ * this will switch to `true`.
+ * 
+ * this can be used to *delay* *mounting a component known to have intense overheads*.
+ * also, *`IonLoading` had bugs in case `isOpen` were initially `true` the first-time mounted* ,
+ * 
+ */
 function useDeferredTrue() {  
     const [e, setE] = (
         React.useState<boolean>(false ) 
