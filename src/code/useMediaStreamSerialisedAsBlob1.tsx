@@ -34,7 +34,7 @@ import { useEventTarget, } from "./usingTimeoutOrInterval";
 import { useDepsChgCount, } from "./usingComponentMountRenderStat";      
 import { usePushAndTruncateStateToLastN, } from "./useMediaStreamBlobConcatState1";
 import {  } from "./useEmbedSrcObjectUrl";
-import { useMediaStrmPollNextAsBlob, } from "./useMediaStreamAsBlobSeq1";
+import { useMediaStrmPollNextAsBlob, } from "./useMediaStreamAsInterlaceBlobSeq1";
 import { useMediaStreamRec, } from "./useMediaStreamRecordingSwitchToDest1";
 
 
