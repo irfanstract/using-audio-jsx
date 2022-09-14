@@ -196,7 +196,7 @@ const MediaStreamRecC: (
                </p>
                <p>
                   <b /** not only *strong*; must also *bring attention* */ >
-                  Length Limit : { +(restartPeriodMillis / 1000 ).toFixed(1 ) }
+                  Length Limit : <AmtOfSecondsC value={(restartPeriodMillis / 1000 ) } />
                   </b>
                </p>
                { downloadsSection }
