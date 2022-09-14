@@ -30,6 +30,13 @@ const blobConfirmUsrSave = (() => {
          Blob
       ) , 
       (
+         /**    
+          * in general, 
+          * `fileNameWithExt` or `fileExt` shall be specified.
+          * if {@link B } happen to clearly `extends` {@link File }, however,
+          * the property can be left-out, 
+          * because {@link File.name its `name` } would be used instead.
+          */
          ConditionallyPartial<(
             [GivenBlob] extends [File] ? true : false
          ), (
