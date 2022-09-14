@@ -17,6 +17,12 @@ type ConditionallyPartial<C extends boolean, V extends undefined | null | object
 
 /**   
  * this shall cause a *download* to initiate.
+ * 
+ * in general, 
+ * `fileNameWithExt` or `fileExt` shall be specified.
+ * if {@link B } happen to clearly `extends` {@link File }, however,
+ * the property can be left-out, 
+ * because {@link File.name its `name` } would be used instead.
  */
 const blobConfirmUsrSave = (() => {
    type IDefineTheFileNameIncludingExt<A> = { intendedFileNameIncludingExt : A ; } ;
