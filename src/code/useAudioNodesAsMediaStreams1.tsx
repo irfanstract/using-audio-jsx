@@ -90,6 +90,21 @@ const useMediaStreamFromAudioNode: (
 namespace useMediaStreamFromAudioNode {} // TS-2503
 // eslint-disable-next-line import/first
 import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
+const useAudioNodesAsMediaStreamTracks: (
+   (...args: Parameters<typeof useAudioNodesAsMediaStream > )
+   => (null | readonly MediaStreamTrack[] )
+) = (
+   (...[src, ...args ] ) => (
+      // TODO
+      React.useMemo(() => (
+         useAudioNodesAsMediaStream(src, ...args )
+         ?.stream
+         .getTracks()
+         ||
+         null
+      ) , [src] )
+   )
+) ;
 
 
 
@@ -99,4 +114,5 @@ import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
 export {
    useMediaStreamFromAudioNode ,
    useAudioNodesAsMediaStream ,
+   useAudioNodesAsMediaStreamTracks ,
 } ;
