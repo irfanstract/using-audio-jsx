@@ -27,7 +27,7 @@ const blobConfirmUsrSave = (() => {
           * this is not `useYyy` and therefore 
           * *conditionality* can be used.
           */
-         Blob
+         GivenBlob
       ) , 
       (
          /**    
