@@ -1,9 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@ionic/react/css/core.css'; // not elsewhere, DRY 
-// import '@ionic/react/css/normalize.css';
-// import '@ionic/react/css/structure.css';
-// import '@ionic/react/css/typography.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
