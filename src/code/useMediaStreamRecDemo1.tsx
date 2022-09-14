@@ -34,6 +34,7 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
 import { usePushAndTruncateStateToLastN, } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
 import { blobConfirmUsrSave, } from "./programmaticEmbedSrcObjectUsrSave";
+import { FileDownloadBtn as DownloadBtn, } from "./useEmbedSrcObjectUsrSaveBtn1";
 import { BlobSeqDisplay } from "./useMediaEmbedSrcSeqShow1";
 import { useMediaStrmPollNextAsBlob } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
@@ -92,42 +93,6 @@ const MediaStreamInterlaceBlobbingDemo11 = (
          </div> //
       ) ;
    }
-) ;
-const DownloadBtn: (
-      React.FC<(
-         Omit<JSX.IntrinsicElements["span"] , "ref" | "onClick" >
-         & { href : Blob ; dlName : string ; }
-      )>
-) = (
-      ({ href: payload, dlName, style: appGivenStyle, ...props }) => {
-         const url = (
-            useObjectURL(payload )
-         ) ;
-         return (
-            <div>
-               <video 
-               src={url }
-               style={{ height: "7em", width: "7em", }}
-               />
-               <button
-               onClick={() => {
-                  blobConfirmUsrSave(payload , {
-                     intendedFileNameIncludingExt : (
-                        dlName
-                     ) ,
-                  } ) ;
-               } } 
-               style={{
-                  minWidth: "7em" ,
-                  ...appGivenStyle ,
-               }}
-               {...props }
-               >
-                  Download
-               </button>
-            </div>
-         ) ;
-      }
 ) ;
 const MediaStreamRecDemo11 : (
    React.FC<{}>
