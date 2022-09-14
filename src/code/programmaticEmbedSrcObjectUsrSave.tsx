@@ -119,7 +119,7 @@ const blobConfirmUsrSave = (() => {
             (
                [
                   encodeURIComponent(src.type ) ,
-                  currentDateStr ,
+                  currentDateStr.replace(/\W+/g, () => "-" ) ,
                ].join("-")
                + (fileNameExt1 ? fileNameExt1 : "")
             )
