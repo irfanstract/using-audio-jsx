@@ -134,12 +134,21 @@ const MediaStreamRecC: (
          const {
             fullLengthRecorded: recorded ,
          } = useMediaStreamAsFullLengthBlob(src , { restartPeriodMillis: restartPeriodMillis, } ) ;
+         const debugInfoElem = (function useDebugElemImpl (): React.ReactElement {
+         ;
          const SRC_DCC = (
             useDepsChgCount({}, [src] )
          ) ;
          const RECORDED_DCC = (
             useDepsChgCount({}, [recorded] )
          ) ;
+         return (
+            <pre>
+               DEBUG :
+               { JSON.stringify({ SRC_DCC, RECORDED_DCC, }, null, 2 ) }
+            </pre>
+         ) ;
+         })() ;
          const downloadsSection = useDeferredValue((
             <div>
                { recorded && (() => {
@@ -169,10 +178,7 @@ const MediaStreamRecC: (
                   </b>
                </p>
                { downloadsSection }
-               <pre>
-                  DEBUG :
-                  { JSON.stringify({ SRC_DCC, RECORDED_DCC, }, null, 2 ) }
-               </pre>
+               { debugInfoElem }
             </div>
          ) ;
       }
