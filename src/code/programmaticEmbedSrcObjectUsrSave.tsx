@@ -30,11 +30,13 @@ const blobConfirmUsrSave = (() => {
          Blob
       ) , 
       (
-         (
+         ConditionallyPartial<(
+            [GivenBlob] extends [File] ? true : false
+         ), (
             (IDefineTheFileNameIncludingExt<string> & Partial<IDefineTheFileNameExtOnly<never> > )
             |
             (IDefineTheFileNameExtOnly<string> & Partial<IDefineTheFileNameIncludingExt<never> > )
-         )
+         )>
          &
          /**   
           * other properties.
