@@ -81,10 +81,31 @@ const blobConfirmUsrSave = (() => {
             ||
             (intendedFileNameIncludingExt || null )
             ||
-            (
-               src instanceof File ? 
-               src.name : null 
-            )
+            ((...[] : [ ] ) => {
+               if (src instanceof File ) {
+                  const {
+                     name: srcNaturalName ,
+                  } = src ;;
+                  /**     
+                   * conditionally return {@link srcNaturalName}.
+                   */
+                  if ((
+                     srcNaturalName && (
+                        /**    
+                         * in case `fileExt` is explicitly given, add check/validate step ;
+                         * if omitted, skip the check
+                         */
+                        fileNameExt1 ? (
+                           srcNaturalName
+                           .endsWith(fileNameExt1 )
+                        ) : true
+                     )
+                  )) { 
+                     return srcNaturalName ;
+                  }
+               }
+               return null ;
+            })( )
             ||
             (
                [
