@@ -37,8 +37,8 @@ import {
 
 const AmtOfSecondsC: (
    React.FC<{ value : number ; }>
-) = (
-   (
+) = (() => {
+   return (
       function ({ value: value0, }) {
          const value = (
             Math.abs(value0 )
@@ -102,8 +102,8 @@ const AmtOfSecondsC: (
             </span>
          ) ;
       }
-   )
-) ;
+   ) ;
+})() ;
 namespace AmtOfSecondsC {} 
 
 
