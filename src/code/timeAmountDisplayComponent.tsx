@@ -59,7 +59,7 @@ const AmtOfSecondsC: (
                   nmvRounded
                   ?
                   <span style={{ }}>
-                     { String(Math.floor(nmvRounded % nominalPeriod ) ).padStart(2, "0" ) }
+                     { String((nmvRounded % nominalPeriod ) ).padStart(2, "0" ) }
                      { marking }
                   </span>
                   : 
