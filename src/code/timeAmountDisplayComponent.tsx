@@ -52,6 +52,11 @@ const AmtOfSecondsC: (
                { unit:                  1 , nominalPeriod:   60 , mark:     `"` } ,
             ])()
             .map(({ unit, nominalPeriod, mark: marking }) => {
+               /**    
+                * - dictates {@link effectiveFldValue } 
+                * - will dictate whether the field could be omitted or not
+                * 
+                */
                const nmvRounded = (
                   Math.floor(value / unit )
                ) ;
@@ -62,6 +67,9 @@ const AmtOfSecondsC: (
                const effectiveFldValue = (
                   nmvRounded % nominalPeriod
                ) ;
+               /**      
+                * {@link effectiveFldValue }, *0-padded* if necessary
+                */
                const effectiveFldFormatted = (
                   String(effectiveFldValue ).padStart(2, "0" )
                ) ;
