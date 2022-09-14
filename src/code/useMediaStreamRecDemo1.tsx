@@ -34,7 +34,7 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
 import { usePushAndTruncateStateToLastN, } from "./useMediaStreamBlobConcatState1";
 import { useObjectURL } from "./useEmbedSrcObjectUrl";
 import { blobConfirmUsrSave, } from "./programmaticEmbedSrcObjectUsrSave";
-import { FileDownloadBtn as DownloadBtn, } from "./useEmbedSrcObjectUsrSaveBtn1";
+import { FileDownloadBtn as FileDownloadBtn, } from "./useEmbedSrcObjectUsrSaveBtn1";
 import { BlobSeqDisplay } from "./useMediaEmbedSrcSeqShow1";
 import { useMediaStrmPollNextAsBlob } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
@@ -147,7 +147,7 @@ const MediaStreamRecC: (
                      `recorded_media_blue_${ recorded.size }.mp4`
                   ) ;
                   return (
-                     <DownloadBtn 
+                     <FileDownloadBtn 
                      title={dlName }
                      href={recorded } 
                      dlName={dlName }
