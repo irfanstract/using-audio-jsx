@@ -38,13 +38,32 @@ import {
 const AmtOfSecondsC: (
    React.FC<{ value : number ; }>
 ) = (() => {
+   type FieldProperties = (
+      { 
+         /**   
+          * the unit size, in *seconds*.
+          * for `DAYS` this'd be `24 * 60 * 60` (see caveats made by astronomists!) ; 
+          * for `HOURS` this'd be `60 * 60`; for `MINUTES` this'd be `60`.
+          */
+         unit: number; 
+         /**    
+          * *the period by which the field's effective value would wrap-around to `0`*.
+          * for `Hrs:Minutes:Secs:Millisecs` this'd be `Infnty:60:60:1000`.
+          */
+         nominalPeriod: number; 
+         /**    
+          * the *suffix* characterising the *unit*.
+          */
+         mark: string; 
+      }
+   ) ;
    return (
       function ({ value: value0, }) {
          const value = (
             Math.abs(value0 )
          ) ;
          const e = (
-            ((): { unit: number; nominalPeriod: number; mark: string; }[] => [
+            ((): FieldProperties[] => [
                { unit: 365 * 24 * 60 * 60 , nominalPeriod:  1E5 , mark:   "yrs" } ,
                { unit:       24 * 60 * 60 , nominalPeriod:  365 , mark:  "days" } ,
                { unit:            60 * 60 , nominalPeriod:   24 , mark: "hours" } ,
