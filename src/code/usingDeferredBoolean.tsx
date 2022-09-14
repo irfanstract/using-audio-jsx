@@ -20,7 +20,7 @@ import React from "react";
  * also, *`IonLoading` had bugs in case `isOpen` were initially `true` the first-time mounted* ,
  * 
  */
-function useDeferredTrue() {  
+function useDeferredTrue(): boolean {  
     const [e, setE] = (
         React.useState<boolean>(false ) 
     ) ;
