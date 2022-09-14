@@ -55,6 +55,15 @@ const blobConfirmUsrSave = (() => {
             vrboLevel = "log" ,
          } ,
       ] : XArgs<B> ) {
+         /**   
+          * {@link fileNameExt } with initial *period-sign*.
+          */
+         const fileNameExt1 = (
+            fileNameExt ? (
+               fileNameExt
+               .replace(/^\.?/ , () => ".")
+            ) : null
+         ) ;
          const currentDateStr = (
             Date()
          ) ;
