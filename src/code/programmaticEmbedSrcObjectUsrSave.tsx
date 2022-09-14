@@ -29,6 +29,9 @@ const blobConfirmUsrSave = (() => {
             (IDefineTheFileNameExtOnly<string> & Partial<IDefineTheFileNameIncludingExt<never> > )
          )
          &
+         /**   
+          * other properties.
+          */
          {
             vrboLevel ?: (
                keyof Pick<Console, "debug" | "log" | "info" | "warn">
