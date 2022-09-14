@@ -1,5 +1,12 @@
 
 import { BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11";
+type ConditionallyPartial<C extends boolean, V extends undefined | null | object > = (
+   never
+   |
+   ([C, true] extends [true, C ] ? Partial<V > : never )
+   |
+   ([C, false] extends [false, C ] ? V : never )
+) ;
 
 
 
