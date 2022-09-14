@@ -39,6 +39,10 @@ import { useMediaStrmPollNextAsBlob } from "./useMediaStreamAsBlobSeq1";
 import { InterlaceBlobSeqVideoPlayer } from "./useEmbedSrcStateRefreshVideoPlayer1";
 import { useMediaReadStreamDemo } from "./useMediaStreamDemo1";
 import { useMediaStreamRec } from "./useMediaStreamRecordingSwitchToDest1";
+import { 
+   useMediaStreamAsFullLengthBlob,
+   
+} from "./useMediaStreamSerialisedAsBlob1";
 function useLastNonNullNHistSequencing<A extends (object | true | symbol )>(...[{ nLimit: n, }, v,] : [
    { nLimit: number ; } ,
    null | A ,
@@ -207,40 +211,6 @@ const MediaStreamRecC: (
             </div>
          ) ;
       }
-) ;
-const useMediaStreamAsFullLengthBlob: (
-   (src: null | MediaStream , options: {
-      restartPeriodMillis : number ;
-   } ) 
-   => { fullLengthRecorded : null | Blob ; }
-) = (
-   function (src , { restartPeriodMillis , } ) {
-      ;
-      const [fullLengthRecorded, setRecdV] = (
-         useState<null | Blob>(null )
-      ) ;
-      const srcRecProcH = (
-         // TODO
-         useMediaStreamRec(src , {
-            outputSizeLimit: 200 * 1024 * 1024 ,
-            restartPeriodMillis: restartPeriodMillis ,
-            reinitDeps: [src ] ,
-            onProgress: (
-               ({ data: updatedAggregate }) => {
-                  setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
-               }
-            ) ,
-         } , (
-            ({ data: updatedAggregate }) => {
-               setRecdV((existingAggregate ) => (updatedAggregate || existingAggregate ) ) ;
-            }
-         ) )
-      ) ;
-      ;
-      return {
-         fullLengthRecorded ,
-      } ;
-   }
 ) ;
 const {
    MediaStreamRecDemo1 ,
