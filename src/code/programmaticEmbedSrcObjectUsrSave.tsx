@@ -94,6 +94,11 @@ const blobConfirmUsrSave = (() => {
          elem.download = (
             null 
             ||
+            /**    
+             * explicit specification 
+             * shall always be given priority.
+             * `:D`
+             */
             (intendedFileNameIncludingExt || null )
             ||
             ((...[] : [ ] ) => {
