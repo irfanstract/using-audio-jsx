@@ -21,7 +21,7 @@ type ConditionallyPartial<C extends boolean, V extends undefined | null | object
 const blobConfirmUsrSave = (() => {
    type IDefineTheFileNameIncludingExt<A> = { intendedFileNameIncludingExt : A ; } ;
    type IDefineTheFileNameExtOnly<A> = { fileNameExt : A ; } ;
-   type XArgs = [
+   type XArgs<GivenBlob extends Blob > = [
       (
          /**   
           * this is not `useYyy` and therefore 
@@ -47,14 +47,14 @@ const blobConfirmUsrSave = (() => {
       ) ,
    ] ;
    return (
-      function blobConfirmSaveDo(...[
+      function blobConfirmSaveDo<B extends Blob>(...[
          src , 
          { 
             intendedFileNameIncludingExt, 
             fileNameExt, 
             vrboLevel = "log" ,
          } ,
-      ] : XArgs ) {
+      ] : XArgs<B> ) {
          const currentDateStr = (
             Date()
          ) ;
