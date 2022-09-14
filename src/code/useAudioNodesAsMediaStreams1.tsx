@@ -94,7 +94,9 @@ const useAudioNodesAsMediaStreamTracks: (
    (...args: Parameters<typeof useAudioNodesAsMediaStream > )
    => (null | readonly MediaStreamTrack[] )
 ) = (
-   (...[src, ...args ] ) => (
+   (...[src, ...args ] ) => {
+   ;
+   return (
       // TODO
       React.useMemo(() => (
          useAudioNodesAsMediaStream(src, ...args )
@@ -103,7 +105,8 @@ const useAudioNodesAsMediaStreamTracks: (
          ||
          null
       ) , [src] )
-   )
+   ) ;
+   }
 ) ;
 
 
