@@ -55,11 +55,21 @@ const AmtOfSecondsC: (
                const nmvRounded = (
                   Math.floor(value / unit )
                ) ;
+               /**   
+                * the effective value for this field,
+                * regardless of the potential, presentational {@link String.padStart padding }.
+                */
+               const effectiveFldValue = (
+                  nmvRounded % nominalPeriod
+               ) ;
+               const effectiveFldFormatted = (
+                  String(effectiveFldValue ).padStart(2, "0" )
+               ) ;
                const e1 = (
                   nmvRounded
                   ?
                   <span style={{ }}>
-                     { String((nmvRounded % nominalPeriod ) ).padStart(2, "0" ) }
+                     { effectiveFldFormatted }
                      { marking }
                   </span>
                   : 
