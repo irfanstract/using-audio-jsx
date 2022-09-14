@@ -27,7 +27,7 @@ function useDeferredTrue(): boolean {
     React.useEffect(() => (setE(() => true ) ) , [] ); 
     return e ;
 }              
-function useDeferredSwitch<A>([v0, v1] : [v0: A, v1: A ]) {   
+function useDeferredSwitch<A>([v0, v1] : [v0: A, v1: A ]) : A {   
     return (
         useDeferredTrue() ? v1 : v0  
     ) ;
