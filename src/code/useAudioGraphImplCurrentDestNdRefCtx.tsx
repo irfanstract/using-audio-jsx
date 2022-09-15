@@ -362,6 +362,11 @@ const useADestNdRefCtx1 = (
 ) ;     
 /**    
  * 
+ * omitting *the current 't'*,
+ * this will 
+ * avoid the high-frequency re-render which {@link useWithCurrentACtxCurrentT } and {@link useCurrentDestNdRefAndCtxT }
+ * .
+ * 
  */
 const useWithCurrentSideTapPtRef: (
     (a: (v: AFeedableAndTappableNCc ) => React.ReactElement )
