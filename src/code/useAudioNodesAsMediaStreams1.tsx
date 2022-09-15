@@ -92,7 +92,7 @@ namespace useMediaStreamFromAudioNode {} // TS-2503
 import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
 const useAudioNodesAsMediaStreamTracks: (
    (...args: Parameters<typeof useAudioNodesAsMediaStream > )
-   => (null | readonly MediaStreamTrack[] )
+   => (null | Readonly<ReturnType<MediaStream["getTracks"] > > )
 ) = (
    (...[src, ...args ] ) => {
    ;
