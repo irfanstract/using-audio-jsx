@@ -8,7 +8,7 @@ import { BoundedIdentityFunction, IterableOps, } from "./generalUse11";
 
 const parseOptionalWidthAndHeight = (
    (...[properties] : [
-      EitherBothSetOrBothUnset<{ width: number ; height: number ; }> ,
+      Partial<{ width: number ; height: number ; }> ,
    ] ): {
       width: number;
       height: number;
