@@ -224,7 +224,9 @@ const {
         } ;           
     }
 })() ;                                
-const useCurrentDestNdRefAndCtxT = (
+const useCurrentDestNdRefAndCtxT: (
+    () => { [p in keyof NCtxV1 ] : NCtxV1[p ] ; }
+) = (
     useCurrentDestNd0
 ) ; 
 const useWithCurrentCtxValue: (
