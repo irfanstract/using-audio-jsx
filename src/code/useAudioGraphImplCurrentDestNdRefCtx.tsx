@@ -300,6 +300,8 @@ const WithGivenDest = (() => {
     ) ;  
 })() ;   
 /**     
+ * internal only.
+ * 
  * 
  * @deprecated
  */
