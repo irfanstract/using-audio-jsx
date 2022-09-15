@@ -371,6 +371,18 @@ const useWithCurrentSideTapPtRef: (
     useWithCurrentCtxValue
 ) ;
 
+/**    
+ * 
+ * __performance note__ .
+ * *the frequency in which current 't' increment may be high enough to heat your device*.
+ * *even when 
+ * `currentTime` is 
+ * omitted from the destructuring `({ feedPt, sideTapPt, // currentT omitted } ) => ... `,
+ * re-renders will still take place*.
+ * *unless information about current 't' were necessary, 
+ * avoid using this `useYyy`, and switch to {@link useWithCurrentSideTapPtRef } instead*.
+ * 
+ */
 const useWithCurrentACtxCurrentT: (
     (callback: (
         (...ctx : (
