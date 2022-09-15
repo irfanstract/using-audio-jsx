@@ -219,7 +219,7 @@ type AtLeastEitherInterface<
  * - all properties unset
  */
 type EitherBothSetOrBothUnset<A extends {} > = (
-    A | { [k in keyof A ] ?: undefined ; }
+    A | { [k in keyof A ] ?: never ; }
 ) ;
 const EitherBothSetOrBothUnset = {} ; // TS-1205
 /**   
