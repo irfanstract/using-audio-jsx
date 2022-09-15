@@ -213,6 +213,15 @@ type AtLeastEitherInterface<
 
  
        
+/**   
+ * either 
+ * - all properties set
+ * - all properties unset
+ */
+type EitherBothSetOrBothUnset<A extends {} > = (
+    A | { [k in keyof A ] ?: undefined ; }
+) ;
+const EitherBothSetOrBothUnset = {} ; // TS-1205
 const Seq1 = {} ; // TS-1205     
 type Seq1<A> = (    
     (readonly A[] )
@@ -246,6 +255,7 @@ export type {
     Optional ,                 
 } ;
 export {                                
+    EitherBothSetOrBothUnset ,      
     PromiseReturnValue,
     Seq1 ,    
     ArrayIndex ,     
