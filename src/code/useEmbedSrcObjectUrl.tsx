@@ -73,8 +73,11 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
  * 
  * @deprecated
  */
-const useObjectURL = (
-   function (...[v] : [null | Blob ] ): string {
+const useObjectURL : (
+   (...[v] : [null | Blob ] )
+   => string
+) = (
+   function (...[v] ) {
    /**    
     * {@link URL.createObjectURL } 
     * should be accompanied with corresponding {@link URL.revokeObjectURL }.
