@@ -220,6 +220,12 @@ type AtLeastEitherInterface<
  */
 type EitherBothSetOrBothUnset<A extends {} > = (
     A | { [k in keyof A ] ?: never ; }
+    
+    /**   
+     * every *key* must consistently appear in every *alternative*, for two reasons:
+     * - otherwise, the resulting type will be considered to omit the key
+     * - to become `[key] ?: never ;`, which is the heart of all these
+     */
 ) ;
 const EitherBothSetOrBothUnset = {} ; // TS-1205
 /**   
