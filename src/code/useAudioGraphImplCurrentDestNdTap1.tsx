@@ -35,6 +35,7 @@ import {
 
 
 
+type IDefinesXRef<A> = { readonly xRef : A ; } ;
 // TODO
 const WithCtxtualAudioStreamSpilloff: (
    React.FC<(
