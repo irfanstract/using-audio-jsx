@@ -273,6 +273,14 @@ const useWithCurrentCtxValue: (
         ) ;   
     })        
 ) ;                    
+/**   
+ * 
+ * *with 
+ * {@link useWithCurrentSideTapPtRef `feedPt` } for the component tree
+ * being set to the given `null | AudioNode`
+ * (without affecting {@link useWithCurrentCtxValue any other ctx values } )*.
+ * 
+ */
 const WithGivenDest = (() => {          
     return (                  
         IterableOps.identity<(         
