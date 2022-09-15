@@ -236,6 +236,9 @@ const EitherBothSetOrBothUnset = {} ; // TS-1205
  * to prevent assigning/giving/specifying conflicting values at once, 
  * it'd be good to restrict the argumentation/constraints to exactly one of them .
  * 
+ * *to avoid surprising behaviours when using this TD, 
+ * avoid non-`object`s, and {@link Required make all known properties required and non-`undefined` }*.
+ * 
  */
 type EitherSetAndOthersUnset<A extends {} > = (
     /**   
