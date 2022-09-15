@@ -71,6 +71,13 @@ const WithCtxtualATapRecording : (
             const videoS = (
                useMediaReadStreamFromOfStillCssFill<"solid">("green")
             ) ;
+            const mS = (
+               React.useMemo(() => (
+                  (dNd  ) ?
+                  new MediaStream([...dNd.stream.getTracks() , ...videoS.getTracks() ])
+                  : videoS
+               ) , [dNd, videoS] )
+            ) ;
             return (
                   dNd ?
                   <MediaStreamRecC1 
