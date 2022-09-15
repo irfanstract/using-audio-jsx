@@ -41,6 +41,9 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
  * calls {@link URL.createObjectURL } and correspondingly 
  * schedules {@link URL.revokeObjectURL } {@link useMemo on unmount }.
  * 
+ * __it's rather easy 
+ * to *write apps which retains dangling-references or {@link URL.revokeObjectURL dead-links}* 
+ * if/whilever *the app uses this `useYyy`*__.
  * due to scheduling of {@link URL.revokeObjectURL },
  * *caching* of {@link JSX element}(s) using the (returned ) `URL` shall be avoided.
  * 
