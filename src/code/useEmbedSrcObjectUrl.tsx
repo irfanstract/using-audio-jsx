@@ -46,6 +46,13 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
  * if/whilever *the app uses this `useYyy`*__.
  * due to scheduling of {@link URL.revokeObjectURL },
  * *caching* of {@link JSX element}(s) using the (returned ) `URL` shall be avoided.
+ * __to avoid such gotchas__ , 
+ * - for {@link Blob }s,
+ *   switch to `blobConfirmUsrSave(...)` (`./useEmbedSrcObjUsrSaveBtn`) solution
+ * - for {@link MediaSource }s,
+ *   use {@link React.useState *cb-ref*s (*callback-ref*) }, 
+ *   pass the *ref* into the intended `<video>`, and 
+ *   {@link HTMLVideoElement assign its `srcStream` } directly.
  * 
  * if *v* is `null`, then the return-value will be *blank URL*.
  * this opportunity is necessary as `useYyy` calls can't be conditional.
