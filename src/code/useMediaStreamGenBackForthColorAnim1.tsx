@@ -32,6 +32,7 @@ import { useEventTarget } from "./usingTimeoutOrInterval";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import {  } from "./useMediaStreamBlobConcatState1";
 import { useWindowActivityStatus } from "./useWindowFocusState";
+import { useMediaReadStreamedCanvasWithProperties, } from "./useMediaStreamFromOfNativeCanvas1";
 
 
 
