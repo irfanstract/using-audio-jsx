@@ -371,7 +371,22 @@ const useWithCurrentSideTapPtRef: (
     useWithCurrentCtxValue
 ) ;
 
-const useWithCurrentACtxCurrentT = (
+const useWithCurrentACtxCurrentT: (
+    (callback: (
+        (...ctx : (
+            Parameters<(
+                (
+                    React.ConsumerProps<(
+                        ReturnType<typeof useCurrentDestNdRefAndCtxT>
+                    )>
+                )["children"] 
+            )>
+        ) ) 
+        => React.ReactElement
+    ) )
+    =>             
+    React.ReactElement               
+) = (
     useWithCurrentCtxValue
 ) ;
 const CurrentCtxTInfoDisplay = (
