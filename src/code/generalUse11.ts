@@ -222,6 +222,30 @@ type EitherBothSetOrBothUnset<A extends {} > = (
     A | { [k in keyof A ] ?: undefined ; }
 ) ;
 const EitherBothSetOrBothUnset = {} ; // TS-1205
+/**   
+ * exactly one be set and all others be unset.
+ * 
+ * consider *frequency and period* as example;
+ * there's invariant that `freq * period === 1 `.
+ * to prevent assigning/giving/specifying conflicting values at once, 
+ * it'd be good to restrict the argumentation/constraints to exactly one of them .
+ * 
+ */
+type EitherSetAndOthersUnset<A extends {} > = (
+    /**   
+     * every *key* must consistently appear in every *alternative*, for two reasons:
+     * - otherwise, the resulting type will be considered to omit the key
+     * - to become `[key] ?: never ;`, which is the hart of all these
+     */
+    { 
+        [whichToRequire in keyof A ] : (
+            { [k in whichToRequire ] -?: A[k] ; }
+            &
+            { [k in keyof Omit<A, whichToRequire > ] ?: never ; }
+        ) ;
+    }[keyof A ]
+) ;
+const EitherSetAndOthersUnset = {} ; // TS-1205
 const Seq1 = {} ; // TS-1205     
 type Seq1<A> = (    
     (readonly A[] )
@@ -256,6 +280,7 @@ export type {
 } ;
 export {                                
     EitherBothSetOrBothUnset ,      
+    EitherSetAndOthersUnset ,
     PromiseReturnValue,
     Seq1 ,    
     ArrayIndex ,     
