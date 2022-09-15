@@ -48,26 +48,16 @@ const useMediaReadStreamDemoBackForthColorAnim = (
          outputRefreshRate: number ;
       } ,
    ]) { 
-      const c = (
-         useMemo(() => (
-            document.createElement("canvas")
-         ), [] )
-      ) ;
-      useInsertionEffect((): void => {
-         c.width = 256 ;
-         c.height = 256 ;
-         ;
-      }, [c] );
-      const cc = (
-         useMemo(() => (
-            c.getContext("2d")!
-         ), [c] )
-      ) ;
-      const cp = (
-         useMemo(() => (
-            c.captureStream(outputRefreshRate )
-         ), [c, outputRefreshRate ])
-      ) ;
+      const [
+         cp ,
+         { cc, c, } ,
+      ] = (
+         useMediaReadStreamedCanvasWithProperties({
+            width: 256 ,
+            height: 256 ,
+            captureRate: outputRefreshRate,
+         })
+      ) ; //
       useAnimationFrameRefreshEffect((...[_1 ]: Parameters<FrameRequestCallback> ) => {
          const t = (
             (
