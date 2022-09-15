@@ -89,9 +89,59 @@ const useMediaReadStreamedCanvasWithProperties: (
       ] ;
    }
 ) ;
+/**    
+ * 
+ */
+const useMediaReadStreamFromOfStillCssFill: (
+   /**   
+    * optional type-param provided,
+    * to allow users to specify `"solid"`, nevessary to maintain *autocomplete*,
+    * defaulting to `true` which will allow all which {@link CanvasRenderingContext2D.fillStyle} allows
+    * 
+    */
+   <SrcType extends true | "solid" = true >(...args: [
+      code: (
+         NonNullable<(
+            React.CSSProperties["backgroundColor"]
+            |
+            ([SrcType] extends ["solid"] ? never : CanvasRenderingContext2D["fillStyle"] )
+         )>
+      ) ,
+      otherProperties?: (
+         {}
+         &
+         Partial<{ width: number ; height: number ; }>
+      ) ,
+   ] )
+   => ReturnType<typeof useMediaReadStreamedCanvasWithProperties >[0 ]
+) = (
+   (code, properties = {} ,) => {
+      const {
+         width ,
+         height ,
+      } = parseOptionalWidthAndHeight(properties ) ;
+      const [cp, { cc, }, ] = (
+         useMediaReadStreamedCanvasWithProperties({
+            width ,
+            height ,
+            captureRate: 5, // for still imagery this will make little sense
+         })
+      ) ;
+      useInsertionEffect(() => {
+         cc.fillStyle = (
+            code
+         ) ;
+         cc.fillRect(0, 0, width, height ) ;
+      } , [cc] ) ;
+      return (
+         cp
+      ) ;
+   }
+) ;
 
 
 
 export {
    useMediaReadStreamedCanvasWithProperties ,
+   useMediaReadStreamFromOfStillCssFill ,
 } ;
