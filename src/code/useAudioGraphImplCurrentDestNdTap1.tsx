@@ -39,10 +39,22 @@ type IDefinesXRef<A> = { readonly xRef : A ; } ;
 // TODO
 const WithCtxtualAudioStreamSpilloff: (
    React.FC<(
+   (
       { 
-         children: React.ReactElement & object ; 
-         xRef : React.Dispatch<null | AudioSourceNode > ;
+         children: (
+            (...args : [ReturnType<typeof useATapNode>[0] , ] ) 
+            => React.ReactElement 
+         ) ;  
       }
+      &
+      Partial<IDefinesXRef<never > >
+   )
+   |
+   (
+      { children : (React.ReactNode & object ) ; }
+      &
+      IDefinesXRef<React.Dispatch<null | AudioSourceNode > >
+   )
    )>
 ) = (
    function WithCtxtualAudioStreamSpilloffC(...[{ xRef: ref, children: payload, }] ) {
@@ -65,6 +77,7 @@ const WithCtxtualAudioStreamSpilloff: (
                useATapNode(nd0 )
             ) ;
             React["useLayoutEffect"](() => {
+               if (ref ) {
                ref(null ) ;
                tapOffNd && (
                   ref(tapOffNd )
@@ -72,11 +85,16 @@ const WithCtxtualAudioStreamSpilloff: (
                return () => {
                   ref(null ) ;
                } ;
+               }
             } , [ref, tapOffNd, ] ) ;
             // TODO
             return (
                <WithGivenDest value={nd11 } >
-                  { payload }
+                  { (
+                     (typeof payload === "function") ?
+                     payload(tapOffNd )
+                     : payload
+                  ) }
                </WithGivenDest>
             ) ;
          } }
