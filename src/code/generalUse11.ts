@@ -217,6 +217,7 @@ type AtLeastEitherInterface<
  * either 
  * - all properties set
  * - all properties unset
+ * 
  */
 type EitherBothSetOrBothUnset<A extends {} > = (
     A | { [k in keyof A ] ?: never ; }
