@@ -90,6 +90,10 @@ const useMediaStreamFromAudioNode: (
 namespace useMediaStreamFromAudioNode {} // TS-2503
 // eslint-disable-next-line import/first
 import useAudioNodesAsMediaStream = useMediaStreamFromAudioNode ;
+/**    
+ * {@link useAudioNodesAsMediaStream } x {@link MediaStream `new MediaStream(...)` }.
+ * 
+ */
 const useAudioNodesAsMediaStreamTracks: (
    (...args: Parameters<typeof useAudioNodesAsMediaStream > )
    => (null | Readonly<ReturnType<MediaStream["getTracks"] > > )
