@@ -72,6 +72,13 @@ import { useDepsChgCount } from "./usingComponentMountRenderStat";
  * }
  * 
  * @deprecated
+ * alternatives :
+ * - for {@link Blob }s,
+ *   switch to `blobConfirmUsrSave(...)` (`./useEmbedSrcObjUsrSaveBtn`) solution__
+ * - for {@link MediaSource }s,
+ *   use {@link React.useState *cb-ref*s (*callback-ref*) }, 
+ *   pass the *ref* into the intended `<video>`, and 
+ *   {@link HTMLVideoElement assign its `srcStream` } directly.
  */
 const useObjectURL : (
    (...[v] : [null | Blob ] )
