@@ -218,6 +218,9 @@ type AtLeastEitherInterface<
  * - all properties set
  * - all properties unset
  * 
+ * *to avoid surprising behaviours when using this TD, 
+ * avoid non-`object`s, and {@link Required make all known properties required and non-`undefined` }*.
+ * 
  */
 type EitherBothSetOrBothUnset<A extends {} > = (
     A | { [k in keyof A ] ?: never ; }
