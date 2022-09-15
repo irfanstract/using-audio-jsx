@@ -132,7 +132,7 @@ const useMediaReadStreamFromOfStillCssFill: (
             code
          ) ;
          cc.fillRect(0, 0, width, height ) ;
-      } , [cc] ) ;
+      } , [cc, code ] ) ;
       return (
          cp
       ) ;
