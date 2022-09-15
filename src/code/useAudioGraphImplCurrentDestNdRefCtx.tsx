@@ -230,7 +230,7 @@ const useCurrentDestNdRefAndCtxT: (
     useCurrentDestNd0
 ) ; 
 const useWithCurrentCtxValue: (
-    (a: (...args: Parameters<ComponentProps<typeof Consm >["children"] > ) => React.ReactElement )
+    (callback: (...args: Parameters<ComponentProps<typeof Consm >["children"] > ) => React.ReactElement )
     =>             
     React.ReactElement               
 ) = (          
