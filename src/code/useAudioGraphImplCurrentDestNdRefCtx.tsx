@@ -241,6 +241,17 @@ const useCurrentDestNdRefAndCtxT: (
 ) = (
     useCurrentDestNd0
 ) ; 
+/**    
+ * 
+ * internal only.
+ * 
+ * *all variables in the ctx will be returned without any omission*.
+ * 
+ * __performance note__ .
+ * *the frequency in which current 't' increment may be high enough to heat your device*.
+ * see {@link useWithCurrentACtxCurrentT }.
+ * 
+ */
 const useWithCurrentCtxValue: (
     (callback: (...args: Parameters<ComponentProps<typeof Consm >["children"] > ) => React.ReactElement )
     =>             
