@@ -2,6 +2,9 @@
 // utility imports        
 import Immutable from "immutable";        
 import { IterableOps, PromiseReturnValue } from "./generalUse11";  
+import { 
+    EitherBothSetOrBothUnset,
+} from "./generalUse11";
 import { ABandpassFreqArgInputRangeMode } from "./audioFltBandpassMetaRangeMode";  
 import React, { useMemo } from "react";               
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";     
@@ -16,15 +19,7 @@ import { CBC } from "./useStateInCallback";
               
                    
     
-/**   
- * either 
- * - all properties set
- * - all properties unset
- */
-type EitherBothSetOrBothUnset<A extends {} > = (
-    A | { [k in keyof A ] ?: undefined ; }
-) ;
-const EitherBothSetOrBothUnset = {} ; // TS-1205
+;
 
 /**    
  * W3C's `AudioNode`s spec makes `AudioNode`s *time-domain*. however,
