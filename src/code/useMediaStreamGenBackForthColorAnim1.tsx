@@ -63,6 +63,11 @@ const useMediaReadStreamDemoBackForthColorAnim = (
             c.getContext("2d")!
          ), [c] )
       ) ;
+      const cp = (
+         useMemo(() => (
+            c.captureStream(outputRefreshRate )
+         ), [c, outputRefreshRate ])
+      ) ;
       useAnimationFrameRefreshEffect((...[_1 ]: Parameters<FrameRequestCallback> ) => {
          const t = (
             (
@@ -92,9 +97,7 @@ const useMediaReadStreamDemoBackForthColorAnim = (
          }
       }, [period, cc ] );
       return (
-         useMemo(() => (
-            c.captureStream(outputRefreshRate )
-         ), [c, outputRefreshRate ])
+         cp
       ) ;
    }
 ) ;
