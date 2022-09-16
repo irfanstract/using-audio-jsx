@@ -4,6 +4,7 @@ import React from 'react';
 import { K } from './code/commonElements';   
 import componentWithLoadingScreen from './code/componentWithLoadingScreen';  
 import { AppWrapper1 } from './code/useAppWrapper1';       
+import { IonApp, } from "@ionic/react";
 // asset imports
 import logo from './logo.svg';   
 // App Code Imports   
