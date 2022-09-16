@@ -41,22 +41,16 @@ const MediaStreamVideoC: (
       &
       { src: HTMLVideoElement["srcObject"]; }
       &
-      { fwdRef ?: React.Dispatch<null | HTMLVideoElement > ; }
+      { fwdRef ?: React.Ref<null | HTMLVideoElement> ; }
    )>
 ) = (
    ({ src, fwdRef: appLevelRef, ...props }, ) => {
-      const [refed1, ref1] = (
+      const [refed1, ref] = (
          React.useState<null | HTMLVideoElement>(null )
       ) ;
-      const ref = (
-         React.useCallback((...args : [null | HTMLVideoElement ] ) => (
-            ref1(...args )
-            ,
-            appLevelRef && appLevelRef(...args )
-            ,
-            void 0
-         ) , [appLevelRef, ref1 ] )
-      ) ;
+      React.useImperativeHandle((
+         appLevelRef
+      ), () => refed1, ) ;
       useHtmlVideoProgrammaticSrc(refed1 , src , ) ;
       const fallbackContent : (
          null 
