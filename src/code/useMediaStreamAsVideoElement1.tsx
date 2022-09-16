@@ -31,7 +31,7 @@ const MediaStreamVideoC: (
    React.FC<(
       Omit<JSX.IntrinsicElements["video"] , "src" | "ref" >
       &
-      { src: MediaStream; }
+      { src: HTMLVideoElement["srcObject"]; }
       &
       { fwdRef ?: React.Dispatch<null | HTMLVideoElement > ; }
    )>
