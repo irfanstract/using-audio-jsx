@@ -70,7 +70,7 @@ const WithCtxtualATapRecording : (
          <CBC name="CBC_AudioCtxFeedRec" >
          { function useRecImpl() {
             const dNd = useAudioNodesAsMediaStream(sideTapPt ) ;
-            const videoS = (
+            const videoS: MediaStream = (
                useMediaReadStreamFromOfStillCssFill<"solid">("green")
             ) ;
             const mS = (
