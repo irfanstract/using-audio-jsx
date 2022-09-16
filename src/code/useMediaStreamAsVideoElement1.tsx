@@ -55,13 +55,7 @@ const MediaStreamVideoC: (
             void 0
          ) , [appLevelRef, ref1 ] )
       ) ;
-      React.useEffect(() => {
-         if (refed1 ) {
-            refed1.srcObject = (
-               src
-            ) ;
-         }
-      } , [refed1 , src ]) ;
+      useHtmlVideoProgrammaticSrc(refed1 , src , ) ;
       const fallbackContent : (
          null 
          | (React.ReactNode & object )
