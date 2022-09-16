@@ -27,6 +27,12 @@ import { useAsyncMemo } from "./useAsyncMemo";
 
 
 
+/**   
+ * equivalent to `<video>` with some exceptions.
+ * 
+ * `src` must be a value-or-obj assignable to {@link HTMLVideoElement.srcObject }.
+ * 
+ */
 const MediaStreamVideoC: (
    React.FC<(
       Omit<JSX.IntrinsicElements["video"] , "src" | "ref" >
