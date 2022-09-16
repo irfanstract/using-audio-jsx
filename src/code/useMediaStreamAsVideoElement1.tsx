@@ -79,7 +79,9 @@ const MediaStreamVideoC: (
       return (
          <video 
          ref={ ref }
-         {...props }
+         {...{ 
+            ...props
+         } }
          >
          { fallbackContent }
          </video>
