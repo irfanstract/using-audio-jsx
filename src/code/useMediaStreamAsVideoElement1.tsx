@@ -66,10 +66,31 @@ const MediaStreamVideoC: (
          >
          </svg>
       ) ;
+      const defaultShallAutoplay: boolean = (
+         src instanceof MediaStream 
+      );
+      const {
+         autoPlay: supposedToAutoplay = (
+            defaultShallAutoplay
+         ) ,
+      } = (
+         props
+      ) ;
+      const defaultShallDisplayControls = (
+         !supposedToAutoplay
+         // 
+         // TODO
+      );
       return (
          <video 
          ref={ ref }
          {...{ 
+            controls: (
+               defaultShallDisplayControls
+            ) ,
+            autoPlay: (
+               supposedToAutoplay
+            ) ,
             ...props
          } }
          >
