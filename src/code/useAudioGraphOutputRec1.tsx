@@ -82,10 +82,12 @@ const WithCtxtualATapRecording : (
             ) ;
             return (
                   mS ?
+                  <div>
                   <MediaStreamRecC1 
                   src={mS }
                   restartPeriodMillis={13 * 60 * 1000 }
                   />
+                  </div>
                   : <></>
             ) ;
          } }
