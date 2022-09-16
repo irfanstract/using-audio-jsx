@@ -19,6 +19,7 @@ import React, {
    useState, useReducer, 
    useRef, 
 } from "react";          
+import { IonLoading, IonProgressBar, } from "@ionic/react" ;
 import { AmtOfSecondsC, } from "./timeAmountDisplayComponent";
 import { useSeqState } from "./useSeqState";
 import { usingInterval, useIntervalDeferredValue, useAnimationFrameRefreshEffect } from "./usingTimeoutOrInterval"; 
