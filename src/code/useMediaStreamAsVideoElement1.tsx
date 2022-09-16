@@ -32,6 +32,11 @@ import { useAsyncMemo } from "./useAsyncMemo";
  * 
  * `src` must be a value-or-obj assignable to {@link HTMLVideoElement.srcObject }.
  * 
+ * will `autoPlay` if `src` were {@link MediaStream }, and
+ * will not otherwise.
+ * still, the `<video>` might refuse to `autoPlay`, and yet
+ * the client-side can manually click "play".
+ * 
  * other attribs will be passed unchanged for the actual `<video>` element.
  * 
  */
