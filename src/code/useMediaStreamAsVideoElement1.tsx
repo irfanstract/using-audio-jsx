@@ -62,11 +62,27 @@ const MediaStreamVideoC: (
             ) ;
          }
       } , [refed1 , src ]) ;
+      const fallbackContent : (
+         null 
+         | (React.ReactNode & object )
+      ) = (
+         <svg 
+         viewBox="0 0 256 256" 
+         style={{ 
+            width: "9em", 
+            height: "9em", 
+            background: "black", 
+         }} 
+         >
+         </svg>
+      ) ;
       return (
          <video 
          ref={ ref }
          {...props }
-         />
+         >
+         { fallbackContent }
+         </video>
       ) ;
    }
 ) ;
