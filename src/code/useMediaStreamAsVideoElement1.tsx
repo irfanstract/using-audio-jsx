@@ -32,6 +32,8 @@ import { useAsyncMemo } from "./useAsyncMemo";
  * 
  * `src` must be a value-or-obj assignable to {@link HTMLVideoElement.srcObject }.
  * 
+ * other attribs will be passed unchanged for the actual `<video>` element.
+ * 
  */
 const MediaStreamVideoC: (
    React.FC<(
