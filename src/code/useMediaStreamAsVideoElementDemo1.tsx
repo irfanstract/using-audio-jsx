@@ -42,6 +42,23 @@ export default (
          muted
          controls
          />
+         <div>
+         <p>
+            <span>
+               <span> the media </span>
+               <em>
+                  did not 
+                  <span> come <span> pre-rendered nor from any capt devices </span> </span>
+               </em>. 
+            </span>
+            instead, 
+            <em> 
+               it was initiated programmatically by 
+               internally creating <code>HTMLCanvasElement</code> and then 
+               running <code>theSrc.captureStream(...)</code>
+            </em>.
+         </p>
+         </div>  
          </div>
       ) ; // TODO
    }
