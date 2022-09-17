@@ -163,6 +163,10 @@ const BootlegMusicDv : (
             : null
          ) }
 
+         { moreToTheMetronome && (
+            moreToTheMetronome({ t, })
+         ) }
+
          </>
       ) }
       </MetronomeAndResponseGraph>
