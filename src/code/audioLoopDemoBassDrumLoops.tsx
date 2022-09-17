@@ -174,9 +174,56 @@ const BootlegMusicDv : (
    return bassDrumLoopGraph ;
    }
 ) ;
-const BassDrumLoopDv = (
-   BootlegMusicDv
-) ;
+const BassDrumLoopDv: (
+   React.FC<(
+      Parameters<typeof BMDV_PROPS_EXPAND >[0 ]
+   )>
+) = (
+   (props ) => {
+   ;
+   const {
+      dv ,
+      renderRange ,
+      xn ,
+      moreToTheMetronome ,
+   } = BMDV_PROPS_EXPAND(props, ) ;
+   ;
+   const bassDrumLoopGraph = (
+      <MetronomeAndResponseGraph
+      preFT={2 }
+      postFT={3 }
+      value={{ tickTockPeriod: 0.5 / dv }}
+      renderRange={renderRange }
+      >
+      { ({ t }) => (
+         <>
+         
+         { (
+            (
+                  (t % 1 ) === 0
+                  &&
+                  !isAtModulo(t, 4 * 8 , [ ] )
+            ) ?
+            <CBassDrumKickFluidly1 /> 
+            :  null
+         )}
+         { (
+            isAtModulo(t, 4 * 8 , [28 ] ) ? 
+            <CFourSecondsBassDrop />
+            : null
+         ) }
+
+         { moreToTheMetronome && (
+            moreToTheMetronome({ t, })
+         ) }
+
+         </>
+      ) }
+      </MetronomeAndResponseGraph>
+   ) ;
+   return bassDrumLoopGraph ;
+   }
+) ; //
 /**    
  * 
  */
