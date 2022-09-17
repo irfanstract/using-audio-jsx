@@ -63,6 +63,26 @@ import { BasicEmbedObjectPreview } from "./useFilePreview1";
 
 
 
+const Delayed: (
+   React.FC<{ children: React.ReactNode & object ; }>
+) = (
+   ({ children: payload, }) => {
+      const P : (
+         Pick<Performance, "now">
+      ) = performance ;
+      const initialT = (
+         React.useMemo(() => P.now() , [] )
+      ) ;
+      const currentT = (
+         useRealTimeQueryInterval1(() => P.now() , 250 , )
+      ) ;
+      return (
+         <>
+         { ((2000 <= (currentT - initialT ) ) && payload ) || null }
+         </>
+      ) ;
+   }
+) ;
 const paragraphOverflowDemo = (() => {
    const p1 = (
       <p>
