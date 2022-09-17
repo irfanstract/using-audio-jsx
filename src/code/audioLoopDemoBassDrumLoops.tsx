@@ -109,16 +109,16 @@ type CMetronomeDirectedDvBandplayProps = (
 ) ; 
 const BootlegMusicDv : (
    React.FC<(
-      CMetronomeDirectedDvBandplayProps
-      &
-      { hihatXnMode ?: 1 | 2 ; }
+      Parameters<typeof BMDV_PROPS_EXPAND >[0 ]
    )>
 ) = (
-   function ({
-      subhalvesN: dv = 1 ,
+   function (props ) {
+   const {
+      dv ,
       renderRange ,
-      hihatXnMode: xn = 2 ,
-   } ) {
+      xn ,
+      moreToTheMetronome ,
+   } = BMDV_PROPS_EXPAND(props, ) ;
    const bassDrumLoopGraph = (
       <MetronomeAndResponseGraph
       preFT={2 }
@@ -173,6 +173,46 @@ const BootlegMusicDv : (
 const BassDrumLoopDv = (
    BootlegMusicDv
 ) ;
+/**    
+ * 
+ */
+const BMDV_PROPS_EXPAND = (
+   function (props : (
+      CMetronomeDirectedDvBandplayProps
+      &
+      { hihatXnMode ?: 1 | 2 ; }
+      &
+      { 
+         /**   
+          * normally this property would be left unset. 
+          * 
+          * sometimes, 
+          * there's need-or-desire to use the same (ie internally-used) metronome for additional strikes.
+          * specify this property,
+          * to add extra response to the (established) metronome.
+          * 
+          */
+         moreToTheMetronome ?: (
+            ComponentProps<typeof MetronomeAndResponseGraph >["children"] 
+            & object
+         ) ; 
+      }
+   ) ) {
+      const {
+         subhalvesN: dv = 1 ,
+         renderRange ,
+         hihatXnMode: xn = 2 ,
+         moreToTheMetronome ,
+      } = props ;
+      ;
+      return {
+         dv ,
+         renderRange ,
+         xn ,
+         moreToTheMetronome ,
+      } ;
+   }
+) ; //
 const MercerTchamiMusicDemo1 = ({ mode: ac = 2, } : { mode ?: 0 | 2 | 7 ; }) => {
 
    const dv : 1 | 2 = 2 ;
