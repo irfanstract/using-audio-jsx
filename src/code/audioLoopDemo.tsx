@@ -142,186 +142,30 @@ export const AudioLoopDemoApp = (function () {
                 <WithADestCtxTCompletionStatCtx>
                 { ({ withADestCtxCompletionStat }) => {
                 ;
-                const bassLine = (
-                    withADestCtxCompletionStat(({ relativeTDiff }) => (
-                    <CAmpModulated0 value={<CConstantValue value={2 ** -1 } /> } >
-                    <CmInHarmonics 
-                    value={[
-                        SupportedFShiftAmtInterpretation.OCTAVE_SHIFT, 
-                        [
-                            [0, { gain: 2 ** -0.5 }] , 
-                            [-1, { gain: (true) ? (2 ** -0.5 ) : 0 }] ,
-                        ], 
-                    ]} 
-                    >
-                    { ({ detuneOctaves }) => {
-                    ;
-                    const detune = (
-                        <K>
-                        <CConstantValue value={detuneOctaves } />
-                        <CFnValue1 
-                        value={({ ctxT: t }) => (
-                            ((): number => { 
-                                { 
-                                    ;
-                                    const startValue = -2 * 2 ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: 32 ,
-                                        }, {
-                                            startT: 28 ,
-                                            endT: 32 ,
-                                            anEndT: 30 ,
-                                            startValue: startValue ,
-                                            finalValue: startValue + -1 ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                { 
-                                    ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: 8 ,
-                                        }, {
-                                            startT: 0 ,
-                                            endT: 0.5 ,
-                                            anEndT: 0.25 ,
-                                            finalValue: 3 + (2 * 2 ) ,
-                                            startValue: 0 ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                { 
-                                    ;
-                                    ;
-                                    for (const value of (
-                                        periodicTRestrictedLinearlyApproachedValueAtT1(t, {
-                                            period: 8 ,
-                                        }, {
-                                            startT: 0.5 ,
-                                            endT: 1 ,
-                                            anEndT: 0.75 ,
-                                            finalValue: 3 ,
-                                            startValue: 3 + (2 * 2 ) ,
-                                        } )
-                                    ) ) { 
-                                        return (
-                                            value
-                                        ) ;
-                                    }
-                                }
-                                return 0 ;
-                            })()
-                            / 12
-                        ) }
-                        />
-                        </K>
-                    ) ;
-                    return (
-                    <CWaveTable1 
-                    freqArgumentInterpretation="timedomain-normalised"
-                    freqArgument={(
-                        <CConstantValue value={55 / 440 } />
-                    )}
-                    detuneInterpretation="timedomain-normalised"
-                    detuneSemitoneCentsNormalVal={12 * 100 }
-                    detune={(
-                        detune
-                    )}
-                    type="triangle"
-                    />
-                    ) ;
-                    } }
-                    </CmInHarmonics>
-                    </CAmpModulated0>
-                    ) )
-                ) ;
                 return (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
                 <K>
                 { (
-                    (tPassed < 63.5 ) ?
-                    <K>
-                    <CBiquadFilterModulated
-                    type="lowpass"
-                    freqArgumentInterpretation="timedomain-normalised" //
-                    freqArgument={(
-                        <CConstantValue 
-                        value={(
-                            2 ** 
-                            (IterableOps.clamp(-2 + (tPassed / 16 ) , -1, 0 ) * 12 )
-                        )} 
-                        />
-                    )}
-                    > 
                     <BassDrumLoopDv subhalvesN={2 } />
-                    </CBiquadFilterModulated>
-                    </K>
-                    : <div />
                 ) }
                 { (
-                    (
-                    (payload: React.ReactElement ): React.ReactElement => {
-                        const bfProps : (
-                            Omit<(
-                                ComponentProps<typeof CBiquadFilterModulated>
-                                &
-                                (
-                                    { type : "highpass" | "lowpass" ; }
-                                )
-                            ) , "children">
-                        ) = (
-                            !(64 <= tPassed ) ?
-                            {
-                                type: "highpass" ,
-                                freqArgumentNormalValue: 48000 ,
-                                freqArgumentInterpretation: "timedomain-normalised" ,
-                                freqArgument: (
-                                    <CConstantValue value={27.5 / 44100 } />
-                                ) ,
-                            }
-                            : {
-                                type: "lowpass" ,
-                                freqArgumentNormalValue: 48000 ,
-                                freqArgumentInterpretation: "timedomain-normalised" ,
-                                freqArgument: (
-                                    <CConstantValue value={43000 / 44100 } />
-                                ) ,
-                            }
-                        ) ;
-                        return (
-                            <CBiquadFilterModulated
-                            {...bfProps }
-                            >
+                <K>
                             <CAmpModulated0  
                             value={(
-                                <CFnValue1 
-                                value={({ ctxT: t }) => (
-                                    2 ** (
-                                        (t % 8 ) <= 1.5 || 0.5 <= (t % 1 ) ? 
-                                        0 : -4 
-                                    ) 
-                                ) } 
-                                />
+                                <CConstantValue value={2 ** -1 } />
                             )}
                             >
-                            { payload }
+                            <CSnareDrumJammer 
+                            metronomeProps={{
+                                value: {
+                                    tickTockPeriod: 1 / 4 ,
+                                } ,
+                            }}
+                            cmPeriod={1 }
+                            />
                             </CAmpModulated0>
-                            </CBiquadFilterModulated>
-                        ) ;
-                    }
-                    )(bassLine )
+                </K>
                 ) }
                 </K> 
                 ) ) }
