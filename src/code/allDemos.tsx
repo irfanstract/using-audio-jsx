@@ -33,6 +33,7 @@ import {
  
 } from "./usingIntervalRefresh";      
 import { useEventTarget } from "./usingTimeoutOrInterval";
+import { useRealTimeQueryInterval1, } from "./usingTimeoutOrIntervalScannedValue";
 import { useDepsChgCount } from "./usingComponentMountRenderStat";      
 import { useWindowLocationHref } from "./useWindowLocationHrefChgEffect";
 import { useCtxtualRoutingState } from "./useWindowLocationHrefBasedRouting1";
