@@ -35,6 +35,10 @@ import {
    useCanvas2DBackForthSolidColorAnim1, 
    
 } from "./useEmbedCanvas2DBackForthAnim1";
+import { 
+   useCanvas2DRainbowColorsShowAnim,
+   
+ } from "./useEmbedCanvas2DBackForthSolidColorAnim1";
 import { useWindowActivityStatus } from "./useWindowFocusState";
 import { useMediaReadStreamedCanvasWithProperties, } from "./useMediaStreamFromOfNativeCanvas1";
 
