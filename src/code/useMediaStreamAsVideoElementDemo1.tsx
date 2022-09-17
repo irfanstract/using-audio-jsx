@@ -38,8 +38,9 @@ export default (
          <div>
          <MediaStreamVideoC 
          src={videoS }
-         autoPlay
+         autoPlay={false }
          muted
+         controls
          />
          </div>
       ) ; // TODO
