@@ -259,6 +259,27 @@ type EitherSetAndOthersUnset<A extends {} > = (
     }[keyof A ]
 ) ;
 const EitherSetAndOthersUnset = {} ; // TS-1205
+type EitherPeriodOrFreq = (
+    EitherSetAndOthersUnset<{ frequency: number ; period: number ; keyIndex : number ; }>
+) ;
+type OptionalWidthAndHeight = (
+    EitherBothSetOrBothUnset<{ width: number ; height: number ; }>
+) ;
+{
+    ;
+    /**   
+     * the crooked version of {@link EitherPeriodOrFreq }.
+     */
+    type EPF11 = (
+        EitherSetAndOthersUnset<{ frequency ?: number ; period : number ; keyIndex : number ; }>
+    ) ;
+    /**   
+     * the crooked version of {@link OptionalWidthAndHeight }.
+     */
+    type OWH11 = (
+        EitherBothSetOrBothUnset<{ width ?: number ; height : number ; depth : number ; }>
+    ) ;
+}
 const Seq1 = {} ; // TS-1205     
 type Seq1<A> = (    
     (readonly A[] )
