@@ -248,6 +248,8 @@ export const AudioLoopDemoApp = (function () {
                 return (
                 <>
                 { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
+                <K>
+                { (
                     (tPassed < 63.5 ) ?
                     <K>
                     <CBiquadFilterModulated
@@ -266,8 +268,8 @@ export const AudioLoopDemoApp = (function () {
                     </CBiquadFilterModulated>
                     </K>
                     : <div />
-                ) ) }
-                { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
+                ) }
+                { (
                     (
                     (payload: React.ReactElement ): React.ReactElement => {
                         const bfProps : (
@@ -319,6 +321,8 @@ export const AudioLoopDemoApp = (function () {
                         ) ;
                     }
                     )(bassLine )
+                ) }
+                </K> 
                 ) ) }
                 </>
                 ) ;
