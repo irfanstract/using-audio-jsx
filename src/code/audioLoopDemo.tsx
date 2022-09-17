@@ -59,6 +59,7 @@ import {
 
 } from "./audioLoopDemoSpecimens1";
 import { BassDrumLoopDv, HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumLoops"; 
+import { CSnareDrumJammer, } from "./useAudioGraphForSnareDrumJammer1";
 import { CBassLineByTimeDomainArgs } from "./audioLoopDemoSpecimens1";
 import { WithAuInstrumentsVisualisation } from "./useAudioGraphInstrumentsVisualisation1";
 import '../App.css';        
