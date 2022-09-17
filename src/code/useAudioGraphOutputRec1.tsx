@@ -87,6 +87,11 @@ const WithCtxtualATapRecording : (
                   src={mS }
                   restartPeriodMillis={13 * 60 * 1000 }
                   />
+                  <MediaStreamVideoC 
+                  src={videoS }
+                  autoPlay
+                  controls
+                  />
                   </div>
                   : <></>
             ) ;
