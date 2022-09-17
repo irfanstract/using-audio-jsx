@@ -18,6 +18,21 @@ import {
             
 } from "./useCompletion";    
 import { useAsyncMemo } from "./useAsyncMemo";          
+function tryHtmlVideoPlaybackResume(...[operand ] : [
+   HTMLMediaElement ,
+]) : void {
+   if (operand.paused ) {
+      (async (): Promise<void > => {
+         ;
+         try {
+            await operand.play() ;
+         } catch (z) {
+            // ignore ; often a sign of requiring user intr
+            ;
+         }
+      })() ;
+   }
+}
 
 
 
