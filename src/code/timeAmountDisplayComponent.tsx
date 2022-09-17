@@ -62,7 +62,7 @@ const AmtOfSecondsC: (
          const value = (
             Math.abs(value0 )
          ) ;
-         const e = (
+         const fields = (
             ((): FieldProperties[] => [
                { unit: 365 * 24 * 60 * 60 , nominalPeriod:  1E5 , mark:   "yrs" } ,
                { unit:       24 * 60 * 60 , nominalPeriod:  365 , mark:  "days" } ,
@@ -70,6 +70,9 @@ const AmtOfSecondsC: (
                { unit:                 60 , nominalPeriod:   60 , mark:     "'" } ,
                { unit:                  1 , nominalPeriod:   60 , mark:     `"` } ,
             ])()
+         ) ;
+         const e = (
+            fields
             .map(({ unit, nominalPeriod, mark: marking }) => {
                /**    
                 * - dictates {@link effectiveFldValue } 
