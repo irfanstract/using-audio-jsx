@@ -66,34 +66,7 @@ const useMediaReadStreamDemoBackForthColorAnim = (
             captureRate: outputRefreshRate,
          })
       ) ; //
-      useAnimationFrameRefreshEffect((...[_1 ]: Parameters<FrameRequestCallback> ) => {
-         const t = (
-            (
-               performance.now() 
-               / 1000
-            )
-         );
-         const s = (() => {
-            const v0 = t ;
-            const v1 = (v0 / period ) % 1 ;
-            const v2 = v1 * 2 ;
-            const v3 = (
-               Math.min(v2, 2 + -v2 )
-            ) ;
-            return (
-               v3
-            ) ;
-         })() ;
-         ;
-         {
-            ;
-            cc.clearRect(0, 0, cc.canvas.width, cc.canvas.height ) ;
-            cc.fillStyle = (
-               `rgb(0, 0, ${Math.min(0xFF, s * 0x100)} )`
-            ) ;
-            cc.fillRect(0, 0, cc.canvas.width, cc.canvas.height ) ;
-         }
-      }, [period, cc ] );
+      useCanvas2DRainbowColorsShowAnim({ period, }, [cc, { outputRefreshRate, }, ], ) ;
       return (
          cp
       ) ;
