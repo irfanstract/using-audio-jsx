@@ -71,7 +71,10 @@ const WithCtxtualATapRecording : (
          { function useRecImpl() {
             const dNd = useAudioNodesAsMediaStream(sideTapPt ) ;
             const videoS: MediaStream = (
-               useMediaReadStreamFromOfStillCssFill<"solid">("green")
+               useMediaReadStreamDemoBackForthColorAnim({
+                  period: 8,
+                  outputRefreshRate: 10,
+               })
             ) ;
             const mS = (
                React.useMemo(() => (
