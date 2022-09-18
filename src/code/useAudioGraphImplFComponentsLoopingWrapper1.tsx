@@ -287,21 +287,21 @@ const MetronomeAndResponseGraph = (
          )>
       )>  
    )): React.ReactElement {                  
-      const { children: givenChildren , value: { tickTockPeriod = 0.5 } = {} } = (
+      const { children: givenChildren , value: { tickTockPeriod: tickTockPeriodArg = 0.5 } = {} } = (
          properties11    
       ) ;    
-      if (!(0 < tickTockPeriod ) ) {
+      if (!(0 < tickTockPeriodArg ) ) {
          throw TypeError(`'tickTockPeriod' must be nonzero.`) ;  
       } ;                
-      if (!(0.05 < tickTockPeriod ) ) {     
+      if (!(0.05 < tickTockPeriodArg ) ) {     
          // return (<></>) ;
       } ;      
       const {
-         preFT: mtPreFT = 2 , 
-         postFT: mtPostFT = 3 ,
+         preFT: mtPreFTArg = 2 , 
+         postFT: mtPostFTArg = 3 ,
       } = properties11 ;
       ;
-      const renderRangeSnapSize: number = (
+      const renderIRangeSnapSize: number = (
          10
       ) ;
       const mainRendered = (
@@ -329,10 +329,50 @@ const MetronomeAndResponseGraph = (
                } = (
                   tCtxs.useCurrentTInf()
                ) ;
-               const lastRenderT1 = (
+               /**   
+                * to identify bugs in this library Component 
+                * we needed to place diagnostics/debug/info/panel.
+                * sadly, the debugging manifests themself will in-this-case heat up CPUs so
+                * we need to keep these left-out by default.
+                */
+               const startEndMountTimeDebug : boolean = (
+                  false
+               );
+               /**   
+                * apply `tScale`.
+                * shall not apply `t`, by definition.
+                */
+               const [mtPreFT = 2, mtPostFTE = 2, ] = (
+                  [mtPreFTArg, mtPostFTArg, ]
+                  .map((v: number ) => (
+                     v * tCtxTScaleVl
+                  ) )
+               ) ;
+               const mtPostFT = (
+                  // TODO remove this debugging-specific addition
+                  mtPostFTE + 10
+               ) ;
+               const tickTockPeriodAbsolutely = (
+                  tickTockPeriodArg * tCtxTScaleVl
+               ) ;
+               /**   
+                * note that the value needs to be adjusted by fingers of seconds.
+                * 
+                */
+               const lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted = (
                   (typeof actualCtxT === "number") ?
-                  Iterable.Range(0, actualCtxT - absoluteScheduledTE , renderRangeSnapSize )
-                  .last(0 )
+                  (
+                     /**   
+                      * multiples of ({@link renderIRangeSnapSize } * {@link tickTockPeriodAbsolutely } )
+                      * less than ({@link actualCtxT } minus {@link absoluteScheduledTE } )
+                      */
+                     Iterable.Range(0, actualCtxT - absoluteScheduledTE , (
+                        renderIRangeSnapSize 
+                        * tickTockPeriodAbsolutely
+                     ) )
+                     // the first value, or ZERO
+                     .last(0 )
+                  )
                   : 3E5
                ) ;                       
                const {   
@@ -343,7 +383,7 @@ const MetronomeAndResponseGraph = (
                            // multiples of that, bounded to reasonable upper-bound
                            Iterable.Range(0, (
                               2E5
-                           ), renderRangeSnapSize )
+                           ), renderIRangeSnapSize )
                            // prevent 'zero'
                            .filter(v => (0 < v ) )
                            /**   
@@ -351,17 +391,17 @@ const MetronomeAndResponseGraph = (
                             * `PositivestAmong(4, (amount of ticks over 18 seconds ) ) `
                             */
                            .filter(v => (
-                              Math.max(4, (18 / tickTockPeriod) )
+                              Math.max(4, (18 / tickTockPeriodArg) )
                               <= 
                               v 
                            ) ) 
                            // the first value, or (...)
-                           .first(renderRangeSnapSize )
+                           .first(renderIRangeSnapSize )
                         ))         
                      ) ,      
                      start: ( 
                         Math.floor((
-                           (lastRenderT1 + -1.5 ) / tickTockPeriod
+                           ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ) + -1.5 ) / tickTockPeriodAbsolutely
                         ))
                      ) ,
                   } ,  
@@ -381,9 +421,9 @@ const MetronomeAndResponseGraph = (
                    */ 
                   value={{  
                      // TODO make this configurable
-                     period: tickTockPeriod ,            
+                     period: tickTockPeriodArg ,            
                                  
-                     initialOffset: lastRenderT1 , 
+                     initialOffset: 0 , 
                   }}                                    
                   renderRange={renderRange }   
                   /**      
@@ -392,6 +432,7 @@ const MetronomeAndResponseGraph = (
                   clippingMode={(
                      AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
                   ) }
+                  visual={startEndMountTimeDebug }
             
                   >       
                      { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
@@ -409,12 +450,19 @@ const MetronomeAndResponseGraph = (
                         const e0 = (   
                            givenChildren({ t })          
                         );    
+                        // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
+                        const absoluteMountStartT = (
+                           (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriodAbsolutely ) ) )
+                        );
+                        const absoluteMountEndT = (
+                           (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriodAbsolutely ) ) )
+                        ) ;
                         const e = (             
                            e0 && (            
                               (
-                                 (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriod ) ) ) <= actualCtxT
+                                 absoluteMountStartT <= actualCtxT
                                  && 
-                                 (Iterable.Range(-renderRangeSnapSize, actualCtxT, renderRangeSnapSize ).last(0 ) ) <= (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriod ) ) )
+                                 (Iterable.Range(-renderIRangeSnapSize, actualCtxT, renderIRangeSnapSize ).last(0 ) ) <= absoluteMountEndT
                               )    
                               ?             
                               e0  
