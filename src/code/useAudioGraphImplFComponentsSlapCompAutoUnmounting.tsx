@@ -91,7 +91,7 @@ const {
                 tCtxs.useCurrentTInf()     
             ) ;
             // TODO  
-            const [preFT, postFT] = ( 
+            const [preFTUsed, postFTUsed] = ( 
                 [preFT0, postFt0 ]  
                 .map((v: number ) => (
                     tScale
@@ -102,7 +102,7 @@ const {
             const {       
                 passageStateBy ,     
             } = (   
-                passageStateBy1({ preFT, postFT })    
+                passageStateBy1({ preFT: preFTUsed, postFT: postFTUsed })    
             ) ;      
             return (         
                 useWithCurrentACtxCurrentT(({ currentTime: ctxT }) => (        
