@@ -87,11 +87,11 @@ const {
         function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0 } : ( 
             Props    
         ) ) {   
-            const { t: expectedT, tScale } = (
+            const { t: expectedAbsoluteT, tScale } = (
                 tCtxs.useCurrentTInf()     
             ) ;
             // TODO  
-            const [preFTUsed, postFTUsed] = ( 
+            const [preFTAbsolutely, postFTAbsolutely] = ( 
                 [preFT0, postFt0 ]  
                 .map((v: number ) => (
                     tScale
@@ -102,7 +102,7 @@ const {
             const {       
                 passageStateBy ,     
             } = (   
-                passageStateBy1({ preFT: preFTUsed, postFT: postFTUsed })    
+                passageStateBy1({ preFT: preFTAbsolutely, postFT: postFTAbsolutely })    
             ) ;      
             return (         
                 useWithCurrentACtxCurrentT(({ currentTime: ctxT }) => (        
@@ -120,9 +120,9 @@ const {
                                 ;                                      
                                 return {
                                     passageState : (     
-                                        passageStateBy({ expectedT, actualT })
+                                        passageStateBy({ expectedT: expectedAbsoluteT, actualT })
                                     ) ,   
-                                    hasPassedT : (expectedT <= actualT ) ,     
+                                    hasPassedT : (expectedAbsoluteT <= actualT ) ,     
                                 } ;                        
                             } )()        
                         ) ;       
