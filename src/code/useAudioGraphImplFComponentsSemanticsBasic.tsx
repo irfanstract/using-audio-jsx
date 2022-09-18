@@ -87,7 +87,7 @@ const LWP_DIV : (
  * another renders the main content (`c1`, `children`, `content`)
  */      
  const XDC = (    
-    function AllChildrenRenderedEqually({ children } : { children: React.ReactElement[] ; } ) {
+    function AllChildrenRenderedEqually({ children } : { children: React.ReactNode & object ; } ) {
         return (
             <div style={{ display: "flex", flexDirection: "column" }} >
                 { children }
