@@ -37,7 +37,7 @@ const {
    type DelayOrSlowdownCProps = (
       {
          value: number;
-         children: React.ReactElement | React.ReactElement[];
+         children: React.ReactNode & object ;
       }
    );
    return {
