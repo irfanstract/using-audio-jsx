@@ -296,6 +296,10 @@ const MetronomeAndResponseGraph = (
       if (!(0.05 < tickTockPeriodArg ) ) {     
          // return (<></>) ;
       } ;      
+      /**   
+       * these values are the `props`', hence 'relative';
+       * will nedd translation, scaling, etc
+       */
       const {
          preFT: mtPreFTArg = 2 , 
          postFT: mtPostFTArg = 3 ,
