@@ -265,6 +265,85 @@ type MetronomeGraphingCallback = (
  */ 
 const MetronomeAndResponseGraph = /* */ (() => {
 ;
+const useSchedulingCtxValue = (
+   () => {
+      ;
+      const {
+         tScale: tCtxTScaleVl , 
+         t: absoluteScheduledTE ,
+      } = (
+         tCtxs.useCurrentTInf()
+      ) ;
+      ;
+      return {
+         tCtxTScaleVl ,
+         absoluteScheduledTE ,
+      } ;
+   }
+) ;
+const useCtxValues1 = (
+   function () {
+      ;
+      /**   
+       * 
+       */
+      const {
+         feedPt : nd0 ,
+         currentTime: actualCtxTRaw ,
+      } = (
+         useCurrentDestNdRefAndCtxT()
+      ) ;
+      /**    
+       * {@link actualCtxTRaw },
+       * rounded for performance reasons
+       * 
+       */
+      const actualCtxTRoundedToYThs = (
+         React.useMemo(() => (
+            (typeof actualCtxTRaw === "number" ) ?
+            actualCtxTRaw
+            : false
+         ) , [actualCtxTRaw && Math.floor(actualCtxTRaw * 4 ) ] )
+      ) ;
+      /**    
+       * {@link tCtxs.useCurrentTInf }
+       * 
+       */
+      const {
+         tCtxTScaleVl ,
+         absoluteScheduledTE ,
+      } = (
+         useSchedulingCtxValue()
+      ) ;
+      ;
+      return {
+         nd0 ,
+
+         actualCtxTRaw ,
+         actualCtxTRoundedToYThs ,
+
+         tCtxTScaleVl ,
+         absoluteScheduledTE ,
+      } ;
+   }
+) ;
+type IRenderRangeAbsoluteSnapSize = { 
+   /**   
+    * in *seconds*, independent of *current t-ctx `tScale` value*.
+    */
+   renderRangeAbsoluteSnapSizeInSecs: number ; 
+};
+type IRenderRangeSnapSize = {
+   /**    
+    * frequent amendment of `renderRange` 
+    * resulted in *brief silencing* even when the shift(s) were rather small.
+    * 
+    * to reduce the freq of amendments,
+    * an idea is to round the values into multiples (of (...) ).
+    * 
+    */
+   renderIRangeSnapSize : number ;
+};
 return (
    function MetronomeAndResponseGraphB(properties11 : ( 
       { 
@@ -306,43 +385,98 @@ return (
       if (!(0.05 < tickTockPeriodArg ) ) {     
          // return (<></>) ;
       } ;      
-      /**   
-       * these values are the `props`', hence 'relative';
-       * will nedd translation, scaling, etc
-       */
-      const {
-         preFT: mtPreFTArg = 2 , 
-         postFT: mtPostFTArg = 3 ,
-      } = properties11 ;
+      const unpublishedProps : (
+         (
+            EitherSetOrBothUnset<(
+               {} 
+               & IRenderRangeAbsoluteSnapSize 
+               & IRenderRangeSnapSize 
+            ) >  
+         )
+      ) = {
+      } ;
       ;
-      const renderIRangeSnapSize: number = (
-         10
-      ) ;
       const mainRendered = (
       (function useMainRenderedImpl() {
-         const {
-            feedPt : nd0 ,
-            currentTime: actualCtxT0 ,
-         } = (
-            useCurrentDestNdRefAndCtxT()
+         ;
+         /**    
+          * 
+          * while one migt be tempted to move this `useYyy` call out of this `<CBC>`,
+          * such a change would constitute change in behaviour.
+          * 
+          * - {@link React.useContext } calls drectly of this {@link useMainRenderedImpl }
+          *   will yield values at-the-point where the enclosing Component render(ing) were mounted
+          * - {@link React.useContext } calls in this `<CBC>`
+          *   will yield values at-the-point where the occurence of this rendered `<CBC>` takes place
+          * 
+          */
+         const { //
+            nd0 ,
+
+            actualCtxTRaw ,
+            actualCtxTRoundedToYThs ,
+
+            tCtxTScaleVl ,
+            absoluteScheduledTE ,
+         } = ( //
+            useCtxValues1()
          ) ;
-         const actualCtxT = (
-            React.useMemo(() => (
-               (typeof actualCtxT0 === "number" ) ?
-               actualCtxT0
-               : false
-            ) , [actualCtxT0 && Math.floor(actualCtxT0 * 4 ) ] )
+         const tickTockPeriodAbsolutely = (
+            tickTockPeriodArg * tCtxTScaleVl
          ) ;
-         return (
-            <CBC name="MetronomeAndResponseGraph_UseEF">
-            { function useEF() {
+         const { //
+            renderRangeAbsoluteSnapSizeInSecs ,
+            renderIRangeSnapSize ,
+         } = (() : (
+            {}
+            & IRenderRangeAbsoluteSnapSize 
+            & IRenderRangeSnapSize
+         ) => {
+            if (unpublishedProps.renderRangeAbsoluteSnapSizeInSecs ) {
+               const { //
+                  renderRangeAbsoluteSnapSizeInSecs = 5 ,
+               } = unpublishedProps ;
+               const { //
+                  renderIRangeSnapSize = (
+                     Math.floor((
+                        renderRangeAbsoluteSnapSizeInSecs
+                        / tickTockPeriodAbsolutely
+                     ))
+                  ) ,
+               } = (
+                  unpublishedProps
+               ) ; //
+               return {
+                  renderRangeAbsoluteSnapSizeInSecs ,
+                  renderIRangeSnapSize ,
+               } ;
+            }
+            {
+               // TODO
                ;
                const {
-                  tScale: tCtxTScaleVl , 
-                  t: absoluteScheduledTE ,
+                  renderIRangeSnapSize = (
+                     // TODO
+                     Iterable.Seq([8, 16, 32, 64 ])
+                     .filter(v => (16 <= v ))
+                     // first
+                     .first(8 )
+                  ) ,
                } = (
-                  tCtxs.useCurrentTInf()
+                  unpublishedProps
                ) ;
+               const renderRangeAbsoluteSnapSizeInSecs = (
+                  renderIRangeSnapSize 
+                  * tickTockPeriodAbsolutely
+               ) ;
+               return {
+                  renderIRangeSnapSize ,
+                  renderRangeAbsoluteSnapSizeInSecs ,
+               } ;
+            } ;
+            ;
+         } )() ;
+         {
                /**   
                 * to identify bugs in this library Component 
                 * we needed to place diagnostics/debug/info/panel.
@@ -356,31 +490,44 @@ return (
                 * apply `tScale`.
                 * shall not apply `t`, by definition.
                 */
-               const [mtPreFT = 2, mtPostFTE = 2, ] = (
+               const {
+                  preFT: mtPreFTArg = (
+                     (renderRangeAbsoluteSnapSizeInSecs + 1 ) / tCtxTScaleVl
+                  ) , 
+                  postFT: mtPostFTArg = (
+                     tickTockPeriodArg + 3
+                  ) ,
+               } = properties11 ;
+               /**   
+                * apply `tScale`.
+                * shall not apply `t`, by definition.
+                */
+               // See more: https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess 
+               const [mtPreFTAbsolute = 2, mtPostFTEAbsolute = 2, ] = (
                   [mtPreFTArg, mtPostFTArg, ]
                   .map((v: number ) => (
                      v * tCtxTScaleVl
                   ) )
                ) ;
-               const mtPostFT = (
+               const mtPostFTAbsolute = (
                   // TODO remove this debugging-specific addition
-                  mtPostFTE + 10
-               ) ;
-               const tickTockPeriodAbsolutely = (
-                  tickTockPeriodArg * tCtxTScaleVl
+                  mtPostFTEAbsolute
                ) ;
                /**   
                 * note that the value needs to be adjusted by fingers of seconds.
                 * 
+                * ({@link actualCtxTRoundedToYThs } minus {@link absoluteScheduledTE } )
+                * `floor`ed into being multiple of ({@link renderIRangeSnapSize } * {@link tickTockPeriodAbsolutely } ).
+                * 
                 */
                const lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted = (
-                  (typeof actualCtxT === "number") ?
+                  (typeof actualCtxTRoundedToYThs === "number") ?
                   (
                      /**   
                       * multiples of ({@link renderIRangeSnapSize } * {@link tickTockPeriodAbsolutely } )
                       * less than ({@link actualCtxT } minus {@link absoluteScheduledTE } )
                       */
-                     Iterable.Range(0, actualCtxT - absoluteScheduledTE , (
+                     Iterable.Range(0, actualCtxTRoundedToYThs - absoluteScheduledTE , (
                         renderIRangeSnapSize 
                         * tickTockPeriodAbsolutely
                      ) )
@@ -389,6 +536,7 @@ return (
                   )
                   : 3E5
                ) ;                       
+               const renderRangeCalcImplPreTInSeconds : number = 1.5 ;
                const {   
                   renderRange = {      
                      n: (   
@@ -402,10 +550,10 @@ return (
                            .filter(v => (0 < v ) )
                            /**   
                             * restrict to 
-                            * `PositivestAmong(4, (amount of ticks over 18 seconds ) ) `
+                            * `PositivestAmong(4, 5 / tickTockPeriodArg,  ) `
                             */
                            .filter(v => (
-                              Math.max(4, (18 / tickTockPeriodArg) )
+                              Math.max(4, 5 / tickTockPeriodArg,  )
                               <= 
                               v 
                            ) ) 
@@ -415,14 +563,14 @@ return (
                      ) ,      
                      start: ( 
                         Math.floor((
-                           ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ) + -1.5 ) / tickTockPeriodAbsolutely
+                           ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ) + -Math.max(0, renderRangeCalcImplPreTInSeconds) ) / tickTockPeriodAbsolutely
                         ))
                      ) ,
                   } ,  
           
                } = properties11 ; 
                return (                      
-                     (nd0 && (typeof actualCtxT === "number")) 
+                     (nd0 && (typeof actualCtxTRoundedToYThs === "number")) 
                      ?         
                   <LoopingWithPeriodAndAutoUnmounting        
                         
@@ -450,9 +598,15 @@ return (
             
                   >       
                      { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
+                     ;
+                     /**   
+                      * additional optimisational auto-mount-and-unmount at this point remains necessary as
+                      * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                      */
+                     {
                         ;
                         const actualCtxTReoundedDownToTens = (
-                           Iterable.Range(-10, actualCtxT, 10 ).last(0 ) 
+                           Iterable.Range(-10, actualCtxTRoundedToYThs, 10 ).last(0 ) 
                         );
                         /**      
                          * estimation of 
@@ -466,17 +620,29 @@ return (
                         );    
                         // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
                         const absoluteMountStartT = (
-                           (CURRENTITEM_VATX1 + -(Math.max(mtPreFT , 2 * tickTockPeriodAbsolutely ) ) )
+                           (CURRENTITEM_VATX1 + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         );
                         const absoluteMountEndT = (
-                           (CURRENTITEM_VATX1 + (Math.max(mtPostFT , 2 * tickTockPeriodAbsolutely ) ) )
+                           (CURRENTITEM_VATX1 + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         ) ;
                         const e = (             
                            e0 && (            
                               (
-                                 absoluteMountStartT <= actualCtxT
+                                 (
+                                    /**    
+                                     * {@link absoluteMountStartT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
+                                     */
+                                    Iterable.Range(-renderRangeAbsoluteSnapSizeInSecs, absoluteMountStartT, renderRangeAbsoluteSnapSizeInSecs )
+                                    .last(0 ) 
+                                 ) <= actualCtxTRoundedToYThs
                                  && 
-                                 (Iterable.Range(-renderIRangeSnapSize, actualCtxT, renderIRangeSnapSize ).last(0 ) ) <= absoluteMountEndT
+                                 (
+                                    /**    
+                                     * {@link actualCtxT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
+                                     */
+                                    Iterable.Range(-renderRangeAbsoluteSnapSizeInSecs, actualCtxTRoundedToYThs, renderRangeAbsoluteSnapSizeInSecs )
+                                    .last(0 ) 
+                                 ) <= absoluteMountEndT
                               )    
                               ?             
                               e0  
@@ -484,14 +650,13 @@ return (
                            )         
                         ) ;
                         return e ;   
+                     }
                      } }    
                   </LoopingWithPeriodAndAutoUnmounting>
                   : 
                   <></>
                ) ; 
-            } }
-            </CBC>
-         ) ;
+         }
       } )()
       ) ;
       return (
