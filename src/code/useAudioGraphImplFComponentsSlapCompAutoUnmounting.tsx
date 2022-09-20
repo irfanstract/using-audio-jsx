@@ -97,7 +97,7 @@ const {
         ) ,           
     ] ) => {
         const Cm = (  
-        function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0, } : ( 
+        function ({ children: expectedChildren, preFT: preFT0, postFT: postFt0, tRangeDebug = false, } : ( 
             Props    
         ) ) {   
             const { t: expectedAbsoluteT, tScale } = (
