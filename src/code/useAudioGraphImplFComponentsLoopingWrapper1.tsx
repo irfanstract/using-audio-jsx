@@ -79,6 +79,11 @@ const {
   
    
                        
+/**    
+ * extra amount of info becomes necassary as otherwise
+ * there would be no practical way to determine the right number of simultaneously-mounted Comp(s).
+ * 
+ */
 type LWpamPayloadMountSpanProperties = (
    {
       premountTime : number ;
