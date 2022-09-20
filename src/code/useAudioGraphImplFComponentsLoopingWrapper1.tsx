@@ -393,8 +393,21 @@ return (
                & IRenderRangeSnapSize 
             ) >  
          )
+         &
+         Partial<{ 
+            /**   
+             * to identify bugs in this library Component 
+             * we needed to place diagnostics/debug/info/panel.
+             * sadly, the debugging manifests themself will in-this-case heat up CPUs so
+             * we need to keep these left-out by default.
+             */
+            startEndMountTimeDebug : boolean ;
+         }>
       ) = {
       } ;
+      const {
+         startEndMountTimeDebug = false ,
+      } = unpublishedProps ;
       ;
       const mainRendered = (
       (function useMainRenderedImpl() {
@@ -477,15 +490,7 @@ return (
             ;
          } )() ;
          {
-               /**   
-                * to identify bugs in this library Component 
-                * we needed to place diagnostics/debug/info/panel.
-                * sadly, the debugging manifests themself will in-this-case heat up CPUs so
-                * we need to keep these left-out by default.
-                */
-               const startEndMountTimeDebug : boolean = (
-                  false
-               );
+               ;
                /**   
                 * apply `tScale`.
                 * shall not apply `t`, by definition.
