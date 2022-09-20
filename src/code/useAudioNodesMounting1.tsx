@@ -15,6 +15,10 @@ import { useWarnOnChange } from "./usingTimeoutOrInterval";
 import { AudioSinkNode, AudioSourceNode } from "./useAudioNodesBasicTypeDefs";         
 import { AUDIONODES_USEEFFECT } from "./useAudioNodesParamChgEffect1"; 
 import { AUDIONODES_USE_AUDIONODEEFFECT } from "./useAudioNodesParamChgEffect1";
+import { 
+  useInitUnconnectedYyyNodeCtxFncLwt,
+  
+} from "./useAudioNodesIndependentlyAllocated1";
 
 
 
@@ -350,81 +354,7 @@ const useInitUnconnectedYyyNodeFor = (
      * the result were *slience* or *all-clicks*
      */
 ) ;       
-// 
-/**    
- * specialisation for {@link YyyNode }.
- * would be simple combn {@link React.useMemo `useMemo((): (c?.createGain() || null ) )` }, 
- * thus *lightweight* without causing *re-render*s.
- */
-const useInitUnconnectedYyyNodeCtxFncLwt = /* chg */ (() => {
-;
-type WithAutostartConstraints<V> = (
-    { autoStart : V ; }
-) ;
-return (
-    function <YyyNode extends object, BAudioContext extends BaseAudioContext>(...[{ ctx: c , }, newYyy, sematicProps = {}] : [
-        { ctx : null | BAudioContext ; } ,
-        // the factory impl 
-        (...ctx: [BAudioContext, {}? ] ) => YyyNode ,
-        // semantic constraints
-        ...(
-            [YyyNode] extends [AudioScheduledSourceNode | null ] ?
-            [
-                (
-                    WithAutostartConstraints<false | (
-                        [YyyNode] extends [(OscillatorNode | ConstantSourceNode | AudioBufferSourceNode ) | null ] ?
-                        never
-                        : "auto"
-                    ) | true >
-                ) ,
-            ]
-            : 
-            [
-                (
-                    Partial<(
-                    WithAutostartConstraints<never>
-                    )>
-                ) ? ,
-            ]
-        ) ,
-    ] ) : { gRef : null | YyyNode ; } {  
-        const {
-            autoStart = "auto" ,
-        } = sematicProps ;
-        ;                
-        const gRef = (
-            React.useMemo(() => {
-                if (c) {
-                    //
-                    const nd1 = (
-                        newYyy(c )
-                    ) ;
-                    // may imply auto-start depending on 'options'
-                    if (autoStart) {
-                        (
-                            (nd1 instanceof AudioScheduledSourceNode ) 
-                            &&
-                            (autoStart === true || !(nd1 instanceof AudioBufferSourceNode ) )
-                            &&
-                            nd1.start()
-                        ) ;
-                    } ;
-                    // return with it
-                    return (
-                        nd1
-                    ) ;
-                }
-                return null ;
-            } , [c] )
-        ) ; 
-        return (     
-            {
-                gRef ,
-            }
-        ) ;
-    }
-) ;
-})() ;
+; //
 // 
 /**    
  * specialisation for {@link GainNode }.
