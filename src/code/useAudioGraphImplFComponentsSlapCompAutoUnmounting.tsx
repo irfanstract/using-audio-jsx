@@ -73,6 +73,19 @@ const {
     type Props = (   
         React.PropsWithChildren<(
             PreFTAndPostFTProps      
+            &
+            { 
+                /**   
+                 * to identify bugs in these library Component(s)
+                 * we needed to place diagnostics/debug/info/panel.
+                 * sadly, the debugging manifests themself will in-this-case give significant computational overheads so
+                 * we need to keep these `OFF` by default.
+                 * 
+                 * default: `false`.
+                 * 
+                 */
+                tRangeDebug ?: boolean ; 
+            }
         ) >          
     ) ;                
     //    
