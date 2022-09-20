@@ -2,6 +2,9 @@
 import { 
    Iterable,
    IterableOps , 
+   EitherBothSetOrBothUnset ,
+   EitherSetAndOthersUnset ,
+   EitherSetOrBothUnset ,
     
 } from "./generalUse11";     
 import { 
