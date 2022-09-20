@@ -168,6 +168,23 @@ const {
    const useDeferredTrue : () => boolean = (
       () => true
    ) ;
+   /**   
+    * to off-load the rendering and its overheads .
+    * 
+    * {@link useDeferredRecompute } is not applicable as 
+    * its timing-effects interfered with the synth.
+    * 
+    * to off-load the rendering and its overheads,
+    * this Component was intended as an alternative.
+    * 
+    */
+   const UDR = (
+      (...[{ title, }, render1, ] : [{ title : string ; } , () => React.ReactElement , ] ) => (
+         <CBC name={title }>
+            { () => render1()  }
+         </CBC>
+      )
+   ) ;
    function newCPropsRenderComponent<CProps>({
       dbgBox1,
       useC1P,
