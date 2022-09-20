@@ -405,6 +405,65 @@ const useSingularSrcDestConnect = (
         }, [dest, gRef1] );    
     }  
 );            
+// TODO
+/**   
+ * multiplied version of {@link useSingularSrcDestConnect }
+ */
+const useMultiPairsDestConnect = (
+    function (...[srcDestPairs , otherSemanticOptions = {}, ...otherArgs ] : (
+        // DISTRIBUTIVE CONDITIONAL TYPING, HENCE OMITTED SQR-BRACKETING
+        (Parameters<typeof useSingularSrcDestConnect > ) extends [infer OSrc, infer ODest, ...(infer OtherArgs) ] ?
+        [
+            srcDestPairs : (
+                readonly (
+                    null 
+                    | readonly [src: object & OSrc, dest: object & ODest, ] 
+                )[]
+            ) , 
+            otherSemanticOptions ?: {} , 
+            ...deriveeOtherArgs: OtherArgs, 
+        ]
+        : never
+    )) {
+        ;
+        // TODO
+        React.useInsertionEffect(() => {
+          const usageLoopReturn1 = (
+              srcDestPairs
+              .map((srcDestPair): ((object & ReturnType<React.EffectCallback> ) | null ) => {
+                /**             
+                 * only if it's *non-null spec*      
+                 */
+                if (srcDestPair) {
+                  const [src, dest, ] = srcDestPair ;
+                  return (
+                    usingANodeCnnctM(src, [dest,], ...otherArgs )
+                  ) ;
+                } else {
+                  return (null ) ;
+                } ;
+              })
+          ) ;
+          return (
+            () => {
+              for (const mFinalize of usageLoopReturn1 ) {
+                if (mFinalize ) {
+                  mFinalize() ;
+                }
+              }
+            }
+          ) ;
+        } , (
+            srcDestPairs
+            // NOTE : `length` of `deps` for given call (line) shall never change.
+            .flatMap((pair) : Readonly<[object, object] | [null, null ] > => (
+                pair ?
+                pair
+                : [null, null ]
+            ) )
+        ) ) ;
+    }
+) ;
 /**     
  * specialised logging.
  * */     
@@ -577,6 +636,8 @@ export {
     useInitAndConnectYyyNodeFor as useYyNodeWithGivenFadeoutTimeConstant1,  
     useInitAndConnectYyyNodeFor ,    
     useSingularSrcDestConnect ,
+    useMultiPairsDestConnect as useMultiParisDestConnect ,
+    useMultiPairsDestConnect as useMultiPairsDestConnect ,
     useParamNodeWithGiven1,
     useParamNodeWithGiven , 
 
