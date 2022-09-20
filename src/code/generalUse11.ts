@@ -259,6 +259,17 @@ type EitherSetAndOthersUnset<A extends {} > = (
     }[keyof A ]
 ) ;
 const EitherSetAndOthersUnset = {} ; // TS-1205
+/**   
+ * either
+ * (a) exactly one set, as in {@link EitherSetAndOthersUnset },
+ * (b) all (left) unset 
+ */
+type EitherSetOrBothUnset<A extends {} > = (
+    EitherSetAndOthersUnset<A> // obviously - allow cases of exact one property set
+    | 
+    { [k in keyof A ] ?: never ; } // allow cases where none set
+) ;
+const EitherSetOrBothUnset = {} ; // TS-1205
 type EitherPeriodOrFreq = (
     EitherSetAndOthersUnset<{ frequency: number ; period: number ; keyIndex : number ; }>
 ) ;
@@ -315,6 +326,7 @@ export type {
 export {                                
     EitherBothSetOrBothUnset ,      
     EitherSetAndOthersUnset ,
+    EitherSetOrBothUnset ,
     PromiseReturnValue,
     Seq1 ,    
     ArrayIndex ,     
