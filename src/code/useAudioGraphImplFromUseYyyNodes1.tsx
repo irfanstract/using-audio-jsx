@@ -7,6 +7,9 @@ import React, { useMemo } from "react";
 import { ComponentProps, ContextReturnType } from "./commonElementsTypes";        
 import { K, asVoidElement, NUMERIC } from "./commonElements";             
 import { CBC } from "./useStateInCallback";  
+import { useDeferredRecompute, } from "./usingDeferredRecompute";
+import { useEventTarget, } from "./usingTimeoutOrInterval";
+import { useDepsChgCount, } from "./usingComponentMountRenderStat";      
 import { useRealTimeQueryInterval1 } from "./usingNonHooksValues";     
 import { useDeferredTrue as useDeferredTrue0 } from "./usingDeferredBoolean";       
 import { 
