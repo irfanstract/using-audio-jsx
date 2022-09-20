@@ -263,7 +263,9 @@ type MetronomeGraphingCallback = (
  * 
  * `t` in call-time `ctx` is (meant) to be *interpreted relatively*.
  */ 
-const MetronomeAndResponseGraph = (
+const MetronomeAndResponseGraph = /* */ (() => {
+;
+return (
    function MetronomeAndResponseGraphB(properties11 : ( 
       { 
          /**    
@@ -500,6 +502,7 @@ const MetronomeAndResponseGraph = (
       )  ;
    }     
 ) ;
+})() ;
 
 
 
