@@ -393,7 +393,9 @@ const {
                 const tScanMappingDomainRoundPrec : "no-rounding" | (1 | 2 | 3 ) = (
                     "no-rounding"
                 ) ;
-                function useCScannedImpl(): { e: React.ReactElement ; } {          
+                function useCScannedImpl(...[{ csiDebug = false, } = {} ] : [
+                    { csiDebug ?: false | true ; } ? ,
+                ] ): { e: React.ReactElement ; } {         
                     const { feedPt: nd0, currentTime: currentTimeE } = (
                         useCurrentDestNdRefAndCtxT()
                     ) ;
@@ -470,12 +472,9 @@ const {
                                  * re-render(s) had been like brute-force trial-and-error, so  
                                  * there is need for indirection via using {@link CBC } and {@link React.useMemo }. 
                                  */
-                                const emAfterRemountDeps = React.useMemo(() => (
-                                    <CBC name="EmAfterRemountDeps" > 
-                                    { function useCE1() {  
-                                        ;
-                                        const graph = (        
-                                            React.useMemo(() => (                        
+                                const emAfterRemountDeps = React.useMemo(() => {
+                                ;
+                                const graph = (                        
                                                 tScan1             
                                                 .map(v => (v + -delayInSeconds ) )        
                                                 .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
@@ -501,16 +500,23 @@ const {
                                                     } ;          
                                                 })     
                                                 .toArray()          
-                                            ) , remountDeps1 )
-                                        ) ;                                    
+                                ) ;
+                                return (
+                                    <CBC name="CFnValue_EmAfterRemountDeps_1" > 
+                                    { function useCE1() {  
+                                        ;
                                         ;     
                                         ;
-                                        ;                           
+                                        ;                              
                                         const {
                                             nd10, 
                                         } = (
                                             useRelevantAutoRemountedNode()
                                         ) ;
+                                        return (
+                                        <CBC name="CFnValue_EmAfterRemountDeps_2" >
+                                        { function useCE2() {
+                                        ;
                                         const nd1 = (             
                                             useSimplePolylineSource(nd10, graph )
                                         ) ;            
@@ -582,6 +588,11 @@ const {
                                         );       
                                         // TODO       
                                         return (                        
+                                        <CBC name="CBC_CFnValue_EmAfterRemountDeps_3">
+                                        { function useCE3() {
+                                        ;
+                                        // TODO       
+                                        return (                        
                                             <section>        
                                             <code>
                                                 end-level effector
@@ -605,10 +616,17 @@ const {
                                             ) && null }
                                             { useDbgArray101() }
                                             </section>       
-                                        ) ;                               
+                                        ) ;            
+                                        } }
+                                        </CBC>
+                                        ) ;            
+                                        } }
+                                        </CBC>
+                                        ) ;                   
                                     } }
                                     </CBC >
-                                ) , remountDeps1 ) ;               
+                                ) ;
+                                } , remountDeps1 ) ;               
                                 const eRemountDepsCountCbcDebug = (
                                     React.useMemo(() => (
                                         <CBC name="eRemountDepsCountCbcDebug">
@@ -625,16 +643,27 @@ const {
                                         </CBC>
                                     ) , remountDeps1 )
                                 ) ;
-                                return (
+                                const edbx: React.ReactElement = (
                                     <section>
                                     <code>
                                     useCScannedImpl with a ctx current t
                                     </code>
-                                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) && null }       
-                                    { eRemountDepsCountCbcDebug && null }
-                                    { useCurrentCtxTDebugPanel() && null }
+                                    { useTopicHeadedRenderCount( <i> Automative Call ID </i> ) && null } 
+                                    { (function useDebug() {
+                                        ;
+                                        const e = (
+                                            <div>                                       
+                                            { eRemountDepsCountCbcDebug && null }
+                                            { useCurrentCtxTDebugPanel() && null }
+                                            </div>
+                                        ) ;
+                                        return csiDebug && e ;
+                                    })() }
                                     { emAfterRemountDeps }
                                     </section>
+                                ) ;
+                                return (
+                                    edbx
                                 ) ;
                             }    }                
                             </CBC>          
