@@ -170,7 +170,16 @@ const {
                          * `react-eslint/react-hooks`
                          */
                         const v1 = (
-                            useAudioCtxCurrentTime1(value.feedPt?.context || null , { periodMillis: (v0 === null ) ? 225.0 : 5800.0 }, {} )
+                            useAudioCtxCurrentTime1((
+                                value.feedPt?.context 
+                                || null
+                            ) , { 
+                                periodMillis: /* */ (
+                                    (v0 === null ) ? 
+                                    225.0 
+                                    : 5800.0
+                                ) ,
+                            }, {} )
                             ||
                             null
                         ) ;
