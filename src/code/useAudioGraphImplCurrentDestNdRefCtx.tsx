@@ -69,6 +69,10 @@ const {
         )        
     ) ;        
  
+    /**    
+     * INTERNAL ONLY
+     * 
+     */
     ctx0: () => Promise<React.Context<AFeedableAndTappableNCc>> ;  
       
      
