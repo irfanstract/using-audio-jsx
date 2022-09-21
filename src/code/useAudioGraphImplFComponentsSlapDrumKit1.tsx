@@ -375,7 +375,7 @@ const snKit = (() => {
                             ampModulGraph        
                         }                   
                         >                                                            
-                            { sVisAttach }
+                            { xDbgDisableSVisAttach || sVisAttach }
                             <CWaveTable1                           
                             detuneInterpretation="timedomain-normalised"  
                             detuneSemitoneCentsNormalVal={12 * 100 }
@@ -438,7 +438,7 @@ const snKit = (() => {
                             ampModulGraph        
                         }                           
                         >                       
-                            { sVisAttach }
+                            { xDbgDisableSVisAttach || sVisAttach }
                             <CContinuousSnareDrumSound 
                             {...{ dbg1, minimumFreq }}
                             />
