@@ -626,10 +626,10 @@ return (
                         const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
                         // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
                         const absoluteMountStartT = (
-                           (CURRENTITEM_VATX1 + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
+                           ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         );
                         const absoluteMountEndT = (
-                           (CURRENTITEM_VATX1 + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
+                           ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         ) ;
                         const e = (             
                            e0 && (            
