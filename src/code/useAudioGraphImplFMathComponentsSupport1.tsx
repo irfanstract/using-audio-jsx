@@ -272,10 +272,8 @@ const {
                         } ,      
                     ]) { 
                         const {                
-                            sp: sp0 = 2 ** -2 ,      
                             currentTimeE , 
                         } = properties1 ;         
-                        const sp = Math.max(2 ** -3  , sp0 );
                         ;
                         const {       
                             ctxT ,           
