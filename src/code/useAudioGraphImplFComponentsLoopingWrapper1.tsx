@@ -543,35 +543,32 @@ return (
                ) ;                       
                const renderRangeCalcImplPreTInSeconds : number = 1.5 ;
                const {   
-                  renderRange = {      
+                  renderRange = ((): (ComponentProps<typeof MetronomeAndResponseGraphB >["renderRange"] & object) => {
+                  ;
+                  const renderRangeEnd = ( 
+                     Math.floor((
+                        ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted + renderRangeAbsoluteSnapSizeInSecs ) ) 
+                        / 
+                        tickTockPeriodAbsolutely
+                     ))
+                  ) ;
+                  const renderRangeStart = ( 
+                     Math.floor((
+                        ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ) + -Math.max(0, renderRangeCalcImplPreTInSeconds) ) 
+                        / 
+                        tickTockPeriodAbsolutely
+                     ))
+                  ) ;
+                  return {      
                      n: (   
                         // TODO
-                        Math.round((
-                           // multiples of that, bounded to reasonable upper-bound
-                           Iterable.Range(0, (
-                              2E5
-                           ), renderIRangeSnapSize )
-                           // prevent 'zero'
-                           .filter(v => (0 < v ) )
-                           /**   
-                            * restrict to 
-                            * `PositivestAmong(4, 5 / tickTockPeriodArg,  ) `
-                            */
-                           .filter(v => (
-                              Math.max(4, 5 / tickTockPeriodArg,  )
-                              <= 
-                              v 
-                           ) ) 
-                           // the first value, or (...)
-                           .first(renderIRangeSnapSize )
-                        ))         
+                        renderRangeEnd - renderRangeStart
                      ) ,      
                      start: ( 
-                        Math.floor((
-                           ((lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ) + -Math.max(0, renderRangeCalcImplPreTInSeconds) ) / tickTockPeriodAbsolutely
-                        ))
+                        renderRangeStart
                      ) ,
-                  } ,  
+                  } ;
+                  } )() ,  
           
                } = properties11 ; 
                return (                      
