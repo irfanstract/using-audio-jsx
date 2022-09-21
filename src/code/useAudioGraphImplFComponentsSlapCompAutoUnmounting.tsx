@@ -145,6 +145,23 @@ const {
                             style={{                     
                             }}   
                             >     
+                            { tRangeDebug && (() => {
+                                const debugJson = (
+                                    JSON.stringify({ 
+                                        ctxT ,
+                                        preFTAbsolutely ,
+                                        postFTAbsolutely ,
+                                        expectedAbsoluteT ,    
+                                        passageState ,
+                                        hasPassedT ,
+                                    } , null , 2 )
+                                ) ;
+                                return (
+                                    <pre title={debugJson }>
+                                        { debugJson }
+                                    </pre>
+                                ) ;
+                            })() }
                             {f({ expectedChildren, passageState }) }
                             </div>  
                         ) ;              
