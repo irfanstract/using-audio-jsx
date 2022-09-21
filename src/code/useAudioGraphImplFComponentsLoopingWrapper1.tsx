@@ -624,6 +624,7 @@ return (
                            givenChildren({ t })          
                         );    
                         const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
+                        const { debugMode = false , } = {} as Partial<{ debugMode : false | "last" | 5 | 5.5 | 6 | 6.5 | 7 ; }> ;
                         // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
                         const absoluteMountStartT = (
                            ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
@@ -631,6 +632,12 @@ return (
                         const absoluteMountEndT = (
                            ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         ) ;
+                        if (debugMode === 5.5 ) {
+                           return <div /> ;
+                        }
+                        if (debugMode === 5 ) {
+                           return false ;
+                        }
                         const e = (             
                            e0 && (            
                               (
