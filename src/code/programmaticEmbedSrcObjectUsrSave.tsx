@@ -64,12 +64,13 @@ const blobConfirmUsrSave = (() => {
    return (
       function blobConfirmSaveDo<B extends Blob>(...[
          src , 
-         { 
+         ifuConfig1 ,
+      ] : XArgs<B> ) {
+         const { 
             intendedFileNameIncludingExt, 
             fileNameExt, 
             vrboLevel = "log" ,
-         } ,
-      ] : XArgs<B> ) {
+         } = ifuConfig1 ;
          /**   
           * {@link fileNameExt } with initial *period-sign*.
           */
