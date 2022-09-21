@@ -89,6 +89,11 @@ const {
     ctx0 ,            
      
 } = ((): {    
+    /**    
+     * with overridden {@link AFeedableAndTappableNCc } .
+     * leaving {@link NCtxV1.currentTime } unchanged.
+     * 
+     */
     Prv1: React.FC<React.ProviderProps<AFeedableAndTappableNCc>>;     
     Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
     useCurrentDestNd0 : (
