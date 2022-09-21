@@ -623,6 +623,7 @@ return (
                         const e0 = (   
                            givenChildren({ t })          
                         );    
+                        const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
                         // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
                         const absoluteMountStartT = (
                            (CURRENTITEM_VATX1 + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
