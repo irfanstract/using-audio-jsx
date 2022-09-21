@@ -35,6 +35,7 @@ const blobConfirmUsrSave = (() => {
           */
          GivenBlob
       ) , 
+      ... OptionsCouldBeOmittedAltogether<(
       (
          /**    
           * in general, 
@@ -59,12 +60,13 @@ const blobConfirmUsrSave = (() => {
                keyof Pick<Console, "debug" | "log" | "info" | "warn">
             ) ;
          }
-      ) ,
+      )
+      )> ,
    ] ;
    return (
       function blobConfirmSaveDo<B extends Blob>(...[
          src , 
-         ifuConfig1 ,
+         ifuConfig1 = {} ,
       ] : XArgs<B> ) {
          const { 
             intendedFileNameIncludingExt, 
