@@ -94,6 +94,7 @@ import {
  
 } from "./useAudioGraphImplUseDeferredBoolean";     
 import { XDC } from "./useAudioGraphImplFComponentsSemanticsBasic";  
+import { AudioNodesParamAutomativeExecETSpc, } from "./useAudioGraphImplFMathComponentsSupport1C";
 
          
    
@@ -710,66 +711,6 @@ const {
         })()
     } ;   
 })() ;     
-const AudioNodesParamAutomativeExecETSpc = (
-    () => { 
-        const {               
-            swingTConst ,                
-            timingArgMode ,          
-
-            SETTARGETATTIME , 
-            SETVALUECURVE_AT_TIME ,      
-
-        } = AudioNodesParamAutomativeExecET({}    ) ;               
-        ;
-        const useSimplePolylineSource = (
-            function (...[nd10, graph ] : [
-                null | AudioNode , 
-                Parameters<typeof SETVALUECURVE_AT_TIME >[1 ] ,
-            ] ): null | object {
-                return (             
-                    React.useMemo(():(
-                        (  Omit<ConstantSourceNode, "start" | "stop" | "connect" | "disconnect"> ) 
-                        | null     
-                    ) => {                  
-                        if (nd10) {             
-                            const cnd11 = (
-                                nd10.context.createConstantSource()        
-                            ) ;     
-                            cnd11.connect(nd10 ) ;     
-                            {        
-                                ;              
-                                (graph[0] ) && (                    
-                                    cnd11.offset
-                                    .setValueAtTime((graph[0] ).vl , 0 )     
-                                );   
-                                SETVALUECURVE_AT_TIME(cnd11, (      
-                                    graph       
-                                ) , a => a.offset )    ;      
-                            }
-                            cnd11.start() ;         
-                            return cnd11;    
-                        } else {
-                            return null ;         
-                        }  
-                    } , [nd10 ] )              
-                ) ;
-            }
-        ) ;
-        ;
-        return {
-            swingTConst ,                
-            timingArgMode ,          
-
-            SETTARGETATTIME , 
-            SETVALUECURVE_AT_TIME ,      
-
-            // added 
-
-            useSimplePolylineSource ,
-
-        } ;
-    }
-) ;
 const CAbsoluteTValueSeq = (
     function ({ value: args0, deps: deps0 } : { 
         value: Parameters<typeof fromTSeqComputedValueInterpolated > ;
