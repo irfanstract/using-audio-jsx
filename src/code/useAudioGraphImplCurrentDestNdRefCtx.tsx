@@ -48,6 +48,18 @@ type AFeedableAndTappableNCc = (
     Record<keyof Pick<AFeedableAndTappableNca, "feedPt"> , AudioNode | null >             
 );                  
 
+/**    
+ * the supposed type of the {@link React.Context *ctx* }.
+ * 
+ * all properties of {@link AFeedableAndTappableNCc }.
+ * 
+ * as 
+ * `currentTime`-polling thru {@link useRealTimeQueryInterval1 } 
+ * is highly subject to distortions-or-interference,
+ * we decided to 
+ * avoid spreading such idiom in favour of centralising `currentTime` here.
+ * 
+ */
 type NCtxV1 = (
     AFeedableAndTappableNCc 
     & 
