@@ -248,14 +248,36 @@ const {
             const usePropsExpand = (   
                 function (propsC: Props ) {
                     ;                                                              
-                    const scanChunkFrequency = (
+                    const scanBatchFrequency = (
                         FrequencyAndPeriod.byPeriod(1 )            
                     ) ;      
+                    const {  //
+                        frequency: scanBatchFreqV ,     
+                        period: scanBatchPeriod ,             
+                    } = (         
+                        scanBatchFrequency    
+                    ) ;      //
                     const { 
                         value: compute ,   
-                        scanPeriodMillis = 32  ,      
+                        scanPeriodMillis: samplingGranularityMillis = 32  ,      
                         codeDeps = [] ,                
                     } = propsC;    
+                    // TODO
+                    const {
+                        scanChunkLengthS: scanBatchLengthS = (
+                            Math.max(2, scanBatchPeriod, )
+                            + 0.25 
+                        ) ,
+                    } = (() : (
+                        Partial<{ 
+                            /**   
+                             * the subsumed range for the current scan batch.
+                             * not necessarily {@link scanBatchPeriod }, but
+                             * shall be at-least that value and should (ideally) exactly be that value.
+                             */
+                            scanChunkLengthS : number ; 
+                        }>
+                    )  => ({}))() ;
                     function useCScanTs(...[nd0, properties1 ] : [
                         AudioNode, 
                         {
@@ -279,7 +301,8 @@ const {
                             ctxT ,           
                         } = { ctxT: currentTimeE } ;         
                         const ctxTFloored = (               
-                            Math.floor(ctxT )               
+                            Math.floor(ctxT / scanBatchPeriod )               
+                            * scanBatchPeriod
                         ) ;                       
                         const {  
                             tScan1 ,           
@@ -290,9 +313,9 @@ const {
                                     Immutable.Range(
                                         ctxTFloored, (
                                             // TODO
-                                            ctxTFloored + 1.25
+                                            ctxTFloored + scanBatchLengthS
                                         ) ,   
-                                        (scanPeriodMillis / 1000 ) ,
+                                        (samplingGranularityMillis / 1000 ) ,
                                          )  
                                 ) ;                 
                                 return {
@@ -301,8 +324,24 @@ const {
                             } , [ctxTFloored ] )   
                         ) ;              
                         return {
+                            /**    
+                             * this would define 
+                             * {@link BaseAudioContext.currentTime *the value which all code shall held `currentDestCtx.currentTime` as presently evaluating to* }
+                             * (with acknw that the value was from only a-fraction-of-seconds ago ).
+                             * 
+                             */
                             ctxT ,       
+                            /**    
+                             * {@link ctxT } 
+                             * rounded down to nearest multiply of {@link scanBatchPeriod }
+                             * 
+                             */
                             ctxTFloored     , 
+                            /**    
+                             * the 't-seq' which
+                             * the presently `graph` shall be built upon.
+                             * 
+                             */
                             tScan1 ,     
                         } ;
                     } ;                 
@@ -327,19 +366,42 @@ const {
                     );          
                     ; //
                     const {
-                        frequency: scanFrq ,     
-                        period: scanPeriod ,             
                     } = (         
-                        scanChunkFrequency    
+                        scanBatchFrequency    
                     ) ;      
-                    const delayInSeconds = 0.02 ;    
+                    const intendedDelayInSeconds = 0.02 ;    
                     ;                                              
                     ;                              
                     return {         
-                        scanPeriodMillis ,  
-                        scanPeriod,
-                        scanFrq,
-                        scanChunkFrequency ,       
+                        /**    
+                         * the interval between two-consecutive `t`s of the samplings.
+                         */
+                        samplingGranularityMillis ,  
+                        /**    
+                         * the latency between the start(s) of two-consecutive batches .
+                         * 
+                         * not necessarily {@link scanBatchLengthS }.
+                         * 
+                         */
+                        scanBatchPeriod,
+                        /**    
+                         * the number of batches per second
+                         * 
+                         */
+                        scanBatchFreqV,
+                        /**
+                         * NOTE: the used data-structure is not React-friendly.
+                         * 
+                         * @deprecated
+                         * 
+                         */
+                        scanBatchFrequency ,       
+                        /**   
+                         * the subsumed range for the current scan batch.
+                         * not necessarily {@link scanBatchPeriod }, but
+                         * shall be at-least that value and should (ideally) exactly be that value.
+                         */
+                        scanBatchLengthS ,
                         codeDeps ,   
       
                         useCScanTs , 
@@ -349,7 +411,7 @@ const {
                          */
                         lComputeAtT ,         
                         
-                        delayInSeconds,
+                        intendedDelayInSeconds,
                     } ;   
                 }
             ) ;      
@@ -357,10 +419,10 @@ const {
                 { propsC: Props ; }
             ) ) {                        
                 const {
-                    scanPeriodMillis ,  
-                    scanPeriod,
-                    scanFrq,
-                    scanChunkFrequency ,   
+                    samplingGranularityMillis ,  
+                    scanBatchPeriod,
+                    scanBatchFreqV,
+                    scanBatchFrequency ,   
                     codeDeps ,   
 
                     useCScanTs , 
@@ -370,7 +432,7 @@ const {
                      */
                     lComputeAtT ,                  
 
-                    delayInSeconds,
+                    intendedDelayInSeconds,
                 } = usePropsExpand(propsC ) ;           
                 ;      
                 // TODO            
@@ -424,7 +486,7 @@ const {
                                         (() => {
                                             const t0 = ctxT ;
                                             const t1 = t0 + headTime ;
-                                            const t2 = t1 * scanFrq ;
+                                            const t2 = t1 * scanBatchFreqV ;
                                             return (
                                                 t2
                                             ) ;
@@ -446,7 +508,7 @@ const {
                                                 dest: nd0  ,       
                                                     
                                                 unmountTransitiveLenSeconds: (
-                                                    headTime + ((0.2) * scanPeriod )  
+                                                    headTime + ((0.2) * scanBatchPeriod )  
                                                 ) ,  
                                             })              
                                         ) ;
@@ -475,7 +537,7 @@ const {
                                 ;
                                 const graph = (                        
                                                 tScan1             
-                                                .map(v => (v + -delayInSeconds ) )        
+                                                .map(v => (v + -intendedDelayInSeconds ) )        
                                                 .map((t1 : number ): Parameters<typeof SETVALUECURVE_AT_TIME >[1][number ] => {             
                                                     /**    
                                                      * the argument to the following mapping/scanning thru {@link lComputeAtT }
@@ -570,8 +632,8 @@ const {
     
                                                         ctxT ,        
     
-                                                        scanPeriodMillis ,    
-                                                        scanChunkFrequency ,   
+                                                        samplingGranularityMillis ,    
+                                                        scanBatchFrequency ,   
                                                         codeDeps ,                    
                                 
                                                         useCScanTs ,       
