@@ -151,6 +151,11 @@ const AllDemoes = (
                   ))
                ) }
             </li>
+            <li>
+               {(
+                  renderChoiceLink({ value: "StreamingInfrasInterlaceBlobSeqPlayback" }, "", )
+               ) }
+            </li>
          </ul>
       ) ;
       const e = ((): React.ReactElement => {
@@ -176,6 +181,11 @@ const AllDemoes = (
          if (wh1 === "MSVED") {
             return (
                <MediaStreamAsVideoElementDemo />
+            ) ;
+         } ;
+         if (wh1 === "StreamingInfrasInterlaceBlobSeqPlayback") {
+            return (
+               <MediaStreamInterlaceBlobbingDemo11 />
             ) ;
          } ;
          return (
