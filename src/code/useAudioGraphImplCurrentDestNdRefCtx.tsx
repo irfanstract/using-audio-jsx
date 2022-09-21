@@ -63,7 +63,23 @@ type AFeedableAndTappableNCc = (
 type NCtxV1 = (
     AFeedableAndTappableNCc 
     & 
-    { currentTime : null | number ; }
+    { 
+        /**
+         * the cached {@link BaseAudioContext.currentTime `aCtx.currentTime`} value 
+         * 
+         * as 
+         * `currentTime`-polling thru {@link useRealTimeQueryInterval1 } 
+         * is highly subject to distortions-or-interference,
+         * we decided to 
+         * avoid spreading such idiom in favour of centralising `currentTime` here.
+         * 
+         * to denote absence of cached value, use `null`.
+         * reserve `0` and `-1` for 
+         * cases where {@link BaseAudioContext.currentTime the Ctx's `currentTime` were really the given value } . 
+         * 
+         * */ 
+        currentTime : null | number ;
+    }
 );
 const {     
     Prv1 ,    
