@@ -325,6 +325,9 @@ const snKit = (() => {
             { sVisMarkingGraph }
         </AsGVis>
     ) ;
+    const { xDbgDisableSVisAttach, } = ((): {
+        xDbgDisableSVisAttach : boolean ;
+    } => ({ xDbgDisableSVisAttach: true , }))() ;
     return {  
         CPitchdownBassDrumKickFluidly1 : (      
             function (mainProps : (    
