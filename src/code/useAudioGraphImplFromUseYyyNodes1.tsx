@@ -353,12 +353,12 @@ const {
 
       modulatedAmpUsageWrapC: (
          // TODO       
-         function <Props1>(useYyy: (typeof audioFltAtAbsTNodes)["useGainModulatedPt"]) {
+         function <Props1>(useC10: (typeof audioFltAtAbsTNodes)["useGainModulatedPt"]) {
             const {
                dbgBox1,
                useC1,
 
-            } = xWithUsableYyy({ useYyy });
+            } = xWithUsableYyy({ useYyy: useC10 });
             type Props = {
                /**         
                 * defines the control graph ; `null` for 'mute' . 
@@ -528,14 +528,14 @@ const {
                   const [, { propsParse } = { propsParse: biquadFltCPropsParse }] = (
                      mainArgs
                   );
-                  const [useYyy,] = (
+                  const [useC10,] = (
                      mainArgs
                   );
                   const {
                      dbgBox1,
                      useC1,
 
-                  } = xWithUsableYyy({ useYyy });
+                  } = xWithUsableYyy({ useYyy: useC10 });
                   return (
                      newCPropsRenderComponent
                   )<Parameters<typeof propsParse>[0]>({
@@ -637,12 +637,12 @@ const {
 
             modulatedWaveTableUsageWrapC: (
                // TODO         
-               function <Props1>(useYyy: (typeof audioFltAtAbsTNodes)["useOinModulatedWaveTable"]) {
+               function <Props1>(useC10: (typeof audioFltAtAbsTNodes)["useOinModulatedWaveTable"]) {
                   const {
                      dbgBox1,
                      useC1,
 
-                  } = xWithUsableYyy({ useYyy });
+                  } = xWithUsableYyy({ useYyy: useC10 });
                   return (
                      IterableOps.identity<(
                         React.FC<(
