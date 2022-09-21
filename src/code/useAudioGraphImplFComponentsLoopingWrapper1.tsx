@@ -258,6 +258,9 @@ type MetronomeGraphingCallback = (
  * selectively fire an instrument depending on the `t`. 
  * `t` in call-time `ctx` shall be *interpreted relatively*.
  * 
+ * extra amount of info becomes necassary as otherwise
+ * there would be no practical way to determine the right number of simultaneously-mounted Comp(s).
+ * 
  * for performance reasons, it might be necessary to make the return-type `null` ; 
  * see {@link LwpPayloadCallback}.  
  * 
