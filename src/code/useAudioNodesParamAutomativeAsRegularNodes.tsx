@@ -112,17 +112,24 @@ const USEM = (
                 const mCtx: BaseAudioContext | null = (
                     mainFeed?.context || null      
                 ) ;
+                const aParams1 = (        
+                    Object.fromEntries((               
+                        Object.entries((
+                            // avoid wrong inferred type
+                            m0 as 
+                            { [k : string ] : null | (AudioNode | AudioParam) ; } 
+                        ))            
+                        .map(function ([k, v ] ) {       
+                            return [k,  (true && useAudioParamAsAudioNodeE )(v , { mCtx } ) ] as const ;
+                        })                       
+                    ))    as Record<keyof typeof m0, AudioNode | null      >
+                ) ;
                 //                    
                 return (
                     // as AudioNode(s)        
                     {           
                         ...(        
-                            Object.fromEntries((               
-                                Object.entries(m0 )            
-                                .map(function ([k, v ] ) {       
-                                    return [k,  (true && useAudioParamAsAudioNodeE )(v , { mCtx } ) ] as const ;
-                                })                       
-                            ))    as Record<keyof typeof m0, AudioNode | null      >
+                            aParams1
                         ) ,    
                           
                         main: mainFeed ,                             
