@@ -1,5 +1,5 @@
 
-import { BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11";
+import { OptionsCouldBeOmittedAltogether, BoundedIdentityFunction, IterableOps, Immutable, } from "./generalUse11";
 type ConditionallyPartial<C extends boolean, V extends undefined | null | object > = (
    never
    |
