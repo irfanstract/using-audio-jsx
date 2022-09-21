@@ -382,16 +382,20 @@ const {
                            main: mainFeed,
                            ampCtrl: ampCtrl1,
                         } = (
-                              useC1(nd0)
+                              useC10(nd0)
                            );
+                        const aCtx = (
+                           mainFeed?.context
+                           || null
+                        ) ;
                         const c1 = (
                            // TODO                    
                            <XList>
                               <li key="value" className="UAGICU_INFOBOX_AMPCOMP_MODULATION" >
                                  Modulating Graph  :
-                                 <WithGivenDest value={ampCtrl1}>
+                                 <WithGivenDestAlt value={(aCtx && ampCtrl1 ) ? [{ ctx: aCtx, }, ampCtrl1, ] : null }>
                                     {ctrlChildren}
-                                 </WithGivenDest>
+                                 </WithGivenDestAlt>
                               </li>
                               <li key="main" className="UAGICU_INFOBOX_AMPCOMP_MAIN" >
 
@@ -567,13 +571,17 @@ const {
                               mFrequencyValue: freqArgCtrlDest1,
                               mGainValue: gainCtrlDest1,
                            } = (
-                                 useC1(nd0, flType, {
+                                 useC10(nd0, flType, {
                                     // TODO
                                     normalFreq: (
                                        freqArgNormalValue 
                                     ) ,
                                  })
                               );
+                           const aCtx = (
+                              mainFeed?.context
+                              || null
+                           ) ;
                            const c1 = (
                               // TODO         
                               <div>
@@ -602,17 +610,21 @@ const {
                                  {freqArgCtrlDest1 && (
                                     <li key="freq" className="UAGICU_INFOBOX_BIQUADFLTCOMP_FREQUEORDETUNE" >
                                        Freq Ctrl Mode :
-                                       <WithGivenDest value={freqArgCtrlDest1}>
+                                       <WithGivenDestAlt 
+                                       value={(aCtx && freqArgCtrlDest1) ? [{ ctx: aCtx }, freqArgCtrlDest1, ] : null }
+                                       >
                                           {POD(freqArgGraph1, "b")}
-                                       </WithGivenDest>
+                                       </WithGivenDestAlt>
                                     </li>
                                  )}
                                  {gainCtrlDest1 && (
                                     <li key="gain" className="UAGICU_INFOBOX_BIQUADFLTCOMP_GAINVALCTRL" >
                                        Gain Value Ctrl Mode :
-                                       <WithGivenDest value={gainCtrlDest1}>
+                                       <WithGivenDestAlt 
+                                       value={(aCtx && gainCtrlDest1) ? [{ ctx: aCtx }, gainCtrlDest1, ] : null }
+                                       >
                                           {POD(gainValArgument1, "b")}
-                                       </WithGivenDest>
+                                       </WithGivenDestAlt>
                                     </li>
                                  )}
                                  <li key="main" className="UAGICU_INFOBOX_BIQUADFLTCOMP_MAIN">
@@ -668,12 +680,16 @@ const {
                                  frequency: freqArgDest1,
                                  detune: detuneCtrlDest1, // TODO                                   
                               } = (
-                                    useC1(nd0, { 
+                                    useC10(nd0, { 
                                        waveTable: wvTableNme ,
                                        freqArgumentNormalValue ,
                                        detuneScale1: detuneSemitoneCentsNormalVal ,
                                     })
                                  );
+                              const aCtx = (
+                                 nd0?.context
+                                 || null
+                              ) ;
                               const c1 = (
                                  // TODO      
                                  <K key={defkey}>
@@ -695,17 +711,21 @@ const {
                                        {freqArgDest1 && (
                                           <li key="freq" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE">
                                              <i>f</i> :
-                                             <WithGivenDest value={freqArgDest1}>
+                                             <WithGivenDestAlt
+                                             value={(aCtx && freqArgDest1) ? [{ ctx: aCtx }, freqArgDest1, ] : null }
+                                             >
                                                 {POD(freqArgGraph1, "W")}
-                                             </WithGivenDest>
+                                             </WithGivenDestAlt>
                                           </li>
                                        )}
                                        {detuneCtrlDest1 && (
                                           <li key="detune" className="UAGICU_INFOBOX_WAVETABLECOMP_FREQUEORDETUNE" >
                                              <i>detune</i> :
-                                             <WithGivenDest value={detuneCtrlDest1}>
+                                             <WithGivenDestAlt 
+                                             value={(aCtx && detuneCtrlDest1) ? [{ ctx: aCtx }, detuneCtrlDest1, ] : null }
+                                             >
                                                 {POD(detuneGraph1, "W")}
-                                             </WithGivenDest>
+                                             </WithGivenDestAlt>
                                           </li>
                                        )}
                                     </XList>
