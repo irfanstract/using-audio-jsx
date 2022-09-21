@@ -535,10 +535,10 @@ return (
                       * multiples of ({@link renderIRangeSnapSize } * {@link tickTockPeriodAbsolutely } )
                       * less than ({@link actualCtxT } minus {@link absoluteScheduledTE } )
                       */
-                     Iterable.Range(0, actualCtxTRoundedToYThs - absoluteScheduledTE , (
+                     Iterable.Range(0, actualCtxTRoundedToYThs - absoluteScheduledTE , Math.max(1, (
                         renderIRangeSnapSize 
                         * tickTockPeriodAbsolutely
-                     ) )
+                     )) )
                      // the first value, or ZERO
                      .last(0 )
                   )
