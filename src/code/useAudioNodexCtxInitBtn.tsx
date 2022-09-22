@@ -75,6 +75,18 @@ const useAudioCtxWithInitBtn = (
             NEW: () => (new AudioContext() ) ,                  
             aCtxGiven ,            
         }) ;                
+        const RESUME = (
+            () => {                                  
+                if (s) {  
+                    ;      
+                    s.resume() ;         
+                    setLastReactivativeT(() => s.currentTime ) ;   
+                }      
+            }                         
+        ) ;            
+        const [lastReactivativeTime, setLastReactivativeT] = (
+            useState<number>(-1 )  
+        ) ;
         const initBtn = (           
             <button type="button" disabled={!!s } onClick={() => INIT() } >
                 INIT AUDIO CTX   
@@ -86,18 +98,6 @@ const useAudioCtxWithInitBtn = (
                 CLOSE() ;                  
             } ;
         }, [] ) ;      
-        const [lastReactivativeTime, setLastReactivativeT] = (
-            useState<number>(-1 )  
-        ) ;
-        const RESUME = (
-            () => {                                  
-                if (s) {  
-                    ;      
-                    s.resume() ;         
-                    setLastReactivativeT(() => s.currentTime ) ;   
-                }      
-            }                         
-        ) ;            
         const optionallyAutostart = (   
             () => (     
                 shallAutoStart && RESUME()    
