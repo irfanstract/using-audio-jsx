@@ -24,7 +24,9 @@ import { useAudioCtxWithInitBtn1 } from "./useAudioNodexCtxInitAndBeepBtns1";
 
 
 const AUDIONODEDEMOKIT_T1BEEPAGAINIMPL = (
-    (prps : Parameters<typeof useAudioCtxWithInitBtn>[0] = {} ) => {   
+    (...[prps = {} ] : [
+        Parameters<typeof useAudioCtxWithInitBtn>[0] ,
+    ] ) => {   
         const [           
             {    
                 t1,                                
