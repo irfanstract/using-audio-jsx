@@ -20,6 +20,12 @@ import {} from "./useAudioNodesBasicTypeDefs" ;
 
 
 import { AUDIONODEDEMOKIT_T1BEEPAGAIN } from "./useAudioNodexCtxInitAndBeepBtns";   
+const TIMEOUT = (
+   (t: number ) => (
+        new Promise(c => setTimeout(c, t) )
+   )
+) ;
+console.log('UseAudioNodex') ;
 
 
 
