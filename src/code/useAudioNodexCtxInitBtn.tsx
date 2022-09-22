@@ -41,6 +41,59 @@ import {
 
 
 
+const useAudioCtxWithInitBtnB = (
+    (...[{ preAllocatedUnit: aCtxGiven , } , ] : [
+        {
+            preAllocatedUnit : null ;
+        } ,
+    ] ) => {
+        ;
+        const {                         
+            INIT,                
+            s ,              
+            // setS ,                    
+            CLOSE  ,    
+        } = (         
+            useUserGestureDependentResource           
+        )<AudioContext>({                      
+            NEW: () => (new AudioContext() ) ,                  
+            aCtxGiven ,            
+        }) ;                
+        const [lastReactivativeTime, setLastReactivativeT] = (
+            useState<number>(-1 )  
+        ) ;
+        const RESUME = (
+            () => {                                  
+                if (s) {  
+                    ;      
+                    s.resume() ;         
+                    setLastReactivativeT(() => s.currentTime ) ;   
+                }      
+            }                         
+        ) ;            
+        ;
+        return BoundedIdentityFunction<(
+            {}
+            & ReturnType<typeof useUserGestureDependentResource >
+            & {
+                RESUME : () => void ;
+            }
+        )>()({
+            INIT ,
+            s ,
+            CLOSE ,
+            
+            RESUME ,
+            lastReactivativeTime ,
+            /**   
+             * @deprecated
+             * 
+             */
+            pretendLastReactivativeT : setLastReactivativeT , 
+            
+        }) ; 
+    } 
+) ;
 /**  
  *          
 */    
@@ -69,24 +122,14 @@ const useAudioCtxWithInitBtn = (
             s ,              
             // setS ,                    
             CLOSE  ,    
+            RESUME ,
+            lastReactivativeTime ,
         } = (         
-            useUserGestureDependentResource           
-        )<AudioContext>({                      
-            NEW: () => (new AudioContext() ) ,                  
-            aCtxGiven ,            
+            useAudioCtxWithInitBtnB           
+        )({                      
+            //                        
+            preAllocatedUnit: aCtxGiven ,            
         }) ;                
-        const RESUME = (
-            () => {                                  
-                if (s) {  
-                    ;      
-                    s.resume() ;         
-                    setLastReactivativeT(() => s.currentTime ) ;   
-                }      
-            }                         
-        ) ;            
-        const [lastReactivativeTime, setLastReactivativeT] = (
-            useState<number>(-1 )  
-        ) ;
         const initBtn = (           
             <button type="button" disabled={!!s } onClick={() => INIT() } >
                 INIT AUDIO CTX   
