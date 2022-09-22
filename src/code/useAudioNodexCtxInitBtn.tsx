@@ -105,18 +105,28 @@ const useAudioCtxWithInitBtn = (
         ) ;
         useLayoutEffect(() => {                                
             if (s) {                   
+                /**   
+                 * *not strictly {@link window} "focusin" evt, but
+                 * roughly the {@link window} element found focused*.
+                 * 
+                 */
+                const onWindowFocusin = (
+                    (): void => void (
+                        optionallyAutostart()
+                    ) 
+                ) ;
                 if ((
                     // TODO      
                     isWindowActive() 
                 )) {
                     ;       
-                    optionallyAutostart() ;   
+                    onWindowFocusin() ;   
                 }
                 const focusAndBlurListener : {
                     onFocus : () => void ;                         
                     onBlur: () => void ;                    
                 } = {        
-                    onFocus : () => optionallyAutostart() ,       
+                    onFocus : () => onWindowFocusin() ,       
                     onBlur : () => (suspendOnWindowBlur && s.suspend() ) ,                                      
                 } as const ;                                                      
                 {    
