@@ -72,6 +72,8 @@ type RealTimeQueryIntervalUsageArgs<A> = [
 ];
 const RealTimeQueryIntervalUsageArgs = {}; // TS-1205
 /**    
+ * *calls {@link useRefreshByInterval1 }, {@link React.useState to enforce periodic re-render }*.
+ * 
 * 
 */
 const useRealtimeQueryIntervalUsageArgsParse = (
@@ -99,6 +101,8 @@ const useRealtimeQueryIntervalUsageArgsParse = (
    }
 );
 /**   
+ * *{@link usingInterval } with callback which {@link React.useState `setState(...)`s }*.
+ * 
 * avoid using this as, for some reason,
 * usage of this will, for some reason, result in infinite re-render.
 * 
