@@ -116,19 +116,8 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
          REFQUER_CALL_ARG_UPGRDE(props)
       );
       ;
-      const [vl, setVl] = (
-         (function useSt() {
-            type State = A;
-            return (
-               React.useReducer((
-                  (...[vl0, newValue]: [State, A]): State => {
-                     return (
-                        newValue
-                     );
-                  }
-               ), f())
-            );
-         })()
+      const [[vl, { c, }, ], setVl] = (
+         useCountedRefState1<A>(f())
       );
       React[LE](() => (
          usingInterval((
@@ -149,6 +138,7 @@ const useRealtimeQueryIntervalUsageArgsParse1 = (
 
          LE,
          f,
+         c ,
 
          forceRefresh,
 
