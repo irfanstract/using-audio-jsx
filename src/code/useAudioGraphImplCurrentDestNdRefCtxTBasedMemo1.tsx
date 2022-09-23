@@ -85,9 +85,7 @@ const WithinANdRefCtxTBasedMemo1: (
       ) ; 
    }>
 ) = (
-   ({ children: doRender, }) => (
-      <CBC name="CBC_WithinANdRefCtxTBasedMemo1">
-      { function useC() {
+   function WithinANdRefCtxTBasedMemo1({ children: doRender, }) {
          const rendered = (
             useANdRefCtxTBasedMemo1((
                (typeof doRender === "function" ) ?
@@ -100,9 +98,7 @@ const WithinANdRefCtxTBasedMemo1: (
             { rendered }
             </>
          ) ;
-      } }
-      </CBC>
-   )
+   }
 ) ;
 
 
