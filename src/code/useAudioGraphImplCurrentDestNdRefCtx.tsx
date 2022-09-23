@@ -96,6 +96,10 @@ const {
      */
     Prv1: React.FC<React.ProviderProps<AFeedableAndTappableNCc>>;     
     Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
+    /**    
+     * *with current/present {@link NCtxV1 } (ie __all__ ctx values )*. 
+     * 
+     */
     useCurrentDestNd0 : (
         (       
             () => NCtxV1  
