@@ -286,7 +286,7 @@ type DestNdRefAndCtxT = (
  * 
  */
 const useCurrentDestNdRefAndCtxT: (
-    () => { [p in keyof NCtxV1 ] : NCtxV1[p ] ; }
+    () => DestNdRefAndCtxT
 ) = (
     useCurrentDestNd0
 ) ; 
