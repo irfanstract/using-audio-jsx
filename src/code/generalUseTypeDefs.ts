@@ -55,6 +55,13 @@ type SameParametersAndReturnType<A extends (...args: any ) => any > = (
  * deciding whether the parameter can be made *optional*
  * (which will only be the case when(ever) it has *zero* *required property* ).
  * 
+ * @example
+ * 
+ * // all props are optional here, but ... 
+ * function bar(properties : { priority ?: number ; } ): void ;
+ * // later on
+ * // bar() ; // // missing required (object literal ) argument
+ * 
  */
  type OptionsCouldBeOmittedAltogether<A extends {} > = (
     [A, [{}, ] ] extends [{}, readonly [A, ] ] ? 
