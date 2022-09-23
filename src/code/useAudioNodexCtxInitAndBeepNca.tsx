@@ -45,28 +45,36 @@ const {
                 useState<boolean>(() => false )
             ) ;            
             const {                      
-                t1 ,  
-                runInitialBeepAgain ,    
-                lastBeepT ,         
                 aCtx: _1 ,   
-                ctxT ,     
                                
-                beepBtn ,
-                gv1,      
-                setGv1 ,      
             
                 ds0 ,        
      
-                dbgInfo1 ,   
-                dbgPanel1 ,             
             } = (
-                AUDIONODEDEMOKIT_T1BEEPAGAIN((    
+            (
+            function useCtx1() {
+                const [
+                    ctx ,
+                    /* IGNORE */ , 
+                ] = (
+                // AUDIONODEDEMOKIT_T1BEEPAGAIN
+                useAudioCtxWithInitBtn((    
                     explicitInter           
                     ? 
                     { shallAutoStart: false , suspendOnWindowBlur: false }   
                     :   
                     { shallAutoStart: 1 , suspendOnWindowBlur: true }   
                 ))   
+                ) ;
+                return (
+                    BoundedIdentityFunction<{ aCtx : null | object ; ds0 : null | object ; }>()((
+                        ctx ?
+                        { aCtx : ctx , ds0: ctx.destination , }
+                        : { aCtx : null , ds0 : null , }
+                    ))
+                ) ;
+            }
+            )()
             ) ;                     
             const aCtx = (
                 ds0?.context         
