@@ -270,6 +270,10 @@ const {
         } ;           
     }
 })() ;                                
+/**    
+ * {@link useCurrentDestNdRefAndCtxT } .
+ * 
+ */
 type DestNdRefAndCtxT = (
   { [p in keyof NCtxV1 ] : NCtxV1[p ] ; }
 ) ;
