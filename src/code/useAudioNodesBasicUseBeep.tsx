@@ -61,7 +61,7 @@ function usingAudioParamSimuatePressAndRelease(
     { valRange: [minv, maxv] , duration, t, coef = 2 ** -8 } : { 
         valRange: (
             Readonly<(
-                [min: number, max: number]          
+                [shutStateVal: number, openStateVal: number]          
             )>            
         ) ; 
         duration : number ;              
