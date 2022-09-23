@@ -56,9 +56,12 @@ const SPR_NEGATIVEARGUMENT_LOG = (
         )    
     ) , 3 * 60 * 1000 , { leading: true , } )  
 ) ;
-function usingAudioParamSimuatePressAndRelease(              
-    p: AudioParam,  
-    { valRange: [minv, maxv] , duration, t, coef = 2 ** -8 } : { 
+function usingAudioParamSimuatePressAndRelease(              ...[
+    p,  
+    { valRange: [minv, maxv] , duration, t, coef = 2 ** -8 } ,
+] : [
+    AudioParam,
+    { 
         valRange: (
             Readonly<(
                 [shutStateVal: number, openStateVal: number]          
@@ -69,7 +72,7 @@ function usingAudioParamSimuatePressAndRelease(
               
         coef ?: number ;                      
     }  ,              
-): ReturnType<React.EffectCallback > {   
+]): ReturnType<React.EffectCallback > {   
     ;                  
     p.cancelScheduledValues(0 ) ;         
     {         
