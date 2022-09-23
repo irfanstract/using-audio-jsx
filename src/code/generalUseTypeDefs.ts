@@ -54,6 +54,7 @@ type SameParametersAndReturnType<A extends (...args: any ) => any > = (
  * takes care 
  * deciding whether the parameter can be made *optional*
  * (which will only be the case when(ever) it has *zero* *required property* ).
+ * 
  */
  type OptionsCouldBeOmittedAltogether<A extends {} > = (
     [A, [{}, ] ] extends [{}, readonly [A, ] ] ? 
