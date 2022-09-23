@@ -627,7 +627,7 @@ return (
                            ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         );
                         const absoluteMountEndT = (
-                           ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
+                           ((CURRENTITEM_VATX1 /* add */ + (-(      0) * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
                         ) ;
                         if (debugMode === 6.5 ) {
                            return <div /> ;
