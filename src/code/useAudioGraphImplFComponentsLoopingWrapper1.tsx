@@ -474,7 +474,7 @@ return (
                   renderIRangeSnapSize = (
                      // TODO
                      Iterable.Seq([8, 16, 32, 64 ])
-                     .filter(v => (16 <= v ))
+                     .filter(v => (1.85 / tickTockPeriodAbsolutely <= v ))
                      // first
                      .first(8 )
                   ) ,
