@@ -270,6 +270,9 @@ const {
         } ;           
     }
 })() ;                                
+type DestNdRefAndCtxT = (
+  { [p in keyof NCtxV1 ] : NCtxV1[p ] ; }
+) ;
 /**    
  * 
  * __performance note__ .
