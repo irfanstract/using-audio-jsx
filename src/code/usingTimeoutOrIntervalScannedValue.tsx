@@ -100,7 +100,7 @@ const useRealTimeQueryInterval1 = (
             c ,   
             
             forceRefresh ,            
-        } = useRealtimeQueryIntervalUsageArgsParse(...args1 ) ;      
+        } = useRealtimeQueryIntervalUsageArgsParse1(...args1 ) ;      
         const vl = React.useMemo(() => f() , [c] ) ;
         useDebugValue({ c, vl }) ;
         return vl ;   
