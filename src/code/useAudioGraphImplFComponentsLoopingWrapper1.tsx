@@ -356,6 +356,8 @@ type IRenderRangeAbsoluteSnapSize = {
 };
 type IRenderRangeSnapSize = {
    /**    
+    * units.
+    * 
     * frequent amendment of `renderRange` 
     * resulted in *brief silencing* even when the shift(s) were rather small.
     * 
