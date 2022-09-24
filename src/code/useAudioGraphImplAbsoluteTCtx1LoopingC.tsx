@@ -24,6 +24,11 @@ import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from ".
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
 import { ModifyingCompPayloadDiv as ModifyingCompPayloadDiv, LoopingCompContentDiv } from "./useAudioGraphImplFComponentsSemanticsBasic";      
 import { wgdDivCtx ,  } from "./useAudioGraphImplFComponentsSemanticsBasic";  
+import { // Looping Comp Props
+   LoopingComponentPropsWithPeriod as LoopingComponentPropsWithPeriodB, 
+   LwpPayloadCallback ,
+   
+} from "./useAudioGraphImplBasicLoopingComponentProps1";
 import {
    currentTCtx ,                              
    currentTScaleCtx ,              
