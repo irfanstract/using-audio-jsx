@@ -635,8 +635,9 @@ return (
                         extraAutoMountUnmount ?: false | true ;
                      } ;
                      /**   
-                      * additional optimisational auto-mount-and-unmount at this point remains necessary as
+                      * additional optimisational auto-mount-and-unmount at this point were deemed necessary as
                       * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                      * weirdly, such optimisative mean(s) might instead effectively worsen perf.
                       */
                      {
                         ;
