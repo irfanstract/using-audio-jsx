@@ -275,6 +275,10 @@ type MetronomeGraphingCallback = (
  */ 
 const MetronomeAndResponseGraph = /* */ (() => {
 ;
+/**    
+ * {@link tCtxs }.
+ * 
+ */
 const useSchedulingCtxValue = (
    () => {
       ;
