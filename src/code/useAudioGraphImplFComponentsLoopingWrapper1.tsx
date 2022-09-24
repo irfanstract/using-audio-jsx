@@ -325,7 +325,17 @@ const useCtxValues1 = (
          actualCtxTRaw ,
          actualCtxTRoundedToYThs ,
 
+         /**   
+          * {@link tCtxs }.
+          * 
+          */
          tCtxTScaleVl ,
+         /**   
+          * {@link tCtxs }.
+          * {@link useCurrentDestNdRefAndCtxT the `absolute_t` }
+          * which {@link tCtxs (`t: 0` WRT the calling-Component) would lie exactly at }.
+          * 
+          */
          absoluteScheduledTE ,
       } ;
    }
