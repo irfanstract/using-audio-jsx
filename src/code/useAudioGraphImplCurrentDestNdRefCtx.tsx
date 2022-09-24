@@ -355,6 +355,10 @@ const WithGivenDest = (() => {
                 useWithCurrentSideTapPtRef(({ sideTapPt }) => (
                     <ModifyingCompPayloadDiv              
                     >                    
+                    <p>
+                      with effects or 
+                      with custom output/dest
+                    </p>
                     <CBC name="WithGivenDestC_CtxPrv">{ function useC1() {   
                         return (                                 
                             <Prv1 
