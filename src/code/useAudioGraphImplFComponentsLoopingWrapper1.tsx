@@ -707,16 +707,14 @@ return (
                                     /**    
                                      * {@link absoluteMountStartT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
                                      */
-                                    Iterable.Range(-renderRangeAbsoluteSnapSizeInSecs, absoluteMountStartT, renderRangeAbsoluteSnapSizeInSecs )
-                                    .last(0 ) 
+                                    floorBy(absoluteMountStartT, renderRangeAbsoluteSnapSizeInSecs )
                                  ) <= actualCtxTRoundedToYThs
                                  && 
                                  (
                                     /**    
                                      * {@link actualCtxT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
                                      */
-                                    Iterable.Range(-renderRangeAbsoluteSnapSizeInSecs, actualCtxTRoundedToYThs, renderRangeAbsoluteSnapSizeInSecs )
-                                    .last(0 ) 
+                                    floorBy(actualCtxTRoundedToYThs, renderRangeAbsoluteSnapSizeInSecs )
                                  ) <= absoluteMountEndT
                               )    
                               ?             
