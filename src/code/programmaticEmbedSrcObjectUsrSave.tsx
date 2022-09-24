@@ -31,7 +31,7 @@ const blobConfirmUsrSave = (() => {
       (
          /**   
           * this is not `useYyy` and therefore 
-          * *conditionality* can be used.
+          * calls can be made conditional thus eliminating the need for `null`ability.
           */
          GivenBlob
       ) , 
