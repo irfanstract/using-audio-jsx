@@ -138,7 +138,7 @@ const CTXTUALOUTPUTUSAGE_CBC = (
         ), "children">
         )>  
     )>((    
-        function ({ children: useC11 , ...otherProps }) {
+        function CTXTUALOUTPUTUSAGE_CBC({ children: useC11 , ...otherProps }) {
             ;       
             return (
                 useWithCurrentSideTapPtRef(a => (
