@@ -602,6 +602,9 @@ return (
                   } )() ,  
           
                } = properties11 ; 
+               const debugJson1 = {
+                  //
+               } as const ;
                return (                      
                      (nd0 && (typeof actualCtxTRoundedToYThs === "number")) 
                      ?         
