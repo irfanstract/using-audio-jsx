@@ -105,6 +105,31 @@ function usingAudioParamSimuatePressAndRelease(              ...[
         }
     } ;    
 }     
+/**   
+ * {@link usingAudioParamSimuatePressAndRelease }.
+ * *the range will always be [0, 1,]*.
+ * this is to support using {@link GainNode}s to simulate *open-shut* anims.
+ * 
+ */
+const usingOpenShutAmpNodeSmoothPressRelease = (
+    function (...[dest , { t, duration, } , ] : (
+        Parameters<typeof usingAudioParamSimuatePressAndRelease > extends [infer Dest, ...(infer OtherArgs ) ] ?
+        [
+            Dest , 
+            { t : number ; duration : number ; } , 
+        ]
+        : never
+    ) ): ReturnType<typeof usingAudioParamSimuatePressAndRelease > {
+        const valRange = (
+            [0, 1] as const
+        ) ;
+        return (
+            usingAudioParamSimuatePressAndRelease((
+                dest
+            ) , { valRange , duration , t , } , )
+        ) ;
+    }
+) ;
 const useHalfSecondPassAtT : (         
     YyyUsable<(                      
         Readonly<{
@@ -194,6 +219,7 @@ export {
     useWhiteNoise , 
     useWhiteNoise1 ,  
   
+    usingOpenShutAmpNodeSmoothPressRelease ,
     useHalfSecondPassAtT ,   
     useGainElas , 
     useFixedGain , 
