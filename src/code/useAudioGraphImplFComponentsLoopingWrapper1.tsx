@@ -511,15 +511,11 @@ return (
                 * shall not apply `t`, by definition.
                 */
                // See more: https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess 
-               const [mtPreFTAbsolute = 2, mtPostFTEAbsolute = 2, ] = (
+               const [mtPreFTAbsolute = 2, mtPostFTAbsolute = 2, ] = (
                   [mtPreFTArg, mtPostFTArg, ]
                   .map((v: number ) => (
                      v * tCtxTScaleVl
                   ) )
-               ) ;
-               const mtPostFTAbsolute = (
-                  // TODO remove this debugging-specific addition
-                  mtPostFTEAbsolute
                ) ;
                /**   
                 * note that the value needs to be adjusted by fingers of seconds.
