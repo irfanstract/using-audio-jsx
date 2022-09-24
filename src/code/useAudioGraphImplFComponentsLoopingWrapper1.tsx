@@ -572,9 +572,22 @@ return (
                   )
                   : 3E5
                ) ;                       
-               const renderRangeCalcImplPreTInSeconds : number = 1.5 ;
                const {   
-                  renderRange = ((): (ComponentProps<typeof MetronomeAndResponseGraphB >["renderRange"] & object) => {
+                  renderRange = ((...[{
+                     preTInSeconds : renderRangeCalcImplPreTInSeconds = 1.5 ,
+                  } = {} ,] : [
+                     ... OptionsCouldBeOmittedAltogether<(
+                        {
+                           /**    
+                            * the default {@link renderRange } calc 
+                            * would add, right prior to existing start, 
+                            * a small number of ticks taking {@link preTInSeconds }.
+                            * 
+                            */
+                           preTInSeconds ?: number
+                        }
+                     )> ,
+                  ] ): (ComponentProps<typeof MetronomeAndResponseGraphB >["renderRange"] & object) => {
                   ;
                   const renderRangeEnd = ( 
                      Math.floor((
