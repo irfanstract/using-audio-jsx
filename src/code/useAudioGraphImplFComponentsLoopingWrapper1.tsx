@@ -342,7 +342,15 @@ const useCtxValues1 = (
 ) ;
 type IRenderRangeAbsoluteSnapSize = { 
    /**   
-    * in *seconds*, independent of *current t-ctx `tScale` value*.
+    * WRT the absolute timeline and hence
+    * independent of *current t-ctx `tScale` value*.
+    * seconds.
+    * 
+    * frequent amendment of `renderRange` 
+    * resulted in *brief silencing* even when the shift(s) were rather small.
+    * to reduce the freq of amendments,
+    * an idea is to round the values into multiples (of (...) ).
+    * 
     */
    renderRangeAbsoluteSnapSizeInSecs: number ; 
 };
