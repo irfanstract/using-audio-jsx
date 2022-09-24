@@ -67,7 +67,7 @@ const useCtxtualRoutingState = (
             (
                { value: string ; }
             ) ,
-            React.ReactElement ,
+            ("" | React.ReactElement) ? ,
          ] ): React.ReactElement {
             return (
                <a 
@@ -82,7 +82,7 @@ const useCtxtualRoutingState = (
                   ) ,
                }}
                >
-                  { payload }
+                  { payload || <code>{ toWhichOne }</code> }
                </a>
             ) ;
          }
