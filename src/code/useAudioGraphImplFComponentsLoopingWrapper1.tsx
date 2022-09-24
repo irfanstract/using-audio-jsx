@@ -620,6 +620,22 @@ return (
                   >       
                      { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
                      ;
+                     /**   
+                      * this fnc 
+                      * shall exactly run `givenChildren({ t })` possibly with decoration.
+                      * 
+                      * later on 
+                      * there'd be switches to determine whether (or-not) to actually run it.
+                      * 
+                      */
+                     const doRenderGivenChildren = () => {
+                        const e = (   
+                           givenChildren({ t })          
+                        ) ;
+                        return (
+                           e
+                        ) ;
+                     } ;
                      const {
                         extraAutoMountUnmount ,
                      } = {
@@ -667,7 +683,7 @@ return (
                            return false ;
                         }
                         const e0 = (   
-                           givenChildren({ t })          
+                           doRenderGivenChildren()          
                         );    
                         if (debugMode === 5.5 ) {
                            return <div /> ;
