@@ -56,6 +56,11 @@ const SPR_NEGATIVEARGUMENT_LOG = (
         )    
     ) , 3 * 60 * 1000 , { leading: true , } )  
 ) ;
+/**    
+ * *it doesn't need to be {@link GainNode.gain }*;
+ * *it could be any linear param, and `valRange` will dictate the two ends*.
+ * 
+ */
 function usingAudioParamSimuatePressAndRelease(              ...[
     p,  
     { valRange: [minv, maxv] , duration, t, coef = 2 ** -8 } ,
