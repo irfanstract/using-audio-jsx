@@ -669,6 +669,8 @@ return (
                         ) ;
                         const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
                         const { debugMode = false , } = {} as Partial<{ debugMode : false | "last" | 5 | 5.5 | 6 | 6.5 | 7 ; }> ;
+                        if (extraAutoMountUnmount ) {
+                        ;
                         // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
                         const absoluteMountStartT = (
                            ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
@@ -716,6 +718,11 @@ return (
                            )         
                         ) ;
                         return e ;   
+                        } else {
+                           return (
+                              doRenderGivenChildren()
+                           ) ;
+                        }
                      }
                      } }    
                   </LoopingWithPeriodAndAutoUnmounting>
