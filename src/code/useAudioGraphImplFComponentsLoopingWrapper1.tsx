@@ -708,6 +708,8 @@ return (
                         if (debugMode === 5 ) {
                            return false ;
                         }
+                        const debugJson = { 
+                        } as const ;
                         const e = (             
                            e0 && (            
                               (
