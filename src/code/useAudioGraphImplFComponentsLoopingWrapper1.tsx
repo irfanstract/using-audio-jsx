@@ -620,6 +620,20 @@ return (
                   >       
                      { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
                      ;
+                     const {
+                        extraAutoMountUnmount ,
+                     } = {
+                        extraAutoMountUnmount: false ,
+                     } as {
+                        /**   
+                         * additional optimisational auto-mount-and-unmount at this point were deemed remain necessary as
+                         * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                         * 
+                         * weirdly, such optimisative mean(s) instead effectively worsened perf.
+                         * 
+                         */
+                        extraAutoMountUnmount ?: false | true ;
+                     } ;
                      /**   
                       * additional optimisational auto-mount-and-unmount at this point remains necessary as
                       * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
