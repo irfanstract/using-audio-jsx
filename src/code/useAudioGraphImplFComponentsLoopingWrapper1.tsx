@@ -439,6 +439,7 @@ return (
             startEndMountTimeDebug : boolean ;
          }>
       ) = {
+         renderRangeAbsoluteSnapSizeInSecs : 4 ,
       } ;
       const {
          startEndMountTimeDebug = false ,
