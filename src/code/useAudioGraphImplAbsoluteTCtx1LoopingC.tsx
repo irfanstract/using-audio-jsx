@@ -74,7 +74,7 @@ type LoopingComponentPropsWithPeriod = (
 
    }    
    &    
-   /**   display properties  */        
+   /**   technical properties  */        
    {      
       
       /**     
