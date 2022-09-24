@@ -4,6 +4,7 @@ import Immutable from "immutable";
 import { IterableOps } from "./generalUse11";  
 import React from "react";               
 import { K, ComponentProps, ContextReturnType, arrayIndexedOrderedList } from "./commonElements";    
+import { NUMERIC, } from "./commonElements";
         
 // domain imports, and CSS imports
 import newInstance from "./useAudioGraphImplAbsoluteTCtxFactory1" ;   
