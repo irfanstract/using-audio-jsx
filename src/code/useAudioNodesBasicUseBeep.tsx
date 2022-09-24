@@ -32,6 +32,9 @@ import {
 import { useBqFltPtModulated } from "./useAudioNodesBasicFltBandPass1";        
 import { useParamModulation } from "./useAudioNodesParamAutomative1"; 
 import { useGainELasParamImpl , GEParam } from "./useAudioNodesParamAutomativeElas";        
+import { //
+    usingAudioParamSimuatePressAndRelease, 
+} from "./useAudioNodesParamShutAndOpenState1";
 import { 
     useGainElas , 
     useConstantParamSrcElas ,  
@@ -47,64 +50,6 @@ import {
 
 
 
-const SPR_NEGATIVEARGUMENT_LOG = (
-    IterableOps.throttle((      
-        (...a : Parameters<Console["error"]> ) => (      
-            console.warn(...a )     
-            ,              
-            undefined 
-        )    
-    ) , 3 * 60 * 1000 , { leading: true , } )  
-) ;
-/**    
- * *it doesn't need to be {@link GainNode.gain }*;
- * *it could be any linear param, and `valRange` will dictate the two ends*.
- * 
- */
-function usingAudioParamSimuatePressAndRelease(              ...[
-    p,  
-    { valRange: [minv, maxv] , duration, t, coef = 2 ** -8 } ,
-] : [
-    AudioParam,
-    { 
-        valRange: (
-            Readonly<(
-                [shutStateVal: number, openStateVal: number]          
-            )>            
-        ) ; 
-        duration : number ;              
-        t: number ;                           
-              
-        coef ?: number ;                      
-    }  ,              
-]): ReturnType<React.EffectCallback > {   
-    ;                  
-    p.cancelScheduledValues(0 ) ;         
-    {         
-        const errorC : number = 0.001 ;            
-        ;
-        p.setValueAtTime(minv, 0, ) ;  
-        ;                          
-        if ((    
-            (0 <= t || SPR_NEGATIVEARGUMENT_LOG((
-                `SPR -- negative 't' detected, this is propably not what you want ` 
-            )) ) 
-            && 
-            (0 < duration )    
-        )) {           
-            ;    
-            p.setTargetAtTime(maxv, errorC + t                    , coef ) ;   
-            p.setTargetAtTime(minv, errorC + t + duration + errorC, coef ) ;
-        }               
-    }              
-    return () => {
-        ;
-        if (0 ) {
-            ;
-            p.cancelScheduledValues(0 ) ;                   
-        }
-    } ;    
-}     
 /**   
  * {@link usingAudioParamSimuatePressAndRelease }.
  * *the range will always be [0, 1,]*.
