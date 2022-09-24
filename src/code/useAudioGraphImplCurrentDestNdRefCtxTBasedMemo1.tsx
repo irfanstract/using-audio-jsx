@@ -83,15 +83,23 @@ const WithinANdRefCtxTBasedMemo1: (
          |
          (React.ReactNode & object )
       ) ; 
+      /**   
+       * the second argument to {@link useANdRefCtxTBasedMemo1 }
+       * (which is `options`).
+       */
+      constraints ?: (
+         Parameters<typeof useANdRefCtxTBasedMemo1 >[1] 
+         & object
+      ) ;
    }>
 ) = (
-   function WithinANdRefCtxTBasedMemo1({ children: doRender, }) {
+   function WithinANdRefCtxTBasedMemo1({ children: doRender, constraints: ctmConstraints, }) {
          const rendered = (
             useANdRefCtxTBasedMemo1((
                (typeof doRender === "function" ) ?
                doRender
                : (() => doRender )
-            ) )
+            ) , ctmConstraints )
          ) ;
          return (
             <>
