@@ -31,8 +31,8 @@ import {
 
 
 
-const DictDisplayElement : (
-   React.FC<(
+const DictDisplayElementSimple = (
+   (props: (
       OverloadedParameters<(typeof JSON)["stringify"]> extends [infer Payload, ...(infer Args) ] ?
       { 
          value : (
@@ -43,9 +43,7 @@ const DictDisplayElement : (
          ) ;
       }
       : never
-   )>
-) = (
-   (props ) => {
+   ) ) => {
       const { value, fmt = [undefined, 2, ], } = props ;
       const valuFmatted = (
          React.useMemo(() => (
@@ -56,6 +54,22 @@ const DictDisplayElement : (
          <code className="long-enough">
             { valuFmatted }
          </code>
+      ) ;
+   }
+) ;
+const DictDisplayElement : (
+   React.FC<(
+      ComponentProps<typeof DictDisplayElementSimple >
+   )>
+) = (
+   ({ value: presentlyValue, ...otherProps }) => {
+      return (
+         React.useDeferredValue((
+            <DictDisplayElementPro 
+            value={presentlyValue }
+            {...otherProps }
+            />
+         ))
       ) ;
    }
 ) ;
