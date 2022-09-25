@@ -51,7 +51,7 @@ const DictDisplayElementSimple = (
          ) , [value, fmt, ] )
       ) ;
       return (
-         <code className="long-enough">
+         <code className="long-enough" title={valuFmatted }>
             { valuFmatted }
          </code>
       ) ;
