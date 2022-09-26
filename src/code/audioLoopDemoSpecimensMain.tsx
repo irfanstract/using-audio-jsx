@@ -86,3 +86,245 @@ const { //
 
 
 
+
+export default (() => {
+    ;
+    const C1  = (({ c , } : { c : BaseAudioContext ; } ) => {
+        ;
+        return (
+        <WithSlowdown value={1 / (68 / 60 ) } >
+        <WithSlowdown value={2 ** -1 } >
+        <WithADestCtxTCompletionStatCtx>
+        { ({ withADestCtxCompletionStat }) => {
+        ;
+        const fadeinAmpGraph = (
+            <CFnValue1 
+            value={({ ctxT: t0, }) => {
+                /**   
+                 * `t0 === t * 2 `
+                 */
+                const { t, } = {
+                    t: t0 / 2 ,
+                } ;
+                const ends1: {
+                    startT : number ;
+                    endT : number ;
+                    startV : number ;
+                    endV : 0 ;
+                } = { startT: 4 , endT: 16 , startV: -11 , endV : 0 , };
+                /**   
+                 * 
+                 */
+                return (
+                    2 ** (
+                        IterableOps.clamp((
+                            ends1.startV + (
+                                Math.max((
+                                    ((t - ends1.startT ) / (ends1.endT - ends1.startT ) )
+                                    *
+                                    (ends1.endV - ends1.startV )
+                                ) , 0 )
+                            )
+                        ) , -1E4 , 0 )
+                    )
+                ) ;
+            }} 
+            />
+        ) ;
+        const drumKitLine = ( 
+            <K /* drumming */ > 
+            { (
+                <BassDrumLoopDv subhalvesN={2 } />
+            ) }
+            { (
+            <K>
+                        <CAmpModulated0  
+                        value={(
+                            <CConstantValue value={2 ** -1 } />
+                        )}
+                        >
+                        { null && (
+                            <CSnareDrumJammer 
+                            metronomeProps={{
+                                value: {
+                                    tickTockPeriod: 1 / 4 ,
+                                } ,
+                            }}
+                            cmPeriod={1 }
+                            />
+                        ) }
+                        </CAmpModulated0>
+            </K>
+            ) }
+            </K>
+        ) ;
+        /**    
+         * `1` for a single semitoone.
+         * 
+         */
+        const detuneGraph = (
+            <K>
+            <CConstantValue  value={-1 } />
+            <CFnValue1 
+            value={({ ctxT: t }) => {
+                if (t < 0 ) {
+                    return 0 ;
+                }
+                if ((t % (4 * 2 ) < 1.5 ) ) {
+                    return 0 ;
+                }
+                if ((t % (4 * 2 ) < 3.5 ) ) {
+                    return 5 ;
+                }
+                return 5 + 2 ;
+            } } 
+            />
+            </K>
+        ) ;
+        type HarmonicsSpec1 = (
+            ComponentProps<typeof CmInHarmonics >["value"] & object
+        ) ;
+        const bassLine = (
+            <CAmpModulated0  
+            value={(
+                <CConstantValue value={2 ** -1.5 } />
+            )} >
+            { (() => {
+            ;
+            return (
+                <K> 
+                    <CmInHarmonics 
+                    value={[SupportedFShiftAmtInterpretation.OCTAVE_SHIFT , [
+                        [0.00, { gain: 2 ** -0.5 , }, ] ,
+                        [1.00, { gain: 2 ** -1.5 , }, ] ,
+                        [1.33, { gain: 2 ** -3.5 , }, ] ,
+                        [2.33, { gain: 2 ** -3.5 , }, ] ,
+                    ] ]} 
+                    >
+                    { ({ detuneOctaves, }) => ( 
+                      <CWaveTable1 
+                      type="triangle"
+                      freqArgumentNormalValue={27.5 }
+                      freqArgumentInterpretation="timedomain-normalised"
+                      freqArgument={(
+                          <CConstantValue  value={1 } />
+                      )}
+                      detuneSemitoneCentsNormalVal={100 }
+                      detuneInterpretation="timedomain-normalised"
+                      detune={(
+                          <K>
+                          <CConstantValue  value={detuneOctaves * 12 } />
+                          { detuneGraph }
+                          </K>
+                      )}
+                      />
+                    ) }
+                    </CmInHarmonics>
+                </K>
+            ) ;
+            })() }
+            </CAmpModulated0>
+        ) ;
+        const trbLine = (
+            <CAmpModulated0  
+            value={(
+                <CConstantValue value={2 ** -1.5 } />
+            )} >
+            { (() => {
+            ;
+            return (
+                <K> 
+                    <CmInHarmonics 
+                    value={[SupportedFShiftAmtInterpretation.SEMITONES_SHIFT , [
+                        [-12    , { gain: 2 ** -4.0 , }, ] ,
+                        [-12 + 3, { gain: 2 ** -3.5 , }, ] ,
+                        [-12 + 4, { gain: 2 ** -5.5 , }, ] ,
+                        [-12 + 7, { gain: 2 ** -4.5 , }, ] ,
+                    ] ]} 
+                    >
+                    { ({ detuneOctaves, }) => (
+                    <CGrandPianeSound1
+                    freqArgumentNormalValue={220 }
+                    freqArgumentInterpretation="timedomain-normalised"
+                    freqArgument={(
+                        <CConstantValue  value={1 } />
+                    )}
+                    detuneSemitoneCentsNormalVal={100 }
+                    detuneInterpretation="timedomain-normalised"
+                    detune={(
+                        <K>
+                        <CConstantValue  value={detuneOctaves * 12 } />
+                        { detuneGraph }
+                        </K>
+                    )}
+                    />
+                    ) }
+                    </CmInHarmonics>
+                </K>
+            ) ;
+            })() }
+            </CAmpModulated0>
+        ) ;
+        return (
+        <>
+        { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
+        <K>
+        <K /* test-beeping */ ></K>
+        <K /* main */ >
+        <CBiquadFilterModulated 
+        type="lowpass"
+        freqArgumentNormalValue={44100 }
+        freqArgumentInterpretation="timedomain-normalised"
+        freqArgument={fadeinAmpGraph }
+        >
+        { drumKitLine }
+        <K>
+            { bassLine }
+            { trbLine }
+        </K>
+        </CBiquadFilterModulated>
+        <CAmpModulated0  
+        value={(
+            <CFnValue1 
+            value={({ ctxT: t, }) => (
+              (0 <= t ) ?
+              (2 ** -t )
+              : 2E-32
+            ) } 
+            />
+        )}>
+          <CGrandPianeSound1
+          freqArgumentNormalValue={110 }
+          freqArgumentInterpretation="timedomain-normalised"
+          freqArgument={(
+              <CConstantValue  value={1 } />
+          )}
+          detuneSemitoneCentsNormalVal={100 }
+          detuneInterpretation="timedomain-normalised"
+          detune={(
+              <K>
+              <CConstantValue  value={-1 } />
+              </K>
+          )}
+          />
+        </CAmpModulated0>
+        </K>
+        </K> 
+        ) ) }
+        </>
+        ) ;
+        } }
+        </WithADestCtxTCompletionStatCtx>
+        </WithSlowdown>
+        </WithSlowdown>
+        ) ;
+    }) ;       
+    return (
+      <WithCurrentDestNdRef>
+        { ({ feedPt, }) => (
+          feedPt &&
+          <C1 c={feedPt.context } /> 
+        ) }
+      </WithCurrentDestNdRef>
+    ) ;
+})() ;
