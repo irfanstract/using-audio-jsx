@@ -265,6 +265,17 @@ const WaveTableNodeProps = {} as const ; // `--isolated-modules` TS-1205
 type WaveTableNodeProps = (              
     (
     {                 
+        /**    
+         * this shall define the waveform.
+         * exactly {@link OscillatorNode.type `OscillatorNode`s `type` or `periodicWave` }.
+         * 
+         * `type` 
+         * only supports constant(s) `keyof` {@link OscillatorType } (excluding `"custom"`);
+         * {@link OscillatorNode.setPeriodicWave `ssn.setPeriodicWave(...)` } 
+         * would be necessary to assign `PeriodicWave` instead
+         * (in which case `ssn.type` would become `"custom"`) .
+         * 
+         */
         type ?: (   
             Exclude<(
                 OscillatorType | PeriodicWave   
