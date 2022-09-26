@@ -107,6 +107,10 @@ const {
     /**    
      * *with current/present {@link NCtxV1 } (ie __all__ ctx values )*. 
      * 
+     * will be regularly refreshed in high frequency.
+     * for high-level component(s), unless needing `currentTime` , 
+     * consider using {@link useWithCurrentSideTapPtRef } instead.
+     * 
      */
     useCurrentDestNd0 : (
         (       
