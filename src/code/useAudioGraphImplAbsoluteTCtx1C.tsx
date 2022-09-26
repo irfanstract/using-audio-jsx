@@ -67,6 +67,15 @@ const {
                      value={v}
                   >
                      <ModifyingCompPayloadDiv>
+                        <p>
+                           with 
+                           <em>
+                           relative delay of 
+                           <NUMERIC>
+                              { addendBeforeScaling }
+                           </NUMERIC>
+                           </em>
+                        </p>
                         {payload || null}
                      </ModifyingCompPayloadDiv>
                   </currentTCtx.Provider>
@@ -94,6 +103,16 @@ const {
                      value={specifiedFct * parentTSclVal}
                   >
                      <ModifyingCompPayloadDiv>
+                        <p>
+                           with 
+                           <em>
+                           the duration 
+                           multiplied by
+                           <NUMERIC>
+                              { specifiedFct }
+                           </NUMERIC>
+                           </em>
+                        </p>
                         {payload || null}
                      </ModifyingCompPayloadDiv>
                   </currentTScaleCtx.Provider>
