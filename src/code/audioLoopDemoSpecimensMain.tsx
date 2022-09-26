@@ -43,6 +43,7 @@ import {
     MetronomeAndResponseGraph , 
     
 } from "./audioLoopDemoComponents1"; 
+import { CGrandPianeSound1, } from "./audioLoopDemoGrandPianoI1";
 import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";
 import * as BBVR from "./audioLoopDemoSpecimens";  
 import {
