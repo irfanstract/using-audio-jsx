@@ -47,6 +47,9 @@ type LoopingComponentPropsWithPeriodB = (
          */
       value: {      
             period: number ;                                                
+            /**    
+             * the delay, relatively.
+             */
             initialOffset ?: number ;         
             // clippingMode ?: AudioTrackConcatClippingMode ;          
       } ;                     
