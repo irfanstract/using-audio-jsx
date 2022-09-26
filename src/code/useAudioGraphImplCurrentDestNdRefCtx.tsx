@@ -98,6 +98,10 @@ const {
     /**    
      * with current/present values (at-the-very-least includes {@link DestNdRefAndCtxT } ) . 
      * 
+     * will be regularly refreshed in high frequency.
+     * for high-level component(s), unless needing `currentTime` , 
+     * consider using {@link useWithCurrentSideTapPtRef } instead.
+     * 
      */
     Consm: React.FC<React.ConsumerProps<NCtxV1>>; 
     /**    
