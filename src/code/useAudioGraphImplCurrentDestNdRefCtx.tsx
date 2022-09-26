@@ -359,6 +359,11 @@ const WithGivenDest = (() => {
                 )>       
             ) >
         )>(function WithGivenDestC({ value: newDest, children }) {        
+            /**      
+             * {@link useCurrentDestNdRefAndCtxT } would cause high-frequency refresh.
+             * hence, {@link useWithCurrentSideTapPtRef } instead.
+             * 
+             */
             return (        
                 useWithCurrentSideTapPtRef(({ sideTapPt }) => (
                     <ModifyingCompPayloadDiv              
