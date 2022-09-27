@@ -71,6 +71,10 @@ const {
   
    
                        
+/**    
+ * TBD; this remains subject to change.
+ * 
+ */
 type HarmonicsSpec = (
    readonly [
       SupportedFShiftAmtInterpretation,  
@@ -80,6 +84,14 @@ type HarmonicsSpec = (
    ]
 ) ;
 // TODO
+/**    
+ * this Component is intended for high-level harmonics.
+ * for low-level synth, where possible, 
+ * use {@link PeriodicWave } with `CWaveTable` instead .
+ * 
+ * will require a callback, in turn given current-index denoting which index it's for .
+ * 
+ */
 const CmInHarmonics : (
    React.FC<(
       { 
@@ -124,7 +136,7 @@ const CmInHarmonics : (
             hSpecExpand(value )
          ) ; //
          const e = (
-            useDeferredRecompute(() => (
+            useANdRefCtxTBasedMemo1(() => (
                translateFShiftR([
                   mFInterpr ,
                   mFreqShiftValuesRaw ,
@@ -137,9 +149,9 @@ const CmInHarmonics : (
                   const infoPanel = (
                      <p> 
                         Harmonic ; 
-                        <code className="long-enough">
-                        { JSON.stringify({ ...ctx , gainFac } , null, 2 ) }   
-                        </code> 
+                        <DictDisplayElement 
+                        value={{ ...ctx , gainFac } }
+                        />
                      </p>
                   ) ;
                   return (
@@ -157,7 +169,7 @@ const CmInHarmonics : (
                      </div >
                   ) ;
                } )
-            ) )
+            ) , { rerunFreq: 2, } ) // TODO
          ) ;
          return (
             <div >
