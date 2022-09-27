@@ -29,7 +29,7 @@ import { isWindowActive, useWindowActivityStatus } from "./useWindowFocusState";
  */
 const useAudioCtxCurrentTime1 = (  
     (...[c, { periodMillis: requestedPeriodMillis }, refreshIntervalProperties] : [
-        BaseAudioContext | null | undefined ,
+        BaseAudioContext | null ,
         ...OptionsCouldBeOmittedAltogether<{
             /**    
              * this specifies *the refresh interval*, in milliseconds.
@@ -59,26 +59,117 @@ const useAudioCtxCurrentTime1 = (
          * for (after null-check ) {@link c.currentTime}!
          */
         const vl = (    
-            useRealTimeQueryInterval1({
-                f: () => (    
-                    c ? 
-                    c.currentTime
-                    : null        
-                ) , 
-                ...refreshIntervalProperties , 
-            } , (
-                (      
-                    /**   
-                     * period millis, 
-                     * with throttling in case of 'not running'
-                     */
-                    Math.max((
-                        (c && c.state === "running") 
-                        ? 
-                        10 : 2500
-                    ), requestedPeriodMillis )    
-                )  
-            ) )
+            (function useACtxPeriodicImpl(...cctArgs : [
+              null | BaseAudioContext ,
+              ... OptionsCouldBeOmittedAltogether<(
+                { periodMillis : number ; }
+              )>,
+            ] ) : number | null {
+                ;
+                const [c, { periodMillis: requestedPeriodMillis, }, ] = cctArgs ;
+                ;
+                const { isWindowOnFocus } = (         
+                    useWindowActivityStatus()        
+                ) ;    
+                const [v, setV] = (
+                    useState<number >(0 )
+                ) ;
+                React["useLayoutEffect"](() => {
+                    let cancelled1 : boolean = false ;
+                    (async () => {
+                      const requestedPeriodSeconds = (
+                          requestedPeriodMillis / 1000
+                      ) ;
+                      if (c) {
+                        const initialCtxT = (
+                          c.currentTime
+                        ) ;
+                        ;
+                        /**    
+                         * for devs :
+                         * - do not store the returned {@link Iterable.Seq `Seq`} since
+                         *   {@link Iterable.Seq that would result in memory-leak }.
+                         *   only store {@link symbol.iterator Iterator } over it instead.
+                         * 
+                         */
+                        LOOP1 :
+                        for (const { expectedCtxT, } of (
+                          Iterable.Range().toSeq()
+                          .map((i) => ({
+                              expectedCtxT : (
+                                initialCtxT 
+                                +
+                                (i * requestedPeriodSeconds )
+                              ) ,
+                          }) )
+                          [Symbol.iterator]()
+                        ) ) {
+                          /**   
+                           * IF CANCELLED - BREAK.
+                           * 
+                           */
+                          if (cancelled1) {
+                              break LOOP1 ;
+                          }
+                          AWAITLOOP11 :
+                          while (true ) {
+                              /**   
+                               * IF CANCELLED - BREAK.
+                               * 
+                               */
+                              if (cancelled1) {
+                                  break LOOP1 ;
+                              }
+                              /**    
+                               * provided that {@link c.currentTime } is ahead of this,
+                               * it's time to exit this waiting ,
+                               * 
+                               */
+                              if (expectedCtxT <= c.currentTime ) {
+                                break AWAITLOOP11 ;
+                              }
+                              /**    
+                               * brute-force code will result in CPU 100% usage, so
+                               * a milliseconds-long recess will be very important.
+                               * 
+                               * it can't be guaranteed that the ctx is actually running at this point, and
+                               * 
+                               * 
+                               */
+                              await (
+                                null 
+                                || (
+                                  c.state === "running" ?
+                                  (
+                                    isWindowOnFocus ?
+                                    new Promise(R => setTimeout(R , 25 ) )
+                                    : new Promise(R => setTimeout(R , 490 ) )
+                                  )
+                                  : null
+                                )
+                                || new Promise(R => setTimeout(R , 1 * 1000 ) )
+                              ) ;
+                          }
+                          /**   
+                           * IF CANCELLED - BREAK.
+                           * 
+                           */
+                          if (cancelled1) {
+                              break LOOP1 ;
+                          }
+                          /**    
+                           * apply update.
+                           */
+                          setV(() => expectedCtxT ) ;
+                        }
+                      }
+                    } )() ;
+                    return () => {
+                        cancelled1 = true ;
+                    } ;
+                } , [requestedPeriodMillis, c, isWindowOnFocus, ] );
+                return v ;
+            } )(c , { periodMillis: requestedPeriodMillis, } , )
         ) ;
 
         return (() => {           
@@ -96,7 +187,13 @@ const useAudioCtxCurrentTime1 = (
  * @deprecated
  */
 const useAudioCtxCurrentTime = (  
-    (c: BaseAudioContext | null | undefined ) => {
+    (...[c] : (
+      Parameters<typeof useAudioCtxCurrentTime1 > extends [infer Ctx, ... (infer Args ) ] ?
+      [
+        Ctx ,
+      ] 
+      : never
+    ) ) => {
         const vl = (
             useAudioCtxCurrentTime1(c , {
                 periodMillis : (
