@@ -96,7 +96,13 @@ const useAudioCtxCurrentTime1 = (
  * @deprecated
  */
 const useAudioCtxCurrentTime = (  
-    (c: BaseAudioContext | null | undefined ) => {
+    (...[c] : (
+      Parameters<typeof useAudioCtxCurrentTime1 > extends [infer Ctx, ... (infer Args ) ] ?
+      [
+        Ctx ,
+      ] 
+      : never
+    ) ) => {
         const vl = (
             useAudioCtxCurrentTime1(c , {
                 periodMillis : (
