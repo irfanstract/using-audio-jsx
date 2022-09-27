@@ -98,7 +98,8 @@ const useAudioCtxWithInitBtnB = (
  *          
 */    
 const useAudioCtxWithInitBtn = (         
-    (mainProps : Readonly<(
+    (...[mainProps = {} , ] : [
+    ...mainProps : OptionsCouldBeOmittedAltogether<Readonly<(
         {          
             aCtx ?: null ;     
                 
@@ -114,7 +115,8 @@ const useAudioCtxWithInitBtn = (
                 suspendOnWindowBlur : true    ;          
             }  
         )>
-    )> = {} ) => {                     
+    )>> ,
+    ] ) => {                     
         const { aCtx: aCtxGiven = null , shallAutoStart = 1 , suspendOnWindowBlur = false } = mainProps ;
         ;
         const {                         
