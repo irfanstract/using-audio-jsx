@@ -390,6 +390,10 @@ const {
                         ) ;
                         const c1 = (
                            // TODO                    
+                           <div>
+                           <p>
+                              Amp-Modulated Graph
+                           </p>
                            <XList>
                               <li key="value" className="UAGICU_INFOBOX_AMPCOMP_MODULATION" >
                                  Modulating Graph  :
@@ -405,6 +409,7 @@ const {
                                  </WithGivenDest>
                               </li>
                            </XList>
+                           </div>
                         );
                         // TODO 
                         return (
@@ -499,6 +504,10 @@ const {
                               );
                            const c1 = (
                               // TODO     
+                              <div>
+                              <p>
+                                 Time-Domain Constant Value Source 
+                              </p>
                               <XList >
                                  {gainCtrlDest1 && (
                                     <li key="value">
@@ -509,6 +518,7 @@ const {
                                     </li>
                                  )}
                               </XList >
+                              </div>
                            );
                            return {
                               c1,
