@@ -2,6 +2,7 @@ import {
     OptionsCouldBeOmittedAltogether ,
     // Unix , 
     IterableOps ,      
+    Iterable ,
     // util ,  
     memoize,    
     BoundedIdentityFunction,   
