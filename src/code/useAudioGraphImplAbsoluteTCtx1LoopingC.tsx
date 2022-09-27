@@ -268,32 +268,6 @@ const LoopingWithPeriod = (
       }  
    ))                 
 ) ;  
-/**           
- * possible return values of implemts : 
- * - {@link LwpPayloadCallback.OmittedItem } - omitted item
- * - {@link LwpPayloadCallback.EmptyItem } - item as blank 
- * - concrete elements    
- */
-type LwpPayloadCallback = (        
-   (ctx: {
-      /**    
-         * relative to the whole component. 
-         * */ 
-      perInstanceRelativeT: number ;  
-
-      /**     
-         * the component-level {@link useCurrentTInf `absoluteTValue` }.  
-      */
-      componentLevelAbsoluteT : number ; 
-   } )  
-   => 
-   (LwpPayloadCallback.OmittedItem | LwpPayloadCallback.EmptyItem | React.ReactElement )  
-) ;      
-namespace LwpPayloadCallback {
-   export type EmptyItem = false ;   
-   export type OmittedItem = null ;        
-   const bar = {} ; // TS-1205            
-} ;        
                       
             
 
