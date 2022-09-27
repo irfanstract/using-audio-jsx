@@ -281,6 +281,11 @@ const useSchedulingCtxValue = (
       ;
       return {
          tCtxTScaleVl ,
+         /**   
+          * {@link useCurrentDestNdRefAndCtxT the `absolute_t` }
+          * which {@link tCtxs (`t: 0` WRT the calling-Component) would lie exactly at }.
+          * 
+          */
          absoluteScheduledTE ,
       } ;
    }
@@ -303,11 +308,9 @@ const useCtxValues1 = (
        * 
        */
       const actualCtxTRoundedToYThs = (
-         React.useMemo(() => (
-            (typeof actualCtxTRaw === "number" ) ?
-            actualCtxTRaw
-            : false
-         ) , [actualCtxTRaw && Math.floor(actualCtxTRaw * 4 ) ] )
+         actualCtxTRaw
+         &&
+         floorBy(actualCtxTRaw, 1 / 4 , )
       ) ;
       /**    
        * {@link tCtxs.useCurrentTInf }
@@ -361,15 +364,13 @@ type IRenderRangeSnapSize = {
     * 
     * frequent amendment of `renderRange` 
     * resulted in *brief silencing* even when the shift(s) were rather small.
-    * 
     * to reduce the freq of amendments,
     * an idea is to round the values into multiples (of (...) ).
     * 
     */
    renderIRangeSnapSize : number ;
 };
-return (
-   function MetronomeAndResponseGraphB(properties11 : ( 
+type XAllProps = ( 
       { 
          /**    
           * the payload
@@ -399,7 +400,12 @@ return (
             PreFTAndPostFTProps
          )>
       )>  
-   )): React.ReactElement {                  
+) ;
+return (
+   function MetronomeAndResponseGraphB(properties11 : (
+      XAllProps
+      
+   ) ): React.ReactElement {                  
       const { children: givenChildren , value: { tickTockPeriod: tickTockPeriodArg = 0.5 } = {} } = (
          properties11    
       ) ;    
@@ -428,7 +434,7 @@ return (
             startEndMountTimeDebug : boolean ;
          }>
       ) = {
-         renderRangeAbsoluteSnapSizeInSecs : 4 ,
+         renderRangeAbsoluteSnapSizeInSecs : 5 ,
       } ;
       const {
          startEndMountTimeDebug = false ,
@@ -475,20 +481,30 @@ return (
          const { //
             renderRangeAbsoluteSnapSizeInSecs ,
             renderIRangeSnapSize ,
-         } = (() : (
+         } = (function inferRenderIRangeProperties1(...[unpublishedProps ] : [
+            (
+            EitherSetOrBothUnset<(
             {}
             & IRenderRangeAbsoluteSnapSize 
             & IRenderRangeSnapSize
-         ) => {
+            ) >  
+            ),
+         ]) : (
+            {}
+            & IRenderRangeAbsoluteSnapSize 
+            & IRenderRangeSnapSize
+         ) {
             if (unpublishedProps.renderRangeAbsoluteSnapSizeInSecs ) {
                const { //
                   renderRangeAbsoluteSnapSizeInSecs = 5 ,
                } = unpublishedProps ;
                const { //
                   renderIRangeSnapSize = (
-                     Math.floor((
-                        renderRangeAbsoluteSnapSizeInSecs
-                        / tickTockPeriodAbsolutely
+                     Math.max(1, (
+                        Math.floor((
+                           renderRangeAbsoluteSnapSizeInSecs
+                           / tickTockPeriodAbsolutely
+                        ))
                      ))
                   ) ,
                } = (
@@ -505,7 +521,7 @@ return (
                const {
                   renderIRangeSnapSize = (
                      // TODO
-                     Iterable.Seq([8, 16, 32, 64 ])
+                     Iterable.Seq([8, 12, 16, 24, 32, 40, 48, 64 ])
                      .filter(v => (1.85 / tickTockPeriodAbsolutely <= v ))
                      // first
                      .first(8 )
@@ -523,12 +539,17 @@ return (
                } ;
             } ;
             ;
-         } )() ;
+         } )(unpublishedProps, ) ;
          {
                ;
                /**   
                 * apply `tScale`.
                 * shall not apply `t`, by definition.
+                * 
+                * this `function` 
+                * will require other variables like {@link tickTockPeriodAbsolutely }, {@link tickTockPeriodArg }, etc ;
+                * effectively preventing any attempt to refactor this `function` out.
+                * 
                 */
                const {
                   preFT: mtPreFTArg = (
@@ -541,6 +562,11 @@ return (
                /**   
                 * apply `tScale`.
                 * shall not apply `t`, by definition.
+                * 
+                * this `function` 
+                * will require other variables like {@link tickTockPeriodAbsolutely }, {@link tickTockPeriodArg }, etc ;
+                * effectively preventing any attempt to refactor this `function` out.
+                * 
                 */
                // See more: https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess 
                const [mtPreFTAbsolute = 2, mtPostFTAbsolute = 2, ] = (
@@ -550,10 +576,14 @@ return (
                   ) )
                ) ;
                /**   
+                * this basically {@link actualCtxTRoundedToYThs } minus {@link absoluteScheduledTE } ;
                 * note that the value needs to be adjusted by fingers of seconds.
                 * 
                 * ({@link actualCtxTRoundedToYThs } minus {@link absoluteScheduledTE } )
                 * `floor`ed into being multiple of ({@link renderIRangeSnapSize } * {@link tickTockPeriodAbsolutely } ).
+                * 
+                * unless {@link renderRange } were explicitly specified,
+                * there'd be a need to compute the default, likely making use of this value.
                 * 
                 */
                const lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted = (
@@ -574,7 +604,7 @@ return (
                ) ;                       
                const {   
                   renderRange = ((...[{
-                     preTInSeconds : renderRangeCalcImplPreTInSeconds = 1.5 ,
+                     preTInSeconds : renderRangeCalcImplPreTInSeconds = 1.2 ,
                   } = {} ,] : [
                      ... OptionsCouldBeOmittedAltogether<(
                         {
@@ -615,147 +645,207 @@ return (
                   } )() ,  
           
                } = properties11 ; 
+               const withAppropriateFltBasedOverlapPrevention1: (
+                  (payload : React.ReactNode & object ) => (
+                     React.ReactElement
+                  )
+               ) = (
+                  e => (
+                     <CAmpModulatedTimeDomain
+                     value={(
+                        <CFnValueByRelativeT 
+                        value={ ({ ctxT: t, }) => (
+                           t === IterableOps.clamp(t, 0, tickTockPeriodArg, ) ?
+                           1 : 0
+                        ) }
+                        />
+                     ) }
+                     >
+                        { e }
+                     </CAmpModulatedTimeDomain>
+                  )
+               ) ;
                const debugJson1 = {
+                  actualCtxTRoundedToYThs ,
+                  absoluteScheduledTE,
+                  tCtxTScaleVl ,
+                  lastRenderAbsoluteTMinusInitialAbsoluteTAndAdjusted ,
+                  tickTockPeriodArg ,
+                  tickTockPeriodAbsolutely ,
+                  renderRange ,
+                  renderIRangeSnapSize ,
+                  renderRangeAbsoluteSnapSizeInSecs ,
+                  mtPreFTAbsolute ,
+                  mtPostFTAbsolute ,
                   //
                } as const ;
-               return (                      
-                     (nd0 && (typeof actualCtxTRoundedToYThs === "number")) 
-                     ?         
-                  <LoopingWithPeriodAndAutoUnmounting        
-                        
-                  /**          
-                   * the engine properties 
-                   *      
-                   * assign the looping period      
-                   * 
-                   * assign `renderRange` and `initialOffset` as appropriate 
-                   */ 
-                  value={{  
-                     // TODO make this configurable
-                     period: tickTockPeriodArg ,            
-                                 
-                     initialOffset: 0 , 
-                  }}                                    
-                  renderRange={renderRange }   
-                  /**      
-                   * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
-                  */
-                  clippingMode={(
-                     AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
-                  ) }
-                  visual={startEndMountTimeDebug }
-            
-                  >       
-                     { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
-                     ;
-                     /**   
-                      * this fnc 
-                      * shall exactly run `givenChildren({ t })` possibly with decoration.
+               return (                   
+                  <div>   
+                  <p>
+                     MetronomeAndResponseGraph
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column-reverse", }}>
+                  { null }
+                  { (                      
+                        (nd0 && (typeof actualCtxTRoundedToYThs === "number")) 
+                        ?         
+                     <LoopingWithPeriodAndAutoUnmounting        
+                           
+                     /**          
+                      * the engine properties 
+                      *      
+                      * assign the looping period      
                       * 
-                      * later on 
-                      * there'd be switches to determine whether (or-not) to actually run it.
-                      * 
-                      */
-                     const doRenderGivenChildren = () => {
-                        const e = (   
-                           givenChildren({ t })          
-                        ) ;
-                        return (
-                           e
-                        ) ;
-                     } ;
-                     const {
-                        extraAutoMountUnmount ,
-                     } = {
-                        extraAutoMountUnmount: false ,
-                     } as {
+                      * assign `renderRange` and `initialOffset` as appropriate 
+                      */ 
+                     value={{  
+                        // TODO make this configurable
+                        period: tickTockPeriodArg ,            
+                                    
+                        initialOffset: 0 , 
+                     }}                                    
+                     renderRange={renderRange }   
+                     /**      
+                      * `autoUnmountMode` - begn shall be clipped, while overflows shall be left exposed
+                     */
+                     clippingMode={(
+                        AudioTrackConcatClippingMode.START_CLIPPED_ENDING_FULLVOLUME
+                     ) }
+                     visual={startEndMountTimeDebug }
+               
+                     >       
+                        { ({ perInstanceRelativeT: t, componentLevelAbsoluteT: CVATX }): ReturnType<LwpPayloadCallback > => { 
+                        ;
                         /**   
-                         * additional optimisational auto-mount-and-unmount at this point were deemed remain necessary as
-                         * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                         * this fnc 
+                         * shall exactly run `givenChildren({ t })` possibly with decoration.
                          * 
-                         * weirdly, such optimisative mean(s) instead effectively worsened perf.
+                         * later on 
+                         * there'd be switches to determine whether (or-not) to actually run it.
                          * 
                          */
-                        extraAutoMountUnmount ?: false | true ;
-                     } ;
-                     /**   
-                      * additional optimisational auto-mount-and-unmount at this point were deemed necessary as
-                      * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
-                      * weirdly, such optimisative mean(s) might instead effectively worsen perf.
-                      */
-                     {
-                        ;
-                        const actualCtxTReoundedDownToTens = (
-                           Iterable.Range(-10, actualCtxTRoundedToYThs, 10 ).last(0 ) 
-                        );
-                        /**      
-                         * estimation of 
-                         * the {@link BaseAudioContext.currentTime `aDestCtx.currentTime` } for the current *item*.
-                         */
-                        const CURRENTITEM_VATX1 = (
-                           CVATX + (t * tCtxTScaleVl )
-                        ) ;
-                        const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
-                        const { debugMode = false , } = {} as Partial<{ debugMode : false | "last" | 5 | 5.5 | 6 | 6.5 | 7 ; }> ;
-                        if (extraAutoMountUnmount ) {
-                        ;
-                        // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
-                        const absoluteMountStartT = (
-                           ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
-                        );
-                        const absoluteMountEndT = (
-                           ((CURRENTITEM_VATX1 /* add */ + (-(      0) * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
-                        ) ;
-                        if (debugMode === 6.5 ) {
-                           return <div /> ;
-                        }
-                        if (debugMode === 6 ) {
-                           return false ;
-                        }
-                        const e0 = (   
-                           doRenderGivenChildren()          
-                        );    
-                        if (debugMode === 5.5 ) {
-                           return <div /> ;
-                        }
-                        if (debugMode === 5 ) {
-                           return false ;
-                        }
-                        const debugJson = { 
-                        } as const ;
-                        const e = (             
-                           e0 && (            
-                              (
-                                 (
-                                    /**    
-                                     * {@link absoluteMountStartT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
-                                     */
-                                    floorBy(absoluteMountStartT, renderRangeAbsoluteSnapSizeInSecs )
-                                 ) <= actualCtxTRoundedToYThs
-                                 && 
-                                 (
-                                    /**    
-                                     * {@link actualCtxT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
-                                     */
-                                    floorBy(actualCtxTRoundedToYThs, renderRangeAbsoluteSnapSizeInSecs )
-                                 ) <= absoluteMountEndT
-                              )    
-                              ?             
-                              e0  
-                              : false   
-                           )         
-                        ) ;
-                        return e ;   
-                        } else {
-                           return (
-                              doRenderGivenChildren()
+                        const doRenderGivenChildren = () => {
+                           const e = (   
+                              givenChildren({ t })          
                            ) ;
+                           return (
+                              e
+                              &&
+                              withAppropriateFltBasedOverlapPrevention1(e )
+                           ) ;
+                        } ;
+                        const {
+                           extraAutoMountUnmount ,
+                        } = {
+                           extraAutoMountUnmount: false ,
+                        } as {
+                           /**   
+                            * additional optimisational auto-mount-and-unmount at this point were deemed remain necessary as
+                            * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                            * 
+                            * weirdly, such optimisative mean(s) instead effectively worsened perf.
+                            * 
+                            */
+                           extraAutoMountUnmount ?: false | true ;
+                        } ;
+                        /**   
+                         * additional optimisational auto-mount-and-unmount at this point were deemed necessary as
+                         * the (built-in) mechanism within `LWPAM` did not sufficiently do the thing well.
+                         * weirdly, such optimisative mean(s) might instead effectively worsen perf.
+                         */
+                        {
+                           ;
+                           const actualCtxTReoundedDownToTens = (
+                              Iterable.Range(-10, actualCtxTRoundedToYThs, 10 ).last(0 ) 
+                           );
+                           /**      
+                            * estimation of 
+                            * the {@link BaseAudioContext.currentTime `aDestCtx.currentTime` } for the current *item*.
+                            */
+                           const CURRENTITEM_VATX1 = (
+                              CVATX + (t * tCtxTScaleVl )
+                           ) ;
+                           const { headTime1 = 1, } = {} as Partial<{ headTime1 : number ; }> ;
+                           const { debugMode = false , } = {} as Partial<{ debugMode : false | "last" | 5 | 5.5 | 6 | 6.5 | 7 ; }> ;
+                           if (extraAutoMountUnmount ) {
+                           ;
+                           // FOR OWN CODE, NOT THE COMPLEMENTARY CODE !
+                           const absoluteMountStartT = (
+                              ((CURRENTITEM_VATX1 /* add */ + (-headTime1 * tCtxTScaleVl ) ) + -(Math.max(mtPreFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
+                           );
+                           const absoluteMountEndT = (
+                              ((CURRENTITEM_VATX1 /* add */ + (-(      0) * tCtxTScaleVl ) ) + (Math.max(mtPostFTAbsolute , 2 * tickTockPeriodAbsolutely ) ) )
+                           ) ;
+                           if (debugMode === 6.5 ) {
+                              return <div /> ;
+                           }
+                           if (debugMode === 6 ) {
+                              return false ;
+                           }
+                           const e0 = (   
+                              doRenderGivenChildren()          
+                           );    
+                           if (debugMode === 5.5 ) {
+                              return <div /> ;
+                           }
+                           if (debugMode === 5 ) {
+                              return false ;
+                           }
+                           const debugJson = { 
+                              CVATX ,
+                              tCtxTScaleVl ,
+                              CURRENTITEM_VATX1 ,
+                              mtPreFTAbsolute ,
+                              mtPostFTAbsolute ,
+                              tickTockPeriodAbsolutely ,
+                              absoluteMountStartT, 
+                              absoluteMountEndT,
+                           } as const ;
+                           const e = (             
+                              e0 && (            
+                                 (
+                                    (
+                                       /**    
+                                        * {@link absoluteMountStartT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
+                                        */
+                                       floorBy(absoluteMountStartT, renderRangeAbsoluteSnapSizeInSecs )
+                                    ) <= actualCtxTRoundedToYThs
+                                    && 
+                                    (
+                                       /**    
+                                        * {@link actualCtxT } rounded down to nearest mul(s) of {@link renderRangeAbsoluteSnapSizeInSecs }
+                                        */
+                                       floorBy(actualCtxTRoundedToYThs, renderRangeAbsoluteSnapSizeInSecs )
+                                    ) <= absoluteMountEndT
+                                 )    
+                                 ?             
+                                 (
+                                    (debugMode === "last") ?
+                                    <div />
+                                    : e0
+                                 )  
+                                 : (
+                                    startEndMountTimeDebug ?
+                                    <DictDisplayElement value={debugJson } />
+                                    : false
+                                 )   
+                              )         
+                           ) ;
+                           return e ;   
+                           } else {
+                              return (
+                                 doRenderGivenChildren()
+                              ) ;
+                           }
                         }
-                     }
-                     } }    
-                  </LoopingWithPeriodAndAutoUnmounting>
-                  : 
-                  <></>
+                        } }    
+                     </LoopingWithPeriodAndAutoUnmounting>
+                     : 
+                     <></>
+                  ) }
+                  <DictDisplayElement value={debugJson1 } />
+                  </div>
+                  </div>
                ) ; 
          }
       } )()
