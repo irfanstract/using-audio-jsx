@@ -70,6 +70,11 @@ import {
    passageStateBy1 ,   
 
 } from "./useAudioGraphImplFComponentsSlapCompAutoUnmounting";   
+import { 
+   LWpamPayloadMountSpanProperties, 
+   LWpamPayloadMountSpanProperties1 ,
+   
+} from "./useAudioGraphImplBasicLoopingComponentTechnicalProps1";
 
 // CSS imports
          
@@ -88,26 +93,6 @@ const {
   
    
                        
-/**    
- * extra amount of info becomes necassary as otherwise
- * there would be no practical way to determine the right number of simultaneously-mounted Comp(s).
- * 
- */
-type LWpamPayloadMountSpanProperties = (
-   {
-      premountTime : number ;
-      mountDuration : number ;
-   }
-) ;
-class LWpamPayloadMountSpanProperties1 implements LWpamPayloadMountSpanProperties {
-   constructor(
-      public premountTime : number ,
-      public mountDuration : number ,
-   ) {}
-   toString(): string {
-      return JSON.stringify(this) ;
-   }
-} ;
 const LoopingWithPeriodAndAutoUnmounting = (() => { 
    type PeerComponentPayload = (                            
        (
