@@ -462,6 +462,16 @@ return (
          const tickTockPeriodAbsolutely = (
             tickTockPeriodArg * tCtxTScaleVl
          ) ;
+         /**    
+          * for the two property(s),
+          * (it's permissible to omit both at once!),
+          * infer one based on the other.
+          * 
+          * this `function` 
+          * will require other variables like {@link tickTockPeriodAbsolutely }, {@link tickTockPeriodArg }, etc ;
+          * effectively preventing any attempt to refactor this `function` out.
+          * 
+          */
          const { //
             renderRangeAbsoluteSnapSizeInSecs ,
             renderIRangeSnapSize ,
