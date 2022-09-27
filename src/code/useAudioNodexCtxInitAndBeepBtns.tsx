@@ -45,7 +45,7 @@ const AUDIONODEDEMOKIT_T1BEEPAGAINIMPL = (
         ) ;                                                                                                            
         const ctxT = (           
             ((
-                useAudioCtxCurrentTime(aCtx.destination?.context )                
+                useAudioCtxCurrentTime(aCtx.destination?.context || null )                
             ))
         ) || -1 ;     
         const [
