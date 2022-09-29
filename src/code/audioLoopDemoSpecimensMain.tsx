@@ -288,17 +288,13 @@ export default (() => {
             { trbLine }
         </K>
         </CBiquadFilterModulated>
-        <CAmpModulated0  
-        value={(
-            <CFnValue1 
-            value={({ ctxT: t, }) => (
-              (0 <= t ) ?
-              (2 ** -t )
-              : 2E-32
-            ) } 
-            />
-        )}>
-          <CGrandPianeSound1
+        <MetronomeAndResponseGraph
+        value={{ tickTockPeriod: 8 , } }
+        >
+        { ({ t }) => (
+        <K>
+          { ((t % 32 ) === 0 ) && (
+          <CGrandPianeSoundSharply1
           freqArgumentNormalValue={110 }
           freqArgumentInterpretation="timedomain-normalised"
           freqArgument={(
@@ -312,7 +308,10 @@ export default (() => {
               </K>
           )}
           />
-        </CAmpModulated0>
+          ) }
+        </K>
+        ) }
+        </MetronomeAndResponseGraph>
         </K>
         </K> 
         ) ) }
