@@ -106,21 +106,23 @@ function wPeriodicWaveAsUnitPhasePrj(...[shape ] : [
          wavetableNameAsUnitPhasePrj("sinel")
       )! ;
       ;
-      return (phase): number => {
-         // TODO
-         return (
-            spn
-            .map((f: (typeof spn )[number]) => (
-               (
-                  // TODO
-                  1
-               ) * unitSineMp(phase * f ) 
-            ) )
-            .reduce((v1, v2) => (
-               v1 + v2 
-            ) )
-         ) ;
-      } ;
+      // TODO
+      // return (phase): number => {
+      //    // TODO
+      //    return (
+      //       spn
+      //       .map((f: (typeof spn )[number]) => (
+      //          (
+      //             // TODO
+      //             1
+      //          ) * unitSineMp(phase * f ) 
+      //       ) )
+      //       .reduce((v1, v2) => (
+      //          v1 + v2 
+      //       ) )
+      //    ) ;
+      // } ;
+      return null ;
    }
 }
 
