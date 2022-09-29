@@ -62,6 +62,7 @@ import { BassDrumLoopDv, HouseMusicShortBrkDemo } from "./audioLoopDemoBassDrumL
 import { CSnareDrumJammer, } from "./useAudioGraphForSnareDrumJammer1";
 import { CBassLineByTimeDomainArgs } from "./audioLoopDemoSpecimens1";
 import { WithAuInstrumentsVisualisation } from "./useAudioGraphInstrumentsVisualisation1";
+import aldSpecimen from "./audioLoopDemoSpecimensMain" ;
 import '../App.css';        
 
     
@@ -135,48 +136,7 @@ export const AudioLoopDemoApp = (function () {
             const [tT, { update: updateTT } ] = (        
                 useASetCurrentT(_1?.feedPt.context || null )    
             ) ;           
-            const c1  = (() => {
-                return (
-                <WithSlowdown value={1 / (68 / 60 ) } >
-                <WithSlowdown value={2 ** -1 } >
-                <WithADestCtxTCompletionStatCtx>
-                { ({ withADestCtxCompletionStat }) => {
-                ;
-                return (
-                <>
-                { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
-                <K>
-                { (
-                    <BassDrumLoopDv subhalvesN={2 } />
-                ) }
-                { (
-                <K>
-                            <CAmpModulated0  
-                            value={(
-                                <CConstantValue value={2 ** -1 } />
-                            )}
-                            >
-                            <CSnareDrumJammer 
-                            metronomeProps={{
-                                value: {
-                                    tickTockPeriod: 1 / 4 ,
-                                } ,
-                            }}
-                            cmPeriod={1 }
-                            />
-                            </CAmpModulated0>
-                </K>
-                ) }
-                </K> 
-                ) ) }
-                </>
-                ) ;
-                } }
-                </WithADestCtxTCompletionStatCtx>
-                </WithSlowdown>
-                </WithSlowdown>
-                ) ;
-            })() ;       
+            const c1  = aldSpecimen ;       
             const { WithACtx } = useADestNdRefCtx1() ;         
             const mainADemoScreen = (
                 /**
