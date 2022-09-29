@@ -195,18 +195,25 @@ const CGrandPianeSound1 = (() => {
       ) ;
     }
   ) ;
-  return (props : Props ) => (
-    <WithCurrentDestNdRef>
-    { ({ feedPt: ctxtualADest, }) => (
-      ctxtualADest 
-      &&
-      <C1 
-      cgpACtx={ctxtualADest.context } 
-      {...props }
-      /> 
-    ) }
-    </WithCurrentDestNdRef>
-  ) ;
+  return (props : Props ) => {
+    const e = (
+      <WithCurrentDestNdRef>
+      { ({ feedPt: ctxtualADest, }) => (
+        ctxtualADest 
+        &&
+        <C1 
+        cgpACtx={ctxtualADest.context } 
+        {...props }
+        /> 
+      ) }
+      </WithCurrentDestNdRef>
+    ) ;
+    return (
+      <CAmpModulated0 value={<CConstantValue value={2 ** -0.75 } /> } >
+        { e }
+      </CAmpModulated0>
+    ) ;
+  } ;
 })() ;
 
 
