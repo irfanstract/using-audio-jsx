@@ -44,6 +44,11 @@ import {
     
 } from "./audioLoopDemoComponents1"; 
 import { CGrandPianeSound1, } from "./audioLoopDemoGrandPianoI1";
+import { 
+  cAsSharply ,
+  CGrandPianeSoundSharply1,
+
+} from "./audioLoopDemoInstrumentsRenderedSharply1";
 import { CBriefHiHatFluidly } from "./useAudioGraphImplFComponentsCymbals";
 import * as BBVR from "./audioLoopDemoSpecimens";  
 import {
