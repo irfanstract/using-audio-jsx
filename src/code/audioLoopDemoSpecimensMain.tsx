@@ -272,6 +272,11 @@ export default (() => {
         ) ;
         return (
         <>
+        <CAmpModulated0 
+        value={(
+          <CConstantValue value={2 ** 1 } />
+        ) }
+        >
         { withADestCtxCompletionStat(({ relativeTDiff: tPassed, }) => (
         <K>
         <K /* test-beeping */ ></K>
@@ -315,6 +320,7 @@ export default (() => {
         </K>
         </K> 
         ) ) }
+        </CAmpModulated0>
         </>
         ) ;
         } }
