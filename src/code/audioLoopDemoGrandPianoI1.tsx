@@ -179,6 +179,11 @@ const CGrandPianeSound1 = (() => {
       ) ;
       // TODO
       return (
+        <CAmpModulated0
+        value={(
+          <CConstantValue value={2 ** -0.8 } />
+        )}
+        >
         <CBiquadFilterModulated
         type="lowpass"
         freqArgumentNormalValue={8000 }
@@ -192,6 +197,7 @@ const CGrandPianeSound1 = (() => {
           {...freqAndDetuneProps }
           />
         </CBiquadFilterModulated>
+        </CAmpModulated0>
       ) ;
     }
   ) ;
