@@ -118,16 +118,31 @@ const usePpw = (() => {
                 if ((i <= 128 )   ) {
                   const vx = i / 3 ;
                   if ( (Math.log2(vx ) % 1 == 0 ) ) {
-                    return 2 ** (-1 + (Math.log2(vx ) * -1 ) ) ;
+                    return (
+                      2 ** (
+                        -1 + (Math.log2(vx ) * -1 ) 
+                      )
+                    ) ;
                   }
                 }
               }
               if (1) {
                 ;
-                if ((i <= 128 )   ) {
+                if ((i <= 64 )   ) {
                   const vx = i / 5 ;
                   if ( (Math.log2(vx ) % 1 == 0 ) ) {
-                    return 2 ** (-2 + (Math.log2(vx ) * -1.5 ) ) ;
+                    return (
+                      2 ** (
+                        (-2 + (Math.log2(vx ) * -1.2 ) )
+                        +
+                        ((): number => {
+                          if (i === 1 ) {
+                            return 2 ;
+                          }
+                          return 0 ;
+                        })()
+                      )
+                    ) ;
                   }
                 }
               }
