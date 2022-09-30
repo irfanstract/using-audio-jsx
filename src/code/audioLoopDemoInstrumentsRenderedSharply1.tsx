@@ -126,7 +126,13 @@ const CGrandPianeSoundSharply1 = (
             <CFnValue1 
             value={({ ctxT: t, }) => (
               (0 <= t ) ?
-              (2 ** -t )
+              ((...[t0, ] : [t: number, ]): number => {
+                /**    
+                 * 
+                 */
+                const t1 = -0.5 + t0;
+                return (2 ** -t1 ) ;
+              })(t, )
               : 2E-32
             ) } 
             />
