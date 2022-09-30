@@ -90,10 +90,10 @@ const usePpw = (() => {
             .map((i): number => {
               if (i === 1 || i === 2 ) {
                 if (i === 1 ) {
-                  return 2 ** -0.2 ;
+                  return 2 ** 0.7 ;
                 }
                 if (i === 2 ) {
-                  return 2 ** 0 ;
+                  return 2 ** 1 ;
                 }
                 return 2 ** 0 ;
               }
