@@ -152,7 +152,7 @@ export const AudioLoopDemoApp = (function () {
                     // debugging the timing issues
                     value={2 ** 0.2 } 
                     >
-                    <WithCtxtualATapRecording />
+                    { null && <WithCtxtualATapRecording /> }
                     { c1 }
                     </WithSlowdown>              
 
