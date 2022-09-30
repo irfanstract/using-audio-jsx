@@ -56,6 +56,12 @@ import { CBriefHiHatFluidly, } from "./useAudioGraphImplFComponentsCymbals";
  * this 
  * shall cache {@link OscillatorNode `PeriodicWave` } instance simulating the European-or-Broadwegian "piano" instrument.
  * 
+ * we deliberately {@link PeriodicWaveConstraints.disableNormalization disable normalisation }.
+ * normalisation 
+ * would cause {@link BaseAudioContext.createPeriodicWave gains to any row } to att other rows, undesirable for this usage.
+ * instead,
+ * there should be extra att at higher level (by decorate with {@link CAmpModulated0 } or {@link CBiquadFilterModulated } ).
+ * 
  */
 const usePpw = (() => {
   function usePpwImpl(c : BaseAudioContext ) : PeriodicWave ;
