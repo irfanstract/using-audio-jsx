@@ -181,7 +181,25 @@ export default (() => {
                 if ((t % (4 * 2 ) < 3.5 ) ) {
                     return 5 ;
                 }
+                {
+                ;
+                {
+                  const {
+                    tRef ,
+                    tx ,
+                  } : {
+                    tRef : number ;
+                    tx : number ;
+                  } = {
+                    tRef: 6,
+                    tx : 0.5 ,
+                  } ;
+                  if (((tRef + -tx ) <= (t % 8 ) && (t % 8 ) < (tRef ) ) && (Math.floor((t % 16 ) / 8 ) === 1 ) ) {
+                    return (5 + 2 ) + 1 ;
+                  }
+                }
                 return 5 + 2 ;
+                }
             } } 
             />
             </K>
