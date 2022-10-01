@@ -90,10 +90,10 @@ const usePpw = (() => {
             .map((i): number => {
               if (i === 1 || i === 2 ) {
                 if (i === 1 ) {
-                  return 2 ** -0.2 ;
+                  return 2 ** 0.7 ;
                 }
                 if (i === 2 ) {
-                  return 2 ** 0 ;
+                  return 2 ** 1 ;
                 }
                 return 2 ** 0 ;
               }
@@ -118,16 +118,31 @@ const usePpw = (() => {
                 if ((i <= 128 )   ) {
                   const vx = i / 3 ;
                   if ( (Math.log2(vx ) % 1 == 0 ) ) {
-                    return 2 ** (-1 + (Math.log2(vx ) * -1 ) ) ;
+                    return (
+                      2 ** (
+                        -1 + (Math.log2(vx ) * -1 ) 
+                      )
+                    ) ;
                   }
                 }
               }
               if (1) {
                 ;
-                if ((i <= 128 )   ) {
+                if ((i <= 64 )   ) {
                   const vx = i / 5 ;
                   if ( (Math.log2(vx ) % 1 == 0 ) ) {
-                    return 2 ** (-2 + (Math.log2(vx ) * -1.5 ) ) ;
+                    return (
+                      2 ** (
+                        (-2 + (Math.log2(vx ) * -1.2 ) )
+                        +
+                        ((): number => {
+                          if (i === 1 ) {
+                            return 2 ;
+                          }
+                          return 0 ;
+                        })()
+                      )
+                    ) ;
                   }
                 }
               }
@@ -179,6 +194,11 @@ const CGrandPianeSound1 = (() => {
       ) ;
       // TODO
       return (
+        <CAmpModulated0
+        value={(
+          <CConstantValue value={2 ** -0.8 } />
+        )}
+        >
         <CBiquadFilterModulated
         type="lowpass"
         freqArgumentNormalValue={8000 }
@@ -192,21 +212,29 @@ const CGrandPianeSound1 = (() => {
           {...freqAndDetuneProps }
           />
         </CBiquadFilterModulated>
+        </CAmpModulated0>
       ) ;
     }
   ) ;
-  return (props : Props ) => (
-    <WithCurrentDestNdRef>
-    { ({ feedPt: ctxtualADest, }) => (
-      ctxtualADest 
-      &&
-      <C1 
-      cgpACtx={ctxtualADest.context } 
-      {...props }
-      /> 
-    ) }
-    </WithCurrentDestNdRef>
-  ) ;
+  return (props : Props ) => {
+    const e = (
+      <WithCurrentDestNdRef>
+      { ({ feedPt: ctxtualADest, }) => (
+        ctxtualADest 
+        &&
+        <C1 
+        cgpACtx={ctxtualADest.context } 
+        {...props }
+        /> 
+      ) }
+      </WithCurrentDestNdRef>
+    ) ;
+    return (
+      <CAmpModulated0 value={<CConstantValue value={2 ** -0.75 } /> } >
+        { e }
+      </CAmpModulated0>
+    ) ;
+  } ;
 })() ;
 
 
